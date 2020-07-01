@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 테스트용 home -->
+	<definition name=".home" template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="testHeader" value="/WEB-INF/views/header.jsp/"/>
+		<put-attribute name="testContent" value="/WEB-INF/views/home.jsp/"/>
+		<put-attribute name="testFooter" value="/WEB-INF/views/footer.jsp/"/>
+	</definition>
+ 
+	<!-- 중고판매자 tiles설정 -->
+	<definition name=".seller" template="/WEB-INF/views/jiho/sellerLayout.jsp">
+		<put-attribute name="sellerHeader" value="/WEB-INF/views/jiho/sellerHeader.jsp/"/>
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerContent.jsp/"/>
+		<put-attribute name="sellerFooter" value="/WEB-INF/views/jiho/sellerFooter.jsp/"/>
+	</definition>
+</tiles-definitions>

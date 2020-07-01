@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	지호테스트
+	지호테스트<br>
+	<a href="">중고판매관리</a>
 </body>
 </html>
