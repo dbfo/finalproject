@@ -8,6 +8,6 @@ public class SellerHomeController {
 	
 	@RequestMapping(value = "/seller")
 	public String sellerTest() {
-		return ".seller";
+		return ".seller";//
 	}
 }
