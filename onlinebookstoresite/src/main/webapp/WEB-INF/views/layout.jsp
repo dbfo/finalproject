@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/bootstrap/bootstrap.css"/> 
+ 
 <title>views/layout.jsp</title>
 </head>
 <body>
 <div id="wrap">
 	<div id="header">
-	
 		<tiles:insertAttribute name="testHeader"/>
 	</div>
 	<div id="content">

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/bootstrap/bootstrap.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/jhcss.css">
 <title>중고판매관리</title>
 </head>
 <body>
