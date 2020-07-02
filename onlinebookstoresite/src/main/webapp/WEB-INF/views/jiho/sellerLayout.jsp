@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <title>중고판매관리</title>
 </head>
 <body>
