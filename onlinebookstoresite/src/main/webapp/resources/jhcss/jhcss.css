@@ -1,1 +1,41 @@
 @charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+/* ////////중고판매 현황판css///// */
+#sellerContentMain{
+	width: 1300px;
+	height: 900px;
+	border: 1px solid red;
+	margin: auto;
+}
+#salesStatus{
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	float: left;
+}
+#salesBoard{
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	float: left;
+}
+#sales{
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	float: left;
+}
+#salesReturn{
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	float: left;
+}
+.row{
+	height: 400px;
+	float: left;
+}
