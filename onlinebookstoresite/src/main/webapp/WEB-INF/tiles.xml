@@ -14,5 +14,8 @@
 		<put-attribute name="sellerHeader" value="/WEB-INF/views/jiho/sellerHeader.jsp"/>
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerContent.jsp"/>
 		<put-attribute name="sellerFooter" value="/WEB-INF/views/jiho/sellerFooter.jsp"/>
-	</definition> 
+	</definition>
+	<definition name=".seller.*" extends=".seller">
+		
+	</definition>
 </tiles-definitions>

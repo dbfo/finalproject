@@ -11,31 +11,10 @@
 	border: 1px solid red;
 	margin: auto;
 }
-#salesStatus{
-	width: 500px;
-	height: 300px;
-	border: 1px solid black;
-	float: left;
-}
-#salesBoard{
-	width: 500px;
-	height: 300px;
-	border: 1px solid black;
-	float: left;
-}
-#sales{
-	width: 500px;
-	height: 300px;
-	border: 1px solid black;
-	float: left;
-}
-#salesReturn{
-	width: 500px;
-	height: 300px;
-	border: 1px solid black;
-	float: left;
-}
-.row{
+.sellerCard{
+	width: 600px;
 	height: 400px;
+	border: 1px solid black;
 	float: left;
+	margin: 20px;
 }

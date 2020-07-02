@@ -20,8 +20,8 @@
 						<ul class="sub-menu">
 							<li><a href="#">주문확인 요청</a></li>
 							<li><a href="#">발송요청</a></li>
-							<li><a href="#">배송&구매확정전</a></li>
-							<li><a href="#">구매확정&정산대기</a></li>
+							<li><a href="#">배송/구매확정전</a></li>
+							<li><a href="#">구매확정/정산대기</a></li>
 						</ul>
 					</li>
 					<li><a href="#">정산조회</a></li>
@@ -35,23 +35,4 @@
 				</ul>
 			</div>
 		</nav>
-
-	<!-- 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">상품등록</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">상품조회/수정</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">정산조회</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">반품관리</a></li>
-			</ul>
-		</div>
-	</nav>-->
 </div>
