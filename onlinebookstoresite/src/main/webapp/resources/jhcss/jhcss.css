@@ -18,3 +18,11 @@
 	float: left;
 	margin: 20px;
 }
+
+/* 중고 상품등록폼 관련 css */
+#prodInputForm{
+	border: 1px solid red;
+	width: 1300px;
+	height: 900px;
+	margin: auto;
+}
