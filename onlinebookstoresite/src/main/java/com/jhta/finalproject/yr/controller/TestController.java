@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class HomeController {	
+public class TestController {	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {		
-		return "yr/main";
+		return ".home";
 	}
 	
 }
