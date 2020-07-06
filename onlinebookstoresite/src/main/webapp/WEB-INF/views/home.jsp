@@ -36,8 +36,9 @@
 
 		<div id="layoutSidenav_content">
 			<!-- content tiles -->
+
 			<div id="content">
-				<tiles:insertAttribute name="content" />
+				<main> <tiles:insertAttribute name="content" /> </main>
 			</div>
 
 			<!-- footer tiles -->
@@ -48,7 +49,7 @@
 		<!-- layoutSidenav_content -->
 	</div>
 	<!-- layoutSidenav -->
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		crossorigin="anonymous"></script>
 	<script

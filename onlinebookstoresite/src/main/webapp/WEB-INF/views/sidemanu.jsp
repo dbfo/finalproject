@@ -42,7 +42,7 @@
 				<div class="collapse" id="collapseProduct"
 					aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="#">상품등록</a>
+						<a class="nav-link" href="${pageContext.request.contextPath }/booksInsert">상품등록</a>
 						<a class="nav-link" href="#">등록상품조회</a>
 					</nav>
 				</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jhta.yj.mybatis.mapper.BooksMapper">
+	<insert id="booksInsert" parameterType="books">
+		insert into books values
+		(SEQ_BOOKS_BNUM.nextval, #{btitle}, #{bwriter}, sysdate, #{bpublisher},
+		#{bprice}, #{bpoint}, #{bshipinfo}, #{bcount}, #{bcontent}, #{bhit}, #{scatenum}, sysdate)
+	</insert>
+	
+	<select id="getBnum" resultType="int">
+		select * from 
+		(select aa.* from
+		(select NVL(bnum, 0) from books order by bnum desc) aa)
+		where rownum = 1;
+	</select>
+
+	<insert id="imgInsert" parameterType="img">
+		insert into img values(SEQ_IMG_IMGNUM.nextval,
+		#{imgorgfilename}, #{imgsavefilename}, #{thumbnail}, #{btype},
+		#{bnum})
+	</insert>
+</mapper>
