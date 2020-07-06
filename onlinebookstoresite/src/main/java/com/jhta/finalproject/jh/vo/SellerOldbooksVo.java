@@ -2,7 +2,7 @@ package com.jhta.finalproject.jh.vo;
 
 import java.util.Date;
 
-public class SellerObookInsertVo {
+public class SellerOldbooksVo {
 	private int obnum; //중고책번호
 	private int snum;  //판매자번호
 	private String selleraddr; //출고주소
@@ -18,9 +18,9 @@ public class SellerObookInsertVo {
 	private int obsalestatus; //판매상태
 	private int obhit; //조회수
 	private int scatenum; //작은카테고리번호
-	public SellerObookInsertVo() {}
+	public SellerOldbooksVo() {}
 	
-	public SellerObookInsertVo(int obnum, int snum, String selleraddr, String obname, String obwriter,
+	public SellerOldbooksVo(int obnum, int snum, String selleraddr, String obname, String obwriter,
 			String obpublisher, Date obpdate, int obstatus, int oborgprice, int obsaleprice, byte obdetail,
 			int obdelfee, int obsalestatus, int obhit, int scatenum) {
 		super();

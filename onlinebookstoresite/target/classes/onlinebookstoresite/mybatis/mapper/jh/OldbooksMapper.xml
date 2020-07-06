@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.OldbooksMapper.jh">
-	<insert id="obinsert">
-		
-	</insert>
+	<select id="getBigcate" resultType="com.jhta.finalproject.jh.vo.SellerBigcategoryVo">
+		select * from bigcategory
+	</select>
 </mapper>
