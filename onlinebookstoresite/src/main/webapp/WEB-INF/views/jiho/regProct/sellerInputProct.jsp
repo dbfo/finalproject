@@ -12,9 +12,59 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-
+<!-- css적용 추후 파일에 따로 분리 예정임 -->
+<style>
+	#prodInputForm{
+		border: 1px solid red;
+		width: 1300px;
+		height: 2000px;
+		margin: auto;
+	}
+	#cate{ /*카테고리css*/
+		width: 1300px;
+		height: 200px;
+		border: 1px solid black;
+	}
+	#cateck{
+		width: 1300px;
+		height: 50%;
+		background-color: silver;
+	}
+	.bgtd{
+		background-color: silver;
+		width: 200px;
+		height: 50px;
+	}
+	#basic{ /*상품기본정보 css*/
+		width: 1300px;
+		height: 300px;
+		border: 1px solid yellow;
+	}
+	#infotable1 tr td input{
+		width: 500px;
+		height: 30px;
+	}
+	#price{ /*상품가격css*/
+		width: 1300px;
+		height: 300px;
+		border: 1px solid blue;
+	}
+	#infotable2 tr td input{
+		width: 500px;
+		height: 30px;
+	}
+	#ship{ /*배송정보*/
+		width: 1300px;
+		height: 300px;
+		border: 1px solid green;
+	}
+	#infotable3 tr td input{
+		width: 500px;
+		height: 30px;
+	}
+</style>
 <script>
-	//에디터api
+	//에디터api적용
 	$(document).ready(function() {
 	  $('#summernote').summernote();
 	});
@@ -77,99 +127,109 @@
 </script>
 <div id="prodInputForm">
 	<h2>상품등록</h2>
+	<!-- 카테고리등록 -->
 	<div id="cate">
-		<span>카테고리확인</span><input type="button" class="btn btn-outline-success" value="추가"><br>
+		<span>카테고리확인&emsp;</span><input type="button" class="btn btn-primary" value="분류추가"><br><br>
 		<div id="cateck">
 		
 		</div>
 	</div>
+	<!-- 상품기본정보등록 -->
 	<div id="basic">
 		<p>상품기본정보</p>
-		<table class="infotable">
+		<table id="infotable1" class="table table-bordered">
 			<tr>
-				<td>도서명</td>
-				<td><input type="text" name="obname"></td>
+				<td class="bgtd">도서명</td>
+				<td><input type="text" name="obname"><span>&emsp;※필수입력</span></td>
 			</tr>
 			<tr>
-				<td>저자</td>
-				<td><input type="text" name="obwriter"></td>
+				<td class="bgtd">저자</td>
+				<td><input type="text" name="obwriter"><span>&emsp;※필수입력</span></td>
 			</tr>
 			<tr>
-				<td>출판사</td>
-				<td><input type="text" name="obpublisher"></td>
+				<td class="bgtd">출판사</td>
+				<td><input type="text" name="obpublisher"><span>&emsp;※필수입력</span></td>
 			</tr>
 			<tr>
-				<td>출간일</td>
-				<td><input type="text" name="obpdate"></td>
+				<td class="bgtd">출간일</td>
+				<td><input type="date" name="obpdate"><span>&emsp;※필수입력</span></td>
 			</tr>
 		</table>
 	</div>
+	<!-- 상품가격정보등록 -->
 	<div id="price">
 		<p>상품가격정보</p>
-		<table class="infotable">
+		<table id="infotable2" class="table table-bordered">
 			<tr>
-				<td>정가</td>
+				<td class="bgtd">정가</td>
 				<td><input type="text" name="oborgprice"></td>
 			</tr>
 			<tr>
-				<td>품질체크</td>
+				<td class="bgtd">품질체크</td>
 				<td><input type="text" name="obstatus">
-				<input type="button" value="품질체크">
+				<input type="button" value="품질체크" style="width: 100px">
 				</td>
 			</tr>
 			<tr>
-				<td>판매가</td>
+				<td class="bgtd">판매가</td>
 				<td><input type="text" name="obsaleprice"></td>
 			</tr>
 		</table>
 	</div>
+	<!-- 배송정보등록 -->
 	<div id="ship">
 		<p>배송정보</p>
-		<table class="infotable">
+		<table class="infotable3">
 			<tr>
-				<td>택배비</td>
-				<td><input type="text" name="obdelfee"></td>
+				<td class="bgtd">택배비</td>
+				<td>
+					<input type="radio" name="obdelfee" checked>무료
+					<input type="radio" name="obdelfee" id="fee">회원부담
+					<input type="text" name="obdelfee">
+				</td>
 			</tr>
 			<tr>
-				<td>출고주소</td>
-				<td><input type="text" id="sample4_postcode" placeholder="우편번호">
+				<td class="bgtd">출고주소</td>
+				<td><input type="text" id="sample4_postcode" placeholder="우편번호" name="addr">
 					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-					<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+					<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr">
+					<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr">
 					<span id="guide" style="color:#999;display:none"></span><br>
-					<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-					<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+					<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr">
+					<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr">
 				</td>
 			</tr>
 		</table>
 	</div>
+	<!-- 상품이미지등록 -->
 	<div id="imginfo">
 		<p>상품이미지등록</p>
-		<table class="infotable">
+		<table class="infotable4">
 			<tr>
-				<td>대표(기본이미지)-필수</td>
-				<td><input type="text" name=""></td>
+				<td class="bgtd">대표(기본이미지)-필수</td>
+				<td><input type="text" name="img1"></td>
 			</tr>
 			<tr>
-				<td>실물이미지-선택</td>
-				<td><input type="text" name=""></td>
+				<td class="bgtd">실물이미지-선택</td>
+				<td><input type="text" name="img2"></td>
 			</tr>
 			<tr>
-				<td>실물이미지-선택</td>
-				<td><input type="text" name=""></td>
+				<td class="bgtd">실물이미지-선택</td>
+				<td><input type="text" name="img3"></td>
 			</tr>
 			<tr>
-				<td>실물이미지-선택</td>
-				<td><input type="text" name=""></td>
+				<td class="bgtd">실물이미지-선택</td>
+				<td><input type="text" name="img4"></td>
 			</tr>
 		</table>
 	</div>
+	<!-- 상품설명 등록 -->
 	<div id="info">
 		<p>상품설명</p>
-		<table class="infotable">
+		<table class="infotable5">
 			<tr>
-				<td>상품설명</td>
-				<td><div id="summernote"></div></td>
+				<td class="bgtd">상품설명</td>
+				<td><div id="summernote" name="obdetail"></div></td>
 			</tr>
 		</table>
 	</div>
