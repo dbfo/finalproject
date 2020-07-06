@@ -15,6 +15,9 @@
 	href="${pageContext.request.contextPath}/resources/yjcss/css/styles.css"
 	rel="stylesheet" />
 <link
+	href="${pageContext.request.contextPath}/resources/yrcss/yrcss.css"
+	rel="stylesheet" />
+<link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
 <script
@@ -37,7 +40,10 @@
 		<div id="layoutSidenav_content">
 			<!-- content tiles -->
 			<div id="content">
-				<tiles:insertAttribute name="content" />
+				<main>
+					<tiles:insertAttribute name="content" />
+					<tiles:insertAttribute name="tables"/>
+				</main>
 			</div>
 
 			<!-- footer tiles -->

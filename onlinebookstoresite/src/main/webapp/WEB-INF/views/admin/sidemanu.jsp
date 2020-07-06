@@ -12,7 +12,7 @@
 					data-target="#collapseOrder" aria-expanded="false"
 					aria-controls="collapseOrder">
 					<div class="sb-nav-link-icon">
-					<i class="fas fa-book-open"></i>
+						<i class="fas fa-book-open"></i>
 					</div>
 					주문관리
 					<div class="sb-sidenav-collapse-arrow">
@@ -21,7 +21,7 @@
 				</a>
 				<div class="collapse" id="collapseOrder" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="#">전체주문목록</a>
+						<a class="nav-link" href="${pageContext.request.contextPath}/totalOrder">전체주문목록</a>
 						<a class="nav-link" href="#">배송관리</a>
 						<a class="nav-link" href="#">취소/교환/반품</a>
 					</nav>
