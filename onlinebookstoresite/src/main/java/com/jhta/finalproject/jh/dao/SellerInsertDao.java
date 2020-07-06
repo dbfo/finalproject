@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
+import com.jhta.finalproject.jh.vo.SellerSmallcategoryVo;
 
 @Repository
 public class SellerInsertDao {
@@ -16,6 +17,11 @@ public class SellerInsertDao {
 	//큰 카테고리 가져오기
 	public List<SellerBigcategoryVo> getBigcate(){
 		List<SellerBigcategoryVo> list=slqSession.selectList(NAMESPACE+".getBigcate");
+		return list;
+	}
+	//작은 카테고리 가져오기
+	public List<SellerSmallcategoryVo> getSmallcate(int bcatenum){
+		List<SellerSmallcategoryVo> list=slqSession.selectList(NAMESPACE+".getSmallcate", bcatenum);
 		return list;
 	}
 }

@@ -18,4 +18,9 @@ public class SellerInsertService {
 		List<SellerBigcategoryVo> list=dao.getBigcate();
 		return list;
 	}
+	
+	public List<SellerSmallcategoryVo> getSmallcate(int bcatenum){
+		List<SellerSmallcategoryVo> list=dao.getSmallcate(bcatenum);
+		return list;
+	}
 }

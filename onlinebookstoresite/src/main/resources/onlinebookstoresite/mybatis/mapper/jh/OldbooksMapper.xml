@@ -6,4 +6,8 @@
 	<select id="getBigcate" resultType="com.jhta.finalproject.jh.vo.SellerBigcategoryVo">
 		select * from bigcategory
 	</select>
+	<select id="getSmallcate" resultType="com.jhta.finalproject.jh.vo.SellerSmallcategoryVo"
+		parameterType="int">
+		select * from smallcategory where bcatenum=#{bcatenum}
+	</select>
 </mapper>
