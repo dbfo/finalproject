@@ -23,6 +23,25 @@
 #prodInputForm{
 	border: 1px solid red;
 	width: 1300px;
-	height: 900px;
+	height: 1300px;
 	margin: auto;
+}
+#cate{
+	width: 1300px;
+	height: 200px;
+	border: 1px solid black;
+}
+#cateck{
+	width: 1300px;
+	height: 200px;
+	background-color: silver;
+}
+#basic{
+	width: 1300px;
+	height: 500px;
+	border: 1px solid yellow;
+}
+.infotable{
+	width: 100%;
+	border: 1px;
 }
