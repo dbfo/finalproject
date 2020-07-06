@@ -251,7 +251,8 @@
 	</div>
 </form>
 <script>
+	//카테고리 선택 팝업창 띄우기
 	$("#catebt").click(function(){
-		window.open('${pageContext.request.contextPath}/seller/popup','window','width=400, height=400');
+		window.open('${pageContext.request.contextPath}/seller/popup','window','width=500, height=500');
 	});
 </script>

@@ -2,13 +2,13 @@ package com.jhta.finalproject.jh.vo;
 
 public class SellerBigcategoryVo {
 	private int bcatenum;
-	private String bcatename;
+	private String bcataname;
 	public SellerBigcategoryVo() {}
 	
-	public SellerBigcategoryVo(int bcatenum, String bcatename) {
+	public SellerBigcategoryVo(int bcatenum, String bcataname) {
 		super();
 		this.bcatenum = bcatenum;
-		this.bcatename = bcatename;
+		this.bcataname = bcataname;
 	}
 
 	public int getBcatenum() {
@@ -17,11 +17,11 @@ public class SellerBigcategoryVo {
 	public void setBcatenum(int bcatenum) {
 		this.bcatenum = bcatenum;
 	}
-	public String getBcatename() {
-		return bcatename;
+	public String getBcataname() {
+		return bcataname;
 	}
-	public void setBcatename(String bcatename) {
-		this.bcatename = bcatename;
+	public void setBcataname(String bcataname) {
+		this.bcataname = bcataname;
 	}
 	
 }

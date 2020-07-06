@@ -17,6 +17,7 @@ public class SellerPopupController {
 	@RequestMapping("/seller/popup")
 	public String showPop(Model model) {
 		List<SellerBigcategoryVo> list=service.getBigcate();
+		System.out.println("리스트:"+list.toString());
 		model.addAttribute("list", list);
 		return "/jiho/regProct/catePop";
 	}
