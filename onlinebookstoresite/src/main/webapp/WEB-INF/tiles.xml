@@ -3,29 +3,38 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name=".main" template="/WEB-INF/views/home.jsp">
+	<definition name=".main"
+		template="/WEB-INF/views/admin/home.jsp">
 		<put-attribute name="header"
-			value="/WEB-INF/views/header.jsp" />
+			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="content"
-			value="/WEB-INF/views/content.jsp" />
+			value="/WEB-INF/views/admin/content.jsp" />
+		<put-attribute name="tables" value="" />
 		<put-attribute name="sidemanu"
-			value="/WEB-INF/views/sidemanu.jsp" />
+			value="/WEB-INF/views/admin/sidemanu.jsp" />
 		<put-attribute name="footer"
-			value="/WEB-INF/views/footer.jsp" />
+			value="/WEB-INF/views/admin/footer.jsp" />
 	</definition>
 
 	<definition name=".booksInsert" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/booksInsert.jsp" />
 	</definition>
-	
+
 	<definition name=".ok" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/ok.jsp" />
 	</definition>
-	
+
 	<definition name=".no" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/no.jsp" />
+	</definition>
+
+	<definition name=".totalOrder" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/yr/totalOrder.jsp" />
+		<put-attribute name="tables"
+			value="/WEB-INF/views/admin/yr/tables.jsp" />
 	</definition>
 </tiles-definitions>
