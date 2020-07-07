@@ -230,8 +230,7 @@
 					<td class="bgtd">택배비</td>
 					<td>
 						<input type="radio" name="obdelfee" checked value="0" id="free">무료
-						<input type="radio" name="obdelfee" value="1" id="fee">회원부담
-						<input type="text" name="obdelfee2" id="obfee" disabled="disabled">
+						<input type="radio" name="obdelfee" value="2500" id="fee">기본(2,500원)
 					</td>
 				</tr>
 				<tr>
@@ -284,7 +283,7 @@
 </form>
 
 <script type="text/javascript">
-	//대분류 선택시 소분류 가져오기
+	//대분류 카테고리 선택시 소분류 가져오기
 	function getsubcate(bcate) {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/seller/getSmallcate?bcatenum="+bcate,
@@ -297,10 +296,11 @@
 		});
 		selectdel();
 	}
-	//기존option리스트 지우기
+	//소분류 카테고리 기존option리스트 지우기
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
+	/*
 	//배송료 체크박스
 	$("#fee").change(function(){
 		if($("#fee").prop("checked")){
@@ -309,6 +309,5 @@
 			$("#obfee").attr("disabled",true);
 		}
 	});
-	
-	
+	*/
 </script>

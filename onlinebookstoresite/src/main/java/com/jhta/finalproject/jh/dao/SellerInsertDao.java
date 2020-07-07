@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
+import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
 import com.jhta.finalproject.jh.vo.SellerSmallcategoryVo;
 
 @Repository
@@ -23,5 +24,10 @@ public class SellerInsertDao {
 	public List<SellerSmallcategoryVo> getSmallcate(int bcatenum){
 		List<SellerSmallcategoryVo> list=slqSession.selectList(NAMESPACE+".getSmallcate", bcatenum);
 		return list;
+	}
+	//중고책상품 등록
+	public int insertProd(SellerOldbooksVo vo) {
+		int n=slqSession.insert(NAMESPACE+".insertProd", vo);
+		return n;
 	}
 }

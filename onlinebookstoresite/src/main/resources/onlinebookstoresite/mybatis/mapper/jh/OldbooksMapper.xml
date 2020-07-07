@@ -3,11 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.OldbooksMapper.jh">
-	<select id="getBigcate" resultType="com.jhta.finalproject.jh.vo.SellerBigcategoryVo">
+	<!-- 대분류 카테고리 가져오기 -->
+	<select id="getBigcate" resultType="bigcategory">
 		select * from bigcategory
 	</select>
-	<select id="getSmallcate" resultType="com.jhta.finalproject.jh.vo.SellerSmallcategoryVo"
+	<!-- 소분류 카테고리 가져오기 -->
+	<select id="getSmallcate" resultType="smallcategory"
 		parameterType="int">
 		select * from smallcategory where bcatenum=#{bcatenum}
 	</select>
+	<!-- 중고책상품 등록하기 -->
+	<insert id="insertProd" parameterType="oldbooks">
+		insert into oldbooks values(SEQ_OLDBOOKS_OBNUM.nextval,#{snum},#{selleraddr},#{obname},#{obwriter},
+		#{obpublisher},#{obpdate},#{obstatus},#{oborgprice},#{obsaleprice},#{obdetail},#{obdelfee},
+		0,0,#{scatenum},sysdate)
+	</insert>
 </mapper>

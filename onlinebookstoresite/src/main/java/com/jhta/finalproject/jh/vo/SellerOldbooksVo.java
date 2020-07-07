@@ -13,7 +13,7 @@ public class SellerOldbooksVo {
 	private int obstatus; //품질
 	private int oborgprice; //정가
 	private int obsaleprice;  //판매가
-	private byte obdetail; //상품설명
+	private String obdetail; //상품설명
 	private int obdelfee; //배송료
 	private int obsalestatus; //판매상태
 	private int obhit; //조회수
@@ -21,7 +21,7 @@ public class SellerOldbooksVo {
 	public SellerOldbooksVo() {}
 	
 	public SellerOldbooksVo(int obnum, int snum, String selleraddr, String obname, String obwriter,
-			String obpublisher, Date obpdate, int obstatus, int oborgprice, int obsaleprice, byte obdetail,
+			String obpublisher, Date obpdate, int obstatus, int oborgprice, int obsaleprice, String obdetail,
 			int obdelfee, int obsalestatus, int obhit, int scatenum) {
 		super();
 		this.obnum = obnum;
@@ -101,10 +101,10 @@ public class SellerOldbooksVo {
 	public void setObsaleprice(int obsaleprice) {
 		this.obsaleprice = obsaleprice;
 	}
-	public byte getObdetail() {
+	public String getObdetail() {
 		return obdetail;
 	}
-	public void setObdetail(byte obdetail) {
+	public void setObdetail(String obdetail) {
 		this.obdetail = obdetail;
 	}
 	public int getObdelfee() {
