@@ -5,10 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class MembersList {
 	@Autowired
-	@GetMapping("/")
-	public String home() {
-		return ".main";
+	@GetMapping("/membersList")
+	public String list() {
+		return ".membersList";
 	}
 }
+

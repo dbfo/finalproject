@@ -43,7 +43,7 @@
 					aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
 						<a class="nav-link" href="${pageContext.request.contextPath }/booksInsert">상품등록</a>
-						<a class="nav-link" href="#">등록상품조회</a>
+						<a class="nav-link" href="${pageContext.request.contextPath }/booksList">등록상품조회</a>
 					</nav>
 				</div>
 
@@ -79,7 +79,7 @@
 				<div class="collapse" id="collapseMember"
 					aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="#">회원리스트</a>
+						<a class="nav-link" href="${pageContext.request.contextPath }/membersList">회원리스트</a>
 						<a class="nav-link" href="#">탈퇴회원리스트</a>
 					</nav>
 				</div>

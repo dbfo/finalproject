@@ -20,7 +20,7 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation"
-			value="classpath:com/jhta/yj/mybatis/config/books-mybatis-config.xml" />
+			value="classpath:com/jhta/yj/mybatis/config/chloe-mybatis-config.xml" />
 	</bean>
 
 	<bean id="sqlSession"

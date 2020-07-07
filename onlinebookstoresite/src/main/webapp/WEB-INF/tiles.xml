@@ -18,17 +18,22 @@
 
 	<definition name=".booksInsert" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/booksInsert.jsp" />
+			value="/WEB-INF/views/admin/chloe/books/booksInsert.jsp" />
+	</definition>
+	
+	<definition name=".booksList" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/books/booksList.jsp" />
 	</definition>
 
 	<definition name=".ok" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/ok.jsp" />
+			value="/WEB-INF/views/admin/chloe/books/ok.jsp" />
 	</definition>
 
 	<definition name=".no" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/no.jsp" />
+			value="/WEB-INF/views/admin/chloe/books/no.jsp" />
 	</definition>
 
 	<definition name=".totalOrder" extends=".main">
@@ -36,5 +41,10 @@
 			value="/WEB-INF/views/admin/yr/totalOrder.jsp" />
 		<put-attribute name="tables"
 			value="/WEB-INF/views/admin/yr/tables.jsp" />
+	</definition>
+	
+	<definition name=".membersList" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/members/membersList.jsp" />
 	</definition>
 </tiles-definitions>
