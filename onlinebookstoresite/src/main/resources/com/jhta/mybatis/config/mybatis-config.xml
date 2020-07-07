@@ -8,6 +8,7 @@
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerBigcategoryVo" alias="bigcategory"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerSmallcategoryVo" alias="smallcategory"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerOldbooksVo" alias="oldbooks"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.SellerImgVo" alias="img"/>
 </typeAliases>
 
   <mappers>

@@ -8,7 +8,7 @@ public class SellerOldbooksVo {
 	private String selleraddr; //출고주소
 	private String obname; //책이름
 	private String obwriter; //저자
-	private String obpublisher; //춣판사
+	private String obpublisher; //출판사
 	private Date obpdate; //출간일
 	private int obstatus; //품질
 	private int oborgprice; //정가

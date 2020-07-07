@@ -1,17 +1,24 @@
 package com.jhta.finalproject.jh.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.finalproject.jh.service.SellerInsertService;
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
 
 @Controller
@@ -20,10 +27,10 @@ public class SellerProdInsertController {
 	private SellerInsertService service;
 	
 	@RequestMapping("/seller/prodInsert")
-	public String insertProd(HttpServletRequest req) {
+	public String insertProd(HttpServletRequest req,HttpSession session, MultipartFile img1,
+			MultipartFile img2,MultipartFile img3,MultipartFile img4) {
 		//,MultipartFile img1,MultipartFile img2,MultipartFile img3,MultipartFile img4
-//		int snum=1;//테스트용 중고판매자번호
-//		System.out.println("큰카테고리"+req.getParameter("bcataname"));
+		/*
 		System.out.println("작은카테고리"+req.getParameter("scatename"));
 		System.out.println("obname"+req.getParameter("obname"));
 		System.out.println("obwriter"+req.getParameter("obwriter"));
@@ -34,31 +41,27 @@ public class SellerProdInsertController {
 		System.out.println("obsaleprice"+req.getParameter("obsaleprice"));
 		System.out.println("배송료"+req.getParameter("obdelfee"));
 		System.out.println("배송료2"+req.getParameter("obdelfee2"));
-		System.out.println("img1"+req.getParameter("img1"));
-		System.out.println("img2"+req.getParameter("img2"));
-		System.out.println("img3"+req.getParameter("img3"));
-		System.out.println("img4"+req.getParameter("img4"));
 		System.out.println("addr1"+req.getParameter("addr1"));
 		System.out.println("addr2"+req.getParameter("addr2"));
 		System.out.println("addr3"+req.getParameter("addr3"));
 		System.out.println("addr4"+req.getParameter("addr4"));
 		System.out.println("addr5"+req.getParameter("addr5"));
 		System.out.println("obdetail"+req.getParameter("obdetail"));
-		//출고지주소
-//		String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
-//				req.getParameter("addr4")+"|"+req.getParameter("addr5");
+		*/
+		System.out.println("img1"+req.getParameter("img1"));
+		System.out.println("img2"+req.getParameter("img2"));
+		System.out.println("img3"+req.getParameter("img3"));
+		System.out.println("img4"+req.getParameter("img4"));
 		
-//		int scatenum=Integer.parseInt(req.getParameter("scatename"));
-		
-//		int obnum; //중고책번호
-		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-mm-dd");//날짜형식 지정
 		try {
-			int snum=1;  //판매자번호
+			int snum=1;  //판매자번호(테스트용) 추후 로그인 후 세션에서 받아올 예정
+			//출고주소(입력칸 나눠져 있는 부분 병합해서 저장)
 			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
-					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
+					req.getParameter("addr4")+"|"+req.getParameter("addr5"); 
 			String obname=req.getParameter("obname"); //책이름
 			String obwriter=req.getParameter("obwriter"); //저자
-			String obpublisher=req.getParameter("obpublisher"); //춣판사
+			String obpublisher=req.getParameter("obpublisher"); //출판사
 			Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일
 			int obstatus=Integer.parseInt(req.getParameter("obstatus")); //품질
 			int oborgprice=Integer.parseInt(req.getParameter("oborgprice")); //정가
@@ -70,15 +73,30 @@ public class SellerProdInsertController {
 					obdelfee=2500;
 				}
 			int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
-			
 			SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
 					obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
-			
-			
-			int n=service.insertProd(vo);
+			int n=service.insertProd(vo);//중고책등록
 			System.out.println("결과:"+n);
+			int obnum=service.getObnum();
+			System.out.println("중고책등록번호:"+obnum);//ok
+			//업로드할 경로명
+			String upload=session.getServletContext().getRealPath("/resources/jhobupload");
+			String orgFileName1=img1.getOriginalFilename();
+			String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
+			
+			InputStream fis=img1.getInputStream();
+			FileOutputStream fos=
+					new FileOutputStream(upload+"\\"+saveFileName1);
+			FileCopyUtils.copy(fis, fos);
+			fis.close();
+			fos.close();
+			SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, obnum);
+			int j=service.insertObimgThum(img1vo);
+			System.out.println("이미지업로드 결과:"+j);
 		}catch(ParseException e) {
 			e.printStackTrace();
+		}catch(IOException ie) {
+			ie.printStackTrace();
 		}
 		return null;
 	}

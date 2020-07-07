@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.jh.dao.SellerInsertDao;
 import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
 import com.jhta.finalproject.jh.vo.SellerSmallcategoryVo;
 
@@ -28,6 +29,21 @@ public class SellerInsertService {
 	//중고책등록
 	public int insertProd(SellerOldbooksVo vo) {
 		int n=dao.insertProd(vo);
+		return n;
+	}
+	//이미지 등록을 위한 중고책 번호 얻어오기
+	public int getObnum() {
+		int obnum=dao.getObnum();
+		return obnum;
+	}
+	//중고책 상품등록시 썸네일 이미지 등록
+	public int insertObimgThum(SellerImgVo vo) {
+		int n=dao.insertObimgThum(vo);
+		return n;
+	}
+	//중고책 상품등록시 일반 이미지 등록
+	public int insertObimg(SellerImgVo vo) {
+		int n=dao.insertObimg(vo);
 		return n;
 	}
 }
