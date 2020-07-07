@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- 다음주소api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -74,6 +75,17 @@
 	#summernote{
 		height: 300px;
 	}
+	#bigbox{
+		width: 200px;
+		height: 300px;
+		border: 1px solid black;
+		float: left;
+	}
+	.selectbox{
+		width: 150px;
+		height:25px;
+		padding-left: 20px;
+	}
 </style>
 <script>
 	//에디터api적용
@@ -142,11 +154,23 @@
 		<h2>상품등록</h2>
 		<!-- 카테고리등록 -->
 		<div id="cate">
-			<span>카테고리확인&emsp;</span>
-			<input type="button" class="btn btn-primary" value="분류추가" id="catebt"><br><br>
-			<div id="cateck">
-			
-			</div>
+			<p>카테고리확인&emsp;</p>
+			<!-- <input type="button" class="btn btn-primary" value="분류추가" id="catebt"><br><br> -->
+			<table id="infotable" class="table table-bordered">
+				<tr>
+					<td class="bgtd">카테고리</td>
+					<td><select name="bcataname" onchange="getsubcate(this.value)" class="selectbox">
+						<option value="">---선택---</option>
+						<c:forEach var="vo" items="${list}">
+							<option value="${vo.bcatenum}">${vo.bcataname}</option>
+						</c:forEach>
+						</select>
+						<select name="scatename" class="selectbox">
+							<option value="">---선택---</option>
+						</select>
+					</td>
+				</tr>	
+			</table>
 		</div>
 		<!-- 상품기본정보등록 -->
 		<div id="basic">
@@ -250,9 +274,27 @@
 	<button type="submit" class="btn btn-success btn-lg">등록하기</button>
 	</div>
 </form>
-<script>
-	//카테고리 선택 팝업창 띄우기
-	$("#catebt").click(function(){
-		window.open('${pageContext.request.contextPath}/seller/popup','window','width=500, height=500');
-	});
+
+
+<script type="text/javascript">
+	//대분류 선택시 소분류 가져오기
+	function getsubcate(bcate) {
+		console.log("큰카테:"+bcate);
+		console.log("작은카테벨류:"+$("select[name=scatename]").val());
+		$.ajax({
+			url:"${pageContext.request.contextPath}/seller/getSmallcate?bcatenum="+bcate,
+			dataType:"json",
+			success:function(data){
+				$(data).each(function(i,mem){
+					$("select[name=scatename]").append("<option value="+data[i].scatenum+">"+data[i].scataname+"</option>");
+				});
+				console.log("스몰카테크기"+data.length);
+			}
+		});
+		selectdel();
+	}
+	//기존option리스트 지우기
+	function selectdel() {
+		$("select[name=scatename] option").remove();
+	}
 </script>

@@ -3,15 +3,15 @@ package com.jhta.finalproject.jh.vo;
 public class SellerSmallcategoryVo {
 	private int scatenum;
 	private int bcatenum;
-	private String scatename;
+	private String scataname;
 	
 	public SellerSmallcategoryVo() {}
 	
-	public SellerSmallcategoryVo(int scatenum, int bcatenum, String scatename) {
+	public SellerSmallcategoryVo(int scatenum, int bcatenum, String scataname) {
 		super();
 		this.scatenum = scatenum;
 		this.bcatenum = bcatenum;
-		this.scatename = scatename;
+		this.scataname = scataname;
 	}
 	public int getScatenum() {
 		return scatenum;
@@ -25,10 +25,10 @@ public class SellerSmallcategoryVo {
 	public void setBcatenum(int bcatenum) {
 		this.bcatenum = bcatenum;
 	}
-	public String getScatename() {
-		return scatename;
+	public String getScataname() {
+		return scataname;
 	}
-	public void setScatename(String scatename) {
-		this.scatename = scatename;
+	public void setScataname(String scataname) {
+		this.scataname = scataname;
 	}
 }
