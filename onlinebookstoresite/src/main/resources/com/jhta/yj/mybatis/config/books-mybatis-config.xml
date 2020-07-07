@@ -9,8 +9,11 @@
 			alias="books" />
 		<typeAlias type="com.jhta.finalproject.yj.vo.ImgVO"
 			alias="img" />
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
+		alias="payment" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/jhta/yj/mybatis/mapper/BooksMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
 	</mappers>
 </configuration>

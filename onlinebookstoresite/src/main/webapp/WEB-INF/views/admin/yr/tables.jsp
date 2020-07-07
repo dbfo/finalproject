@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-fluid">
 	<h2 class="mt-4">주문 리스트</h2>
 	<div class="card mb-4">
@@ -23,16 +24,41 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Tiger Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>61</td>
-							<td>2011/04/25</td>
-							<td>$320,800</td>
-							<td>배송중</td>
-							<td></td>
-						</tr>
+						<c:forEach var="vo" items="${list }">
+							<tr>
+								<td>${vo.borderdate}</td>
+								<td>${vo.bpaynum}</td>
+								<td>조인해서....이름가져와야하넹</td>
+								<td>조인해서...책 제목도 가져와야하넹</td>
+								<td>${vo.bfinalmoney}</td>
+<!-- 								결제수단 -->
+								<c:choose>
+									<c:when test="${vo.methodpayment == 0 }">
+										<td>카드</td>									
+									</c:when>									
+									<c:when test="${vo.methodpayment == 1 }">
+										<td>무통장</td>									
+									</c:when>
+								</c:choose>
+<!-- 								배송상태 -->
+								<c:choose>
+									<c:when test="${vo.bstatus == 0 || vo.bstatus == 1 }">
+										<td>배송전</td>									
+									</c:when>									
+									<c:when test="${vo.methodpayment == 2 }">
+										<td>배송중</td>									
+									</c:when>
+									<c:when test="${vo.methodpayment == 3 }">
+										<td>배송완료</td>									
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
+								
+								<td>이것도 조인...ㅜㅜ</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

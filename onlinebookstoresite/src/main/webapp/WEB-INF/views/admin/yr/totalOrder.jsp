@@ -7,10 +7,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-
-<div class="container-fluid">
-	<h2>주문관리</h2>
-	<table class="table">
+<div class="container-fluid ">
+	<h2>전체주문관리</h2>
+	<table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>
 			<td colspan="3">
@@ -31,16 +30,16 @@
 			<th class="table-active">기간</th>
 			<td colspan="3">
 				<div class = "row">
-					<select name = "tfield" class = "col form-control">
+					<select name = "tfield" class = "col form-control col-xs-2">
 						<option value="ordernum">주문일</option>
 						<option value="">결제일</option>
 					</select>
-					<div class='col-md-5'> 
-						<input class="btn btn-outline-success btn-sm" type="button" name="today" value = "오늘">
-						<input class="btn btn-outline-success btn-sm" type="button" name="tomorrow" value = "내일">
-						<input class="btn btn-outline-success btn-sm " type="button" name="seven" value = "7일">
-						<input class="btn btn-outline-success btn-sm" type="button" name="month" value = "1개월">
-						<input class="btn btn-outline-success btn-sm " type="button" name="sixmonth" value = "6개월">
+					<div class='col-md-4'> 
+						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="today" value = "오늘">
+						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="tomorrow" value = "내일">
+						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="seven" value = "7일">
+						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="month" value = "1개월">
+						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">
 					</div>
 					
 					<div class='col-md-3 col-xs-4'> 
@@ -64,9 +63,6 @@
 							</div> 
 						</div> 
 					</div>
-
-					
-					
 				</div>
 			</td>
 		</tr>
@@ -85,8 +81,6 @@
 						<input class="form-control" type="text" name="bkeyword">
 					</div>
 				</div>
-				
-				
 			</td>
 		</tr>
 		<tr>
@@ -110,13 +104,13 @@
 		<tr>
 			<th class="table-active">입금 / 결제 상태</th>
 			<td>
-				<input type="radio" name="payType" value="ptotal" id = "ptotal"><label for="ptotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+				<input type="radio" name="payType" value="ptotal" id = "ptotal" ><label for="ptotal"> &nbsp;전체 &nbsp;&nbsp;</label>
 				<input type="radio" name="payType" value="pbefore" id = "pbefore"><label for="pbefore"> &nbsp;입금 전 &nbsp;&nbsp;</label>
 				<input type="radio" name="payType" value="pafter" id = "pafter"><label for ="pafter"> &nbsp;입금 완료 &nbsp;&nbsp;</label>
 			</td>
 			<th class="table-active">회원 / 비회원</th>
 			<td>
-				<input type="radio" name="mType" value="mtotal" id = "mtotal"><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+				<input type="radio" name="mType" value="mtotal" id = "mtotal" ><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
 				<input type="radio" name="mType" value="member" id = "member"><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
 				<input type="radio" name="mType" value="nonemember" id = "nonemember"><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
 			</td>
@@ -128,5 +122,41 @@
 			</td>		
 		</tr>
 	</table>
-	
 </div>
+
+<script type="text/javascript">
+
+// 	1. 전체 누르면 전부다 클릭 되도록, 2. '전체'눌려져 있을때 다른거 누르면 전체 체크 해제
+	
+	$("input[type=checkbox]").on('click',function(){
+		var value = $(this).val();
+		if(value == 'pstotal' || value == 'cpstotal'){
+			var c = $(this).prop('checked');
+			$('input[name='+$(this).attr('name')+']').each( function(idx, item){
+					$(this).prop('checked',c);
+				}
+			)
+			return;
+		}else{
+			if($('input[name='+$(this).attr("name")+']').first().prop('checked')){
+				$('input[name='+$(this).attr("name")+']').first().prop('checked',false);
+			}
+		}
+	})
+	
+	//[오늘, 내일, 7일, 1개월, 6개월]버튼 클릭하면 색 바뀜
+	$('.dbtn').on('click',function(){
+		var clickbtn = $(this);
+
+		$('.dbtn').each(function(idx, item){
+			if(clickbtn != $(this)){
+				$(this).removeClass('btn-success');
+				$(this).addClass('btn-outline-success');	
+			}
+		})
+		
+		$(this).removeClass('btn-outline-success');	
+		$(this).addClass('btn-success');	
+	})
+	
+</script>
