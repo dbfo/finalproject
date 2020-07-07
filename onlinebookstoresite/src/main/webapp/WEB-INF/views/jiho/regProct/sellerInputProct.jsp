@@ -50,7 +50,7 @@
 		height: 300px;
 		border: 1px solid blue;
 	}
-	#infotable2 tr td input{
+	.infotd2{
 		width: 500px;
 		height: 30px;
 	}
@@ -86,11 +86,16 @@
 		height:25px;
 		padding-left: 20px;
 	}
+	#insertbt{
+		margin: auto;
+	}
 </style>
 <script>
 	//에디터api적용
 	$(document).ready(function() {
-	  $('#summernote').summernote();
+	  $('#summernote').summernote({
+		  height:400
+	  });
 	});
 
 	//주소api적용
@@ -149,7 +154,7 @@
         }).open();
     }
 </script>
-<form method="post" action="${pageContext.request.contextPath}/seller/...">
+<form method="post" action="${pageContext.request.contextPath}/seller/prodInsert" enctype="multipart/form-data">
 	<div id="prodInputForm">
 		<h2>상품등록</h2>
 		<!-- 카테고리등록 -->
@@ -200,17 +205,20 @@
 			<table id="infotable2" class="table table-bordered">
 				<tr>
 					<td class="bgtd">정가</td>
-					<td><input type="text" name="oborgprice"></td>
+					<td><input type="text" name="oborgprice" class="infotd2"></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
-					<td><input type="text" name="obstatus">
-					<input type="button" value="품질체크" style="width: 100px">
+					<td>
+					<input type="radio" name="obstatus" value="1" width="100">최상
+					<input type="radio" name="obstatus" value="2">상
+					<input type="radio" name="obstatus" value="3">중
+					<input type="radio" name="obstatus" value="4">하
 					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">판매가</td>
-					<td><input type="text" name="obsaleprice"></td>
+					<td><input type="text" name="obsaleprice" class="infotd2"></td>
 				</tr>
 			</table>
 		</div>
@@ -221,9 +229,9 @@
 				<tr>
 					<td class="bgtd">택배비</td>
 					<td>
-						<input type="radio" name="obdelfee" checked>무료
-						<input type="radio" name="obdelfee" id="fee">회원부담
-						<input type="text" name="obdelfee" disabled="disabled">
+						<input type="radio" name="obdelfee" checked value="0" id="free">무료
+						<input type="radio" name="obdelfee" value="1" id="fee">회원부담
+						<input type="text" name="obdelfee2" id="obfee" disabled="disabled">
 					</td>
 				</tr>
 				<tr>
@@ -245,19 +253,19 @@
 			<table id="infotable4" class="table table-bordered">
 				<tr>
 					<td class="bgtd">대표(기본이미지)-필수</td>
-					<td><input type="text" name="img1"></td>
+					<td><input type="file" name="img1"></td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="text" name="img2"></td>
+					<td><input type="file" name="img2"></td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="text" name="img3"></td>
+					<td><input type="file" name="img3"></td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="text" name="img4"></td>
+					<td><input type="file" name="img4"></td>
 				</tr>
 			</table>
 		</div>
@@ -267,20 +275,17 @@
 			<table id="infotable5" class="table table-bordered">
 				<tr>
 					<td class="bgtd">상품설명</td>
-					<td><div id="summernote" name="obdetail"></div></td>
+					<td><textarea id="summernote" name="obdetail"></textarea></td>
 				</tr>
 			</table>
 		</div>
-	<button type="submit" class="btn btn-success btn-lg">등록하기</button>
+	<button type="submit" class="btn btn-success btn-lg" id="insertbt">등록하기</button>
 	</div>
 </form>
-
 
 <script type="text/javascript">
 	//대분류 선택시 소분류 가져오기
 	function getsubcate(bcate) {
-		console.log("큰카테:"+bcate);
-		console.log("작은카테벨류:"+$("select[name=scatename]").val());
 		$.ajax({
 			url:"${pageContext.request.contextPath}/seller/getSmallcate?bcatenum="+bcate,
 			dataType:"json",
@@ -288,7 +293,6 @@
 				$(data).each(function(i,mem){
 					$("select[name=scatename]").append("<option value="+data[i].scatenum+">"+data[i].scataname+"</option>");
 				});
-				console.log("스몰카테크기"+data.length);
 			}
 		});
 		selectdel();
@@ -297,4 +301,14 @@
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
+	//배송료 체크박스
+	$("#fee").change(function(){
+		if($("#fee").prop("checked")){
+			$("#obfee").attr("disabled", false);
+		}else if($("free").prop("checked")){
+			$("#obfee").attr("disabled",true);
+		}
+	});
+	
+	
 </script>
