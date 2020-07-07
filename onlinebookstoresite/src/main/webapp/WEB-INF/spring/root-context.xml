@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>	
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>	
+		<property name="username" value="scott"/>	
+		<property name="password" value="tiger"/>	
+	</bean>
+	
+		<!-- SqlSessionFactoryBean 설정(dataSource,Mapper XML파일) -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:com/jhta/mybatis/config/mybatis-config.xml"/>
+	</bean>	
+	
+		<!-- SqlSessionTemplate(SqlSessionFactoryBean주입 -> 생성자) -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	<context:component-scan base-package="com.jhta.finalproject.jm">
+	<!-- @Controller어노테이션을 갖는개체는 제외하고 나머지만 Bean객체로 생성하기 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+		
 		
 </beans>
