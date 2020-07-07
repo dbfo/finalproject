@@ -18,4 +18,7 @@
 	<definition name=".seller.product" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/regProct/sellerInputProct.jsp"/>
 	</definition>
+	<definition name=".seller.insertok" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/regProct/sellerInsertOk.jsp"/>
+	</definition>
 </tiles-definitions>

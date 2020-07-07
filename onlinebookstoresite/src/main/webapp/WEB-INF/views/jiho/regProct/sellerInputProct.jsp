@@ -165,13 +165,13 @@
 				<tr>
 					<td class="bgtd">카테고리</td>
 					<td><select name="bcataname" onchange="getsubcate(this.value)" class="selectbox">
-						<option value="">---선택---</option>
+						<option value="0">---선택---</option>
 						<c:forEach var="vo" items="${list}">
 							<option value="${vo.bcatenum}">${vo.bcataname}</option>
 						</c:forEach>
 						</select>
 						<select name="scatename" class="selectbox">
-							<option value="">---선택---</option>
+							<option value="0">---선택---</option>
 						</select>
 					</td>
 				</tr>	
@@ -300,14 +300,48 @@
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
-	/*
-	//배송료 체크박스
-	$("#fee").change(function(){
-		if($("#fee").prop("checked")){
-			$("#obfee").attr("disabled", false);
-		}else if($("free").prop("checked")){
-			$("#obfee").attr("disabled",true);
+	
+	//입력폼 유효성검사
+	$("form").submit(function() {
+		/*대분류카테고리*/
+		if($("select[name=bcataname]").val()==="0"){
+			alert("대분류 카테고리를 선택해주세요");
+			return false;
 		}
+		/*소분류카테고리*/
+		if($("select[name=scataname]").val()==="0"){
+			alert("소분류 카테고리를 선택해주세요");
+			return false;
+		}
+		/*도서명*/
+		if($("input[name=obname]").val()===""){
+			alert("도서명을 입력해주세요");
+			$("input[name=obname]").focus();
+			return false;
+		}
+		/*저자*/
+		if($("input[name=obwriter]").val()===""){
+			alert("저자를 입력해주세요");
+			$("input[name=obwriter]").focus();
+			return false;
+		}
+		/*출판사*/
+		if($("input[name=obpublisher]").val()===""){
+			alert("출판사를 입력해주세요");
+			$("input[name=obpublisher]").focus();
+			return false;
+		}
+		/*출간일*/
+		if($("input[name=obpdate]").val()===""){
+			alert("출간일을 입력해주세요");
+			$("input[name=obpdate]").focus();
+			var date=new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			var day = date.getDate();
+			alert($("input[name=obpdate]").val()+","+date);
+			return false;
+		}
+		alert($("input[name=obpdate]").val());
 	});
-	*/
 </script>

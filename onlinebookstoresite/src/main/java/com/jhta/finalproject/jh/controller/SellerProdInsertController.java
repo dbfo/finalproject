@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jhta.finalproject.jh.service.SellerInsertService;
 import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
-
+@Transactional
 @Controller
 public class SellerProdInsertController {
 	@Autowired
@@ -52,7 +53,6 @@ public class SellerProdInsertController {
 		System.out.println("img2"+req.getParameter("img2"));
 		System.out.println("img3"+req.getParameter("img3"));
 		System.out.println("img4"+req.getParameter("img4"));
-		
 		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-mm-dd");//날짜형식 지정
 		try {
 			int snum=1;  //판매자번호(테스트용) 추후 로그인 후 세션에서 받아올 예정
@@ -77,13 +77,13 @@ public class SellerProdInsertController {
 					obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
 			int n=service.insertProd(vo);//중고책등록
 			System.out.println("결과:"+n);
-			int obnum=service.getObnum();
+			
+			int obnum=service.getObnum();//이미지등록을 위한 중고책번호 가져오기
 			System.out.println("중고책등록번호:"+obnum);//ok
 			//업로드할 경로명
 			String upload=session.getServletContext().getRealPath("/resources/jhobupload");
 			String orgFileName1=img1.getOriginalFilename();
 			String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
-			
 			InputStream fis=img1.getInputStream();
 			FileOutputStream fos=
 					new FileOutputStream(upload+"\\"+saveFileName1);
@@ -93,11 +93,14 @@ public class SellerProdInsertController {
 			SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, obnum);
 			int j=service.insertObimgThum(img1vo);
 			System.out.println("이미지업로드 결과:"+j);
+			if(!(img2.isEmpty())) {
+				
+			}
 		}catch(ParseException e) {
 			e.printStackTrace();
 		}catch(IOException ie) {
 			ie.printStackTrace();
 		}
-		return null;
+		return ".seller.insertok";
 	}
 }
