@@ -20,7 +20,7 @@
 	<!-- </select> -->
 
 	<insert id="imgInsert" parameterType="img">
-		insert into img	values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename}, #{thumbnail}, 1, #{bnum})
+		insert into img	values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename}, #{thumbnail}, 1, SEQ_BOOKS_BNUM.currval)
 	</insert>
 
 

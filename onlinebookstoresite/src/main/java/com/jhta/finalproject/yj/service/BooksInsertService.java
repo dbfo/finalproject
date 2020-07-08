@@ -10,5 +10,5 @@ import com.jhta.finalproject.yj.vo.ImgVO;
 @Service
 public interface BooksInsertService {
 	int insert(BooksVO bvo, ImgVO ivo);
-	int insertList(BooksVO bvo, ImgVO ivo1, ImgVO ivo2);
+	int insertList(BooksVO bvo, List<ImgVO> list);
 }

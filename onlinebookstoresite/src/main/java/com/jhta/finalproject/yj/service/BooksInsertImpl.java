@@ -36,14 +36,12 @@ public class BooksInsertImpl implements BooksInsertService {
 
 	@Transactional
 	@Override
-	public int insertList(BooksVO bvo, ImgVO ivo1, ImgVO ivo2) {
+	public int insertList(BooksVO bvo, List<ImgVO> list) {
 		bdao.booksInsert(bvo);
-		idao.imgInsert(ivo1);
-		idao.imgInsert(ivo2);
-		
-//		for (ImgVO ivo3 : list) {
-//			idao.imgInsert(ivo3);
-//		}
+		// idao.imgInsert(ivo);
+		for (ImgVO ivo : list) {
+			idao.imgInsert(ivo);
+		}
 		return 1;
 	}
 }

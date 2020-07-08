@@ -79,10 +79,9 @@ public class BooksInsertController {
 				ImgVO ivo = new ImgVO(imgorgfilename, 0, imgsavefilename, 1, 1, bvo.getBnum());
 				insertService.insert(bvo, ivo);
 
-			} 
-			if (!(img1.isEmpty())) {
+			} else if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) {
 				// 썸네일
-//				List<ImgVO> list=new ArrayList<ImgVO>();
+				List<ImgVO> list = new ArrayList<ImgVO>();
 				String imgorgfilename1 = thumbnail.getOriginalFilename();
 				String imgsavefilename1 = UUID.randomUUID() + "_" + imgorgfilename1;
 				InputStream fis1 = thumbnail.getInputStream();
@@ -90,13 +89,13 @@ public class BooksInsertController {
 				FileCopyUtils.copy(fis1, fos1);
 				fis1.close();
 				fos1.close();
-				
+
 				BooksVO bvo = new BooksVO(0, btitle, bwriter, null, bpublisher, bprice, bpoint, bshipinfo, bcount,
 						bcontent, 0, smctg, null);
 				ImgVO ivo1 = new ImgVO(imgorgfilename1, 0, imgsavefilename1, 1, 1, bvo.getBnum());
-//				list.add(ivo1);
+				list.add(ivo1);
 
-				//이미지
+				// 이미지
 				String imgorgfilename2 = img1.getOriginalFilename();
 				String imgsavefilename2 = UUID.randomUUID() + "_" + imgorgfilename2;
 				InputStream fis2 = img1.getInputStream();
@@ -104,14 +103,14 @@ public class BooksInsertController {
 				FileCopyUtils.copy(fis2, fos2);
 				fis2.close();
 				fos2.close();
-				
+
 				ImgVO ivo2 = new ImgVO(imgorgfilename2, 0, imgsavefilename2, 0, 1, bvo.getBnum());
-//				list.add(ivo2);
-				insertService.insertList(bvo, ivo1, ivo2);
+				list.add(ivo2);
+				insertService.insertList(bvo, list);
 			}
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
 		}
-		return "redirect:/booksInsert";
+		return "redirect:/";
 	}
 }
