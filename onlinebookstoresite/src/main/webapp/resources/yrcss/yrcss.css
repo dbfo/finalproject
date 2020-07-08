@@ -24,13 +24,42 @@
     padding-inline-start: 20px;	
     flex-grow: 1;
     border: 1px solid #dadcdd;
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 5px;
+}
+
+.thumb{
+	display: inline-block;
+	
 }
 
 .thumb:hover {
 	color: green;
+	cursor: pointer;
 }
 
+.thumbcolor {
+	color: green;
+	cursor: pointer;
+}
+
+.title{
+	font-size: 20px;
+	font-weight: normal;
+	margin-left: 15px;
+}
+
+.title a { 
+	text-decoration:none;
+	color : black; 
+} 
+
+body{
+	background-color: #ecf0f7;
+}
+
+.container-fluid{
+	background-color: white;
+}
 
  
