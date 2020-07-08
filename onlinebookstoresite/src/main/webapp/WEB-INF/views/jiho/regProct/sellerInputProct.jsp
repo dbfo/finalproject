@@ -180,7 +180,7 @@
 							<option value="0">---선택---</option>
 						</select>
 					</td>
-				</tr>	
+				</tr>		
 			</table>
 		</div>
 		<!-- 상품기본정보등록 -->
@@ -211,7 +211,8 @@
 			<table id="infotable2" class="table table-bordered">
 				<tr>
 					<td class="bgtd">정가</td>
-					<td><input type="text" name="oborgprice" class="infotd2"><span>&emsp;원</span></td>
+					<td><input type="text" name="oborgprice" class="infotd2"
+						onkeyup="numberComma(this.value)"><span>&emsp;원</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
@@ -310,7 +311,29 @@
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
-	
+	/*
+	//숫자 입력폼 천단위 comma
+	function comma(str) { 
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
+	}
+	function uncomma(str) { 
+		str = String(str);
+		return str.replace(/[^\d]+/g, '');
+	}
+	function numberComma(data) {
+		//data.replace(/,/g,'');
+		//$("input[name=oborgprice]").val(data.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		
+		//var parts = num.toString().split(".");
+		//$("input[name=oborgprice]").val(data.toLocaleString());
+		// return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		data=String(data);
+		data.replace(/[^\d]+/g, '');
+		$("input[name=oborgprice]").val(data.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		//$("input[name=oborgprice]").val(data.toLocaleString('en'));
+	}
+	*/
 	//입력폼 유효성검사
 	$("form").submit(function() {
 		var number= /[^0-9]/g //정규식(숫자만)

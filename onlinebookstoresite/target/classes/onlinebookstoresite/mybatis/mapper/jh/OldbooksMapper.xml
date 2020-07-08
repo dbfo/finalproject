@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.OldbooksMapper.jh">
+	<!-- 중고책 상품등록을 위한 MapperFile -->
 	<!-- 대분류 카테고리 가져오기 -->
 	<select id="getBigcate" resultType="bigcategory">
 		select * from bigcategory

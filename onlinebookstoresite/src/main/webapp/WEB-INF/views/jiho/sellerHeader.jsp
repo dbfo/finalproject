@@ -15,7 +15,7 @@
 				<!-- menu -->
 				<ul class="main-menu">
 					<li><a href="${pageContext.request.contextPath}/seller/productInput">상품등록</a></li>
-					<li><a href="#">상품조회/수정</a></li>
+					<li><a href="${pageContext.request.contextPath}/seller/prodLook">상품조회/수정</a></li>
 					<li><a href="#">판매관리</a>
 						<ul class="sub-menu">
 							<li><a href="#">주문확인 요청</a></li>
