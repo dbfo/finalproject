@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,28 +77,86 @@ public class SellerProdInsertController {
 			
 //			int obnum=service.getObnum();//이미지등록을 위한 중고책번호 가져오기
 //			System.out.println("중고책등록번호:"+obnum);//ok
-			
-			//파일 업로드를 위한 작업(썸네일)
+			//파일 업로드 경로명 가져오기
 			String upload=session.getServletContext().getRealPath("/resources/jhobupload");
-			String orgFileName1=img1.getOriginalFilename();
-			String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
-			InputStream fis=img1.getInputStream();
-			FileOutputStream fos=
-					new FileOutputStream(upload+"\\"+saveFileName1);
-			FileCopyUtils.copy(fis, fos);
-			fis.close();
-			fos.close();
-			SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
-//			int j=service.insertObimgThum(img1vo);
-//			System.out.println("이미지업로드 결과:"+j);
-			int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
-			SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
-					obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
-			
-			int n=service.insertProd(vo,img1vo);//중고책등록
-			System.out.println("결과:"+n);
-			if(!(img2.isEmpty())) {
+			if(img2.isEmpty() && img3.isEmpty() && img4.isEmpty()) {
+				//썸네일 파일만 있을 경우 실행할 상품등록 작업
+				//파일 업로드를 위한 작업(썸네일)
+				String orgFileName1=img1.getOriginalFilename();
+				String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
+				InputStream fis=img1.getInputStream();
+				FileOutputStream fos=
+						new FileOutputStream(upload+"\\"+saveFileName1);
+				FileCopyUtils.copy(fis, fos);
+				fis.close();
+				fos.close();
+				SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
+	//			int j=service.insertObimgThum(img1vo);
+	//			System.out.println("이미지업로드 결과:"+j);
+				int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
+				SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
+						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
 				
+				int n=service.insertProd(vo,img1vo);//중고책등록
+				System.out.println("결과:"+n);
+			}else {
+				//썸네일+선택이미지 있을 경우 실행할 상품등록 작업
+				String orgFileName1=img1.getOriginalFilename();
+				String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
+				InputStream fis=img1.getInputStream();
+				FileOutputStream fos=
+						new FileOutputStream(upload+"\\"+saveFileName1);
+				FileCopyUtils.copy(fis, fos);
+				fis.close();
+				fos.close();
+				SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
+				int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
+				SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
+						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
+				
+				//선택 이미지들을 담기 위한 배열
+				List<SellerImgVo> list=new ArrayList<SellerImgVo>();
+				if(!(img2.isEmpty())) {
+					System.out.println("이미지2");
+					String orgFileName2=img2.getOriginalFilename();
+					String saveFileName2=UUID.randomUUID()+"_"+orgFileName2;
+					InputStream fis2=img2.getInputStream();
+					FileOutputStream fos2=
+							new FileOutputStream(upload+"\\"+saveFileName2);
+					FileCopyUtils.copy(fis2, fos2);
+					fis2.close();
+					fos2.close();
+					SellerImgVo img2vo=new SellerImgVo(orgFileName2, 0, saveFileName2, 0, 0, 0);
+					list.add(img2vo);
+				}
+				if(!(img3.isEmpty())) {
+					System.out.println("이미지3");
+					String orgFileName3=img3.getOriginalFilename();
+					String saveFileName3=UUID.randomUUID()+"_"+orgFileName3;
+					InputStream fis3=img3.getInputStream();
+					FileOutputStream fos3=
+							new FileOutputStream(upload+"\\"+saveFileName3);
+					FileCopyUtils.copy(fis3, fos3);
+					fis3.close();
+					fos3.close();
+					SellerImgVo img3vo=new SellerImgVo(orgFileName3, 0, saveFileName3, 0, 0, 0);
+					list.add(img3vo);
+				}
+				if(!(img4.isEmpty())) {
+					System.out.println("이미지4");
+					String orgFileName4=img4.getOriginalFilename();
+					String saveFileName4=UUID.randomUUID()+"_"+orgFileName4;
+					InputStream fis4=img4.getInputStream();
+					FileOutputStream fos4=
+							new FileOutputStream(upload+"\\"+saveFileName4);
+					FileCopyUtils.copy(fis4, fos4);
+					fis4.close();
+					fos4.close();
+					SellerImgVo img4vo=new SellerImgVo(orgFileName4, 0, saveFileName4, 0, 0, 0);
+					list.add(img4vo);
+				}
+				int j=service.insertProd(vo, img1vo, list);
+				System.out.println("선택:"+j);
 			}
 		}catch(ParseException e) {
 			e.printStackTrace();
