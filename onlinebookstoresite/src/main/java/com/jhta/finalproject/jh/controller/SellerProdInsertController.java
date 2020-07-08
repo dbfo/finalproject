@@ -72,15 +72,11 @@ public class SellerProdInsertController {
 			if(req.getParameter("obdelfee2")!=null) {
 					obdelfee=2500;
 				}
-			int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
-			SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
-					obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
-			int n=service.insertProd(vo);//중고책등록
-			System.out.println("결과:"+n);
 			
-			int obnum=service.getObnum();//이미지등록을 위한 중고책번호 가져오기
-			System.out.println("중고책등록번호:"+obnum);//ok
-			//업로드할 경로명
+//			int obnum=service.getObnum();//이미지등록을 위한 중고책번호 가져오기
+//			System.out.println("중고책등록번호:"+obnum);//ok
+			
+			//파일 업로드를 위한 작업(썸네일)
 			String upload=session.getServletContext().getRealPath("/resources/jhobupload");
 			String orgFileName1=img1.getOriginalFilename();
 			String saveFileName1=UUID.randomUUID()+"_"+orgFileName1;
@@ -90,9 +86,15 @@ public class SellerProdInsertController {
 			FileCopyUtils.copy(fis, fos);
 			fis.close();
 			fos.close();
-			SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, obnum);
-			int j=service.insertObimgThum(img1vo);
-			System.out.println("이미지업로드 결과:"+j);
+			SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
+//			int j=service.insertObimgThum(img1vo);
+//			System.out.println("이미지업로드 결과:"+j);
+			int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
+			SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
+					obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
+			
+			int n=service.insertProd(vo,img1vo);//중고책등록
+			System.out.println("결과:"+n);
 			if(!(img2.isEmpty())) {
 				
 			}

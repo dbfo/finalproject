@@ -1,9 +1,11 @@
 package com.jhta.finalproject.jh.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.finalproject.jh.dao.SellerInsertDao;
 import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
@@ -26,11 +28,33 @@ public class SellerInsertService {
 		List<SellerSmallcategoryVo> list=dao.getSmallcate(bcatenum);
 		return list;
 	}
-	//중고책등록
-	public int insertProd(SellerOldbooksVo vo) {
-		int n=dao.insertProd(vo);
-		return n;
+	
+	//중고책등록(트랜잭션처리)-썸네일이미지 1개만 있을 경우
+	@Transactional
+	public int insertProd(SellerOldbooksVo vo,SellerImgVo img1vo) {
+		dao.insertProd(vo);
+		int obnum=dao.getObnum();
+		img1vo.setBnum(obnum);//등록한 중고책 번호 저장
+		dao.insertObimgThum(img1vo);
+		return 1;
 	}
+	
+	////중고책등록(트랜잭션처리)-썸네일이미지+선택이미지여러개
+	@Transactional
+	public int insertProd(SellerOldbooksVo vo,SellerImgVo img1vo,List<SellerImgVo> list) {
+		dao.insertProd(vo);
+		int obnum=dao.getObnum();
+		img1vo.setBnum(obnum);//등록한 중고책 번호 저장
+		dao.insertObimgThum(img1vo); //썸네일 이미지저장
+		//선택이미지 저장
+		for(SellerImgVo imgsVo:list) {
+			imgsVo.setBnum(obnum);
+			dao.insertObimg(imgsVo); //선택 이미지 저장
+		}
+		return 1;
+	}
+	
+	
 	//이미지 등록을 위한 중고책 번호 얻어오기
 	public int getObnum() {
 		int obnum=dao.getObnum();

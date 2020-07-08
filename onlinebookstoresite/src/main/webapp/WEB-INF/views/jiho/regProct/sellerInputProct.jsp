@@ -332,6 +332,7 @@
 			return false;
 		}
 		/*출간일*/
+		/*
 		if($("input[name=obpdate]").val()===""){
 			alert("출간일을 입력해주세요");
 			$("input[name=obpdate]").focus();
@@ -343,5 +344,6 @@
 			return false;
 		}
 		alert($("input[name=obpdate]").val());
+		*/
 	});
 </script>
