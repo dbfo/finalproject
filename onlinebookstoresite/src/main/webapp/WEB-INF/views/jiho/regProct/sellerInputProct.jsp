@@ -332,17 +332,30 @@
 			return false;
 		}
 		/*출간일*/
-		
 		if($("input[name=obpdate]").val()===""){
 			alert("출간일을 입력해주세요");
 			$("input[name=obpdate]").focus();
-			var date=new Date();
-			var year = date.getFullYear();
-			var month = date.getMonth();
-			var day = date.getDate();
-			alert($("input[name=obpdate]").val()+","+date);
 			return false;
 		}
-		alert($("input[name=obpdate]").val());
+		//오늘 날짜 구하기
+		var date=new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		if(month.toString.length<2){
+			month="0"+month;
+		}
+		var day = date.getDate();
+		if(day.toString.length<2){
+			day="0"+day;
+		}
+		var today=year+month+day
+		//입력받은 날짜 쪼개기
+		var inputdate=$("input[name=obpdate]").val();
+		var str=inputdate.split('-');
+		var strArr=str[0]+str[1]+str[2];
+		if(strArr>=today){
+			alert("출간일은 현재 날짜를 넘을 수 없습니다.");
+			return false;
+		}
 	});
 </script>
