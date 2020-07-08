@@ -23,11 +23,12 @@
 							<option value="${big.bcatenum }">${big.bcataname }</option>
 						</c:forEach>
 					</select>
-					<select name="smctg" onchange="setSelect(this)" disabled="disabled">
-						<option value="">선 택</option>
-						<c:forEach var="sm" items="${getSmallctg }">
-							<option value="${sm.scatenum }">${sm.scataname }</option>
-						</c:forEach>
+					<select name="smctg" onchange="setSelect(this)">
+						<option value="">- 선택 -</option>
+						<option value="100030010">100030010</option>
+<%-- 						<c:forEach var="sm" items="${getSmallctg }"> --%>
+<%-- 							<option value="${sm.scatenum }">${sm.scataname }</option> --%>
+<%-- 						</c:forEach> --%>
 				</select>
 				</td>
 			</tr>
@@ -41,7 +42,7 @@
 
 			<tr>
 				<th align="center" class="table-active">출간일</th>
-				<td><input type="text" name="bpublishdate" value="달력띄울거야"></td>
+<!-- 				<td><input type="text" name="bpublishdate" value="달력띄울거야"></td> -->
 			</tr>
 
 			<tr>
@@ -67,10 +68,10 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">썸네일(아직)</th>
+				<th align="center" class="table-active">썸네일(필수)</th>
 				<td><input type="file" name="thumbnail"></td>
-				<th align="center" class="table-active">이미지(안돼)</th>
-				<td><input type="file" name="imgorgfilename"></td>
+				<th align="center" class="table-active">이미지(선택)</th>
+				<td><input type="file" name="img1"></td>
 			</tr>
 
 			<tr>
