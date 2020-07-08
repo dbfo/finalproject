@@ -9,7 +9,7 @@
 }
 #infomation{
 	width:180px;
-	height:180px;
+	height:150px;
 	border:1px solid #dee2e6;
 }
 #content_body_top{
@@ -21,3 +21,10 @@
 	width:180px;
 	border:2px solid red;
 }
+#menubar a:link{
+	color:grey;
+}
+#menubar a:hover{
+	color:#e83e8c;
+}
+

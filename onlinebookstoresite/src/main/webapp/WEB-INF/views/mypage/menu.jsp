@@ -3,7 +3,7 @@
 <div id="infomation">
 	
 </div>
-<table class="table table-striped">
+<table class="table table-striped" id="menubar">
 	<tr>
 		<th scope="col">주문내역</th>
 	</tr>
