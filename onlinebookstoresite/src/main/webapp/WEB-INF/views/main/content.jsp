@@ -9,13 +9,13 @@
 		viewnew();
 	});
 	var bestpageNum=1;
+	var newpageNum=1;
 	var viewBest=function(){
-		var kind="best";
 		console.log('11111')
 		$.ajax({
 			url:"/finalproject/home/bestlist",
 			dataType:"json",
-			data:{pageNum:bestpageNum,kind:kind},
+			data:{pageNum:bestpageNum},
 			success:function(data){
 				var b=$("<div id='bestprev'>"+
 				"<img src='${cp }/resources/image/prevButton.png' id='bestprevimg'>"+
@@ -31,7 +31,7 @@
 				  "<img src='${cp }/resources/image/nextButton.png' id='bestnextimg'>"+
 				  "</div>").appendTo("#content-best-card");
 				a.click(function(){
-					if(bestpageNum==2){
+					if(bestpageNum>=2){
 						bestpageNum=1;
 					}else{
 						bestpageNum=bestpageNum+1;
@@ -40,7 +40,7 @@
 					viewBest();
 				});
 				b.click(function(){
-					if(bestpageNum==1){
+					if(bestpageNum<=1){
 						bestpageNum=2;
 					}else{
 						bestpageNum=bestpageNum-1;
@@ -56,14 +56,13 @@
 		$("#content-best-card").empty();
 	}
 	
-	var newpageNum=1;
+	
 	var viewnew=function(){
 		console.log('2222')
-		var kind="new"
 		$.ajax({
 			url:"/finalproject/home/newlist",
 			dataType:"json",
-			data:{pageNum:bestpageNum,kind:kind},
+			data:{pageNum:newpageNum},
 			success:function(data){
 				var b=$("<div id='newprev'>"+
 				"<img src='${cp }/resources/image/prevButton.png' id='newprevimg'>"+
@@ -79,7 +78,7 @@
 				  "<img src='${cp }/resources/image/nextButton.png' id='newnextimg'>"+
 				  "</div>").appendTo("#content-new-card");
 				a.click(function(){
-					if(newpageNum==2){
+					if(newpageNum>=2){
 						newpageNum=1;
 					}else{
 						newpageNum=newpageNum+1;
@@ -88,7 +87,7 @@
 					viewnew();
 				});
 				b.click(function(){
-					if(newpageNum==1){
+					if(newpageNum<=1){
 						newpageNum=2;
 					}else{
 						newpageNum=newpageNum-1;

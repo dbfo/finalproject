@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>views/layout.jsp</title>
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="${cp }/resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="${cp }/resources/js/jquery.slicknav.min.js"></script>
