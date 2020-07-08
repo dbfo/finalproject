@@ -205,7 +205,7 @@
 			<table id="infotable2" class="table table-bordered">
 				<tr>
 					<td class="bgtd">정가</td>
-					<td><input type="text" name="oborgprice" class="infotd2"></td>
+					<td><input type="text" name="oborgprice" class="infotd2"><span>&emsp;원</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
@@ -218,7 +218,7 @@
 				</tr>
 				<tr>
 					<td class="bgtd">판매가</td>
-					<td><input type="text" name="obsaleprice" class="infotd2"></td>
+					<td><input type="text" name="obsaleprice" class="infotd2"><span>&emsp;원</span></td>
 				</tr>
 			</table>
 		</div>
@@ -229,7 +229,7 @@
 				<tr>
 					<td class="bgtd">택배비</td>
 					<td>
-						<input type="radio" name="obdelfee" checked value="0" id="free">무료
+						<input type="radio" name="obdelfee" value="0" id="free">무료
 						<input type="radio" name="obdelfee" value="2500" id="fee">기본(2,500원)
 					</td>
 				</tr>
@@ -332,7 +332,7 @@
 			return false;
 		}
 		/*출간일*/
-		/*
+		
 		if($("input[name=obpdate]").val()===""){
 			alert("출간일을 입력해주세요");
 			$("input[name=obpdate]").focus();
@@ -344,6 +344,5 @@
 			return false;
 		}
 		alert($("input[name=obpdate]").val());
-		*/
 	});
 </script>

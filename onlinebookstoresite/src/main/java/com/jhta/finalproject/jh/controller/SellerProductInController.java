@@ -20,5 +20,4 @@ public class SellerProductInController {
 		model.addAttribute("list", list);
 		return ".seller.product";
 	}
-	
 }
