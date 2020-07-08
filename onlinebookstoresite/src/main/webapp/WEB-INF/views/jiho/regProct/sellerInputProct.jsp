@@ -235,13 +235,17 @@
 				</tr>
 				<tr>
 					<td class="bgtd">출고주소</td>
-					<td><input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="addr">
+					<td><input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="addr"
+							onclick="sample4_execDaumPostcode()" readonly="readonly">
 						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr">
+						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr"
+							onclick="sample4_execDaumPostcode()" readonly="readonly">
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr"
+							onclick="sample4_execDaumPostcode()" readonly="readonly">
 						<span id="guide" style="color:#999;display:none"></span><br>
 						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr">
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr">
+						<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr"
+							onclick="sample4_execDaumPostcode()" readonly="readonly">
 					</td>
 				</tr>
 			</table>
@@ -303,6 +307,8 @@
 	
 	//입력폼 유효성검사
 	$("form").submit(function() {
+		var number= /[^0-9]/g //정규식(숫자만)
+		
 		/*대분류카테고리*/
 		if($("select[name=bcataname]").val()==="0"){
 			alert("대분류 카테고리를 선택해주세요");
@@ -355,6 +361,63 @@
 		var strArr=str[0]+str[1]+str[2];
 		if(strArr>=today){
 			alert("출간일은 현재 날짜를 넘을 수 없습니다.");
+			return false;
+		}
+		/*상품정가*/
+		if($("input[name=oborgprice]").val()===""){
+			alert("상품 정가를 입력해주세요");
+			$("input[name=oborgprice]").focus();
+			return false;
+		}
+		if(number.test($("input[name=oborgprice]").val())){
+			alert("가격은 숫자만 입력해주세요");
+			$("input[name=oborgprice]").focus();
+			return false;
+		}
+		/*상품품질*/
+		if($('input:radio[name=obstatus]').is(':checked')==false){
+			alert("상품 품질 상태를 선택해 주세요");
+			$("input[name=obstatus]").focus();
+			return false;
+		}
+		/*상품판매가*/
+		if($("input[name=obsaleprice]").val()===""){
+			alert("상품 판매가를 입력해주세요");
+			$("input[name=obsaleprice]").focus();
+			return false;
+		}
+		if(number.test($("input[name=obsaleprice]").val())){
+			alert("가격은 숫자만 입력해주세요");
+			$("input[name=obsaleprice]").focus();
+			return false;
+		}
+		/*택배비*/
+		if($('input:radio[name=obdelfee]').is(':checked')==false){
+			alert("택배비를 선택해 주세요");
+			$("input[name=obdelfee]").focus();
+			return false;
+		}
+		/*출고주소*/
+		if($("input[name=addr1]").val()===""){
+			alert("우편번호를 입력해주세요.");
+			$("input[name=addr1]").focus();
+			return false;
+		}
+		if($("input[name=addr4]").val()===""){
+			alert("상세주소를 입력해주세요.");
+			$("input[name=addr4]").focus();
+			return false;
+		}
+		/*썸네일 이미지*/
+		if($("input[name=img1]").val()===""){
+			alert("기본 이미지를 등록해주세요.");
+			$("input[name=img1]").focus();
+			return false;
+		}
+		/*상품설명*/
+		if($("textarea[name=obdetail]").val()===""){
+			alert("상품설명을 입력해주세요.");
+			$("textarea[name=obdetail]").focus();
 			return false;
 		}
 	});

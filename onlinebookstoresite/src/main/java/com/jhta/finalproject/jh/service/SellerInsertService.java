@@ -39,7 +39,7 @@ public class SellerInsertService {
 		return 1;
 	}
 	
-	////중고책등록(트랜잭션처리)-썸네일이미지+선택이미지여러개
+	//중고책등록(트랜잭션처리)-썸네일이미지+선택이미지여러개
 	@Transactional
 	public int insertProd(SellerOldbooksVo vo,SellerImgVo img1vo,List<SellerImgVo> list) {
 		dao.insertProd(vo);
@@ -48,30 +48,9 @@ public class SellerInsertService {
 		dao.insertObimgThum(img1vo); //썸네일 이미지저장
 		//선택이미지 저장
 		for(SellerImgVo imgsVo:list) {
-			System.out.println("리스트사이즈:"+list.size());
 			imgsVo.setBnum(obnum);
 			dao.insertObimg(imgsVo); //선택 이미지 저장
 		}
 		return 1;
 	}
-	
-	/*
-	//이미지 등록을 위한 중고책 번호 얻어오기
-	public int getObnum() {
-		int obnum=dao.getObnum();
-		return obnum;
-	}
-	
-	
-	//중고책 상품등록시 썸네일 이미지 등록
-	public int insertObimgThum(SellerImgVo vo) {
-		int n=dao.insertObimgThum(vo);
-		return n;
-	}
-	//중고책 상품등록시 일반 이미지 등록
-	public int insertObimg(SellerImgVo vo) {
-		int n=dao.insertObimg(vo);
-		return n;
-	}
-	*/
 }
