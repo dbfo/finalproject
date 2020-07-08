@@ -15,13 +15,15 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- css적용 추후 파일에 따로 분리 예정임 -->
 <style>
+
 	#prodInputForm{
 		border: 1px solid red;
 		width: 1300px;
 		height: 2100px;
 		margin: auto;
 	}
-	#cate{ /*카테고리css*/
+	/*카테고리css*/
+	#cate{ 
 		width: 1300px;
 		height: 200px;
 		border: 1px solid black;
@@ -36,7 +38,8 @@
 		width: 200px;
 		height: 50px;
 	}
-	#basic{ /*상품기본정보 css*/
+	/*상품기본정보 css*/
+	#basic{ 
 		width: 1300px;
 		height: 300px;
 		border: 1px solid yellow;
@@ -45,7 +48,8 @@
 		width: 500px;
 		height: 30px;
 	}
-	#price{ /*상품가격css*/
+	/*상품가격css*/
+	#price{ 
 		width: 1300px;
 		height: 300px;
 		border: 1px solid blue;
@@ -54,7 +58,8 @@
 		width: 500px;
 		height: 30px;
 	}
-	#ship{ /*배송정보*/
+	/*배송정보*/
+	#ship{ 
 		width: 1300px;
 		height: 300px;
 		border: 1px solid green;
@@ -89,6 +94,7 @@
 	#insertbt{
 		margin: auto;
 	}
+
 </style>
 <script>
 	//에디터api적용

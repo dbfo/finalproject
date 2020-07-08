@@ -129,8 +129,10 @@ public class SellerProdInsertController {
 			}
 		}catch(ParseException e) {
 			e.printStackTrace();
+			return ".seller.insertfail";
 		}catch(IOException ie) {
 			ie.printStackTrace();
+			return ".seller.insertfail";
 		}
 		//새로고침 방지하기 위한 컨트롤러로 이동
 		return "redirect:/seller/insertOk";

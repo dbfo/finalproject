@@ -15,10 +15,14 @@
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerContent.jsp"/>
 		<put-attribute name="sellerFooter" value="/WEB-INF/views/jiho/sellerFooter.jsp"/>
 	</definition>
+	<!-- 상품등록관련 -->
 	<definition name=".seller.product" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/regProct/sellerInputProct.jsp"/>
 	</definition>
 	<definition name=".seller.insertok" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/regProct/sellerInsertOk.jsp"/>
+	</definition>
+	<definition name=".seller.insertfail" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/regProct/sellerInsertFail.jsp"/>
 	</definition>
 </tiles-definitions>
