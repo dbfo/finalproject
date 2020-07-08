@@ -7,6 +7,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/main/content.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
+	<definition name=".mypage" template="/WEB-INF/views/mypagelayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="content_header" value="/WEB-INF/views/mypage/content_header/mypage_main.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/mypage/menu.jsp"/>
+		<put-attribute name="content_body_top" value="/WEB-INF/views/mypage/content_body_top.jsp"/>
+		<put-attribute name="content_body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

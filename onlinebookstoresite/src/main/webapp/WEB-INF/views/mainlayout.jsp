@@ -29,8 +29,8 @@
 <link rel="stylesheet" href="${cp }/resources/css/jquery-ui.min.css"/>
 <link rel="stylesheet" href="${cp }/resources/css/owl.carousel.min.css"/>
 <link rel="stylesheet" href="${cp }/resources/css/animate.css"/>
-<link rel="stylesheet" href="${cp }/resources/css/style.css"/>
 <link rel="stylesheet" href="${cp }/resources/css_main/main.css"/>
+<link rel="stylesheet" href="${cp }/resources/css/style.css"/>
 </head>
 <body>
 <div id="wrap">

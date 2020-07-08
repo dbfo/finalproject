@@ -63,7 +63,7 @@
 				<li><a href="#">신간 <span class="new">New</span>
 				</a></li>
 				<li><a href="#">중고</a></li>
-				<li><a href="#">마이페이지</a>
+				<li><a href="${cp }/mypage/main">마이페이지</a>
 					<ul class="sub-menu">
 						<li><a href="#">주문내역</a></li>
 						<li><a href="#">반품/취소/환불</a></li>
