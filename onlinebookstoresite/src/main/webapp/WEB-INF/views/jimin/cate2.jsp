@@ -14,10 +14,10 @@
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
 					<form method="post" action="sbooklist">
 					
-					<select id="bcate2" name="bcate2" >
+					<select id="bcate2" name="bcate2">
 						<option>[---대 분류---]</option>
 					<c:forEach var="vo" items="${list2 }">	
-						<option value="${vo.bcatenum }">${vo.bcataname }</option>
+						<option  value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
 					>
@@ -43,17 +43,17 @@
 	
 	</c:if>
 	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${list }">
+	<c:forEach  var="vo" items="${bestlist }">
 	
 	<div id="listwrap">
 	<div id="image">
-				<a href="#"> <img
+				<a href="#" name="detaillink"> <img
 				src="${cp }/resources/images/광규2.png" id="thumbnail">
 				</a>
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a	href="#"> 
+							<a	href="#" name="detaillink"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -139,6 +139,6 @@
 		});
 
 	});
-	
+
 	
 </script>

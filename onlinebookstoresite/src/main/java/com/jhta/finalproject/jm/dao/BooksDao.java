@@ -22,6 +22,9 @@ public class BooksDao {
 	public List<BooksVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".list",map);
 	}
+	public List<BooksVo> bestlist(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".bestlist",map);
+	}
 	public List<BigcateVo> list2(){
 		return sqlSession.selectList(NAMESPACE + ".bcatelist");
 	}
@@ -31,5 +34,13 @@ public class BooksDao {
 	public int addHit(int num) {
 		return sqlSession.update(NAMESPACE + ".hit",num);
 	}
-	
+	public List<BooksVo> bbooklist(int num) {
+		return sqlSession.selectList(NAMESPACE + ".bbooklist",num);
+	}
+	public List<BooksVo> sbooklist(int num) {
+		return sqlSession.selectList(NAMESPACE + ".sbooklist",num);
+	}
+	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".sbooklist1",map);
+	}
 }

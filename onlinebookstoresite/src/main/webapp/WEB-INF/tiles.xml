@@ -12,6 +12,9 @@
 	<definition name=".list1" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/cate1.jsp"></put-attribute>
 	</definition>
+	<definition name=".list2" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cate2.jsp"></put-attribute>
+	</definition>
 	
 	<definition name=".*.*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}/{3}.jsp"></put-attribute>				

@@ -23,7 +23,7 @@ public class SmallcateController {
 	@ResponseBody
 	public String list(int bcatenum) {
 		
-//		System.out.println(bcatenum);
+		System.out.println(bcatenum);
 //		
 //		List<SmallcateVo> vo=service.list(bcatenum);
 //		System.out.println(vo.get(0).getScataname());

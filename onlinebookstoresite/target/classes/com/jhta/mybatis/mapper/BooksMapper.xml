@@ -30,6 +30,22 @@
 		<!-- CDATA - '<','>' 같은 특수기호문자들을 멋대로 해석하지(변환하지) 않고 그대로 쓰게 하는거임  -->
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+
+<!-- 	조회수순위별목록 -->
+	<select id="bestlist" parameterType="hashmap" resultType="books">
+	select * from
+	(
+		select aa.*,rownum rnum from
+		(
+			select * from books
+			<!-- 위에 간략하게 지정한 sql구문 (search)을 불러넣음  -->
+			<include refid="search"/>
+			 order by bhit desc
+		)aa
+	)
+		<!-- CDATA - '<','>' 같은 특수기호문자들을 멋대로 해석하지(변환하지) 않고 그대로 쓰게 하는거임  -->
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 	
 	
 	<select id="bcatelist" resultType="bigcate">
@@ -53,6 +69,21 @@
 		select * from books where scatenum=#{scatenum} order by bnum asc
 	</select>
 	
+<!-- 	카테고리검색 -->
+	<select id="sbooklist1" parameterType="hashmap" resultType="books"> 
+		
+<!-- 		select * from books where scatenum = #{scatenum} and btitle=#{keyword} -->
+<!-- 		order by bnum asc -->
+	select * from
+	(
+		select aa.*,rownum rnum from
+		(
+			select * from books where scatenum like '%'||#{scatenum}||'%' and btitle like '%'||#{keyword}||'%'
+			order by bnum asc
+		)aa
+	)
+	<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 	
 	<select id="detail" parameterType="int" resultType="books">
 		select * from books where bnum=#{bnum}

@@ -4,10 +4,10 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" id="nav">
 		<ul class="nav">
 		  <li class="nav-item">
-		    <a class="nav-link" href="${cp }/list1">리스트테스트1</a>
+		    <a class="nav-link" href="${cp }/list1">전체오름차순</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Link</a>
+		    <a class="nav-link" href="${cp }/list2">베스트순</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">Link</a>
@@ -34,7 +34,7 @@
             <a class="nav-link" href="${cp }/list1">리스트테스트1</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">LINK1</a>
+            <a class="nav-link" href="${cp }/list2">베스트순</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">LINK2</a>

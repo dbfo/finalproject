@@ -21,6 +21,9 @@ public class BooksService {
 	public List<BooksVo> list(HashMap<String, Object> map){
 		return dao.list(map);
 	}
+	public List<BooksVo> bestlist(HashMap<String, Object> map){
+		return dao.bestlist(map);
+	}
 	public List<BigcateVo> list2(){
 		return dao.list2();
 	}
@@ -31,6 +34,14 @@ public class BooksService {
 	public int addHit(int num) {
 		return dao.addHit(num);
 	}
-	
+	public List<BooksVo> bbooklist(int num) {
+		return dao.bbooklist(num);
+	}
+	public List<BooksVo> sbooklist(int num) {
+		return dao.sbooklist(num);
+	}
+	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
+		return dao.sbooklist(map);
+	}
 
 }
