@@ -32,8 +32,8 @@ public class BooksDao {
 		return sqlsession.selectList(NAMESPACE + ".bctg");
 	}
 
-	public List<SmallCategoryVO> getSmallctg() {
-		return sqlsession.selectList(NAMESPACE + ".smctg");
+	public List<SmallCategoryVO> getSmallctg(int bcatenum) {
+		return sqlsession.selectList(NAMESPACE + ".smctg", bcatenum);
 	}
 
 	public List<BooksVO> list() {

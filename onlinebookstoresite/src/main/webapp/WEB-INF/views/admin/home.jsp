@@ -23,9 +23,30 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/yjcss/js/scripts.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/chart-area-demo.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/chart-bar-demo.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/datatables-demo.js"></script>
 </head>
 <body class="sb-nav-fixed">
-
 	<!-- tiles 헤더 설정 -->
 	<div id="header">
 		<tiles:insertAttribute name="header" />
@@ -40,10 +61,8 @@
 		<div id="layoutSidenav_content">
 			<!-- content tiles -->
 			<div id="content">
-				<main>
-					<tiles:insertAttribute name="content" />
-					<tiles:insertAttribute name="tables"/>
-				</main>
+				<main> <tiles:insertAttribute name="content" /> <tiles:insertAttribute
+					name="tables" /> </main>
 			</div>
 
 			<!-- footer tiles -->
@@ -54,28 +73,5 @@
 		<!-- layoutSidenav_content -->
 	</div>
 	<!-- layoutSidenav -->
-	
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/yjcss/js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/chart-area-demo.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/chart-bar-demo.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/yjcss/assets/demo/datatables-demo.js"></script>
 </body>
 </html>

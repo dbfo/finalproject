@@ -7,34 +7,25 @@
 	<!-- 책등록 -->
 	<insert id="booksInsert" parameterType="books">
 		insert into books values
-		(SEQ_BOOKS_BNUM.nextval, #{btitle}, #{bwriter}, sysdate,
+		(SEQ_BOOKS_BNUM.nextval, #{btitle}, #{bwriter}, #{bpublishdate},
 		#{bpublisher}, #{bprice}, #{bpoint}, #{bshipinfo}, #{bcount},
 		#{bcontent}, 0, #{scatenum}, sysdate)
 	</insert>
-
-	<!-- <select id="getBnum" resultType="int"> -->
-	<!-- select * from -->
-	<!-- (select aa.* from -->
-	<!-- (select NVL(bnum, 0) bnum from books order by bnum desc) aa) -->
-	<!-- where rownum = 1; -->
-	<!-- </select> -->
 
 	<insert id="imgInsert" parameterType="img">
 		insert into img	values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename}, #{thumbnail}, 1, SEQ_BOOKS_BNUM.currval)
 	</insert>
 
-
 	<!-- 카테고리 -->
 	<select id="bctg" resultType="bctg">
 		select * from bigcategory
-		order by
-		bcatenum
+		order by bcatenum
 	</select>
 
-	<select id="smctg" resultType="smctg">
+	<select id="smctg" resultType="smctg" parameterType="int">
 		select * from smallcategory
-		order
-		by bcatenum, scatenum
+		where bcatenum=#{bcatenum}
+		order by scatenum
 	</select>
 
 	<select id="list" resultType="books">

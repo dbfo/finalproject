@@ -19,8 +19,8 @@ public class BooksService {
 		return dao.getBigctg();
 	}
 
-	public List<SmallCategoryVO> getSmallctg() {
-		return dao.getSmallctg();
+	public List<SmallCategoryVO> getSmallctg(int bcatenum) {
+		return dao.getSmallctg(bcatenum);
 	}
 	
 	public List<BooksVO> list() {

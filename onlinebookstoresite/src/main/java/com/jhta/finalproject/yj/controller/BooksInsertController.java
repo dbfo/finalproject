@@ -3,19 +3,26 @@ package com.jhta.finalproject.yj.controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.finalproject.yj.service.BooksInsertService;
@@ -35,32 +42,48 @@ public class BooksInsertController {
 	@GetMapping("/booksInsert")
 	public String booksInsert(Model model) {
 		List<BigCategoryVO> getBigctg = service.getBigctg();
-//		List<SmallCategoryVO> getSmallctg = service.getSmallctg(bcatenum);
 		model.addAttribute("getBigctg", getBigctg);
-//		model.addAttribute("getSmallctg", getSmallctg);
 		return ".booksInsert";
+	}
+
+	@RequestMapping(value = "/booksctg", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String sctgList(int bcatenum) {
+		List<SmallCategoryVO> getsctg = service.getSmallctg(bcatenum);
+		JSONArray arr = new JSONArray();
+		for (SmallCategoryVO vo : getsctg) {
+			JSONObject json = new JSONObject();
+			json.put("scatenum", vo.getScatenum());
+			json.put("bcatenum", vo.getBcatenum());
+			json.put("scataname", vo.getScataname());
+			arr.put(json);
+		}
+		return arr.toString();
 	}
 
 	@PostMapping("/booksInsert")
 	public String insertOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req) {
-		String btitle = req.getParameter("btitle");
-		String bwriter = req.getParameter("bwriter");
-		String bpublisher = req.getParameter("bpublisher");
-		int bprice = Integer.parseInt(req.getParameter("bprice"));
-		int bpoint = Integer.parseInt(req.getParameter("bprice"));
-		int bshipinfo = Integer.parseInt(req.getParameter("bshipinfo"));
-		int bcount = Integer.parseInt(req.getParameter("bcount"));
-		String bcontent = req.getParameter("bcontent");
-		// System.out.println(req.getParameter("smctg"));
-		int smctg = Integer.parseInt(req.getParameter("smctg"));
-
 		try {
+			String btitle = req.getParameter("btitle");
+			String bwriter = req.getParameter("bwriter");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date bpublishdate = sdf.parse(req.getParameter("bpublishdate"));
+//			System.out.println("bpublishdate:" + bpublishdate);
+			String bpublisher = req.getParameter("bpublisher");
+			int bprice = Integer.parseInt(req.getParameter("bprice"));
+			int bpoint = Integer.parseInt(req.getParameter("bprice"));
+			int bshipinfo = Integer.parseInt(req.getParameter("bshipinfo"));
+			int bcount = Integer.parseInt(req.getParameter("bcount"));
+			String bcontent = req.getParameter("bcontent");
+//			System.out.println(req.getParameter("smctg"));
+			int smctg = Integer.parseInt(req.getParameter("smctg"));
+
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
 
 			// file
 			if (!(thumbnail.isEmpty()) && img1.isEmpty()) {
-				// System.out.println(uploadPath);
-				// C:\web\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\onlinebookstoresite\resources\imgUpload
+//				System.out.println(uploadPath);
+//				C:\web\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\onlinebookstoresite\resources\imgUpload
 				String imgorgfilename = thumbnail.getOriginalFilename();
 				String imgsavefilename = UUID.randomUUID() + "_" + imgorgfilename;
 
@@ -74,8 +97,8 @@ public class BooksInsertController {
 				fos.close();
 
 				// DB에 파일정보 저장하기
-				BooksVO bvo = new BooksVO(0, btitle, bwriter, null, bpublisher, bprice, bpoint, bshipinfo, bcount,
-						bcontent, 0, smctg, null);
+				BooksVO bvo = new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bshipinfo,
+						bcount, bcontent, 0, smctg, null);
 				ImgVO ivo = new ImgVO(imgorgfilename, 0, imgsavefilename, 1, 1, bvo.getBnum());
 				insertService.insert(bvo, ivo);
 
@@ -90,8 +113,8 @@ public class BooksInsertController {
 				fis1.close();
 				fos1.close();
 
-				BooksVO bvo = new BooksVO(0, btitle, bwriter, null, bpublisher, bprice, bpoint, bshipinfo, bcount,
-						bcontent, 0, smctg, null);
+				BooksVO bvo = new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bshipinfo,
+						bcount, bcontent, 0, smctg, null);
 				ImgVO ivo1 = new ImgVO(imgorgfilename1, 0, imgsavefilename1, 1, 1, bvo.getBnum());
 				list.add(ivo1);
 
@@ -108,6 +131,8 @@ public class BooksInsertController {
 				list.add(ivo2);
 				insertService.insertList(bvo, list);
 			}
+		} catch (ParseException pe) {
+			System.out.println(pe.getMessage());
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
 		}
