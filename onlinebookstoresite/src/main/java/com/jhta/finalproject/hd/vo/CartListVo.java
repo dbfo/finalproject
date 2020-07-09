@@ -9,12 +9,14 @@ public class CartListVo {
 	private int bshipinfo; //배송료
 	private int stored; //재고
 	private int bcount;  //카트에 넣은 수량
+	private int cartnum;
 	private String imgsavefilename;
 	
 	public CartListVo() {}
+	
 
 	public CartListVo(int mnum, int bnum, String btitle, int bprice, int bpoint, int bshipinfo, int stored, int bcount,
-			String imgsavefilename) {
+			int cartnum, String imgsavefilename) {
 		super();
 		this.mnum = mnum;
 		this.bnum = bnum;
@@ -24,8 +26,10 @@ public class CartListVo {
 		this.bshipinfo = bshipinfo;
 		this.stored = stored;
 		this.bcount = bcount;
+		this.cartnum = cartnum;
 		this.imgsavefilename = imgsavefilename;
 	}
+
 
 	public int getMnum() {
 		return mnum;
@@ -91,6 +95,14 @@ public class CartListVo {
 		this.bcount = bcount;
 	}
 
+	public int getCartnum() {
+		return cartnum;
+	}
+
+	public void setCartnum(int cartnum) {
+		this.cartnum = cartnum;
+	}
+
 	public String getImgsavefilename() {
 		return imgsavefilename;
 	}
@@ -98,7 +110,5 @@ public class CartListVo {
 	public void setImgsavefilename(String imgsavefilename) {
 		this.imgsavefilename = imgsavefilename;
 	}
-	
-	
 	
 }

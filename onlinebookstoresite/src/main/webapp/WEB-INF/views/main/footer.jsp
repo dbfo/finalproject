@@ -3,14 +3,14 @@
 <section class="footer-section">
 		<div class="container">
 			<div class="footer-logo text-center">
-				<a href="index.html"><img src="./img/logo-light.png" alt=""></a>
+				<!--  <a href="index.html"><img src="./img/logo-light.png" alt=""></a>-->
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
 						<h2>About</h2>
 						<p>파이널 프로젝트 - 인터넷 서점</p>
-						<img src="img/cards.png" alt="">
+						<!--  <img src="img/cards.png" alt="">-->
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">

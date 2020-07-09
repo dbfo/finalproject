@@ -8,7 +8,7 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.CartListVo" alias="cartview"/>
   </typeAliases>
   <mappers>
-    <mapper resource="com/jhta/mybatis/mapper/HomeMapper.xml"/>
-    <mapper resource="com/jhta/mybatis/mapper/CartMapper.xml"/>
+    <mapper resource="com/jhta/hd/mybatis/mapper/HomeMapper.xml"/>
+    <mapper resource="com/jhta/hd/mybatis/mapper/CartMapper.xml"/>
   </mappers>
 </configuration>
