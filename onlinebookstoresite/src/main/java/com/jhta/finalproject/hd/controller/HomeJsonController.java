@@ -1,6 +1,6 @@
 package com.jhta.finalproject.hd.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class HomeJsonController {
 	@Autowired
 	private HomeService service;
 	
-	//홈화면 베스트셀러.신간.
+	//홈화면 베스트셀러
 	@RequestMapping(value="/home/bestlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String bestlist(HttpSession session,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
@@ -50,6 +50,7 @@ public class HomeJsonController {
 		}
 		return jarr.toString();
 	}
+	//홈화면 신간
 	@RequestMapping(value="/home/newlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String newtlist(HttpSession session,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {

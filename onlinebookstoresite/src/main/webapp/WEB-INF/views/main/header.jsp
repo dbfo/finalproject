@@ -34,7 +34,7 @@
 							<div class="shopping-card">
 								<i class="flaticon-bag"></i><span>0<!-- 장바구니select행수 받기 --></span>
 							</div>
-							<a href="#">장바구니</a>
+							<a href="${cp }/pay/cart">장바구니</a>
 						</div>
 					</div>
 				</div>

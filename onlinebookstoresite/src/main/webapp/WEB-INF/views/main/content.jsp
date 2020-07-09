@@ -25,29 +25,21 @@
 										+ "<img src='${cp }/resources/image/prevButton.png' id='bestprevimg'>"
 										+ "</div>").appendTo(
 								"#content-best-card");
-						$(data)
-								.each(
-										function(index, item) {
-											$(
-													"<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
-								" alt='Card image cap'></div>"
-															+ "<div class='card-body'><h5 class='card-title'>"
-															+ item.btitle
-															+ "</h5>"
-															+ "<p class='card-text'>"
-															+ item.bwriter
-															+ "<br><strong>"
-															+ item.bprice
-															+ "</stromg></p></div></div>")
-													.appendTo(
-															"#content-best-card");
-
-										});
-						var a = $(
-								"<div id='bestnext'>"
-										+ "<img src='${cp }/resources/image/nextButton.png' id='bestnextimg'>"
-										+ "</div>").appendTo(
-								"#content-best-card");
+						$(data).each(function(index, item) {
+								$("<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
+									" alt='Card image cap'></div>"
+									+ "<div class='card-body'><h5 class='card-title'>"
+									+ item.btitle
+									+ "</h5>"
+									+ "<p class='card-text'>"
+									+ item.bwriter
+									+ "<br><strong>"
+									+ item.bprice
+									+ "</stromg></p></div></div>").appendTo("#content-best-card");
+						});
+						var a = $("<div id='bestnext'>"
+								+ "<img src='${cp }/resources/image/nextButton.png' id='bestnextimg'>"
+								+ "</div>").appendTo("#content-best-card");
 						a.click(function() {
 							if (bestpageNum >= 2) {
 								bestpageNum = 1;

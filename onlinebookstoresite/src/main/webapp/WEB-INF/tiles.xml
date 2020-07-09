@@ -2,17 +2,28 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<!-- 홈화면 -->
 	<definition name=".main" template="/WEB-INF/views/mainlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/main/content.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
+	
+	<!-- 마이페이지  -->
 	<definition name=".mypage" template="/WEB-INF/views/mypagelayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="content_header" value="/WEB-INF/views/mypage/content_header/mypage_main.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/mypage/menu.jsp"/>
 		<put-attribute name="content_body_top" value="/WEB-INF/views/mypage/content_body_top.jsp"/>
 		<put-attribute name="content_body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+	
+	<!-- 장바구니. -->
+	<definition name=".cart" template="/WEB-INF/views/cartlayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="content_header" value="/WEB-INF/views/pay/content_header/content_header_cart.jsp"/>
+		<put-attribute name="content_body" value="/WEB-INF/views/pay/content_body/content_body.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 </tiles-definitions>
