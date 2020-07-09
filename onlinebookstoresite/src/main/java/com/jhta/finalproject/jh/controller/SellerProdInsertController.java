@@ -63,7 +63,7 @@ public class SellerProdInsertController {
 			String obname=req.getParameter("obname"); //책이름
 			String obwriter=req.getParameter("obwriter"); //저자
 			String obpublisher=req.getParameter("obpublisher"); //출판사
-			Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일
+			Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일 
 			int obstatus=Integer.parseInt(req.getParameter("obstatus")); //품질
 			int oborgprice=Integer.parseInt(req.getParameter("oborgprice")); //정가
 			int obsaleprice=Integer.parseInt(req.getParameter("obsaleprice"));  //판매가
