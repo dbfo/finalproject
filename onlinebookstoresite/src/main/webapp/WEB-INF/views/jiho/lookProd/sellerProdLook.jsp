@@ -47,6 +47,9 @@
 	#showTable table{
 		text-align: center;
 	}
+	.title{
+		background-color: silver;
+	}
 </style>
 <script type="text/javascript">
 	
@@ -99,7 +102,7 @@
 		</div>
 		<div id="showTable">
 			<table class="table table-bordered">
-				<tr>
+				<tr class="title">
 					<td width="50">NO</td>
 					<td width="300">상품명</td>
 					<td>출판사</td>
@@ -108,8 +111,8 @@
 					<td>품질</td>
 					<td>판매가</td>
 					<td>등록일</td>
-					<td>수정</td>
-					<td>삭제</td>
+					<td width="80">수정</td>
+					<td width="80">삭제</td>
 				</tr>
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
@@ -130,8 +133,21 @@
 						</td>
 						<td>${vo.obsaleprice}원</td>
 						<td><fmt:formatDate value="${vo.obregdate}" pattern="yyyy-MM-dd"/></td>
-						<td>${vo.obnum}</td>
-						<td>${vo.obnum}</td>
+						<td>
+							<c:choose>
+								<c:when test="${vo.obsalestatus==0}">
+									<a href="${vo.obnum}"><input type="button" value="수정" class="btn btn-primary"></a>
+								</c:when>
+								<c:otherwise>
+									<input type="button" value="수정" class="btn btn-primary" disabled="disabled">
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:if test="${vo.obsalestatus==0}">
+								<a href="${vo.obnum}"><input type="button" value="삭제" class="btn btn-secondary"></a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

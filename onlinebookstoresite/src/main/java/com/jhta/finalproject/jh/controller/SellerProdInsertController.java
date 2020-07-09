@@ -88,8 +88,7 @@ public class SellerProdInsertController {
 				int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
 				SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
 						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum,null);
-				int n=service.insertProd(vo,img1vo);//중고책등록
-				System.out.println("결과:"+n);
+				service.insertProd(vo,img1vo);//중고책등록
 			}else {
 				//썸네일+선택이미지 있을 경우 실행할 상품등록 작업
 				String orgFileName1=img1.getOriginalFilename();
@@ -109,7 +108,6 @@ public class SellerProdInsertController {
 				List<SellerImgVo> list=new ArrayList<SellerImgVo>();
 				
 				if(!(img2.isEmpty())) {
-					System.out.println("이미지2");
 					String orgFileName2=img2.getOriginalFilename();
 					String saveFileName2=UUID.randomUUID()+"_"+orgFileName2;
 					InputStream fis2=img2.getInputStream();
@@ -122,7 +120,6 @@ public class SellerProdInsertController {
 					list.add(img2vo);
 				}
 				if(!(img3.isEmpty())) {
-					System.out.println("이미지3");
 					String orgFileName3=img3.getOriginalFilename();
 					String saveFileName3=UUID.randomUUID()+"_"+orgFileName3;
 					InputStream fis3=img3.getInputStream();
@@ -135,7 +132,6 @@ public class SellerProdInsertController {
 					list.add(img3vo);
 				}
 				if(!(img4.isEmpty())) {
-					System.out.println("이미지4");
 					String orgFileName4=img4.getOriginalFilename();
 					String saveFileName4=UUID.randomUUID()+"_"+orgFileName4;
 					InputStream fis4=img4.getInputStream();
@@ -147,8 +143,7 @@ public class SellerProdInsertController {
 					SellerImgVo img4vo=new SellerImgVo(orgFileName4, 0, saveFileName4, 0, 0, 0);
 					list.add(img4vo);
 				}
-				int j=service.insertProd(vo, img1vo, list);
-				System.out.println("선택:"+j);
+				service.insertProd(vo, img1vo, list);
 			}
 		}catch(ParseException e) {
 			e.printStackTrace();
