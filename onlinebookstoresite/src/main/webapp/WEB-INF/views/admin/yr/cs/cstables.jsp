@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<div class="container-fluid">
 <h2 class="mt-4">list</h2>
 <div class="card mb-4">
 	<div class="card-header">
@@ -45,5 +48,6 @@
 			</table>
 		</div>
 	</div>
+</div>
 </div>
     

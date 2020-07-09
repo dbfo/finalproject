@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.jhta.finalproject.yr.service.PaymentService;
 import com.jhta.finalproject.yr.vo.PaymentVo;
@@ -22,7 +23,15 @@ public class TotalOrderManegeController {
 		List<PaymentVo> list = service.allList();
 		model.addAttribute("list", list);
 		
+		for (PaymentVo vo : list) {
+			System.out.println(vo);
+		}
+		
 		return ".totalOrder";
 	}
+	
+	
+	
+//	@PostMapping("/yr/orderSearch")
 	
 }

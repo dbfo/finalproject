@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container-fluid">
 	<h2 class="mt-4">주문 리스트</h2>
 	<div class="card mb-4">
@@ -28,8 +29,8 @@
 							<tr>
 								<td>${vo.borderdate}</td>
 								<td>${vo.bpaynum}</td>
-								<td>조인해서....이름가져와야하넹</td>
-								<td>조인해서...책 제목도 가져와야하넹</td>
+								<td>${vo.mname }</td>
+								<td>${vo.btitle }</td>
 								<td>${vo.bfinalmoney}</td>
 <!-- 								결제수단 -->
 								<c:choose>
@@ -45,18 +46,31 @@
 									<c:when test="${vo.bstatus == 0 || vo.bstatus == 1 }">
 										<td>배송전</td>									
 									</c:when>									
-									<c:when test="${vo.methodpayment == 2 }">
+									<c:when test="${vo.bstatus == 2 }">
 										<td>배송중</td>									
 									</c:when>
-									<c:when test="${vo.methodpayment == 3 }">
+									<c:when test="${vo.bstatus == 3 || vo.bstatus == 4 }">
 										<td>배송완료</td>									
 									</c:when>
 									<c:otherwise>
 										<td></td>
 									</c:otherwise>
 								</c:choose>
-								
-								<td>이것도 조인...ㅜㅜ</td>
+<!-- 								cs type -->
+								<c:choose>
+									<c:when test="${vo.type == 1}">
+										<td>취소</td>									
+									</c:when>									
+									<c:when test="${vo.type == 2 }">
+										<td>반품</td>									
+									</c:when>
+									<c:when test="${vo.type == 3 }">
+										<td>교환</td>									
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>

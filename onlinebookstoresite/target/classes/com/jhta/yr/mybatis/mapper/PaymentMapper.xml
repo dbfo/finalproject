@@ -5,6 +5,10 @@
 
 <mapper namespace="com.jhta.yr.mybatis.mapper.PaymentMapper">
 	<select id="allList" resultType="payment">
-		select * from bpayment
+		select bpayment.*, members.mname, books.btitle, refundhistory.type 
+		from bpayment, members, books, refundhistory 
+		where bpayment.mnum=members.mnum 
+		and bpayment.bnum = books.bnum and btype = 1
+		and bpayment.bpaynum = refundhistory.bpaynum(+)
 	</select>
 </mapper>
