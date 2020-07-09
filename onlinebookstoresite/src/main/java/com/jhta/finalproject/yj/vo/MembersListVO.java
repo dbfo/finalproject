@@ -2,47 +2,30 @@ package com.jhta.finalproject.yj.vo;
 
 import java.util.Date;
 
-public class MembersVO {
-	private int mnum;
+public class MembersListVO {
 	private String mname;
 	private String mid;
-	private String mpwd;
 	private String email;
 	private String phone;
-	private String addr;
 	private Date regdate;
-	private int grade;
 	private int mstatus;
 	private Date birth;
-	private String sex;
+	private int age;
 
-	public MembersVO() {
-		super();
+	public MembersListVO() {
 	}
 
-	public MembersVO(int mnum, String mname, String mid, String mpwd, String email, String phone, String addr,
-			Date regdate, int grade, int mstatus, Date birth, String sex) {
+	public MembersListVO(String mname, String mid, String email, String phone, Date regdate, int mstatus, Date birth,
+			int age) {
 		super();
-		this.mnum = mnum;
 		this.mname = mname;
 		this.mid = mid;
-		this.mpwd = mpwd;
 		this.email = email;
 		this.phone = phone;
-		this.addr = addr;
 		this.regdate = regdate;
-		this.grade = grade;
 		this.mstatus = mstatus;
 		this.birth = birth;
-		this.sex = sex;
-	}
-
-	public int getMnum() {
-		return mnum;
-	}
-
-	public void setMnum(int mnum) {
-		this.mnum = mnum;
+		this.age = age;
 	}
 
 	public String getMname() {
@@ -61,14 +44,6 @@ public class MembersVO {
 		this.mid = mid;
 	}
 
-	public String getMpwd() {
-		return mpwd;
-	}
-
-	public void setMpwd(String mpwd) {
-		this.mpwd = mpwd;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -85,28 +60,12 @@ public class MembersVO {
 		this.phone = phone;
 	}
 
-	public String getAddr() {
-		return addr;
-	}
-
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
-
 	public Date getRegdate() {
 		return regdate;
 	}
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
-	}
-
-	public int getGrade() {
-		return grade;
-	}
-
-	public void setGrade(int grade) {
-		this.grade = grade;
 	}
 
 	public int getMstatus() {
@@ -125,11 +84,11 @@ public class MembersVO {
 		this.birth = birth;
 	}
 
-	public String getSex() {
-		return sex;
+	public int getAge() {
+		return age;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

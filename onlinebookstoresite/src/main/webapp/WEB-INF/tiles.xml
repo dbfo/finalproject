@@ -16,35 +16,74 @@
 			value="/WEB-INF/views/admin/footer.jsp" />
 	</definition>
 
+	<!-- books -->
 	<definition name=".booksInsert" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksInsert.jsp" />
 	</definition>
-	
+
 	<definition name=".booksList" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksList.jsp" />
 	</definition>
 
-	<definition name=".ok" extends=".main">
+	<!-- <definition name=".ok" extends=".main"> -->
+	<!-- <put-attribute name="content" -->
+	<!-- value="/WEB-INF/views/admin/chloe/books/ok.jsp" /> -->
+	<!-- </definition> -->
+
+	<!-- <definition name=".no" extends=".main"> s -->
+	<!-- <put-attribute name="content" -->
+	<!-- value="/WEB-INF/views/admin/chloe/books/no.jsp" /> -->
+	<!-- </definition> -->
+
+	<!-- members -->
+	<definition name=".membersList" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/admin/chloe/books/ok.jsp" />
+			value="/WEB-INF/views/admin/chloe/members/membersList.jsp" />
 	</definition>
 
-	<definition name=".no" extends=".main">
+	<definition name=".ghostList" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/admin/chloe/books/no.jsp" />
+			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
-
+	
 	<definition name=".totalOrder" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/yr/totalOrder.jsp" />
 		<put-attribute name="tables"
 			value="/WEB-INF/views/admin/yr/tables.jsp" />
 	</definition>
-	
-	<definition name=".membersList" extends=".main">
-		<put-attribute name="content"
-			value="/WEB-INF/views/admin/chloe/members/membersList.jsp" />
+
+
+	<!-- 배송관리(입금상태) -->
+	<definition name=".admin.ship"
+		template="/WEB-INF/views/admin/yr/ship/shiplayout.jsp">
+		<put-attribute name="shipStatus"
+			value="/WEB-INF/views/admin/yr/ship/shipStatus.jsp" />
+		<put-attribute name="shipsearch"
+			value="/WEB-INF/views/admin/yr/ship/shipsearch.jsp" />
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/shiptables.jsp" />
+	</definition>
+
+	<definition name=".ship" extends=".main">
+		<put-attribute name="content" value=".admin.ship" />
+	</definition>
+
+
+	<!-- cs관리 -->
+	<definition name=".admin.cs"
+		template="/WEB-INF/views/admin/yr/cs/cslayout.jsp">
+		<put-attribute name="csStatus"
+			value="/WEB-INF/views/admin/yr/cs/csStatus.jsp" />
+		<put-attribute name="cssearch"
+			value="/WEB-INF/views/admin/yr/cs/cssearch.jsp" />
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/cstables.jsp" />
+	</definition>
+
+	<definition name=".cs" extends=".main">
+		<put-attribute name="content" value=".admin.cs" />
 	</definition>
 </tiles-definitions>

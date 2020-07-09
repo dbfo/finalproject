@@ -5,6 +5,7 @@
 
 <configuration>
 	<typeAliases>
+		<!-- 연주 -->
 		<!-- books -->
 		<typeAlias type="com.jhta.finalproject.yj.vo.BooksVO"
 			alias="books" />
@@ -12,15 +13,23 @@
 			alias="img" />
 		<typeAlias type="com.jhta.finalproject.yj.vo.BigCategoryVO"
 			alias="bctg" />
-		<typeAlias type="com.jhta.finalproject.yj.vo.SmallCategoryVO" 
-			alias="smctg" />
-		
+		<typeAlias
+			type="com.jhta.finalproject.yj.vo.SmallCategoryVO" alias="smctg" />
+
 		<!-- members -->
-		<typeAlias type="com.jhta.finalproject.yj.vo.MembersVO"
+		<typeAlias type="com.jhta.finalproject.yj.vo.MembersListVO"
 			alias="members" />
+
+		<!-- 유래 -->
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
+			alias="payment" />
 	</typeAliases>
 	<mappers>
+		<!-- 연주 -->
 		<mapper resource="com/jhta/yj/mybatis/mapper/BooksMapper.xml" />
 		<mapper resource="com/jhta/yj/mybatis/mapper/MembersMapper.xml" />
+
+		<!-- 유래 -->
+		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
 	</mappers>
 </configuration>

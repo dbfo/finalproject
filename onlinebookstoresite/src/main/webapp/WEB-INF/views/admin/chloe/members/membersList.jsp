@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="memSearch container-fluid">
 	<div class="card-header">
@@ -21,7 +23,7 @@
 			<td colspan="3"><select>
 					<option value="">주문일</option>
 					<option value="">결제완료일</option>
-			</select> <input type="text" size="25"></td>
+			</select> <input type="date"></td>
 		</tr>
 
 		<tr>
@@ -49,36 +51,45 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%"
-				cellspacing="0">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
 						<th>이름</th>
 						<th>아이디</th>
-						<th>가입일</th>
 						<th>휴대전화</th>
+						<th>이메일</th>
 						<th>나이</th>
+						<th>가입일</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<th>이름</th>
 						<th>아이디</th>
-						<th>가입일</th>
 						<th>휴대전화</th>
+						<th>이메일</th>
 						<th>나이</th>
+						<th>가입일</th>
 					</tr>
 				</tfoot>
 				<tbody>
-					<tr>
-						<td>이름</td>
-						<td>아이디</td>
-						<td>가입일</td>
-						<td>휴대전화</td>
-						<td>나이</td>
-					</tr>
+					<c:forEach var="vo" items="${list }" >
+						<tr>
+							<td>${vo.mname}</td>
+							<td>${vo.mid}</td>
+							<td>${vo.phone}</td>
+							<td>${vo.email}</td>
+							<td>${vo.age}</td>
+							<fmt:formatDate value="${vo.regdate}" pattern="yyyy/MM/dd" var="regdate" />
+							<td>${regdate}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+
+<script>
+$
+</script>

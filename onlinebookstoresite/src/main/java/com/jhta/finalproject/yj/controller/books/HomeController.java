@@ -1,4 +1,4 @@
-package com.jhta.finalproject.yj.controller;
+package com.jhta.finalproject.yj.controller.books;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

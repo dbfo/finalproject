@@ -5,10 +5,14 @@
 
 <mapper namespace="com.jhta.yj.mybatis.mapper.MembersMapper">
 	<select id="memList" resultType="members">
-		select * from members
+		select mname, mid, email, phone, regdate, FLOOR((months_between(sysdate, birth))/12) age from members where mstatus = 1
 	</select>
 	
-	<select id="ghostList" resultType="members">
-		select * from members where mstatus = 0
-	</select>
+<!-- 	<select id="ghostList" resultType="members"> -->
+<!-- 		select * from members where mstatus = 0 -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getAge" resultType="int"> -->
+<!-- 		select FLOOR((months_between(sysdate, birth))/12) from members -->
+<!-- 	</select> -->
 </mapper>
