@@ -15,20 +15,43 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.finalproject.jh.service.SellerInsertService;
+import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
 import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
+import com.jhta.finalproject.jh.vo.SellerSmallcategoryVo;
 @Controller
 public class SellerProdInsertController {
 	
 	@Autowired
 	private SellerInsertService service;
 	
-	@RequestMapping(value="/seller/prodInsert") //상품등록하기 위한 컨트롤러
+	//========================상품등록 페이지로 이동하기 위한 메소드========================
+	@RequestMapping("/seller/productInput")
+	public String sellerProdInput(Model model) {
+		List<SellerBigcategoryVo> list=service.getBigcate();
+		model.addAttribute("list", list);
+		return ".seller.product";
+	}
+	
+	
+	//========================대분류 선택시 소분류 가져오는 메소드========================
+	@RequestMapping("/seller/getSmallcate")
+	@ResponseBody
+	public List<SellerSmallcategoryVo> getSmallcate(int bcatenum) {
+		List<SellerSmallcategoryVo> list= service.getSmallcate(bcatenum);
+		return list;
+	}
+	
+	
+	//========================상품등록하기 위한 메소드========================
+	@RequestMapping(value="/seller/prodInsert") 
 	public String insertProd(HttpServletRequest req,HttpSession session, MultipartFile img1,//img1--thumbnail
 			MultipartFile img2,MultipartFile img3,MultipartFile img4) {
 		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
@@ -136,5 +159,10 @@ public class SellerProdInsertController {
 		}
 		//새로고침 방지하기 위한 컨트롤러로 이동
 		return "redirect:/seller/insertOk";
+	}
+	
+	@RequestMapping("/seller/insertOk")
+	public String sellerInsertOk() {
+		return ".seller.insertok";
 	}
 }
