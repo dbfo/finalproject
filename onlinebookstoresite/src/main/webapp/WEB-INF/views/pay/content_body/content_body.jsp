@@ -56,7 +56,7 @@
 		$("tbody").empty();
 	}
 	var viewCart=function(){
-		
+		$("#allcheck").prop("checked",true);
 		$.ajax({
 			url:"/finalproject/pay/cartlist",
 			dataType:"json",
