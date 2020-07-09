@@ -87,7 +87,7 @@ public class SellerProdInsertController {
 				SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
 				int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
 				SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
-						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
+						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum,null);
 				int n=service.insertProd(vo,img1vo);//중고책등록
 				System.out.println("결과:"+n);
 			}else {
@@ -103,7 +103,7 @@ public class SellerProdInsertController {
 				SellerImgVo img1vo=new SellerImgVo(orgFileName1, 0, saveFileName1, 0, 0, 0);
 				int scatenum=Integer.parseInt(req.getParameter("scatename")); //작은카테고리번호
 				SellerOldbooksVo vo=new SellerOldbooksVo(0, snum, selleraddr, obname, obwriter, obpublisher, 
-						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum);
+						obpdate, obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum,null);
 				
 				//선택 이미지들을 담기 위한 배열
 				List<SellerImgVo> list=new ArrayList<SellerImgVo>();

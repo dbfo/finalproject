@@ -18,11 +18,12 @@ public class SellerOldbooksVo {
 	private int obsalestatus; //판매상태
 	private int obhit; //조회수
 	private int scatenum; //작은카테고리번호
+	private Date obregdate;//등록일
 	public SellerOldbooksVo() {}
 	
-	public SellerOldbooksVo(int obnum, int snum, String selleraddr, String obname, String obwriter,
-			String obpublisher, Date obpdate, int obstatus, int oborgprice, int obsaleprice, String obdetail,
-			int obdelfee, int obsalestatus, int obhit, int scatenum) {
+	public SellerOldbooksVo(int obnum, int snum, String selleraddr, String obname, String obwriter, String obpublisher,
+			Date obpdate, int obstatus, int oborgprice, int obsaleprice, String obdetail, int obdelfee,
+			int obsalestatus, int obhit, int scatenum, Date obregdate) {
 		super();
 		this.obnum = obnum;
 		this.snum = snum;
@@ -39,7 +40,10 @@ public class SellerOldbooksVo {
 		this.obsalestatus = obsalestatus;
 		this.obhit = obhit;
 		this.scatenum = scatenum;
+		this.obregdate = obregdate;
 	}
+
+
 
 	public int getObnum() {
 		return obnum;
@@ -131,5 +135,10 @@ public class SellerOldbooksVo {
 	public void setScatenum(int scatenum) {
 		this.scatenum = scatenum;
 	}
-	
+	public Date getObregdate() {
+		return obregdate;
+	}
+	public void setObregdate(Date obregdate) {
+		this.obregdate = obregdate;
+	}
 }

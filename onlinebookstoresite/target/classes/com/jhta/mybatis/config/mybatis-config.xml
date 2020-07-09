@@ -13,5 +13,6 @@
 
   <mappers>
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/>
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/>
   </mappers>
 </configuration>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <!-- 추후 css파일 분리예정 -->
 <style>
@@ -21,6 +23,8 @@
 	.tdstyle{
 		background-color: silver;
 		width: 300px;
+		height:70px;
+		text-align: center;
 	}
 	input[type="radio"] {
 		width: 50px;
@@ -39,6 +43,9 @@
 		width: 1300px;
 		height: 500px;
 		border: 1px solid green;
+	}
+	#showTable table{
+		text-align: center;
 	}
 </style>
 <script type="text/javascript">
@@ -93,17 +100,40 @@
 		<div id="showTable">
 			<table class="table table-bordered">
 				<tr>
-					<td>NO</td>
-					<td>상품명</td>
+					<td width="50">NO</td>
+					<td width="300">상품명</td>
 					<td>출판사</td>
 					<td>저자</td>
-					<td>판매상태</td>
+					<td width="100">판매상태</td>
 					<td>품질</td>
 					<td>판매가</td>
 					<td>등록일</td>
 					<td>수정</td>
 					<td>삭제</td>
 				</tr>
+				<c:forEach var="vo" items="${list}" varStatus="status">
+					<tr>
+						<td><c:out value="${status.count}"/></td>
+						<td>${vo.obname}</td>
+						<td>${vo.obwriter}</td>
+						<td>${vo.obpublisher}</td>
+						<td>
+							<c:if test="${vo.obsalestatus==0}">판매중</c:if>
+							<c:if test="${vo.obsalestatus==1}">입금대기중</c:if>
+							<c:if test="${vo.obsalestatus==2}">판매완료</c:if>
+						</td>
+						<td>
+							<c:if test="${vo.obstatus==1}">최상</c:if>
+							<c:if test="${vo.obstatus==2}">상</c:if>
+							<c:if test="${vo.obstatus==3}">중</c:if>
+							<c:if test="${vo.obstatus==4}">하</c:if>
+						</td>
+						<td>${vo.obsaleprice}원</td>
+						<td><fmt:formatDate value="${vo.obregdate}" pattern="yyyy-MM-dd"/></td>
+						<td>${vo.obnum}</td>
+						<td>${vo.obnum}</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</form>
