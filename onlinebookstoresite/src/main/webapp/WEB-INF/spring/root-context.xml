@@ -30,7 +30,7 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	<!-- 지호주석:인증메일 발송하기 위한 설정 -->
+	<!-- 지호주석:인증메일 발송하기 위한 설정 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com"/>
 		<property name="port" value="587"/>
@@ -42,7 +42,7 @@
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 	<!-- 지호주석: @트랜잭션 어노테이션을 scan하기 위해 설정 -->
 	<tx:annotation-driven/>
 </beans>
