@@ -132,6 +132,11 @@
 
 		$(this).removeClass('btn-outline-success');
 		$(this).addClass('btn-success');
+		
+// 		test
+		$('table>tbody').empty();
 	})
+	
+	
 
 </script>
