@@ -29,4 +29,9 @@
 	<definition name=".seller.prodLook" extends=".seller">
 	 	<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/lookProd/sellerProdLook.jsp"/>
 	</definition>
+	
+	<!-- 중고상품 수정관련 -->
+	<definition name=".seller.prodUpdateView" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/lookProd/sellerProdUpdateView.jsp"/>
+	</definition>
 </tiles-definitions>

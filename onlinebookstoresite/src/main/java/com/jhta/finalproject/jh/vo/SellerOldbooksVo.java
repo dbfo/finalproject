@@ -43,8 +43,6 @@ public class SellerOldbooksVo {
 		this.obregdate = obregdate;
 	}
 
-
-
 	public int getObnum() {
 		return obnum;
 	}

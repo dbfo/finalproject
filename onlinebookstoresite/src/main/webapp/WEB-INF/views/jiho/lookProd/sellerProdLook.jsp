@@ -136,7 +136,8 @@
 						<td>
 							<c:choose>
 								<c:when test="${vo.obsalestatus==0}">
-									<a href="${vo.obnum}"><input type="button" value="수정" class="btn btn-primary"></a>
+									<a href="${pageContext.request.contextPath}/seller/prodUpdateView?obnum=${vo.obnum}">
+									<input type="button" value="수정" class="btn btn-primary"></a>
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="수정" class="btn btn-primary" disabled="disabled">
@@ -144,9 +145,14 @@
 							</c:choose>
 						</td>
 						<td>
-							<c:if test="${vo.obsalestatus==0}">
-								<a href="${vo.obnum}"><input type="button" value="삭제" class="btn btn-secondary"></a>
-							</c:if>
+							<c:choose>
+								<c:when test="${vo.obsalestatus==0}">
+									<a href="${vo.obnum}"><input type="button" value="삭제" class="btn btn-secondary"></a>
+								</c:when>
+								<c:otherwise>
+									<input type="button" value="삭제" class="btn btn-secondary" disabled="disabled">
+								</c:otherwise>														
+							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>
