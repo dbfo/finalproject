@@ -17,7 +17,8 @@
 						<th>이름</th>
 						<th>아이디</th>
 						<th>휴대전화</th>
-						<th>나이</th>
+						<th>이메일</th>
+						<th>만 나이</th>
 						<th>가입일</th>
 					</tr>
 				</thead>
@@ -26,21 +27,20 @@
 						<th>이름</th>
 						<th>아이디</th>
 						<th>휴대전화</th>
-						<th>나이</th>
+						<th>이메일</th>
+						<th>만 나이</th>
 						<th>가입일</th>
 					</tr>
 				</tfoot>
 				<tbody>
-					<c:forEach var="vo" items="${list }">
+					<c:forEach var="vo" items="${list }" >
 						<tr>
-							<td>${vo. mname}</td>
-							<td>${vo. mid}</td>
-							<td>${vo. phone}</td>
-							<fmt:formatDate value="${vo.birth}" pattern="yyyy/MM/dd"
-								var="birth" />
+							<td>${vo.mname}</td>
+							<td>${vo.mid}</td>
+							<td>${vo.phone}</td>
+							<td>${vo.email}</td>
 							<td>${vo.age}</td>
-							<fmt:formatDate value="${vo.regdate}" pattern="yyyy/MM/dd"
-								var="regdate" />
+							<fmt:formatDate value="${vo.regdate}" pattern="yyyy/MM/dd" var="regdate" />
 							<td>${regdate}</td>
 						</tr>
 					</c:forEach>

@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.controller.members;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,11 @@ public class MembersListController {
 
 	// 일반회원
 	@RequestMapping("/membersList")
-	public ModelAndView memList() {
+	public ModelAndView memList(String infoField, String infoKeyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("infoField", infoField);
+		map.put("infoKeyword", infoKeyword);
+		//검색하다가 말았음 map에 담고???
 		ModelAndView mv = new ModelAndView();
 		List<MembersListVO> list = service.memList();
 		mv.addObject("list", list);
