@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- stylesheet관련 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/jhcss.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/bootstrap.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/animate.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/style.css">
@@ -15,7 +16,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/jquery-ui.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/flaticon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/jhcss/jhcss.css">
 <title>중고판매관리</title>
 </head>
 <body>

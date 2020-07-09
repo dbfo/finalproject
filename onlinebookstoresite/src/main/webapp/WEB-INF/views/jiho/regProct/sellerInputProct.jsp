@@ -16,84 +16,7 @@
 <!-- css적용 추후 파일에 따로 분리 예정임 -->
 <style>
 
-	#prodInputForm{
-		border: 1px solid red;
-		width: 1300px;
-		height: 2100px;
-		margin: auto;
-	}
-	/*카테고리css*/
-	#cate{ 
-		width: 1300px;
-		height: 200px;
-		border: 1px solid black;
-	}
-	#cateck{
-		width: 1300px;
-		height: 50%;
-		background-color: silver;
-	}
-	.bgtd{
-		background-color: silver;
-		width: 200px;
-		height: 50px;
-	}
-	/*상품기본정보 css*/
-	#basic{ 
-		width: 1300px;
-		height: 300px;
-		border: 1px solid yellow;
-	}
-	#infotable1 tr td input{
-		width: 500px;
-		height: 30px;
-	}
-	/*상품가격css*/
-	#price{ 
-		width: 1300px;
-		height: 300px;
-		border: 1px solid blue;
-	}
-	.infotd2{
-		width: 500px;
-		height: 30px;
-	}
-	/*배송정보*/
-	#ship{ 
-		width: 1300px;
-		height: 300px;
-		border: 1px solid green;
-	}
-	#infotable3 tr td input{
-		height: 30px;
-	}
-	.addr{
-		width: 500px;
-	}
-	#infotable4 tr td input{
-		width: 500px;
-		height: 30px;
-	}
-	#infotable5 tr td{
-		height: 500px;
-	}
-	#summernote{
-		height: 300px;
-	}
-	#bigbox{
-		width: 200px;
-		height: 300px;
-		border: 1px solid black;
-		float: left;
-	}
-	.selectbox{
-		width: 150px;
-		height:25px;
-		padding-left: 20px;
-	}
-	#insertbt{
-		margin: auto;
-	}
+
 
 </style>
 <script>
@@ -328,8 +251,9 @@
 		//var parts = num.toString().split(".");
 		//$("input[name=oborgprice]").val(data.toLocaleString());
 		// return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		data=String(data);
-		data.replace(/[^\d]+/g, '');
+		//data=String(data);
+		//data.replace(/[^\d]+/g, '');
+		uncomma(data);
 		$("input[name=oborgprice]").val(data.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		//$("input[name=oborgprice]").val(data.toLocaleString('en'));
 	}
