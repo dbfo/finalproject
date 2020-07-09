@@ -26,10 +26,12 @@ public class SellerProdUpdateController {
 		List<SellerOldbooksVo> prodList=lookService.prodUpdateSelect(obnum);
 		SellerOldbooksVo prodVo=prodList.get(0);
 		int bcatenum=lookService.getBiccatenum(obnum);
+		int scatenum=prodList.get(0).getScatenum();
 		System.out.println("큰카테"+bcatenum);
 		model.addAttribute("list", list);
-		model.addAttribute("prodList", prodVo);
-		model.addAttribute("bcatenum", bcatenum);
+//		model.addAttribute("prodList", prodVo);
+		model.addAttribute("bbcatenum", bcatenum);
+		model.addAttribute("sscatenum", scatenum);
 		return ".seller.prodUpdateView";
 	}
 	

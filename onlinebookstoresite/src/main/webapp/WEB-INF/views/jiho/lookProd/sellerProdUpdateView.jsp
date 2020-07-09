@@ -97,14 +97,14 @@
 					<td><select name="bcataname" onchange="getsubcate(this.value)" class="selectbox">
 						<option value="0">---선택---</option>
 						<c:forEach var="vo" items="${list}">
-							<option value="${vo.bcatenum}" >${vo.bcataname}</option>
+							<option value="${vo.bcatenum}"<c:if test="${vo.bcatenum==bbcatenum}">
+							selected</c:if>>${vo.bcataname}</option>
 						</c:forEach>
 						<!-- 안됨
 							<option value="${vo.bcatenum}">${vo.bcatenum } ${prodList.bcatenum}</option>
 						<c:if test="${vo.bcatenum == 100}">selected</c:if>
 						
 						 -->
-						
 						</select>
 						<select name="scatename" class="selectbox">
 							<option value="0">---선택---</option>
@@ -123,15 +123,15 @@
 				</tr>
 				<tr>
 					<td class="bgtd">저자</td>
-					<td><input type="text" name="obwriter"><span>&emsp;※필수입력</span></td>
+					<td><input type="text" name="obwriter" value="${prodList.obwriter }"><span>&emsp;※필수입력</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">출판사</td>
-					<td><input type="text" name="obpublisher"><span>&emsp;※필수입력</span></td>
+					<td><input type="text" name="obpublisher" value="${prodList.obpublisher }"><span>&emsp;※필수입력</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">출간일</td>
-					<td><input type="date" name="obpdate"><span>&emsp;※필수입력</span></td>
+					<td><input type="date" name="obpdate" value="${prodList.obpdate }"><span>&emsp;※필수입력</span></td>
 				</tr>
 			</table>
 		</div>
@@ -142,7 +142,7 @@
 				<tr>
 					<td class="bgtd">정가</td>
 					<td><input type="text" name="oborgprice" class="infotd2"
-						onkeyup="numberComma(this.value)"><span>&emsp;원</span></td>
+						onkeyup="numberComma(this.value)" value="${prodList.oborgprice }"><span>&emsp;원</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
@@ -155,7 +155,7 @@
 				</tr>
 				<tr>
 					<td class="bgtd">판매가</td>
-					<td><input type="text" name="obsaleprice" class="infotd2"><span>&emsp;원</span></td>
+					<td><input type="text" name="obsaleprice" class="infotd2" value="${prodList.obsaleprice }"><span>&emsp;원</span></td>
 				</tr>
 			</table>
 		</div>
@@ -215,7 +215,7 @@
 			<table id="infotable5" class="table table-bordered">
 				<tr>
 					<td class="bgtd">상품설명</td>
-					<td><textarea id="summernote" name="obdetail"></textarea></td>
+					<td><textarea id="summernote" name="obdetail">${prodList.obdetail}</textarea></td>
 				</tr>
 			</table>
 		</div>
