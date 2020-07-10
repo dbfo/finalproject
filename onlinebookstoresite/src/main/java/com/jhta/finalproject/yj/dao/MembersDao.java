@@ -22,7 +22,7 @@ public class MembersDao {
 	public List<MembersListVO> memList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".memList", map);
 	}
-
+	
 	public List<MembersListVO> ghostList() {
 		return session.selectList(NAMESPACE + ".ghostList");
 	}
