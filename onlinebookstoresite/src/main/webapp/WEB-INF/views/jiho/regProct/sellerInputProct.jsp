@@ -302,11 +302,11 @@
 		var date=new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth()+1;
-		if(month.length<2){
+		if(month.toString().length<2){
 			month="0"+month;
 		}
 		var day = date.getDate();
-		if(day.length<2){
+		if(day.toString().length<2){
 			day="0"+day;
 		}
 		var today=year+month+day
@@ -315,7 +315,6 @@
 		var str=inputdate.split('-');
 		var strArr=str[0]+str[1]+str[2];
 		if(strArr>=today){
-			alert("현재:"+today+",입력:"+strArr);
 			alert("출간일은 현재 날짜를 넘을 수 없습니다.");
 			return false;
 		}

@@ -3,7 +3,7 @@
 <table>
 	<tr>
 		<td id="mypageimg">
-			<img src="${cp }/resources/image/mypagebar.gif">
+			<img src="${cp }/resources/hd/image/mypagebar.gif">
 		</td>
 	</tr>
 </table>

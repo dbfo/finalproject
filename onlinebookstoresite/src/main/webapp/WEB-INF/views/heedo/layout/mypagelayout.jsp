@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>views/mypagelayout.jsp</title>
 <!-- jQuery library -->
-<script src="${cp }/resources/js/jquery-3.5.1.js"></script>
+<script src="${cp }/resources/hd/js/jquery-3.5.1.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="${cp }/resources/hd/bootstrap/js/bootstrap.min.js"></script>
 <script src="${cp }/resources/hd/js/jquery.slicknav.min.js"></script>
@@ -27,7 +27,7 @@
 	rel="stylesheet">
 <!-- Stylesheets -->
 <link rel="stylesheet"
-	href="${cp }/resources/bootstrap/css/bootstrap.css">
+	href="${cp }/resources/hd/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="${cp }/resources/hd/css/font-awesome.min.css" />
 <link rel="stylesheet" href="${cp }/resources/hd/css/flaticon.css" />
 <link rel="stylesheet" href="${cp }/resources/hd/css/jquery-ui.min.css" />
