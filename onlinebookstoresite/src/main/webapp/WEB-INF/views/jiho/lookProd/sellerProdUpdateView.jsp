@@ -122,19 +122,19 @@
 			<table id="infotable1" class="table table-bordered">
 				<tr>
 					<td class="bgtd">도서명</td>
-					<td><input type="text" name="obname" value="${prodList.obname}"><span>&emsp;※필수입력</span></td>
+					<td><input type="text" name="obname" value="${getObname}"><span>&emsp;※필수입력</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">저자</td>
-					<td><input type="text" name="obwriter" value="${prodList.obwriter }"><span>&emsp;※필수입력</span></td>
+					<td><input type="text" name="obwriter" value="${getObwriter }"><span>&emsp;※필수입력</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">출판사</td>
-					<td><input type="text" name="obpublisher" value="${prodList.obpublisher }"><span>&emsp;※필수입력</span></td>
+					<td><input type="text" name="obpublisher" value="${getObpublisher }"><span>&emsp;※필수입력</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">출간일</td>
-					<td><input type="date" name="obpdate" value="${prodList.obpdate }"><span>&emsp;※필수입력</span></td>
+					<td><input type="date" name="obpdate" value="2020-07-09"><span>&emsp;※필수입력</span></td>
 				</tr>
 			</table>
 		</div>
@@ -310,11 +310,11 @@
 		var date=new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth()+1;
-		if(month.toString.length<2){
+		if(month.toString().length<2){
 			month="0"+month;
 		}
 		var day = date.getDate();
-		if(day.toString.length<2){
+		if(day.toString().length<2){
 			day="0"+day;
 		}
 		var today=year+month+day
