@@ -15,7 +15,7 @@
 					<form method="post" action="sbooklist">
 					
 					<select id="bcate2" name="bcate2" >
-						<option>[---대 분류---]</option>
+						<option>[--- 대 분류 ---]</option>
 					<c:forEach var="vo" items="${list2 }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
