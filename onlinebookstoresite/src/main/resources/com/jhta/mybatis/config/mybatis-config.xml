@@ -5,14 +5,27 @@
 <configuration>
   <!-- Vo알리아스 설정내용 -->
 <typeAliases>
+	<!-- ///지호 ////-->
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerBigcategoryVo" alias="bigcategory"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerSmallcategoryVo" alias="smallcategory"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerOldbooksVo" alias="oldbooks"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerImgVo" alias="img"/>
+ 	<!-- /////// -->
+ 	<!-- ////희도//// -->
+  	<typeAlias type="com.jhta.finalproject.hd.vo.HomeBestVo" alias="homebest"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.CartListVo" alias="cartview"/>
+  	<!-- /////////// -->
+
 </typeAliases>
 
   <mappers>
+  	<!-- ////지호///// -->
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/>
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/>
+  
+  	<!-- ////희도//// -->
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/>
+    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/CartMapper.xml"/>
+    
   </mappers>
 </configuration>
