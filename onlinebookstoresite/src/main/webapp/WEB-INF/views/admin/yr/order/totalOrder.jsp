@@ -4,7 +4,7 @@
 
 <div class="container-fluid ">
 	<h2>전체주문관리</h2>
-	<form action="${pageContext.request.contextPath }/yr/orderSearch" method = "post">
+	<form action="${pageContext.request.contextPath }/totalOrder" method = "post">
 		<table class="table searchbox">
 			<tr>
 				<th class="table-active">검색어</th>
@@ -12,7 +12,7 @@
 					<div class="form-group row">
 						<div class = "col-xs-2 ">
 							<select class="form-control" name = "pfield">
-								<option value="pnum">주문번호</option>
+								<option value="bpaynum">주문번호</option>
 								<option value="mname">주문자명</option>
 							</select>
 						</div>
@@ -36,6 +36,10 @@
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="seven" value = "7일">
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="month" value = "1개월">
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">
+						</div>
+						<div>
+							<input type="date" name = "startDate">  &nbsp;~ &nbsp;
+							<input type="date" name = "endDate">
 						</div>
 					</div>
 				</td>
@@ -61,7 +65,7 @@
 				<th class="table-active">주문상태</th>
 				<td colspan="3">
 					<input type="checkbox" name= "bstatus" value="-1" id = "pstotal"><label for="pstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-					<input type="checkbox" name= "bstatus" value="0" id = "beforeShip"><label for="beforeShip"> &nbsp;배송전&nbsp;&nbsp;</label>
+					<input type="checkbox" name= "bstatus" value="0,1" id = "beforeShip"><label for="beforeShip"> &nbsp;배송전&nbsp;&nbsp;</label>
 					<input type="checkbox" name= "bstatus" value="2" id = "shipping"><label for="shipping"> &nbsp;배송중&nbsp;&nbsp;</label>
 					<input type="checkbox" name= "bstatus" value="3" id = "completeShip"><label for="completeShip"> &nbsp;배송 완료&nbsp;&nbsp;</label>
 				</td>
@@ -69,7 +73,7 @@
 			<tr>
 				<th class="table-active">cs주문상태</th>
 				<td colspan="3">
-					<input type="checkbox" name= "type" value="cpstotal" id = "-1"><label for="cpstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+					<input type="checkbox" name= "type" value="-1" id = "cpstotal"><label for="cpstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
 					<input type="checkbox" name= "type" value="1" id = "cancle"><label for="cancle"> &nbsp;취소 &nbsp;&nbsp;</label>
 					<input type="checkbox" name= "type" value="2" id = "return"><label for="return"> &nbsp;반품 &nbsp;&nbsp;</label>
 					<input type="checkbox" name= "type" value="3" id = "exchange"><label for="exchange"> &nbsp;교환 &nbsp;&nbsp;</label>
@@ -85,8 +89,8 @@
 				<th class="table-active">회원 / 비회원</th>
 				<td>
 					<input type="radio" name="mType" value="-1" id = "mtotal" ><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-					<input type="radio" name="mType" value="member" id = "member"><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
-					<input type="radio" name="mType" value="nonemember" id = "nonemember"><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
+					<input type="radio" name="mType" value="1" id = "member"><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
+					<input type="radio" name="mType" value="2" id = "nonemember"><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
 				</td>
 			</tr>
 			<tr>
@@ -104,7 +108,7 @@
 // 	1. 전체 누르면 전부다 클릭 되도록, 2. '전체'눌려져 있을때 다른거 누르면 전체 체크 해제
 	$("input[type=checkbox]").on('click',function(){
 		var value = $(this).val();
-		if(value == 'pstotal' || value == 'cpstotal'){
+		if(value == '-1'){
 			var c = $(this).prop('checked');
 			$('input[name='+$(this).attr('name')+']').each( function(idx, item){
 					$(this).prop('checked',c);
@@ -132,11 +136,14 @@
 
 		$(this).removeClass('btn-outline-success');
 		$(this).addClass('btn-success');
-		
-// 		test
-		$('table>tbody').empty();
+	
 	})
 	
+	
+	//input date 값 검사
+// 	$('input[type=date]').on('change',function(){
+// 		var startD = $('#')
+// 	})
 	
 
 </script>

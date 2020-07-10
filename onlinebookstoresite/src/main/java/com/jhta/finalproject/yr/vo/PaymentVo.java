@@ -24,7 +24,7 @@ public class PaymentVo {
 	private int bfinalmoney; // 결제금액
 	private Date borderdate; // 주문날짜
 	private Date bpaydate; // 결제 날짜
-	private int bstatus; // 상태 (0:주문, 1:결제완료,2:배송중,3:수령완료(구매확정),4:cs상태)
+	private int bstatus; // 상태 (0:주문(입금전), 1:결제완료,2:배송중,3:수령완료(구매확정),4:cs상태)
 	private int btype; // 책 타입
 	private int bnum; // 책 번호
 	private int odermoney; // 주문금액
@@ -39,8 +39,6 @@ public class PaymentVo {
 	public PaymentVo() {
 	}
 
-	
-	
 	public PaymentVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate, Date bpaydate,
 			int bstatus, int btype, int bnum, int odermoney, int usedpoint, int methodpayment, String receiver,
 			int mnum, String mname, String btitle, int type) {

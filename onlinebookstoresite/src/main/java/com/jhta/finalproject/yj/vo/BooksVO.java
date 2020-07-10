@@ -3,19 +3,19 @@ package com.jhta.finalproject.yj.vo;
 import java.util.Date;
 
 public class BooksVO {
-	private int bnum; // Ã¥¹øÈ£
-	private String btitle; // Ã¥Á¦¸ñ
-	private String bwriter; // ÀÛ°¡
-	private Date bpublishdate; // Ãâ°£ÀÏ
-	private String bpublisher; // ÃâÆÇ»ç
-	private int bprice; // °¡°Ý
-	private int bpoint; // Àû¸³Æ÷ÀÎÆ®
-	private int bshipinfo; // ¹è¼Û·á
-	private int bcount; // ¼ö·®
-	private String bcontent; // Ã¥¼³¸í
-	private int bhit; // Á¶È¸¼ö
-	private int scatenum; // ÀÛÀºÄ«Å×°í¸®¹øÈ£
-	private Date bregdate; // Ã¥µî·ÏÀÏ
+	private int bnum; // Ã¥ï¿½ï¿½È£
+	private String btitle; // Ã¥ï¿½ï¿½ï¿½ï¿½
+	private String bwriter; // ï¿½Û°ï¿½
+	private Date bpublishdate; // ï¿½â°£ï¿½ï¿½
+	private String bpublisher; // ï¿½ï¿½ï¿½Ç»ï¿½
+	private int bprice; // ï¿½ï¿½ï¿½ï¿½
+	private int bpoint; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+	private int bshipinfo; // ï¿½ï¿½Û·ï¿½
+	private int bcount; // ï¿½ï¿½ï¿½ï¿½
+	private String bcontent; // Ã¥ï¿½ï¿½ï¿½ï¿½
+	private int bhit; // ï¿½ï¿½È¸ï¿½ï¿½
+	private int scatenum; // ï¿½ï¿½ï¿½ï¿½Ä«ï¿½×°ï¿½ï¿½ï¿½È£
+	private Date bregdate; // Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	public BooksVO() {
 	}

@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yr.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class PaymentService {
 	@Autowired
 	public PaymentDao dao;
 	
-	public List<PaymentVo> allList(){
-		return dao.allList();
+	public List<PaymentVo> allList(HashMap<String, Object> map){
+		return dao.allList(map);
 	}
 }

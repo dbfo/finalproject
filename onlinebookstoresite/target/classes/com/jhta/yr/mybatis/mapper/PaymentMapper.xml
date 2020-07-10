@@ -7,13 +7,76 @@
 	
 	<sql id="search">
 		
+<!-- 		주문번호, 주문자 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(pfield)">
+			and 
+			<choose>
+				<when test="pfield == 'bpaynum'">
+					bpayment.${pfield} 
+				</when>
+				<otherwise>
+					members.${pfield}
+				</otherwise>
+			</choose>
+			like '%'||#{pkeyword}||'%'
+		</if>		
+
+<!-- 		책제목, 첵 번호 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bfield)">
+			and books.${bfield} like '%'||#{bkeyword}||'%'
+		</if>
+		
+<!-- 		주문상태 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bstatus)">
+			and bstatus in
+			<foreach collection="bstatus" item="bs" open="(" close=")" separator=",">
+				<if test="bstatus != -1">
+				#{bs,jdbcType=VARCHAR}	
+				</if>
+			</foreach>
+	    </if>
+	    
+<!-- 	    cs 상태 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(type)">
+			and type in
+			<foreach collection="type" item="type" open="(" close=")" separator=",">
+				<if test="type != -1">
+				#{type,jdbcType=VARCHAR}	
+				</if>
+			</foreach>
+	    </if>
+	    
+<!-- 	    입금/결제 상태 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(payType)">
+			<if test="payType == 1">
+				and bstatus in (1,2,3,4)			
+			</if>
+			<if test="payType == 0">
+				and bstatus = 0			
+			</if>
+	    </if>
+	    
+	    
+<!-- 	    회원상태 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(mType)">
+			<if test="mType == 2">
+				and bpayment.mnum = 0  						
+			</if>						
+			<if test="mType == 1">
+				and bpayment.mnum != 0  						
+			</if>				
+	    </if>
+
 	</sql>
 
-	<select id="allList" resultType="payment">
+	<select id="allList" resultType="payment" parameterType="hashmap">
 		select bpayment.*, members.mname, books.btitle, refundhistory.type 
 		from bpayment, members, books, refundhistory 
 		where bpayment.mnum=members.mnum 
 		and bpayment.bnum = books.bnum and btype = 1
 		and bpayment.bpaynum = refundhistory.bpaynum(+)
+		<include refid="search"/>
 	</select>
+	
+	
 </mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jhta.yj.mybatis.mapper.MembersMapper">
+	<sql id="search">
+		<if test="infoField != null and infoField != '' ">
+			and ${infoField} like '%'||#{infoKeyword}||'%'
+		</if>
+		
+		<if test="payField != null and payField != '' ">
+			and ${infoField} like '%'||#{payKeyword}||'%'
+		</if>
+	</sql>
+
+	<select id="memList" resultType="members"
+		parameterType="hashmap">
+		select mname, mid, email, phone, regdate,
+		FLOOR((months_between(sysdate, birth))/12) age
+		from members where
+		mstatus = 1
+		<include refid="search" />
+	</select>
+
+	<select id="ghostList" resultType="members">
+		select mname, mid, email,
+		phone, regdate, FLOOR((months_between(sysdate, birth))/12) age from
+		members where mstatus = 0
+	</select>
+</mapper>
