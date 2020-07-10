@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="text-center text-lg-left">
 					<!-- logo -->
-					<a href="./index.html" class="site-logo"> <img
+					<a href="${cp }/" class="site-logo"> <img
 						src="${cp }/resources/hd/img/logo2.jpg" id="logoImg" alt="">
 					</a>
 				</div>
@@ -45,7 +45,7 @@
 		<div class="container">
 			<!-- menu -->
 			<ul class="main-menu">
-				<li><a href="#">카테고리</a>
+				<li><a href="${cp}/list1">카테고리</a>
 					<ul class="sub-menu">
 						<li><a href="#">소설</a></li>
 						<li><a href="#">시/에세이</a></li>
@@ -59,10 +59,10 @@
 						<li><a href="#">만화</a></li>
 						<li><a href="#">기타</a></li>
 					</ul></li>
-				<li><a href="#">베스트</a></li>
+				<li><a href="${cp }/list2">베스트</a></li>
 				<li><a href="#">신간 <span class="new">New</span>
 				</a></li>
-				<li><a href="${cp }/seller">중고</a></li>
+				<li><a href="#">중고</a></li>
 				<li><a href="${cp }/mypage/main">마이페이지</a>
 					<ul class="sub-menu">
 						<li><a href="#">주문내역</a></li>

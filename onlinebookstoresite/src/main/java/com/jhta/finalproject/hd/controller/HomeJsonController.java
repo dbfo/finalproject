@@ -39,13 +39,13 @@ public class HomeJsonController {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
-			System.out.println("컨트롤러안 title : "+vo.getBtitle());
+			
 			json.put("bwriter", vo.getBwriter());
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();
 			json.put("imgsrc",imgpath );
-			System.out.println("컨트롤러안 imgsrc : "+imgpath);
+
 			jarr.put(json);
 		}
 		return jarr.toString();
@@ -65,13 +65,11 @@ public class HomeJsonController {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
-			System.out.println("컨트롤러안 title : "+vo.getBtitle());
 			json.put("bwriter", vo.getBwriter());
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();
 			json.put("imgsrc",imgpath );
-			System.out.println("컨트롤러안 imgsrc : "+imgpath);
 			jarr.put(json);
 		}
 		return jarr.toString();

@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="${cp }/resources/hd/css/animate.css"/>
 <link rel="stylesheet" href="${cp }/resources/hd/css_main/main.css"/>
 <link rel="stylesheet" href="${cp }/resources/hd/css/style.css"/>
+<link rel="stylesheet" href="${cp }/resources/JIMIN/cssjm/jimin.css">
 </head>
 <body>
 <div id="wrap">

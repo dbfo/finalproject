@@ -29,6 +29,7 @@
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/lookProd/sellerProdUpdateView.jsp"/>
 	</definition>
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
+	
 	<!-- /////////////////////희도//////////////////////////////ㄴ -->
 	<!-- 홈화면 -->
 	<definition name=".main" template="/WEB-INF/views/heedo/layout/mainlayout.jsp">
@@ -55,8 +56,20 @@
 		<put-attribute name="footer" value="/WEB-INF/views/heedo/main/footer.jsp"/>
 	</definition>
 	<!-- ///////////////////////////////////////////////////////////////////// -->
-</tiles-definitions>
 	
-
-
-
+	<!-- //////////////////////지민//////////////////////////////////////////// -->
+	<definition name=".list1" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cate1.jsp"/>
+	</definition>
+	<definition name=".list2" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cate2.jsp"/>
+	</definition>
+	
+	<definition name=".*.*.*" extends=".main">		
+		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}/{3}.jsp"/>				
+	</definition>
+	<definition name=".*.*" extends=".main">		
+		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}.jsp"/>				
+	</definition>
+	<!-- ////////////////////////////////////////////////////////////////////////////// -->
+</tiles-definitions>

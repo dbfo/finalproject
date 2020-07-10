@@ -72,7 +72,6 @@
 					$("#total_point").text(total_point);
 				}else{
 					$(data).each(function(index,item){
-						console.log('data length 있음..')
 						var tableapp="<tr>"
 									+"<td><input class='checkTd' style='zoom:1.5;' type='checkbox' checked='checked' data-id="+item.cartnum+"></td>"
 									+"<td><img src="+item.imgsrc+" class='cartlistimg'></td>"
@@ -95,13 +94,13 @@
 					
 					//각행 체크버튼 체크/비체크시.
 					$(".checkTd").change(function(){ 
-						console.log('change!')
+					
 						if($(this).is(":checked")){
 							var checkTd=$(this)
 							var tr=checkTd.parent().parent();
 							var td=tr.children();
 							var value=td.eq(6).text();
-							console.log("value : "+value)
+						
 							var point=td.eq(4).text();
 							var orgtotal_value=$("#total_value").text();
 							var orgtotal_point=$("#total_point").text();
@@ -126,7 +125,6 @@
 					//각행의 삭제버튼 클릭시.
 					$(".deletebtn").click(function(){
 						$("#deletebtn_modal").val($(this).data('id'));
-						console.log('data-id:'+($(this).data('id')));
 						$("#deleteModal").modal('show');
 					});
 					//수량 변경버튼 클릭시.
@@ -135,8 +133,6 @@
 						var td=tr.children();
 						var newCount=td.eq(5).children().val();
 						var cartNum=$(this).data('id');
-						console.log('수량 값 : '+newCount);
-						console.log('변경버튼 장바구니번호 : '+cartNum);
 						$.ajax({
 							url:"/finalproject/pay/changeCount",
 							data:{cartNum:cartNum,newCount:newCount},
@@ -179,7 +175,6 @@
 	}
 	//전체체크 버튼.
 	$("#allcheck").change(function(){
-			console.log('allchange!!')
 			if($("#allcheck").is(":checked")){
 				$(".checkTd").each(function(){
 					if(!$(this).is(":checked")){

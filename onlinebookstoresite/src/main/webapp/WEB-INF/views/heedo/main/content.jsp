@@ -11,7 +11,7 @@
 	var bestpageNum = 1;
 	var newpageNum = 1;
 	var viewBest = function() {
-		console.log('11111')
+
 		$
 				.ajax({
 					url : "/finalproject/home/bestlist",
@@ -22,7 +22,7 @@
 					success : function(data) {
 						var b = $(
 								"<div id='bestprev'>"
-										+ "<img src='${cp }/resources/image/prevButton.png' id='bestprevimg'>"
+										+ "<img src='${cp }/resources/hd/image/prevButton.png' id='bestprevimg'>"
 										+ "</div>").appendTo(
 								"#content-best-card");
 						$(data).each(function(index, item) {
@@ -67,7 +67,6 @@
 	}
 
 	var viewnew = function() {
-		console.log('2222')
 		$
 				.ajax({
 					url : "/finalproject/home/newlist",

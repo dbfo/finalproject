@@ -6,13 +6,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-
-	
+		
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.3:1521:xe"/>
-		<property name="username" value="gobook"/>
-		<property name="password" value="gobook1234"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.0.21:1521:xe"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
 	</bean>
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
@@ -46,4 +45,5 @@
 	</bean>-->
 	<!-- 지호주석: @트랜잭션 어노테이션을 scan하기 위해 설정 -->
 	<tx:annotation-driven/>
+
 </beans>

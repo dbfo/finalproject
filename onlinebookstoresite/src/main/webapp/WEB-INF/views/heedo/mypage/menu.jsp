@@ -30,4 +30,10 @@
 			<a href="#">- 모임관리</a><br>
 		</td>
 	</tr>
+	<tr>
+		<th>중고관리</th>
+	</tr>
+	<tr>
+		<td><a href="${cp }/seller">-중고판매자매니저</a></td>
+	</tr>
 </table>
