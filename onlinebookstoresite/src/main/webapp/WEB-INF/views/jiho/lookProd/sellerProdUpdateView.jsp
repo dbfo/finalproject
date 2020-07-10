@@ -107,7 +107,10 @@
 						 -->
 						</select>
 						<select name="scatename" class="selectbox">
-							<option value="0">---선택---</option>
+							<c:forEach var="svo" items="${slist}">
+								<option value="${svo.scatenum }" <c:if test="${svo.scatenum==sscatenum}">
+								selected</c:if>>${svo.scataname }</option>
+							</c:forEach>
 						</select>
 					</td>
 				</tr>		

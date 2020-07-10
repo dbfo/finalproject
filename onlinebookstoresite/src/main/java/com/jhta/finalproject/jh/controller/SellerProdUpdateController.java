@@ -11,6 +11,7 @@ import com.jhta.finalproject.jh.service.SellerInsertService;
 import com.jhta.finalproject.jh.service.SellerProdLookService;
 import com.jhta.finalproject.jh.vo.SellerBigcategoryVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
+import com.jhta.finalproject.jh.vo.SellerSmallcategoryVo;
 
 @Controller
 public class SellerProdUpdateController {
@@ -26,9 +27,11 @@ public class SellerProdUpdateController {
 		List<SellerOldbooksVo> prodList=lookService.prodUpdateSelect(obnum);
 		SellerOldbooksVo prodVo=prodList.get(0);
 		int bcatenum=lookService.getBiccatenum(obnum);
+		List<SellerSmallcategoryVo> smallList=insertService.getSmallcate(bcatenum);
 		int scatenum=prodList.get(0).getScatenum();
 		System.out.println("큰카테"+bcatenum);
-		model.addAttribute("list", list);
+		model.addAttribute("list", list);//큰카테고리 리스트
+		model.addAttribute("slist", smallList);//작은 카테고리 리스트
 //		model.addAttribute("prodList", prodVo);
 		model.addAttribute("bbcatenum", bcatenum);
 		model.addAttribute("sscatenum", scatenum);
