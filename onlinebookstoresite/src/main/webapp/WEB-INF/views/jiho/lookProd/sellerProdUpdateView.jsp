@@ -150,15 +150,15 @@
 				<tr>
 					<td class="bgtd">품질체크</td>
 					<td>
-					<input type="radio" name="obstatus" value="1">최상
-					<input type="radio" name="obstatus" value="2">상
-					<input type="radio" name="obstatus" value="3">중
-					<input type="radio" name="obstatus" value="4">하
+					<input type="radio" name="obstatus" value="1" <c:if test="${getObstatus==1 }">checked</c:if>>최상
+					<input type="radio" name="obstatus" value="2" <c:if test="${getObstatus==2 }">checked</c:if>>상
+					<input type="radio" name="obstatus" value="3" <c:if test="${getObstatus==3 }">checked</c:if>>중
+					<input type="radio" name="obstatus" value="4" <c:if test="${getObstatus==4 }">checked</c:if>>하
 					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">판매가</td>
-					<td><input type="text" name="obsaleprice" class="infotd2" value="${prodList.obsaleprice }"><span>&emsp;원</span></td>
+					<td><input type="text" name="obsaleprice" class="infotd2" value="${getObsaleprice }"><span>&emsp;원</span></td>
 				</tr>
 			</table>
 		</div>
@@ -169,23 +169,24 @@
 				<tr>
 					<td class="bgtd">택배비</td>
 					<td>
-						<input type="radio" name="obdelfee" value="0" id="free">무료
-						<input type="radio" name="obdelfee" value="2500" id="fee">기본(2,500원)
+						<input type="radio" name="obdelfee" value="0" id="free" <c:if test="${getObdelfee==0 }">checked</c:if>>무료
+						<input type="radio" name="obdelfee" value="2500" id="fee" 
+						<c:if test="${getObdelfee==2500 }">checked</c:if>>기본(2,500원)
 					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">출고주소</td>
 					<td><input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="addr"
-							onclick="sample4_execDaumPostcode()" readonly="readonly">
+							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr1}">
 						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr"
-							onclick="sample4_execDaumPostcode()" readonly="readonly">
+							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr2 }">
 						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr"
-							onclick="sample4_execDaumPostcode()" readonly="readonly">
+							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr3 }">
 						<span id="guide" style="color:#999;display:none"></span><br>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr">
+						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr" value=${addr4 }>
 						<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr"
-							onclick="sample4_execDaumPostcode()" readonly="readonly">
+							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr5 }">
 					</td>
 				</tr>
 			</table>
@@ -196,19 +197,52 @@
 			<table id="infotable4" class="table table-bordered">
 				<tr>
 					<td class="bgtd">대표(기본이미지)-필수</td>
-					<td><input type="file" name="img1"></td>
+					<td>
+						<span><c:if test="${imgList[0].thumbnail==1 }">${imgList[0].imgorgfilename }</c:if>&nbsp</span>
+						<input type="button" value="삭제" style="width: 80px;" class="thumbImgDelbt">
+					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="file" name="img2"></td>
+					<td>
+						<c:choose>
+							<c:when test="${imgList[1]==null  }">
+								<input type="file" name="img2">
+							</c:when>
+							<c:otherwise>
+								<span>${imgList[1].imgorgfilename }&nbsp</span>
+								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="file" name="img3"></td>
+					<td>
+						<c:choose>
+							<c:when test="${imgList[2]==null  }">
+								<input type="file" name="img3">
+							</c:when>
+							<c:otherwise>
+								<span>${imgList[2].imgorgfilename }&nbsp</span>
+								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				<tr>
 					<td class="bgtd">실물이미지-선택</td>
-					<td><input type="file" name="img4"></td>
+					<td>
+						<c:choose>
+							<c:when test="${imgList[3]==null  }">
+								<input type="file" name="img4">
+							</c:when>
+							<c:otherwise>
+								<span>${imgList[3].imgorgfilename }&nbsp</span>
+								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -218,7 +252,7 @@
 			<table id="infotable5" class="table table-bordered">
 				<tr>
 					<td class="bgtd">상품설명</td>
-					<td><textarea id="summernote" name="obdetail">${prodList.obdetail}</textarea></td>
+					<td><textarea id="summernote" name="obdetail">${getObdetail}</textarea></td>
 				</tr>
 			</table>
 		</div>

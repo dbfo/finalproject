@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.jh.dao.SellerProdLookDao;
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
 
 @Service
@@ -28,5 +29,11 @@ public class SellerProdLookService {
 	//상품수정을 위한 큰 카테고리 넘버 가져오기
 	public int getBiccatenum(int obnum){
 		return dao.getBiccatenum(obnum);
+	}
+	
+	//상품수정을 위한 이미지 리스트 가져오기
+	public List<SellerImgVo> getProdImgList(int obnum){
+		List<SellerImgVo> list=dao.getProdImgList(obnum);
+		return list;
 	}
 }
