@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * È¨¿¡¼­ º¸³»Áà¾ßÇÏ´Â°Í.
- * º£½ºÆ®¼¿·¯ ¸®½ºÆ® / ½Å°£ ¸®½ºÆ®/ È¸¿ø¾ÆÀÌµğ / Àå¹Ù±¸´Ï ¸®½ºÆ®.
+ * í™ˆì—ì„œ ë³´ë‚´ì¤˜ì•¼í•˜ëŠ”ê²ƒ.
+ * ë² ìŠ¤íŠ¸ì…€ëŸ¬ ë¦¬ìŠ¤íŠ¸ / ì‹ ê°„ ë¦¬ìŠ¤íŠ¸/ íšŒì›ì•„ì´ë”” / ì¥ë°”êµ¬ë‹ˆ ë¦¬ìŠ¤íŠ¸.
  */
 @Controller
 public class HomeController { 

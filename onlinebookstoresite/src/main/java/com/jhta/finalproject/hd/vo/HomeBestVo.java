@@ -1,5 +1,7 @@
 package com.jhta.finalproject.hd.vo;
 
+//홈화면 신간,베스트 리스트!!!
+
 public class HomeBestVo {
 	private int bnum;
 	private String btitle;

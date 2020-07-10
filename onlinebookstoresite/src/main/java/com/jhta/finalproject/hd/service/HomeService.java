@@ -16,7 +16,7 @@ public class HomeService {
 	@Autowired
 	private HomeDao dao;
 	
-	//È¨È­¸é º£½ºÆ®¼¿·¯ 10°³ ¸®½ºÆ®.
+	//í™ˆí™”ë©´ ë² ìŠ¤íŠ¸ì…€ëŸ¬ 10ê°œ ë¦¬ìŠ¤íŠ¸.
 	public List<HomeBestVo> bestlist(HashMap<String, Object> map){
 		return dao.bestlist(map);
 	}

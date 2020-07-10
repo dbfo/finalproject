@@ -16,7 +16,7 @@ public class HomeDao {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="mybatis.mapper.HomeMapper";
 	
-	//È¨È­¸é º£½ºÆ®¼¿·¯ 10°³ ¸®½ºÆ®. 
+	//í™ˆí™”ë©´ ë² ìŠ¤íŠ¸ì…€ëŸ¬ 10ê°œ ë¦¬ìŠ¤íŠ¸. 
 	public List<HomeBestVo> bestlist(HashMap<String, Object>map){
 		List<HomeBestVo>list=sqlSession.selectList(NAMESPACE+".bestlist",map);
 		return list;

@@ -15,19 +15,19 @@ public class CartService {
 	@Autowired
 	private CartDao dao;
 	
-	//Àå¹Ù±¸´Ï ¸®½ºÆ® Ãâ·Â service
+	//ì¥ë°”êµ¬ë‹ˆ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ service
 	public List<CartListVo> cartlist(HashMap<String, Object> map){
 		return dao.cartlist(map);
 	}
-	//Àå¹Ù±¸´Ï ÇÏ³ª»èÁ¦ service
+	//ì¥ë°”êµ¬ë‹ˆ í•˜ë‚˜ì‚­ì œ service
 	public int deleteOne(int cartNum) {
 		return dao.deleteOne(cartNum);
 	}
-	//Àå¹Ù±¸´Ï ¼ö·®º¯°æ service
+	//ì¥ë°”êµ¬ë‹ˆ ìˆ˜ëŸ‰ë³€ê²½ service
 	public int changeCount(HashMap<String, Object>map) {
 		return dao.changeCount(map);
 	}
-	//Àå¹Ù±¸´Ï ¼±ÅÃÇÑ°Å »èÁ¦ service
+	//ì¥ë°”êµ¬ë‹ˆ ì„ íƒí•œê±° ì‚­ì œ service
 	public int deleteSelected(HashMap<String, Object> map) {
 		return dao.deleteSelected(map);
 	}

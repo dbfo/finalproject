@@ -29,13 +29,13 @@ public class CartController {
 	public String conCart() {
 		return ".cart";
 	}
-	//Àå¹Ù±¸´Ï ¸®½ºÆ® Ãâ·Â AJAX
+	//ì¥ë°”êµ¬ë‹ˆ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ AJAX
 	@RequestMapping(value="/pay/cartlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String cartlist(HttpSession session) {
-		//¼¼¼Ç¿¡ µé¾îÀÖ´Â È¸¿ø¹øÈ£ ¹ŞÀ½.
+		//ì„¸ì…˜ì— ë“¤ì–´ìˆëŠ” íšŒì›ë²ˆí˜¸ ë°›ìŒ.
 		int mnum=Integer.parseInt(session.getAttribute("mnum").toString());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mnum", mnum);
 		List<CartListVo> list=service.cartlist(map);
@@ -51,7 +51,7 @@ public class CartController {
 			json.put("bprice", vo.getBprice());
 			json.put("bpoint", vo.getBpoint());
 			json.put("bshipinfo", vo.getBshipinfo());
-			json.put("stored", vo.getStored()); //Àç°í ( books Å×ÀÌºí )
+			json.put("stored", vo.getStored()); //ì¬ê³  ( books í…Œì´ë¸” )
 			json.put("bcount", vo.getBcount());
 			int totalvalue=vo.getBprice()*vo.getBcount();
 			json.put("totalvalue", totalvalue);
@@ -59,7 +59,7 @@ public class CartController {
 		}
 		return jarr.toString();
 	}
-	//Àå¹Ù±¸´Ï¿¡¼­ ÇÏ³ª»èÁ¦ AJAX
+	//ì¥ë°”êµ¬ë‹ˆì—ì„œ í•˜ë‚˜ì‚­ì œ AJAX
 	@RequestMapping("/pay/deleteOneCart")
 	@ResponseBody
 	public String deleteOne(int cartNum) {
@@ -72,7 +72,7 @@ public class CartController {
 		json.put("result", result);
 		return json.toString();	
 	}
-	//¼ö·®º¯°æ AJAX
+	//ìˆ˜ëŸ‰ë³€ê²½ AJAX
 	@RequestMapping("/pay/changeCount")
 	@ResponseBody
 	public String changeCount(int cartNum,int newCount) {

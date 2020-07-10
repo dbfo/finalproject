@@ -1,16 +1,15 @@
 package com.jhta.page.util;
 
 public class PageUtil {
-	private int pageNum; 
-	private int startRow; 
-	private int endRow; 
-	private int totalPageCount; 
-	private int startPageNum;  
-	private int endPageNum;   
-	private int rowBlockCount;  
-	private int pageBlockCount;  
-	private int totalRowCount;  
-	
+	private int pageNum; //페이지번호
+	private int startRow; //시작행
+	private int endRow; //끝행
+	private int totalPageCount; //전체페이지갯수
+	private int startPageNum; //시작페이지
+	private int endPageNum; //끝페이지
+	private int rowBlockCount; //한페이지에 보여질 글의 갯수
+	private int pageBlockCount; //한페이지에 보여질 페이지의 갯수
+	private int totalRowCount; //전체 글의 갯수
 	public PageUtil() {}
 	public PageUtil(int pageNum,int totalRowCount,int rowBlockCount,int pageBlockCount) {
 		this.pageNum=pageNum;
@@ -80,6 +79,5 @@ public class PageUtil {
 	public void setTotalRowCount(int totalRowCount) {
 		this.totalRowCount = totalRowCount;
 	}
-	
-	
+
 }

@@ -24,7 +24,7 @@ public class HomeJsonController {
 	@Autowired
 	private HomeService service;
 	
-	//È¨È­¸é º£½ºÆ®¼¿·¯
+	//í™ˆí™”ë©´ ë² ìŠ¤íŠ¸ì…€ëŸ¬
 	@RequestMapping(value="/home/bestlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String bestlist(HttpSession session,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
@@ -32,25 +32,25 @@ public class HomeJsonController {
 		PageUtil pu=new PageUtil(pageNum, 10, 5, 5);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		List<HomeBestVo> list=service.bestlist(map);
 		JSONArray jarr=new JSONArray();
 		for(HomeBestVo vo:list) {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
-			System.out.println("ÄÁÆ®·Ñ·¯¾È title : "+vo.getBtitle());
+			
 			json.put("bwriter", vo.getBwriter());
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();
 			json.put("imgsrc",imgpath );
-			System.out.println("ÄÁÆ®·Ñ·¯¾È imgsrc : "+imgpath);
+
 			jarr.put(json);
 		}
 		return jarr.toString();
 	}
-	//È¨È­¸é ½Å°£
+	//í™ˆí™”ë©´ ì‹ ê°„
 	@RequestMapping(value="/home/newlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String newtlist(HttpSession session,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
@@ -58,20 +58,18 @@ public class HomeJsonController {
 		PageUtil pu=new PageUtil(pageNum, 10, 5, 5);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		List<HomeBestVo> list=service.newlist(map);
 		JSONArray jarr=new JSONArray();
 		for(HomeBestVo vo:list) {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
-			System.out.println("ÄÁÆ®·Ñ·¯¾È title : "+vo.getBtitle());
 			json.put("bwriter", vo.getBwriter());
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();
 			json.put("imgsrc",imgpath );
-			System.out.println("ÄÁÆ®·Ñ·¯¾È imgsrc : "+imgpath);
 			jarr.put(json);
 		}
 		return jarr.toString();

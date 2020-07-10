@@ -15,19 +15,19 @@ public class CartDao {
 	private SqlSession sqlsession;
 	private final String NAMESPACE="mybatis.mapper.CartMapper";
 	
-	//Àå¹Ù±¸´Ï ¸®½ºÆ® Ãâ·Â dao
+	//ì¥ë°”êµ¬ë‹ˆ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ dao
 	public List<CartListVo> cartlist(HashMap<String, Object> map){
 		return sqlsession.selectList(NAMESPACE+".cartlist", map);
 	}
-	//Àå¹Ù±¸´Ï ÇÏ³ª»èÁ¦ dao
+	//ì¥ë°”êµ¬ë‹ˆ í•˜ë‚˜ì‚­ì œ dao
 	public int deleteOne(int cartNum) {
 		return sqlsession.delete(NAMESPACE+".deleteOne", cartNum);
 	}
-	//Àå¹Ù±¸´Ï ¼ö·®º¯°æ dao
+	//ì¥ë°”êµ¬ë‹ˆ ìˆ˜ëŸ‰ë³€ê²½ dao
 	public int changeCount(HashMap<String, Object>map) {
 		return sqlsession.update(NAMESPACE+".changeCount", map);
 	}
-	//Àå¹Ù±¸´Ï ¼±ÅÃÇÑ°Å »èÁ¦ dao
+	//ì¥ë°”êµ¬ë‹ˆ ì„ íƒí•œê±° ì‚­ì œ dao
 	public int deleteSelected(HashMap<String,Object>map) {
 		return sqlsession.delete(NAMESPACE+".deleteSelected", map);
 	}

@@ -1,14 +1,16 @@
 package com.jhta.finalproject.hd.vo;
 
+//ì¥ë°”êµ¬ë‹ˆ ë¦¬ìŠ¤íŠ¸ VO
+
 public class CartListVo {
-	private int mnum;  //È¸¿ø¹øÈ£
-	private int bnum;  //Ã¥¹øÈ£
-	private String btitle; //Ã¥Á¦¸ñ
-	private int bprice; //Ã¥°¡°İ
-	private int bpoint; //Àû¸³Æ÷ÀÎÆ®
-	private int bshipinfo; //¹è¼Û·á
-	private int stored; //Àç°í
-	private int bcount;  //Ä«Æ®¿¡ ³ÖÀº ¼ö·®
+	private int mnum;  //íšŒì›ë²ˆí˜¸
+	private int bnum;  //ì±…ë²ˆí˜¸
+	private String btitle; //ì±…ì œëª©
+	private int bprice; //ì±…ê°€ê²©
+	private int bpoint; //ì ë¦½í¬ì¸íŠ¸
+	private int bshipinfo; //ë°°ì†¡ë£Œ
+	private int stored; //ì¬ê³ 
+	private int bcount;  //ì¹´íŠ¸ì— ë„£ì€ ìˆ˜ëŸ‰
 	private int cartnum;
 	private String imgsavefilename;
 	
