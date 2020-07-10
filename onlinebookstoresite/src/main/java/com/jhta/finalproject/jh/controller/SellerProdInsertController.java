@@ -70,7 +70,7 @@ public class SellerProdInsertController {
 			String obdetail=req.getParameter("obdetail"); //상품설명
 			
 			//파일 업로드 경로명 가져오기
-			String upload=session.getServletContext().getRealPath("/resources/jhobupload");
+			String upload=session.getServletContext().getRealPath("/resources/jh/jhobupload");
 
 			//썸네일 파일만 있을 경우 실행할 상품등록 작업
 			if(img2.isEmpty() && img3.isEmpty() && img4.isEmpty()) {

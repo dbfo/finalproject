@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <div id="sellerTop">
 	<a href="${pageContext.request.contextPath}/seller"><img
-		src="${pageContext.request.contextPath}/resources/jhimages/gobook.png"></a>
+		src="${pageContext.request.contextPath}/resources/jh/jhimages/gobook.png"></a>
 	<a href="${pageContext.request.contextPath}/">메인화면으로</a>
 	<a href="${pageContext.request.contextPath}/seller">중고관리메인</a>
 	<a href="#">로그아웃</a>
