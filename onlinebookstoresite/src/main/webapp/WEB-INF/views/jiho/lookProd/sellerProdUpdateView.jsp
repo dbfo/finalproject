@@ -84,7 +84,11 @@
         }).open();
     }
 </script>
-<form method="post" action="#" enctype="multipart/form-data">
+<form method="post" action="${cp }/seller/updateOldbook" enctype="multipart/form-data">
+	<!-- 상품 수정 할 상품번호 -->
+	<input type="hidden" name="obnum" value="${obnum}">
+	
+	
 	<div id="prodInputForm">
 		<h2>상품수정</h2>
 		<!-- 카테고리등록 -->
@@ -100,11 +104,6 @@
 							<option value="${vo.bcatenum}"<c:if test="${vo.bcatenum==bbcatenum}">
 							selected</c:if>>${vo.bcataname}</option>
 						</c:forEach>
-						<!-- 안됨
-							<option value="${vo.bcatenum}">${vo.bcatenum } ${prodList.bcatenum}</option>
-						<c:if test="${vo.bcatenum == 100}">selected</c:if>
-						
-						 -->
 						</select>
 						<select name="scatename" class="selectbox">
 							<c:forEach var="svo" items="${slist}">
@@ -195,9 +194,9 @@
 		<div id="imginfo">
 			<p>상품이미지등록</p>
 			<table id="infotable4" class="table table-bordered">
-				<tr>
+				<tr id="thumbimg">
 					<td class="bgtd">대표(기본이미지)-필수</td>
-					<td>
+					<td id="test">
 						<span><c:if test="${imgList[0].thumbnail==1 }">${imgList[0].imgorgfilename }</c:if>&nbsp</span>
 						<input type="button" value="삭제" style="width: 80px;" class="thumbImgDelbt">
 					</td>
@@ -224,7 +223,7 @@
 								<input type="file" name="img3">
 							</c:when>
 							<c:otherwise>
-								<span>${imgList[2].imgorgfilename }&nbsp</span>
+								<span class="test">${imgList[2].imgorgfilename }&nbsp</span>
 								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
 							</c:otherwise>
 						</c:choose>
@@ -278,6 +277,18 @@
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
+	
+	// 이미지 삭제버튼 클릭
+	$(".thumbImgDelbt").click(function() {
+		$("#thumbimg").append("<input type='file' name='updateImg1' style='margin:10px;'>");
+		$(".thumbImgDelbt").remove();
+		$("#test").remove();
+	});
+	
+	
+	
+	
+	
 	/*
 	//숫자 입력폼 천단위 comma
 	function comma(str) { 

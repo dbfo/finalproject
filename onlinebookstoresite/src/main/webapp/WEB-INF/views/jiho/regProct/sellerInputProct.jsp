@@ -83,7 +83,7 @@
         }).open();
     }
 </script>
-<form method="post" action="${pageContext.request.contextPath}/seller/prodInsert" enctype="multipart/form-data">
+<form method="post" action="${cp}/seller/prodInsert" enctype="multipart/form-data">
 	<div id="prodInputForm">
 		<h2>상품등록</h2>
 		<!-- 카테고리등록 -->

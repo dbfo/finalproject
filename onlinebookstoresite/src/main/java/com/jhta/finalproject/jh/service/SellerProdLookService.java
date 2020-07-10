@@ -10,7 +10,7 @@ import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerOldbooksVo;
 
 @Service
-public class SellerProdLookService {
+public class SellerProdLookService implements SellerProdUpdate{
 	@Autowired
 	private SellerProdLookDao dao;
 	
@@ -35,5 +35,11 @@ public class SellerProdLookService {
 	public List<SellerImgVo> getProdImgList(int obnum){
 		List<SellerImgVo> list=dao.getProdImgList(obnum);
 		return list;
+	}
+	
+	//상품 수정을 위한 메소드
+	@Override
+	public int oldbookUpdate(SellerOldbooksVo vo) {
+		return dao.updateOldBooks(vo);
 	}
 }

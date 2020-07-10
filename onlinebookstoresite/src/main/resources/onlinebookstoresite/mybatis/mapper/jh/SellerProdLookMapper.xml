@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerProdLookMapper.jh">
+	<!-- //////////상품수정 관련 mapper//////////// -->
 	<!-- 중고책 등록한 상품 조회를 위한 MapperFile -->
 	<select id="prodAllSelect" parameterType="int" resultType="oldbooks">
 		select * from oldbooks where snum=#{snum} ORDER by obregdate desc
@@ -20,4 +21,11 @@
 	<select id="getProdImg" parameterType="int" resultType="img">
 		select * from img where bnum=#{bnum} order by thumbnail desc
 	</select>
+	<!-- 중고책 상품수정 -->
+	<update id="updateProdinfo" parameterType="oldbooks">
+		update oldbooks set selleraddr=#{selleraddr},obname=#{obname},obwriter=#{obwriter},
+		obpublisher=#{obpublisher},obpdate=#{obpdate},obstatus=#{obstatus},oborgprice=#{oborgprice},
+		obsaleprice=#{obsaleprice},obdetail=#{obdetail},obdelfee=#{obdelfee},scatenum=#{scatenum} 
+		where obnum=#{obnum}
+	</update>
 </mapper>

@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddStaticInitTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,24 +33,21 @@ public class SellerProdUpdateController {
 		try {
 			SimpleDateFormat dformat = new SimpleDateFormat("yyyy-MM-dd");// 날짜형식 지정
 			List<SellerBigcategoryVo> list = insertService.getBigcate();
-			List<SellerOldbooksVo> prodList = lookService.prodUpdateSelect(obnum);
-//			SellerOldbooksVo prodVo=prodList.get(0);
+			List<SellerOldbooksVo> prodList = lookService.prodUpdateSelect(obnum);//수정할 상품 정보
+			List<SellerImgVo> imgList=lookService.getProdImgList(obnum);//이미지
 			int bcatenum = lookService.getBiccatenum(obnum);
 			List<SellerSmallcategoryVo> smallList = insertService.getSmallcate(bcatenum);
 			int scatenum = prodList.get(0).getScatenum();
-			model.addAttribute("list", list);// 큰카테고리 리스트
-			model.addAttribute("slist", smallList);// 작은 카테고리 리스트
-//			model.addAttribute("prodList", prodVo);
-			model.addAttribute("bbcatenum", bcatenum);// 기존 큰카테고리
-			model.addAttribute("sscatenum", scatenum);// 기존 작은 카테고리
-//			String obpdate=dformat.parse(d);
-			//-----------이미지---------------------------------------
-			List<SellerImgVo> imgList=lookService.getProdImgList(obnum);
 			//-------------------------------------------------------
 			//주소api사용한 부분 문자열 나누기
 			String addrStr=prodList.get(0).getSelleraddr();
 			String[] arr=addrStr.split("\\|");
 			// ----------------기존 파라미터값들 보내주기-------------------
+			model.addAttribute("obnum", obnum);//상품번호
+			model.addAttribute("list", list);// 큰카테고리 리스트
+			model.addAttribute("slist", smallList);// 작은 카테고리 리스트
+			model.addAttribute("bbcatenum", bcatenum);// 기존 큰카테고리
+			model.addAttribute("sscatenum", scatenum);// 기존 작은 카테고리
 			model.addAttribute("getObname", prodList.get(0).getObname());// 기존도서명
 			model.addAttribute("getObwriter", prodList.get(0).getObwriter());// 기존저자
 			model.addAttribute("getObpublisher", prodList.get(0).getObpublisher());// 기존출판사
@@ -63,9 +62,38 @@ public class SellerProdUpdateController {
 			model.addAttribute("addr4", arr[3]);//주소4
 			model.addAttribute("addr5", arr[4]);//주소5
 			model.addAttribute("getObdetail", prodList.get(0).getObdetail());//상품상세설명
-			model.addAttribute("imgList", imgList);
+			model.addAttribute("imgList", imgList);//등록한 이미지 리스트
 			return ".seller.prodUpdateView";
 		} catch (Exception e) {
+			e.printStackTrace();
+			return ".seller.insertfail";
+		}
+	}
+	
+	//상품 수정하는 메소드
+	@RequestMapping("/seller/updateOldbook")
+	public String updateOldbook(HttpServletRequest req,HttpSession session) {
+		try {
+			SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
+			//-----------------------수정할 객체 담기------------------------
+			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
+					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
+			int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료
+			String obname=req.getParameter("obname"); //책이름
+			String obwriter=req.getParameter("obwriter"); //저자
+			String obpublisher=req.getParameter("obpublisher"); //출판사
+			Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일 
+			int obnum=Integer.parseInt(req.getParameter("obnum"));
+			int obstatus=Integer.parseInt(req.getParameter("obstatus")); //품질
+			int oborgprice=Integer.parseInt(req.getParameter("oborgprice")); //정가
+			int obsaleprice=Integer.parseInt(req.getParameter("obsaleprice"));  //판매가
+			int scatenum=Integer.parseInt(req.getParameter("scatename"));  //판매가
+			String obdetail=req.getParameter("obdetail"); //상품설명
+			SellerOldbooksVo vo=new SellerOldbooksVo(obnum, 0, selleraddr, obname, obwriter, obpublisher, obpdate, 
+					obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum, null);
+			lookService.oldbookUpdate(vo);
+			return ".seller.insertok";
+		}catch (ParseException e) {
 			e.printStackTrace();
 			return ".seller.insertfail";
 		}

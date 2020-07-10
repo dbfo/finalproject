@@ -1,8 +1,8 @@
 package com.jhta.finalproject.jh.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,5 +37,10 @@ public class SellerProdLookDao {
 	public List<SellerImgVo> getProdImgList(int obnum){
 		List<SellerImgVo> list=slqSession.selectList(NAMESPACE+".getProdImg", obnum);
 		return list;
+	}
+	
+	//상품수정 메소드
+	public int updateOldBooks(SellerOldbooksVo vo) {
+		return slqSession.update(NAMESPACE+".updateProdinfo", vo);
 	}
 }
