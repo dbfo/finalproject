@@ -194,51 +194,55 @@
 		<div id="imginfo">
 			<p>상품이미지등록</p>
 			<table id="infotable4" class="table table-bordered">
-				<tr id="thumbimg">
+				<tr id="selectimg1">
 					<td class="bgtd">대표(기본이미지)-필수</td>
-					<td id="test">
+					<td id="img1td">
 						<span><c:if test="${imgList[0].thumbnail==1 }">${imgList[0].imgorgfilename }</c:if>&nbsp</span>
-						<input type="button" value="삭제" style="width: 80px;" class="thumbImgDelbt">
+						<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(1)"
+						id="imgdelbt1">
 					</td>
 				</tr>
-				<tr>
+				<tr id="selectimg2">
 					<td class="bgtd">실물이미지-선택</td>
-					<td>
+					<td id="img2td">
 						<c:choose>
 							<c:when test="${imgList[1]==null  }">
 								<input type="file" name="img2">
 							</c:when>
 							<c:otherwise>
 								<span>${imgList[1].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(2)"
+								id="imgdelbt2">
 							</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
-				<tr>
+				<tr id="selectimg3">
 					<td class="bgtd">실물이미지-선택</td>
-					<td>
+					<td id="img3td">
 						<c:choose>
 							<c:when test="${imgList[2]==null  }">
 								<input type="file" name="img3">
 							</c:when>
 							<c:otherwise>
 								<span class="test">${imgList[2].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(3)"
+								id="imgdelbt3">
 							</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
-				<tr>
+				<tr id="selectimg4">
 					<td class="bgtd">실물이미지-선택</td>
-					<td>
+					<td id="img4td">
 						<c:choose>
 							<c:when test="${imgList[3]==null  }">
 								<input type="file" name="img4">
 							</c:when>
 							<c:otherwise>
 								<span>${imgList[3].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" class="imgDelbt">
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(4)"
+								id="imgdelbt4">
 							</c:otherwise>
 						</c:choose>
 					</td>
@@ -278,15 +282,12 @@
 		$("select[name=scatename] option").remove();
 	}
 	
-	// 이미지 삭제버튼 클릭
-	$(".thumbImgDelbt").click(function() {
-		$("#thumbimg").append("<input type='file' name='updateImg1' style='margin:10px;'>");
-		$(".thumbImgDelbt").remove();
-		$("#test").remove();
-	});
-	
-	
-	
+	function imgdel(num) {
+		console.log(num);
+		$("#selectimg"+num).append("<td><input type='file' name='updateImg"+num+"'></td>");
+		$("#imgdelbt"+num).remove();
+		$("#img"+num+"td").remove();
+	}
 	
 	
 	/*
