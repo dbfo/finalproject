@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jhta.yr.mybatis.mapper.PaymentMapper">
+	
+	<sql id="search">
+		
+	</sql>
+
 	<select id="allList" resultType="payment">
 		select bpayment.*, members.mname, books.btitle, refundhistory.type 
 		from bpayment, members, books, refundhistory 
