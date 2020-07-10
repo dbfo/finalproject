@@ -64,6 +64,13 @@
 	<definition name=".list2" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/cate2.jsp"/>
 	</definition>
+	<definition name=".cnovel" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catenovel.jsp"/>
+	</definition>
+	<definition name=".sclist" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/sclist.jsp"/>
+	</definition>
+	
 	
 	<definition name=".*.*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}/{3}.jsp"/>				

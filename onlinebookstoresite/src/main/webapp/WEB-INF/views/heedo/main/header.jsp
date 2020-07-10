@@ -47,7 +47,7 @@
 			<ul class="main-menu">
 				<li><a href="${cp}/list1">카테고리</a>
 					<ul class="sub-menu">
-						<li><a href="#">소설</a></li>
+						<li><a href="${cp }/cnovel">소설</a></li>
 						<li><a href="#">시/에세이</a></li>
 						<li><a href="#">인문</a></li>
 						<li><a href="#">경제/경영</a></li>

@@ -28,9 +28,9 @@
 <!-- 				</div> -->
 				<div id="search">
 					
-						<input type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
+						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 <!-- 						<button>검색</button> -->
-				<input type="submit" value="검색~">
+				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
 					
@@ -53,7 +53,7 @@
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a	href="#"> 
+							<a  style="font-size:20px; color:green;" href="#"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -86,10 +86,10 @@
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success">구매하기</button>
+			<button class="btn btn-success"><a href="#">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success">장바구니</button>
+			<button class="btn btn-success"><a href="#">장바구니</a></button>
 		</div>
 	</div>
 	</c:forEach>

@@ -18,6 +18,10 @@ public class BooksService {
 	public int count(HashMap<String, Object>map) {
 		return dao.count(map);
 	}
+	public int sbooklist1count(HashMap<String, Object> map) {
+		return dao.sbooklist1count(map);
+	}
+	
 	public List<BooksVo> list(HashMap<String, Object> map){
 		return dao.list(map);
 	}
@@ -42,6 +46,9 @@ public class BooksService {
 	}
 	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
 		return dao.sbooklist(map);
+	}
+	public List<BooksVo> catenovel(HashMap<String, Object> map){
+		return dao.catenovel(map);
 	}
 
 }

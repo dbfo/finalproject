@@ -19,6 +19,9 @@ public class BooksDao {
 	public int count(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".count",map);
 	}
+	public int sbooklist1count(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".sbooklist1count",map);
+	}
 	public List<BooksVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".list",map);
 	}
@@ -42,5 +45,8 @@ public class BooksDao {
 	}
 	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
 		return sqlSession.selectList(NAMESPACE + ".sbooklist1",map);
+	}
+	public List<BooksVo> catenovel(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".catenovel",map);
 	}
 }

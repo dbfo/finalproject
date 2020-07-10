@@ -23,7 +23,7 @@ public class ListController {
 	private BooksService service;
 
 	//전체 리스트
-	@GetMapping(value = "list1")
+	@GetMapping(value = "/list1")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
 			String keyword) {
@@ -32,9 +32,6 @@ public class ListController {
 		// 검색조건 Map에 담기
 		map.put("field", field);
 		map.put("keyword", keyword);
-
-		
-		
 
 		ModelAndView mv = new ModelAndView(".list1");
 		int totalRowCount = service.count(map);// 전체글의 갯수
@@ -55,7 +52,7 @@ public class ListController {
 	}
 	
 	// 베스트셀러 리스트..(bhit 기준)
-	@GetMapping(value = "list2")
+	@GetMapping(value = "/list2")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView bestlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
 			String keyword) {
@@ -84,20 +81,22 @@ public class ListController {
 	}
 	
 	// 검색했을때 리스트
-	@PostMapping(value = "/sbooklist")
+	@RequestMapping(value = "/sbooklist")
 	public ModelAndView sbooklist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
 			String keyword ,@RequestParam(value = "bcate2", defaultValue = "0")int bcate2,
 			@RequestParam(value = "scate2", defaultValue = "0")int scate2) {
 		System.out.println("scate:" + scate2);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ModelAndView mv = new ModelAndView(".list1");
-		map.put("field", scate2);
-		map.put("keyword", keyword);
-		System.out.println(field);
-		System.out.println(keyword);
-		int totalRowCount = service.count(map);// 전체글의 갯수
 		
-		if(field==null) { totalRowCount = 0; }
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ModelAndView mv = new ModelAndView(".sclist");
+		map.put("scatenum", scate2);
+		map.put("keyword", keyword);
+		System.out.println(scate2);
+		System.out.println(keyword);
+
+		int totalRowCount = service.sbooklist1count(map);// 전체글의 갯수
+		
+//		if(field==null) { totalRowCount = 0; }
 		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
 		// 검색조건 Map에 담기
@@ -106,18 +105,56 @@ public class ListController {
 		map.put("bcatenum", bcate2);
 		map.put("scatenum", scate2);
 		
-		List<BooksVo> sbooklist=service.sbooklist(map);
+		List<BooksVo> sbooklist1=service.sbooklist(map);
 		List<BigcateVo> list2=service.list2();
-			
-		System.out.println(map.get(field));
-		System.out.println(map.get(keyword));
+//			
+//		System.out.println(map.get(field));
+//		System.out.println(map.get(keyword));
+System.out.println("pu:" + pu);
+		mv.addObject("sbooklist1", sbooklist1);
+		mv.addObject("list2", list2);
+		mv.addObject("pu", pu);
+		mv.addObject("scatenum", scate2);
+		mv.addObject("keyword", keyword);
+		mv.addObject("bcatenum", bcate2);
+		System.out.println("==========================================================");
+		return mv;
+	}
+	
+	
+	//소설분류 리스트
+	@GetMapping(value = "/cnovel")
+	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
+	public ModelAndView cnovellist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
+			String keyword) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		// 검색조건 Map에 담기
+		
+		System.out.println(field);
+		System.out.println(keyword);
+		map.put("field", field);
+		map.put("keyword", keyword);
 
-		mv.addObject("list", sbooklist);
+		int totalRowCount = service.count(map);// 전체글의 갯수
+//		if(field==null) { totalRowCount = 0; }
+		ModelAndView mv = new ModelAndView(".cnovel");
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		List<BooksVo> catenovel = service.catenovel(map);
+		List<BigcateVo> list2=service.list2();
+		
+		mv.addObject("catenovel", catenovel);
+	
 		mv.addObject("list2", list2);
 		mv.addObject("pu", pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword", keyword);
+		
 		return mv;
 	}
+	
 	
 }

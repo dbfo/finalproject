@@ -78,12 +78,39 @@
 	(
 		select aa.*,rownum rnum from
 		(
-			select * from books where scatenum like '%'||#{scatenum}||'%' and btitle like '%'||#{keyword}||'%'
+			select * from books where
+			scatenum like '%'||#{scatenum}||'%' and btitle like '%'||#{keyword}||'%'
 			order by bnum asc
 		)aa
 	)
 	<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+	<select id="sbooklist1count" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from books
+	   <if test="scatenum!=null and scatenum!=''">
+			where scatenum like '%'||#{scatenum}||'%' and btitle like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
+
+
+<!--소설 카테고리 -->
+	<select id="catenovel" parameterType="hashmap" resultType="books"> 
+		
+<!-- 		select * from books where scatenum = #{scatenum} and btitle=#{keyword} -->
+<!-- 		order by bnum asc -->
+	select * from
+	(
+		select aa.*,rownum rnum from
+		(
+			select * from books where 
+			scatenum in (select scatenum from smallcategory where bcatenum = 100)
+			order by bnum asc
+		)aa
+	)
+	<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+
 	
 	<select id="detail" parameterType="int" resultType="books">
 		select * from books where bnum=#{bnum}

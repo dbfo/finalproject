@@ -28,9 +28,9 @@
 <!-- 				</div> -->
 				<div id="search">
 					
-						<input type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
+						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 <!-- 						<button>검색</button> -->
-				<input type="submit" value="검색~">
+				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
 					
@@ -43,11 +43,11 @@
 	
 	</c:if>
 	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${bestlist }">
+	<c:forEach  var="vo" items="${sbooklist1 }">
 	
 	<div id="listwrap">
 	<div id="image">
-				<a href="#" name="detaillink"> <img
+				<a href="#"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
 				</a>
 	</div>
@@ -86,10 +86,10 @@
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a style="color: white;" href="#">구매하기</a></button>
+			<button class="btn btn-success"><a href="#">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success"><a style="color: white;" href="#">장바구니</a></button>
+			<button class="btn btn-success"><a href="#">장바구니</a></button>
 		</div>
 	</div>
 	</c:forEach>
@@ -99,7 +99,7 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="sbooklist?pageNum=${i }&scatenum=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
@@ -107,7 +107,7 @@
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="sbooklist?pageNum=${i }&scatenum=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
@@ -116,11 +116,8 @@
 	 	</c:choose>
 	 	
 		</c:forEach>
-			
 	</div>
-
 </div>
-
 
 <script>
 
@@ -140,8 +137,8 @@
 			}
 		});
 
+
 	});
-	
+
 	
 </script>
-
