@@ -48,7 +48,7 @@
 	<div id="listwrap">
 	<div id="image">
 				<a href="#" name="detaillink"> <img
-				src="${cp }/resources/images/광규2.png" id="thumbnail">
+				src="${cp }/resources/images/JIMIN/광규2.png" id="thumbnail">
 				</a>
 	</div>
 		<div id="detail">
@@ -123,14 +123,13 @@
 
 	$("#bcate2").change(function(){
 		var bval=$(this).val();
-		$("#listwrap").empty();
 		$.ajax({
 			
 			url:"${cp}/sclist" ,
 			data:{bcatenum:bval},
 			success:function(data){
 				$("#scate2").empty();
-				$("#scate2").append("<option>---소 분류---</option>")
+// 				$("#scate2").append("<option>---소 분류---</option>")
 				$(data).each(function(i,mem){
 					$("#scate2").append("<option value='"+ mem.scatenum +"'>"+mem.scataname+"</option>")
 				});
@@ -139,6 +138,7 @@
 		});
 
 	});
-
+	
 	
 </script>
+

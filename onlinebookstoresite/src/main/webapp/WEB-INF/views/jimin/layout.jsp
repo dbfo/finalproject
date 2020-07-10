@@ -7,12 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>jimin/layout</title>
-<script type="text/javascript" src="${cp }/resources/js/jquery-3.5.1.js"></script>
-<link rel="stylesheet" href="${cp}/resources/css/bootstrap.css">
+<script type="text/javascript" src="${cp }/resources/JIMIN/js/jquery-3.5.1.js"></script>
+<link rel="stylesheet" href="${cp}/resources/JIMIN/css/bootstrap.css">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
-<link rel="stylesheet" href="${cp }/resources/cssjm/jimin.css">
-<script type="text/javascript" src="${cp }/resources/js/bootstrap.js"></script>
+<link rel="stylesheet" href="${cp }/resources/JIMIN/cssjm/jimin.css">
+<script type="text/javascript" src="${cp }/resources/JIMIN/js/bootstrap.js"></script>
 
 </head>
 <body>
