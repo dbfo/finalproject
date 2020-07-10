@@ -28,4 +28,12 @@
 		obsaleprice=#{obsaleprice},obdetail=#{obdetail},obdelfee=#{obdelfee},scatenum=#{scatenum} 
 		where obnum=#{obnum}
 	</update>
+	<!-- 중고책 이미지 등록 -->
+	<insert id="updateImg" parameterType="img">
+		insert into img values(#{imgorgfilename},SEQ_IMG_IMGNUM.nextval,#{imgsavefilename},#{thumbnail},2,#{bnum})
+	</insert>
+	<!-- 중고책 이미지 삭제 -->
+	<delete id="deleteImg" parameterType="int">
+		delete from img where bnum=#{bnum}
+	</delete>
 </mapper>

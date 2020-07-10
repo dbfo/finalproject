@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.finalproject.jh.service.SellerInsertService;
 import com.jhta.finalproject.jh.service.SellerProdLookService;
@@ -72,10 +73,11 @@ public class SellerProdUpdateController {
 	
 	//상품 수정하는 메소드
 	@RequestMapping("/seller/updateOldbook")
-	public String updateOldbook(HttpServletRequest req,HttpSession session) {
+	public String updateOldbook(HttpServletRequest req,HttpSession session,MultipartFile updateImg1,
+			MultipartFile updateImg2,MultipartFile updateImg3,MultipartFile updateImg4) {
 		try {
 			SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
-			//-----------------------수정할 객체 담기------------------------
+			//-----------------------수정할 객체 담기(수정한 이미지 없을 경우)------------------------
 			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
 					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
 			int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료

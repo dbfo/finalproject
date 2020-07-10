@@ -87,6 +87,15 @@
 <form method="post" action="${cp }/seller/updateOldbook" enctype="multipart/form-data">
 	<!-- 상품 수정 할 상품번호 -->
 	<input type="hidden" name="obnum" value="${obnum}">
+	<!-- 기존 등록된이미지 -->
+	<input type="hidden" name="beforeImgnum1" value="${imgList[0].imgnum}">
+	<input type="hidden" name="beforeImgsavename1" value="${imgList[0].imgsavefilename }">
+	<input type="hidden" name="beforeImgnum2" value="${imgList[1].imgnum}">
+	<input type="hidden" name="beforeImgsavename2" value="${imgList[1].imgsavefilename }">
+	<input type="hidden" name="beforeImgnum3" value="${imgList[2].imgnum}">
+	<input type="hidden" name="beforeImgsavename3" value="${imgList[2].imgsavefilename }">
+	<input type="hidden" name="beforeImgnum4" value="${imgList[3].imgnum}">
+	<input type="hidden" name="beforeImgsavename4" value="${imgList[3].imgsavefilename }">
 	
 	
 	<div id="prodInputForm">
@@ -281,7 +290,7 @@
 	function selectdel() {
 		$("select[name=scatename] option").remove();
 	}
-	
+	//이미지삭제버튼
 	function imgdel(num) {
 		console.log(num);
 		$("#selectimg"+num).append("<td><input type='file' name='updateImg"+num+"'></td>");
