@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,8 +19,8 @@ public class MembersDao {
 		this.session = session;
 	}
 
-	public List<MembersListVO> memList() {
-		return session.selectList(NAMESPACE + ".memList");
+	public List<MembersListVO> memList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE + ".memList", map);
 	}
 
 	public List<MembersListVO> ghostList() {

@@ -4,58 +4,61 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="memSearch container-fluid">
-	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 회원리스트
-	</div>
-	<table class="memSearchTable table">
-		<tr>
-			<th align="center" class="table-active">검색어</th>
-			<td colspan="3">
-				<select name="infoField">
-					<option value="mname" <c:if test="${infoField == 'mname' }">selected</c:if>>이름</option>
-					<option value="mid" <c:if test="${infoField == 'mid' }">selected</c:if>>아이디</option>
-					<option value="email" <c:if test="${infoField == 'email' }">selected</c:if>>이메일</option>
-					<option value="phone" <c:if test="${infoField == 'phone' }">selected</c:if>>휴대폰번호</option>
-				</select>
-				<input type="text" name="infoKeyword" value="${infoKeyword }" size="30">
-			</td>
-		</tr>
-
-		<tr>
-			<th align="center" class="table-active">주문일/결제완료일</th>
-			<td colspan="3">
-				<select name="payField">
-					<option value="boderdate">주문일</option>
-					<option value="bpaydate">결제완료일</option>
-				</select>
-				<input type="date" name="payKeyword">
-			</td>
-		</tr>
-
-		<tr>
-			<th align="center" class="table-active">나이</th>
-			<td>
-				<input type="text" name="" size="3"> 세 ~
-				<input type="text" name="" size="3"> 세
-			</td>
-			
-			<th align="center" class="table-active">가입일/기념일</th>
-			<td>
-				<select name="dateField">
-					<option value="">- 선택 -</option>
-					<option value="regdate">가입일</option>
-					<option value="birth">생일</option>
-				</select>
-				<input type="date" size="25" name="dateKeyword">
-			</td>
-		</tr>
-
-		<tr>
-			<td align="center" colspan="4">
-				<input type="submit" value="검  색">
-			</td>
-		</tr>
-	</table>
+	<form action="${pageContext.request.contextPath }/membersList" method="post">
+		<div class="card-header">
+			<i class="fas fa-table mr-1"></i> 회원리스트
+		</div>
+		<table class="memSearchTable table">
+			<tr>
+				<th align="center" class="table-active">검색어</th>
+				<td colspan="3">
+					<select name="infoField">
+						<option value="mname" <c:if test="${infoField == 'mname' }">selected</c:if>>이름</option>
+						<option value="mid" <c:if test="${infoField == 'mid' }">selected</c:if>>아이디</option>
+						<option value="email" <c:if test="${infoField == 'email' }">selected</c:if>>이메일</option>
+						<option value="phone" <c:if test="${infoField == 'phone' }">selected</c:if>>휴대폰번호</option>
+					</select>
+					<input type="text" name="infoKeyword" value="${infoKeyword }" size="30">
+				</td>
+			</tr>
+	
+			<tr>
+				<th align="center" class="table-active">주문일/결제완료일</th>
+				<td colspan="3">
+					<select name="payField">
+						<option value="boderdate" <c:if test="${payField == 'boderdate' }">selected</c:if>>주문일</option>
+						<option value="bpaydate" <c:if test="${payField == 'bpaydate' }">selected</c:if>>결제완료일</option>
+					</select>
+					<input type="date" name="payKeyword" value="${payKeyword }">
+				</td>
+			</tr>
+	
+			<tr>
+				<th align="center" class="table-active">나이</th>
+				<td>
+					<input type="text" name="" size="3"> 세 ~
+					<input type="text" name="" size="3"> 세
+				</td>
+				
+				<th align="center" class="table-active">가입일/기념일</th>
+				<td>
+					<select name="dateField">
+						<option value="">- 선택 -</option>
+						<option value="regdate" <c:if test="${dateField == 'regdate' }">selected</c:if>>가입일</option>
+						<option value="birth" <c:if test="${dateField == 'birth' }">selected</c:if>>생일</option>
+					</select>
+					<input type="date" size="25" name="dateKeyword" value="${dateKeyword }">
+				</td>
+			</tr>
+	
+			<tr>
+				<td align="center" colspan="4">
+					<input type="submit" value="검  색">
+				</td>
+			</tr>
+		</table>
+	</form>
+	
 </div>
 
 <!-- 리스트 -->

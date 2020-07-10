@@ -18,14 +18,20 @@ public class MembersListController {
 
 	// 일반회원
 	@RequestMapping("/membersList")
-	public ModelAndView memList(String infoField, String infoKeyword) {
+	public ModelAndView memList(String infoField, String infoKeyword, String payField, String payKeyword) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("infoField", infoField);
 		map.put("infoKeyword", infoKeyword);
-		//검색하다가 말았음 map에 담고???
+		map.put("payField", payField);
+		map.put("payKeyword", payKeyword);
+		
 		ModelAndView mv = new ModelAndView();
-		List<MembersListVO> list = service.memList();
+		List<MembersListVO> list = service.memList(map);
 		mv.addObject("list", list);
+		mv.addObject("infoField", infoField);
+		mv.addObject("infoKeyword", infoKeyword);
+		mv.addObject("payField", payField);
+		mv.addObject("payKeyword", payKeyword);
 		mv.setViewName(".membersList");
 		return mv;
 	}
