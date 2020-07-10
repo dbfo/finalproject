@@ -5,13 +5,25 @@
 	margin-left: 10px;
 	display: inline-block;
 }
+
+#bcate2{
+	height: 30px;
+}
+#scate2{
+	height: 30px;
+}
 #search{
 	width:280px;
 	position: relative;
+	float: right;
 	margin-right: 1px;
 	display: inline-block;
 	
 }
+#catesearch{
+	width:910px;
+}
+
 #main{
 	position: relative;
 	margin-left: 640px;
@@ -59,5 +71,6 @@ li{
 #buycartbtn{
 	width:200px;
 	display: inline-block;
-	margin-right: 1px;
+	margin-right: 100px;
+	float: right;
 }

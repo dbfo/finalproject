@@ -12,12 +12,12 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist">
-					
-					<select id="bcate2" name="bcate2">
-						<option>[---대 분류---]</option>
+					<form method="post" action="sbooklist" id="catesearch">
+					<br>
+					<select id="bcate2" name="bcate2" >
+						<option>[--- 대 분류 ---]</option>
 					<c:forEach var="vo" items="${list2 }">	
-						<option  value="${vo.bcatenum }">${vo.bcataname }</option>
+						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
 					>
@@ -48,7 +48,7 @@
 	<div id="listwrap">
 	<div id="image">
 				<a href="#" name="detaillink"> <img
-				src="${cp }/resources/images/JIMIN/광규2.png" id="thumbnail">
+				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
 				</a>
 	</div>
 		<div id="detail">
@@ -116,8 +116,11 @@
 	 	</c:choose>
 	 	
 		</c:forEach>
+			
 	</div>
+
 </div>
+
 
 <script>
 
