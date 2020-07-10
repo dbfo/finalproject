@@ -134,7 +134,7 @@
 				</tr>
 				<tr>
 					<td class="bgtd">출간일</td>
-					<td><input type="date" name="obpdate" value="2020-07-09"><span>&emsp;※필수입력</span></td>
+					<td><input type="date" name="obpdate" value="${getObpdate}"><span>&emsp;※필수입력</span></td>
 				</tr>
 			</table>
 		</div>
@@ -145,12 +145,12 @@
 				<tr>
 					<td class="bgtd">정가</td>
 					<td><input type="text" name="oborgprice" class="infotd2"
-						onkeyup="numberComma(this.value)" value="${prodList.oborgprice }"><span>&emsp;원</span></td>
+						onkeyup="numberComma(this.value)" value="${getOborgprice }"><span>&emsp;원</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
 					<td>
-					<input type="radio" name="obstatus" value="1" width="100">최상
+					<input type="radio" name="obstatus" value="1">최상
 					<input type="radio" name="obstatus" value="2">상
 					<input type="radio" name="obstatus" value="3">중
 					<input type="radio" name="obstatus" value="4">하

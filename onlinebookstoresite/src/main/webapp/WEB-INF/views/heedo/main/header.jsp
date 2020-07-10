@@ -69,6 +69,7 @@
 						<li><a href="#">반품/취소/환불</a></li>
 						<li><a href="#">나의계좌</a></li>
 						<li><a href="#">나의정보</a></li>
+						<li><a href="${cp }/seller">중고판매관리</a></li>
 						<li><a href="#">모임관리</a></li>
 					</ul></li>
 					<li><a href="#">고객센터</a></li>
