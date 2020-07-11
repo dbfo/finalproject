@@ -11,8 +11,8 @@ public class CartListVo {
 	private int bshipinfo; //배송료
 	private int stored; //재고
 	private int bcount;  //카트에 넣은 수량
-	private int cartnum;
-	private String imgsavefilename;
+	private int cartnum; //카트번호 -> 주문할때 카트번호 0이 아니면 장바구니에서 삭제해야함.
+	private String imgsavefilename; // 주문할때 / 장바구니에서 섬네일사진 가져옴..
 	
 	public CartListVo() {}
 	
