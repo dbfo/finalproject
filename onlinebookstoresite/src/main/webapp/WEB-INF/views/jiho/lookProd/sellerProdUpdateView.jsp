@@ -207,7 +207,7 @@
 					<td class="bgtd">대표(기본이미지)-필수</td>
 					<td id="img1td">
 						<span><c:if test="${imgList[0].thumbnail==1 }">${imgList[0].imgorgfilename }</c:if>&nbsp</span>
-						<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(1)"
+						<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(1,${imgList[0].imgnum})"
 						id="imgdelbt1">
 					</td>
 				</tr>
@@ -220,7 +220,7 @@
 							</c:when>
 							<c:otherwise>
 								<span>${imgList[1].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(2)"
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(2,${imgList[1].imgnum})"
 								id="imgdelbt2">
 							</c:otherwise>
 						</c:choose>
@@ -235,7 +235,7 @@
 							</c:when>
 							<c:otherwise>
 								<span class="test">${imgList[2].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(3)"
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(3,${imgList[2].imgnum})"
 								id="imgdelbt3">
 							</c:otherwise>
 						</c:choose>
@@ -250,7 +250,7 @@
 							</c:when>
 							<c:otherwise>
 								<span>${imgList[3].imgorgfilename }&nbsp</span>
-								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(4)"
+								<input type="button" value="삭제" style="width: 80px;" onclick="imgdel(4,${imgList[3].imgnum})"
 								id="imgdelbt4">
 							</c:otherwise>
 						</c:choose>
@@ -291,13 +291,23 @@
 		$("select[name=scatename] option").remove();
 	}
 	//이미지삭제버튼
-	function imgdel(num) {
-		console.log(num);
-		$("#selectimg"+num).append("<td><input type='file' name='updateImg"+num+"'></td>");
-		$("#imgdelbt"+num).remove();
-		$("#img"+num+"td").remove();
+	function imgdel(num,imgnum) {
+		var imgresult=confirm('이미지를 삭제하시겠습니까?');
+		if(imgresult){
+			$.ajax({
+				url:"${cp}/seller/delimg?imgnum="+imgnum,
+				dataType:"json",
+				success:function(data){
+					alert('이미지가 삭제되었습니다!');
+				}
+			});
+			$("#selectimg"+num).append("<td><input type='file' name='updateImg"+num+"'></td>");
+			$("#imgdelbt"+num).remove();
+			$("#img"+num+"td").remove();
+		}else{
+			return;
+		}
 	}
-	
 	
 	/*
 	//숫자 입력폼 천단위 comma

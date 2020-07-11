@@ -42,4 +42,22 @@ public class SellerProdLookService implements SellerProdUpdate{
 	public int oldbookUpdate(SellerOldbooksVo vo) {
 		return dao.updateOldBooks(vo);
 	}
+	
+	//상품+이미지수정을 위한 메소드
+	@Override
+	public int oldbookAndImgUpdate(SellerOldbooksVo vo, List<SellerImgVo> list) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	//이미지삭제 메소드
+	public int delimg(int imgnum) {
+		return dao.delimg(imgnum);
+	}
+	
+	//삭제할 이미지 정보 가져오기
+	public SellerImgVo getdelImginfo(int imgnum) {
+		SellerImgVo vo=dao.getdelImginfo(imgnum);
+		return vo;
+	}
 }

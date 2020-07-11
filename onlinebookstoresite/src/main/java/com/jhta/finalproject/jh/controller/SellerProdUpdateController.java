@@ -1,5 +1,6 @@
 package com.jhta.finalproject.jh.controller;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,10 +9,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.finalproject.jh.service.SellerInsertService;
@@ -78,26 +81,50 @@ public class SellerProdUpdateController {
 		try {
 			SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
 			//-----------------------수정할 객체 담기(수정한 이미지 없을 경우)------------------------
-			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
-					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
-			int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료
-			String obname=req.getParameter("obname"); //책이름
-			String obwriter=req.getParameter("obwriter"); //저자
-			String obpublisher=req.getParameter("obpublisher"); //출판사
-			Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일 
-			int obnum=Integer.parseInt(req.getParameter("obnum"));
-			int obstatus=Integer.parseInt(req.getParameter("obstatus")); //품질
-			int oborgprice=Integer.parseInt(req.getParameter("oborgprice")); //정가
-			int obsaleprice=Integer.parseInt(req.getParameter("obsaleprice"));  //판매가
-			int scatenum=Integer.parseInt(req.getParameter("scatename"));  //판매가
-			String obdetail=req.getParameter("obdetail"); //상품설명
-			SellerOldbooksVo vo=new SellerOldbooksVo(obnum, 0, selleraddr, obname, obwriter, obpublisher, obpdate, 
-					obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum, null);
-			lookService.oldbookUpdate(vo);
-			return ".seller.insertok";
+			if(updateImg1.isEmpty() && updateImg2.isEmpty() && updateImg3.isEmpty() && updateImg4.isEmpty()) {
+				String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
+						req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
+				int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료
+				String obname=req.getParameter("obname"); //책이름
+				String obwriter=req.getParameter("obwriter"); //저자
+				String obpublisher=req.getParameter("obpublisher"); //출판사
+				Date obpdate=dformat.parse(req.getParameter("obpdate")); //출간일 
+				int obnum=Integer.parseInt(req.getParameter("obnum"));
+				int obstatus=Integer.parseInt(req.getParameter("obstatus")); //품질
+				int oborgprice=Integer.parseInt(req.getParameter("oborgprice")); //정가
+				int obsaleprice=Integer.parseInt(req.getParameter("obsaleprice"));  //판매가
+				int scatenum=Integer.parseInt(req.getParameter("scatename"));  //판매가
+				String obdetail=req.getParameter("obdetail"); //상품설명
+				SellerOldbooksVo vo=new SellerOldbooksVo(obnum, 0, selleraddr, obname, obwriter, obpublisher, obpdate, 
+						obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum, null);
+				lookService.oldbookUpdate(vo);
+				return ".seller.insertok";
+			}else {
+				//----------------수정한 이미지가 있는 경우-------------------------------------
+				return null;
+			}
 		}catch (ParseException e) {
 			e.printStackTrace();
 			return ".seller.insertfail";
+		}
+	}
+	
+	//이미지삭제하는 메소드
+	@RequestMapping("/seller/delimg")
+	@ResponseBody
+	public void delimg(int imgnum,HttpSession session) {
+		System.out.println("이미지넘:"+imgnum);
+		SellerImgVo vo= lookService.getdelImginfo(imgnum);
+		String delname=vo.getImgsavefilename();
+		String uploadpath=session.getServletContext().getRealPath("/resources/jh/jhobupload");
+		File file=new File(uploadpath+"\\"+delname);
+		file.delete();//파일삭제
+		int n=lookService.delimg(imgnum);//이미지삭제
+		JSONObject json=new JSONObject();
+		if(n>0) {
+			json.put("code", "success");
+		}else {
+			json.put("code", "error");
 		}
 	}
 }
