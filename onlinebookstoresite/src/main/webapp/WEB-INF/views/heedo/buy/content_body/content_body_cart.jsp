@@ -64,7 +64,7 @@
 				var total_value="0";
 				var total_point="0";
 				var datalength=$(data).length
-				if(datalength==0){
+				if(datalength==0){ 
 					var tableapp="<tr>"
 								+"<td colspan='8' align='center'><strong><span>장바구니에 담긴 상품이 없습니다.</span></strong></td>"
 					$("tbody").append(tableapp);

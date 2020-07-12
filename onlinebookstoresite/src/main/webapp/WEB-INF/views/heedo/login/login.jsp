@@ -23,15 +23,17 @@
 			<div class="card login-card">
 				<div class="row no-gutters">
 					<div class="col-md-5">
+						
 						<img src="${cp }/resources/hd/loginForm/images/imgtest1.jpg"
-							alt="login" class="login-card-img">
+							alt="login" class="login-card-img"></a>
 					</div>
 					<div class="col-md-7">
 
 						<div class="card-body">
 							<div class="brand-wrapper">
+								<a href="${cp }/">
 								<img src="${cp }/resources/hd/img/logo2.jpg" alt="logo"
-									class="logo" style="width: 160px; height: auto;">
+									class="logo" style="width: 200px; height: auto;"></a>
 							</div>
 							<ul class="nav nav-tabs">
 								<li class="nav-item"><a class="nav-link active"
@@ -88,7 +90,7 @@
 									</form>
 									<a href="#!" class="forgot-password-link">주문번호를 잊어버리셨습니까?</a>
 									<p class="login-card-footer-text">
-										회원이시라면  <a href="#!" class="text-reset">로그인해주세요</a>
+										잊어버리셨다면  <a href="#!" class="text-reset"> 주문번호 찾기!</a>
 									</p>
 									<nav class="login-card-footer-nav">
 										<a href="#!">Terms of use.</a> <a href="#!">Privacy policy</a>

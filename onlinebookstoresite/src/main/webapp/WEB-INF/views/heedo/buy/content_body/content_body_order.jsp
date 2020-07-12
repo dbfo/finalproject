@@ -26,3 +26,6 @@
 		</tr>
 	</tfoot>
 </table>
+<script type="text/javascript">
+	
+</script>
