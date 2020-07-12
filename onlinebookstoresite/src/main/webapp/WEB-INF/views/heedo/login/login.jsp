@@ -23,7 +23,7 @@
           <div class="col-md-7">
             <div class="card-body">
               <div class="brand-wrapper">
-                <img src="${cp }/resources/hd/img/logo2.jpg" alt="logo" class="logo" style="width:126px;height:auto;">
+                <img src="${cp }/resources/hd/img/logo2.jpg" alt="logo" class="logo" style="width:160px;height:auto;">
               </div>
               <p class="login-card-description">로그인</p>
               <form action="#!">
