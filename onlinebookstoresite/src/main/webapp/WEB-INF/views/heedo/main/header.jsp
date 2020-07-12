@@ -27,7 +27,7 @@
 				<div class="col-xl-4 col-lg-5">
 					<div class="user-panel">
 						<div class="up-item">
-							<i class="flaticon-profile"></i><a href="#">로그인</a> / <a
+							<i class="flaticon-profile"></i><a href="${cp }/login">로그인</a> / <a
 								href="#">회원가입</a>
 						</div>
 						<div class="up-item">
