@@ -8,7 +8,7 @@
 	<sql id="search">
 		
 <!-- 		주문번호, 주문자 -->
-		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(pfield)">
+		<if test="pfield != null and pfield != ''">
 			and 
 			<choose>
 				<when test="pfield == 'bpaynum'">
@@ -19,6 +19,11 @@
 				</otherwise>
 			</choose>
 			like '%'||#{pkeyword}||'%'
+		</if>		
+
+<!-- 주문일, 결제일 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(tfield)">
+			 and ${tfield} BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate})
 		</if>		
 
 <!-- 		책제목, 첵 번호 -->
@@ -70,11 +75,12 @@
 	</sql>
 
 	<select id="allList" resultType="payment" parameterType="hashmap">
-		select bpayment.*, members.mname, books.btitle, refundhistory.type 
-		from bpayment, members, books, refundhistory 
-		where bpayment.mnum=members.mnum 
-		and bpayment.bnum = books.bnum and btype = 1
-		and bpayment.bpaynum = refundhistory.bpaynum(+)
+	  	select bpayment.*, paymentbook.*, members.mname, books.btitle, refundhistory.type
+	    from bpayment, paymentbook, members, books, refundhistory
+	    where bpayment.bpaynum = paymentbook.bpaynum
+	    and members.mnum = bpayment.mnum
+	    and paymentbook.bnum = books.bnum
+	    and bpayment.bpaynum = refundhistory.bpaynum(+)
 		<include refid="search"/>
 	</select>
 	

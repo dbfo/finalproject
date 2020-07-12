@@ -22,7 +22,7 @@ public class TotalOrderManegeController {
 	
 	@RequestMapping("/totalOrder")
 	public String ordersearch(Model model, String pfield, String  pkeyword,
-			String tfield, String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
+			String tfield, String startDate, String endDate ,String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
 
 //		주문번호, 주문자명		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -32,6 +32,12 @@ public class TotalOrderManegeController {
 		
 //		주문일, 결제일
 		System.out.println(tfield);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		map.put("tfield",tfield);
+		map.put("startDate",startDate);
+		map.put("endDate",endDate);
 		
 		
 //		책제목, 책번호
@@ -54,17 +60,12 @@ public class TotalOrderManegeController {
 		}
 		
 //		입금상태
-		System.out.println(payType);
 		map.put("payType",payType);
 		
 //		회원타입(mname)
 		map.put("mType",mType);
 		
 		List<PaymentVo> list = service.allList(map);
-		
-		for (PaymentVo vo : list) {
-			System.out.println(vo);
-		}
 		
 		model.addAttribute("list", list);
 		return ".totalOrder";

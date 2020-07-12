@@ -10,6 +10,8 @@ public class ShipManageController {
 	@Autowired
 	@RequestMapping("/ship")
 	public String goShip() {
+		
+		
 		return ".ship";
 	}
 }

@@ -4,7 +4,7 @@
 
 <div class="container-fluid ">
 	<h2>전체주문관리</h2>
-	<form action="${pageContext.request.contextPath }/totalOrder" method = "post">
+	<form action="${pageContext.request.contextPath }/totalOrder" method = "post" id="searchform">
 		<table class="table searchbox">
 			<tr>
 				<th class="table-active">검색어</th>
@@ -38,8 +38,8 @@
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">
 						</div>
 						<div>
-							<input type="date" name = "startDate">  &nbsp;~ &nbsp;
-							<input type="date" name = "endDate">
+							<input type="date" name = "startDate" id = "startDate">  &nbsp;~ &nbsp;
+							<input type="date" name = "endDate" id = "endDate">
 						</div>
 					</div>
 				</td>
@@ -139,11 +139,29 @@
 	
 	})
 	
+	$(function(){
+		//input date 값 검사
+		$('input[type=date]').on('change',getDate)
+		
+		$('#searchform').submit(getDate)
+		
+		function getDate(){
+			var startD = $('#startDate').val();
+			var endD = $('#endDate').val();
+			var startresult = startD.replace(/-/g,'');
+			var endresult = endD.replace(/-/g,'');
+			if(startresult - endresult > 0){
+				console.log("ggggg");
+				alert('날짜를 다시선택해주세요....')
+				return false;
+			}else{
+				return true;
+			}
+			
+		}
+	})
+
 	
-	//input date 값 검사
-// 	$('input[type=date]').on('change',function(){
-// 		var startD = $('#')
-// 	})
 	
 
 </script>
