@@ -9,9 +9,27 @@
 		<if test="obsalestatus!=null and obsalestatus != 3 and obsalestatus !=''">
 			and obsalestatus=#{obsalestatus}
 		</if>
-		<if test="field!=null and field!=''">
-			and ${field} like '%'||#{keyword}||'%'
+		<if test='field!=null and field!=""'>
+			<choose>
+				<when test='field=="0"'>
+					and obpublisher like '%'||#{keyword}||'%' 
+					or obname like '%'||#{keyword}||'%' 
+					or obwriter like '%'||#{keyword}||'%'
+				</when>
+				<when test='field=="obname"'>
+					and obname like '%'||#{keyword}||'%'
+				</when>
+				<when test='field=="obwriter"'>
+					and obwriter like '%'||#{keyword}||'%'
+				</when>
+				<when test='field=="obpublisher"'>
+					and obpublisher like '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</if>
+		<!-- 
+		<if test="field!=null and field!=''">
+		</if> -->
 		<if test="startDay!=null and startDay!=''">
 			<![CDATA[
 				and obregdate >= to_date(#{startDay}) and obregdate <= to_date(#{endDay})+0.99999
