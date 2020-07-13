@@ -1,5 +1,6 @@
 package com.jhta.finalproject.jh.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ public class SellerProdLookService implements SellerProdUpdate{
 	private SellerProdLookDao dao;
 	
 	//등록한 중고책상품 전체조회
-	public List<SellerOldbooksVo> allList(int snum){
-		List<SellerOldbooksVo> list=dao.allList(snum);
+	public List<SellerOldbooksVo> allList(HashMap<String, Object> map){
+		List<SellerOldbooksVo> list=dao.allList(map);
 		return list;
+	}
+	//글갯수 구하기
+	public int oldbookPageCount(HashMap<String, Object> map) {
+		return dao.oldbookPageCount(map);
 	}
 	
 	

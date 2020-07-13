@@ -4,10 +4,48 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerProdLookMapper.jh">
 	<!-- //////////상품수정 관련 mapper//////////// -->
-	<!-- 중고책 등록한 상품 조회를 위한 MapperFile -->
-	<select id="prodAllSelect" parameterType="int" resultType="oldbooks">
-		select * from oldbooks where snum=#{snum} ORDER by obregdate desc
+	<!-- 전체 중고책 등록한 상품 조회를 위한 MapperFile -->
+	<sql id="sCount">
+		<if test="obsalestatus!=null and obsalestatus != '' ">
+			and obsalestatus=#{obsalestatus}
+		</if>
+		<if test="field!=null and field!=''">
+			and ${field} like '%'||#{keyword}||'%'
+		</if>
+		<if test="startDay!=null and startDay!=''">
+			<![CDATA[
+				and obregdate >= to_date('#{startDay}') and obregdate <= to_date('#{endDay}')+0.99999
+			]]>
+		</if>
+	</sql>
+	<!-- 총 글의 갯수 -->
+	<select id="oldbookPageCount" parameterType="hashmap" resultType="int">
+	 	select NVL(count(*),0) cunt from oldbooks where snum=#{snum} 
+	 	<include refid="sCount"/>
+	 	ORDER by obregdate desc
+	 </select>
+	
+	<select id="prodAllSelect" parameterType="hashmap" resultType="oldbooks">
+		select *
+			from (select ob.*,rownum rnum from (select * from oldbooks where snum=1 order by obnum desc) ob) book
+		<![CDATA[
+			where rnum>=#{startRow} and rnum <=#{endRow}
+		]]>
+			<include refid="sCount"></include>
+		ORDER by obregdate desc
+		<!-- 
+		select *
+			from (select ob.*,rownum rnum from (select * from oldbooks where snum=1 order by obnum desc) ob) book
+			where rnum>=1 and rnum <=5 
+			
+			and obsalestatus=0 
+			<
+			and obname like '%t%' 
+			and obregdate >= to_date('2020-07-01') and obregdate <= to_date('2020-07-13')+0.99999
+		
+		 -->
 	</select>
+	
 	<!-- 수정할 상품정보 가져오기 -->
 	<select id="prodUpdateSelect" parameterType="int" resultType="oldbooks">
 		select * from oldbooks where obnum=#{obnum}
@@ -54,4 +92,14 @@
 	<select id="delImgInfo" parameterType="int" resultType="img">
 		select * from img where bnum=#{bnum}
 	</select>
+	
+	
+	<!-- =============상품조회/수정 페이징처리 관련============ -->
+	<!-- 
+	<select id="oldbookSerch" parameterType="hashmap" resultType="oldbook">
+		
+	</select>
+		
+	 
+	 -->
 </mapper>

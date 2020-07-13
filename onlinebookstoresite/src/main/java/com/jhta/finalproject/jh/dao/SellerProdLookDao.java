@@ -1,5 +1,6 @@
 package com.jhta.finalproject.jh.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,8 +18,8 @@ public class SellerProdLookDao {
 	private final String NAMESPACE="com.jhta.mybatis.mapper.SellerProdLookMapper.jh";
 	
 	//전체 등록한 상품 조회
-	public List<SellerOldbooksVo> allList(int snum){
-		List<SellerOldbooksVo> list=slqSession.selectList(NAMESPACE+".prodAllSelect", snum);
+	public List<SellerOldbooksVo> allList(HashMap<String, Object> map){
+		List<SellerOldbooksVo> list=slqSession.selectList(NAMESPACE+".prodAllSelect", map);
 		return list;
 	}
 	
@@ -72,6 +73,10 @@ public class SellerProdLookDao {
 	public List<SellerImgVo> delImglist(int obnum){
 		List<SellerImgVo> list=slqSession.selectList(NAMESPACE+".delImgInfo", obnum);
 		return list;
+	}
+	//글갯수 구하기
+	public int oldbookPageCount(HashMap<String, Object> map) {
+		return slqSession.selectOne(NAMESPACE+".oldbookPageCount", map);
 	}
 		
 }
