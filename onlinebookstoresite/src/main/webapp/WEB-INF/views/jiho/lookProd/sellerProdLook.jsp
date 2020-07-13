@@ -51,9 +51,7 @@
 		background-color: silver;
 	}
 </style>
-<script type="text/javascript">
-	
-</script>
+<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <div id="sellerProdLook">
 	<div><h2>상품조회/수정페이지</h2></div>
 	<form action="">
@@ -136,7 +134,7 @@
 						<td>
 							<c:choose>
 								<c:when test="${vo.obsalestatus==0}">
-									<a href="${pageContext.request.contextPath}/seller/prodUpdateView?obnum=${vo.obnum}">
+									<a href="${cp}/seller/prodUpdateView?obnum=${vo.obnum}">
 									<input type="button" value="수정" class="btn btn-primary"></a>
 								</c:when>
 								<c:otherwise>
@@ -147,7 +145,8 @@
 						<td>
 							<c:choose>
 								<c:when test="${vo.obsalestatus==0}">
-									<a href="${vo.obnum}"><input type="button" value="삭제" class="btn btn-secondary"></a>
+									<!-- <a href="${cp }/seller/oldbookDel?obnum=${vo.obnum}"></a> -->
+									<input type="button" value="삭제" class="btn btn-secondary" onclick="del(${vo.obnum})">
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="삭제" class="btn btn-secondary" disabled="disabled">
@@ -160,3 +159,17 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	
+	function del(obnum){
+		var result=confirm('상품을 삭제하시겠습니까?');
+		if(result==true){
+			location.href="${cp }/seller/oldbookDel?obnum="+obnum;
+		}else{
+			return;
+		}
+	}
+	
+	
+</script>

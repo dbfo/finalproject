@@ -59,4 +59,19 @@ public class SellerProdLookDao {
 	public int updateImg(SellerImgVo vo) {
 		return slqSession.insert(NAMESPACE+".updateImg", vo);
 	}
+	//---------------------중고책 삭제관련------------------
+	//중고책 상품 삭제하기
+	public int oldbookDel(int obnum) {
+		return slqSession.delete(NAMESPACE+".oldbookDel", obnum);
+	}
+	//중고책 상품 이미지 삭제
+	public int oldbookImgDel(int obnum) {
+		return slqSession.delete(NAMESPACE+".oldbookImgDel", obnum);
+	}
+	//삭제할 중고책 이미지 가져오기
+	public List<SellerImgVo> delImglist(int obnum){
+		List<SellerImgVo> list=slqSession.selectList(NAMESPACE+".delImgInfo", obnum);
+		return list;
+	}
+		
 }

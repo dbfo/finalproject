@@ -20,6 +20,9 @@ public class SellerProdLookService implements SellerProdUpdate{
 		return list;
 	}
 	
+	
+	//--------------중고책 수정-------------------------------//
+	
 	//상품 수정을 위한 조회
 	public List<SellerOldbooksVo> prodUpdateSelect(int obnum){
 		List<SellerOldbooksVo> list=dao.prodUpdateSelect(obnum);
@@ -48,7 +51,6 @@ public class SellerProdLookService implements SellerProdUpdate{
 	public int oldbookAndImgUpdate(SellerOldbooksVo vo, List<SellerImgVo> list) {
 		dao.updateOldBooks(vo);
 		for(int n=0;n<list.size();n++) {
-			System.out.println("서비스이미지사이즈:"+list.size());
 			dao.updateImg(list.get(n));
 		}
 		return 1;
@@ -64,4 +66,21 @@ public class SellerProdLookService implements SellerProdUpdate{
 		SellerImgVo vo=dao.getdelImginfo(imgnum);
 		return vo;
 	}
+
+	//------------중고 등록상품 삭제------------------//
+	
+	//상품삭제하는 메소드
+	@Override
+	public int oldbookDel(int obnum) {
+		dao.oldbookDel(obnum);
+		dao.oldbookImgDel(obnum);
+		return 1;
+	}
+	
+	//삭제할 중고책 이미지 가져오기
+	public List<SellerImgVo> delImglist(int obnum){
+		List<SellerImgVo> list=dao.delImglist(obnum);
+		return list;
+	}
+	
 }

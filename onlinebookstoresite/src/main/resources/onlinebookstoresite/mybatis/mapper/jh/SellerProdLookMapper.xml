@@ -40,4 +40,18 @@
 	<select id="getImginfo" parameterType="int" resultType="img">
 		select * from img where imgnum=#{imgnum}
 	</select>
+	
+	
+	<!-- ////////////////////상품삭제관련Mapper////////////////// -->
+	<!-- 중고책 상품 삭제 -->
+	<delete id="oldbookDel" parameterType="int">
+		delete from oldbooks where obnum=#{obnum} and obsalestatus=0
+	</delete>
+	<!-- 중고책번호로 이미지 삭제 -->
+	<delete id="oldbookImgDel" parameterType="int">
+		delete from img where bnum=#{bnum}
+	</delete>
+	<select id="delImgInfo" parameterType="int" resultType="img">
+		select * from img where bnum=#{bnum}
+	</select>
 </mapper>
