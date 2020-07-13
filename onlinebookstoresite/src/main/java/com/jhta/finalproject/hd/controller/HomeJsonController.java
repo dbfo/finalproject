@@ -74,6 +74,8 @@ public class HomeJsonController {
 		}
 		return jarr.toString();
 	}
+	
+	//로그인화면으로 이동..
 	@RequestMapping("/login")
 	public String loginPage() {
 		return "heedo/login/login";

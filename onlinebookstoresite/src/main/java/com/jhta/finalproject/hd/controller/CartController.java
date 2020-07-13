@@ -54,6 +54,8 @@ public class CartController {
 			json.put("stored", vo.getStored()); //재고 ( books 테이블 )
 			json.put("bcount", vo.getBcount());
 			int totalvalue=vo.getBprice()*vo.getBcount();
+			int totalpoint=vo.getBpoint()*vo.getBcount();
+			json.put("totalpoint", totalpoint);
 			json.put("totalvalue", totalvalue);
 			jarr.put(json);
 		}

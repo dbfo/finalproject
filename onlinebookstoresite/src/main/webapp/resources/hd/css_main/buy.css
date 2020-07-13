@@ -3,7 +3,7 @@
 	height:56px;
 	display:inline-block;
 }
-.cartlistimg{
+.cartlistimg, .orderlistimg{
 	width:100px;
 	height:auto;
 }

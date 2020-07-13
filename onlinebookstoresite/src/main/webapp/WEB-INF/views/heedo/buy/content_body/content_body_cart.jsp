@@ -73,19 +73,19 @@
 				}else{
 					$(data).each(function(index,item){
 						var tableapp="<tr>"
-									+"<td><input class='checkTd' style='zoom:1.5;' type='checkbox' checked='checked' data-id="+item.cartnum+"></td>"
+									+"<td><input class='checkTd' style='zoom:1.5;' type='checkbox' checked='checked' data-id="+item.cartnum+" data-totalpoint="+item.totalpoint+"></td>"
 									+"<td><img src="+item.imgsrc+" class='cartlistimg'></td>"
 									+"<td>"+item.btitle+"</td>"
 									+"<td>"+item.bprice+"</td>"
 									+"<td>"+item.bpoint+"</td>"
 									+"<td><input type='text' value="+item.bcount+" style='width:25px'><br><button type='button' class='btn btn-dark countbtn'"
-									+" data-id="+item.cartnum+">변경</button><input type='hidden' value="+item.bnum+"></td>"
+									+" data-id="+item.cartnum+">변경</button></td>"
 									+"<td><strong>"+item.totalvalue+"</strong></td>"
 									+"<td align='right'><button type='button' class='btn btn-dark orderbtn' data-id="+item.bnum+">주문하기</button><br>"
 									+"<button type='button' class='btn btn-light deletebtn' data-id="+item.cartnum+
 									" data-toggle='modal'>삭제하기</button></td></tr>";
 						total_value=Number(total_value)+Number(item.totalvalue);
-						total_point=Number(total_point)+Number(item.bpoint);	
+						total_point=Number(total_point)+Number(item.totalpoint);	
 						$("tbody").append(tableapp);
 					});	
 					//리스트 불러온후 총액/포인트값  맨하단에 넣기.
@@ -100,8 +100,7 @@
 							var tr=checkTd.parent().parent();
 							var td=tr.children();
 							var value=td.eq(6).text();
-						
-							var point=td.eq(4).text();
+							var point=checkTd.data("totalpoint");
 							var orgtotal_value=$("#total_value").text();
 							var orgtotal_point=$("#total_point").text();
 							var total_value=Number(orgtotal_value)+Number(value);
@@ -113,7 +112,7 @@
 							var tr=checkTd.parent().parent();
 							var td=tr.children();
 							var value=td.eq(6).text();
-							var point=td.eq(4).text();
+							var point=checkTd.data("totalpoint");
 							var orgtotal_value=$("#total_value").text();
 							var orgtotal_point=$("#total_point").text();
 							var total_value=Number(orgtotal_value)-Number(value);
@@ -127,20 +126,12 @@
 						var tr=$(this).parent().parent();
 						var td=tr.children();
 						var cartNumValue=td.eq(0).children().data('id');
-						var bcountValue=td.eq(5).children().val(); //수량..
-						var bnumValue=$(this).data('id');
 						var form=$('<form></form>');
 						form.attr('action','${cp}/pay/order');
 						form.attr('method','post');
 						form.appendTo('body');
-						var bcount=$("<input type='hidden' value="
-								+bcountValue+" name='bcount'>");
-						var bnum=$("<input type='hidden' value="
-								+bnumValue+" name='bnum'>");
 						var cartNum=$("<input type='hidden' value="
 								+cartNumValue+" name='cartNum'>");
-						form.append(bcount);
-						form.append(bnum);
 						form.append(cartNum);
 						form.submit();
 					});

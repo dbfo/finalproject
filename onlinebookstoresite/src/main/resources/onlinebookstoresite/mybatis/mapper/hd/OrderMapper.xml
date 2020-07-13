@@ -3,5 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.OrderMapper">
-	
+	<select id="orderlist" parameterType="hashmap" resultType="orderVo">
+		select btitle,book.bnum,bprice,bpoint, bshipinfo, imgsavefilename,cartNum,cart.bcount from
+		(select * from cart where btype=1 and cartnum in
+		<foreach collection="datalist" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+		)cart,
+		(select * from books) book,
+		(select * from img where THUMBNAIL=1)img
+		where cart.bnum=book.bnum and book.bnum=img.bnum
+	</select>
 </mapper>
+
