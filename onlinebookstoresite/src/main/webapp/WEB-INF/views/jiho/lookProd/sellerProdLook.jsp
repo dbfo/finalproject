@@ -82,10 +82,10 @@ input[type="text"] {
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
-					<td><input type="radio" name="regdate" value="0" checked>전체
-						<input type="radio" name="regdate" value="date">일자별&nbsp;&nbsp;&nbsp;
-						<input type="date" name="startDay"><span>&nbsp;~</span>
-						<input type="date" name="endDay"></td>
+					<td><input type="radio" name="regdate" value="0" <c:if test="${map.regdate==0 || map.regdate==null}">checked</c:if>>전체
+						<input type="radio" name="regdate" value="1" <c:if test="${map.regdate==1}">checked</c:if>>일자별&nbsp;&nbsp;&nbsp;
+						<input type="date" name="startDay" value="${map.startDay }"><span>&nbsp;~</span>
+						<input type="date" name="endDay" value="${map.endDay }"></td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록한 상품 검색</td>
@@ -93,14 +93,14 @@ input[type="text"] {
 						<div class="input-group mt-1 mb-1">
 							<div class="input-group-prepend">
 								<select name="field" class="form-control">
-									<option value="0">전체</option>
-									<option value="obname">상품명</option>
-									<option value="obwriter">저자</option>
-									<option value="obpublisher">출판사</option>
+									<option value="0" <c:if test="${map.field=='0' || map.field==null}">selected</c:if>>전체</option>
+									<option value="obname" <c:if test="${map.field=='obname'}">selected</c:if>>상품명</option>
+									<option value="obwriter" <c:if test="${map.field=='obwriter'}">selected</c:if>>저자</option>
+									<option value="obpublisher" <c:if test="${map.field=='obpublisher'}">selected</c:if>>출판사</option>
 								</select>
 							</div>
-							<input type="text" name="keyword" class="form-control"
-								placeholder="검색어를 입력하세요.">
+							<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요."
+							<c:if test="${map.keyword!=null || map.keyword!=''}">value="${map.keyword }"</c:if>>
 							<!-- 버튼 -->
 							<input type="submit" value="검색" class="btn btn-success"
 								id="list2bt"> <input type="button" value="초기화"

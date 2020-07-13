@@ -22,14 +22,19 @@ public class SellerProdLookController {
 	
 	//========================중고상품 조회/수정페이지로 이동========================
 	@RequestMapping("/seller/prodLook")
-	public String sellerProdLook(Model model,HttpServletRequest req,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
-			@RequestParam(value="obsalestatus",defaultValue = "3")int obsalestatus,@RequestParam(value="field",defaultValue = "")String field,
-			@RequestParam(value="keyword",defaultValue = "")String keyword,@RequestParam(value="startDay",defaultValue = "")String startDay,
-			@RequestParam(value="endDay",defaultValue = "")String endDay) {
+	public String sellerProdLook(Model model,HttpServletRequest req,
+			@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+			@RequestParam(value="obsalestatus",defaultValue = "3")int obsalestatus,
+			@RequestParam(value="field",defaultValue = "0")String field,
+			@RequestParam(value="keyword",defaultValue = "")String keyword,
+			@RequestParam(value="startDay",defaultValue = "")String startDay,
+			@RequestParam(value="endDay",defaultValue = "")String endDay,
+			@RequestParam(value="regdate",defaultValue = "0")int regdate) {
 		int snum=1;//판매자번호 추후 세션에서 받아오기
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		map.put("snum", snum);//판매자번호
 		map.put("obsalestatus",req.getParameter("obsalestatus"));
+		map.put("regdate", req.getParameter("regdate"));
 		map.put("startDay",req.getParameter("startDay"));
 		map.put("endDay",req.getParameter("endDay"));
 		map.put("field",req.getParameter("field"));
@@ -44,10 +49,10 @@ public class SellerProdLookController {
 		List<SellerOldbooksVo> list=service.allList(map);
 		
 		System.out.println("판매상태:"+req.getParameter("obsalestatus"));
-		System.out.println("등록일자:"+req.getParameter("regdate"));
+		System.out.println("등록일자 상태:"+req.getParameter("regdate"));
 		System.out.println("시작일자:"+req.getParameter("startDay"));
 		System.out.println("종료일자:"+req.getParameter("endDay"));
-		System.out.println("검색필드:"+req.getParameter("field"));
+		System.out.println("★검색필드:"+req.getParameter("field"));
 		System.out.println("키워드:"+req.getParameter("keyword"));
 		
 		model.addAttribute("list", list);

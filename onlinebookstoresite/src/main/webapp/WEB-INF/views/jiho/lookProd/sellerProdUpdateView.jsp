@@ -189,8 +189,7 @@
 						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr"
 							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr2 }">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr"
-							onclick="sample4_execDaumPostcode()" readonly="readonly" value="${addr3 }">
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr" value="${addr3 }">
 						<span id="guide" style="color:#999;display:none"></span><br>
 						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr" value=${addr4 }>
 						<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr"
@@ -430,6 +429,11 @@
 		if($("input[name=addr1]").val()===""){
 			alert("우편번호를 입력해주세요.");
 			$("input[name=addr1]").focus();
+			return false;
+		}
+		if($("input[name=addr3]").val()===""){
+			alert("지번 주소를 입력해주세요.");
+			$("input[name=addr3]").focus();
 			return false;
 		}
 		if($("input[name=addr4]").val()===""){
