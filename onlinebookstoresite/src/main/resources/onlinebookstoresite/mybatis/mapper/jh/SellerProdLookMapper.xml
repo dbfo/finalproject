@@ -5,8 +5,8 @@
 <mapper namespace="com.jhta.mybatis.mapper.SellerProdLookMapper.jh">
 	<!-- //////////상품수정 관련 mapper//////////// -->
 	<!-- 전체 중고책 등록한 상품 조회를 위한 MapperFile -->
-	<sql id="sCount">
-		<if test="obsalestatus!=null and obsalestatus != '' ">
+	<sql id="search">
+		<if test="obsalestatus!=null and obsalestatus != 3 and obsalestatus !=''">
 			and obsalestatus=#{obsalestatus}
 		</if>
 		<if test="field!=null and field!=''">
@@ -14,24 +14,23 @@
 		</if>
 		<if test="startDay!=null and startDay!=''">
 			<![CDATA[
-				and obregdate >= to_date('#{startDay}') and obregdate <= to_date('#{endDay}')+0.99999
+				and obregdate >= to_date(#{startDay}) and obregdate <= to_date(#{endDay})+0.99999
 			]]>
 		</if>
 	</sql>
 	<!-- 총 글의 갯수 -->
 	<select id="oldbookPageCount" parameterType="hashmap" resultType="int">
 	 	select NVL(count(*),0) cunt from oldbooks where snum=#{snum} 
-	 	<include refid="sCount"/>
-	 	ORDER by obregdate desc
+	 	<include refid="search"/>
 	 </select>
 	
 	<select id="prodAllSelect" parameterType="hashmap" resultType="oldbooks">
 		select *
-			from (select ob.*,rownum rnum from (select * from oldbooks where snum=1 order by obnum desc) ob) book
+			from (select ob.*,rownum rnum from (select * from oldbooks where snum=#{snum} order by obnum desc) ob) book
 		<![CDATA[
 			where rnum>=#{startRow} and rnum <=#{endRow}
 		]]>
-			<include refid="sCount"></include>
+			<include refid="search"></include>
 		ORDER by obregdate desc
 		<!-- 
 		select *

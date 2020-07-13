@@ -23,7 +23,7 @@ public class SellerProdLookController {
 	//========================중고상품 조회/수정페이지로 이동========================
 	@RequestMapping("/seller/prodLook")
 	public String sellerProdLook(Model model,HttpServletRequest req,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
-			@RequestParam(value="status",defaultValue = "")String status,@RequestParam(value="field",defaultValue = "")String field,
+			@RequestParam(value="status",defaultValue = "3")int status,@RequestParam(value="field",defaultValue = "")String field,
 			@RequestParam(value="keyword",defaultValue = "")String keyword,@RequestParam(value="startDay",defaultValue = "")String startDay,
 			@RequestParam(value="endDay",defaultValue = "")String endDay) {
 		int snum=1;//판매자번호 추후 세션에서 받아오기

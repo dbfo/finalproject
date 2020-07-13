@@ -75,7 +75,7 @@ input[type="text"] {
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
-					<td><input type="radio" name="status" checked>전체
+					<td><input type="radio" name="status" value="3" checked>전체
 						<input type="radio" name="status" value="0">판매중
 						<input type="radio" name="status" value="1">입금대기중
 						<input type="radio" name="status" value="2">판매완료</td>
