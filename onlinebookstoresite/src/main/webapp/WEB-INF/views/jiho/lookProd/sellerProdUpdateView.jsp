@@ -298,10 +298,11 @@
 				url:"${cp}/seller/delimg?imgnum="+imgnum,
 				dataType:"json",
 				success:function(data){
-					alert('이미지가 삭제되었습니다!');
+				//	alert(data+'이미지가 삭제되었습니다!');
 				}
 			});
-			$("#selectimg"+num).append("<td><input type='file' name='updateImg"+num+"'></td>");
+			var text="<td><input type='file' name='updateImg"+num+"'></td>";
+			$("#selectimg"+num).append(text);
 			$("#imgdelbt"+num).remove();
 			$("#img"+num+"td").remove();
 		}else{
@@ -437,7 +438,7 @@
 			return false;
 		}
 		/*썸네일 이미지*/
-		if($("input[name=img1]").val()===""){
+		if($("input[name=updateImg1]").val()===""){
 			alert("기본 이미지를 등록해주세요.");
 			$("input[name=img1]").focus();
 			return false;

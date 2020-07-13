@@ -54,4 +54,9 @@ public class SellerProdLookDao {
 		SellerImgVo vo=slqSession.selectOne(NAMESPACE+".getImginfo", imgnum);
 		return vo;
 	}
+	
+	//중고책 수정이미지 등록
+	public int updateImg(SellerImgVo vo) {
+		return slqSession.insert(NAMESPACE+".updateImg", vo);
+	}
 }

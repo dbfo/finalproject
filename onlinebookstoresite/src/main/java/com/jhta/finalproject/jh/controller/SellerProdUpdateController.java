@@ -1,10 +1,15 @@
 package com.jhta.finalproject.jh.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +18,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,11 +83,18 @@ public class SellerProdUpdateController {
 	//상품 수정하는 메소드
 	@RequestMapping("/seller/updateOldbook")
 	public String updateOldbook(HttpServletRequest req,HttpSession session,MultipartFile updateImg1,
-			MultipartFile updateImg2,MultipartFile updateImg3,MultipartFile updateImg4) {
+			MultipartFile updateImg2,MultipartFile updateImg3,MultipartFile updateImg4,MultipartFile img2,
+			MultipartFile img3,MultipartFile img4) {
 		try {
-			SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
-			//-----------------------수정할 객체 담기(수정한 이미지 없을 경우)------------------------
-			if(updateImg1.isEmpty() && updateImg2.isEmpty() && updateImg3.isEmpty() && updateImg4.isEmpty()) {
+				System.out.println("업데이트이미지1:"+updateImg1);
+				System.out.println("업데이트이미지2:"+updateImg2);
+				System.out.println("업데이트이미지3:"+updateImg3);
+				System.out.println("업데이트이미지4:"+updateImg4);
+				System.out.println("추가이미지2:"+img2);
+				System.out.println("추가이미지3:"+img3);
+				System.out.println("추가이미지4:"+img4);
+				
+				SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
 				String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
 						req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
 				int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료
@@ -97,14 +110,221 @@ public class SellerProdUpdateController {
 				String obdetail=req.getParameter("obdetail"); //상품설명
 				SellerOldbooksVo vo=new SellerOldbooksVo(obnum, 0, selleraddr, obname, obwriter, obpublisher, obpdate, 
 						obstatus, oborgprice, obsaleprice, obdetail, obdelfee, 0, 0, scatenum, null);
+				System.out.println("수정할 이미지 없을 경우 실행");
+		//		lookService.oldbookUpdate(vo);
+			//	return ".seller.insertok";
+			/*
+			if(updateImg1==null && updateImg2==null && updateImg3==null && updateImg4==null &&
+					img2.isEmpty() && img3.isEmpty() && img4.isEmpty() ) {
+				//-----------------------(수정한 이미지 없을 경우)------------------------
+				System.out.println("수정할 이미지 없을 경우 실행");
 				lookService.oldbookUpdate(vo);
 				return ".seller.insertok";
 			}else {
 				//----------------수정한 이미지가 있는 경우-------------------------------------
-				return null;
-			}
+				System.out.println("수정할 이미지 있는 경우 실행");
+				String upload=session.getServletContext().getRealPath("/resources/jh/jhobupload");//업로드 파일 경로명
+				List<SellerImgVo> imglist=new ArrayList<SellerImgVo>();
+				if(updateImg1!=null && !updateImg1.isEmpty()) {
+					System.out.println("1번실행");
+					String orgUdpateName1=updateImg1.getOriginalFilename();
+					String updateSaveName1=UUID.randomUUID()+"_"+orgUdpateName1;
+					InputStream fis=updateImg1.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName1);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg1=new SellerImgVo(orgUdpateName1, 0, updateSaveName1, 1, 2, obnum);
+					imglist.add(updateimg1);		
+				}
+				if(updateImg2!=null) {
+					System.err.println("2번");
+					String orgUdpateName2=updateImg2.getOriginalFilename();
+					String updateSaveName2=UUID.randomUUID()+"_"+orgUdpateName2;
+					InputStream fis=updateImg2.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName2);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg2=new SellerImgVo(orgUdpateName2, 0, updateSaveName2, 0, 2, obnum);
+					imglist.add(updateimg2);
+				}
+				if(updateImg3!=null) {
+					System.out.println("3번");
+					String orgUdpateName3=updateImg3.getOriginalFilename();
+					String updateSaveName3=UUID.randomUUID()+"_"+orgUdpateName3;
+					InputStream fis=updateImg3.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName3);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg3=new SellerImgVo(orgUdpateName3, 0, updateSaveName3, 0, 2, obnum);
+					imglist.add(updateimg3);
+				}
+				if(updateImg4!=null) {
+					System.out.println("4번");
+					String orgUdpateName4=updateImg4.getOriginalFilename();
+					String updateSaveName4=UUID.randomUUID()+"_"+orgUdpateName4;
+					InputStream fis=updateImg4.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName4);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg4=new SellerImgVo(orgUdpateName4, 0, updateSaveName4, 0, 2, obnum);
+					imglist.add(updateimg4);
+				}
+				if(img2!=null && !(img2.isEmpty())) {
+					System.out.println("5번");
+					String orgUdpateImg2=img2.getOriginalFilename();
+					String updateSaveImg2=UUID.randomUUID()+"_"+orgUdpateImg2;
+					InputStream fis=img2.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg2);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg2, 0, updateSaveImg2, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				if(img3!=null && !(img3.isEmpty())) {
+					System.out.println("6번");
+					String orgUdpateImg3=img3.getOriginalFilename();
+					String updateSaveImg3=UUID.randomUUID()+"_"+orgUdpateImg3;
+					InputStream fis=img3.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg3);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg3, 0, updateSaveImg3, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				if(img4!=null && !(img4.isEmpty())) {
+					System.out.println("7번");
+					String orgUdpateImg4=img4.getOriginalFilename();
+					String updateSaveImg4=UUID.randomUUID()+"_"+orgUdpateImg4;
+					InputStream fis=img4.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg4);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg4, 0, updateSaveImg4, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				
+				//수정할 상품정보+수정한 이미지
+				System.out.println("수정한이미지사이즈:"+imglist.size());
+				lookService.oldbookAndImgUpdate(vo, imglist);
+				return ".seller.insertok";
+			}*/
+				String upload=session.getServletContext().getRealPath("/resources/jh/jhobupload");//업로드 파일 경로명
+				List<SellerImgVo> imglist=new ArrayList<SellerImgVo>();
+				if(updateImg1!=null && !updateImg1.isEmpty()) {
+					System.out.println("1번실행");
+					String orgUdpateName1=updateImg1.getOriginalFilename();
+					String updateSaveName1=UUID.randomUUID()+"_"+orgUdpateName1;
+					InputStream fis=updateImg1.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName1);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg1=new SellerImgVo(orgUdpateName1, 0, updateSaveName1, 1, 2, obnum);
+					imglist.add(updateimg1);		
+				}
+				if(updateImg2!=null && !updateImg2.isEmpty()) {
+					System.err.println("2번");
+					String orgUdpateName2=updateImg2.getOriginalFilename();
+					String updateSaveName2=UUID.randomUUID()+"_"+orgUdpateName2;
+					InputStream fis=updateImg2.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName2);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg2=new SellerImgVo(orgUdpateName2, 0, updateSaveName2, 0, 2, obnum);
+					imglist.add(updateimg2);
+				}
+				if(updateImg3!=null && !updateImg3.isEmpty()) {
+					System.out.println("3번");
+					String orgUdpateName3=updateImg3.getOriginalFilename();
+					String updateSaveName3=UUID.randomUUID()+"_"+orgUdpateName3;
+					InputStream fis=updateImg3.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName3);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg3=new SellerImgVo(orgUdpateName3, 0, updateSaveName3, 0, 2, obnum);
+					imglist.add(updateimg3);
+				}
+				if(updateImg4!=null && !updateImg4.isEmpty()) {
+					System.out.println("4번");
+					String orgUdpateName4=updateImg4.getOriginalFilename();
+					String updateSaveName4=UUID.randomUUID()+"_"+orgUdpateName4;
+					InputStream fis=updateImg4.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveName4);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo updateimg4=new SellerImgVo(orgUdpateName4, 0, updateSaveName4, 0, 2, obnum);
+					imglist.add(updateimg4);
+				}
+				if(img2!=null && !(img2.isEmpty())) {
+					System.out.println("5번");
+					String orgUdpateImg2=img2.getOriginalFilename();
+					String updateSaveImg2=UUID.randomUUID()+"_"+orgUdpateImg2;
+					InputStream fis=img2.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg2);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg2, 0, updateSaveImg2, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				if(img3!=null && !(img3.isEmpty())) {
+					System.out.println("6번");
+					String orgUdpateImg3=img3.getOriginalFilename();
+					String updateSaveImg3=UUID.randomUUID()+"_"+orgUdpateImg3;
+					InputStream fis=img3.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg3);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg3, 0, updateSaveImg3, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				if(img4!=null && !(img4.isEmpty())) {
+					System.out.println("7번");
+					String orgUdpateImg4=img4.getOriginalFilename();
+					String updateSaveImg4=UUID.randomUUID()+"_"+orgUdpateImg4;
+					InputStream fis=img4.getInputStream();
+					FileOutputStream fos=
+							new FileOutputStream(upload+"\\"+updateSaveImg4);
+					FileCopyUtils.copy(fis, fos);
+					fis.close();
+					fos.close();
+					SellerImgVo imgvo=new SellerImgVo(orgUdpateImg4, 0, updateSaveImg4, 0, 2, obnum);
+					imglist.add(imgvo);
+				}
+				
+				//수정할 상품정보+수정한 이미지
+				System.out.println("수정한이미지사이즈:"+imglist.size());
+				lookService.oldbookAndImgUpdate(vo, imglist);
+				return ".seller.insertok";
 		}catch (ParseException e) {
 			e.printStackTrace();
+			return ".seller.insertfail";
+		}catch (IOException ie) {
+			ie.printStackTrace();
 			return ".seller.insertfail";
 		}
 	}

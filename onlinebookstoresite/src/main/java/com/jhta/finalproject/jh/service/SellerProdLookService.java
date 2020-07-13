@@ -46,8 +46,12 @@ public class SellerProdLookService implements SellerProdUpdate{
 	//상품+이미지수정을 위한 메소드
 	@Override
 	public int oldbookAndImgUpdate(SellerOldbooksVo vo, List<SellerImgVo> list) {
-		// TODO Auto-generated method stub
-		return 0;
+		dao.updateOldBooks(vo);
+		for(int n=0;n<list.size();n++) {
+			System.out.println("서비스이미지사이즈:"+list.size());
+			dao.updateImg(list.get(n));
+		}
+		return 1;
 	}
 	
 	//이미지삭제 메소드
