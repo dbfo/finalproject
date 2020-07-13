@@ -7,17 +7,17 @@
 	
 	<sql id="search">	
 <!-- 		주문번호, 주문자 -->
-		<if test="pfield != null and pfield != ''">
-			and 
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bfield)">
+			
 			<choose>
 				<when test="pfield == 'bpaynum'">
-					bpayment.${pfield} 
+					and bpayment.${pfield} like '%'||#{pkeyword}||'%'
 				</when>
-				<otherwise>
-					members.${pfield}
-				</otherwise>
+				<when test="pfield == 'mname'">
+					and members.${pfield} like '%'||#{pkeyword}||'%'
+				</when>
 			</choose>
-			like '%'||#{pkeyword}||'%'
+			
 		</if>		
 
 <!-- 주문일, 결제일 -->

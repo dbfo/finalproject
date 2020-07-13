@@ -17,12 +17,12 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-shipping-fast fa-3x"></i>
-				<span class = "title"><a href="#">배송 중  [${countList[2]}]</a></span>
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/shipping">배송 중  [${countList[2]}]</a></span>
 			</span>
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-clipboard-check fa-3x"></i>
-				<span class = "title"><a href="#">배송 완료  [${countList[3]}]</a></span>
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/completedShip">배송 완료  [${countList[3]}]</a></span>
 			</span>
 		</li>
 	</ul>

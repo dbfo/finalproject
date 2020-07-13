@@ -28,7 +28,7 @@ public class TotalOrderManegeController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pfield",pfield);
 		map.put("pkeyword",pkeyword);
-		
+		System.out.println("1pfield : "+pfield);
 		
 //		주문일, 결제일
 		

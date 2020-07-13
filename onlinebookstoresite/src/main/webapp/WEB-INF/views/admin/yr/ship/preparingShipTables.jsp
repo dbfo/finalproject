@@ -14,8 +14,8 @@
 					<thead>
 						<tr>
 							<th><input type="checkbox"></th>
-							<th>주문일(결제일)</th>
 							<th>주문번호</th>
+							<th>주문일(결제일)</th>
 							<th>주문자</th>
 							<th>운송장정보</th>
 							<th>책 제목</th>
@@ -26,23 +26,35 @@
 						</tr>
 					</thead>
 					<tbody>
+						
 						<c:forEach var="vo" items="${list }">
 							<tr>
-								<td><input type="checkbox"></td>
-								<td>${vo.borderdate}</td>
-								<td>${vo.bpaynum}</td>
-								<td>조인해서....이름가져와야하넹</td>
-								<td>조인해서...책 제목도 가져와야하넹</td>
-								<td>${vo.bfinalmoney}</td>
-								<!-- 								결제수단 -->
-								<c:choose>
-									<c:when test="${vo.methodpayment == 0 }">
-										<td>카드</td>
-									</c:when>
-									<c:when test="${vo.methodpayment == 1 }">
-										<td>무통장</td>
-									</c:when>
-								</c:choose>
+								<td rowspan="2"><input type="checkbox"></td>
+								<td rowspan="2">${vo.bpaynum}</td>
+								<td rowspan="2">${vo.borderdate}</td>
+								<td rowspan="2">${vo.mname }</td>
+								<td rowspan="1">
+									<select name="courier">
+										<option>--택배사 선택--</option>
+										<option>CJ대한통운</option>
+										<option>우체국</option>
+										<option>자체배송</option>
+									</select>
+									<br>
+									<input type="text" name = "transportNumber">
+									<input class = "btn btn-success btn-sm" type = "button" value = "저장" id = "saveBtn">
+								</td>
+								<td rowspan="1">${vo.btitle }</td>
+								<td rowspan="1">수량?????</td>
+								<td rowspan="1">판매가!!</td>
+								<td rowspan="2">${vo.bfinalmoney}</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									수령인 : <br>
+									전화번호 : <br>
+									주소 : <br>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

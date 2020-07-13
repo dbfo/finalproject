@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form action="${pageContext.request.contextPath }/ship" method="post">
+<form action="${pageContext.request.contextPath }/ship${path}" method="post">
 <table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>
@@ -8,6 +8,7 @@
 				<div class="form-group row">
 					<div class = "col-xs-2 ">
 						<select class="form-control" name = "pfield">
+							<option value =''>--선택--</option>
 							<option value="bpaynum">주문번호</option>
 							<option value="mname">주문자명</option>
 						</select>
@@ -23,7 +24,7 @@
 			<td colspan="3">
 				<div class = "row">
 					<select name = "tfield" class = "col form-control col-xs-2">
-						<option selected="selected">--선택--</option>
+						<option value =''>--선택--</option>
 						<option value="borderdate">주문일</option>
 						<option value="bpaydate">결제일</option>
 					</select>
@@ -33,8 +34,7 @@
 						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="seven" value = "7일">
 						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="month" value = "1개월">
 						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">
-					</div>
-					
+					</div>				
 					<div>
 						<input type="date" name = "startDate" id = "startDate">  &nbsp;~ &nbsp;
 						<input type="date" name = "endDate" id = "endDate">
@@ -49,7 +49,7 @@
 				<div class="form-group row">
 					<div class = "col-xs-2 ">
 						<select class="form-control" name = "bfield">
-							<option selected="selected">--선택--</option>
+							<option value =''>--선택--</option>
 							<option value="btitle">책 이름</option>
 							<option value="bnum">책 번호</option>
 						</select>
