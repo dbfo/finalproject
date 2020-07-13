@@ -55,7 +55,7 @@
 										</div>
 										<div class="form-group mb-4">
 											<label for="password" class="sr-only">비밀번호</label> <input
-												type="password" name="password" id="pwd"
+												type="password" name="password" id="password"
 												class="form-control" placeholder="***********">
 										</div>
 										<input name="login" id="login"
@@ -77,15 +77,15 @@
 									<form action="#!">
 										<div class="form-group">
 											<label for="email" class="sr-only">주문번호</label> <input
-												type="text" name="ordernum" id="ordernum" class="form-control"
+												type="text" name="id" id="id" class="form-control"
 												placeholder="주문번호를 입력하세요">
 										</div>
 										<div class="form-group mb-4">
 											<label for="password" class="sr-only">이메일</label> <input
-												type="email" name="email" id="email"
+												type="email" name="password" id="password"
 												class="form-control" placeholder="이메일을 입력하세요">
 										</div>
-										<input name="login" id="confirm"
+										<input name="login" id="login"
 											class="btn btn-block login-btn mb-4" type="button"
 											value="확인">
 									</form>
@@ -104,35 +104,9 @@
 			</div>
 		</div>
 	</main>
-	
+	<script src="${cp }/resources/hd/js/jquery-3.5.1.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="${cp }/resources/hd/js/bootstrap.min.js"></script>
 </body>
-<script src="${cp }/resources/hd/js/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="${cp }/resources/hd/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$("#login").click(function(){
-		var id=$("#id").val();
-		var pwd=$("#pwd").val();
-		if(id=='' ||pwd==''){
-			alert("아이디와 비밀번호를 적어주세요.")
-		}else{
-			$.ajax({
-				url:"/finalproject/loginCheck",
-				type: "post",
-				data:{id:id,pwd:pwd},
-				dataType:"json",
-				success:function(data){
-					if(data.result=="fail"){
-						alert("로그인 실패!")
-					}else{
-						window.location.href="/finalproject/";
-					}
-					
-				}
-			});
-		}
-		
-	});
-	
-</script>
 </html>

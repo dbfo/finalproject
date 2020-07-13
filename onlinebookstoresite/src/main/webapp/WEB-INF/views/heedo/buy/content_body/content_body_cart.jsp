@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="topButton" style="height:35px;">
-	<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm'>주문하기</button>
+	<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
 	<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>
 </div>
 <table class="table">
@@ -94,7 +94,6 @@
 					
 					//각행 체크버튼 체크/비체크시.
 					$(".checkTd").change(function(){ 
-					
 						if($(this).is(":checked")){
 							var checkTd=$(this)
 							var tr=checkTd.parent().parent();
@@ -158,6 +157,25 @@
 							}
 						});
 					});
+					//맨위 주문버튼 클릭시.
+					$("#orderTopBtn").click(function(){
+						var form=$('<form></form>');
+						form.attr('action','${cp}/pay/order');
+						form.attr('method','post');
+						form.appendTo('body');
+						var i=0;
+						$('.checkTd').each(function(){
+							if($(this).is(":checked")){
+								i++;
+								var cartNumValue=$(this).data('id')
+								var cartNum=$("<input type='hidden' value="
+										+cartNumValue+" name='cartNum'>");
+								form.append(cartNum);
+							}
+						});
+						form.submit();
+					});
+					
 					//맨위 삭제버튼클릭시...
 					$("#deleteTopBtn").click(function(){
 						var cartNum=[];
