@@ -75,10 +75,10 @@ input[type="text"] {
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
-					<td><input type="radio" name="status" value="3" checked>전체
-						<input type="radio" name="status" value="0">판매중
-						<input type="radio" name="status" value="1">입금대기중
-						<input type="radio" name="status" value="2">판매완료</td>
+					<td><input type="radio" name="obsalestatus" value="3" <c:if test="${map.obsalestatus==3 || map.obsalestatus==null}">checked</c:if>>전체
+						<input type="radio" name="obsalestatus" value="0" <c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중
+						<input type="radio" name="obsalestatus" value="1" <c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
+						<input type="radio" name="obsalestatus" value="2" <c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료</td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
