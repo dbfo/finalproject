@@ -31,9 +31,6 @@ public class TotalOrderManegeController {
 		
 		
 //		주문일, 결제일
-		System.out.println(tfield);
-		System.out.println(startDate);
-		System.out.println(endDate);
 		
 		map.put("tfield",tfield);
 		map.put("startDate",startDate);

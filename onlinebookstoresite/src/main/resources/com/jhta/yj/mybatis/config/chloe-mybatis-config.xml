@@ -31,5 +31,6 @@
 
 		<!-- 유래 -->
 		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/ShipMapper.xml" />
 	</mappers>
 </configuration>

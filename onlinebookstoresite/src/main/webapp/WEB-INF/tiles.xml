@@ -9,7 +9,6 @@
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/content.jsp" />
-		<put-attribute name="tables" value="" />
 		<put-attribute name="sidemanu"
 			value="/WEB-INF/views/admin/sidemanu.jsp" />
 		<put-attribute name="footer"
@@ -70,13 +69,32 @@
 		<put-attribute name="shipsearch"
 			value="/WEB-INF/views/admin/yr/ship/shipsearch.jsp" />
 		<put-attribute name="shiptables"
-			value="/WEB-INF/views/admin/yr/ship/shiptables.jsp" />
+			value="" />
 	</definition>
 
-	<definition name=".ship" extends=".main">
-		<put-attribute name="content" value=".admin.ship" />
+<!-- 	입금전 -->
+	<definition name=".admin.beforeDeposit" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/beforeDepositTables.jsp" />
 	</definition>
 
+<!-- 	배송 준비중 -->
+	<definition name=".admin.preparingShip" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/preparingShipTables.jsp" />
+	</definition>
+
+<!-- 	배송 중, 배송완료 -->
+	<definition name=".admin.shipInfo" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/shipInfoTables.jsp" />
+	</definition>
+
+
+	<definition name=".ship.*" extends=".main">
+		<put-attribute name="content" value=".admin.{1}" />
+	</definition>
+	
 
 	<!-- cs관리 -->
 	<definition name=".admin.cs"

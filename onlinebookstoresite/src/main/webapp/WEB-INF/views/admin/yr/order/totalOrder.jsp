@@ -12,6 +12,7 @@
 					<div class="form-group row">
 						<div class = "col-xs-2 ">
 							<select class="form-control" name = "pfield">
+								<option selected="selected">--선택--</option>
 								<option value="bpaynum">주문번호</option>
 								<option value="mname">주문자명</option>
 							</select>
@@ -27,6 +28,7 @@
 				<td colspan="3">
 					<div class = "row">
 						<select name = "tfield" class = "col form-control col-xs-2">
+							<option selected="selected">--선택--</option>				
 							<option value="borderdate">주문일</option>
 							<option value="bpaydate">결제일</option>
 						</select>
@@ -51,6 +53,7 @@
 					<div class="form-group row">
 						<div class = "col-xs-2 ">
 							<select class="form-control" name = "bfield">
+								<option selected="selected">--선택--</option>
 								<option value="btitle">책 제목</option>
 								<option value="bnum">책 번호</option>
 							</select>
@@ -133,7 +136,36 @@
 				$(this).addClass('btn-outline-success');
 			}
 		})
-
+		
+		var v = $(this).val() ;
+		
+		var date = new Date();
+		var mv = 1;
+		var dv = 0;
+		
+		if(v == '내일'){
+			console.log("gg"+v);
+			dv = -1;
+		}else if(v == '7일'){
+			dv = -7;
+		}else if(v == '1개월'){
+			mv -= 1; 
+		}else if(v == '6개월'){
+			mv -= 6;
+		}
+		
+		var yyyy = date.getFullYear();
+		var mm = date.getMonth()+mv > 9 ? date.getMonth()+mv : '0' + (date.getMonth()+mv);
+		var dd = date.getDate()+dv > 9 ? date.getDate()+dv : '0' + (date.getDate()+dv);
+		
+		var yyyy2 = date.getFullYear();
+		var mm2 = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + (date.getMonth()+1);
+		var dd2 = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+		
+	
+		$('#startDate').val(yyyy+"-"+mm+"-"+dd);			
+		$('#endDate').val(yyyy2+"-"+mm2+"-"+dd2);
+		
 		$(this).removeClass('btn-outline-success');
 		$(this).addClass('btn-success');
 	
@@ -151,7 +183,6 @@
 			var startresult = startD.replace(/-/g,'');
 			var endresult = endD.replace(/-/g,'');
 			if(startresult - endresult > 0){
-				console.log("ggggg");
 				alert('날짜를 다시선택해주세요....')
 				return false;
 			}else{
@@ -160,8 +191,4 @@
 			
 		}
 	})
-
-	
-	
-
 </script>
