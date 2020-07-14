@@ -267,7 +267,7 @@
 				</tr>
 			</table>
 		</div>
-	<button type="submit" class="btn btn-success btn-lg" id="insertbt">등록하기</button>
+	<button type="submit" class="btn btn-success btn-lg" id="insertbt">수정하기</button>
 	</div>
 </form>
 
