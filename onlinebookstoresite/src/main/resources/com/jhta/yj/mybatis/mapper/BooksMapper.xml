@@ -31,5 +31,13 @@
 	<select id="list" resultType="books">
 		select * from books
 	</select>
-
+	
+	<!-- 미리보기 -->
+	<select id="preview" resultType="books" parameterType="int">
+		select * from books where bnum = #{bnum}
+	</select>
+	
+	<select id="previewImg" resultType="img" parameterType="int">
+		select * from img where bnum = #{bnum} order by thumbnail desc
+	</select>
 </mapper>

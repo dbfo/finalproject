@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
+import com.jhta.finalproject.yj.vo.ImgVO;
 import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 
 @Repository
@@ -15,7 +16,7 @@ public class BooksDao {
 	@Autowired
 	private SqlSessionTemplate sqlsession;
 	private final String NAMESPACE = "com.jhta.yj.mybatis.mapper.BooksMapper";
-	
+
 	public void setSqlsession(SqlSessionTemplate sqlsession) {
 		this.sqlsession = sqlsession;
 	}
@@ -38,5 +39,13 @@ public class BooksDao {
 
 	public List<BooksVO> list() {
 		return sqlsession.selectList(NAMESPACE + ".list");
+	}
+
+	public BooksVO preview(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".preview", bnum);
+	}
+
+	public List<ImgVO> previewImg(int bnum) {
+		return sqlsession.selectList(NAMESPACE + ".previewImg", bnum);
 	}
 }

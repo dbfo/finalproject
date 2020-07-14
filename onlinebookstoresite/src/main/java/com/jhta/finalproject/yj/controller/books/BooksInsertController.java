@@ -71,7 +71,7 @@ public class BooksInsertController {
 //			System.out.println("bpublishdate:" + bpublishdate);
 			String bpublisher = req.getParameter("bpublisher");
 			int bprice = Integer.parseInt(req.getParameter("bprice"));
-			int bpoint = Integer.parseInt(req.getParameter("bprice"));
+			int bpoint = Integer.parseInt(req.getParameter("bpoint"));
 			int bshipinfo = Integer.parseInt(req.getParameter("bshipinfo"));
 			int bcount = Integer.parseInt(req.getParameter("bcount"));
 			String bcontent = req.getParameter("bcontent");
@@ -136,6 +136,6 @@ public class BooksInsertController {
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
 		}
-		return "redirect:/";
+		return "redirect:/booksList";
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jhta.finalproject.yj.dao.BooksDao;
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
+import com.jhta.finalproject.yj.vo.ImgVO;
 import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 
 @Service
@@ -25,5 +26,13 @@ public class BooksService {
 	
 	public List<BooksVO> list() {
 		return dao.list();
+	}
+	
+	public BooksVO preview(int bnum) {
+		return dao.preview(bnum);
+	}
+	
+	public List<ImgVO> previewImg(int bnum) {
+		return dao.previewImg(bnum);
 	}
 }
