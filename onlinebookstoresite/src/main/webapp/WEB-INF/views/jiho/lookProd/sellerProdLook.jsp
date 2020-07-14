@@ -89,15 +89,16 @@
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
-					<td class="prodLooktdStyle"><input type="radio"
-						name="obsalestatus" value="3"
-						<c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
+					<td class="prodLooktdStyle">
+						<input type="radio"	name="obsalestatus" value="3" 
+							<c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
 						<input type="radio" name="obsalestatus" value="0"
-						<c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중 <input
-						type="radio" name="obsalestatus" value="1"
-						<c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
+							<c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중
+						<input type="radio" name="obsalestatus" value="1"
+							<c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
 						<input type="radio" name="obsalestatus" value="2"
-						<c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료</td>
+							<c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료
+					</td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
@@ -132,7 +133,7 @@
 								<c:if test="${map.keyword!=null || map.keyword!=''}">value="${map.keyword }"</c:if>>
 							<!-- 버튼 -->
 							<input type="submit" value="검색" class="btn btn-success"
-								id="list2bt"> <input type="button" value="초기화"
+								id="list2bt"> <input type="button" value="검색조건 초기화" id="resetBt"
 								class="btn btn-secondary">
 						</div>
 					</td>
@@ -234,8 +235,19 @@ $(function(){
 			$("input[name=endDay]").attr("disabled",true);
 		}
 	});	
+	//초기화버튼
+	$("#resetBt").click(function() {
+		$("input[name=obsalestatus]")[0].checked=true;
+		$("input[name=regdate]")[0].checked=true;
+		$("input[name=startDay]").attr("disabled",true);
+		$("input[name=startDay]").val("");
+		$("input[name=endDay]").attr("disabled",true);
+		$("input[name=endDay]").val("");
+		$("select[name=field]").val('all').attr("selected","selected");
+		$("input[name=keyword]").val("");
+	});
 	
-	
+	//입력 유효성검사
 	$("form").submit(function() {
 		//일자별 검색 유효성검사1
 		if($("input[name=regdate]:checked").val()=='1'){
