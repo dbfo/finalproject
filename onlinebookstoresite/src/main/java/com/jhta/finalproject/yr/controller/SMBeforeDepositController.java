@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.PaymentService;
 import com.jhta.finalproject.yr.service.ShipManageService;
+import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Controller
@@ -30,7 +31,7 @@ public class SMBeforeDepositController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 //		배송 상태 갯수 가져오기
-		List<Integer> countlist = service.getShipCount();
+		List<HashMap<String, Object>> countlist = service.getShipCount();
 		
 		
 //		검색하기
@@ -46,10 +47,20 @@ public class SMBeforeDepositController {
 //		입금전 리스트 가져오기
 		map.put("shipStatus", 0);
 		
-		List<PaymentVo> list = payService.allList(map);
+		List<PaymentAndBookListVo> list = payService.paymentList(map);
 		
 		model.addAttribute("countList", countlist);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pfield",pfield);
+		model.addAttribute("pkeyword",pkeyword);
+		model.addAttribute("tfield",tfield);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		model.addAttribute("bfield",bfield);
+		model.addAttribute("bkeyword",bkeyword);
+		model.addAttribute("mType",mType);		
 		
 		return ".ship.beforeDeposit";
 	}

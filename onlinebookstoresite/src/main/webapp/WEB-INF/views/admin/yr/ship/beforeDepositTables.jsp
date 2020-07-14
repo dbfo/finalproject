@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container-fluid ">
 	<h2 class="mt-4">list</h2>
 	<div class="card mb-4">
 		<div class="card-header">
-			<i class="fas fa-table mr-1"></i> 검색결과[0]
+			<i class="fas fa-table mr-1"></i> 
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -27,9 +28,15 @@
 							<tr>
 								<td><input type="checkbox"  name = "chb"></td>
 								<td>${vo.bpaynum}</td>
-								<td>${vo.borderdate}</td>
+								<td><fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/></td>
 								<td>${vo.mname }</td>
-								<td>${vo.btitle }</td>
+								
+								<td>
+									<c:forEach items="${vo.paymentbook}" var="book">
+										<p>${book.btitle}</p>
+									</c:forEach>
+								</td>
+								
 								<td>${vo.bfinalmoney}</td>
 								<!-- 결제수단 -->
 								<c:choose>
@@ -45,7 +52,6 @@
 					</tbody>
 				</table>
 				<input class="btn btn-outline-success" id = "checkBtn" type = "button" value = "입금확인">
-				<input class="btn btn-success" id = "cancelBtn" type = "button" value = "주문취소">
 			</div>
 		</div>
 	</div>

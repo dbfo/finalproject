@@ -7,8 +7,7 @@
 	
 	<sql id="search">	
 <!-- 		주문번호, 주문자 -->
-		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bfield)">
-			
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(pfield)">	
 			<choose>
 				<when test="pfield == 'bpaynum'">
 					and bpayment.${pfield} like '%'||#{pkeyword}||'%'
@@ -17,7 +16,6 @@
 					and members.${pfield} like '%'||#{pkeyword}||'%'
 				</when>
 			</choose>
-			
 		</if>		
 
 <!-- 주문일, 결제일 -->
@@ -79,18 +77,54 @@
 	    </if>
 	</sql>
 
-	<select id="allList" resultType="payment" parameterType="hashmap">
-	  	select bpayment.*, paymentbook.*, members.mname, books.btitle, refundhistory.type
+<!-- 	전체리스트보기 -->
+<!-- 	<select id="allList" resultType="payment" parameterType="hashmap"> -->
+<!-- 	  	select bpayment.*, paymentbook.*, members.mname, books.btitle, refundhistory.type -->
+<!-- 	    from bpayment, paymentbook, members, books, refundhistory -->
+<!-- 	    where bpayment.bpaynum = paymentbook.bpaynum -->
+<!-- 	    and members.mnum = bpayment.mnum -->
+<!-- 	    and paymentbook.bnum = books.bnum -->
+<!-- 	    and bpayment.bpaynum = refundhistory.bpaynum(+) -->
+<!-- 		<include refid="search"/> -->
+<!-- 	    <include refid="shipStatus"/> -->
+<!-- 	</select> -->
+	
+		<resultMap type="com.jhta.finalproject.yr.vo.PaymentAndBookListVo" id="paymentBooksList">
+		<result property="bpaynum" column="bpaynum"/>
+		<result property="baddr" column="baddr"/>
+		<result property="bphone" column="bphone"/>
+		<result property="bfinalmoney" column="bfinalmoney"/>
+		<result property="borderdate" column="borderdate"/>
+		<result property="bpaydate" column="bpaydate"/>
+		<result property="bstatus" column="bstatus"/>
+		<result property="odermoney" column="odermoney"/>
+		<result property="usedpoint" column="usedpoint"/>
+		<result property="methodpayment" column="methodpayment"/>
+		<result property="receiver" column="receiver"/>
+		<result property="mnum" column="mnum"/>
+		<result property="mname" column="mname"/>
+		<result property="type" column="type"/>
+		<collection property="paymentbook" ofType="com.jhta.finalproject.yr.vo.PaymentBooksVo">
+			<result property="bpaynum" column="bpaynum"/>
+			<result property="btype" column="btype"/>
+			<result property="bnum" column="bnum"/>
+			<result property="bcount" column="bcount"/>
+			<result property="btitle" column="btitle"/>
+			<result property="bprice" column="bprice"/>
+		</collection>	
+	</resultMap>
+	
+	
+	<select id="paymentList" resultMap="paymentBooksList">
+		select bpayment.*, paymentbook.*, books.* ,members.mname, refundhistory.type
 	    from bpayment, paymentbook, members, books, refundhistory
 	    where bpayment.bpaynum = paymentbook.bpaynum
 	    and members.mnum = bpayment.mnum
-	    and paymentbook.bnum = books.bnum
+	    and paymentbook.bnum= books.bnum
 	    and bpayment.bpaynum = refundhistory.bpaynum(+)
-		<include refid="search"/>
+	    <include refid="search"/>
 	    <include refid="shipStatus"/>
 	</select>
-	
-
 	
 	
 </mapper>

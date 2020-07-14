@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "com.jhta.yr.mybatis.mapper.ShipMapper">
-	<select id = "shipCount" resultType = "int">
-		select count(*) from bpayment group by bstatus order by bstatus
+	<select id = "shipCount" resultType = "Hashmap">
+		select bstatus, count(*) count from bpayment group by bstatus order by bstatus
 	</select>
 	
 	<update id="updateBeforeToPreparing" parameterType="list">
@@ -13,5 +13,9 @@
 		<foreach collection="list" item = "bpaynum" separator="or">
 	 	  bpaynum = #{bpaynum} 
 		</foreach>	
+	</update>
+	
+	<update id="updatePrepareToShipping" parameterType="int">
+		update bpayment set bstatus = 2 where bpaynum = #{bpaynum} 
 	</update>
 </mapper>

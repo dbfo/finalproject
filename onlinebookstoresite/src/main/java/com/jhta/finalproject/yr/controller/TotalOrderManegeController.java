@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.finalproject.yr.service.PaymentService;
+import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Controller
@@ -28,7 +29,6 @@ public class TotalOrderManegeController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pfield",pfield);
 		map.put("pkeyword",pkeyword);
-		System.out.println("1pfield : "+pfield);
 		
 //		주문일, 결제일
 		
@@ -41,7 +41,7 @@ public class TotalOrderManegeController {
 
 		map.put("bfield",bfield);
 		map.put("bkeyword",bkeyword);
-		
+		System.out.println("bfield : " + bfield);
 
 //		주문상태
 		if(bstatus != null && bstatus != "") {
@@ -62,9 +62,21 @@ public class TotalOrderManegeController {
 //		회원타입(mname)
 		map.put("mType",mType);
 		
-		List<PaymentVo> list = service.allList(map);
+		List<PaymentAndBookListVo> list = service.paymentList(map);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pfield",pfield);
+		model.addAttribute("pkeyword",pkeyword);
+		model.addAttribute("tfield",tfield);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		model.addAttribute("bfield",bfield);
+		model.addAttribute("bkeyword",bkeyword);
+		model.addAttribute("bstatus",bstatus);
+		model.addAttribute("type",type);
+		model.addAttribute("payType",payType);
+		model.addAttribute("mType",mType);		
+		
 		return ".totalOrder";
 	}
 	
@@ -76,9 +88,9 @@ public class TotalOrderManegeController {
 
 		array_word = str.split(","); 
 				
-		for(int i=0;i<array_word.length;i++) { //출력
-		    System.out.println("배열로  : " + array_word[i]);
-		}
+//		for(int i=0;i<array_word.length;i++) { //출력
+//		    System.out.println("배열로  : " + array_word[i]);
+//		}
 		
 		return array_word;
 	}

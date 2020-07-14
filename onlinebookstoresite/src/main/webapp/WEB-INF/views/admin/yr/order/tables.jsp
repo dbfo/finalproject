@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container-fluid">
@@ -27,10 +28,14 @@
 					<tbody>
 						<c:forEach var="vo" items="${list }">
 							<tr>
-								<td>${vo.borderdate}</td>
+								<td><fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/></td>
 								<td>${vo.bpaynum}</td>
 								<td>${vo.mname }</td>
-								<td>${vo.btitle }</td>
+								<td>
+									<c:forEach items="${vo.paymentbook}" var="book">
+										<p>${book.btitle}</p>
+									</c:forEach>
+								</td>
 								<td>${vo.bfinalmoney}</td>
 <!-- 								결제수단 -->
 								<c:choose>

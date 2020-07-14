@@ -9,12 +9,12 @@
 					<div class = "col-xs-2 ">
 						<select class="form-control" name = "pfield">
 							<option value =''>--선택--</option>
-							<option value="bpaynum">주문번호</option>
-							<option value="mname">주문자명</option>
+							<option value="bpaynum" <c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
+							<option value="mname"<c:if test="${pfield == 'mname'}">selected</c:if> >주문자명</option>
 						</select>
 					</div>
 					<div class = "col-xs-3">
-						<input class="form-control" type="text" name="pkeyword">
+						<input class="form-control" type="text" value="${pkeyword }">
 					</div>
 				</div>
 			</td>
@@ -25,8 +25,8 @@
 				<div class = "row">
 					<select name = "tfield" class = "col form-control col-xs-2">
 						<option value =''>--선택--</option>
-						<option value="borderdate">주문일</option>
-						<option value="bpaydate">결제일</option>
+						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>
+						<option value="bpaydate" <c:if test="${tfield == 'bpaydate'}">selected</c:if>>결제일</option>
 					</select>
 					<div class='col-md-4'> 
 						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="today" value = "오늘">
@@ -36,8 +36,8 @@
 						<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">
 					</div>				
 					<div>
-						<input type="date" name = "startDate" id = "startDate">  &nbsp;~ &nbsp;
-						<input type="date" name = "endDate" id = "endDate">
+						<input type="date" name = "startDate" id = "startDate" value="${startDate }">  &nbsp;~ &nbsp;
+						<input type="date" name = "endDate" id = "endDate" value="${endDate }">
 					</div>
 				</div>
 			</td>
@@ -50,12 +50,12 @@
 					<div class = "col-xs-2 ">
 						<select class="form-control" name = "bfield">
 							<option value =''>--선택--</option>
-							<option value="btitle">책 이름</option>
-							<option value="bnum">책 번호</option>
+							<option value="btitle" <c:if test="${bfield == 'btitle'}">selected</c:if>>책 이름</option>
+							<option value="bnum" <c:if test="${bfield == 'bnum'}">selected</c:if>>책 번호</option>
 						</select>
 					</div>
 					<div class = "col-xs-3">
-						<input class="form-control" type="text" name="bkeyword">
+						<input class="form-control" type="text" name="bkeyword" value="${bkeyword }">
 					</div>
 				</div>
 			</td>
@@ -63,9 +63,9 @@
 		<tr>
 			<th class="table-active">회원 / 비회원</th>
 			<td>
-				<input type="radio" name="mType" value="mtotal" id = "mtotal" ><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-				<input type="radio" name="mType" value="member" id = "member"><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
-				<input type="radio" name="mType" value="nonemember" id = "nonemember"><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
+				<input type="radio" name="mType" value="-1" id = "mtotal" <c:if test="${mType == '-1'}">checked</c:if>><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+				<input type="radio" name="mType" value="1" id = "member" <c:if test="${mType == '1'}">checked</c:if>><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
+				<input type="radio" name="mType" value="2" id = "nonemember"<c:if test="${mType == '2'}">checked</c:if>><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
 			</td>
 		</tr>
 		<tr>

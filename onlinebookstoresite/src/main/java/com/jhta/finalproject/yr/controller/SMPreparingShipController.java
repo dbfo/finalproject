@@ -3,14 +3,16 @@ package com.jhta.finalproject.yr.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.PaymentService;
 import com.jhta.finalproject.yr.service.ShipManageService;
-import com.jhta.finalproject.yr.vo.PaymentVo;
+import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 
 @Controller
 public class SMPreparingShipController {
@@ -25,8 +27,19 @@ public class SMPreparingShipController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
+
+		
 //		배송 상태 갯수 가져오기
-		List<Integer> countlist = service.getShipCount();
+		List<HashMap<String, Object>> countlist = service.getShipCount();
+		
+//		for (HashMap<String, Object> map1 : countlist) {
+//			String bstatus = String.valueOf(map1.get("BSTATUS"));
+//			BigDecimal count = (BigDecimal)map1.get("COUNT");
+//			
+//			System.out.println("bstatus : " + bstatus);
+//			System.out.println("count : " + count);
+//		}
+		
 		
 //		System.out.println(	"2pfield : "+ pfield
 //		+" 2pkeyword : "+ pkeyword
@@ -37,6 +50,8 @@ public class SMPreparingShipController {
 //		+" 2bkeyword : "+ bkeyword
 //		+ " 2mType :"+ mType
 //		);
+		
+		
 		
 //		검색하기
 		map.put("pfield", pfield);
@@ -54,13 +69,49 @@ public class SMPreparingShipController {
 		map.put("shipStatus",1);
 		
 		
-		List<PaymentVo> list = payService.allList(map);
+		List<PaymentAndBookListVo> list = payService.paymentList(map);
+
+//		출력		
+//		for (PaymentAndBookListVo vo : list) {
+//			System.out.println(vo);
+//			List<PaymentBooksVo> v1 = vo.getPaymentbook();
+//			System.out.println("주문한 책 리스트");
+//			for (PaymentBooksVo pavo : v1) {
+//				System.out.println(pavo);
+//			}
+////			System.out.println("주문한 책 리스트");
+////			List<BooksVO> v2 = vo.getBookinfo();
+////			for (BooksVO pavo : v2) {
+////				System.out.println(pavo);
+////			}
+//					
+//		}
 		
-		model.addAttribute("countList", countlist);
+		
+		 
 		model.addAttribute("list", list);
+		model.addAttribute("countList", countlist);
 		
 		model.addAttribute("path", "/preparing");
 		
+		
 		return ".ship.preparingShip";
 	}
+	
+	@RequestMapping(value="/ship/changeToShipping")
+	@ResponseBody
+	public String changeToShipping(int bpaynum) {
+		int n = service.updatePrepareToShipping(bpaynum);
+		
+		JSONObject json = new JSONObject();
+		if(n>0) {
+			json.put("code","success");			
+		}else {
+			json.put("code","error");						
+		}
+		
+		return json.toString();
+		
+	}
+	
 }

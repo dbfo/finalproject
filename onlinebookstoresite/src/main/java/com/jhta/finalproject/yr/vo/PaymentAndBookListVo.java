@@ -1,23 +1,9 @@
 package com.jhta.finalproject.yr.vo;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
-public class PaymentVo {
-//	BPAYNUM	NUMBER
-//	BADDR	VARCHAR2(500 BYTE)
-//	BPHONE	NVARCHAR2(30 CHAR)
-//	BFINALMONEY	NUMBER
-//	BODERDATE	DATE
-//	BPAYDATE	DATE
-//	BSTATUS	NUMBER
-//	BTYPE	NUMBER
-//	BNUM	NUMBER
-//	ORDERMONEY	NUMBER
-//	USEDPOINT	NUMBER
-//	MeTHODPAYMENT	NUMBER
-//	RECEIVER	VARCHAR2(20 BYTE)
-//	MNUM	NUMBER
-
+public class PaymentAndBookListVo {
 	private int bpaynum; // 지불번호
 	private String baddr; // 주문자 집 주소
 	private String bphone; // 주문자 전화번호
@@ -31,16 +17,29 @@ public class PaymentVo {
 	private String receiver;// 수령인
 	private int mnum; // 회원 번호
 	private String mname;// 회원이름(주문자이름)
-	private String btitle;// 책 제목
 	private int type; // cs타입
+	private String btitle; // 책이름
+	private List<PaymentBooksVo> paymentbook;
+	private List<BooksVO> bookinfo;
 
-	public PaymentVo() {
 	
+
+
+	@Override
+	public String toString() {
+		return "PaymentAndBookListVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
+				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
+				+ ", odermoney=" + odermoney + ", usedpoint=" + usedpoint + ", methodpayment=" + methodpayment
+				+ ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname + ", type=" + type + ", btitle="
+				+ btitle + ", paymentbook=" + paymentbook + ", bookinfo=" + bookinfo + "]";
 	}
 
-	public PaymentVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate, Date bpaydate,
-			int bstatus, int odermoney, int usedpoint, int methodpayment, String receiver,
-			int mnum, String mname, String btitle, int type) {
+
+
+
+	public PaymentAndBookListVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate,
+			Date bpaydate, int bstatus, int odermoney, int usedpoint, int methodpayment, String receiver, int mnum,
+			String mname, int type, String btitle, List<PaymentBooksVo> paymentbook, List<BooksVO> bookinfo) {
 		super();
 		this.bpaynum = bpaynum;
 		this.baddr = baddr;
@@ -55,17 +54,30 @@ public class PaymentVo {
 		this.receiver = receiver;
 		this.mnum = mnum;
 		this.mname = mname;
-		this.btitle = btitle;
 		this.type = type;
+		this.btitle = btitle;
+		this.paymentbook = paymentbook;
+		this.bookinfo = bookinfo;
 	}
 
-	@Override
-	public String toString() {
-		return "PaymentVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
-				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
-				+ ", btype=" +", odermoney=" + odermoney + ", usedpoint=" + usedpoint
-				+ ", methodpayment=" + methodpayment + ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname
-				+ ", btitle=" + btitle + ", type=" + type + "]";
+
+
+
+	public PaymentAndBookListVo() {
+		super();
+	}
+
+	
+	
+	
+	public String getBtitle() {
+		return btitle;
+	}
+
+
+
+	public void setBtitle(String btitle) {
+		this.btitle = btitle;
 	}
 
 
@@ -84,14 +96,6 @@ public class PaymentVo {
 
 	public void setMname(String mname) {
 		this.mname = mname;
-	}
-
-	public String getBtitle() {
-		return btitle;
-	}
-
-	public void setBtitle(String btitle) {
-		this.btitle = btitle;
 	}
 
 	public int getType() {
@@ -158,7 +162,6 @@ public class PaymentVo {
 		this.bstatus = bstatus;
 	}
 
-	
 	public int getOdermoney() {
 		return odermoney;
 	}
@@ -198,4 +201,21 @@ public class PaymentVo {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
+
+	public List<PaymentBooksVo> getPaymentbook() {
+		return paymentbook;
+	}
+
+	public void setPaymentbook(List<PaymentBooksVo> paymentbook) {
+		this.paymentbook = paymentbook;
+	}
+
+	public List<BooksVO> getBookinfo() {
+		return bookinfo;
+	}
+
+	public void setBookinfo(List<BooksVO> bookinfo) {
+		this.bookinfo = bookinfo;
+	}
+
 }
