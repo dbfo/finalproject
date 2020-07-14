@@ -18,10 +18,10 @@
 					<li><a href="${cp}/seller/prodLook">상품조회/수정</a></li>
 					<li><a href="${cp}/seller/salesManagement">판매관리</a>
 						<ul class="sub-menu">
-							<li><a href="#">입금대기중</a></li>
-							<li><a href="#">발송요청</a></li>
-							<li><a href="#">배송/구매확정전</a></li>
-							<li><a href="#">구매확정/정산대기</a></li>
+							<li><a href="${cp}/seller/salesManagement?tabType=1">입금대기중</a></li>
+							<li><a href="${cp}/seller/salesManagement2?tabType=2">입금완료/배송요청</a></li>
+							<li><a href="${cp}/seller/salesManagement?tabType=3">배송중/구매확정전</a></li>
+							<li><a href="${cp}/seller/salesManagement?tabType=4">구매확정/정산대기</a></li>
 						</ul>
 					</li>
 					<li><a href="#">정산조회</a></li>
