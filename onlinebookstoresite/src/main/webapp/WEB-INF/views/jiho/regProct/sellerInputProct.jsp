@@ -259,7 +259,6 @@
 	*/
 	//입력폼 유효성검사
 	$("form").submit(function() {
-	
 		
 		var number= /[^0-9]/g //정규식(숫자만)
 		

@@ -29,18 +29,13 @@
 	text-align: center;
 }
 
-input[type="radio"] {
+.prodLooktdStyle input[type="radio"] {
 	width: 50px;
 }
 
-input[type="text"] {
+.prodLooktdStyle input[type="text"] {
 	width: 300px;
 }
-
-input[type="text"] {
-	width: 300px;
-}
-
 .form-control {
 	width: 150px;
 }
@@ -64,29 +59,46 @@ input[type="text"] {
 	margin-right: 10px;
 }
 </style>
-<script type="text/javascript"
-	src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
+<script>
+/*
+	$(function(){
+		$("input:radio[name=regdate]").click(function(){
+			if($("input[name=regdate]:checked").val()=='1'){
+				$("input[name=startDay]").attr("disabled",false);
+				$("input[name=endDay]").attr("disabled",false);
+			}
+			if($("input[name=regdate]:checked").val()=='0'){
+				$("input[name=startDay]").attr("disabled",true);
+				$("input[name=endDay]").attr("disabled",true);
+			}
+		});	
+	});*/
+</script>
 <div id="sellerProdLook">
 	<div>
 		<h2>상품조회/수정페이지</h2>
 	</div>
 	<form action="${cp }/seller/prodLook?keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}
 		&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">
+		<!-- 검색박스 -->
 		<div id="selectBox">
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
-					<td><input type="radio" name="obsalestatus" value="3" <c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
+					<td class="prodLooktdStyle">
+						<input type="radio" name="obsalestatus" value="3" <c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
 						<input type="radio" name="obsalestatus" value="0" <c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중
 						<input type="radio" name="obsalestatus" value="1" <c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
 						<input type="radio" name="obsalestatus" value="2" <c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료</td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
-					<td><input type="radio" name="regdate" value="0" <c:if test="${map.regdate==0 || map.regdate==null}">checked</c:if>>전체
+					<td class="prodLooktdStyle">
+						<input type="radio" name="regdate" value="0" <c:if test="${map.regdate==0 || map.regdate==null}">checked</c:if>>전체
 						<input type="radio" name="regdate" value="1" <c:if test="${map.regdate==1}">checked</c:if>>일자별&nbsp;&nbsp;&nbsp;
-						<input type="date" name="startDay" value="${map.startDay }"><span>&nbsp;~</span>
-						<input type="date" name="endDay" value="${map.endDay }"></td>
+						<input type="date" name="startDay" value="${map.startDay }" <c:if test="${map.regdate==0 }">disabled</c:if>><span>&nbsp;~</span>
+						<input type="date" name="endDay" value="${map.endDay }" <c:if test="${map.regdate==0 }">disabled</c:if>></td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록한 상품 검색</td>
@@ -111,6 +123,7 @@ input[type="text"] {
 				</tr>
 			</table>
 		</div>
+		<!-- 상품 리트스 테이블 -->
 		<div id="showTable">
 			<h2>상품 리스트</h2>
 			<table class="table table-bordered">
@@ -189,8 +202,38 @@ input[type="text"] {
 	</form>
 </div>
 
-<script type="text/javascript">
+<script>
+$(function(){
+	
+	//날짜 검색시 유효성검사
+	var startDay=$("input[name=startDay]").val();
+	var endDay=$("input[name=endDay]").val();
+	var startArr=startDay.split('-');
+	var endArr=endDay.split('-');
+	var start=startArr[0]+startArr[1]+startArr[2];
+	var end=endArr[0]+endArr[1]+endArr[2];
+	if(start>end){
+		alert('검색 날짜를 올바르게 입력해주세요.');
+		return false;
+	}
+	
+	
+	
+	//날짜 검색 disabled처리
+	$("input:radio[name=regdate]").click(function(){
+		if($("input[name=regdate]:checked").val()=='1'){
+			$("input[name=startDay]").attr("disabled",false);
+			$("input[name=endDay]").attr("disabled",false);
+		}
+		if($("input[name=regdate]:checked").val()=='0'){
+			$("input[name=startDay]").attr("disabled",true);
+			$("input[name=endDay]").attr("disabled",true);
+		}
+	});	
+	
+	
 	//상품삭제
+});
 	function del(obnum){
 		var result=confirm('상품을 삭제하시겠습니까?');
 		if(result==true){
@@ -199,6 +242,4 @@ input[type="text"] {
 			return;
 		}
 	}
-	
-	
 </script>
