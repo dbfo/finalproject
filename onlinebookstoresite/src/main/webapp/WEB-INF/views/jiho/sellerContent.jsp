@@ -14,11 +14,11 @@
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">입금대기중</span></a></th>
-					<td><a href="">0개</a></td>
+					<td><a href="">${getOldbookSalestatusCount1}개</a></td>
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">입금완료/배송요청</span></a></th>
-					<td><a href="">0개</a></td>
+					<td><a href="">${getOldbookSalestatusCount2}개</a></td>
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">배송중/구매확정전</span></a></th>
@@ -26,7 +26,7 @@
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">구매확정</span></a></th>
-					<td><a href="">0개</a></td>
+					<td><a href="">${getOldbookSalestatusCount3}개</a></td>
 				</tr>
 			</table>
 		</div>
