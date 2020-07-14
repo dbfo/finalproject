@@ -70,7 +70,8 @@ input[type="text"] {
 	<div>
 		<h2>상품조회/수정페이지</h2>
 	</div>
-	<form action="${cp }/seller/prodLook?keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">
+	<form action="${cp }/seller/prodLook?keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}
+		&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">
 		<div id="selectBox">
 			<table class="table table-bordered">
 				<tr>
@@ -118,10 +119,10 @@ input[type="text"] {
 					<td width="300">상품명</td>
 					<td>출판사</td>
 					<td>저자</td>
-					<td width="100">판매상태</td>
+					<td width="110">판매상태</td>
 					<td>품질</td>
 					<td>판매가</td>
-					<td>등록일</td>
+					<td width="120">등록일</td>
 					<td width="80">수정</td>
 					<td width="80">삭제</td>
 				</tr>
@@ -170,16 +171,16 @@ input[type="text"] {
 					<!-- 이전버튼 -->
 					<c:if test="${pu.startPageNum>3 }">
 						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${pu.startPageNum-1}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
 					</c:if>
 					<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
 						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${i}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a></li>
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a></li>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pu.totalPageCount>pu.endPageNum}">
 						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${pu.endPageNum+1}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
 					</c:if>
 				</ul>
 

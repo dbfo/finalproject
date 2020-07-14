@@ -34,7 +34,7 @@ public class SellerProdLookController {
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		map.put("snum", snum);//판매자번호
 		map.put("obsalestatus",obsalestatus);
-		map.put("regdate", req.getParameter("regdate"));
+		map.put("regdate", regdate);
 		map.put("startDay",startDay);
 		map.put("endDay",endDay);
 		map.put("field",field);
@@ -47,17 +47,17 @@ public class SellerProdLookController {
 		
 		
 		List<SellerOldbooksVo> list=service.allList(map);
-		System.out.println("============================================");
-		System.out.println("판매상태:"+obsalestatus);
-		System.out.println("등록일자 상태:"+req.getParameter("regdate"));
-		System.out.println("시작일자:"+req.getParameter("startDay"));
-		System.out.println("종료일자:"+req.getParameter("endDay"));
-		System.out.println("검색필드:"+req.getParameter("field"));
-		System.out.println("키워드:"+req.getParameter("keyword"));
-		System.out.println("★페이지번호"+pageNum);
-		System.out.println("스타트 row:"+pu.getStartRow());
-		System.out.println("endrow:"+pu.getEndRow());
-		System.out.println("한페이지에 보여질 글갯수:"+pu.getRowBlockCount());
+//		System.out.println("============================================");
+		System.out.println("★판매상태:"+obsalestatus);
+//		System.out.println("등록일자 상태:"+req.getParameter("regdate"));
+//		System.out.println("시작일자:"+req.getParameter("startDay"));
+//		System.out.println("종료일자:"+req.getParameter("endDay"));
+//		System.out.println("검색필드:"+req.getParameter("field"));
+//		System.out.println("키워드:"+req.getParameter("keyword"));
+//		System.out.println("★페이지번호"+pageNum);
+//		System.out.println("스타트 row:"+pu.getStartRow());
+//		System.out.println("endrow:"+pu.getEndRow());
+//		System.out.println("한페이지에 보여질 글갯수:"+pu.getRowBlockCount());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pu", pu);

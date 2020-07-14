@@ -5,9 +5,21 @@
 <mapper namespace="com.jhta.mybatis.mapper.SellerProdLookMapper.jh">
 	<!-- ////////////////상품페이징처리 관련//////////////// -->
 	<!-- 전체 중고책 등록한 상품 조회를 위한 MapperFile -->
+	<!-- 검색조건 -->
 	<sql id="search">
+		 <!-- 
 		<if test="obsalestatus!=null and obsalestatus != 3 and obsalestatus !=''">
 			and obsalestatus=#{obsalestatus}
+		</if>
+	 -->
+		<if test="obsalestatus == 0">
+			and obsalestatus=0
+		</if>
+		<if test="obsalestatus == 1">
+			and obsalestatus=1
+		</if>
+		<if test="obsalestatus == 2">
+			and obsalestatus=2
 		</if>
 		<if test='field=="all" and keyword != null and keyword !=""'>
 			and obpublisher like '%'||#{keyword}||'%' 
@@ -25,23 +37,26 @@
 		</if>
 		<if test="startDay!=null and startDay!=''">
 			<![CDATA[
-				and obregdate >= to_date(#{startDay}) and obregdate <= to_date(#{endDay})+0.99999
+				and obregdate >= to_date(#{startDay},'yyyy-mm-dd') and obregdate <= to_date(#{endDay},'yyyy_mm_dd')+0.99999
 			]]>
 		</if>
 	</sql>
+	
 	<!-- 총 글의 갯수 -->
 	<select id="oldbookPageCount" parameterType="hashmap" resultType="int">
 	 	select NVL(count(*),0) cunt from oldbooks where snum=#{snum} 
 	 	<include refid="search"/>
 	 </select>
-	
+	 
+	<!--등록된 상품조회 -->
 	<select id="prodAllSelect" parameterType="hashmap" resultType="oldbooks">
 		select *
-			from (select ob.*,rownum rnum from (select * from oldbooks where snum=#{snum} order by obnum desc) ob) book
+			from (select ob.*,rownum rnum from (select * from oldbooks where snum=#{snum} 
+			<include refid="search"></include>
+			order by obnum desc) ob) book
 		<![CDATA[
 			where rnum>=#{startRow} and rnum <=#{endRow}
 		]]>
-			<include refid="search"></include>
 		ORDER by obregdate desc
 	</select>
 
