@@ -35,7 +35,7 @@
 						</select>
 						<div class='col-md-3'> 
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="today" value = "오늘">
-							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="tomorrow" value = "내일">
+							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="yesterday" value = "어제">
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="seven" value = "7일">
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="month" value = "1개월">
 							<input class="btn btn-outline-success btn-sm dbtn" type="button" name="sixmonth" value = "6개월">

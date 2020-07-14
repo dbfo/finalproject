@@ -7,7 +7,7 @@
 	<ul class="tab">	
 		<li>
 			<span class="thumb"><i class="fas fa-cart-arrow-down fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/ship">입금 전 
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/menu?PageName=0">입금 전 
 					<c:forEach items="${countList }" var="list">						
 						<c:if test="${list.BSTATUS == '0'}">
 							[${list['COUNT']}]
@@ -18,7 +18,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-box fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/ship/preparing">배송준비 중
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/menu?PageName=1">배송준비 중
 					<c:forEach items="${countList }" var="list">						
 						<c:if test="${list.BSTATUS == '1'}">
 							[${list['COUNT']}]
@@ -29,7 +29,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-shipping-fast fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/ship/shipping">배송 중
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/menu?PageName=2">배송 중
 				<c:forEach items="${countList }" var="list">						
 					<c:if test="${list.BSTATUS == '2'}">
 						[${list['COUNT']}]

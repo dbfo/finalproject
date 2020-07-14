@@ -21,7 +21,7 @@ public class SMPreparingShipController {
 	@Autowired
 	private PaymentService payService;
 	
-	@RequestMapping("/ship/preparing")
+
 	public String goPreparingList(Model model, String pfield, String pkeyword, 
 			String tfield, String startDate, String endDate, String bfield, String bkeyword, String mType){
 		
@@ -41,15 +41,7 @@ public class SMPreparingShipController {
 //		}
 		
 		
-//		System.out.println(	"2pfield : "+ pfield
-//		+" 2pkeyword : "+ pkeyword
-//		+" 2tfield : "+ tfield
-//		+" 2startDate :"+ startDate
-//		+" 2endDate : "+ endDate
-//		+" 2bfield : "+ bfield
-//		+" 2bkeyword : "+ bkeyword
-//		+ " 2mType :"+ mType
-//		);
+
 		
 		
 		
