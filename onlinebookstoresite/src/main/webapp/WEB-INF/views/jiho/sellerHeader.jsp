@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div id="sellerTop">
-	<a href="${pageContext.request.contextPath}/seller"><img
-		src="${pageContext.request.contextPath}/resources/jh/jhimages/gobook.png"></a>
-	<a href="${pageContext.request.contextPath}/">메인화면으로</a>
-	<a href="${pageContext.request.contextPath}/seller">중고관리메인</a>
+	<a href="${cp}/seller"><img
+		src="${cp}/resources/jh/jhimages/gobook.png"></a>
+	<a href="${cp}/">메인화면으로</a>
+	<a href="${cp}/seller">중고관리메인</a>
 	<a href="#">로그아웃</a>
 	<a href="#">판매자탈퇴</a>
 </div>
@@ -14,9 +14,9 @@
 			<div class="container">
 				<!-- menu -->
 				<ul class="main-menu">
-					<li><a href="${pageContext.request.contextPath}/seller/productInput">상품등록</a></li>
-					<li><a href="${pageContext.request.contextPath}/seller/prodLook">상품조회/수정</a></li>
-					<li><a href="#">판매관리</a>
+					<li><a href="${cp}/seller/productInput">상품등록</a></li>
+					<li><a href="${cp}/seller/prodLook">상품조회/수정</a></li>
+					<li><a href="${cp}/seller/salesManagement">판매관리</a>
 						<ul class="sub-menu">
 							<li><a href="#">입금대기중</a></li>
 							<li><a href="#">발송요청</a></li>

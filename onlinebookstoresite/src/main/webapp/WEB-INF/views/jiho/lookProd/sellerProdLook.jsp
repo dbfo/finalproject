@@ -3,65 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<!-- 추후 css파일 분리예정 -->
+<!-- 추후 css파일 분리예정 
 <style>
-#sellerProdLook {
-	border: 1px solid black;
-	width: 1300px;
-	height: 900px;
-	margin: auto;
-}
-/*검색박스*/
-#selectBox {
-	width: 1300px;
-	height: 300px;
-	border: 1px solid red;
-}
 
-#selectBox table {
-	border: 1px;
-}
-
-.tdstyle {
-	background-color: silver;
-	width: 300px;
-	height: 70px;
-	text-align: center;
-}
-
-.prodLooktdStyle input[type="radio"] {
-	width: 50px;
-}
-
-.prodLooktdStyle input[type="text"] {
-	width: 300px;
-}
-
-.form-control {
-	width: 150px;
-}
-/*테이블박스*/
-#showTable {
-	width: 1300px;
-	height: 500px;
-	border: 1px solid green;
-}
-
-#showTable table {
-	text-align: center;
-}
-
-.title {
-	background-color: silver;
-}
-/*검색버튼*/
-#list2bt {
-	margin-left: 10px;
-	margin-right: 10px;
-}
 </style>
-<script type="text/javascript"
-	src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
+-->
+<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <script>
 
 	$(function(){
