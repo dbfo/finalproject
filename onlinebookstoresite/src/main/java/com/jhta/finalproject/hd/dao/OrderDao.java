@@ -17,8 +17,17 @@ public class OrderDao {
 	private SqlSession sqlsession;
 	private final String NAMESPACE="mybatis.mapper.OrderMapper";
 	
+	//주문리스트 출력
 	public List<OrderResultVo> inputorderlist(Map<String, Object>map){
 		return sqlsession.selectList(NAMESPACE+".orderlist", map);
+	}
+	//회원번호로 주소가져옴.
+	public String getAddr(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".getAddr",mnum);
+	}
+	//회원번호로 사용가능한 포인트가져옴.
+	public int getPoint(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".usablepoint",mnum);
 	}
 
 }

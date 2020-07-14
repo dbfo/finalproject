@@ -126,7 +126,7 @@
 						var td=tr.children();
 						var cartNumValue=td.eq(0).children().data('id');
 						var form=$('<form></form>');
-						form.attr('action','${cp}/pay/order');
+						form.attr('action','${cp}/order/order');
 						form.attr('method','post');
 						form.appendTo('body');
 						var cartNum=$("<input type='hidden' value="
@@ -160,7 +160,7 @@
 					//맨위 주문버튼 클릭시.
 					$("#orderTopBtn").click(function(){
 						var form=$('<form></form>');
-						form.attr('action','${cp}/pay/order');
+						form.attr('action','${cp}/order/order');
 						form.attr('method','post');
 						form.appendTo('body');
 						var i=0;

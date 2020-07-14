@@ -1,17 +1,18 @@
 package com.jhta.finalproject.hd.vo;
 
+//장바구니 -> 주문 넘어갈때 사용하는 VO
 public class OrderResultVo {
-	private String btitle;
-	private int bnum;
-	private int bprice;
-	private int bpoint;
-	private int bshipinfo;
-	private String imgsavefilename;
-	private int cartNum;
-	private int bcount;
-	private String imgpath;
-	private int totalpoint;
-	private int totalvalue;
+	private String btitle; //책제목
+	private int bnum; //책번호
+	private int bprice; //가격
+	private int bpoint; //포인트
+	private int bshipinfo;  // 배송정보?
+	private String imgsavefilename; //섬네일 사진이름
+ 	private int cartNum;  //장바구니번호
+	private int bcount;  //수량
+	private String imgpath; //이미지 이름 + 저장폴더명 ( 컨트롤러에서 set )
+	private int totalpoint; //수량 * 포인트  (컨트롤러에서 set)
+	private int totalvalue; //수량 * 가격  (컨트롤러에서 set)
 	public OrderResultVo() {}
 	public OrderResultVo(String btitle, int bnum, int bprice, int bpoint, int bshipinfo, String imgsavefilename,
 			int cartNum, int bcount, String imgpath, int totalpoint, int totalvalue) {

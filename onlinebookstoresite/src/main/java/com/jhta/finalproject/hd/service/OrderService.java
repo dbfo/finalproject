@@ -19,4 +19,10 @@ public class OrderService {
 	public List<OrderResultVo> inputorderlist(Map<String, Object>map){
 		return dao.inputorderlist(map);
 	}
+	public String getAddr(int mnum) {
+		return dao.getAddr(mnum);
+	}
+	public int getPoint(int mnum) {
+		return dao.getPoint(mnum);
+	}
 }

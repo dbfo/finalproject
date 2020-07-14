@@ -1,9 +1,10 @@
 package com.jhta.finalproject.hd.vo;
 
+// 로그인시 사용함. 
 public class LoginCheckVo {
 	private int mnum;
 	private String mid;
-	private int snum;
+	private int snum; //중고판매자번호. NVL사용으로 판매자번호가 없으면 0번들어감.
 	public LoginCheckVo() {}
 	public LoginCheckVo(int mnum, String mid, int snum) {
 		super();

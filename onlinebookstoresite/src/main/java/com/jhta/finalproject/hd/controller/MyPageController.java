@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MyPageConnectionTest {
+public class MyPageController {
 	@RequestMapping("/mypage/main")
 	public String conMyPage() {
 		return ".mypage";

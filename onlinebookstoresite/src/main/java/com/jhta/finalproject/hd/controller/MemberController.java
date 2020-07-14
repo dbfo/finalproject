@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.finalproject.hd.service.MemberService;
 import com.jhta.finalproject.hd.vo.LoginCheckVo;
 @Controller
-public class LoginController {
+public class MemberController {
 	@Autowired
 	private MemberService service;
 	//로그인화면으로 이동..
@@ -22,6 +22,7 @@ public class LoginController {
 		public String moveloginPage() {
 			return "heedo/login/login";
 		}
+		//로그인 jsp에서 로그인눌렀을때..
 		@PostMapping("/loginCheck")
 		@ResponseBody
 		public String loginCheck(HttpSession session,String id,String pwd) {
@@ -32,7 +33,7 @@ public class LoginController {
 			LoginCheckVo vo=service.membercheck(map);
 			if(vo==null) {
 				result="fail";
-			}else if(vo.getSnum()!=0){
+			}else if(vo.getSnum()!=0){  //snum이 있으면 세션에 저장함.
 				session.setAttribute("snum", vo.getSnum());
 			}else {
 				System.out.println("로그인시 snum : "+vo.getSnum());
@@ -42,6 +43,11 @@ public class LoginController {
 			JSONObject json=new JSONObject();
 			json.put("result", result);
 			return json.toString();
-			
+		}
+		//로그아웃버튼 클릭시.
+		@RequestMapping("/logout")
+		public String logout(HttpSession session) {
+			session.invalidate();
+			return "redirect:/";
 		}
 }
