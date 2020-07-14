@@ -80,7 +80,7 @@
 			<td><strong>주문고객</strong></td>
 		</tr>
 		<tr>
-			<td>이름</td><td>이이름</td><td rowspan="3">ㅎㅇㅎ</td>
+			<td>이름</td><td><input type="text" id="name" value=""></td><td rowspan="3">ㅎㅇㅎ</td>
 		</tr>
 		<tr>
 			<td>배송주소</td><td></td>
