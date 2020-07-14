@@ -70,12 +70,12 @@ input[type="text"] {
 	<div>
 		<h2>상품조회/수정페이지</h2>
 	</div>
-	<form action="${cp }/seller/prodLook" method="post">
+	<form action="${cp }/seller/prodLook?keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">
 		<div id="selectBox">
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
-					<td><input type="radio" name="obsalestatus" value="3" <c:if test="${map.obsalestatus==3 || map.obsalestatus==null}">checked</c:if>>전체
+					<td><input type="radio" name="obsalestatus" value="3" <c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
 						<input type="radio" name="obsalestatus" value="0" <c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중
 						<input type="radio" name="obsalestatus" value="1" <c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
 						<input type="radio" name="obsalestatus" value="2" <c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료</td>
@@ -93,7 +93,7 @@ input[type="text"] {
 						<div class="input-group mt-1 mb-1">
 							<div class="input-group-prepend">
 								<select name="field" class="form-control">
-									<option value="0" <c:if test="${map.field=='0' || map.field==null}">selected</c:if>>전체</option>
+									<option value="all" <c:if test="${map.field=='all' || map.field==null || map.field==''}">selected</c:if>>전체</option>
 									<option value="obname" <c:if test="${map.field=='obname'}">selected</c:if>>상품명</option>
 									<option value="obwriter" <c:if test="${map.field=='obwriter'}">selected</c:if>>저자</option>
 									<option value="obpublisher" <c:if test="${map.field=='obpublisher'}">selected</c:if>>출판사</option>
@@ -127,7 +127,7 @@ input[type="text"] {
 				</tr>
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
-						<td><c:out value="${status.count}" /></td>
+						<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>
 						<td>${vo.obname}</td>
 						<td>${vo.obwriter}</td>
 						<td>${vo.obpublisher}</td>
@@ -167,12 +167,20 @@ input[type="text"] {
 			<!-- 페이징처리 -->
 			<div>
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="javascript:void(0);">이전</a></li>
+					<!-- 이전버튼 -->
+					<c:if test="${pu.startPageNum>3 }">
+						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${pu.startPageNum-1}&
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
+					</c:if>
 					<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
 						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${i}&
-						keyword=${keyword}&field=${field}&status=${status}&startDay=${startDay}&endDay=${endDay}">${i}</a></li>
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a></li>
 					</c:forEach>
-					<li class="page-item"><a class="page-link" href="javascript:void(0);">다음</a></li>
+					<!-- 다음버튼 -->
+					<c:if test="${pu.totalPageCount>pu.endPageNum}">
+						<li class="page-item"><a class="page-link" href="${cp }/seller/prodLook?pageNum=${pu.endPageNum+1}&
+						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
+					</c:if>
 				</ul>
 
 			</div>
@@ -181,7 +189,7 @@ input[type="text"] {
 </div>
 
 <script type="text/javascript">
-	
+	//상품삭제
 	function del(obnum){
 		var result=confirm('상품을 삭제하시겠습니까?');
 		if(result==true){
