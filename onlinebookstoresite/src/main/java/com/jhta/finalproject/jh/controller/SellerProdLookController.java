@@ -24,7 +24,7 @@ public class SellerProdLookController {
 	@RequestMapping("/seller/prodLook")
 	public String sellerProdLook(Model model,HttpServletRequest req,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum, //페이지번호
-			@RequestParam(value="obsalestatus",defaultValue = "3")int obsalestatus, //판매상태
+			@RequestParam(value="obsalestatus",defaultValue = "4")int obsalestatus, //판매상태
 			String field,
 			String keyword,
 			String startDay, //시작일

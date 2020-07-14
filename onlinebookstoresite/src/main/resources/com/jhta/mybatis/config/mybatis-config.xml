@@ -27,6 +27,7 @@
   	<!-- ////지호///// -->
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/>
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/>
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerMainBoardMapper.xml"/>
   
   	<!-- ////희도//// -->
   	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/>

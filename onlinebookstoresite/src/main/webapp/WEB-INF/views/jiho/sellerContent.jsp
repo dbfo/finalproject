@@ -9,23 +9,23 @@
 		<br>
 			<table class="table">
 				<tr>
-					<th>등록상품</th>
+					<th><a href="${cp}/seller/prodLook"><span style="color: black;">등록상품</span></a></th>
+					<td><a href="${cp }/seller/prodLook">${getOldbookCount }개</a></td>
+				</tr>
+				<tr>
+					<th><a href=""><span style="color: black;">입금대기중</span></a></th>
 					<td><a href="">0개</a></td>
 				</tr>
 				<tr>
-					<th>주문확인요청</th>
+					<th><a href=""><span style="color: black;">입금완료/배송요청</span></a></th>
 					<td><a href="">0개</a></td>
 				</tr>
 				<tr>
-					<th>발송요청</th>
+					<th><a href=""><span style="color: black;">배송중/구매확정전</span></a></th>
 					<td><a href="">0개</a></td>
 				</tr>
 				<tr>
-					<th>배송/구매확정전</th>
-					<td><a href="">0개</a></td>
-				</tr>
-				<tr>
-					<th>구매확정</th>
+					<th><a href=""><span style="color: black;">구매확정</span></a></th>
 					<td><a href="">0개</a></td>
 				</tr>
 			</table>

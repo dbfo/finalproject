@@ -90,14 +90,16 @@
 				<tr>
 					<td class="tdstyle" id="statusa">판매상태별 조회</td>
 					<td class="prodLooktdStyle">
-						<input type="radio"	name="obsalestatus" value="3" 
-							<c:if test="${map.obsalestatus==3 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
+						<input type="radio"	name="obsalestatus" value="4" 
+							<c:if test="${map.obsalestatus==4 || map.obsalestatus==null || map.obsalestatus==''}">checked</c:if>>전체
 						<input type="radio" name="obsalestatus" value="0"
 							<c:if test="${map.obsalestatus==0 }">checked</c:if>>판매중
 						<input type="radio" name="obsalestatus" value="1"
 							<c:if test="${map.obsalestatus==1 }">checked</c:if>>입금대기중
 						<input type="radio" name="obsalestatus" value="2"
-							<c:if test="${map.obsalestatus==2 }">checked</c:if>>판매완료
+							<c:if test="${map.obsalestatus==2 }">checked</c:if>>결제완료
+						<input type="radio" name="obsalestatus" value="3"
+							<c:if test="${map.obsalestatus==3 }">checked</c:if>>판매완료
 					</td>
 				</tr>
 				<tr>
@@ -162,15 +164,18 @@
 						<td>${vo.obname}</td>
 						<td>${vo.obwriter}</td>
 						<td>${vo.obpublisher}</td>
-						<td><c:if test="${vo.obsalestatus==0}">판매중</c:if> <c:if
-								test="${vo.obsalestatus==1}">입금대기중</c:if> <c:if
-								test="${vo.obsalestatus==2}">판매완료</c:if></td>
-						<td><c:if test="${vo.obstatus==1}">최상</c:if> <c:if
-								test="${vo.obstatus==2}">상</c:if> <c:if test="${vo.obstatus==3}">중</c:if>
-							<c:if test="${vo.obstatus==4}">하</c:if></td>
+						<td><c:if test="${vo.obsalestatus==0}">판매중</c:if> 
+							<c:if test="${vo.obsalestatus==1}">입금대기중</c:if> 
+							<c:if test="${vo.obsalestatus==2}">결제완료</c:if>
+							<c:if test="${vo.obsalestatus==3}">판매완료</c:if>
+						</td>
+						<td><c:if test="${vo.obstatus==1}">최상</c:if>
+							<c:if test="${vo.obstatus==2}">상</c:if>
+							<c:if test="${vo.obstatus==3}">중</c:if>
+							<c:if test="${vo.obstatus==4}">하</c:if>
+						</td>
 						<td>${vo.obsaleprice}원</td>
-						<td><fmt:formatDate value="${vo.obregdate}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${vo.obregdate}"	pattern="yyyy-MM-dd" /></td>
 						<td><c:choose>
 								<c:when test="${vo.obsalestatus==0}">
 									<a href="${cp}/seller/prodUpdateView?obnum=${vo.obnum}"> <input

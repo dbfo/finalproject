@@ -21,6 +21,9 @@
 		<if test="obsalestatus == 2">
 			and obsalestatus=2
 		</if>
+		<if test="obsalestatus == 3">
+			and obsalestatus=3
+		</if>
 		<if test='field=="all" and keyword != null and keyword !=""'>
 			and obpublisher like '%'||#{keyword}||'%' 
 			or obname like '%'||#{keyword}||'%' 
