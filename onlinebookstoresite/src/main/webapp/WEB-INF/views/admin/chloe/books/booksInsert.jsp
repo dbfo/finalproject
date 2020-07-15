@@ -104,19 +104,22 @@
 	// 포인트 = 가격 * (5 / 100)
 	$("#bprice").change(function() {
 		var price = $(this).val();
-		$("#bpoint").val(price * 0.05);
+		$("#bpoint").val(Math.round(price * 0.05));
 	});
-	
+
 	// 유효성검사
 	$("form").submit(function() {
 		var bctg = $("#bctg").val();
-		var smctg = $("#smctg").val();
 		if (bctg == "") {
 			alert("카테고리를 선택해 주세요.");
+			$("#bctg")[0].focus();
 			return false;
 		}
+
+		var smctg = $("#smctg").val();
 		if (smctg == "") {
 			alert("카테고리를 선택해 주세요.");
+			$("#smctg")[0].focus();
 			return false;
 		}
 
@@ -147,7 +150,7 @@
 			bpublisher.focus();
 			return false;
 		}
-		
+
 		var bprice = $("input[name='bprice']");
 		if (bprice.val() == "") {
 			alert("가격을 입력해 주세요.");

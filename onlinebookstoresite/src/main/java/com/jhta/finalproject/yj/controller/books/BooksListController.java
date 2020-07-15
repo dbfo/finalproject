@@ -33,19 +33,16 @@ public class BooksListController {
 		if (bcontent != null) {
 			bcontent = bcontent.replace("\n", "<br>");
 		}
+		vo.setBcontent(bcontent);
 
 		List<ImgVO> imgList = service.previewImg(bnum);
-//		for (int i = 0; i < imgList.size(); i++) {
-//			int thumbnail= imgList.get(0).getThumbnail();
-//			int img= imgList.get(1).getThumbnail();
-//			System.out.println("섬네일:" + imgList.get(0).getThumbnail());
-//			System.out.println("일반이미지:" + imgList.get(1).getThumbnail());
-//		}
 
-		vo.setBcontent(bcontent);
+		if (imgList.size() == 2) { // 만약에 이미지가 두개일 경우
+			model.addAttribute("imgVO2", imgList.get(1));
+
+		}
 		model.addAttribute("vo", vo);
-		model.addAttribute("thub", imgList.get(0));
-		model.addAttribute("img", imgList.get(1));
+		model.addAttribute("imgVO1", imgList.get(0));
 		return ".booksPreview";
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
@@ -9,33 +10,67 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
+			<div id="btnDiv1">
+				<input type="submit" value="수정" class="btn btn-success">
+				<input type="reset" value="삭제" class="btn btn-danger">
+			</div>
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-7">
-					<h1>${thub.imgsavefilename }</h1>
-						<img alt="Bootstrap Image Preview"
-							src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+					<div class="col-md-7" id="thumbDiv">
+						<%-- <h1>${imgVO1.thumbnail}</h1> --%>
+						<img width="400px" height="600px"
+							src="${pageContext.request.contextPath}/resources/imgUpload/${imgVO1.imgsavefilename}" />
 					</div>
 					<div class="col-md-5">
-						<div style="font-size: 30px; font-weight: 600;">${vo.btitle }</div>
+						<div id="titleDiv" style="font-size: 35px; font-weight: 600;">${vo.btitle }</div>
 						<fmt:formatDate value="${vo.bpublishdate }" pattern="yyyy/MM/dd"
-								var="bpublishdate" />
-						<div>${vo.bwriter } 지음 | ${vo.bpublisher } | ${bpublishdate } 출간</div>
-						<div style="font-size: 25px; font-weight: 500;">${vo.bprice }원</div>
-						<div>(${vo.bpoint } point 적립 예정)</div>
-						<div style="font-size: 20px;">배송비 : ${vo.bshipinfo }원</div>
+							var="bpublishdate" />
+						<div id="wppDiv" style="font-size: 20px;">${vo.bwriter } 지음 | ${vo.bpublisher } | ${bpublishdate } 출간</div>
+						<div id="priceDiv" style="font-size: 30px; font-weight: 500;">${vo.bprice }원</div>
+						<div id="pointDiv">(${vo.bpoint } point 적립 예정)</div>
 					</div>
 				</div>
 				<br>
 				<div class="row">
 					<div class="col-md-12">
-						<h4>[책 소개글]</h4>
-						<p>${vo.bcontent }</p>
+						<div id="introTextDiv" style="font-size: 30px; font-weight: 600;">[소개글]</div>
+						<div id="contentTextDiv">${vo.bcontent }</div>
 					</div>
 				</div>
-				<img alt="Bootstrap Image Preview"
-					src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+				<c:if test="${!empty imgVO2 }">
+					<div id="imgDiv">
+						<%-- <h1>${imgVO2.thumbnail}</h1> --%>
+						<img
+							src="${pageContext.request.contextPath}/resources/imgUpload/${imgVO2.imgsavefilename}" />
+					</div>
+				</c:if>
+			</div>
+			<div id="btnDiv2">
+				<input type="button" value="수정" class="btn btn-success">
+				<input type="button" value="삭제" class="btn btn-danger">
 			</div>
 		</div>
 	</div>
 </div>
+
+<style type="text/css">
+#thumbDiv, #introTextDiv, #contentTextDiv, #imgDiv {
+	text-align: center;
+}
+
+#introTextDiv, #contentTextDiv{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+#titleDiv, #wppDiv, #priceDiv, #pointDiv {
+	margin-top: 15px;
+	/* 	margin-bottom: 30px; */
+}
+
+#btnDiv1, #btnDiv2 {
+	margin-left: 100px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+</style>
