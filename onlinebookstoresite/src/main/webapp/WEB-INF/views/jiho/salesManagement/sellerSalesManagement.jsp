@@ -130,7 +130,10 @@ p {
 						<tr>
 							<th scope="col" width="60" rowspan="2">1</th>
 							<th scope="col" width="100" rowspan="2">${vo.bpaynum }</th>
-							<th scope="col" rowspan="2" width="400">책제목들..</th>
+							<th scope="col" rowspan="2" width="400">
+								${vo.sellerOldbookVo }
+								
+							</th>
 							<th scope="col">${vo.mname }</th>
 							<th scope="col">${vo.ordermoney }원</th>
 							<th scope="col" rowspan="2">${vo.bfinalmoney }원</th>

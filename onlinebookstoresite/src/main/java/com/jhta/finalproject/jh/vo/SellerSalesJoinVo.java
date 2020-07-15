@@ -20,13 +20,14 @@ public class SellerSalesJoinVo {
 	private int mnum;
 	private int delfee;
 	private String mname;
-	private List<SellerOldbooksVo> sellerOldbookVo;
+	private int obnum;
+	private SellerOldbooksVo sellerOldbookVo;
 	
 	public SellerSalesJoinVo () {}
 	
 	public SellerSalesJoinVo(int bpaynum, int snum, int btype, int bcount, String baddr, String phone, int bfinalmoney,
 			Date borderdate, Date bpaydate, int bstatus, int ordermoney, int mothodpayment, String receiver, int mnum,
-			int delfee, String mname, List<SellerOldbooksVo> sellerOldbookVo) {
+			int delfee, String mname, int obnum,SellerOldbooksVo sellerOldbookVo) {
 		super();
 		this.bpaynum = bpaynum;
 		this.snum = snum;
@@ -44,6 +45,7 @@ public class SellerSalesJoinVo {
 		this.mnum = mnum;
 		this.delfee = delfee;
 		this.mname = mname;
+		this.obnum = obnum;
 		this.sellerOldbookVo = sellerOldbookVo;
 	}
 	public int getBpaynum() {
@@ -140,12 +142,18 @@ public class SellerSalesJoinVo {
 		return mname;
 	}
 	public void setMname(String mname) {
-		this.mname = mname;
+		this.mname= mname;
 	}
-	public List<SellerOldbooksVo> getSellerOldbookVo() {
+	public int getObnum() {
+		return obnum;
+	}
+	public void setObnum(int obnum) {
+		this.obnum = obnum;
+	}
+	public SellerOldbooksVo getSellerOldbookVo() {
 		return sellerOldbookVo;
 	}
-	public void setSellerOldbookVo(List<SellerOldbooksVo> sellerOldbookVo) {
+	public void setSellerOldbookVo(SellerOldbooksVo sellerOldbookVo) {
 		this.sellerOldbookVo = sellerOldbookVo;
 	}
 	

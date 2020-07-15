@@ -38,6 +38,8 @@ bpayment bstatus
 		map.put("bstatus",bstatus);
 		List<SellerSalesJoinVo> list1=service.getSalesList(map);
 		
+		System.out.println("test:"+list1.get(0).getSellerOldbookVo().toString());
+		
 		model.addAttribute("list1", list1);
 		model.addAttribute("tabType", tabType);
 		return ".seller.salesManagement";
