@@ -12,20 +12,26 @@
 		<i class="fas fa-table mr-1"></i> 상품수정
 	</div>
 	<form method="post" action="${pageContext.request.contextPath }/booksUpdate" enctype="multipart/form-data">
+		<input type="hidden" name="bnum" value="${bvo.bnum }">
 		<table class="booksUpdateTable table">
 			<tr>
 				<th align="center" class="table-active">카테고리 *</th>
-				<td colspan="3"><select name="bctg" id="bctg">
+				<td colspan="3">
+					<select name="bctg" id="bctg">
 						<option value="">- 선택 -</option>
 						<c:forEach var="big" items="${getBigctg }">
 							<option value="${big.bcatenum }">${big.bcataname }</option>
 						</c:forEach>
-				</select>
+					</select>
 					<div id="smctgDiv" style="display: none">
-						<select name="smctg" id="smctg">
-							<option value="">- 선택 -</option>
-						</select>
-					</div></td>
+<%-- 						<c:forEach var="sm"> --%>
+							<select name="smctg" id="smctg">
+								<option value="">- 선택 -</option>
+								<option value="${bvo.scatenum }">(카테고리가져오기)</option>
+							</select>
+<%-- 						</c:forEach> --%>
+					</div>
+				</td>
 			</tr>
 
 			<tr>
@@ -60,7 +66,7 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">기존 썸네일 ${thumbImg.imgnum }</th>
+				<th align="center" class="table-active">기존 썸네일</th>
 				<td>
 					<div id="savedThumbImg" style="text-align: center;">
 						<img width="300px" height="350px"
