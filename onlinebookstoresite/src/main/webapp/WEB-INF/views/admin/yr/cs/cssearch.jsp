@@ -27,7 +27,7 @@
 				<div class="row">
 					<select name = "tfield" class = "col form-control col-xs-2">
 						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>
-						<option value="bpaydate" <c:if test="${tfield == 'bpaydate'}">selected</c:if>>결제일</option>
+						<option value="aplctdate" <c:if test="${tfield == 'aplctdate'}">selected</c:if>>접수일</option>
 					</select>
 					<div class='col-md-4'>
 						<input class="btn btn-outline-success btn-sm dbtn" type="button"

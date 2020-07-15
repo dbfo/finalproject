@@ -76,6 +76,12 @@
 			and bstatus = #{shipStatus}				
 	    </if>
 	</sql>
+	
+	<sql id="CSStatus">
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
+			and type = #{CSStatus}				
+	    </if>		
+	</sql>
 
 <!-- 	전체리스트보기 -->
 <!-- 	<select id="allList" resultType="payment" parameterType="hashmap"> -->
@@ -124,6 +130,7 @@
 	    and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
 	    <include refid="search"/>
 	    <include refid="shipStatus"/>
+	    <include refid="CSStatus"/>
 	</select>
 	
 	

@@ -10,11 +10,10 @@
 			
 		<!-- 취소 -->
 		<section id="content1" >
-			<jsp:include page="cstables.jsp" />
 		</section>
 		<!-- 입금 전 취소-->
 		<section id="content2">
-			
+			<jsp:include page="cstables.jsp" />			
 		</section>
 	</div>
 </div>
