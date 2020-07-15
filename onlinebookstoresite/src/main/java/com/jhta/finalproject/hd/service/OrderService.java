@@ -9,17 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.OrderDao;
-import com.jhta.finalproject.hd.vo.OrderResultVo;
+import com.jhta.finalproject.hd.vo.OrderListResultVo;
+import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 
 @Service
 public class OrderService {
 	@Autowired
 	private OrderDao dao;
 	
-	public List<OrderResultVo> inputorderlist(Map<String, Object>map){
+	public List<OrderListResultVo> inputorderlist(Map<String, Object>map){
 		return dao.inputorderlist(map);
 	}
-	public String getAddr(int mnum) {
+	public OrderListResultVo directorder(int bnum) {
+		return dao.directOrder(bnum);
+	}
+	public ShipmentInfoVo getAddr(int mnum) {
 		return dao.getAddr(mnum);
 	}
 	public int getPoint(int mnum) {

@@ -1,7 +1,7 @@
 package com.jhta.finalproject.hd.vo;
 
 //장바구니 -> 주문 넘어갈때 사용하는 VO
-public class OrderResultVo {
+public class OrderListResultVo {
 	private String btitle; //책제목
 	private int bnum; //책번호
 	private int bprice; //가격
@@ -13,8 +13,8 @@ public class OrderResultVo {
 	private String imgpath; //이미지 이름 + 저장폴더명 ( 컨트롤러에서 set )
 	private int totalpoint; //수량 * 포인트  (컨트롤러에서 set)
 	private int totalvalue; //수량 * 가격  (컨트롤러에서 set)
-	public OrderResultVo() {}
-	public OrderResultVo(String btitle, int bnum, int bprice, int bpoint, int bshipinfo, String imgsavefilename,
+	public OrderListResultVo() {}
+	public OrderListResultVo(String btitle, int bnum, int bprice, int bpoint, int bshipinfo, String imgsavefilename,
 			int cartNum, int bcount, String imgpath, int totalpoint, int totalvalue) {
 		super();
 		this.btitle = btitle;

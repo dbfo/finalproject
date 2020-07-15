@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h2>상품확인</h2>
+
+
+
+<div class="tab-content">
+<div class="container" style="border:1px solid black">
+<!--/////////// 상품리스트 테이블 시작 ///////////////-->
+<h4>상품확인</h4>
 <table class="table">
-	<thead class="thead-dark" style="table-layout: fixed">
+	<thead class="thead-dark">
 		<tr>
 			<th colspan="2">상품명</th>
 			<th>판매가</th>
@@ -33,12 +39,12 @@
 			<td colspan="6" >
 				<div id="divloc" style="display:inline-block;"><strong>배송지:</strong></div>
 				<div id="shipaddr" style="display:inline-block;">
-					<span id="landAddr">
 					<img src="${cp }/resources/hd/image/addricon_land.gif">
-					</span><br>
-					<span id="roadAddr">
+					<span id="landAddr" class="addrs">
+					</span><span class="addr4 addrs"></span><br>
 					<img src="${cp }/resources/hd/image/addricon_road.gif">
-					</span>
+					<span id="roadAddr" class="addrs">
+					</span><span class="addr4 addrs"></span>
 				</div>
 			</td>
 		</tr>
@@ -46,8 +52,9 @@
 			<td colspan="6">1-2일내 도착예정....
 		</tr>
 	</tfoot>
-	</table>
-	
+</table>
+<!--/////////// 상품리스트 테이블 끝 ///////////////-->
+<!--/////////// 결제금액,포인트 테이블 시작 ///////////////-->
 	<table class="table">
 			<tr class="table-secondary">
 				<th>총 상품금액</th><th>배송비</th><th>사용포인트</th>
@@ -71,25 +78,83 @@
 				</td>
 			</tr>
 	</table>
-	<br><br>
+<!--/////////// 결제금액,포인트 테이블 끝 ///////////////-->
+</div>
+	<br>
+<!--/////////// 배송정보 테이블 시작 ///////////////--> 
+	<div class="container" style="border:1px solid black;">
 	<h4>배송정보</h4>
-	<table class="table">
+	<table class="table table-bordered">
 		<tr>
-			<td>배송지</td>
-			<td></td>
-			<td><strong>주문고객</strong></td>
+			<td class="table-info tableloc" style="width:10%"><strong>배송지</strong></td>
+			<td style="width:50%">
+				<c:if test="${not empty sessionScope.mid }">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="ship_option" checked="checked" value="0">회원정보와 동일
+						</label>
+					</div>
+				</c:if>
+				<div class="form-check-inline">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="ship_option" value="1">새로입력
+					</label>
+				</div>
+			</td>
+			<td class="table-info tableloc" style="width:40%"><strong>주문고객</strong></td>
 		</tr>
 		<tr>
-			<td>이름</td><td><input type="text" id="name" value=""></td><td rowspan="3">ㅎㅇㅎ</td>
+			<td  class="table-info tableloc"><strong>이름</strong></td>
+			<td><input type="text" id="name" value="" class="textbox1"></td>
+			<td rowspan="3" class="tableloc">
+				<table class="tableloc">
+					<tr>
+						<td>이름</td><td><input type="text"  readonly="readonly" id="ordername"></td>
+					</tr>
+					<tr>
+						<td>전화번호</td>
+						<td>
+							<input type="text" class="contact_number" id="orderphone1" readonly="readonly">
+						- <input type="text" class="contact_number" id="orderphone2" readonly="readonly">
+						- <input type="text" class="contact_number" id="orderphone3" readonly="readonly">
+						</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
 		<tr>
-			<td>배송주소</td><td></td>
+			<td class="table-info tableloc"><strong>배송주소</strong></td>
+			<td>
+				<input type="text" id="addr1" class="textbox1">
+				<button type="button" class="btn btn-dark disabled" id="searchAddrBtn"  onclick="searchShipAddr()">주소 검색</button><br>
+				<div class="addrLoc">지번 주소</div><input type="text" id="addr3" class="road_land_textbox" readonly="readonly"><br>
+				<div class="addrLoc">도로명 주소</div><input type="text" id="addr2" class="road_land_textbox" readonly="readonly"><br>
+				<input type="text" id="addr4" placeholder="상세주소" readonly="readonly">&nbsp<input type="text" id="addr5" placeholder="참고주소" readonly="readonly">
+			</td>
+			
 		</tr>
 		<tr>
-			<td>전화번호</td><td>111-1111-1111</td>
+			<td class="table-info tableloc"><strong>전화번호</strong></td>
+			<td>
+				<input type="text" class="contact_number" id="phone1">
+				- <input type="text" class="contact_number" id="phone2">
+				- <input type="text" class="contact_number" id="phone3">
+			</td>
+			
 		</tr>
 	</table>
-<!-- ////////// 포인트사용 모달 //////////////////////// -->
+	</div>
+<!--/////////// 배송정보 테이블 끝 ///////////////--> 	
+<!--/////////// 결제정보 테이블 시작 ///////////////--> 	
+	<br>
+	<h4>결제정보</h4>
+	<table>
+	
+	</table>
+<!--/////////// 결제정보 테이블 끝 ///////////////--> 	
+	<button type="button" class="btn btn-dark">결제하기</button>
+</div>
+<!-- ////////// 포인트사용 모달  시작//////////////////////// -->
 <div class="modal fade" id="modal_point">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -117,7 +182,11 @@
     </div>
   </div>
 </div>
-<!-- /////////////////////////////////////////////////// -->
+<!-- ////////// 포인트사용 모달 끝//////////////////////// -->
+
+<!-- 주소 API 사용 스크립트 시작-->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 주소 API 사용 스크립트 끝-->
 <script type="text/javascript">
 	$(document).ready(function(){
 		shipAddr();
@@ -125,22 +194,59 @@
 		shipCharge();
 		finalprice();
 	});
+	//상세주소 입력시.
+	$("#addr4").on('keyup',function(){
+		console.log('1111')
+		var addr4=$("#addr4").val();
+		$(".addr4").text(addr4);
+	});
+	
+	//배송지 radio 버튼 선택 이벤트.
+	$("input[type='radio']").click(function(){
+		var value=$(this).val();
+		if(value==0){
+			$("#searchAddrBtn").addClass("disabled");
+			$("#addr4").attr("readonly",true);
+			shipAddr();
+		}else if(value==1){
+			$("#searchAddrBtn").removeClass("disabled");
+			$("#addr4").attr("readonly",false);
+			$("#addr4, #addr1, #addr2, #addr3, #addr5, #name,#phone1,#phone2,#phone3").val("");
+			$("#landAddr").text("()");
+			$("#roadAddr").text("()");
+		}
+		
+	});
 	//회원정보의 배송지주소 받아옴.
 	var shipAddr=function(){
 		$.ajax({
 			url:"/finalproject/order/getAddr",
 			dataType: "json",
 			success:function(data){
-				var addr1=data.addr1;
-				var addr2=data.addr2;
-				var addr3=data.addr3;
-				var addr4=data.addr4;
-				var addr5=data.addr5;
+				var addr1=data.addr1; //우편번호
+				var addr2=data.addr2; //도로명주소 
+				var addr3=data.addr3; //지번주소
+				var addr4=data.addr4; //상세주소
+				var addr5=data.addr5; //참고주소
 				var zipcode="("+addr1+")";
-				var landaddr=zipcode+" "+addr3+" "+addr4;
-				var roadaddr=zipcode+" "+addr2+" "+addr4+" "+addr5;
-				$("#landAddr").append(landaddr);
-				$("#roadAddr").append(roadaddr);
+				var landaddr=zipcode+" "+addr3+" "+addr5+" "+addr4;
+				var roadaddr=zipcode+" "+addr2+" "+addr5+" "+addr4;
+				var mname=data.mname;
+				var phone1=data.phone1;
+				var phone2=data.phone2;
+				var phone3=data.phone3;
+				$("#landAddr").text(landaddr);
+				$("#roadAddr").text(roadaddr);
+				$("#name").val(mname);
+				$("#ordername").val(mname);
+				$("#addr1").val(addr1);
+				$("#addr2").val(addr2);
+				$("#addr3").val(addr3);
+				$("#addr4").val(addr4);
+				$("#addr5").val(addr5);
+				$("#phone1, #orderphone1").val(phone1);
+				$("#phone2, #orderphone2").val(phone2);
+				$("#phone3, #orderphone3").val(phone3);
 				$("#use_point").text("0");
 			}
 		})
@@ -224,4 +330,65 @@
 	 	$("#modal_remainpoint").val("");
 	 	$("#modal_confirm").addClass("disabled");
 	});
+	///////////// 주소 API 시작 ///////////////////////////////////////////////////////
+	function searchShipAddr() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+				var postnum=data.zonecode;
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                $("#addr1").val(postnum);
+                $("#addr2").val(roadAddr);
+                $("#addr3").val(data.jibunAddress);
+                
+                var toproadAddr="("+postnum+")"+" "+roadAddr;
+                var topjibunAddr="("+postnum+")"+" "+data.jibunAddress
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                   $("#addr5").val(extraRoadAddr);
+                    toproadAddr+=" "+extraRoadAddr+" ";
+                    topjibunAddr+=" "+extraRoadAddr+" ";
+                } else {
+                    
+                }
+				$("#landAddr").text(topjibunAddr);
+				$("#roadAddr").text(toproadAddr);
+                //var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    //guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                   // guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                   // guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                  //  guideTextBox.style.display = 'block';
+                } else {
+                    //guideTextBox.innerHTML = '';
+                   // guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+///////////// 주소 API 끝 ///////////////////////////////////////////////////////
 </script>

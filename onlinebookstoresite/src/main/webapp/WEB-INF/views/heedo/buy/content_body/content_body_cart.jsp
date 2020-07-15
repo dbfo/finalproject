@@ -1,38 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="topButton" style="height:35px;">
-	<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
-	<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>
-</div>
-<table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th><input  style='zoom:1.5;' type="checkbox" id="allcheck" checked="checked"></th>
-			<th colspan="2" align="center">상품명</th>
-			<th>판매가</th>
-			<th>적립포인트</th>
-			<th>수랑</th>
-			<th>합계</th>
-			<th style="text-align: right;">주문</th>
-		</tr>
-	</thead>
-	<tbody>
+<!-- /// 최상단 tab 영역 시작 /// -->
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link active" data-toggle="tab" href="#newitem">새상품</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#useditem">중고상품</a>
+	</li>
+</ul>    
+<!-- /// 최상단 tab 영역 끝 /// -->
+<br>
+<!-- /// 내용 div 시작 /// -->
+<div class="tab-content container" style="border:1px solid black">
+	<!-- /// 새상품 div 시작 /// -->
+	<div id="newitem" class="tab-pane active">
+		<div id="topButton" style="height:35px;">
+			<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
+			<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>
+		</div>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th><input  style='zoom:1.5;' type="checkbox" id="allcheck" checked="checked"></th>
+					<th colspan="2" align="center">상품명</th>
+					<th>판매가</th>
+					<th>적립포인트</th>
+					<th>수랑</th>
+					<th>합계</th>
+					<th style="text-align: right;">주문</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="8" align="right">
+					상품 총 금액 : <strong><span id="total_value"></span></strong>원  
+					| 포인트 총 적립액 : <strong><span id="total_point"></span></strong>원</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 	
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="8" align="right">
-			상품 총 금액 : <strong><span id="total_value"></span></strong>원  
-			| 포인트 총 적립액 : <strong><span id="total_point"></span></strong>원</td>
-		</tr>
-	</tfoot>
-</table>
-<!-- ////////////////////////삭제 확인 Modal  ///////////////////////////-->
+	
+	<!-- /// 새상품 div 끝 /// -->
+	<!-- /// 중고상품 div 시작 /// -->
+	<div id="useditem" class="tab-pane fade">
+	
+	</div>
+	<!-- /// 중고상품 div 시작 /// -->
+	</div>
+<br>
+<!-- /// 내용 div 시작 /// -->
+
+<!-- ///삭제 확인 Modal 시작 ///-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">물품 삭제</h5>
+      <div class="modal-header">  
+        <h5 class="modal-title" id="deleteModalLabel">상품 삭제</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,7 +75,7 @@
     </div>
   </div>
 </div>
-<!-- /////////////////////////////////// -->
+<!-- ///삭제 확인 Modal 끝 ///-->
 <script>
 	$(document).ready(function() {
 		viewCart();
