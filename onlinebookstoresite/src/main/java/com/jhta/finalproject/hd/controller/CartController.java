@@ -1,40 +1,72 @@
 package com.jhta.finalproject.hd.controller;
 
-import java.sql.Array;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.CartService;
 import com.jhta.finalproject.hd.vo.CartListVo;
+import com.jhta.finalproject.hd.vo.UsedCartListVo;
 
 @Controller
 public class CartController {
 	@Autowired
 	private CartService service;
-	
+	//장바구니버튼 클릭시 장바구니로 이동.
 	@RequestMapping("/pay/cart")
 	public String conCart() {
 		return ".cart";
 	}
-	//장바구니 리스트 출력 AJAX
+	//============== 중고 관련 AJAX 컨트롤러  시작 =============//
+	@RequestMapping(value="/pay/usedlist",produces= "application/json;charset=utf-8")
+	@ResponseBody
+	public String usedlist(HttpSession session) {
+		String smnum=(String)session.getAttribute("mnum");
+		String path=session.getAttribute("cp")+"/resources/hd/image";
+		int mnum=0;
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}
+		List<UsedCartListVo>list=service.usedlist(mnum);
+		JSONArray jarr=new JSONArray();
+		for(UsedCartListVo vo:list) {
+			JSONObject json=new JSONObject();
+			json.put("cartnum", vo.getCartnum());
+			json.put("bcount", vo.getBcount());
+			json.put("obnum", vo.getObnum());
+			String sid=service.getSid(vo.getSnum());
+			json.put("sid", sid); //판매자 아이디
+			String imgpath=path+"\\"+vo.getImgsavefilename();
+			json.put("imgsrc", imgpath);
+			json.put("oborgprice", vo.getOborgprice());
+			json.put("obsaleprice", vo.getObsaleprice());
+			json.put("obstatus", vo.getObstatus());
+			jarr.put(json);
+		}
+		return jarr.toString();
+	}
+	
+	//============== 새제품 관련 AJAX 컨트롤러  끝 =============//
+	
+	//============== 새제품 관련 AJAX 컨트롤러  시작 =============//
+	//장바구니 새상품 리스트 출력 AJAX
 	@RequestMapping(value="/pay/cartlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String cartlist(HttpSession session) {
 		//세션에 들어있는 회원번호 받음.
-		int mnum=(int)session.getAttribute("mnum");
+		String smnum=(String)session.getAttribute("mnum");
+		int mnum=0;
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}
 		String path=session.getAttribute("cp")+"/resources/hd/image";
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mnum", mnum);
@@ -61,7 +93,7 @@ public class CartController {
 		}
 		return jarr.toString();
 	}
-	//장바구니에서 하나삭제 AJAX
+	//장바구니에서 새상품 하나삭제 AJAX
 	@RequestMapping("/pay/deleteOneCart")
 	@ResponseBody
 	public String deleteOne(int cartNum) {
@@ -74,7 +106,7 @@ public class CartController {
 		json.put("result", result);
 		return json.toString();	
 	}
-	//수량변경 AJAX
+	//새상품 수량변경 AJAX
 	@RequestMapping("/pay/changeCount")
 	@ResponseBody
 	public String changeCount(int cartNum,int newCount) {
@@ -90,7 +122,7 @@ public class CartController {
 		json.put("result", result);
 		return json.toString();	
 	}
-	//
+	// 새상품 선택한거 삭제 AJAX
 	@PostMapping("/pay/deleteSelectCart")
 	@ResponseBody
 	public String deleteSelectCart(@RequestParam(value="cartNumlist[]")List<Integer>cartNumlist) {
@@ -110,4 +142,5 @@ public class CartController {
 		
 		return json.toString();
 	}
+	//============== 새제품 관련 AJAX 컨트롤러  끝 =============//
 }

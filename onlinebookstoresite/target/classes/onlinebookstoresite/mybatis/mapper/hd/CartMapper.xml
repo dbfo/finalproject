@@ -3,9 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.CartMapper">
+	<!-- ======== 중고 상품 관련 Mapper 시작 ============ -->
+	
+	<!-- 회원번호 받아 중고 장바구니 리스트 출력. -->
+	<select id="usedlist" parameterType="int" resultType="usedVo">
+		select cart.*,img.imgsavefilename,obs.snum, oborgprice, obsaleprice, obstatus, obnum
+		from
+		(select * from cart where btype=2 and mnum=#{mnum})cart,
+		(select * from oldbooks)obs,
+		(select * from img where btype=2)img
+		where cart.bnum=obs.obnum and cart.bnum=img.bnum;
+	</select>
+	
+	<select id="getSid" parameterType="int" resultType="string">
+		select members.mid from 
+		(select * from obseller where snum=#{snum})seller,(select * from members) members
+		where seller.mnum=members.mnum;
+	</select>
+	
+	<!-- ======== 중고 상품 관련 Mapper 끝 ============ -->
+	<!-- ======== 새 상품 관련 Mapper 시작 ============ -->
+
 	<!-- 회원번호 받아서 장바구니 리스트 출력시 사용하는 SELECT 문 -->
+	<!-- 15일 저녁 집에서 bshipinfo 에러남.. 16일날 물어보기! -->
 	<select id="cartlist" parameterType="hashmap" resultType="cartview">
-		select books.bnum,books.btitle,books.bprice,books.bpoint,books.bshipinfo,books.bcount stored,cart.mnum,cart.cartnum,cart.bcount,img.imgsavefilename from
+		select books.bnum,books.btitle,books.bprice,books.bpoint,books.bcount stored,cart.mnum,cart.cartnum,cart.bcount,img.imgsavefilename from
 		(select * from books)books,(select * from cart where mnum=#{mnum})cart,(select * from img where thumbnail=1 and btype=1)img
 		where books.bnum=cart.bnum and cart.bnum=img.bnum
 	</select>
@@ -24,4 +46,6 @@
 	<update id="changeCount" parameterType="hashmap">
 		update cart set bcount=#{newCount} where cartnum=#{cartNum}
 	</update>
+	
+	<!-- ======== 새 상품 관련 Mapper 끝 ============ -->
 </mapper>

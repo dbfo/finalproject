@@ -17,6 +17,7 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.CartListVo" alias="cartview"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.OrderListResultVo" alias="orderVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.ShipmentInfoVo" alias="shipVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.UsedCartListVo" alias="usedVo"/>
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->

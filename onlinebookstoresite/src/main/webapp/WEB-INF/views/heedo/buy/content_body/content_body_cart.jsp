@@ -50,8 +50,10 @@
 	<div id="useditem" class="tab-pane fade">
 	
 	</div>
-	<!-- /// 중고상품 div 시작 /// -->
-	</div>
+	<!-- /// 중고상품 div 끝 /// -->
+	
+
+</div>
 <br>
 <!-- /// 내용 div 시작 /// -->
 
@@ -80,9 +82,27 @@
 	$(document).ready(function() {
 		viewCart();
 	})
+	//=====================중고 관린 스크립트 시작 ===========================//
+	var viewusedcart=function(){
+		$.ajax({
+			url:"/finalproject/pay/usedlist",
+			dataType:"json",
+			success:function(data){
+				
+			}
+		})
+		
+	}
+	
+	//=====================중고 관린 스크립트 끝 ===========================//
+	
+	//=====================새제품 관린 스크립트 시작 ===========================//
+	
+	//장바구니 클리어 
 	var clearCart=function(){
 		$("tbody").empty();
 	}
+	//장바구니 리스트 
 	var viewCart=function(){
 		$("#allcheck").prop("checked",true);
 		$.ajax({
@@ -266,6 +286,7 @@
 		});
 		$("#deleteModal").modal('hide');
 	});
+	//=====================새제품 관린 스크립트 끝 ===========================//
 	
 	
 </script>

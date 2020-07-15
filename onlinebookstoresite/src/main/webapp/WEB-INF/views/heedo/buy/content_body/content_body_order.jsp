@@ -152,7 +152,7 @@
 	
 	</table>
 <!--/////////// 결제정보 테이블 끝 ///////////////--> 	
-	<button type="button" class="btn btn-dark">결제하기</button>
+	<button type="button" class="btn btn-dark" id="paymentBtn">결제하기</button>
 </div>
 <!-- ////////// 포인트사용 모달  시작//////////////////////// -->
 <div class="modal fade" id="modal_point">
@@ -187,6 +187,8 @@
 <!-- 주소 API 사용 스크립트 시작-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 주소 API 사용 스크립트 끝-->
+<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		shipAddr();
@@ -391,4 +393,5 @@
         }).open();
     }
 ///////////// 주소 API 끝 ///////////////////////////////////////////////////////
+
 </script>
