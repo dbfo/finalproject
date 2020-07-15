@@ -17,6 +17,9 @@
 	</insert>
 	
 	<!-- 삭제/수정 -->
+	<select id="getBooksInfo" resultType="books" parameterType="int">
+		select * from books where bnum = #{bnum}
+	</select>
 	
 	<select id="getImgInfo" resultType="img" parameterType="int">
 		select * from img where bnum = #{bnum}
@@ -29,7 +32,31 @@
 	<delete id="imgDelete" parameterType="int">
 		delete from img where bnum = #{bnum}
 	</delete>
+	
+	<update id="booksUpdate" parameterType="books">
+		update books set 
+		btitle = #{btitle}, 
+		bwriter = #{bwriter},
+		bpublishdate = #{bpublishdate},
+		bprice = #{bprice},
+		bpoint = #{bpoint},
+		bcount = #{bcount},
+		bcontent = #{bcontent},
+		scatenum = #{scatenum}
+		where bnum = #{bnum}
+	</update>
+	
+	<update id="imgUpdate" parameterType="hashmap">
+		update img set
+		imgorgfilename = #{imgorgfilename},
+		imgsavefilename = #{imgsavefilename}
+		where imgnum = #{imgnum}
+	</update>
 
+	<select id="list" resultType="books">
+		select * from books
+	</select>
+	
 	<!-- 카테고리 -->
 	<select id="bctg" resultType="bctg">
 		select * from bigcategory
@@ -41,14 +68,13 @@
 		where bcatenum=#{bcatenum}
 		order by scatenum
 	</select>
-
-	<select id="list" resultType="books">
-		select * from books
-	</select>
 	
-	<!-- 미리보기 -->
-	<select id="preview" resultType="books" parameterType="int">
-		select * from books where bnum = #{bnum}
+	<!-- 수정을 위한 큰 카테고리 가져오기 -->
+	<select id="getBigctg" resultType="int" parameterType="int">
+		select s.bcatenum  
+		from smallcategory s, 
+		(select * from books where bnum = #{bnum}) b
+		where s.scatenum = b.scatenum;
 	</select>
 	
 </mapper>

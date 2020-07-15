@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
-import com.jhta.finalproject.yj.vo.ImgVO;
 import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 
 @Repository
@@ -29,10 +28,6 @@ public class BooksDao {
 		return sqlsession.delete(NAMESPACE + ".booksDelete", bnum);
 	}
 
-//	public int getBnum() {
-//		return sqlsession.selectOne(NAMESPACE + ".getBnum");
-//	}
-
 	public List<BigCategoryVO> getBigctg() {
 		return sqlsession.selectList(NAMESPACE + ".bctg");
 	}
@@ -45,7 +40,15 @@ public class BooksDao {
 		return sqlsession.selectList(NAMESPACE + ".list");
 	}
 
-	public BooksVO preview(int bnum) {
-		return sqlsession.selectOne(NAMESPACE + ".preview", bnum);
+	public BooksVO getBooksInfo(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".getBooksInfo", bnum);
+	}
+	
+	public int getBigctg(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".getBigctg", bnum);
+	}
+
+	public int booksUpdate(BooksVO vo) {
+		return sqlsession.update(NAMESPACE + ".booksUpdate", vo);
 	}
 }

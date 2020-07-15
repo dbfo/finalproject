@@ -11,7 +11,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div id="btnDiv1">
-<!-- 				<button type="button" onclick="location.href='booksUpdate'" class="btn btn-success">수정</button> -->
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksUpdate?bnum=${vo.bnum }'" class="btn btn-success">수정</button>
 				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksDelete?bnum=${vo.bnum }'" class="btn btn-danger">삭제</button>
 			</div>
 			<div class="col-md-12">

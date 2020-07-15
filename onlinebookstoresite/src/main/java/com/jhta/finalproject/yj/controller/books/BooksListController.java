@@ -28,7 +28,7 @@ public class BooksListController {
 
 	@RequestMapping("/preview")
 	public String preview(int bnum, Model model) {
-		BooksVO vo = service.preview(bnum);
+		BooksVO vo = service.getBooksInfo(bnum);
 		String bcontent = vo.getBcontent();
 		if (bcontent != null) {
 			bcontent = bcontent.replace("\n", "<br>");

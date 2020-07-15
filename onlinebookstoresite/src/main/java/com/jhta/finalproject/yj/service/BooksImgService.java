@@ -31,8 +31,8 @@ public class BooksImgService {
 		return bdao.list();
 	}
 
-	public BooksVO preview(int bnum) {
-		return bdao.preview(bnum);
+	public BooksVO getBooksInfo(int bnum) {
+		return bdao.getBooksInfo(bnum);
 	}
 
 	public List<ImgVO> getImgInfo(int bnum) {
@@ -45,5 +45,13 @@ public class BooksImgService {
 
 	public int imgDelete(int bnum) {
 		return idao.imgDelete(bnum);
+	}
+	
+	public int getBigctg(int bnum) {
+		return bdao.getBigctg(bnum);
+	}
+	
+	public int booksUpdate(BooksVO vo) {
+		return bdao.booksUpdate(vo);
 	}
 }

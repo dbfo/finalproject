@@ -27,7 +27,7 @@
 
 			<tr>
 				<th align="center" class="table-active">책제목 *</th>
-				<td><input type="text" name="btitle" id="btitle" size="50"></td>
+				<td><input type="text" name="btitle" id="btitle" size="70"></td>
 				<th align="center" class="table-active">작가 (지은이) *</th>
 				<td><input type="text" name="bwriter" id="bwriter" size="50"></td>
 			</tr>
