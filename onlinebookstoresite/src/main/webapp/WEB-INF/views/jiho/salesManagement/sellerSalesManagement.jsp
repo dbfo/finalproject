@@ -6,7 +6,7 @@
 <style>
 #salesManagement {
 	width: 1300px;
-	height: 1000px;
+	height: 1300px;
 	border: 1px solid red;
 	margin: auto;
 }
@@ -27,7 +27,7 @@ p {
 
 .salesTopMenu {
 	width: 1300px;
-	height:900px;
+	height:1250px;
 	border:1px solid black;
 	/*max-width: 800px;*/
 	padding: 50px;
@@ -78,7 +78,7 @@ p {
 /*입금대기중 css*/
 #detail1{
 	border: 1px solid green;
-	height: 700px;
+	height: 1100px;
 }
 #detail1 table{
 	text-align: center;
@@ -86,6 +86,11 @@ p {
 #detail1 table th{
 	height: 30px;
 	background-color: silver;
+}
+#searchBox1{
+	width: 1200px;
+	height: 200px;
+	border: 1px solid red;
 }
 
 </style>
@@ -105,6 +110,7 @@ p {
 				<div id="searchBox1">
 					검색조건 박스
 				</div>
+				<h2>List</h2>
 				<table class="table table-bordered">
 						<tr>
 							<th scope="col" width="60" rowspan="2">NO</th>

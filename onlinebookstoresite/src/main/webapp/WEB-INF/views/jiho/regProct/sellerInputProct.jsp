@@ -85,7 +85,7 @@
 </script>
 <form method="post" action="${cp}/seller/prodInsert" enctype="multipart/form-data">
 	<div id="prodInputForm">
-		<h2>상품등록</h2>
+		<i><img src="${cp }/resources/jh/jhimages/상품등록.png"></i>
 		<!-- 카테고리등록 -->
 		<div id="cate">
 			<p>카테고리확인&emsp;</p>
