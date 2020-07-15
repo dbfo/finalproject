@@ -51,11 +51,6 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">배송료 *</th>
-				<td  colspan="3"><input type="text" name="bshipinfo" value="2500" size="50"> 원</td>
-			</tr>
-
-			<tr>
 				<th align="center" class="table-active">입고수량 *</th>
 				<td colspan="3"><input type="text" name="bcount" size="50"> 개</td>
 			</tr>
@@ -113,7 +108,6 @@
 	});
 	
 	// 유효성검사
-
 	$("form").submit(function() {
 		var bctg = $("#bctg").val();
 		var smctg = $("#smctg").val();

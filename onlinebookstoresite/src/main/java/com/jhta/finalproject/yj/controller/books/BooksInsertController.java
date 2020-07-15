@@ -72,7 +72,6 @@ public class BooksInsertController {
 			String bpublisher = req.getParameter("bpublisher");
 			int bprice = Integer.parseInt(req.getParameter("bprice"));
 			int bpoint = Integer.parseInt(req.getParameter("bpoint"));
-			int bshipinfo = Integer.parseInt(req.getParameter("bshipinfo"));
 			int bcount = Integer.parseInt(req.getParameter("bcount"));
 			String bcontent = req.getParameter("bcontent");
 //			System.out.println(req.getParameter("smctg"));
@@ -97,8 +96,7 @@ public class BooksInsertController {
 				fos.close();
 
 				// DB에 파일정보 저장하기
-				BooksVO bvo = new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bshipinfo,
-						bcount, bcontent, 0, smctg, null);
+				BooksVO bvo=new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount, bcontent, 0, smctg, null);
 				ImgVO ivo = new ImgVO(imgorgfilename, 0, imgsavefilename, 1, 1, bvo.getBnum());
 				insertService.insert(bvo, ivo);
 
@@ -113,8 +111,7 @@ public class BooksInsertController {
 				fis1.close();
 				fos1.close();
 
-				BooksVO bvo = new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bshipinfo,
-						bcount, bcontent, 0, smctg, null);
+				BooksVO bvo=new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount, bcontent, 0, smctg, null);
 				ImgVO ivo1 = new ImgVO(imgorgfilename1, 0, imgsavefilename1, 1, 1, bvo.getBnum());
 				list.add(ivo1);
 
