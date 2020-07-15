@@ -64,11 +64,21 @@
 	<definition name=".list2" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/cate2.jsp"/>
 	</definition>
+	<definition name=".newlist" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/newlist.jsp"/>
+	</definition>
 	<definition name=".cnovel" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/catenovel.jsp"/>
 	</definition>
+	<definition name=".cpoetry" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catepoetry.jsp"/>
+	</definition>
 	<definition name=".sclist" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/sclist.jsp"/>
+	</definition>
+	
+	<definition name=".bdetail" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/bookdetail.jsp"/>
 	</definition>
 	
 	

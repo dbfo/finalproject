@@ -19,9 +19,20 @@ public class BooksDao {
 	public int count(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".count",map);
 	}
+	public int breviewcount(int bnum) {
+		return sqlSession.selectOne(NAMESPACE + ".breviewcount",bnum);
+	}
+	
 	public int sbooklist1count(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".sbooklist1count",map);
 	}
+	public int novelcount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".novelcount",map);
+	}
+	public int poetrycount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".poetrycount",map);
+	}
+	
 	public List<BooksVo> list(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".list",map);
 	}
@@ -43,10 +54,18 @@ public class BooksDao {
 	public List<BooksVo> sbooklist(int num) {
 		return sqlSession.selectList(NAMESPACE + ".sbooklist",num);
 	}
-	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
+	public List<BooksVo> sbooklist1(HashMap<String,Object> map) {
 		return sqlSession.selectList(NAMESPACE + ".sbooklist1",map);
 	}
+	
+	public List<BooksVo> newlist(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".newlist",map);
+	}
+	
 	public List<BooksVo> catenovel(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".catenovel",map);
+	}
+	public List<BooksVo> catepoetry(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".catepoetry",map);
 	}
 }

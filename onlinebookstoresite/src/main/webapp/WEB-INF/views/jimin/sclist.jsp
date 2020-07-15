@@ -12,10 +12,10 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist" id="catesearch">
+					<form method="post" action="sbooklist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
-						<option>[--- 대 분류 ---]</option>
+						<option>[---대 분류---]</option>
 					<c:forEach var="vo" items="${list2 }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
@@ -42,7 +42,7 @@
 	<c:if test="">
 	
 	</c:if>
-	<!-- 전체목록출력시 -->
+	<!--////////////// 책 목록출력시 /////////////////-->
 	<c:forEach  var="vo" items="${sbooklist1 }">
 	
 	<div id="listwrap">
@@ -99,7 +99,7 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="sbooklist?pageNum=${i }&scatenum=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
+			 	<a href="sbooklist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
@@ -107,7 +107,7 @@
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="sbooklist?pageNum=${i }&scatenum=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
+			 	<a href="sbooklist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
@@ -139,6 +139,18 @@
 
 
 	});
+	
+	function nullable(){
+		 var sv = document.getElementById("searchv");
+		 var bc = document.getElementById("bcate2");
+		 if(bc.value == "[---대 분류---]") {
+			   alert("조건을 모두 채워주세요ㅋㅋ");
+			   return false; //submit 중지
+			  }
+		 else{
+			 return true;
+		 }
+	}
 
 	
 </script>

@@ -21,6 +21,7 @@
 	<typeAlias type="com.jhta.finalproject.jm.vo.BooksVo" alias="books"/> <!-- books라고 줄여쓰겠다. -->
 		<typeAlias type="com.jhta.finalproject.jm.vo.BigcateVo" alias="bigcate"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.SmallcateVo" alias="smallcate"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.BreviewVo" alias="breviewc"/>
 	<!-- /////////////// -->
 </typeAliases>
   <mappers>

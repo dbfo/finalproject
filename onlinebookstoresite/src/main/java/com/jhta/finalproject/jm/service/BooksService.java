@@ -18,8 +18,18 @@ public class BooksService {
 	public int count(HashMap<String, Object>map) {
 		return dao.count(map);
 	}
+	public int breviewcount(int bnum) {
+		return dao.breviewcount(bnum);
+	}
+	
 	public int sbooklist1count(HashMap<String, Object> map) {
 		return dao.sbooklist1count(map);
+	}
+	public int novelcount(HashMap<String, Object> map) {
+		return dao.novelcount(map);
+	}
+	public int poetrycount(HashMap<String, Object> map) {
+		return dao.poetrycount(map);
 	}
 	
 	public List<BooksVo> list(HashMap<String, Object> map){
@@ -44,11 +54,18 @@ public class BooksService {
 	public List<BooksVo> sbooklist(int num) {
 		return dao.sbooklist(num);
 	}
-	public List<BooksVo> sbooklist(HashMap<String,Object> map) {
-		return dao.sbooklist(map);
+	public List<BooksVo> sbooklist1(HashMap<String,Object> map) {
+		return dao.sbooklist1(map);
 	}
+	public List<BooksVo> newlist(HashMap<String, Object> map){
+		return dao.newlist(map);
+	}
+	
 	public List<BooksVo> catenovel(HashMap<String, Object> map){
 		return dao.catenovel(map);
+	}
+	public List<BooksVo> catepoetry(HashMap<String, Object> map){
+		return dao.catepoetry(map);
 	}
 
 }

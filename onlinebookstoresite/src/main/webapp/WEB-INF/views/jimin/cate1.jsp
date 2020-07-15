@@ -12,10 +12,10 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist" id="catesearch">
+					<form method="post" action="sbooklist" id="catesearch" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
-						<option>[--- 대 분류 ---]</option>
+						<option id="bcate3">[--- 대 분류 ---]</option>
 					<c:forEach var="vo" items="${list2 }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
@@ -47,13 +47,13 @@
 	
 	<div id="listwrap">
 	<div id="image">
-				<a href="#"> <img
+				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
 				</a>
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="#"> 
+							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -139,6 +139,18 @@
 
 
 	});
+	
+	function nullable(){
+		 var sv = document.getElementById("searchv");
+		 var sc = document.getElementById("scate2");
+		 if(sc.value == "[---대 분류---]") {
+			   alert("조건을 모두 채워주세요ㅋㅋ");
+			   return false; //submit 중지
+			  }
+		 else{
+			 return true;
+		 }
+	}
 
 	
 </script>
