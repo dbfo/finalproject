@@ -7,12 +7,13 @@
 	<!-- 중고판매자 상황판 관련 Mapper파일 -->
 
 	<!-- 최근 한달간 등록 상품 -->
-	<select id="getOldbookCount" resultType="int">
-		select NVL(count(*),0) count from oldbooks where obregdate >= TO_DATE(add_months(sysdate,-1))
+	<select id="getOldbookCount" resultType="int" parameterType="int">
+		select NVL(count(*),0) count from oldbooks where obregdate >= TO_DATE(add_months(sysdate,-1)) and snum=#{snum}
 	</select>
 	<!-- 최근 한달간 판매현황(1:입금대기중 , 2:입금완료/배송요청,  3: 판매완료/구매확정) -->
-	<select id="getOldbookSalestatusCount" resultType="int" parameterType="int">
-		select NVL(count(*),0) count from oldbooks where obregdate >= TO_DATE(add_months(sysdate,-1)) and obsalestatus=#{obsalestatus}
+	<select id="getOldbookSalestatusCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) count from oldbooks 
+		where obregdate >= TO_DATE(add_months(sysdate,-1)) and obsalestatus=#{obsalestatus} and snum=#{snum}
 	</select>
 	
 </mapper>

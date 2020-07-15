@@ -10,6 +10,7 @@
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerSmallcategoryVo" alias="smallcategory"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerOldbooksVo" alias="oldbooks"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerImgVo" alias="img"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.SellerSalesJoinVo" alias="obsalesjoin"/>
  	<!-- /////// -->
  	
  	<!-- ////희도//// -->
@@ -28,7 +29,8 @@
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/>
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/>
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerMainBoardMapper.xml"/>
-  
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSalesManagementMapper.xml"/>
+  	
   	<!-- ////희도//// -->
   	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/>
     <mapper resource="onlinebookstoresite/mybatis/mapper/hd/CartMapper.xml"/>

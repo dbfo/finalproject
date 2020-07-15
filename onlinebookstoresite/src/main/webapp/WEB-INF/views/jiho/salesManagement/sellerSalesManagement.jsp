@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <style>
@@ -83,7 +84,7 @@ p {
 #detail1 table{
 	text-align: center;
 }
-#detail1 table th{
+#detail1 table .toptr{
 	height: 30px;
 	background-color: silver;
 }
@@ -112,19 +113,34 @@ p {
 				</div>
 				<h2>List</h2>
 				<table class="table table-bordered">
-						<tr>
+						<tr class="toptr">
 							<th scope="col" width="60" rowspan="2">NO</th>
 							<th scope="col" width="100" rowspan="2">주문번호</th>
 							<th scope="col" rowspan="2" width="400">상품정보</th>
 							<th scope="col">주문인</th>
-							<th scope="col">상품금액</th>
+							<th scope="col">주문금액</th>
 							<th scope="col" rowspan="2">총 합계</th>
 							<th scope="col" rowspan="2">주문일</th>
 						</tr>
-						<tr>
+						<tr class="toptr">
 							<th scope="col">수령인</th>
 							<th scope="col">배송비</th>
 						</tr>
+					<c:forEach var="vo" items="${list1 }" varStatus="status">
+						<tr>
+							<th scope="col" width="60" rowspan="2">1</th>
+							<th scope="col" width="100" rowspan="2">${vo.bpaynum }</th>
+							<th scope="col" rowspan="2" width="400">책제목들..</th>
+							<th scope="col">${vo.mname }</th>
+							<th scope="col">${vo.ordermoney }원</th>
+							<th scope="col" rowspan="2">${vo.bfinalmoney }원</th>
+							<th scope="col" rowspan="2"><fmt:formatDate value="${vo.borderdate }" pattern="yyyy년MM월dd일"/></th>
+						</tr>
+						<tr>
+							<th scope="col">${vo.receiver }</th>
+							<th scope="col">${vo.delfee }원</th>
+						</tr>
+					</c:forEach>	
 				</table>
 			</div>
 		</section>
@@ -137,6 +153,7 @@ p {
 		<section id="content3">
 			<p>tab menu3의 내용</p>
 		</section>
+
 
 		<!-- 구매확정/정산대기 -->
 		<section id="content4">
