@@ -15,13 +15,15 @@
 				cellspacing="0">
 				<thead>
 					<tr>
+<!-- 						입금전 취소 -->
 						<th><input type="checkbox"></th>
-						<th>주문일(결제일)</th>
+						<th>주문일(신청일)</th>
 						<th>주문번호</th>
 						<th>주문자</th>
 						<th>책 제목</th>
-						<th>총 실제 결제 금액</th>
-						<th>결제수단</th>
+						<th>수량</th>
+						<th>결제예정금액</th>
+						<th>처리상태</th>
 					</tr>
 				</thead>
 				<tbody>

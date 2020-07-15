@@ -6,19 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.finalproject.yr.service.PaymentService;
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
-import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Controller
 public class TotalOrderManegeController {
 	
 	@Autowired
-	public PaymentService service;
+	private PaymentService service;
 	
 	
 	@RequestMapping("/totalOrder")
@@ -41,7 +38,6 @@ public class TotalOrderManegeController {
 
 		map.put("bfield",bfield);
 		map.put("bkeyword",bkeyword);
-		System.out.println("bfield : " + bfield);
 
 //		주문상태
 		if(bstatus != null && bstatus != "") {
@@ -55,6 +51,9 @@ public class TotalOrderManegeController {
 			String[] typeArray= stringToArray(type);
 			map.put("type",typeArray);			
 		}
+		
+		
+
 		
 //		입금상태
 		map.put("payType",payType);

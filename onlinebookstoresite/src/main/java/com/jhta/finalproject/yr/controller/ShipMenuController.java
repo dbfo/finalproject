@@ -29,15 +29,15 @@ public class ShipMenuController {
 //		배송 상태 갯수 가져오기
 		List<HashMap<String, Object>> countlist = service.getShipCount();
 		
-		System.out.println(	"2pfield : "+ pfield
-		+" 2pkeyword : "+ pkeyword
-		+" 2tfield : "+ tfield
-		+" 2startDate :"+ startDate
-		+" 2endDate : "+ endDate
-		+" 2bfield : "+ bfield
-		+" 2bkeyword : "+ bkeyword
-		+ " 2mType :"+ mType
-		);
+//		System.out.println(	"2pfield : "+ pfield
+//		+" 2pkeyword : "+ pkeyword
+//		+" 2tfield : "+ tfield
+//		+" 2startDate :"+ startDate
+//		+" 2endDate : "+ endDate
+//		+" 2bfield : "+ bfield
+//		+" 2bkeyword : "+ bkeyword
+//		+ " 2mType :"+ mType
+//		);
 		
 		
 //		검색하기
@@ -76,13 +76,16 @@ public class ShipMenuController {
 			model.addAttribute("path",0);		
 			return ".ship.beforeDeposit";
 		}else if(PageName.equals("1")) {
+			model.addAttribute("path",1);		
 			return ".ship.preparingShip";
 		}else if(PageName.equals("2")) {
+			model.addAttribute("path",2);		
 			return ".ship.shipInfo";
 		}else if(PageName.equals("3")) {
-		
+			model.addAttribute("path",3);		
+			return ".ship.shipInfo";		
 		}
 		
-		return "error";
+		return "/admin/error";
 	}
 }

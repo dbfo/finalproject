@@ -19,6 +19,9 @@
 							<th>주문번호</th>
 							<th>주문일(결제일)</th>
 							<th>주문자</th>
+							<c:if test="${path == 2}">
+								<th><input type="checkbox"></th>
+							</c:if>
 							<th>책 제목</th>
 							<th>수량</th>
 							<th>판매가</th>
@@ -31,8 +34,21 @@
 						<c:forEach var="vo" items="${list }">
 							<tr>
 								<td class="bpaynum" rowspan="2">${vo.bpaynum}</td>
-								<td rowspan="2"><fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/></td>
+								<td rowspan="2">
+								<c:choose>
+									<c:when test="${tfield == 'bpaydate' }">
+										<fmt:formatDate value = "${vo.bpaydate}" pattern="yyyy-MM-dd"/>
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/>									
+									</c:otherwise>
+								</c:choose>						
+								</td>
 								<td rowspan="2">${vo.mname }</td>
+								<c:if test="${path == 2}">
+									<td  rowspan="2"><input type="checkbox"></td>
+								</c:if>
+								
 								<td rowspan="1"><c:forEach items="${vo.paymentbook}"
 										var="book">
 										<p>${book.btitle}</p>
@@ -56,7 +72,14 @@
 						</c:forEach>
 					</tbody>
 				</table>
+<!-- 				배송중일때 -->
+				<c:if test="${path == 2}">
+					<input class = "btn btn-outline-success" type="button" id = "shipCancelBtn" value = "배송준비중 처리">
+					<input class = "btn btn-success" type="button" id= "shipCompleteBtn" value = "배송완료 처리">
+				</c:if>
 			</div>
 		</div>
 	</div>
 </div>
+
+

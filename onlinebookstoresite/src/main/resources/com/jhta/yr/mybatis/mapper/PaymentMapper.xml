@@ -20,7 +20,7 @@
 
 <!-- 주문일, 결제일 -->
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startDate)">
-			 and ${tfield} BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate})
+			 and TRUNC(${tfield}) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate})
 		</if>		
 
 <!-- 		책제목, 첵 번호 -->
@@ -103,7 +103,6 @@
 		<result property="receiver" column="receiver"/>
 		<result property="mnum" column="mnum"/>
 		<result property="mname" column="mname"/>
-		<result property="type" column="type"/>
 		<collection property="paymentbook" ofType="com.jhta.finalproject.yr.vo.PaymentBooksVo">
 			<result property="bpaynum" column="bpaynum"/>
 			<result property="btype" column="btype"/>
@@ -111,6 +110,7 @@
 			<result property="bcount" column="bcount"/>
 			<result property="btitle" column="btitle"/>
 			<result property="bprice" column="bprice"/>
+			<result property="type" column="type"/>
 		</collection>	
 	</resultMap>
 	
@@ -121,7 +121,7 @@
 	    where bpayment.bpaynum = paymentbook.bpaynum
 	    and members.mnum = bpayment.mnum
 	    and paymentbook.bnum= books.bnum
-	    and bpayment.bpaynum = refundhistory.bpaynum(+)
+	    and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
 	    <include refid="search"/>
 	    <include refid="shipStatus"/>
 	</select>

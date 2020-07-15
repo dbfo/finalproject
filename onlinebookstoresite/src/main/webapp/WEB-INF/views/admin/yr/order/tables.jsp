@@ -28,7 +28,16 @@
 					<tbody>
 						<c:forEach var="vo" items="${list }">
 							<tr>
-								<td><fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/></td>
+								<td>
+									<c:choose>
+										<c:when test="${tfield == 'bpaydate' }">
+											<fmt:formatDate value = "${vo.bpaydate}" pattern="yyyy-MM-dd"/>
+										</c:when>								
+										<c:otherwise>
+											<fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/>									
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${vo.bpaynum}</td>
 								<td>${vo.mname }</td>
 								<td>

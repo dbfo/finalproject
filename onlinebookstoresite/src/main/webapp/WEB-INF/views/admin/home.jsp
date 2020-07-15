@@ -55,6 +55,8 @@
 <link
 	href="${pageContext.request.contextPath}/resources/yrcss/yrcss.css"
 	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/resources/yrjs/yrjs.js"></script>
 
 </head>
 

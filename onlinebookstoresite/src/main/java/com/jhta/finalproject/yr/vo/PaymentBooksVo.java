@@ -12,11 +12,15 @@ public class PaymentBooksVo {
 	private int bcount;
 	private String btitle; 
 	private int bprice;
+	private int type;
+	
 	
 	public PaymentBooksVo() {
 	}
 	
-	public PaymentBooksVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice) {
+
+
+	public PaymentBooksVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice, int type) {
 		super();
 		this.bpaynum = bpaynum;
 		this.btype = btype;
@@ -24,7 +28,10 @@ public class PaymentBooksVo {
 		this.bcount = bcount;
 		this.btitle = btitle;
 		this.bprice = bprice;
+		this.type = type;
 	}
+
+
 
 	public int getBpaynum() {
 		return bpaynum;
@@ -67,10 +74,22 @@ public class PaymentBooksVo {
 		this.bprice = bprice;
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "PaymentBooksVo [bpaynum=" + bpaynum + ", btype=" + btype + ", bnum=" + bnum + ", bcount=" + bcount
-				+ ", btitle=" + btitle + ", bprice=" + bprice + "]";
+				+ ", btitle=" + btitle + ", bprice=" + bprice + ", type=" + type + "]";
 	}
+
+	
 
 }

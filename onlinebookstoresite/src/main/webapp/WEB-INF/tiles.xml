@@ -106,8 +106,23 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/cstables.jsp" />
 	</definition>
+	
+	
+	<definition name=".admin.cancel" extends=".admin.cs">
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/csCancelTables.jsp" />
+	</definition>
 
-	<definition name=".cs" extends=".main">
-		<put-attribute name="content" value=".admin.cs" />
+	<definition name=".admin.return" extends=".admin.cs">
+	
+	</definition>
+
+	<definition name=".admin.exchange" extends=".admin.cs">
+	
+	</definition>
+	
+
+	<definition name=".cs.*" extends=".main">
+		<put-attribute name="content" value=".admin.{1}" />
 	</definition>
 </tiles-definitions>

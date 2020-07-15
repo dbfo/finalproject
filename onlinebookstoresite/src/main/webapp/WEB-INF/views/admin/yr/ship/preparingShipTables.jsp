@@ -33,7 +33,16 @@
 						<c:forEach var="vo" items="${list }">
 							<tr>
 								<td class="bpaynum" rowspan="2">${vo.bpaynum}</td>
-								<td rowspan="2"><fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/></td>
+								<td rowspan="2">
+								<c:choose>
+									<c:when test="${tfield == 'bpaydate' }">
+										<fmt:formatDate value = "${vo.bpaydate}" pattern="yyyy-MM-dd"/>
+									</c:when>								
+									<c:otherwise>
+										<fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/>									
+									</c:otherwise>
+								</c:choose>
+								</td>	
 								<td rowspan="2">${vo.mname }</td>
 								<td rowspan="2"><input type="checkbox" name="chb"></td>
 								<td rowspan="1"><select id="courier" name="courier">

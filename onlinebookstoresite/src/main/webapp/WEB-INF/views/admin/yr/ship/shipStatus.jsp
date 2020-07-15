@@ -40,7 +40,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-clipboard-check fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/ship/completedShip">배송 완료
+				<span class = "title"><a href="${pageContext.request.contextPath}/ship/menu?PageName=3">배송 완료
 				<c:forEach items="${countList}" var="list">					
 					<c:if test="${list.BSTATUS == '3'}">
 						[${list['COUNT']}]
@@ -50,8 +50,6 @@
 			</span>
 		</li>
 	</ul>
-	
-	
 </div>
 
 <script type="text/javascript">
