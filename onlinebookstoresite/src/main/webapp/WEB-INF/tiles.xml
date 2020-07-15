@@ -31,6 +31,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksPreview.jsp" />
 	</definition>
+	
+	<definition name=".booksUpdate" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/books/booksUpdate.jsp" />
+	</definition>
 
 	<!-- members -->
 	<definition name=".membersList" extends=".main">

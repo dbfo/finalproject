@@ -8,7 +8,7 @@ import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 
 @Service
-public interface BooksInsertService {
+public interface BooksTransService {
 	int insert(BooksVO bvo, ImgVO ivo);
 	int insertList(BooksVO bvo, List<ImgVO> list);
 }

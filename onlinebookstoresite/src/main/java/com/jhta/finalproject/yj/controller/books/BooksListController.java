@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jhta.finalproject.yj.service.BooksService;
+import com.jhta.finalproject.yj.service.BooksImgService;
 import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 
 @Controller
 public class BooksListController {
 	@Autowired
-	private BooksService service;
+	private BooksImgService service;
 
 	@RequestMapping("/booksList")
 	public ModelAndView showList() {
@@ -35,7 +35,7 @@ public class BooksListController {
 		}
 		vo.setBcontent(bcontent);
 
-		List<ImgVO> imgList = service.previewImg(bnum);
+		List<ImgVO> imgList = service.getImgInfo(bnum);
 
 		if (imgList.size() == 2) { // 만약에 이미지가 두개일 경우
 			model.addAttribute("imgVO2", imgList.get(1));

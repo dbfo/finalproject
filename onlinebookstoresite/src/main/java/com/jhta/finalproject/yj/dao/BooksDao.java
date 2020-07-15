@@ -25,9 +25,13 @@ public class BooksDao {
 		return sqlsession.insert(NAMESPACE + ".booksInsert", vo);
 	}
 
-	public int getBnum() {
-		return sqlsession.selectOne(NAMESPACE + ".getBnum");
+	public int booksDelete(int bnum) {
+		return sqlsession.delete(NAMESPACE + ".booksDelete", bnum);
 	}
+
+//	public int getBnum() {
+//		return sqlsession.selectOne(NAMESPACE + ".getBnum");
+//	}
 
 	public List<BigCategoryVO> getBigctg() {
 		return sqlsession.selectList(NAMESPACE + ".bctg");
@@ -43,9 +47,5 @@ public class BooksDao {
 
 	public BooksVO preview(int bnum) {
 		return sqlsession.selectOne(NAMESPACE + ".preview", bnum);
-	}
-
-	public List<ImgVO> previewImg(int bnum) {
-		return sqlsession.selectList(NAMESPACE + ".previewImg", bnum);
 	}
 }

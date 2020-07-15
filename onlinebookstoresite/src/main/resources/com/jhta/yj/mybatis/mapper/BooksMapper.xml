@@ -15,6 +15,20 @@
 	<insert id="imgInsert" parameterType="img">
 		insert into img	values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename}, #{thumbnail}, 1, SEQ_BOOKS_BNUM.currval)
 	</insert>
+	
+	<!-- 삭제/수정 -->
+	
+	<select id="getImgInfo" resultType="img" parameterType="int">
+		select * from img where bnum = #{bnum}
+	</select>
+	
+	<delete id="booksDelete" parameterType="int">
+		delete from books where bnum = #{bnum}
+	</delete>
+	
+	<delete id="imgDelete" parameterType="int">
+		delete from img where bnum = #{bnum}
+	</delete>
 
 	<!-- 카테고리 -->
 	<select id="bctg" resultType="bctg">
@@ -37,7 +51,4 @@
 		select * from books where bnum = #{bnum}
 	</select>
 	
-	<select id="previewImg" resultType="img" parameterType="int">
-		select * from img where bnum = #{bnum}
-	</select>
 </mapper>

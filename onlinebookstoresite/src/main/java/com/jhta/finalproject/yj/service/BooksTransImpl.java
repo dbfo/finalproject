@@ -12,7 +12,7 @@ import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 
 @Service
-public class BooksInsertImpl implements BooksInsertService {
+public class BooksTransImpl implements BooksTransService {
 	@Autowired
 	private BooksDao bdao;
 	@Autowired

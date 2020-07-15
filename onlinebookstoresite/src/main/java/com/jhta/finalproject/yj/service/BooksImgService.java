@@ -6,33 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.yj.dao.BooksDao;
+import com.jhta.finalproject.yj.dao.ImgDao;
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 
 @Service
-public class BooksService {
+public class BooksImgService {
 	@Autowired
-	private BooksDao dao;
-	
+	private BooksDao bdao;
+	@Autowired
+	private ImgDao idao;
+
 	public List<BigCategoryVO> getBigctg() {
-		return dao.getBigctg();
+		return bdao.getBigctg();
 	}
 
 	public List<SmallCategoryVO> getSmallctg(int bcatenum) {
-		return dao.getSmallctg(bcatenum);
+		return bdao.getSmallctg(bcatenum);
 	}
-	
+
 	public List<BooksVO> list() {
-		return dao.list();
+		return bdao.list();
 	}
-	
+
 	public BooksVO preview(int bnum) {
-		return dao.preview(bnum);
+		return bdao.preview(bnum);
 	}
-	
-	public List<ImgVO> previewImg(int bnum) {
-		return dao.previewImg(bnum);
+
+	public List<ImgVO> getImgInfo(int bnum) {
+		return idao.getImgInfo(bnum);
+	}
+
+	public int booksDelete(int bnum) {
+		return bdao.booksDelete(bnum);
+	}
+
+	public int imgDelete(int bnum) {
+		return idao.imgDelete(bnum);
 	}
 }

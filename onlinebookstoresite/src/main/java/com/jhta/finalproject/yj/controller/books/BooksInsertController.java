@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jhta.finalproject.yj.service.BooksInsertService;
-import com.jhta.finalproject.yj.service.BooksService;
+import com.jhta.finalproject.yj.service.BooksTransService;
+import com.jhta.finalproject.yj.service.BooksImgService;
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
@@ -35,9 +35,9 @@ import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 @Controller
 public class BooksInsertController {
 	@Autowired
-	private BooksService service;
+	private BooksImgService service;
 	@Autowired
-	private BooksInsertService insertService;
+	private BooksTransService insertService;
 
 	@GetMapping("/booksInsert")
 	public String booksInsert(Model model) {
