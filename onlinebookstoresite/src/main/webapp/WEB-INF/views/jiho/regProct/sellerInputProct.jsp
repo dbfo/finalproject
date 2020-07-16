@@ -134,8 +134,8 @@
 			<table id="infotable2" class="table table-bordered">
 				<tr>
 					<td class="bgtd">정가</td>
-					<td><input type="text" name="oborgprice" class="infotd2"
-						onkeyup="numberComma(this.value)"><span>&emsp;원</span></td>
+					<td><input type="text" name="oborgprice" class="infotd2">
+					<span>&emsp;원</span></td>
 				</tr>
 				<tr>
 					<td class="bgtd">품질체크</td>
@@ -260,6 +260,8 @@
 	*/
 	//입력폼 유효성검사
 	$("form").submit(function() {
+	
+		
 		var number= /[^0-9]/g //정규식(숫자만)
 		
 		/*대분류카테고리*/
@@ -313,6 +315,7 @@
 		var str=inputdate.split('-');
 		var strArr=str[0]+str[1]+str[2];
 		if(strArr>=today){
+			alert("현재:"+today+",입력:"+strArr);
 			alert("출간일은 현재 날짜를 넘을 수 없습니다.");
 			return false;
 		}

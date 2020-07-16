@@ -35,10 +35,10 @@
 									+ item.bwriter
 									+ "<br><strong>"
 									+ item.bprice
-									+ "</stromg></p></div></div>").appendTo("#content-best-card");
+									+ "</strong></p></div></div>").appendTo("#content-best-card");
 						});
 						var a = $("<div id='bestnext'>"
-								+ "<img src='${cp }/resources/image/nextButton.png' id='bestnextimg'>"
+								+ "<img src='${cp }/resources/hd/image/nextButton.png' id='bestnextimg'>"
 								+ "</div>").appendTo("#content-best-card");
 						a.click(function() {
 							if (bestpageNum >= 2) {
@@ -78,7 +78,7 @@
 					success : function(data) {
 						var b = $(
 								"<div id='newprev'>"
-										+ "<img src='${cp }/resources/image/prevButton.png' id='newprevimg'>"
+										+ "<img src='${cp }/resources/hd/image/prevButton.png' id='newprevimg'>"
 										+ "</div>").appendTo(
 								"#content-new-card");
 						$(data)
@@ -101,7 +101,7 @@
 										});
 						var a = $(
 								"<div id='newnext'>"
-										+ "<img src='${cp }/resources/image/nextButton.png' id='newnextimg'>"
+										+ "<img src='${cp }/resources/hd/image/nextButton.png' id='newnextimg'>"
 										+ "</div>").appendTo(
 								"#content-new-card");
 						a.click(function() {
@@ -147,15 +147,15 @@
 					<div class="carousel-item active" id="slideForm">
 						<!--가로-->
 						<img class="d-block w-100"
-							src="${cp }/resources/img/slide/test1.svg" alt="First slide">
+							src="${cp }/resources/hd/img/slide/test1.svg" alt="First slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/img/slide/test2.svg" alt="Second slide">
+							src="${cp }/resources/hd/img/slide/test2.svg" alt="Second slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/img/slide/test3.svg" alt="Third slide">
+							src="${cp }/resources/hd/img/slide/test3.svg" alt="Third slide">
 					</div>
 					<!-- / 슬라이드 쇼 끝 -->
 					<!-- 왼쪽 오른쪽 화살표 버튼 -->

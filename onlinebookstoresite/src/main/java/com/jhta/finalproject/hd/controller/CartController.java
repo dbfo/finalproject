@@ -35,7 +35,7 @@ public class CartController {
 	public String cartlist(HttpSession session) {
 		//세션에 들어있는 회원번호 받음.
 		int mnum=Integer.parseInt(session.getAttribute("mnum").toString());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mnum", mnum);
 		List<CartListVo> list=service.cartlist(map);

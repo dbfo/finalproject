@@ -32,7 +32,7 @@ public class HomeJsonController {
 		PageUtil pu=new PageUtil(pageNum, 10, 5, 5);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		List<HomeBestVo> list=service.bestlist(map);
 		JSONArray jarr=new JSONArray();
 		for(HomeBestVo vo:list) {
@@ -58,7 +58,7 @@ public class HomeJsonController {
 		PageUtil pu=new PageUtil(pageNum, 10, 5, 5);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		String path=session.getAttribute("cp")+"/resources/image";
+		String path=session.getAttribute("cp")+"/resources/hd/image";
 		List<HomeBestVo> list=service.newlist(map);
 		JSONArray jarr=new JSONArray();
 		for(HomeBestVo vo:list) {

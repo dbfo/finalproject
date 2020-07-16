@@ -12,15 +12,15 @@
 <!-- jQuery library -->
 <script src="${cp }/resources/js/jquery-3.5.1.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="${cp }/resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="${cp }/resources/js/jquery.slicknav.min.js"></script>
-<script src="${cp }/resources/js/owl.carousel.min.js"></script>
-<script src="${cp }/resources/js/jquery.nicescroll.min.js"></script>
-<script src="${cp }/resources/js/jquery.zoom.min.js"></script>
-<script src="${cp }/resources/js/jquery-ui.min.js"></script>
-<script src="${cp }/resources/js/main.js"></script>
+<script src="${cp }/resources/hd/bootstrap/js/bootstrap.min.js"></script>
+<script src="${cp }/resources/hd/js/jquery.slicknav.min.js"></script>
+<script src="${cp }/resources/hd/js/owl.carousel.min.js"></script>
+<script src="${cp }/resources/hd/js/jquery.nicescroll.min.js"></script>
+<script src="${cp }/resources/hd/js/jquery.zoom.min.js"></script>
+<script src="${cp }/resources/hd/js/jquery-ui.min.js"></script>
+<script src="${cp }/resources/hd/js/main.js"></script>
 <!-- Favicon -->
-<link href="${cp }/resources/img/favicon.ico" rel="shortcut icon" />
+<link href="${cp }/resources/hd/img/favicon.ico" rel="shortcut icon" />
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i"
@@ -28,13 +28,13 @@
 <!-- Stylesheets -->
 <link rel="stylesheet"
 	href="${cp }/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="${cp }/resources/css/font-awesome.min.css" />
-<link rel="stylesheet" href="${cp }/resources/css/flaticon.css" />
-<link rel="stylesheet" href="${cp }/resources/css/jquery-ui.min.css" />
-<link rel="stylesheet" href="${cp }/resources/css/owl.carousel.min.css" />
-<link rel="stylesheet" href="${cp }/resources/css/animate.css" />
-<link rel="stylesheet" href="${cp }/resources/css_main/login.css" />
-<link rel="stylesheet" href="${cp }/resources/css/style.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/flaticon.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/animate.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css_main/login.css" />
+<link rel="stylesheet" href="${cp }/resources/hd/css/style.css" />
 </head>
 <body>
 	<div id="wrap">

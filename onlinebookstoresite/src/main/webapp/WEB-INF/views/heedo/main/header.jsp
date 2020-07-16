@@ -13,7 +13,7 @@
 				<div class="text-center text-lg-left">
 					<!-- logo -->
 					<a href="./index.html" class="site-logo"> <img
-						src="${cp }/resources/img/logo2.jpg" id="logoImg" alt="">
+						src="${cp }/resources/hd/img/logo2.jpg" id="logoImg" alt="">
 					</a>
 				</div>
 				<div class="col-xl-6 col-lg-5">
