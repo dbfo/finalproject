@@ -4,12 +4,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<div class="memSearch container-fluid">
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i> 회원리스트
+	</div>
 	<form action="${pageContext.request.contextPath }/membersList"
 		method="post">
-		<div class="card-header">
-			<i class="fas fa-table mr-1"></i> 회원리스트
-		</div>
 		<table class="memSearchTable table">
 			<tr>
 				<th align="center" class="table-active">검색어</th>

@@ -157,10 +157,22 @@
 			bprice.focus();
 			return false;
 		}
+		
+		if (isNaN(bprice.val())) {
+			alert("가격을 숫자로만 입력해 주세요");
+			bprice.focus();
+			return false;
+		}
 
 		var bcount = $("input[name='bcount']");
 		if (bcount.val() == "") {
 			alert("수량을 입력해 주세요.");
+			bcount.focus();
+			return false;
+		}
+		
+		if (isNaN(bcount.val())) {
+			alert("수량을 숫자로만 입력해 주세요");
 			bcount.focus();
 			return false;
 		}
