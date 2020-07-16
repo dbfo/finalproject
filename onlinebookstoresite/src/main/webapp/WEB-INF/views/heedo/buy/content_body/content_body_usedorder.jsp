@@ -12,11 +12,11 @@
 	<thead class="thead-dark">
 		<tr>
 			<th colspan="2">상품명</th>
+			<th>정가</th>
 			<th>판매가</th>
-			<th>포인트</th>
-			<th>수랑</th>
+			<th>수량</th>
 			<th>합계</th>
-			<th>배송일</th>
+			<th>배송</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,7 +27,7 @@
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
 				<td>${vo.bcount }</td>
 				<td><strong>${vo.totalvalue }원</strong></td>
-				<td>1~2일내 배송</td>
+				<td>판매자 재량</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -76,7 +76,7 @@
 				<td colspan="4" style="padding:0px;">
 					사용가능한 포인트 : <strong><span id="usable_point"></span></strong> 포인트  
 					<button type="button"  id="usePbtn" class="btn btn-dark btn-sm" 
-							data-toggle="modal" data-target="#modal_point">사용</button>
+							data-toggle="modal" data-target="#modal_point" >사용</button>
 				</td>
 			</tr>
 	</table>
@@ -90,7 +90,7 @@
 		<tr>
 			<td class="table-info tableloc" style="width:10%"><strong>배송지</strong></td>
 			<td style="width:50%">
-				<c:if test="${not empty sessionScope.mid }">
+				<c:if test="${not empty sessionScope.mnum }">
 					<div class="form-check-inline">
 						<label class="form-check-label">
 							<input type="radio" class="form-check-input" name="ship_option" checked="checked" value="0">회원정보와 동일
@@ -99,7 +99,8 @@
 				</c:if>
 				<div class="form-check-inline">
 					<label class="form-check-label">
-						<input type="radio" class="form-check-input" name="ship_option" value="1">새로입력
+						<input type="radio" class="form-check-input" name="ship_option" value="1" 
+						<c:if test="${empty sessionScope.mnum }">checked="checked"</c:if>>새로입력
 					</label>
 				</div>
 			</td>
@@ -195,6 +196,7 @@
 <!-- 주소 API 사용 스크립트 끝-->
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 
+<!-- ////// 스크립트 시작 ///////// -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		shipAddr();

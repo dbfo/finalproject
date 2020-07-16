@@ -3,10 +3,10 @@
 <!-- /// 최상단 tab 영역 시작 /// -->
 <ul class="nav nav-tabs">
 	<li class="nav-item">
-		<a class="nav-link active" data-toggle="tab" href="#newitem">새상품</a>
+		<a class="nav-link " data-toggle="tab" href="#newitem">새상품</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" data-toggle="tab" href="#useditem">중고상품</a>
+		<a class="nav-link active" data-toggle="tab" href="#useditem">중고상품</a>
 	</li>
 </ul>    
 <!-- /// 최상단 tab 영역 끝 /// -->
@@ -15,7 +15,8 @@
 <div class="tab-content container" style="border:1px solid black">
 	<!-- /// 새상품 div 시작 /// -->
 	<div id="newitem" class="tab-pane fade">
-		<div id="topButton" style="height:35px;">
+		<h4 style='display:inline'><span style='color:#f51167'>새상품</span>장바구니</h4>
+		<div id="topButton" style="height:35px; float:right">
 			<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
 			<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>
 		</div>
@@ -92,7 +93,7 @@
 				// 장바구니에 데이터 없을경우.
 				if(data.length==0){
 					var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
-					var htitle="<h4 style='display:inline'><span style='color:#f51167'>판매자별</span> 장바구니  : 없음 </h4>"
+					var htitle="<h4 style='display:inline'><span style='color:#f51167'>중고 판매자별</span> 장바구니  : 없음 </h4>"
 					c.append(htitle);
 					var tableapp=
 							"<table class='table'>"
@@ -118,7 +119,7 @@
 				// 각 중고판매자 테이블부터 생성. 
 				for(var i=0;i<sidlist.length;i++){
 					var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
-					var htitle="<h4 style='display:inline'><span style='color:#f51167'>판매자별</span> 장바구니  : "+ sidlist[i]+"</h4>"
+					var htitle="<h4 style='display:inline'><span style='color:#f51167'>중고판매자별</span> 장바구니  : "+ sidlist[i]+"</h4>"
 					c.append(htitle);
 					var topbutton="<div id='topButton' style='height:35px;display:inline-block;float:right'>"
 								 +"<span>해당 판매자 선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>"
@@ -220,9 +221,13 @@
 								 	+"<td bgcolor='#80d4ff'><span id='final_payment_value' style='color:#f51167;'>"+finalvalue+"</span><span style='#f51167'>원</span></td>"
 								 +"<tr>"
 								+"</table>";
-				c.append(chargeApp);
-				var bottomBtnGroup="
-				// 하단 결제정보 테이블 끝 //					 	
+				c.append(chargeApp); 
+				// 하단 결제정보 테이블 끝 //	
+				var bottomBtnGroup="<div style='text-align:center;''>"
+						+"<button type='button' class='btn btn-primary btn-lg'>주문하기</button>"
+					  	+"<a href='${cp}/'><button type='button' class='btn btn-light btn-lg'>쇼핑계속하기</button></a>"
+					  	+"</div>"
+				c.append(bottomBtnGroup);
 			}
 		});	
 	}

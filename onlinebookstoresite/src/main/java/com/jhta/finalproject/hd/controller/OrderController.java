@@ -27,36 +27,17 @@ import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 public class OrderController {
 	@Autowired
 	private OrderService service;
-	// 바로 주문하기 눌렀을때  (( 책번호랑 몇개주문했는지 bcount 받아야함 )):
-	@RequestMapping(value="/order/directorder")
-	public String directOrder(HttpSession session,int bnum,int bcount,Model model) {
-		String path=session.getAttribute("cp")+"/resources/hd/image";
-		String smnum=(String)session.getAttribute("mnum");
-		int mnum=0; //비회원 회원번호 0번으로 가정함.
-		if(smnum!=null) {
-			mnum=Integer.parseInt(smnum);
-		}
-		int totalprice=0;
-		int totalpoint=0;
-		OrderListResultVo vo=service.directorder(bnum);
-		String imgpath=path+"\\"+vo.getImgsavefilename();
-		int point=vo.getBpoint();
-		int price=vo.getBprice();
-		vo.setBcount(bcount);
-		totalprice+=(price*bcount);
-		totalpoint+=(point*bcount);
-		vo.setTotalpoint(point*bcount);
-		vo.setTotalvalue(price*bcount);
-		vo.setImgpath(imgpath);
-		List<OrderListResultVo> list=new ArrayList<OrderListResultVo>();
-		list.add(vo);
-
-		model.addAttribute("list", list);
-		model.addAttribute("totalprice", totalprice);
-		model.addAttribute("totalpoint", totalpoint);
-		model.addAttribute("mnum",mnum);
-		return ".order";
+	//================== 중고상품 주문 컨트롤러 시작 =========================//
+	@RequestMapping(value="/order/usedorder",method= RequestMethod.POST)
+	public String usedorder(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {
+		
+		return null;
 	}
+	
+	
+	
+	//================== 중고상품 주문 컨트롤러 끝 ===========================//
+	//================== 새상품 주문 컨트롤러 시작 ===========================//
 	// 장바구니에서 주문하기 클릭했을때 처리함.
 	@RequestMapping(value="/order/order",method = RequestMethod.POST)
 	public String order(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {
@@ -84,7 +65,35 @@ public class OrderController {
 		model.addAttribute("totalpoint", totalpoint);
 		return ".order";
 	}
-	
+	// 바로 주문하기 눌렀을때  (( 책번호랑 몇개주문했는지 bcount 받아야함 )):
+	@RequestMapping(value="/order/directorder")
+	public String directOrder(HttpSession session,int bnum,int bcount,Model model) {
+		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String smnum=(String)session.getAttribute("mnum");
+		int mnum=0; //비회원 회원번호 0번으로 가정함.
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}
+		int totalprice=0;
+		int totalpoint=0;
+		OrderListResultVo vo=service.directorder(bnum);
+		String imgpath=path+"\\"+vo.getImgsavefilename();
+		int point=vo.getBpoint();
+		int price=vo.getBprice();
+		vo.setBcount(bcount);
+		totalprice+=(price*bcount);
+		totalpoint+=(point*bcount);
+		vo.setTotalpoint(point*bcount);
+		vo.setTotalvalue(price*bcount);
+		vo.setImgpath(imgpath);
+		List<OrderListResultVo> list=new ArrayList<OrderListResultVo>();
+		list.add(vo);
+		model.addAttribute("list", list);
+		model.addAttribute("totalprice", totalprice);
+		model.addAttribute("totalpoint", totalpoint);
+		model.addAttribute("mnum",mnum);
+		return ".order";
+	}
 	//주문페이지에서 배송지 얻어옴.
 	@RequestMapping(value="/order/getAddr",produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -147,4 +156,5 @@ public class OrderController {
 		json.put("point", point);
 		return json.toString();
 	}
+	//================== 새상품 주문 컨트롤러 끝 ===========================//
 }
