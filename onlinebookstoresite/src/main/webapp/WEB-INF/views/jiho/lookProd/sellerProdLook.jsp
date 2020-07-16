@@ -51,15 +51,16 @@
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
-					<td class="prodLooktdStyle"><input type="radio" name="regdate"
-						value="0"
-						<c:if test="${map.regdate==0 || map.regdate==null}">checked</c:if>>전체
+					<td class="prodLooktdStyle">
+						<input type="radio" name="regdate" value="0"
+							<c:if test="${map.regdate==0 || map.regdate==null}">checked</c:if>>전체
 						<input type="radio" name="regdate" value="1"
-						<c:if test="${map.regdate==1}">checked</c:if>>일자별&nbsp;&nbsp;&nbsp;
+							<c:if test="${map.regdate==1}">checked</c:if>>일자별&nbsp;&nbsp;&nbsp;
 						<input type="date" name="startDay" value="${map.startDay }"
-						<c:if test="${map.regdate==0 }">disabled</c:if>><span>&nbsp;~</span>
+							<c:if test="${map.regdate==0 }">disabled</c:if>><span>&nbsp;~</span>
 						<input type="date" name="endDay" value="${map.endDay }"
-						<c:if test="${map.regdate==0 }">disabled</c:if>></td>
+							<c:if test="${map.regdate==0 }">disabled</c:if>>
+					</td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록한 상품 검색</td>

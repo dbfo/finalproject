@@ -139,4 +139,14 @@ public class SellerOldbooksVo {
 	public void setObregdate(Date obregdate) {
 		this.obregdate = obregdate;
 	}
+
+	@Override
+	public String toString() {
+		return "SellerOldbooksVo [obnum=" + obnum + ", snum=" + snum + ", selleraddr=" + selleraddr + ", obname="
+				+ obname + ", obwriter=" + obwriter + ", obpublisher=" + obpublisher + ", obpdate=" + obpdate
+				+ ", obstatus=" + obstatus + ", oborgprice=" + oborgprice + ", obsaleprice=" + obsaleprice
+				+ ", obdetail=" + obdetail + ", obdelfee=" + obdelfee + ", obsalestatus=" + obsalestatus + ", obhit="
+				+ obhit + ", scatenum=" + scatenum + ", obregdate=" + obregdate + "]";
+	}
+	
 }

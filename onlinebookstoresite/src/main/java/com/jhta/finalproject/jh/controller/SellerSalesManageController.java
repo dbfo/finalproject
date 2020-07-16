@@ -32,13 +32,11 @@ bpayment bstatus
 			@RequestParam(value="tabType",defaultValue = "1")int tabType) {
 			
 		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴
-		int bstatus=0;
+		int bstatus=0; //주문,입금전
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
 		List<SellerSalesJoinVo> list1=service.getSalesList(map);
-		
-		System.out.println("test:"+list1.get(0).getSellerOldbookVo().toString());
 		
 		model.addAttribute("list1", list1);
 		model.addAttribute("tabType", tabType);
