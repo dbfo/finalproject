@@ -13,13 +13,13 @@
 			]]>
 		</if>
 		<if test="obname!=null">
-			and o.obname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
+			or o.obname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
 		</if>
-		<if test="mname!=null and mname !=''">
-			and m.mname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
+		<if test="mname!=null">
+			or m.mname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
 		</if>
-		<if test="receiver!=null and receiver !=''">
-			and bp.receiver like '%||#{keyword1,jdbcType=VARCHAR}||%'
+		<if test="receiver!=null">
+			or bp.receiver like '%||#{keyword1,jdbcType=VARCHAR}||%'
 		</if>
 	</sql>
 	

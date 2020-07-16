@@ -36,8 +36,10 @@ bpayment bstatus
 			String keyword1,
 			String startDay,
 			String endDay,
-			String obname,String mname,String receiver,
+			String obname,String mname,String receiver,String all,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+		
+		
 		
 		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴
 		int bstatus=tabType-1; //주문,입금전
@@ -50,6 +52,8 @@ bpayment bstatus
 		System.out.println("obname:"+obname);
 		System.out.println("mname:"+mname);
 		System.out.println("receiver:"+receiver);
+		System.out.println("all:"+all);
+//		System.out.println("field:"+field);
 		
 		
 		

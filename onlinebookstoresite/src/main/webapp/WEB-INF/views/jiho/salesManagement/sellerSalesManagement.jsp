@@ -131,10 +131,10 @@ input[name='field1']{
 							<tr>
 								<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
 								<td>
-									<input type="radio" name="all" value="all">전체
-									<input type="radio" name="obname" value="obname">상품명
-									<input type="radio" name="mname" value="mname">주문인
-									<input type="radio" name="receiver" value="receiver">수령인
+									<input type="radio" name="all" value="all" class="radio">전체
+									<input type="radio" name="obname" value="obname" class="radio">상품명
+									<input type="radio" name="mname" value="mname" class="radio">주문인
+									<input type="radio" name="receiver" value="receiver" class="radio">수령인
 								</td>
 							</tr>
 							<tr>
@@ -181,7 +181,7 @@ input[name='field1']{
 								<th scope="col" width="100" rowspan="2" style="text-align: center;">${vo.bpaynum }</th>
 								<th scope="col" rowspan="2" width="400">
 									<c:forEach var="oldbook" items="${vo.sellerOldbooksVo }">
-										상품명:${oldbook.obname }	| 수량: 1개 | 판매가 : ${oldbook.obsaleprice }원<br>
+										▶ 상품명 : ${oldbook.obname }	| 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원<br>
 									</c:forEach>
 								</th>
 								<th scope="col" style="text-align: center;margin: auto;">${vo.mname }</th>
