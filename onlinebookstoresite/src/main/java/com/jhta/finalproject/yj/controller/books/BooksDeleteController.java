@@ -20,13 +20,10 @@ public class BooksDeleteController {
 	@RequestMapping("/booksDelete")
 	public String imgDelete(int bnum, HttpSession session) {
 		service.booksDelete(bnum);
-//		System.out.println("상품번호:" + bnum);
 		List<ImgVO> imgList = service.getImgInfo(bnum);
 		String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
-//		C:\web\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\onlinebookstoresite\resources\imgUpload
 		for (int i = 0; i < imgList.size(); i++) {
 			File file = new File(uploadPath + "\\" + imgList.get(i).getImgsavefilename());
-//			System.out.println("gdgsdgd: "+imgList.get(i).getImgsavefilename());
 			file.delete();
 		}
 		service.imgDelete(bnum);

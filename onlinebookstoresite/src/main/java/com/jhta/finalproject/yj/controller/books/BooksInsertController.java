@@ -80,27 +80,7 @@ public class BooksInsertController {
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
 
 			// file
-			if (!(thumbnail.isEmpty()) && img1.isEmpty()) {
-//				System.out.println(uploadPath);
-//				C:\web\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\onlinebookstoresite\resources\imgUpload
-				String imgorgfilename = thumbnail.getOriginalFilename();
-				String imgsavefilename = UUID.randomUUID() + "_" + imgorgfilename;
-
-				// 전송된파일을 읽어오는 스트림
-				InputStream fis = thumbnail.getInputStream();
-				// 전송된 파일을 서버에 복사(업로드)하기 위한 출력스트림
-				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + imgsavefilename);
-				// 파일복사
-				FileCopyUtils.copy(fis, fos);
-				fis.close();
-				fos.close();
-
-				// DB에 파일정보 저장하기
-				BooksVO bvo=new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount, bcontent, 0, smctg, null);
-				ImgVO ivo = new ImgVO(imgorgfilename, 0, imgsavefilename, 1, 1, bvo.getBnum());
-				insertService.insert(bvo, ivo);
-
-			} else if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) {
+			if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) {
 				// 썸네일
 				List<ImgVO> list = new ArrayList<ImgVO>();
 				String imgorgfilename1 = thumbnail.getOriginalFilename();

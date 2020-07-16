@@ -11,7 +11,7 @@
 	<form method="post" action="${pageContext.request.contextPath }/booksInsert" enctype="multipart/form-data">
 		<table class="booksInsertTable table">
 			<tr>
-				<th align="center" class="table-active">카테고리 *</th>
+				<th align="center" class="table-active">카테고리</th>
 				<td colspan="3"><select name="bctg" id="bctg">
 						<option value="">- 선택 -</option>
 						<c:forEach var="big" items="${getBigctg }">
@@ -26,44 +26,44 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책제목 *</th>
+				<th align="center" class="table-active">책제목</th>
 				<td><input type="text" name="btitle" id="btitle" size="70"></td>
-				<th align="center" class="table-active">작가 (지은이) *</th>
+				<th align="center" class="table-active">작가 (지은이)</th>
 				<td><input type="text" name="bwriter" id="bwriter" size="50"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출간일 *</th>
+				<th align="center" class="table-active">출간일</th>
 				<td><input type="date" name="bpublishdate" id="bpublishdate"></td>
 
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출판사 *</th>
+				<th align="center" class="table-active">출판사</th>
 				<td colspan="3"><input type="text" name="bpublisher" size="50"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책가격 *</th>
+				<th align="center" class="table-active">책가격</th>
 				<td><input type="text" name="bprice" id="bprice" size="50"> 원</td>
-				<th align="center" class="table-active">적립포인트 *</th>
+				<th align="center" class="table-active">적립포인트</th>
 				<td><input type="text" name="bpoint" id="bpoint" size="50" readonly="readonly"> point 적립예정</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">입고수량 *</th>
+				<th align="center" class="table-active">입고수량</th>
 				<td colspan="3"><input type="text" name="bcount" size="50"> 개</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">썸네일 *</th>
+				<th align="center" class="table-active">썸네일</th>
 				<td><input type="file" name="thumbnail"></td>
 				<th align="center" class="table-active">이미지</th>
 				<td><input type="file" name="img1"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책설명 *</th>
+				<th align="center" class="table-active">책설명</th>
 				<td colspan="3">
 					<textarea rows="30" cols="200" name="bcontent"></textarea>
 				</td>
@@ -169,6 +169,13 @@
 		if (thumbnail.val() == "") {
 			alert("썸네일 등록은 필수사항입니다.");
 			thumbnail.focus();
+			return false;
+		}
+
+		var img1 = $("input[name='img1']");
+		if (img1.val() == "") {
+			alert("이미지 등록은 필수사항입니다.");
+			img1.focus();
 			return false;
 		}
 

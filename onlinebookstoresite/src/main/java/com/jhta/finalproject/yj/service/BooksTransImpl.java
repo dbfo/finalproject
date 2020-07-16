@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,18 @@ public class BooksTransImpl implements BooksTransService {
 		}
 		return 1;
 	}
+
+	@Transactional
+	@Override
+	public int update(ImgVO ivo1, ImgVO ivo2) {
+		// bdao.booksUpdate(bvo);
+		if (ivo2 == null) {
+			idao.imgUpdate(ivo1);
+		} else {
+			idao.imgUpdate(ivo1);
+			idao.imgUpdate(ivo2);
+		}
+		return 1;
+	}
+
 }

@@ -44,8 +44,8 @@ public class BooksDao {
 		return sqlsession.selectOne(NAMESPACE + ".getBooksInfo", bnum);
 	}
 	
-	public int getBigctg(int bnum) {
-		return sqlsession.selectOne(NAMESPACE + ".getBigctg", bnum);
+	public int updateBigCtg(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".updateBigCtg", bnum);
 	}
 
 	public int booksUpdate(BooksVO vo) {

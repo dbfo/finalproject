@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,13 +22,20 @@ public class ImgDao {
 	public int imgInsert(ImgVO vo) {
 		return sqlsession.insert(NAMESPACE + ".imgInsert", vo);
 	}
-	
 
 	public List<ImgVO> getImgInfo(int bnum) {
 		return sqlsession.selectList(NAMESPACE + ".getImgInfo", bnum);
 	}
-	
+
 	public int imgDelete(int bnum) {
 		return sqlsession.delete(NAMESPACE + ".imgDelete", bnum);
+	}
+
+	public int imgUpdate(ImgVO ivo) {
+		return sqlsession.update(NAMESPACE + ".imgUpdate", ivo);
+	}
+
+	public int imgUpdateDelete(int imgnum) {
+		return sqlsession.delete(NAMESPACE + ".imgUpdateDelete", imgnum);
 	}
 }

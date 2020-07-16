@@ -46,12 +46,16 @@ public class BooksImgService {
 	public int imgDelete(int bnum) {
 		return idao.imgDelete(bnum);
 	}
-	
-	public int getBigctg(int bnum) {
-		return bdao.getBigctg(bnum);
+
+	public int updateBigCtg(int bnum) {
+		return bdao.updateBigCtg(bnum);
 	}
-	
+
 	public int booksUpdate(BooksVO vo) {
 		return bdao.booksUpdate(vo);
+	}
+
+	public int imgUpdateDelete(int imgnum) {
+		return idao.imgUpdateDelete(imgnum);
 	}
 }

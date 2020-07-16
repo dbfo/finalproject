@@ -5,92 +5,122 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- booksUpdate -->
-<link href="${pageContext.request.contextPath }/resources/yjcss/css/made.css" rel="stylesheet" />
+<link
+	href="${pageContext.request.contextPath }/resources/yjcss/css/made.css"
+	rel="stylesheet" />
 
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 상품수정
 	</div>
-	<form method="post" action="${pageContext.request.contextPath }/booksUpdate" enctype="multipart/form-data">
+	<form method="post"
+		action="${pageContext.request.contextPath }/booksUpdate"
+		enctype="multipart/form-data">
 		<input type="hidden" name="bnum" value="${bvo.bnum }">
 		<table class="booksUpdateTable table">
 			<tr>
-				<th align="center" class="table-active">카테고리 *</th>
+				<th align="center" class="table-active">카테고리</th>
 				<td colspan="3">
 					<select name="bctg" id="bctg">
-						<option value="">- 선택 -</option>
 						<c:forEach var="big" items="${getBigctg }">
-							<option value="${big.bcatenum }">${big.bcataname }</option>
+							<option value="${big.bcatenum}"
+								<c:if test="${big.bcatenum == bcatenum }">selected</c:if>>${big.bcataname }
+							</option>
 						</c:forEach>
 					</select>
-					<div id="smctgDiv" style="display: none">
-<%-- 						<c:forEach var="sm"> --%>
-							<select name="smctg" id="smctg">
-								<option value="">- 선택 -</option>
-								<option value="${bvo.scatenum }">(카테고리가져오기)</option>
-							</select>
-<%-- 						</c:forEach> --%>
+					<div id="smctgDiv" style="display: inline-block">
+						<select name="smctg" id="smctg">
+							<option value="">- 선택 -</option>
+							<c:forEach var="sm" items="${getsctg }">
+								<option value="${sm.scatenum}"
+									<c:if test="${sm.scatenum == bvo.scatenum }">selected</c:if>>${sm.scataname }
+								</option>
+							</c:forEach>
+						</select>
 					</div>
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책제목 *</th>
-				<td><input type="text" name="btitle" id="btitle" size="60" value="${bvo.btitle }"></td>
-				<th align="center" class="table-active">작가 (지은이) *</th>
-				<td><input type="text" name="bwriter" id="bwriter" size="50" value="${bvo.bwriter }"></td>
+				<th align="center" class="table-active">책제목</th>
+				<td>
+					<input type="text" name="btitle" id="btitle" size="60" value="${bvo.btitle }">
+				</td>
+				
+				<th align="center" class="table-active">작가 (지은이)</th>
+				<td>
+					<input type="text" name="bwriter" id="bwriter" size="50" value="${bvo.bwriter }">
+				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출간일 *</th>
+				<th align="center" class="table-active">출간일</th>
 				<fmt:formatDate value="${bvo.bpublishdate }" pattern="yyyy-MM-dd" var="bpublishdate" />
-				<td><input type="date" name="bpublishdate" id="bpublishdate" value="${bpublishdate }"></td>
-
+				<td>
+					<input type="date" name="bpublishdate" id="bpublishdate" value="${bpublishdate }">
+				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출판사 *</th>
-				<td colspan="3"><input type="text" name="bpublisher" size="50" value="${bvo.bpublisher }"></td>
+				<th align="center" class="table-active">출판사</th>
+				<td colspan="3">
+					<input type="text" name="bpublisher" size="50" value="${bvo.bpublisher }">
+				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책가격 *</th>
-				<td><input type="text" name="bprice" id="bprice" size="50" value="${bvo.bprice }"> 원</td>
-				<th align="center" class="table-active">적립포인트 *</th>
-				<td><input type="text" name="bpoint" id="bpoint" size="50" readonly="readonly" value="${bvo.bpoint }"> point 적립예정</td>
+				<th align="center" class="table-active">책가격</th>
+				<td>
+					<input type="text" name="bprice" id="bprice" size="50" value="${bvo.bprice }"> 원
+				</td>
+				
+				<th align="center" class="table-active">적립포인트</th>
+					<td>
+						<input type="text" name="bpoint" id="bpoint" size="50" readonly="readonly" value="${bvo.bpoint }"> point 적립예정
+					</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">입고수량 *</th>
-				<td colspan="3"><input type="text" name="bcount" size="50" value="${bvo.bcount }"> 개</td>
+				<th align="center" class="table-active">입고수량</th>
+				<td colspan="3">
+					<input type="text" name="bcount" size="50" value="${bvo.bcount }"> 개
+				</td>
 			</tr>
 
 			<tr>
 				<th align="center" class="table-active">기존 썸네일</th>
 				<td>
+					<input type="hidden" name="thumbNum" value="${thumbImg.imgnum }">
 					<div id="savedThumbImg" style="text-align: center;">
 						<img width="300px" height="350px"
-						src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
+							src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
 					</div>
 				</td>
+				
 				<th align="center" class="table-active">기존 이미지</th>
 				<td>
-				<div id="savedImg" style="text-align: center;">
-						<img width="300px" height="350px"
-						src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
-					</div>				
+					<c:if test="${!empty img1 }">
+						<input type="hidden" name="imgNum" value="${img1.imgnum }">
+						<div id="savedImg" style="text-align: center;">
+							<img width="300px" height="350px"
+								src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
+						</div>
+					</c:if>
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">수정할 썸네일 *</th>
-				<td><input type="file" name="thumbnail"></td>
+				<th align="center" class="table-active">수정할 썸네일</th>
+				<td>
+					<input type="file" name="thumbnail">
+				</td>
+				
 				<th align="center" class="table-active">수정할 이미지</th>
-				<td><input type="file" name="img1"></td>
-			</tr>
+					<td><input type="file" name="img1"></td>
+				</tr>
 
 			<tr>
-				<th align="center" class="table-active">책설명 *</th>
+				<th align="center" class="table-active">책설명</th>
 				<td colspan="3">
 					<textarea rows="30" cols="200" name="bcontent">${bvo.bcontent }</textarea>
 				</td>
@@ -109,24 +139,29 @@
 <!-- 스크립트 -->
 <script>
 	// 카테고리
-	$("#bctg").change(function() {
-		var big = $(this).val();
-		//alert("big:" + big);
-		$.ajax({
-			url : "/finalproject/booksctg",
-			data : {
-				bcatenum : big
-			},
-			success : function(data) {
-				$("#smctgDiv").css("display", "inline-block");
-				$("#smctg").empty();
-				$("#smctg").append("<option value=''>- 선택 -</option>")
-				$(data).each(function(i, sm) {
-					$("#smctg").append("<option value='" + sm.scatenum + "'>" + sm.scataname + "</option>")
+	$("#bctg").change(
+			function() {
+				var big = $(this).val();
+				//alert("big:" + big);
+				$.ajax({
+					url : "/finalproject/booksctg",
+					data : {
+						bcatenum : big
+					},
+					success : function(data) {
+						// 				$("#smctgDiv").css("display", "inline-block");
+						$("#smctg").empty();
+						$("#smctg").append("<option value=''>- 선택 -</option>")
+						$(data).each(
+								function(i, sm) {
+									$("#smctg").append(
+											"<option value='" + sm.scatenum + "'>"
+													+ sm.scataname
+													+ "</option>")
+								});
+					}
 				});
-			}
-		});
-	});
+			});
 
 	// 포인트 = 가격 * (5 / 100)
 	$("#bprice").change(function() {
@@ -196,6 +231,13 @@
 		if (thumbnail.val() == "") {
 			alert("썸네일 등록은 필수사항입니다.");
 			thumbnail.focus();
+			return false;
+		}
+		
+		var img1 = $("input[name='img1']");
+		if (img1.val() == "") {
+			alert("이미지 등록은 필수사항입니다.");
+			img1.focus();
 			return false;
 		}
 
