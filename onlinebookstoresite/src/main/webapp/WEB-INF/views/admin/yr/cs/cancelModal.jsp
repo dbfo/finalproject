@@ -8,7 +8,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">주문 리스트</h4>
+        <h4 class="modal-title">취소 처리 상세정보</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -16,8 +16,27 @@
       <div class="modal-body">
         <div class="row">
 		<div class="col-md-12">
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>주문번호</th>
+						<th>주문 일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="vo" items="${List}">
+						<tr>
+							<td id="bpaynum">${vo.bpaynum }</td>							
+							<td> <fmt:formatDate value="${vo.borderdate }" pattern="yyyy-MM-dd"/> </td>							
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			
 			<h5>
-				주문한 리스트
+				주문 상품
 			</h5>
 			<table class="table">
 				<thead>
@@ -26,6 +45,7 @@
 						<th>책이름</th>
 						<th>수량</th>
 						<th>판매가격</th>
+						<th>배송비</th>
 						<th>총 가격</th>
 					</tr>
 				</thead>
@@ -38,38 +58,17 @@
 									<td>${book.bcount}</td>
 									<td>${book.bprice}</td>
 									<td></td>
+									<td></td>
 								</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="5" align="right">${vo.ordermoney}</td>
+							<td colspan="5" align="right">배송금액 </td>
+							<td colspan="1" align="right">${vo.ordermoney}</td>
 						</tr>
+
+
 					</c:forEach>
 				</tbody>
-			</table>
-			
-<!-- 			주소 -->
-			<h5>
-				배송 정보
-			</h5>
-			<table class="table">
-				<c:forEach var="vo" items = "${List }">
-					<tr>
-						<th>주문자 이름</th>
-						<td>${vo.mname}</td>
-					</tr>
-					<tr>
-						<th>수령인</th>
-						<td>${vo.receiver}</td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td>${vo.baddr}</td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td>${vo.bphone}</td>
-					</tr>
-				</c:forEach>
 			</table>
 			
 		</div>
@@ -86,7 +85,9 @@
 						<th>책이름</th>
 						<th>수량</th>
 						<th>판매가격</th>
-						<th>총 가격</th>
+						<th>배송비</th>
+						<th>취소 가격</th>
+						<th>총 취소 예상 가격</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -100,23 +101,44 @@
 									<td>${book.count}</td>
 									<td>${book.bprice}</td>
 									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
 								<c:set var="price" value="${price+book.bprice }"/>
 							</c:if>
 						</c:forEach>
+									
+<%-- 						<c:forEach items="${vo.CSAndPaymentBook}" var="book"> --%>
+<%-- 							<c:if test="${book.type != 1 }"> --%>
+<%-- 								<div id = "newOrderBnum">${book.bnum}</div> --%>
+<%-- 							</c:if> --%>
+<%-- 							<c:if test="${book.type == 1 }"> --%>
+<%-- 								<c:if test="${book.bcount-book.count > 0 }">  --%>
+<%-- 									<c:out value="${book.bcount-book.count }"></c:out> --%>
+<%-- 									${book.bnum  } --%>
+<%-- 								</c:if> --%>
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+						
 					</c:forEach>
 					<tr>
-						<td colspan="5" align="right"><span style = "color : red"><c:out value="${price }" /></span></td>
+						<td colspan="5" align="right">배송비</td>
+						<td colspan="1" align="right"><c:out value="${price }" /></span></td>
+						<td colspan="1" align="right"><span style = "color : red"><c:out value="${price }" /></span></td>
 					</tr>
 				</tbody>
 			</table>
 			
 			 
-			<button type="button" class="btn btn-success btn-md"> 승인</button>
+			<button type="button" class="btn btn-success btn-md" id = "applyBtn">승인</button>
 			<button type="button" class="btn btn-success btn-md">반려</button>
+
 		</div>
 	</div>
       </div>
+      
+      
+
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -125,4 +147,25 @@
 
     </div>
 
+
+    
+<script type="text/javascript">
+	
+	$("#applyBtn").click(function () {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/cs/cancelapproval",
+			dataType : "json",
+			data : {bpaynum : ${'#bpaynum'}},
+			success : function(data){
+				if(){
+					alert("처리 성공 하셨습니다.")
+				}else{
+					alert("처리 실패 하셨습니다.")					
+				}
+			}
+		})		
+	})
+
+</script>
+    
     

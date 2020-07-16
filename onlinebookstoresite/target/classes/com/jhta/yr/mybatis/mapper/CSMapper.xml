@@ -13,6 +13,9 @@
 			<if test="CSStatus == 0">
 				and bstatus = 0
 			</if>
+			<if test="CSStatus == 1">
+				and bstatus = 0
+			</if>
 	    </if>		
 	</sql>
 

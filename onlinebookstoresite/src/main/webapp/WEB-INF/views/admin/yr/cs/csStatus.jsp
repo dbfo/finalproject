@@ -8,7 +8,7 @@
 	<ul class="tab">	
 		<li>
 			<span class="thumb"><i class="fas fa-times fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=0">취소
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=1">취소
 					<c:forEach items="${countList }" var="list">						
 						<c:if test="${list.TYPE == '1'}">
 							[${list['COUNT']}]
@@ -19,7 +19,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-sync fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=1">교환
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=2">교환
 					<c:forEach items="${countList }" var="list">						
 						<c:if test="${list.TYPE == '2'}">
 							[${list['COUNT']}]
@@ -30,7 +30,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-undo-alt fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=2">반품
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=3">반품
 					<c:forEach items="${countList }" var="list">						
 						<c:if test="${list.TYPE == '3'}">
 							[${list['COUNT']}]
@@ -41,7 +41,7 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-comment-dollar fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=3">환불</a></span>
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=4">환불</a></span>
 			</span>
 		</li>
 	</ul>

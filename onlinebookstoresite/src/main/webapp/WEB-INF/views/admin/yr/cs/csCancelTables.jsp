@@ -10,6 +10,7 @@
 			
 		<!-- 취소 -->
 		<section id="content1" >
+			<jsp:include page="allCancelListTable.jsp" />			
 		</section>
 		<!-- 입금 전 취소-->
 		<section id="content2">
