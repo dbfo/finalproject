@@ -7,18 +7,17 @@
 	
 	<!-- 회원번호 받아 중고 장바구니 리스트 출력. -->
 	<select id="usedlist" parameterType="int" resultType="usedVo">
-		select cart.*,img.imgsavefilename,obs.snum, oborgprice, obsaleprice, obstatus, obnum
-		from
-		(select * from cart where btype=2 and mnum=#{mnum})cart,
+		select cart.*,img.imgsavefilename,obs.snum, oborgprice, obsaleprice, obstatus, obnum,obname,obdelfee
+		from (select * from cart where btype=2 and mnum=#{mnum})cart,
 		(select * from oldbooks)obs,
 		(select * from img where btype=2)img
-		where cart.bnum=obs.obnum and cart.bnum=img.bnum;
+		where cart.bnum=obs.obnum and cart.bnum=img.bnum
 	</select>
 	
 	<select id="getSid" parameterType="int" resultType="string">
 		select members.mid from 
 		(select * from obseller where snum=#{snum})seller,(select * from members) members
-		where seller.mnum=members.mnum;
+		where seller.mnum=members.mnum
 	</select>
 	
 	<!-- ======== 중고 상품 관련 Mapper 끝 ============ -->

@@ -56,8 +56,10 @@
 <!--/////////// 상품리스트 테이블 끝 ///////////////-->
 <!--/////////// 결제금액,포인트 테이블 시작 ///////////////-->
 	<table class="table">
-			<tr class="table-secondary">
-				<th>총 상품금액</th><th>배송비</th><th>사용포인트</th>
+			<tr>
+				<th class="table-secondary">총 상품금액</th>
+				<th class="table-secondary">배송비</th>
+				<th class="table-secondary">사용포인트</th>
 				<td rowspan="2" class="table-danger">
 					<strong>최종 결제금액</strong><br>
 					<span id="final_payment_price"></span>원

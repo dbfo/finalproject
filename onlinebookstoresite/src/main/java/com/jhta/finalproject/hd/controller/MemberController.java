@@ -40,6 +40,9 @@ public class MemberController {
 				session.setAttribute("mnum", vo.getMnum());
 				session.setAttribute("mid", vo.getMid());
 				session.setAttribute("snum", vo.getSnum());
+			}else {
+				session.setAttribute("mnum", vo.getMnum());
+				session.setAttribute("mid", vo.getMid());
 			}
 			JSONObject json=new JSONObject();
 			json.put("result", result);

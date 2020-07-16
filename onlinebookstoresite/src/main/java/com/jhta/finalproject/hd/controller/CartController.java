@@ -1,5 +1,6 @@
 package com.jhta.finalproject.hd.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -7,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +30,7 @@ public class CartController {
 	//============== 중고 관련 AJAX 컨트롤러  시작 =============//
 	@RequestMapping(value="/pay/usedlist",produces= "application/json;charset=utf-8")
 	@ResponseBody
-	public String usedlist(HttpSession session) {
+	public String usedlist(HttpSession session,Model model) {
 		String smnum=(String)session.getAttribute("mnum");
 		String path=session.getAttribute("cp")+"/resources/hd/image";
 		int mnum=0;
@@ -37,26 +39,47 @@ public class CartController {
 		}
 		List<UsedCartListVo>list=service.usedlist(mnum);
 		JSONArray jarr=new JSONArray();
+		List<String> sidList= new ArrayList<String>();
 		for(UsedCartListVo vo:list) {
 			JSONObject json=new JSONObject();
 			json.put("cartnum", vo.getCartnum());
 			json.put("bcount", vo.getBcount());
 			json.put("obnum", vo.getObnum());
+			json.put("btitle", vo.getObname());
 			String sid=service.getSid(vo.getSnum());
-			json.put("sid", sid); //판매자 아이디
+			//====== 판매자 아이디 리스트  add 시작 ====//
+			json.put("sid", sid);
+			int confirm=0;
+			for(int i=0;i<sidList.size();i++) {
+				if(sid.equals(sidList.get(i))) {
+					confirm++;
+				}
+			}
+			if(confirm==0) {
+				sidList.add(sid);
+			}
+			//====== 판매자 아이디 리스트  add 끝 ====//
 			String imgpath=path+"\\"+vo.getImgsavefilename();
 			json.put("imgsrc", imgpath);
 			json.put("oborgprice", vo.getOborgprice());
 			json.put("obsaleprice", vo.getObsaleprice());
-			json.put("obstatus", vo.getObstatus());
+			int totalvalue=vo.getObsaleprice()*vo.getBcount();
+			json.put("totalvalue",totalvalue );
+			json.put("obstatus", vo.getObstatus());	
+			json.put("shipmentfee", vo.getObdelfee());
 			jarr.put(json);
+		}
+		JSONObject json=new JSONObject();
+		if(sidList.size()!=0) {
+			json.put("sidlist", sidList);
+			jarr.put(json); //맨 마지막 json에는 판매자 아이디만 있음.
 		}
 		return jarr.toString();
 	}
 	
-	//============== 새제품 관련 AJAX 컨트롤러  끝 =============//
+	//============== 중고 관련 AJAX 컨트롤러  끝 =============//
 	
-	//============== 새제품 관련 AJAX 컨트롤러  시작 =============//
+	//============== 새상품 관련 AJAX 컨트롤러  시작 =============//
 	//장바구니 새상품 리스트 출력 AJAX
 	@RequestMapping(value="/pay/cartlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -142,5 +165,5 @@ public class CartController {
 		
 		return json.toString();
 	}
-	//============== 새제품 관련 AJAX 컨트롤러  끝 =============//
+	//============== 새상품 관련 AJAX 컨트롤러  끝 =============//
 }
