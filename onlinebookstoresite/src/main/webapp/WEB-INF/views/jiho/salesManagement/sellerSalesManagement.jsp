@@ -131,23 +131,23 @@ input[name='field1']{
 							<tr>
 								<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
 								<td>
-									<input type="checkbox" name="keyword1" value="all">전체
-									<input type="checkbox" name="keyword1" value="obname">상품명
-									<input type="checkbox" name="keyword1" value="mname">주문인
-									<input type="checkbox" name="keyword1" value="receiver">수령인
+									<input type="radio" name="all" value="all">전체
+									<input type="radio" name="obname" value="obname">상품명
+									<input type="radio" name="mname" value="mname">주문인
+									<input type="radio" name="receiver" value="receiver">수령인
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<input type="radio" name="borderdate1" value="1">전체
-									<input type="radio" name="borderdate1" value="2">일자별&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="borderdate1" value="2">주문일&nbsp;&nbsp;&nbsp;
 									<input type="date" name="startDay"><span>&nbsp;~</span>
 									<input type="date" name="endDay">
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="field1" class="form-control" placeholder="검색어를 입력하세요.">
+									<input type="text" name="keyword1" class="form-control" placeholder="검색어를 입력하세요.">
 									<!-- 버튼 -->
 									<input type="submit" value="검색" class="btn btn-success" id="slaesListbt1">
 									<input type="button" value="검색조건 초기화" id="resetBt" class="btn btn-secondary">

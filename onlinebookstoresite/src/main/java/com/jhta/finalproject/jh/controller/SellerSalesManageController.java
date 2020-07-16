@@ -32,11 +32,11 @@ bpayment bstatus
 	public String salesManage(
 			Model model,
 			@RequestParam(value="tabType",defaultValue = "1")int tabType,
-			String keyword1,
 			@RequestParam(value="borderdate1",defaultValue = "1")int borderdate1,
+			String keyword1,
 			String startDay,
 			String endDay,
-			String field1,
+			String obname,String mname,String receiver,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
 		
 		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴
@@ -47,24 +47,35 @@ bpayment bstatus
 		System.out.println("startDay:"+startDay);
 		System.out.println("endDay:"+endDay);
 		System.out.println("keyword1:"+keyword1);
-		System.out.println("field1:"+field1);
+		System.out.println("obname:"+obname);
+		System.out.println("mname:"+mname);
+		System.out.println("receiver:"+receiver);
 		
 		
 		
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
+		map.put("startDay",startDay);
+		map.put("endDay",endDay);
+		map.put("obname",obname);
+		map.put("mname",mname);
+		map.put("receiver",receiver);
+		map.put("keyword1", keyword1);
+		
+		
 		int totRowCount=service.getTotRowCount(map);
-		
-		
-		
 		System.out.println("전체 행의 갯수:"+totRowCount);
+		
+		
+		
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		
 		
 		List<SellerSalesJoinVo> list1=service.getSalesList(map);
-		System.out.println("리스트:"+list1.size());
+		
+		
 		model.addAttribute("list1", list1);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
