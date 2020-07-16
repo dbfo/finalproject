@@ -20,5 +20,8 @@ public class SellerSalesManagementDao {
 		List<SellerSalesJoinVo> list=sqlSession.selectList(NAMESPACE+".getSalesList", map);
 		return list;
 	}
-	
+	//전체 행의 갯수 구하기
+	public int getTotRowCount(HashMap<String, Object> map){
+		return sqlSession.selectOne(NAMESPACE+".getTotRowCount", map);
+	}
 }

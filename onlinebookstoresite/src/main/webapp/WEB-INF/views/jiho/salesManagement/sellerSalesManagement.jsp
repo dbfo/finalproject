@@ -123,87 +123,100 @@ input[name='field1']{
 		
 		<!-- 입금대기중 -->
 		<section id="content1">
-			<div id="detail1">
-				<div id="searchBox1">
-					<!-- 검색박스 -->
+			<form action="${cp }/seller/salesManagement" method="post">
+				<div id="detail1">
+					<div id="searchBox1">
+						<!-- 검색박스 -->
+						<table class="table table-bordered">
+							<tr>
+								<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
+								<td>
+									<input type="checkbox" name="keyword1" value="all">전체
+									<input type="checkbox" name="keyword1" value="obname">상품명
+									<input type="checkbox" name="keyword1" value="mname">주문인
+									<input type="checkbox" name="keyword1" value="receiver">수령인
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="radio" name="borderdate1" value="1">전체
+									<input type="radio" name="borderdate1" value="2">일자별&nbsp;&nbsp;&nbsp;
+									<input type="date" name="startDay"><span>&nbsp;~</span>
+									<input type="date" name="endDay">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" name="field1" class="form-control" placeholder="검색어를 입력하세요.">
+									<!-- 버튼 -->
+									<input type="submit" value="검색" class="btn btn-success" id="slaesListbt1">
+									<input type="button" value="검색조건 초기화" id="resetBt" class="btn btn-secondary">
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 리스트 -->
+					<h2>LIST</h2>
 					<table class="table table-bordered">
-						<tr>
-							<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
-							<td>
-								<input type="checkbox" name="keyword1" value="all">전체
-								<input type="checkbox" name="keyword1" value="obname">상품명
-								<input type="checkbox" name="keyword1" value="mname">주문인
-								<input type="checkbox" name="keyword1" value="receiver">수령인
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="radio" name="borderdate1" value="0">전체
-								<input type="radio" name="borderdate1" value="1">일자별&nbsp;&nbsp;&nbsp;
-								<input type="date" name="startDay"><span>&nbsp;~</span>
-								<input type="date" name="endDay">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="text" name="field1" class="form-control" placeholder="검색어를 입력하세요.">
-								<!-- 버튼 -->
-								<input type="submit" value="검색" class="btn btn-success" id="slaesListbt1">
-								<input type="button" value="검색조건 초기화" id="resetBt" class="btn btn-secondary">
-							</td>
-						</tr>
+						<thead class="thead-dark">
+							<tr class="toptr">
+								<th scope="col" width="60" rowspan="2">NO</th>
+								<th scope="col" width="100" rowspan="2">주문번호</th>
+								<th scope="col" rowspan="2" width="400">상품정보</th>
+								<th scope="col">주문인</th>
+								<th scope="col">총 주문금액</th>
+								<th scope="col" rowspan="2">총 합계</th>
+								<th scope="col" rowspan="2">주문일</th>
+							</tr>
+							<tr class="toptr">
+								<th scope="col">수령인</th>
+								<th scope="col">배송비</th>
+							</tr>
+						</thead>
+						<c:forEach var="vo" items="${list1 }" varStatus="status">
+							<tr>
+								<th scope="col" width="60" rowspan="2" style="text-align: center;">
+									${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}
+								</th>
+								<th scope="col" width="100" rowspan="2" style="text-align: center;">${vo.bpaynum }</th>
+								<th scope="col" rowspan="2" width="400">
+									<c:forEach var="oldbook" items="${vo.sellerOldbooksVo }">
+										상품명:${oldbook.obname }	| 수량: 1개 | 판매가 : ${oldbook.obsaleprice }원<br>
+									</c:forEach>
+								</th>
+								<th scope="col" style="text-align: center;margin: auto;">${vo.mname }</th>
+								<th scope="col" style="text-align: right;">${vo.ordermoney }원</th>
+								<th scope="col" rowspan="2" style="text-align: right;margin: auto;">${vo.bfinalmoney }원</th>
+								<th scope="col" rowspan="2" style="text-align: center;"><fmt:formatDate value="${vo.borderdate }" pattern="yyyy-MM-dd"/></th>
+							</tr>
+							<tr>
+								<th scope="col" style="text-align: center;">${vo.receiver }</th>
+								<th scope="col" style="text-align: right;">${vo.delfee }원</th>
+							</tr>
+						</c:forEach>	
 					</table>
+					<!-- 페이징버튼 -->
+					<div>
+						<ul class="pagination justify-content-center">
+							<!-- 이전버튼 -->
+							<c:if test="${pu.startPageNum>3 }">
+								<li class="page-item"><a class="page-link" href="${cp}/seller/salesManagement?pageNum=${pu.startPageNum-1}">
+									이전</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum}" >
+								<li class="page-item">
+								<a class="page-link" href="${cp}/seller/salesManagement?pageNum=${i}">${i}</a></li>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${pu.totalPageCount>pu.endPageNum}">
+								<li class="page-item"><a class="page-link" 
+									href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}">
+									다음</a></li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
-				<!-- 리스트 -->
-				<h2>LIST</h2>
-				<table class="table table-bordered">
-					<thead class="thead-dark">
-						<tr class="toptr">
-							<th scope="col" width="60" rowspan="2">NO</th>
-							<th scope="col" width="100" rowspan="2">주문번호</th>
-							<th scope="col" rowspan="2" width="400">상품정보</th>
-							<th scope="col">주문인</th>
-							<th scope="col">총 주문금액</th>
-							<th scope="col" rowspan="2">총 합계</th>
-							<th scope="col" rowspan="2">주문일</th>
-						</tr>
-						<tr class="toptr">
-							<th scope="col">수령인</th>
-							<th scope="col">배송비</th>
-						</tr>
-					</thead>
-					<c:forEach var="vo" items="${list1 }" varStatus="status">
-						<tr>
-							<th scope="col" width="60" rowspan="2" style="text-align: center;">1</th>
-							<th scope="col" width="100" rowspan="2" style="text-align: center;">${vo.bpaynum }</th>
-							<th scope="col" rowspan="2" width="400">
-								<c:forEach var="oldbook" items="${vo.sellerOldbooksVo }">
-									상품명:${oldbook.obname }	| 수량: 1개 | 판매가 : ${oldbook.obsaleprice }원<br>
-								</c:forEach>
-							</th>
-							<th scope="col" style="text-align: center;margin: auto;">${vo.mname }</th>
-							<th scope="col" style="text-align: right;">${vo.ordermoney }원</th>
-							<th scope="col" rowspan="2" style="text-align: right;margin: auto;">${vo.bfinalmoney }원</th>
-							<th scope="col" rowspan="2" style="text-align: center;"><fmt:formatDate value="${vo.borderdate }" pattern="yyyy-MM-dd"/></th>
-						</tr>
-						<tr>
-							<th scope="col" style="text-align: center;">${vo.receiver }</th>
-							<th scope="col" style="text-align: right;">${vo.delfee }원</th>
-						</tr>
-					</c:forEach>	
-				</table>
-				<!-- 페이징버튼 -->
-				<div>
-					<ul class="pagination justify-content-center">
-						<!-- 이전버튼 -->
-						<li class="page-item"><a class="page-link" href="">이전</a></li>
-						
-							<li class="page-item"><a class="page-link" href="">1</a></li>
-						<!-- 다음버튼 -->
-						<li class="page-item"><a class="page-link" href="">다음</a></li>
-					</ul>
-				</div>
-			</div>
+			</form>
 		</section>
 		<!-- 입금완료/배송요청 -->
 		<section id="content2">

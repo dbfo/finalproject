@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerSalesManagementMapper.jh">
 	<!-- //*판매관리 관련 Mapper설정파일*// -->
+	<!-- 검색조건 
+	<sql id="search">
+		<if test="">
+		
+		</if>
 	
+	
+	</sql>
+	-->
 	<resultMap type="obsalesjoin" id="obsalesjoin">
 		<result column="bpaynum" property="bpaynum"/>
 		<result column="snum" property="snum"/>
@@ -28,20 +36,85 @@
 			<result property="obsaleprice" column="obsaleprice"/>
 		</collection>
 	</resultMap>
-	
+	<!-- 리스트 가져오기 -->
 	<select id="getSalesList" parameterType="hashmap" resultMap="obsalesjoin">
-		select a.*,rownum rnum
-		from(
-            select DISTINCT b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
-            b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
-            b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
-            b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE
-            from paymentbook p,bpayment b, oldbooks o,members m
-            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum and snum=#{snum} and b.bstatus=#{bstatus}
-            order by borderdate desc)a
+	    <![CDATA[
+		    select * from(
+	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
+                    b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
+                    b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE
+	                from paymentbook p,( select * from
+                    (
+                    select * from(
+                        select a.*,rownum r from
+                        (
+                            select *
+                            from bpayment where bpaynum in 
+                             (select distinct(pay) from (
+                                select bp.bpaynum pay from 
+                                bpayment b,oldbooks o,paymentbook bp 
+                                where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum and bp.bnum=o.obnum
+                                order by b.borderdate desc  
+                             ) 
+                           )
+                        )a
+                    )where r>=#{startRow} and r<=#{endRow} ) )b, oldbooks o,members m 
+	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum     
+	           )
+		]]>
 	</select>
+	<!--  
+	<select id="getTotRowCount" parameterType="hashmap" resultMap="obsalesjoin">
+		select a.*,rownum rnum
+			from(
+	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
+	            b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
+	            b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
+	            b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE
+	            from paymentbook p,bpayment b, oldbooks o,members m
+	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum and snum=#{snum} and b.bstatus=#{bstatus}
+	            order by borderdate desc)a
+	</select>
+	
+	-->
+	<select id="getTotRowCount" parameterType="hashmap" resultType="int">
+		select count(DISTINCT(b.bpaynum)) count
+		from bpayment b, paymentbook p, oldbooks o,members m
+		where b.bpaynum=p.bpaynum and p.bnum=o.obnum and b.mnum=m.mnum and snum=#{snum} and b.bstatus=#{bstatus}
+	</select>
+	
+	<!-- 
+	<resultMap type="int" id="obsalesjoin">
+		<result column="count" property="count"/>
+		<collection property="sellerOldbooksVo"	ofType="oldbooks">
+			<result property="obname" column="obname"/>
+			<result property="obsaleprice" column="obsaleprice"/>
+		</collection>
+	</resultMap>
+	 -->
+
+	<!-- 전체 행의 갯수 구하기 
+	<select id="getTotRowcount" parameterType="hashmap" resultType="int">
+		select count(*) count 
+		from(
+			select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT,
+			b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, 
+			b.BPAYDATE BPAYDATE, b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, 
+			b.RECEIVER RECEIVER, b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME, o.obsaleprice OBSALEPRICE 
+			from paymentbook p,bpayment b, 
+			oldbooks o,members m
+			where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum and snum=1 and b.bstatus=0 order by borderdate desc)a
+	</select> 
  
-	<!-- 중고판매관리(1:입금대기중)
+ -->
+ 
+ 
+ 
+ 
+ 
+ 
+	<!-- 중고판매관리(0:입금대기중)
 	<select id="getSalesList" parameterType="hashmap" resultType="obsalesjoin">
 		select a.*,rownum rnum
 		from(

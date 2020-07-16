@@ -15,9 +15,13 @@ public class SellerSalesManagementService {
 	private SellerSalesManagementDao dao;
 	
 	//중고판매관리(0:주문/입금대기중,1:결제완료, 2:배송중, 3:수령완료(구매확정), 4:환불) 상태별 리스트 가져오기
-		public List<SellerSalesJoinVo> getSalesList(HashMap<String, Object> map){
-			List<SellerSalesJoinVo> list=dao.getSalesList(map);
-			return list;
-		}
+	public List<SellerSalesJoinVo> getSalesList(HashMap<String, Object> map){
+		List<SellerSalesJoinVo> list=dao.getSalesList(map);
+		return list;
+	}
 	
+	//전체 행의 갯수 구하기
+	public int getTotRowCount(HashMap<String, Object> map){
+		return dao.getTotRowCount(map); 
+	}
 }
