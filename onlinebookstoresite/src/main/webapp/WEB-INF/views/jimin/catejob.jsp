@@ -43,7 +43,7 @@
 	
 	</c:if>
 	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${catenovel }">
+	<c:forEach  var="vo" items="${catejob }">
 	
 	<div id="listwrap">
 	<div id="image">
@@ -106,13 +106,13 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="cnovel?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
+			 	<a href="cjob?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
 			 	<strong style="color:red">${i }</strong></a>
 			 	</button>
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="cnovel?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
+			 	<a href="cjob?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>

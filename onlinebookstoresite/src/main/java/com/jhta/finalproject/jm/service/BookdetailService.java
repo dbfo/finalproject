@@ -14,7 +14,7 @@ public class BookdetailService {
 	@Autowired
 	private BookdetailDao dao;
 	
-	public List<BooksVo> bookdetail(int bnum){
+	public BooksVo bookdetail(int bnum){
 		return dao.bookdetail(bnum);
 	}
 	public int addHit(int bnum) {

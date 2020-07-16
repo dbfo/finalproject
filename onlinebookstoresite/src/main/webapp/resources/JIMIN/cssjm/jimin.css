@@ -52,6 +52,7 @@
 }
 #thumbnail{
 	width:150px;
+	height:170px;
 		display: inline-block;
 	margin-left: 1px;	
 }
@@ -143,4 +144,5 @@ a:visited {text-decoration: none; color: white;}
 	margin-left:80px;
 	float:left;
 	padding-top: 11px;
+	text-align: center;
 }

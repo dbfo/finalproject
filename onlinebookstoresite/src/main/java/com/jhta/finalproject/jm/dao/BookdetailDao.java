@@ -15,8 +15,8 @@ public class BookdetailDao {
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="com.jhta.mybatis.mapper.BooksMapper";
 	
-	public List<BooksVo> bookdetail(int bnum){
-		return sqlSession.selectList(NAMESPACE + ".detail",bnum);
+	public BooksVo bookdetail(int bnum){
+		return sqlSession.selectOne(NAMESPACE + ".detail",bnum);
 	}
 	public int addHit(int bnum) {
 		return sqlSession.update(NAMESPACE + ".hit",bnum);
