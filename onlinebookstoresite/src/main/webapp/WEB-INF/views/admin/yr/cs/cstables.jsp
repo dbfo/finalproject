@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container-fluid">
 <h2 class="mt-4">list</h2>
@@ -16,7 +16,6 @@
 				<thead>
 					<tr>
 <!-- 						입금전 취소 -->
-						<th><input type="checkbox"></th>
 						<th>주문일(신청일)</th>
 						<th>주문번호</th>
 						<th>주문자</th>
@@ -27,23 +26,29 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="vo" items="${list }">
+
+					<c:forEach var="vo" items="${list}">
 						<tr>
-							<td><input type="checkbox"></td>
-							<td>${vo.borderdate}</td>
-							<td>${vo.bpaynum}</td>
-							<td>조인해서....이름가져와야하넹</td>
-							<td>조인해서...책 제목도 가져와야하넹</td>
-							<td>${vo.bfinalmoney}</td>
-							<!-- 								결제수단 -->
-							<c:choose>
-								<c:when test="${vo.methodpayment == 0 }">
-									<td>카드</td>
-								</c:when>
-								<c:when test="${vo.methodpayment == 1 }">
-									<td>무통장</td>
-								</c:when>
-							</c:choose>
+							<td>
+								<fmt:formatDate value = "${vo.borderdate}" pattern="yyyy-MM-dd"/>
+							</td>
+							<td id = "bpaynumId">${vo.bpaynum}</td>
+							<td>${vo.mname }</td>
+							<td>
+								<c:forEach items="${vo.CSAndPaymentBook}" var="book">
+									<p>${book.btitle}</p>
+								</c:forEach>
+							</td>
+							<td>
+								<c:forEach items="${vo.CSAndPaymentBook}" var="book">
+									<p>${book.count}</p>
+								</c:forEach>
+							</td>
+							<td>${vo.ordermoney }</td>
+							<td>
+								<input class= "btn btn-success" id = "openModal" type="button"  value = "신청 처리">
+<!-- 								<input type="button" value = "처리 완료"> -->
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,5 +56,52 @@
 		</div>
 	</div>
 </div>
+</div>
+
+<script type="text/javascript">
+	
+	$('#openModal').on('click',function(){
+		
+		var index = $('#openModal').index(this);
+		
+		var bpaynumId = $('#bpaynumId').eq(index).text();
+		console.log(bpaynumId);
+		
+// 		$.ajax({
+// 			url : "${pageContext.request.contextPath}/cs/cancelModal",
+// 			dataType : json,
+// 			data : {bpaynum : bpaynumId},
+// 			success: function(data){
+				
+// 			}
+// 		})
+		
+// 	    $("#myModal").modal();
+
+		sampleModalPopup(bpaynumId);
+	})
+	
+	
+    function sampleModalPopup(bpaynum){
+        // 팝업 호출 url
+        var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
+        
+        // 팝업 호출
+        $("#myModal > .modal-dialog").load(url, function() { 
+            $("#myModal").modal("show"); 
+        });
+    }
+
+
+
+</script>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    
+  </div>
 </div>
     

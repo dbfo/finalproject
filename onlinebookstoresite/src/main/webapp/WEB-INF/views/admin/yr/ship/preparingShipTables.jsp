@@ -44,7 +44,7 @@
 								</c:choose>
 								</td>	
 								<td rowspan="2">${vo.mname }</td>
-								<td rowspan="2"><input type="checkbox" name="chb"></td>
+								<td rowspan="2"><input type="checkbox" id = "chb"></td>
 								<td rowspan="1"><select id="courier" name="courier">
 										<option value=''>--택배사 선택--</option>
 										<option value='cj'>CJ대한통운</option>
@@ -90,7 +90,7 @@
 		
 		var tnum = $('input[name=transportNumber]').eq(index).val();
 		var courier = $('#courier').eq(index).val();
-		var chb = $('input[name=chb]').eq(index).prop('checked');
+		var chb = $('#chb').eq(index).prop('checked');
 		var bpaynum = $('.bpaynum').eq(index).text();
 		
 		if(tnum == '' || tnum == null  ){

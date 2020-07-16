@@ -42,8 +42,8 @@
 							name="sixmonth" value="6개월">
 					</div>
 						<div>
-							<input type="date" name = "startDate" id = "startDate" value="${startDate }"> &nbsp;~ &nbsp;
-							<input type="date" name = "endDate" id = "endDate" value="${endDate }">
+							<input class="form-control" type="date" name = "startDate" id = "startDate" value="${startDate }"> &nbsp;~ &nbsp;
+							<input class="form-control" type="date" name = "endDate" id = "endDate" value="${endDate }">
 						</div>
 				</div>
 			</td>
@@ -71,10 +71,10 @@
 			<td>
 				<input type="checkbox" name="status" value="-1" id="ototal"><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
 				<input type="checkbox" name="status" value="1" id="oapply"><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing"><label for="ocomplete"> &nbsp;처리중 &nbsp;&nbsp;</label>
+				<input type="checkbox" name="status" value="2"id="processing"><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>
 				<input type="checkbox" name="status" value="3"id="ocomplete"><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>
 				<c:if test="${path == 1 }">
-					<input type="checkbox" name="status" value="4"id="bdapply"><label for="ocomplete"> &nbsp;입금전 취소&nbsp;&nbsp;</label>
+					<input type="checkbox" name="status" value="4"id="bdapply"><label for="bdapply"> &nbsp;입금전 취소&nbsp;&nbsp;</label>
 				</c:if>							
 			</td>
 		</tr>

@@ -6,5 +6,64 @@
 	<select id="CSCount" resultType="Hashmap">
 		select type, count(*) count from refundhistory group by type
 	</select>
-	
+
+	<sql id="CSStatus">
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
+			and type = #{CSStatus}				
+			<if test="CSStatus == 0">
+				and bstatus = 0
+			</if>
+	    </if>		
+	</sql>
+
+	<resultMap type="com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo" id="CSAndPaymentBookList">
+		<result property="bpaynum" column="bpaynum"/>
+		<result property="baddr" column="baddr"/>
+		<result property="bphone" column="bphone"/>
+		<result property="bfinalmoney" column="bfinalmoney"/>
+		<result property="borderdate" column="borderdate"/>
+		<result property="bpaydate" column="bpaydate"/>
+		<result property="bstatus" column="bstatus"/>
+		<result property="ordermoney" column="ordermoney"/>
+		<result property="usedpoint" column="usedpoint"/>
+		<result property="methodpayment" column="methodpayment"/>
+		<result property="receiver" column="receiver"/>
+		<result property="mnum" column="mnum"/>
+		<result property="mname" column="mname"/>
+		<collection property="CSAndPaymentBook" ofType="com.jhta.finalproject.yr.vo.CSAndPaymentBookVo">
+			<result property="bpaynum" column="bpaynum"/>
+			<result property="btype" column="btype"/>
+			<result property="bnum" column="bnum"/>
+			<result property="bcount" column="bcount"/>
+			<result property="btitle" column="btitle"/>
+			<result property="bprice" column="bprice"/>
+			<result property="paymentbook_num" column="paymentbook_num"/>
+			<result property="status" column="status"/>
+			<result property="aplctdate" column="aplctdate"/>
+			<result property="recomdate" column="recomdate"/>
+			<result property="type" column="type"/>
+			<result property="count" column="count"/>
+		</collection>	
+	</resultMap>
+
+	<sql id="selectPaynum">
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bpaynum)">
+			and bpayment.bpaynum = #{bpaynum}
+		</if>		
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(type)">
+			and type = #{type}
+		</if>
+	</sql>
+
+	<select id="paymentList" resultMap="CSAndPaymentBookList">
+		select bpayment.*, paymentbook.*, books.* ,members.mname, refundhistory.*
+	    from bpayment, paymentbook, members, books, refundhistory
+	    where bpayment.bpaynum = paymentbook.bpaynum
+	    and members.mnum = bpayment.mnum
+	    and paymentbook.bnum= books.bnum
+	    and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
+	    <include refid="CSStatus"/>
+	    <include refid="selectPaynum"/>	    
+	</select>
+
 </mapper>

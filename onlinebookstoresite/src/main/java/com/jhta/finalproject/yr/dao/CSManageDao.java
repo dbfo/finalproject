@@ -7,6 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
+import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
+
 @Repository
 public class CSManageDao {
 	
@@ -19,4 +22,8 @@ public class CSManageDao {
 		return session.selectList(NAMESPACE+".CSCount");
 	}
 	
+	
+	public List<PaymentAndCSBookListVo> paymentList(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".paymentList",map);
+	}
 }

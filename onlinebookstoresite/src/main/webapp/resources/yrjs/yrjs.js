@@ -79,7 +79,8 @@
 		}
 		
 //	 	1. 전체 누르면 전부다 클릭 되도록, 2. '전체'눌려져 있을때 다른거 누르면 전체 체크 해제
-		$("input[type=checkbox]").on('click',function(){
+		$(".searchChb").on('click',function(){
+			console.log("dddd");
 			var value = $(this).val();
 			if(value == '-1'){
 				var c = $(this).prop('checked');

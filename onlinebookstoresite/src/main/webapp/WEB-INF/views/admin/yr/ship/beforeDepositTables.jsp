@@ -26,7 +26,7 @@
 					<tbody>
 						<c:forEach var="vo" items="${list }">
 							<tr>
-								<td><input type="checkbox"  name = "chb"></td>
+								<td><input type="checkbox"  id = "chb"></td>
 								<td>${vo.bpaynum}</td>
 								<td>
 								<c:choose>
@@ -71,8 +71,8 @@
 		
 		$('#checkBtn').click(function(){
 			var tdArr = new Array();
-			var checkbox = $("input[name=chb]:checked");
-			
+			var checkbox = $("input[type=checkbox]:checked");
+	
 			checkbox.each(function(i){
 				// checkbox.parent() : checkbox의 부모는 <td>이다.
 				// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
@@ -80,11 +80,16 @@
 				var td = tr.children();
 			
 				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-				var no = td.eq(1).text()
+				var no = td.eq(1).text();
 				
-				tdArr.push(no);
+				console.log("ggg" + no);
+				
+				if(no != "주문번호"){
+					tdArr.push(no);					
+				}
 			})
 			
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/ship/checkDeposit",
 				dataType : "json",

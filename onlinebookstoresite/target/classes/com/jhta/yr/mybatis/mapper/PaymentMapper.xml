@@ -80,6 +80,9 @@
 	<sql id="CSStatus">
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
 			and type = #{CSStatus}				
+			<if test="CSStatus == 0">
+				and bstatus = 0
+			</if>
 	    </if>		
 	</sql>
 
@@ -95,7 +98,7 @@
 <!-- 	    <include refid="shipStatus"/> -->
 <!-- 	</select> -->
 	
-		<resultMap type="com.jhta.finalproject.yr.vo.PaymentAndBookListVo" id="paymentBooksList">
+	<resultMap type="com.jhta.finalproject.yr.vo.PaymentAndBookListVo" id="paymentBooksList">
 		<result property="bpaynum" column="bpaynum"/>
 		<result property="baddr" column="baddr"/>
 		<result property="bphone" column="bphone"/>
@@ -103,7 +106,7 @@
 		<result property="borderdate" column="borderdate"/>
 		<result property="bpaydate" column="bpaydate"/>
 		<result property="bstatus" column="bstatus"/>
-		<result property="odermoney" column="odermoney"/>
+		<result property="ordermoney" column="ordermoney"/>
 		<result property="usedpoint" column="usedpoint"/>
 		<result property="methodpayment" column="methodpayment"/>
 		<result property="receiver" column="receiver"/>

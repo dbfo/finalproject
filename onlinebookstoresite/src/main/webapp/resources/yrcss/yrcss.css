@@ -86,7 +86,7 @@ p {
 }
 
 /*라디오버튼 숨김*/
-.salesTopMenu input {
+.salesTopMenu input[type=radio] {
 	display: none;
 }
 
@@ -106,7 +106,7 @@ p {
 }
 
 /*input 클릭시, label 스타일*/
-.salesTopMenu input:checked+label {
+.salesTopMenu input[type=radio]:checked+label {
 	color: #555;
 	border: 1px solid #ddd;
 	border-top: 2px solid #2e9cdf;

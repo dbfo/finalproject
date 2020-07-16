@@ -71,20 +71,24 @@
 									</c:otherwise>
 								</c:choose>
 <!-- 								cs type -->
-								<c:choose>
-									<c:when test="${vo.type == 1}">
-										<td>취소</td>									
-									</c:when>									
-									<c:when test="${vo.type == 2 }">
-										<td>반품</td>									
-									</c:when>
-									<c:when test="${vo.type == 3 }">
-										<td>교환</td>									
-									</c:when>
-									<c:otherwise>
-										<td></td>
-									</c:otherwise>
-								</c:choose>
+								<td>
+									<c:forEach items="${vo.paymentbook}" var="book">
+										<c:choose>
+											<c:when test="${book.type == 1}">
+												<p>취소</p>									
+											</c:when>									
+											<c:when test="${book.type == 2 }">
+												<p>반품</p>									
+											</c:when>
+											<c:when test="${book.type == 3 }">
+												<p>교환</p>									
+											</c:when>
+											<c:otherwise>
+												<p></p>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

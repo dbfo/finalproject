@@ -6,13 +6,15 @@ public class PaymentBooksVo {
 //	BNUM	NUMBER
 //	BCOUNT	NUMBER
 	
+	
+	private int paymentbook_num;
 	private int bpaynum;
 	private int btype;
 	private int bnum;
 	private int bcount;
-	private String btitle; 
-	private int bprice;
-	private int type;
+	private String btitle; //책이름
+	private int bprice; //책 가격
+	private int type; //타입
 	
 	
 	public PaymentBooksVo() {
@@ -20,7 +22,7 @@ public class PaymentBooksVo {
 	
 
 
-	public PaymentBooksVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice, int type) {
+	public PaymentBooksVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice, int type, int paymentbook_num) {
 		super();
 		this.bpaynum = bpaynum;
 		this.btype = btype;
@@ -29,6 +31,20 @@ public class PaymentBooksVo {
 		this.btitle = btitle;
 		this.bprice = bprice;
 		this.type = type;
+		this.paymentbook_num = paymentbook_num;
+	}
+	
+	
+
+
+	public int getPaymentbook_num() {
+		return paymentbook_num;
+	}
+
+
+
+	public void setPaymentbook_num(int paymentbook_num) {
+		this.paymentbook_num = paymentbook_num;
 	}
 
 
@@ -86,9 +102,11 @@ public class PaymentBooksVo {
 
 	@Override
 	public String toString() {
-		return "PaymentBooksVo [bpaynum=" + bpaynum + ", btype=" + btype + ", bnum=" + bnum + ", bcount=" + bcount
-				+ ", btitle=" + btitle + ", bprice=" + bprice + ", type=" + type + "]";
+		return "PaymentBooksVo [paymentbook_num=" + paymentbook_num + ", bpaynum=" + bpaynum + ", btype=" + btype
+				+ ", bnum=" + bnum + ", bcount=" + bcount + ", btitle=" + btitle + ", bprice=" + bprice + ", type="
+				+ type + "]";
 	}
+
 
 	
 
