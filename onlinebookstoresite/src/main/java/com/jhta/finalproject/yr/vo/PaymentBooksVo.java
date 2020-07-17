@@ -20,6 +20,19 @@ public class PaymentBooksVo {
 	public PaymentBooksVo() {
 	}
 	
+	
+	
+
+	public PaymentBooksVo(int paymentbook_num, int bpaynum, int btype, int bnum, int bcount) {
+		super();
+		this.paymentbook_num = paymentbook_num;
+		this.bpaynum = bpaynum;
+		this.btype = btype;
+		this.bnum = bnum;
+		this.bcount = bcount;
+	}
+
+
 
 
 	public PaymentBooksVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice, int type, int paymentbook_num) {

@@ -60,28 +60,33 @@
 
 <script type="text/javascript">
 	
-	$('#openModal').on('click',function(){
-		
-		var index = $('#openModal').index(this);
-		
-		var bpaynumId = $('#bpaynumId').eq(index).text();
-		console.log(bpaynumId);
-		
-// 		$.ajax({
-// 			url : "${pageContext.request.contextPath}/cs/cancelModal",
-// 			dataType : json,
-// 			data : {bpaynum : bpaynumId},
-// 			success: function(data){
-				
-// 			}
-// 		})
-		
-// 	    $("#myModal").modal();
+	$(function(){
+		$('#openModal').on('click',function(){
+			console.log("gggg");
+			
+			var index = $('#openModal').index(this);
+			
+			var bpaynumId = $('#bpaynumId').eq(index).text();
+			console.log(bpaynumId);
+			
+//	 		$.ajax({
+//	 			url : "${pageContext.request.contextPath}/cs/cancelModal",
+//	 			dataType : json,
+//	 			data : {bpaynum : bpaynumId},
+//	 			success: function(data){
+					
+//	 			}
+//	 		})
+			
+//	 	    $("#myModal").modal();
 
-		sampleModalPopup(bpaynumId);
+			sampleModalPopup(bpaynumId);
+		})
+		
+		
 	})
 	
-	
+
     function sampleModalPopup(bpaynum){
         // 팝업 호출 url
         var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;

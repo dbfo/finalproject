@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
+import com.jhta.finalproject.yr.vo.PaymentBooksVo;
+import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Repository
 public class CSManageDao {
@@ -25,5 +27,13 @@ public class CSManageDao {
 	
 	public List<PaymentAndCSBookListVo> paymentList(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".paymentList",map);
+	}
+	
+	public int cancelPaymentInsert(PaymentVo vo) {
+		return session.insert(NAMESPACE + ".cancelPaymentInsert",vo);
+	}
+	
+	public int paymentbooksInsert(PaymentBooksVo booksVo) {
+		return session.insert(NAMESPACE + ".paymentbooksInsert", booksVo);
 	}
 }

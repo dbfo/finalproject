@@ -152,12 +152,15 @@
 <script type="text/javascript">
 	
 	$("#applyBtn").click(function () {
+		
+		alert( $('#bpaynum').text());
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/cancelapproval",
 			dataType : "json",
-			data : {bpaynum : ${'#bpaynum'}},
+			data : {bpaynum : $('#bpaynum').text()},
 			success : function(data){
-				if(){
+				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.")
 				}else{
 					alert("처리 실패 하셨습니다.")					

@@ -13,9 +13,6 @@
 			<if test="CSStatus == 0">
 				and bstatus = 0
 			</if>
-			<if test="CSStatus == 1">
-				and bstatus = 0
-			</if>
 	    </if>		
 	</sql>
 
@@ -69,4 +66,18 @@
 	    <include refid="selectPaynum"/>	    
 	</select>
 
+
+	<insert id="cancelPaymentInsert" parameterType="payment">
+		insert into bpayment values (SEQ_BPAYMENT_BPAYNUM.nextval,#{baddr},#{bphone},#{bfinalmoney},
+			#{borderdate},null,0,#{ordermoney},0,#{methodpayment},#{receiver},#{mnum})
+	</insert>
+
+	<insert id="paymentbooksInsert" parameterType="booksVo">
+			insert into paymentbook values (SEQ_BPAYMENT_BPAYNUM.currval, 1, #{bnum}, #{bcount}, SEQ_PAYMENTBOOK_NUM.nextval)
+	</insert>
+	
+	<update id="updateStatus" parameterType="int">
+		update bpayment set bstatus = 5
+	</update>
+	
 </mapper>

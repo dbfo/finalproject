@@ -23,6 +23,8 @@
 		<!-- 유래 -->
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
 			alias="payment" />
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
+			alias="booksVo" /> 
 	</typeAliases>
 	<mappers>
 		<!-- 연주 -->
