@@ -11,10 +11,12 @@
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
 			and type = #{CSStatus}				
 			<if test="CSStatus == 0">
-				and bstatus = 0
+				and bstatus = 0 or bstatus = 5
 			</if>
 	    </if>		
 	</sql>
+	
+	
 
 	<resultMap type="com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo" id="CSAndPaymentBookList">
 		<result property="bpaynum" column="bpaynum"/>
@@ -77,7 +79,11 @@
 	</insert>
 	
 	<update id="updateStatus" parameterType="int">
-		update bpayment set bstatus = 5
+		update bpayment set bstatus = 5 where bpaynum = #{bpaynum}
 	</update>
 	
+	<update id="updateRefundStatus" parameterType="int">
+		update refundhistory set status = 3 where paymentbook_num = #{paymentbook_num}
+	</update>
+
 </mapper>

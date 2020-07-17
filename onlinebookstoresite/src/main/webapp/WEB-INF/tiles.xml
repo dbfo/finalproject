@@ -25,16 +25,16 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksList.jsp" />
 	</definition>
-
-	<!-- <definition name=".ok" extends=".main"> -->
-	<!-- <put-attribute name="content" -->
-	<!-- value="/WEB-INF/views/admin/chloe/books/ok.jsp" /> -->
-	<!-- </definition> -->
-
-	<!-- <definition name=".no" extends=".main"> s -->
-	<!-- <put-attribute name="content" -->
-	<!-- value="/WEB-INF/views/admin/chloe/books/no.jsp" /> -->
-	<!-- </definition> -->
+	
+	<definition name=".booksPreview" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/books/booksPreview.jsp" />
+	</definition>
+	
+	<definition name=".booksUpdate" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/books/booksUpdate.jsp" />
+	</definition>
 
 	<!-- members -->
 	<definition name=".membersList" extends=".main">

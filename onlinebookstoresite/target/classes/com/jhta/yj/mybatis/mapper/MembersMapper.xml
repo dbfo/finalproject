@@ -6,11 +6,21 @@
 <mapper namespace="com.jhta.yj.mybatis.mapper.MembersMapper">
 	<sql id="search">
 		<if test="infoField != null and infoField != '' ">
-			and ${infoField} like '%'||#{infoKeyword}||'%'
+			and ${infoField} like '%'|| #{infoKeyword}||'%'
+		</if>
+
+		<if
+			test="ageKeyword1 != null and ageKeyword1 != '' 
+			and ageKeyword2 != null and ageKeyword2 != '' ">
+			<![CDATA[
+			and FLOOR((months_between(sysdate, birth))/12) <= #{ageKeyword2}
+			and FLOOR((months_between(sysdate, birth))/12) >= #{ageKeyword1}
+			]]>
 		</if>
 		
-		<if test="payField != null and payField != '' ">
-			and ${infoField} like '%'||#{payKeyword}||'%'
+		<if test="dateField != null and dateField != '' ">
+			and ${dateField} BETWEEN TO_DATE(#{dateKeyword}, 'YYYY/MM/DD') 
+			AND TO_DATE(#{dateKeyword}, 'YYYY/MM/DD') + 1
 		</if>
 	</sql>
 
@@ -18,11 +28,11 @@
 		parameterType="hashmap">
 		select mname, mid, email, phone, regdate,
 		FLOOR((months_between(sysdate, birth))/12) age
-		from members where
-		mstatus = 1
+		from members where mstatus = 1
 		<include refid="search" />
 	</select>
 
+	<!-- 탈퇴회원 조회 -->
 	<select id="ghostList" resultType="members">
 		select mname, mid, email,
 		phone, regdate, FLOOR((months_between(sysdate, birth))/12) age from

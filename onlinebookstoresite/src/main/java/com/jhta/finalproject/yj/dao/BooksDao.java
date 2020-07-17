@@ -15,7 +15,7 @@ public class BooksDao {
 	@Autowired
 	private SqlSessionTemplate sqlsession;
 	private final String NAMESPACE = "com.jhta.yj.mybatis.mapper.BooksMapper";
-	
+
 	public void setSqlsession(SqlSessionTemplate sqlsession) {
 		this.sqlsession = sqlsession;
 	}
@@ -24,8 +24,8 @@ public class BooksDao {
 		return sqlsession.insert(NAMESPACE + ".booksInsert", vo);
 	}
 
-	public int getBnum() {
-		return sqlsession.selectOne(NAMESPACE + ".getBnum");
+	public int booksDelete(int bnum) {
+		return sqlsession.delete(NAMESPACE + ".booksDelete", bnum);
 	}
 
 	public List<BigCategoryVO> getBigctg() {
@@ -38,5 +38,17 @@ public class BooksDao {
 
 	public List<BooksVO> list() {
 		return sqlsession.selectList(NAMESPACE + ".list");
+	}
+
+	public BooksVO getBooksInfo(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".getBooksInfo", bnum);
+	}
+	
+	public int updateBigCtg(int bnum) {
+		return sqlsession.selectOne(NAMESPACE + ".updateBigCtg", bnum);
+	}
+
+	public int booksUpdate(BooksVO vo) {
+		return sqlsession.update(NAMESPACE + ".booksUpdate", vo);
 	}
 }

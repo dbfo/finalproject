@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.finalproject.yr.service.CSManageService;
 import com.jhta.finalproject.yr.service.PaymentService;
-import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
 
 @Controller

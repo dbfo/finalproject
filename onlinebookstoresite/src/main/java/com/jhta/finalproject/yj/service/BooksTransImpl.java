@@ -12,7 +12,7 @@ import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 
 @Service
-public class BooksInsertImpl implements BooksInsertService {
+public class BooksTransImpl implements BooksTransService {
 	@Autowired
 	private BooksDao bdao;
 	@Autowired
@@ -44,4 +44,18 @@ public class BooksInsertImpl implements BooksInsertService {
 		}
 		return 1;
 	}
+
+	@Transactional
+	@Override
+	public int update(ImgVO ivo1, ImgVO ivo2) {
+		// bdao.booksUpdate(bvo);
+		if (ivo2 == null) {
+			idao.imgUpdate(ivo1);
+		} else {
+			idao.imgUpdate(ivo1);
+			idao.imgUpdate(ivo2);
+		}
+		return 1;
+	}
+
 }

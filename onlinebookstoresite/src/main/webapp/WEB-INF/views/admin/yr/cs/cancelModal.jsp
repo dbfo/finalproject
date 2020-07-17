@@ -65,8 +65,6 @@
 							<td colspan="5" align="right">배송금액 </td>
 							<td colspan="1" align="right">${vo.ordermoney}</td>
 						</tr>
-
-
 					</c:forEach>
 				</tbody>
 			</table>
@@ -123,7 +121,7 @@
 					</c:forEach>
 					<tr>
 						<td colspan="5" align="right">배송비</td>
-						<td colspan="1" align="right"><c:out value="${price }" /></span></td>
+						<td colspan="1" align="right" id = "cancelPrice"><c:out value="${price }" /></span></td>
 						<td colspan="1" align="right"><span style = "color : red"><c:out value="${price }" /></span></td>
 					</tr>
 				</tbody>
@@ -136,9 +134,6 @@
 		</div>
 	</div>
       </div>
-      
-      
-
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -146,9 +141,7 @@
       </div>
 
     </div>
-
-
-    
+   
 <script type="text/javascript">
 	
 	$("#applyBtn").click(function () {
@@ -158,10 +151,11 @@
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/cancelapproval",
 			dataType : "json",
-			data : {bpaynum : $('#bpaynum').text()},
+			data : {bpaynum : $('#bpaynum').text(), cancelPrice : $('#cancelPrice').text()},
 			success : function(data){
 				if(data.code == "success"){
-					alert("처리 성공 하셨습니다.")
+					alert("처리 성공 하셨습니다.");
+					location.href = "${pageContext.request.contextPath}/cs/menu?PageName=0";
 				}else{
 					alert("처리 실패 하셨습니다.")					
 				}

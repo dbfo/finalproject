@@ -38,7 +38,6 @@ public class CsCancelMangeController {
 //		for (PaymentAndCSBookListVo vo : list) {
 //			System.out.println(vo);
 //		}
-
 		model.addAttribute("List",list);
 		
 		return "/admin/yr/cs/cancelModal";
@@ -47,7 +46,7 @@ public class CsCancelMangeController {
 	
 	@RequestMapping("/cs/cancelapproval")
 	@ResponseBody
-	public String cancelApproval(String bpaynum) {
+	public String cancelApproval(String bpaynum, String cancelPrice) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("bpaynum", bpaynum);
@@ -61,6 +60,7 @@ public class CsCancelMangeController {
 	
 		PaymentVo cancelPayment = new PaymentVo();
 		List<PaymentBooksVo> paymentbookList = new ArrayList<PaymentBooksVo>();
+		List<Integer> paymentbookNumList = new ArrayList<Integer>();
 		
 		for (PaymentAndCSBookListVo vo : list) {
 			
@@ -70,6 +70,9 @@ public class CsCancelMangeController {
 			List<CSAndPaymentBookVo> bookList = vo.getCSAndPaymentBook();
 			
 			for (CSAndPaymentBookVo blist : bookList) {				
+				
+				paymentbookNumList.add(blist.getPaymentbook_num());
+				
 				if(blist.getBcount() - blist.getCount() > 0) { //주문한 책 갯수 - 취소한 책 갯수 
 					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount() - blist.getCount()));
 				}else if(blist.getType() != 1) { //취소하지 않은 책
@@ -89,13 +92,14 @@ public class CsCancelMangeController {
 		}
 		
 		//update
-		
-		
-		
+		int n = cservice.updateStatus(Integer.parseInt(bpaynum), paymentbookNumList);
 		JSONObject json = new JSONObject();
-		json.put("code", "success");
 		
-		
+		if(n > 0) {
+			json.put("code", "success");			
+		}else {
+			json.put("code", "error");						
+		}
 		
 		return json.toString();
 	}

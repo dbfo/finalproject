@@ -10,7 +10,6 @@ public class BooksVO {
 	private String bpublisher; // ���ǻ�
 	private int bprice; // ����
 	private int bpoint; // ��������Ʈ
-	private int bshipinfo; // ��۷�
 	private int bcount; // ����
 	private String bcontent; // å����
 	private int bhit; // ��ȸ��
@@ -21,7 +20,7 @@ public class BooksVO {
 	}
 
 	public BooksVO(int bnum, String btitle, String bwriter, Date bpublishdate, String bpublisher, int bprice,
-			int bpoint, int bshipinfo, int bcount, String bcontent, int bhit, int scatenum, Date bregdate) {
+			int bpoint, int bcount, String bcontent, int bhit, int scatenum, Date bregdate) {
 		super();
 		this.bnum = bnum;
 		this.btitle = btitle;
@@ -30,7 +29,6 @@ public class BooksVO {
 		this.bpublisher = bpublisher;
 		this.bprice = bprice;
 		this.bpoint = bpoint;
-		this.bshipinfo = bshipinfo;
 		this.bcount = bcount;
 		this.bcontent = bcontent;
 		this.bhit = bhit;
@@ -92,14 +90,6 @@ public class BooksVO {
 
 	public void setBpoint(int bpoint) {
 		this.bpoint = bpoint;
-	}
-
-	public int getBshipinfo() {
-		return bshipinfo;
-	}
-
-	public void setBshipinfo(int bshipinfo) {
-		this.bshipinfo = bshipinfo;
 	}
 
 	public int getBcount() {

@@ -3,7 +3,7 @@
 <!-- header.jsp -->
 <!-- 여기부터 -->
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/">GoBook Admin Page</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/">GOBOOK ADMIN</a>
 	<button class="btn btn-link btn-sm order-1 order-lg-0"
 		id="sidebarToggle" href="#">
 		<i class="fas fa-bars"></i>

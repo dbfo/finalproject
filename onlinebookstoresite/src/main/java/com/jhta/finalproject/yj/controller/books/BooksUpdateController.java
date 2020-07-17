@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.controller.books;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,57 +14,59 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jhta.finalproject.yj.service.BooksTransService;
 import com.jhta.finalproject.yj.service.BooksImgService;
+import com.jhta.finalproject.yj.service.BooksTransService;
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
 import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 
 @Controller
-public class BooksInsertController {
+public class BooksUpdateController {
 	@Autowired
-	private BooksImgService service;
+	public BooksImgService service;
 	@Autowired
-	private BooksTransService insertService;
+	public BooksTransService updateService;
 
-	@GetMapping("/booksInsert")
-	public String booksInsert(Model model) {
+	// 수정 폼
+	@GetMapping("/booksUpdate")
+	public String updateForm(int bnum, Model model) {
+		BooksVO bvo = service.getBooksInfo(bnum);
+
+		List<ImgVO> imgList = service.getImgInfo(bnum);
+		model.addAttribute("thumbImg", imgList.get(0));
+
+		if (imgList.size() == 2) { // 만약에 이미지가 두개일 경우 (그냥 이미지가 존재)
+			model.addAttribute("img1", imgList.get(1));
+		}
+
+		int bcatenum = service.updateBigCtg(bnum);
+//		System.out.println("카테고리넘버:" + bcatenum);
+		model.addAttribute("bcatenum", bcatenum);
+
 		List<BigCategoryVO> getBigctg = service.getBigctg();
 		model.addAttribute("getBigctg", getBigctg);
-		return ".booksInsert";
-	}
-
-	@RequestMapping(value = "/booksctg", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String sctgList(int bcatenum) {
 		List<SmallCategoryVO> getsctg = service.getSmallctg(bcatenum);
-		JSONArray arr = new JSONArray();
-		for (SmallCategoryVO vo : getsctg) {
-			JSONObject json = new JSONObject();
-			json.put("scatenum", vo.getScatenum());
-			json.put("bcatenum", vo.getBcatenum());
-			json.put("scataname", vo.getScataname());
-			arr.put(json);
-		}
-		return arr.toString();
+		model.addAttribute("getsctg", getsctg);
+
+		model.addAttribute("bvo", bvo);
+		return ".booksUpdate";
 	}
 
-	@PostMapping("/booksInsert")
-	public String insertOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req) {
+	// 폼에서 전달된 정보
+	@PostMapping("/booksUpdate")
+	public String updateOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req,
+			int thumbNum, int imgNum) {
 		try {
+			int bnum = Integer.parseInt(req.getParameter("bnum"));
 			String btitle = req.getParameter("btitle");
 			String bwriter = req.getParameter("bwriter");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,35 +81,67 @@ public class BooksInsertController {
 			int smctg = Integer.parseInt(req.getParameter("smctg"));
 
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
+			
+			List<ImgVO> imgList = service.getImgInfo(bnum);
 
 			// file
-			if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) {
+			if (!(thumbnail.isEmpty()) && img1.isEmpty()) { // 썸네일만 존재하면
+				// 기존파일 삭제하기
+				File f = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
+				f.delete();
+
+				// 전송된 파일 업로드
+				String imgorgfilename = thumbnail.getOriginalFilename();
+				String imgsavefilename = UUID.randomUUID() + "_" + imgorgfilename;
+				InputStream fis = thumbnail.getInputStream();
+				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + imgsavefilename);
+
+				// 파일복사
+				FileCopyUtils.copy(fis, fos);
+				fis.close();
+				fos.close();
+
+				// DB에 파일정보 저장하기
+				BooksVO bvo = new BooksVO(bnum, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount,
+						bcontent, 0, smctg, null);
+				ImgVO ivo = new ImgVO(imgorgfilename, thumbNum, imgsavefilename, 1, 1, bnum);
+				service.booksUpdate(bvo);
+				updateService.update(ivo, null);
+
+			} else if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) { // 둘 다 존재하면
 				// 썸네일
-				List<ImgVO> list = new ArrayList<ImgVO>();
+				File f1 = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
+				f1.delete();
+
 				String imgorgfilename1 = thumbnail.getOriginalFilename();
 				String imgsavefilename1 = UUID.randomUUID() + "_" + imgorgfilename1;
 				InputStream fis1 = thumbnail.getInputStream();
 				FileOutputStream fos1 = new FileOutputStream(uploadPath + "\\" + imgsavefilename1);
+
 				FileCopyUtils.copy(fis1, fos1);
 				fis1.close();
 				fos1.close();
 
-				BooksVO bvo=new BooksVO(0, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount, bcontent, 0, smctg, null);
-				ImgVO ivo1 = new ImgVO(imgorgfilename1, 0, imgsavefilename1, 1, 1, bvo.getBnum());
-				list.add(ivo1);
+				BooksVO bvo1 = new BooksVO(bnum, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount,
+						bcontent, 0, smctg, null);
+				ImgVO ivo1 = new ImgVO(imgorgfilename1, thumbNum, imgsavefilename1, 1, 1, bnum);
 
 				// 이미지
+				File f2 = new File(uploadPath + "\\" + imgList.get(1).getImgsavefilename());
+				f2.delete();
+
 				String imgorgfilename2 = img1.getOriginalFilename();
 				String imgsavefilename2 = UUID.randomUUID() + "_" + imgorgfilename2;
 				InputStream fis2 = img1.getInputStream();
 				FileOutputStream fos2 = new FileOutputStream(uploadPath + "\\" + imgsavefilename2);
+
 				FileCopyUtils.copy(fis2, fos2);
 				fis2.close();
 				fos2.close();
 
-				ImgVO ivo2 = new ImgVO(imgorgfilename2, 0, imgsavefilename2, 0, 1, bvo.getBnum());
-				list.add(ivo2);
-				insertService.insertList(bvo, list);
+				ImgVO ivo2 = new ImgVO(imgorgfilename2, imgNum, imgsavefilename2, 0, 1, bnum);
+				service.booksUpdate(bvo1);
+				updateService.update(ivo1, ivo2);
 			}
 		} catch (ParseException pe) {
 			System.out.println(pe.getMessage());

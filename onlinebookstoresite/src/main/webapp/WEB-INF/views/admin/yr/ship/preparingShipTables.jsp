@@ -72,7 +72,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">수령인 : ${vo.receiver}<br> 전화번호 :
-									${vo.bphone }<br> 주소 : ${vo.baddr}<br>
+									${vo.bphone }<br> <p class = "addr"> 주소 : ${vo.baddr} </p><br>
 								</td>
 							</tr>
 						</c:forEach>
@@ -83,7 +83,17 @@
 	</div>
 </div>
 <script type="text/javascript">
-
+	
+	
+	$(function(){
+		$('.addr').each(function(idx,item){
+			var addr = $(this).text();
+			addr =  addr.replace(/\|/g, ' ');
+			$(this).text(addr);			
+		})
+	})
+	
+	
 // 	 입력 확인
 	$('input[name=saveBtn]').on('click',function(){
 		var index = $('input[name=saveBtn]').index(this);

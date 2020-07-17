@@ -25,7 +25,14 @@ public class CancelServiceImpl implements CancelService{
 		}
 		return 1;
 	}
-	
-	
-	
+
+	@Transactional
+	@Override
+	public int updateStatus(int bpaynum, List<Integer> paymentbookNumList) {
+		dao.updateCancelStatus(bpaynum);
+		for (Integer paymentbooknum : paymentbookNumList) {
+			dao.updateRefundStatus(paymentbooknum);			
+		}
+		return 1;
+	}	
 }

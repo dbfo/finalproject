@@ -10,4 +10,5 @@ import com.jhta.finalproject.yr.vo.PaymentVo;
 @Service
 public interface CancelService {
 	int makeCancelPayment(PaymentVo vo, List<PaymentBooksVo> booklist);
+	int updateStatus(int bpaynum, List<Integer> paymentbookNumList);
 }
