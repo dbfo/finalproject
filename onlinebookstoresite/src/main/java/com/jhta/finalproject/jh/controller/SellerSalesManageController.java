@@ -36,53 +36,39 @@ bpayment bstatus
 			String keyword1,
 			String startDay,
 			String endDay,
-			String obname,String mname,String receiver,String all,
+			String field1,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
 		
 		
 		
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴
+		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //주문,입금전
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		System.out.println("borderdate1:"+borderdate1);
 		System.out.println("startDay:"+startDay);
 		System.out.println("endDay:"+endDay);
 		System.out.println("keyword1:"+keyword1);
-		System.out.println("obname:"+obname);
-		System.out.println("mname:"+mname);
-		System.out.println("receiver:"+receiver);
-		System.out.println("all:"+all);
-//		System.out.println("field:"+field);
-		
-		
+		System.out.println("field1:"+field1);
 		
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
+		map.put("borderdate1",borderdate1);
 		map.put("startDay",startDay);
 		map.put("endDay",endDay);
-		map.put("obname",obname);
-		map.put("mname",mname);
-		map.put("receiver",receiver);
+		map.put("field1",field1);
 		map.put("keyword1", keyword1);
-		
 		
 		int totRowCount=service.getTotRowCount(map);
 		System.out.println("전체 행의 갯수:"+totRowCount);
-		
-		
-		
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		
-		
 		List<SellerSalesJoinVo> list1=service.getSalesList(map);
-		
 		
 		model.addAttribute("list1", list1);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
+		model.addAttribute("map", map);
 		return ".seller.salesManagement";
 	}
 	

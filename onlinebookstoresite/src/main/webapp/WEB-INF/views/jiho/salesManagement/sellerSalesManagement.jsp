@@ -93,15 +93,11 @@ p {
 	height: 200px;
 	border: 1px solid red;
 }
-input[name='keyword1']{
-	margin-left: 20px;
-	margin-right: 10px;
-}
 input[name='borderdate1']{
 	margin-left: 20px;
 	margin-right: 10px;
 }
-input[name='field1']{
+input[name='keyword1']{
 	margin-left:20px;
 	width: 400px;
 	display: inline;
@@ -109,6 +105,10 @@ input[name='field1']{
 #slaesListbt1{
 	margin-left: 10px;
 	margin-right: 10px;
+}
+input[name='field1']{
+    margin-right: 10px;
+    margin-left: 20px;
 }
 </style>
 <div id="salesManagement">
@@ -123,7 +123,8 @@ input[name='field1']{
 		
 		<!-- 입금대기중 -->
 		<section id="content1">
-			<form action="${cp }/seller/salesManagement" method="post">
+			<form action="${cp }/seller/salesManagement?tabType=1&keyword1=${map.keyword1}&startDay=${map.startDay}&
+							endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
 				<div id="detail1">
 					<div id="searchBox1">
 						<!-- 검색박스 -->
@@ -131,16 +132,22 @@ input[name='field1']{
 							<tr>
 								<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
 								<td>
-									<input type="radio" name="all" value="all" class="radio">전체
-									<input type="radio" name="obname" value="obname" class="radio">상품명
-									<input type="radio" name="mname" value="mname" class="radio">주문인
-									<input type="radio" name="receiver" value="receiver" class="radio">수령인
+									<input type="radio" name="field1" value="all"
+										<c:if test="${map.field1=='all' || map.field1==null || map.field1==''}">checked</c:if>>전체
+									<input type="radio" name="field1" value="obname"
+										<c:if test="${map.field1=='obname'}">checked</c:if>>상품명
+									<input type="radio" name="field1" value="mname"
+										<c:if test="${map.field1=='mname'}">checked</c:if>>주문인
+									<input type="radio" name="field1" value="receiver"
+										<c:if test="${map.field1=='receiver'}">checked</c:if>>수령인
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="radio" name="borderdate1" value="1">전체
-									<input type="radio" name="borderdate1" value="2">주문일&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="borderdate1" value="1"
+										<c:if test="${map.borderdate1==1 || map.borderdate1==null || map.borderdate1==''}">checked</c:if>>전체
+									<input type="radio" name="borderdate1" value="2"
+										<c:if test="${map.borderdate1==2}">checked</c:if>>주문일&nbsp;&nbsp;&nbsp;
 									<input type="date" name="startDay"><span>&nbsp;~</span>
 									<input type="date" name="endDay">
 								</td>
@@ -181,7 +188,7 @@ input[name='field1']{
 								<th scope="col" width="100" rowspan="2" style="text-align: center;">${vo.bpaynum }</th>
 								<th scope="col" rowspan="2" width="400">
 									<c:forEach var="oldbook" items="${vo.sellerOldbooksVo }">
-										▶ 상품명 : ${oldbook.obname }	| 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원<br>
+										▶ 상품명 : ${oldbook.obname } | 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원 <br>
 									</c:forEach>
 								</th>
 								<th scope="col" style="text-align: center;margin: auto;">${vo.mname }</th>
@@ -200,17 +207,22 @@ input[name='field1']{
 						<ul class="pagination justify-content-center">
 							<!-- 이전버튼 -->
 							<c:if test="${pu.startPageNum>3 }">
-								<li class="page-item"><a class="page-link" href="${cp}/seller/salesManagement?pageNum=${pu.startPageNum-1}">
+								<li class="page-item"><a class="page-link" href="${cp}/seller/salesManagement?
+									pageNum=${pu.startPageNum-1}&tabType=1&keyword1=${map.keyword1}&startDay=${map.startDay}&
+									endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
 									이전</a></li>
 							</c:if>
 							<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum}" >
 								<li class="page-item">
-								<a class="page-link" href="${cp}/seller/salesManagement?pageNum=${i}">${i}</a></li>
+								<a class="page-link" href="${cp}/seller/salesManagement?pageNum=${i}&tabType=1
+									&keyword1=${map.keyword1}&startDay=${map.startDay}&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">${i}</a></li>
 							</c:forEach>
 							<!-- 다음버튼 -->
 							<c:if test="${pu.totalPageCount>pu.endPageNum}">
 								<li class="page-item"><a class="page-link" 
-									href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}">
+									href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}&tabType=1
+									&keyword1=${map.keyword1}&startDay=${map.startDay}
+									&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
 									다음</a></li>
 							</c:if>
 						</ul>

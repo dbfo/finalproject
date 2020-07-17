@@ -12,14 +12,19 @@
 				and borderdate >= to_date(#{startDay},'yyyy-mm-dd') and borderdate <= to_date(#{endDay},'yyyy_mm_dd')+0.99999
 			]]>
 		</if>
-		<if test="obname!=null">
-			or o.obname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
+		<if test='field1=="obname"'>
+			and o.obname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
 		</if>
-		<if test="mname!=null">
-			or m.mname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
+		<if test='field1=="mname"'>
+			and m.mname like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
 		</if>
-		<if test="receiver!=null">
-			or bp.receiver like '%||#{keyword1,jdbcType=VARCHAR}||%'
+		<if test='field1=="receiver"'>
+			and b.receiver like '%'||#{keyword1,jdbcType=VARCHAR}||'%'
+		</if>
+		<if test='field1=="all" and keyword1!=null and keyword1 !=""'>
+			and (o.obname like '%'||#{keyword1,jdbcType=VARCHAR}||'%' 
+			or m.mname like '%'||#{keyword1,jdbcType=VARCHAR}||'%' 
+			or b.receiver like '%'||#{keyword1,jdbcType=VARCHAR}||'%')
 		</if>
 	</sql>
 	
@@ -40,10 +45,10 @@
 		<result column="mnum" property="mnum"/>
 		<result column="delfee" property="delfee"/>
 		<result column="mname" property="mname"/>
-		<result column="obnum" property="obnum"/>
 		<collection property="sellerOldbooksVo"	ofType="oldbooks">
 			<result property="obname" column="obname"/>
 			<result property="obsaleprice" column="obsaleprice"/>
+			<result property="obnum" column="obnum"/>
 		</collection>
 	</resultMap>
 	<!-- 리스트 가져오기 -->
@@ -52,7 +57,7 @@
 	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
                     b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
                     b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
-                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE,o.obnum OBNUM
 	                from paymentbook p,( select * from
                     (
                     select * from(
