@@ -601,13 +601,6 @@
 
 
 
-	<!-- 책리뷰카운터 -->
-	<select id="breviewcount" resultType="breviewc" parameterType="int">
-	    select NVL(count(*),0) cnt from bookreview
-		where bnum = #{bnum};
-	</select>
-
-
 	<!--/////////////////////책 상세페이지//////////////////////////////////// -->
 	<select id="detail" parameterType="int" resultType="books">
 		select * from books where bnum=#{bnum}
@@ -654,8 +647,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1  
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1  
                  <if test="field!=null and field!=''">
 					and ${field} like '%'||#{keyword}||'%' 
 				 </if>
@@ -664,6 +657,41 @@
 		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 
+	</select>
+	
+	<!-- //////////////////상세페이지 책(책,이미지,리스트 다 포함)///////////////////////////////// -->
+	<select id="bookdetail" parameterType="hashmap" resultType="alllist">
+	
+				select b.*,i.*,r.* from books b,img i,bookreview r 
+                 where b.bnum =#{bnum} and b.bnum = i.bnum and b.bnum = r.bnum(+)
+	</select>
+	
+	
+	<!-- 책리뷰 목록/////// -->
+	<select id="reviewlist" parameterType="hashmap" resultType="breviewc">
+	select * from
+	(
+		select aa.*,rownum rnum from
+		(
+			select br.*,m.* from bookreview br,members m
+			where br.bnum=#{bnum}
+			order by br.bnum asc
+		)aa
+	)
+		<!-- CDATA - '<','>' 같은 특수기호문자들을 멋대로 해석하지(변환하지) 않고 그대로 쓰게 하는거임  -->
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	
+	<!-- 책리뷰카운터 -->
+	<select id="breviewcount" resultType="int" parameterType="int">
+	    select NVL(count(*),0) cnt from bookreview br,members m
+		where bnum = #{bnum}
+	</select>
+	
+	<select id="breviewinsert" parameterType="breviewc">
+		insert into bookreview values(SEQ_BOOKREVIEW_REVIEWNUM.nextval,
+		#{mnum},#{bnum},#{reviewcontent},#{bscore},sysdate)
 	</select>
 	
 	
@@ -687,9 +715,8 @@
 	    	select aa.*,rownum rnum from(
     			select * from books order by bnum desc
    			)aa 
-    	<![CDATA[)where rnum<=5;]]>
+    	<![CDATA[)where rnum<=5]]>
 	</select>
-	
-	
+
 	
 </mapper>

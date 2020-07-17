@@ -3,20 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>BookDetail</title>
-</head>
-<body>
+
 <br>
 <br>
 	<div  class="container" id="detailallwrap">
 		<div id="detailupper">
 			<div id="detailinfo">
 				<img id="detailbook_img"
-				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
+				src="${cp }/resources/JIMIN/images/${bookvo.imgsavefilename}" id="thumbnail">
 				
 				<div id="detailbookNameTitle">
 				<strong style="font-size: x-large;">${bookvo.btitle }</strong>
@@ -81,7 +75,7 @@
 					<br>
 					<h3 style="text-align: center;">상세정보
 					<br><br>
-					<img src="${cp }/resources/JIMIN/images/상세페이지1.jpg" id="detailimg"/>
+					<img src="${cp }/resources/JIMIN/images/${bookvo.imgsavefilename}" id="detailimg"/>
 					</h3>
 				  </div>
 				  <div class="tab-pane fade" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">
@@ -146,17 +140,106 @@
 					</div>
 				  </div>
 				  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-				  	리뷰게시판입니다~~~
-				  	리뷰게시판입니다~~~
-				  	리뷰게시판입니다~~~
-				  	리뷰게시판입니다~~~
-				  	리뷰게시판입니다~~~
+							
+					<div class="tabWrite">	
+					<!-- <form name="form" method="post" action="/ypbooks/book/pop_review_proc.jsp" target="ifrmProc"> -->
+					<form name="form" method="post" action="${cp }/enrllReview">
+						<input type="hidden" name="bnum" value="${bnum}">
+						
+						<div style=" width: 1110px;background-color:#f9f9f9 ;padding: 12px 20px 19px 20px; overflow: hidden; border: 2px solid #f9f9f9">
+							<span style="font-size: 20px;"><strong>독자서평 쓰기</strong></span>
+							 <span style="font-size: 12px;">로그인을 하시면 독자서평을 쓰실 수 있습니다.</span> 
+							<dl>
+								<input type="hidden" name="review_name" id="review_name" value="지쳤거나 좋아하는 게 없거나">
+								<br>
+								<div>
+								<strong>도서평점</strong>&nbsp&nbsp&nbsp
+									<input type="radio" value="1" name="radio_revRate" class="b0">&nbsp ★
+									&nbsp
+									<input type="radio" value="2" name="radio_revRate" class="writeRadio">&nbsp ★★
+									&nbsp
+									<input type="radio" value="3" name="radio_revRate" class="writeRadio" checked="checked">&nbsp ★★★
+									&nbsp
+									<input type="radio" value="4" name="radio_revRate" class="writeRadio">&nbsp ★★★★
+									&nbsp
+									<input type="radio" value="5" name="radio_revRate" class="writeRadio">&nbsp ★★★★★
+									&nbsp
+								</div>
+								<br>
+								<strong>내용</strong>
+								<br><br>
+								<span>
+									<textarea id="review_content" style="width:900px;height:100px;"></textarea>
+<!-- 									<a style="display:inline-block  ;float:right ;margin-bottom: 18px; " class="btn btn-success" id="enrollBtn">등록하기</a> -->
+									
+									<input type="submit" style="display:inline-block  ;float:right ;margin-bottom: 18px; " class="btn btn-success" id="enrollBtn" value="등록하기"> 
+								</span>
+							</dl>
+						</div>
+					</form>
+					<!-- <iframe src="/blank.html" name="ifrmProc" id="ifrmProc" width="0" height="0"></iframe> -->
+					<table style="width:648px;" class="writeList1">
+						<tbody>
+						<c:forEach var ="rvo" items="${reviewvo }">
+						<tr>
+							<td style=" width:13%;" id="mid" >${rvo.mnum }</td>
+							<td style="width:19%;" id="mscore">		
+								<span>${rvo.bscore }</span>
+							</td>
+							<td class="tdCen" id="mdate"><fmt:formatDate value="${rvo.breviewregdate }"></fmt:formatDate></td>
+						</tr>
+						<tr class="writeCon02">
+							<td colspan="4" id="mwrite">
+								<span>${rvo.reviewcontent }</span>
+							</td>
+						</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+<!-- 					<table width="100%" border="0" cellspacing="0" cellpadding="0"> -->
+<!-- 						<tbodㅡy><tr> -->
+<!-- 							<td align="center"> -->
+<!-- 								페이징 S (출력 코드에 <form> 태그가 있으므로 <form></form> 사이에 아래 페이징 함수를 포함시키면 안됨) -->
+<!-- 											<script language="javascript"> -->									
+<!-- 											</script> -->
+<!-- 											<div style="margin:0 auto; width:100%; text-align:center; "> -->
+<!-- 												<div class="paging"> -->
+<!-- 													<a href="javascript:goPage(1)" class="recent"> -->
+<!-- 														<img src="/ypbooks/images/btnRecentList.gif" alt=""> -->
+<!-- 													</a> -->
+<!-- 													<a href="javascript:goPage(1)" class="current"> -->
+<!-- 													1 -->
+<!-- 													</a> -->
+<!-- 													<a href="javascript:goPage(1)" class="last"> -->
+<!-- 													<img src="/ypbooks/images/btnLastList.gif" alt=""> -->
+<!-- 													</a> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<form name="FrmPaging" method="post" action="http://www.ypbooks.co.kr/book.yp?bookcd=100979414"> -->
+<!-- 												<input type="hidden" name="ReqPageNo" value="">	 -->
+<!-- 												<input type="hidden" name="UserCode" value=""> -->
+<!-- 											</form> -->
+<!-- 								페이징 E (출력 코드에 <form> 태그가 있으므로 <form></form> 사이에 아래 페이징 함수를 포함시키면 안됨) -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+<!-- 						</tbody> -->
+<!-- 						</table>		 -->
+					</div>
 				  </div>
 				</div>
-				
 	</div>
 </div>
 <br>
 <br>
-</body>
-</html>
+<script>
+
+//JSon 방식 
+// 	$("#enrollBtn").click(function(){
+// 		var reviewcontent=$("#review_content").val();
+// 		var bscore=$("input[name=radio_revRate]:checked").val();
+// 		var bnum = $("input[name=bnum]").val();
+// 		$.getJSON('${cp}/enrllReview',{"reviewcontent":reviewcontent,"bscore":bscore,"bnum":bnum},function(data){
+// 			alert(data);
+// 		});
+// 	});
+</script>

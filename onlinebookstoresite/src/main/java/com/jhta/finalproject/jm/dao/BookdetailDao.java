@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.jm.vo.AllListVo;
 import com.jhta.finalproject.jm.vo.BooksVo;
+import com.jhta.finalproject.jm.vo.BreviewVo;
 
 @Repository
 public class BookdetailDao {
@@ -15,11 +17,20 @@ public class BookdetailDao {
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="com.jhta.mybatis.mapper.BooksMapper";
 	
-	public BooksVo bookdetail(int bnum){
-		return sqlSession.selectOne(NAMESPACE + ".detail",bnum);
+	public AllListVo bookdetail(int bnum){
+		return sqlSession.selectOne(NAMESPACE + ".bookdetail",bnum);
 	}
 	public int addHit(int bnum) {
 		return sqlSession.update(NAMESPACE + ".hit",bnum);
+	}
+	public List<BreviewVo> reviewlist(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".reviewlist",map);
+	}
+	public int breviewcount(int bnum) {
+		return sqlSession.selectOne(NAMESPACE + ".breviewcount",bnum);
+	}
+	public int breviewinsert(BreviewVo vo) {
+		return sqlSession.insert(NAMESPACE + ".breviewinsert",vo);
 	}
 	
 }
