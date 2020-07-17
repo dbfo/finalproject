@@ -9,7 +9,7 @@ public class SellerSalesJoinVo {
 	private int btype;
 	private int bcount;
 	private String baddr;
-	private String phone;
+	private String bphone;
 	private int bfinalmoney;
 	private Date borderdate;
 	private Date bpaydate;
@@ -24,7 +24,7 @@ public class SellerSalesJoinVo {
 	
 	public SellerSalesJoinVo () {}
 	
-	public SellerSalesJoinVo(int bpaynum, int snum, int btype, int bcount, String baddr, String phone, int bfinalmoney,
+	public SellerSalesJoinVo(int bpaynum, int snum, int btype, int bcount, String baddr, String bphone, int bfinalmoney,
 			Date borderdate, Date bpaydate, int bstatus, int ordermoney, int mothodpayment, String receiver, int mnum,
 			int delfee, String mname, List<SellerOldbooksVo> sellerOldbooksVo) {
 		super();
@@ -33,7 +33,7 @@ public class SellerSalesJoinVo {
 		this.btype = btype;
 		this.bcount = bcount;
 		this.baddr = baddr;
-		this.phone = phone;
+		this.bphone = bphone;
 		this.bfinalmoney = bfinalmoney;
 		this.borderdate = borderdate;
 		this.bpaydate = bpaydate;
@@ -76,11 +76,11 @@ public class SellerSalesJoinVo {
 	public void setBaddr(String baddr) {
 		this.baddr = baddr;
 	}
-	public String getPhone() {
-		return phone;
+	public String getBphone() {
+		return bphone;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setBphone(String bphone) {
+		this.bphone = bphone;
 	}
 	public int getBfinalmoney() {
 		return bfinalmoney;

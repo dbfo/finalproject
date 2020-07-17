@@ -7,7 +7,7 @@
 <style>
 #salesManagement {
 	width: 1300px;
-	height: 1300px;
+	height: 1600px;
 	border: 1px solid red;
 	margin: auto;
 }
@@ -28,7 +28,7 @@ p {
 
 .salesTopMenu {
 	width: 1300px;
-	height:1250px;
+	height:1550px;
 	border:1px solid black;
 	/*max-width: 800px;*/
 	padding: 50px;
@@ -76,40 +76,6 @@ p {
 #tab4:checked ~ #content4 {
 	display: block;
 }
-/*입금대기중 css*/
-#detail1{
-	border: 1px solid green;
-	height: 1100px;
-}
-.toptr{
-	text-align: center;
-}
-#detail1 table .toptr{
-	height: 30px;
-	background-color: silver;
-}
-#searchBox1{
-	width: 1200px;
-	height: 200px;
-	border: 1px solid red;
-}
-input[name='borderdate1']{
-	margin-left: 20px;
-	margin-right: 10px;
-}
-input[name='keyword1']{
-	margin-left:20px;
-	width: 400px;
-	display: inline;
-}
-#slaesListbt1{
-	margin-left: 10px;
-	margin-right: 10px;
-}
-input[name='field1']{
-    margin-right: 10px;
-    margin-left: 20px;
-}
 </style>
 <script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <div id="salesManagement">
@@ -128,7 +94,7 @@ input[name='field1']{
 		</section>
 		<!-- 입금완료/배송요청 -->
 		<section id="content2">
-			<p>tab menu2의 내용</p>
+			<jsp:include page="sellerMenu2.jsp"/>
 		</section>
 
 		<!-- 배송중/구매확정전 -->
@@ -145,7 +111,11 @@ input[name='field1']{
 </div>
 <script>
 	$(function(){
-		
+		$("#tab1").click(function(){
+			location.href ="${cp}/seller/salesManagement";
+		});
+		$("#tab2").click(function(){
+			location.href ="${cp}/seller/salesManagement2";
+		});
 	});
-		
 </script>

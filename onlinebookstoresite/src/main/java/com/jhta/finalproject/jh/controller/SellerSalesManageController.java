@@ -38,18 +38,9 @@ bpayment bstatus
 			String endDay,
 			String field1,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-		
-		
-		
 		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //주문,입금전
-		
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		System.out.println("startDay:"+startDay);
-		System.out.println("endDay:"+endDay);
-		System.out.println("keyword1:"+keyword1);
-		System.out.println("field1:"+field1);
-		
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
 		map.put("borderdate1",borderdate1);
@@ -57,14 +48,11 @@ bpayment bstatus
 		map.put("endDay",endDay);
 		map.put("field1",field1);
 		map.put("keyword1", keyword1);
-		
-		int totRowCount=service.getTotRowCount(map);
-		System.out.println("전체 행의 갯수:"+totRowCount);
+		int totRowCount=service.getTotRowCount(map);//전체 행의 갯수
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		List<SellerSalesJoinVo> list1=service.getSalesList(map);
-		
 		model.addAttribute("list1", list1);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
@@ -73,17 +61,37 @@ bpayment bstatus
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+	//판매관리 메소드(입금완료)
 	@RequestMapping("/seller/salesManagement2")
 	public String salesManage2(
 			Model model,
-			@RequestParam(value="tabType",defaultValue = "0")int tabType) {
+			@RequestParam(value="tabType",defaultValue = "2")int tabType,
+			@RequestParam(value="borderdate2",defaultValue = "1")int borderdate2,
+			String keyword2,
+			String startDay2,
+			String endDay2,
+			String field2,
+			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int bstatus=tabType-1; //결제완료
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("snum", snum);
+		map.put("bstatus",bstatus);
+		map.put("borderdate2",borderdate2);
+		map.put("startDay2",startDay2);
+		map.put("endDay2",endDay2);
+		map.put("field2",field2);
+		map.put("keyword2", keyword2);
+		int totRowCount=service.getTotRowCount(map);
+		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+		List<SellerSalesJoinVo> list=service.getSalesList(map);
+		
+		model.addAttribute("list", list);
 		model.addAttribute("tabType", tabType);
+		model.addAttribute("pu", pu);
+		model.addAttribute("map", map);
 		return ".seller.salesManagement";
 	}
 	
