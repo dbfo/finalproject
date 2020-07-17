@@ -12,6 +12,7 @@
 	<thead class="thead-dark">
 		<tr>
 			<th colspan="2">상품명</th>
+			<th>판매자</th>
 			<th>정가</th>
 			<th>판매가</th>
 			<th>수량</th>
@@ -23,8 +24,9 @@
 		<c:forEach var="vo" items="${list }" >
 			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
-				<td>${vo.btitle }</td>
-				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
+				<td><span>${vo.statusString }</span>&nbsp ${vo.obname }</td>
+				<td>${vo.oborgprice }원</td>
+				<td>${vo.obsaleprice }원</td>
 				<td>${vo.bcount }</td>
 				<td><strong>${vo.totalvalue }원</strong></td>
 				<td>판매자 재량</td>
@@ -66,7 +68,7 @@
 				</td>
 			</tr>	
 			<tr class="table-secondary">
-				<td>${totalprice }원</td><td><span id="ship_charge"></span>원</td>
+				<td>${totalprice }원</td><td><span>${totalshipfee }</span>원</td>
 				<td>
 					<span id="use_point"></span>원
 					<button type="button" class="btn btn-dark btn-sm disabled" id="point_cancel">취소</button>
@@ -201,7 +203,6 @@
 	$(document).ready(function(){
 		shipAddr();
 		usablepoint();
-		shipCharge();
 		finalprice();
 	});
 	//상세주소 입력시.
@@ -261,18 +262,6 @@
 			}
 		})
 	
-	}
-	//첫실행시 배송비 정함 (상품금액 5만원이상시 배송비 무료 아니면 2500원!)
-	var shipCharge=function(){
-		var totalprice=${totalprice};
-		console.log(totalprice);
-		var ship_charge=0;
-		if(Number(totalprice)>=50000){
-			ship_charge=0;
-		}else{
-			ship_charge=2500;
-		}
-		$("#ship_charge").text(ship_charge);                
 	}
 	//사용가능한 포인트조회.
 	var usablepoint=function(){

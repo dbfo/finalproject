@@ -3,7 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.OrderMapper">
-
+	<!-- 중고상품 장바구니->주문페이지 SELECT 문 -->
+	<select id="usedorderlist" parameterType="hashmap" resultType="usedOrderVo">
+		select cartnum,cart.bnum,cart.btype,cart.bcount,obname,obstatus,oborgprice,obsaleprice,obdelfee,members.mid sid,members.mnum smnum,imgsavefilename from 
+		(select * from cart where btype=2 and cartnum in
+			<foreach collection="datalist" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		)cart,
+		(select * from oldbooks)ob,
+		(select * from obseller)obs,
+		(select * from img where btype=2 and thumbnail=1) img,
+		(select * from members) members 
+		where cart.bnum=ob.obnum and cart.bnum=img.bnum and ob.snum=obs.snum and obs.mnum=members.mnum
+		order by sid desc
+	</select>
+	
+	
  	<!-- 장바구니 -> 주문페이지 갈때 사용하는 SELECT 문  -->
 	<select id="orderlist" parameterType="hashmap" resultType="orderVo">
 		select btitle,book.bnum,bprice,bpoint, imgsavefilename,cartNum,cart.bcount from

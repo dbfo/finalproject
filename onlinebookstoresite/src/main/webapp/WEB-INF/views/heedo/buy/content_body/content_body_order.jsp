@@ -21,7 +21,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartnum }>
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td>${vo.btitle }</td>
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>

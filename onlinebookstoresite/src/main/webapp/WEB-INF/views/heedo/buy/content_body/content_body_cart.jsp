@@ -224,7 +224,7 @@
 				c.append(chargeApp); 
 				// 하단 결제정보 테이블 끝 //	
 				var bottomBtnGroup="<div style='text-align:center;''>"
-						+"<button type='button' class='btn btn-primary btn-lg'>주문하기</button>"
+						+"<button type='button' class='btn btn-primary btn-lg' id='usedallorder'>주문하기</button>"
 					  	+"<a href='${cp}/'><button type='button' class='btn btn-light btn-lg'>쇼핑계속하기</button></a>"
 					  	+"</div>"
 				c.append(bottomBtnGroup);
@@ -298,6 +298,9 @@
 		}	
 		checkshipfee(sid);
 	})
+	$(document).on('click','#usedallorder',function(){
+		
+	});
 	
 	//=====================중고 관린 스크립트 끝 ===========================//
 	

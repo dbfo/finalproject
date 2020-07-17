@@ -18,6 +18,7 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.OrderListResultVo" alias="orderVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.ShipmentInfoVo" alias="shipVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.UsedCartListVo" alias="usedVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.UsedOrderListVo" alias="usedOrderVo"/>
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->

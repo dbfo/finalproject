@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
+import com.jhta.finalproject.hd.vo.UsedOrderListVo;
 
 @Repository
 public class OrderDao {
@@ -18,6 +19,8 @@ public class OrderDao {
 	private SqlSession sqlsession;
 	private final String NAMESPACE="mybatis.mapper.OrderMapper";
 	
+	
+	// ============ 새상품 관련 dao 시작 ==========================//
 	//주문리스트 출력
 	public List<OrderListResultVo> inputorderlist(Map<String, Object>map){
 		return sqlsession.selectList(NAMESPACE+".orderlist", map);
@@ -34,5 +37,13 @@ public class OrderDao {
 	public int getPoint(int mnum) {
 		return sqlsession.selectOne(NAMESPACE+".usablepoint",mnum);
 	}
+	// ============ 새상품 관련 dao 끝 ==========================//
+	
+	// ============ 중고상품 관련 dao 시작 ==========================//
+	public List<UsedOrderListVo> usedorderlist(Map<String,Object>map){
+		return sqlsession.selectList(NAMESPACE+".usedorderlist"+map);
+	}
+	
+	// ============ 중고상품 관련 dao 끝 ==========================//
 
 }

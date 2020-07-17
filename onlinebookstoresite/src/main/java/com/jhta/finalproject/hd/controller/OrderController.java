@@ -4,8 +4,10 @@ package com.jhta.finalproject.hd.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.finalproject.hd.service.OrderService;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
+import com.jhta.finalproject.hd.vo.UsedOrderListVo;
 
 @Controller
 public class OrderController {
@@ -30,8 +33,54 @@ public class OrderController {
 	//================== 중고상품 주문 컨트롤러 시작 =========================//
 	@RequestMapping(value="/order/usedorder",method= RequestMethod.POST)
 	public String usedorder(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {
+		ArrayList<Integer> data=new ArrayList<Integer>(Arrays.stream(cartNum).boxed().collect(Collectors.toList()));
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("datalist", data);
+		List<UsedOrderListVo> list=service.usedorderlist(map);
+		String path=session.getAttribute("cp")+"/resources/hd/image";
+		int totalprice=0;
+		HashMap<String, Object> shipmap=new HashMap<String, Object>();
+		for(UsedOrderListVo vo:list) {
+			// 중고판매자마자 배송비 결정 //
+			if(shipmap.get(vo.getSid())==null) {
+				shipmap.put(vo.getSid(),vo.getObdelfee());
+			}else {
+				if((int)shipmap.get(vo.getSid())<(vo.getObdelfee())) {
+					shipmap.put(vo.getSid(),vo.getObdelfee());
+				}
+			}
+			// ====================//
+			int status=vo.getObstatus();
+			String statusString="";
+			if(status==1) {
+				statusString="[중고-최상]";
+			}else if(status==2) {
+				statusString="[중고-상]";
+			}else if(status==3) {
+				statusString="[중고-중]";
+			}else if(status==4) {
+				statusString="[중고-하]";
+			}
+			vo.setStatusString(statusString);
+			int saleprice=vo.getObsaleprice();
+			int bcount=vo.getBcount();
+			vo.setTotalvalue(saleprice*bcount);
+			totalprice+=saleprice*bcount;
+			String imgpath=path+"\\"+vo.getImgsavefilename();
+			vo.setImgpath(imgpath);
+		}
+		int totalshipfee=0;
+		Iterator iterator=shipmap.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry entry=(Entry)iterator.next();
+			totalshipfee+=(int)entry.getValue();
+		}
+		model.addAttribute("totalprice",totalprice);
+		model.addAttribute("totalshipfee",totalshipfee);
+		model.addAttribute("list",list);
+		model.addAttribute("sidmap",shipmap);
 		
-		return null;
+		return ".usedorder";
 	}
 	
 	

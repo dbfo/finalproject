@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jhta.finalproject.hd.dao.OrderDao;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
+import com.jhta.finalproject.hd.vo.UsedOrderListVo;
 
 @Service
 public class OrderService {
@@ -28,5 +29,8 @@ public class OrderService {
 	}
 	public int getPoint(int mnum) {
 		return dao.getPoint(mnum);
+	}
+	public List<UsedOrderListVo> usedorderlist(Map<String,Object>map){
+		return dao.usedorderlist(map);
 	}
 }
