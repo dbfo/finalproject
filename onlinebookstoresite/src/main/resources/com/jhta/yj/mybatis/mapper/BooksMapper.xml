@@ -4,38 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jhta.yj.mybatis.mapper.BooksMapper">
-	<!-- 책등록 -->
+	<!-- insert문 -->
 	<insert id="booksInsert" parameterType="books">
 		insert into books values
 		(SEQ_BOOKS_BNUM.nextval, #{btitle}, #{bwriter}, #{bpublishdate},
 		#{bpublisher}, #{bprice}, #{bpoint}, #{bcount},
-		#{bcontent}, 0, #{scatenum}, sysdate)
+		#{bcontent}, 0,
+		#{scatenum}, sysdate)
 	</insert>
 
 	<insert id="imgInsert" parameterType="img">
-		insert into img	values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename}, #{thumbnail}, 1, SEQ_BOOKS_BNUM.currval)
+		insert into img
+		values(#{imgorgfilename}, SEQ_IMG_IMGNUM.nextval, #{imgsavefilename},
+		#{thumbnail}, 1, SEQ_BOOKS_BNUM.currval)
 	</insert>
-	
-	<!-- 삭제/수정 -->
-	<select id="getBooksInfo" resultType="books" parameterType="int">
-		select * from books where bnum = #{bnum}
-	</select>
-	
-	<select id="getImgInfo" resultType="img" parameterType="int">
-		select * from img where bnum = #{bnum}
-	</select>
-	
+
+	<!-- delete/update문 -->
+
 	<delete id="booksDelete" parameterType="int">
 		delete from books where bnum = #{bnum}
 	</delete>
-	
+
 	<delete id="imgDelete" parameterType="int">
 		delete from img where bnum = #{bnum}
 	</delete>
-	
+
 	<update id="booksUpdate" parameterType="books">
-		update books set 
-		btitle = #{btitle}, 
+		update books set
+		btitle = #{btitle},
 		bwriter = #{bwriter},
 		bpublishdate = #{bpublishdate},
 		bprice = #{bprice},
@@ -45,41 +41,42 @@
 		scatenum = #{scatenum}
 		where bnum = #{bnum}
 	</update>
-	
+
 	<update id="imgUpdate" parameterType="img">
 		update img set
 		imgorgfilename = #{imgorgfilename},
-		imgsavefilename = #{imgsavefilename}
+		imgsavefilename =
+		#{imgsavefilename}
 		where imgnum = #{imgnum}
 	</update>
-	
-	<delete id="imgUpdateDelete" parameterType="int">
-		delete from img
-		where imgnum = #{imgnum} and thumbnail = 0
-	</delete>
+
+	<!-- select문 -->
+	<select id="getBooksInfo" resultType="books" parameterType="int">
+		select * from books where bnum = #{bnum}
+	</select>
+
+	<select id="getImgInfo" resultType="img" parameterType="int">
+		select * from img where bnum = #{bnum}
+	</select>
 
 	<select id="list" resultType="books">
 		select * from books
 	</select>
-	
+
 	<!-- 카테고리 -->
 	<select id="bctg" resultType="bctg">
-		select * from bigcategory
-		order by bcatenum
+		select * from bigcategory order by bcatenum
 	</select>
 
 	<select id="smctg" resultType="smctg" parameterType="int">
 		select * from smallcategory
-		where bcatenum = #{bcatenum}
-		order by scatenum
+		where bcatenum = #{bcatenum} order by scatenum
 	</select>
-	
+
 	<!-- 수정을 위한 큰 카테고리 가져오기 -->
 	<select id="updateBigCtg" resultType="int" parameterType="int">
-		select s.bcatenum  
-		from smallcategory s, 
+		select s.bcatenum from smallcategory s,
 		(select * from books where bnum = #{bnum}) b
 		where s.scatenum = b.scatenum
 	</select>
-	
 </mapper>

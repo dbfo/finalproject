@@ -36,6 +36,7 @@ public class BooksUpdateController {
 	@Autowired
 	public BooksTransService updateService;
 
+	// 수정 폼
 	@GetMapping("/booksUpdate")
 	public String updateForm(int bnum, Model model) {
 		BooksVO bvo = service.getBooksInfo(bnum);
@@ -60,6 +61,7 @@ public class BooksUpdateController {
 		return ".booksUpdate";
 	}
 
+	// 폼에서 전달된 정보
 	@PostMapping("/booksUpdate")
 	public String updateOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req,
 			int thumbNum, int imgNum) {
@@ -79,30 +81,14 @@ public class BooksUpdateController {
 			int smctg = Integer.parseInt(req.getParameter("smctg"));
 
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
+			
 			List<ImgVO> imgList = service.getImgInfo(bnum);
-
-//			if (imgList.size() == 1) { // 이미지가 한 개일 경우
-//				File f = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
-//				f.delete();
-//			} else if (imgList.size() == 2) { // 이미지가 두 개일 경우
-//				File f1 = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
-//				File f2 = new File(uploadPath + "\\" + imgList.get(1).getImgsavefilename());
-//				f1.delete();
-//				f2.delete();
-//				service.imgUpdateDelete(imgNum);
-//			}
 
 			// file
 			if (!(thumbnail.isEmpty()) && img1.isEmpty()) { // 썸네일만 존재하면
 				// 기존파일 삭제하기
-				List<ImgVO> imgInfoList = service.getImgInfo(bnum);
-				File f = new File(uploadPath + "\\" + imgInfoList.get(0).getImgsavefilename());
+				File f = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
 				f.delete();
-
-//				if (imgList.size() == 1) { // 이미지가 한 개일 경우
-//					File f = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
-//					f.delete();
-//				}
 
 				// 전송된 파일 업로드
 				String imgorgfilename = thumbnail.getOriginalFilename();
@@ -124,17 +110,8 @@ public class BooksUpdateController {
 
 			} else if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) { // 둘 다 존재하면
 				// 썸네일
-				List<ImgVO> imgInfoList = service.getImgInfo(bnum);
-				File f1 = new File(uploadPath + "\\" + imgInfoList.get(0).getImgsavefilename());
+				File f1 = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
 				f1.delete();
-
-//				if (imgList.size() == 2) { // 이미지가 두 개일 경우
-//					File f1 = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
-//					File f2 = new File(uploadPath + "\\" + imgList.get(1).getImgsavefilename());
-//					f1.delete();
-//					f2.delete();
-//					service.imgUpdateDelete(imgNum);
-//				}
 
 				String imgorgfilename1 = thumbnail.getOriginalFilename();
 				String imgsavefilename1 = UUID.randomUUID() + "_" + imgorgfilename1;
@@ -150,7 +127,7 @@ public class BooksUpdateController {
 				ImgVO ivo1 = new ImgVO(imgorgfilename1, thumbNum, imgsavefilename1, 1, 1, bnum);
 
 				// 이미지
-				File f2 = new File(uploadPath + "\\" + imgInfoList.get(1).getImgsavefilename());
+				File f2 = new File(uploadPath + "\\" + imgList.get(1).getImgsavefilename());
 				f2.delete();
 
 				String imgorgfilename2 = img1.getOriginalFilename();
