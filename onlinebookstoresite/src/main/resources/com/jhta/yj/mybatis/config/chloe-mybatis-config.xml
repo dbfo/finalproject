@@ -23,6 +23,8 @@
 		<!-- 유래 -->
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
 			alias="payment" />
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
+			alias="booksVo" /> 
 	</typeAliases>
 	<mappers>
 		<!-- 연주 -->
@@ -31,5 +33,8 @@
 
 		<!-- 유래 -->
 		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/ShipMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/CSMapper.xml" />
+		
 	</mappers>
 </configuration>

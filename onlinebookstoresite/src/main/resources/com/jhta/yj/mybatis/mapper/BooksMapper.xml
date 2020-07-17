@@ -20,7 +20,6 @@
 	</insert>
 
 	<!-- delete/update문 -->
-
 	<delete id="booksDelete" parameterType="int">
 		delete from books where bnum = #{bnum}
 	</delete>
@@ -60,7 +59,7 @@
 	</select>
 
 	<select id="list" resultType="books">
-		select * from books
+		select * from books order by bnum desc
 	</select>
 
 	<!-- 카테고리 -->

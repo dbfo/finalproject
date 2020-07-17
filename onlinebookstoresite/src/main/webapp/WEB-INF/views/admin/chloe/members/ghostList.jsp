@@ -23,38 +23,32 @@
 							<c:if test="${infoField == 'phone' }">selected</c:if>>휴대폰번호</option>
 				</select> <input type="text" name="infoKeyword" value="${infoKeyword }"
 					size="30"></td>
-					
+
 				<th align="center" class="table-active">생일</th>
-				<td>
-					<input type="text" id="birthMonth" size="3"> 월
-					<input type="text" id="birthDay" size="3"> 일생
-				</td>
+				<td><input type="text" id="birthMonth" size="3"> 월 <input
+					type="text" id="birthDay" size="3"> 일생</td>
 			</tr>
 
 			<tr>
 				<th align="center" class="table-active">나이</th>
-				<td>
-					<input type="text" id="ageKeyword1" name="ageKeyword1" size="3"> 세 ~ 
-					<input type="text" id="ageKeyword2" name="ageKeyword2" size="3" disabled="disabled"> 세
-				</td>
+				<td><input type="text" id="ageKeyword1" name="ageKeyword1"
+					size="3"> 세 ~ <input type="text" id="ageKeyword2"
+					name="ageKeyword2" size="3" disabled="disabled"> 세</td>
 
 				<th align="center" class="table-active">가입일/기념일</th>
-				<td>
-					<select name="dateField">
-							<option value="">- 선택 -</option>
-							<option value="regdate"
-								<c:if test="${dateField == 'regdate' }">selected</c:if>>가입일</option>
-							<option value="birth"
-								<c:if test="${dateField == 'birth' }">selected</c:if>>생일</option>
-					</select>
-					<input type="date" size="25" name="dateKeyword" id="dateKeyword" value="${dateKeyword }">
-				</td> 
+				<td><select name="dateField">
+						<option value="">- 선택 -</option>
+						<option value="regdate"
+							<c:if test="${dateField == 'regdate' }">selected</c:if>>가입일</option>
+						<option value="birth"
+							<c:if test="${dateField == 'birth' }">selected</c:if>>생일</option>
+				</select> <input type="date" size="25" name="dateKeyword" id="dateKeyword"
+					value="${dateKeyword }"></td>
 			</tr>
 
 			<tr>
-				<td align="center" colspan="4">
-					<input type="submit" value="검  색">
-				</td>
+				<td align="center" colspan="4"><input type="submit"
+					value="검  색"></td>
 			</tr>
 		</table>
 	</form>
@@ -65,44 +59,44 @@
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 탈퇴 회원 목록
 	</div>
-	<div class="card-body">
-		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%"
-				cellspacing="0">
-				<thead>
-					<tr>
-						<th>이름</th>
-						<th>아이디</th>
-						<th>휴대전화</th>
-						<th>이메일</th>
-						<th>만 나이</th>
-						<th>가입일</th>
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<th>이름</th>
-						<th>아이디</th>
-						<th>휴대전화</th>
-						<th>이메일</th>
-						<th>만 나이</th>
-						<th>가입일</th>
-					</tr>
-				</tfoot>
-				<tbody>
-					<c:forEach var="vo" items="${list }" >
-						<tr>
-							<td>${vo.mname}</td>
-							<td>${vo.mid}</td>
-							<td>${vo.phone}</td>
-							<td>${vo.email}</td>
-							<td>${vo.age}</td>
-							<fmt:formatDate value="${vo.regdate}" pattern="yyyy/MM/dd" var="regdate" />
-							<td>${regdate}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	<table class="ghoshListTable table">
+		<thead>
+			<tr>
+				<th>이름</th>
+				<th>아이디</th>
+				<th>휴대전화</th>
+				<th>이메일</th>
+				<th>만 나이</th>
+				<th>가입일</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>이름</th>
+				<th>아이디</th>
+				<th>휴대전화</th>
+				<th>이메일</th>
+				<th>만 나이</th>
+				<th>가입일</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<td>${vo.mname}</td>
+					<td>${vo.mid}</td>
+					<td>${vo.phone}</td>
+					<td>${vo.email}</td>
+					<td>${vo.age}</td>
+					<fmt:formatDate value="${vo.regdate}" pattern="yyyy/MM/dd"
+						var="regdate" />
+					<td>${regdate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
+
+<!-- 페이징기능추가하렴 -->
+	<h1>페이징!!!!!추가!!!예정!!!</h1>
+<!-- ////////////////// -->

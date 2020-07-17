@@ -129,7 +129,7 @@
 			<tr>
 				<td align="center" colspan="4">
 					<input type="submit" value="수  정" class="btn btn-primary">
-					<input type="reset" value="초기화" class="btn btn-secondary">
+					<input type="reset" value="초기화" class="btn btn-secondary resetBtn">
 				</td>
 			</tr>
 		</table>
@@ -162,7 +162,7 @@
 					}
 				});
 			});
-
+	
 	// 포인트 = 가격 * (5 / 100)
 	$("#bprice").change(function() {
 		var price = $(this).val();
@@ -185,21 +185,21 @@
 			return false;
 		}
 
-		var btitle = $("#btitle");
+		var btitle = $("input[name='btitle']");
 		if (btitle.val() == "") {
 			alert("책 제목을 입력해 주세요.");
 			btitle.focus();
 			return false;
 		}
 
-		var bwriter = $("#bwriter");
+		var bwriter = $("input[name='bwriter']");
 		if (bwriter.val() == "") {
 			alert("지은이를 입력해 주세요.");
 			bwriter.focus();
 			return false;
 		}
 
-		var bpublishdate = $("#bpublishdate");
+		var bpublishdate = $("input[name='bpublishdate']");
 		if (bpublishdate.val() == "") {
 			alert("출간일을 선택해 주세요.");
 			bpublishdate.focus();

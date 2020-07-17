@@ -1,23 +1,10 @@
 package com.jhta.finalproject.yr.vo;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
-public class PaymentVo {
-//	BPAYNUM	NUMBER
-//	BADDR	VARCHAR2(500 BYTE)
-//	BPHONE	NVARCHAR2(30 CHAR)
-//	BFINALMONEY	NUMBER
-//	BODERDATE	DATE
-//	BPAYDATE	DATE
-//	BSTATUS	NUMBER
-//	BTYPE	NUMBER
-//	BNUM	NUMBER
-//	ORDERMONEY	NUMBER
-//	USEDPOINT	NUMBER
-//	MeTHODPAYMENT	NUMBER
-//	RECEIVER	VARCHAR2(20 BYTE)
-//	MNUM	NUMBER
-
+public class PaymentAndBookListVo {
+	
 	private int bpaynum; // 지불번호
 	private String baddr; // 주문자 집 주소
 	private String bphone; // 주문자 전화번호
@@ -30,13 +17,27 @@ public class PaymentVo {
 	private int methodpayment; // 지불방법(0:카드,1:무통장)
 	private String receiver;// 수령인
 	private int mnum; // 회원 번호
+	private String mname;// 회원이름(주문자이름)
+	private List<PaymentBooksVo> paymentbook;
 
-	public PaymentVo() {
-		// TODO Auto-generated constructor stub
-	}
 	
-	public PaymentVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate, Date bpaydate,
-			int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int mnum) {
+
+
+	@Override
+	public String toString() {
+		return "PaymentAndBookListVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
+				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
+				+ ", odermoney=" + ordermoney + ", usedpoint=" + usedpoint + ", methodpayment=" + methodpayment
+				+ ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname  +  ", paymentbook=" + paymentbook + "]";
+	}
+
+
+
+
+	public PaymentAndBookListVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate,
+			Date bpaydate, int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int mnum,
+			String mname, List<PaymentBooksVo> paymentbook) {
+		super();
 		this.bpaynum = bpaynum;
 		this.baddr = baddr;
 		this.bphone = bphone;
@@ -49,19 +50,16 @@ public class PaymentVo {
 		this.methodpayment = methodpayment;
 		this.receiver = receiver;
 		this.mnum = mnum;
+		this.mname = mname;
+		this.paymentbook = paymentbook;
 	}
 
 
 
-	@Override
-	public String toString() {
-		return "PaymentVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
-				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
-				+ ", btype=" +", ordermoney=" + ordermoney + ", usedpoint=" + usedpoint
-				+ ", methodpayment=" + methodpayment + ", receiver=" + receiver + ", mnum=" + mnum +"]";
+
+	public PaymentAndBookListVo() {
+		super();
 	}
-
-
 
 	public Date getBorderdate() {
 		return borderdate;
@@ -69,6 +67,14 @@ public class PaymentVo {
 
 	public void setBorderdate(Date borderdate) {
 		this.borderdate = borderdate;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public int getBpaynum() {
@@ -103,6 +109,14 @@ public class PaymentVo {
 		this.bfinalmoney = bfinalmoney;
 	}
 
+	public Date getborderdate() {
+		return borderdate;
+	}
+
+	public void setborderdate(Date borderdate) {
+		this.borderdate = borderdate;
+	}
+
 	public Date getBpaydate() {
 		return bpaydate;
 	}
@@ -119,8 +133,7 @@ public class PaymentVo {
 		this.bstatus = bstatus;
 	}
 
-	
-	public int getOdermoney() {
+	public int getOrdermoney() {
 		return ordermoney;
 	}
 
@@ -159,4 +172,13 @@ public class PaymentVo {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
+
+	public List<PaymentBooksVo> getPaymentbook() {
+		return paymentbook;
+	}
+
+	public void setPaymentbook(List<PaymentBooksVo> paymentbook) {
+		this.paymentbook = paymentbook;
+	}
+
 }

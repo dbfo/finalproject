@@ -22,8 +22,8 @@
 				<div class="collapse" id="collapseOrder" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
 						<a class="nav-link" href="${pageContext.request.contextPath}/totalOrder">전체주문목록</a>
-						<a class="nav-link" href="${pageContext.request.contextPath}/ship">배송관리</a>
-						<a class="nav-link" href="${pageContext.request.contextPath}/cs">취소/교환/반품</a>
+						<a class="nav-link" href="${pageContext.request.contextPath}/ship/menu?PageName=0">배송관리</a>
+						<a class="nav-link" href="${pageContext.request.contextPath}/cs/menu?PageName=1">취소/교환/반품</a>
 					</nav>
 				</div>
 				<!-- 주문관리 -->

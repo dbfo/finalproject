@@ -9,8 +9,7 @@
 			and ${infoField} like '%'|| #{infoKeyword}||'%'
 		</if>
 
-		<if
-			test="ageKeyword1 != null and ageKeyword1 != '' 
+		<if test="ageKeyword1 != null and ageKeyword1 != '' 
 			and ageKeyword2 != null and ageKeyword2 != '' ">
 			<![CDATA[
 			and FLOOR((months_between(sysdate, birth))/12) <= #{ageKeyword2}
@@ -28,14 +27,16 @@
 		parameterType="hashmap">
 		select mname, mid, email, phone, regdate,
 		FLOOR((months_between(sysdate, birth))/12) age
-		from members where mstatus = 1
-		<include refid="search" />
+		from members where mstatus = 1 
+		<include refid="search" /> 
+		order by regdate desc
 	</select>
 
 	<!-- 탈퇴회원 조회 -->
 	<select id="ghostList" resultType="members">
 		select mname, mid, email,
 		phone, regdate, FLOOR((months_between(sysdate, birth))/12) age from
-		members where mstatus = 0
+		members where mstatus = 0 
+		order by regdate desc
 	</select>
 </mapper>

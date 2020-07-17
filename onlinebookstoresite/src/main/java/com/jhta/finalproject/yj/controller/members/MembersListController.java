@@ -37,8 +37,8 @@ public class MembersListController {
 		map.put("dateField", dateField);
 		map.put("dateKeyword", dateKeyword);
 		
-		System.out.println("dateField1:"+dateField);
-		System.out.println("dateKeyword1:"+dateKeyword);
+//		System.out.println("dateField1:"+dateField);
+//		System.out.println("dateKeyword1:"+dateKeyword);
 		
 		ModelAndView mv = new ModelAndView();
 		List<MembersListVO> list = service.memList(map);
@@ -51,8 +51,8 @@ public class MembersListController {
 		mv.addObject("dateField", dateField);
 		mv.addObject("dateKeyword", dateKeyword);
 		
-		System.out.println("dateField2:"+dateField);
-		System.out.println("dateKeyword2:"+dateKeyword);
+//		System.out.println("dateField2:"+dateField);
+//		System.out.println("dateKeyword2:"+dateKeyword);
 		mv.setViewName(".membersList");
 		return mv;
 	}

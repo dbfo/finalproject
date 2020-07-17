@@ -9,7 +9,6 @@
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/content.jsp" />
-		<put-attribute name="tables" value="" />
 		<put-attribute name="sidemanu"
 			value="/WEB-INF/views/admin/sidemanu.jsp" />
 		<put-attribute name="footer"
@@ -47,10 +46,16 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
-	
+
+<!-- 	주문관리 -->
+	<definition name = ".admin.order" template = "/WEB-INF/views/admin/yr/order/orderlayout.jsp">
+		<put-attribute name="ordersearch" value = "/WEB-INF/views/admin/yr/order/totalOrder.jsp" />	
+		<put-attribute name="ordertables" value = "/WEB-INF/views/admin/yr/order/tables.jsp" />
+	</definition>
+
+
 	<definition name=".totalOrder" extends=".main">
-		<put-attribute name="content"
-			value="/WEB-INF/views/admin/yr/totalOrder.jsp" />
+		<put-attribute name="content" value=".admin.order" />
 		<put-attribute name="tables"
 			value="/WEB-INF/views/admin/yr/tables.jsp" />
 	</definition>
@@ -64,13 +69,32 @@
 		<put-attribute name="shipsearch"
 			value="/WEB-INF/views/admin/yr/ship/shipsearch.jsp" />
 		<put-attribute name="shiptables"
-			value="/WEB-INF/views/admin/yr/ship/shiptables.jsp" />
+			value="" />
 	</definition>
 
-	<definition name=".ship" extends=".main">
-		<put-attribute name="content" value=".admin.ship" />
+<!-- 	입금전 -->
+	<definition name=".admin.beforeDeposit" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/beforeDepositTables.jsp" />
 	</definition>
 
+<!-- 	배송 준비중 -->
+	<definition name=".admin.preparingShip" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/preparingShipTables.jsp" />
+	</definition>
+
+<!-- 	배송 중, 배송완료 -->
+	<definition name=".admin.shipInfo" extends = ".admin.ship">
+		<put-attribute name="shiptables"
+			value="/WEB-INF/views/admin/yr/ship/shipInfoTables.jsp" />
+	</definition>
+
+
+	<definition name=".ship.*" extends=".main">
+		<put-attribute name="content" value=".admin.{1}" />
+	</definition>
+	
 
 	<!-- cs관리 -->
 	<definition name=".admin.cs"
@@ -82,8 +106,23 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/cstables.jsp" />
 	</definition>
+	
+	
+	<definition name=".admin.cancel" extends=".admin.cs">
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/csCancelTables.jsp" />
+	</definition>
 
-	<definition name=".cs" extends=".main">
-		<put-attribute name="content" value=".admin.cs" />
+	<definition name=".admin.return" extends=".admin.cs">
+	
+	</definition>
+
+	<definition name=".admin.exchange" extends=".admin.cs">
+	
+	</definition>
+	
+
+	<definition name=".cs.*" extends=".main">
+		<put-attribute name="content" value=".admin.{1}" />
 	</definition>
 </tiles-definitions>
