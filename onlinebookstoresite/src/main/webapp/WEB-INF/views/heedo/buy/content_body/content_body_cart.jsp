@@ -124,7 +124,7 @@
 					var htitle="<h4 style='display:inline'><span style='color:#f51167'>중고판매자별</span> 장바구니  : "+ sidlist[i]+"</h4>"
 					c.append(htitle);
 					var topbutton="<div id='topButton' style='height:35px;display:inline-block;float:right'>"
-								 +"<span>해당 판매자 선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>"
+								 +"<span>해당 판매자 선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm usedorderTopBtn' data-sid="+sidlist[i]+">주문하기</button>"
 								 +"<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>";
 								 +"</div><br>";	
 					c.append(topbutton);
@@ -235,6 +235,24 @@
 			}
 		});	
 	}
+	//각 중고판매자테이블 주문버튼 클릭시
+	$(document).on('click','.usedorderTopBtn',function(){
+		var form=$('<form></form>');
+		form.attr('action','${cp}/order/usedorder');
+		form.attr('method','post');
+		form.appendTo('body');
+		var sid=$(this).data('sid');
+		$("."+sid+"_checkTd").each(function(){
+			if($(this).is(':checked')){
+				var cartNumValue=$(this).data('cartnum');
+				var cartNum=$("<input type='hidden' value="
+						+cartNumValue+" name='cartNum'>");
+				form.append(cartNum);
+			}
+		});
+		form.submit();
+	})
+	
 	//맨아래 주문하기 버튼 클릭시.
 	$(document).on('click','#usedallorder',function(){
 		var form=$('<form></form>');
@@ -330,11 +348,55 @@
 		}	
 		checkshipfee(sid);
 	})
-	$(document).on('click','#usedallorder',function(){
-		
-	});
+
 	
 	//=====================중고 관린 스크립트 끝 ===========================//
+	
+	//각행의 삭제버튼 클릭시.
+	$(document).on('click','.deletebtn',function(){
+		$("#deletebtn_modal").val($(this).data('id'));
+		$("#deleteModal").modal('show');
+	});
+	//맨위 삭제버튼클릭시...
+	$("#deleteTopBtn").click(function(){
+		var cartNum=[];
+		$('.checkTd').each(function(){
+			if($(this).is(":checked")){
+				var num=$(this).data('id')
+				cartNum.push(num);
+			}
+		})
+
+		$.ajax({
+			url:'/finalproject/pay/deleteSelectCart',
+			data:{cartNumlist:cartNum},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				if(data.result=='success'){
+					clearCart();
+					viewCart();
+				}
+			}
+		});
+	});
+	//하나삭제 모달에서 삭제하기 버튼 눌렀을때
+	$("#deletebtn_modal").click(function(){
+		var cartNum=$(this).val();
+		$.ajax({
+			url:"/finalproject/pay/deleteOneCart",
+			data:{cartNum:cartNum},
+			dataType:"json",
+			success:function(data){
+				if(data.result=='success'){
+					clearCart();
+					viewCart();
+					viewusedcart();
+				}
+			}
+		});
+		$("#deleteModal").modal('hide');
+	});
 	
 	//=====================새제품 관린 스크립트 시작 ===========================//
 	
@@ -370,7 +432,7 @@
 									+"<td><input type='text' value="+item.bcount+" style='width:25px'><br><button type='button' class='btn btn-dark countbtn'"
 									+" data-id="+item.cartnum+">변경</button></td>"
 									+"<td><strong>"+item.totalvalue+"</strong></td>"
-									+"<td align='right'><button type='button' class='btn btn-dark orderbtn' data-id="+item.bnum+">주문하기</button><br>"
+									+"<td align='right'><button type='button' class='btn btn-dark orderbtn' data-cartnum="+item.cartnum+" data-id="+item.bnum+">주문하기</button><br>"
 									+"<button type='button' class='btn btn-light deletebtn' data-id="+item.cartnum+
 									" data-toggle='modal'>삭제하기</button></td></tr>";
 						total_value=Number(total_value)+Number(item.totalvalue);
@@ -384,9 +446,7 @@
 					
 					//각행의 주문버튼 클릭시.
 					$(".orderbtn").click(function(){
-						var tr=$(this).parent().parent();
-						var td=tr.children();
-						var cartNumValue=td.eq(0).children().data('id');
+						var cartNumValue=$(this).data('cartnum');
 						var form=$('<form></form>');
 						form.attr('action','${cp}/order/order');
 						form.attr('method','post');
@@ -468,34 +528,7 @@
 			$("#total_point").text(total_point);
 		}	
 	});
-	//각행의 삭제버튼 클릭시.
-	$(document).on('click','.deletebtn',function(){
-		$("#deletebtn_modal").val($(this).data('id'));
-		$("#deleteModal").modal('show');
-	});
-	//맨위 삭제버튼클릭시...
-	$("#deleteTopBtn").click(function(){
-		var cartNum=[];
-		$('.checkTd').each(function(){
-			if($(this).is(":checked")){
-				var num=$(this).data('id')
-				cartNum.push(num);
-			}
-		})
 
-		$.ajax({
-			url:'/finalproject/pay/deleteSelectCart',
-			data:{cartNumlist:cartNum},
-			dataType:'json',
-			type:'post',
-			success:function(data){
-				if(data.result=='success'){
-					clearCart();
-					viewCart();
-				}
-			}
-		});
-	});
 	//전체체크 버튼.
 	$("#allcheck").change(function(){
 			if($("#allcheck").is(":checked")){
@@ -514,23 +547,7 @@
 				});
 			}	
 	});
-	//하나삭제 모달에서 삭제하기 버튼 눌렀을때
-	$("#deletebtn_modal").click(function(){
-		var cartNum=$(this).val();
-		$.ajax({
-			url:"/finalproject/pay/deleteOneCart",
-			data:{cartNum:cartNum},
-			dataType:"json",
-			success:function(data){
-				if(data.result=='success'){
-					clearCart();
-					viewCart();
-					viewusedcart();
-				}
-			}
-		});
-		$("#deleteModal").modal('hide');
-	});
+	
 	//=====================새제품 관린 스크립트 끝 ===========================//
 	
 	

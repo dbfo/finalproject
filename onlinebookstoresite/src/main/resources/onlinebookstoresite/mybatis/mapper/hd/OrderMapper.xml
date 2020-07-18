@@ -27,7 +27,7 @@
 		</foreach>
 		)cart,
 		(select * from books) book,
-		(select * from img where THUMBNAIL=1)img
+		(select * from img where THUMBNAIL=1 and btype=1)img
 		where cart.bnum=book.bnum and book.bnum=img.bnum
 	</select>
 	<!-- 상품페이지,리스트에서 바로 구매하기 버튼 클릭 -->

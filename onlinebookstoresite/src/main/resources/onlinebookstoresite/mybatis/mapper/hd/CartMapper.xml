@@ -27,12 +27,14 @@
 	<!-- 15일 저녁 집에서 bshipinfo 에러남.. 16일날 물어보기! -->
 	<select id="cartlist" parameterType="hashmap" resultType="cartview">
 		select books.bnum,books.btitle,books.bprice,books.bpoint,books.bcount stored,cart.mnum,cart.cartnum,cart.bcount,img.imgsavefilename from
-		(select * from books)books,(select * from cart where mnum=#{mnum})cart,(select * from img where thumbnail=1 and btype=1)img
+		(select * from books)books,
+		(select * from cart where btype=1 and mnum=#{mnum})cart,
+		(select * from img where thumbnail=1 and btype=1)img
 		where books.bnum=cart.bnum and cart.bnum=img.bnum
 	</select>
 	<!-- 장바구니에서 하나삭제시 사용  -->
 	<delete id="deleteOne" parameterType="int">
-		delete from cart where cartnum=#{cartNum}
+		delete from cart where cartnum=#{cartNum} 
 	</delete>
 	<!-- 체크박스로 여러개 체크후 삭제시 사용 -->
 	<delete id="deleteSelected" parameterType="hashmap">

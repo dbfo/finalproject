@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-<div class="tab-content">
 <div class="container" style="border:1px solid black">
 <!--/////////// 주문상품 리스트 테이블 시작 ///////////////-->
 <h4><span style='color:#f51167'>상품</span>확인</h4>
@@ -22,7 +19,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartnum }">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td><span>${vo.statusString }</span>&nbsp ${vo.obname }</td>
 				<td>${vo.sid }</td>
@@ -69,7 +66,7 @@
 				</td>
 			</tr>	
 			<tr class="table-secondary">
-				<td>${totalprice }원</td><td><span>${totalshipfee }</span>원</td>
+				<td>${totalprice }원</td><td><span id="ship_charge">${totalshipfee }</span>원</td>
 				<td>
 					<span id="use_point"></span>원
 					<button type="button" class="btn btn-dark btn-sm disabled" id="point_cancel">취소</button>
@@ -163,7 +160,6 @@
 		<button type="button" class="btn btn-dark" id="paymentBtn">결제하기</button>
 </div>
 <!--/////////// 결제정보 테이블 끝 ///////////////--> 	
-</div>
 <!-- ////////// 포인트사용 모달  시작//////////////////////// -->
 <div class="modal fade" id="modal_point">
   <div class="modal-dialog">
@@ -390,6 +386,6 @@
             }
         }).open();
     }
-///////////// 주소 API 끝 ///////////////////////////////////////////////////////
+	///////////// 주소 API 끝 ///////////////////////////////////////////////////////
 
 </script>

@@ -2,13 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-<div class="tab-content">
 <div class="container" style="border:1px solid black">
 <!--/////////// 주문상품 리스트 테이블 시작 ///////////////-->
 <h4><span style='color:#f51167'>상품</span>확인</h4>
-<table class="table">
+<table class="table" id="productTable">
 	<thead class="thead-dark">
 		<tr>
 			<th colspan="2">상품명</th>
@@ -21,7 +18,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartnum }>
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td>${vo.btitle }</td>
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
@@ -62,11 +59,12 @@
 				<th class="table-secondary">사용포인트</th>
 				<td rowspan="2" class="table-danger">
 					<strong>최종 결제금액</strong><br>
-					<span id="final_payment_price"></span>원
+					<span class="final_payment_price"></span>원
 				</td>
 			</tr>	
 			<tr class="table-secondary">
-				<td>${totalprice }원</td><td><span id="ship_charge"></span>원</td>
+				<td>${totalprice }원</td>
+				<td><span id="ship_charge"></span>원</td>
 				<td>
 					<span id="use_point"></span>원
 					<button type="button" class="btn btn-dark btn-sm disabled" id="point_cancel">취소</button>
@@ -151,15 +149,36 @@
 <br>
 <div class="container" style="border:1px solid black;">
 		<h4><span style='color:#f51167'>결제</span>정보</h4>
-		<table>
-		
+		<table class="table table-borderd">
+			<tr>
+				<td rowspan="2">결제수단</td>
+				<td rowspan="2">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="payment_option" checked="checked" value="0">신용카드
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="payment_option" value="1">가상계좌 무통장입금
+						</label>
+					</div>
+				</td>
+				<td>
+					최종결제금액
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="final_payment_price" id="final_price"></span>원
+				</td>
+			</tr>
 		</table>
 		
 
 		<button type="button" class="btn btn-dark" id="paymentBtn">결제하기</button>
 </div>
 <!--/////////// 결제정보 테이블 끝 ///////////////--> 	
-</div>
 <!-- ////////// 포인트사용 모달  시작//////////////////////// -->
 <div class="modal fade" id="modal_point">
   <div class="modal-dialog">
@@ -188,12 +207,16 @@
     </div>
   </div>
 </div>
+
 <!-- ////////// 포인트사용 모달 끝//////////////////////// -->
 
 <!-- 주소 API 사용 스크립트 시작-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 주소 API 사용 스크립트 끝-->
-<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+
+<!-- 아임포트 결제 API 사용 스크립트 시작 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 아임포트 결제 API 사용 스크립트 끝 -->
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -202,15 +225,15 @@
 		shipCharge();
 		finalprice();
 	});
+
 	//상세주소 입력시.
 	$("#addr4").on('keyup',function(){
-		console.log('1111')
 		var addr4=$("#addr4").val();
 		$(".addr4").text(addr4);
 	});
 	
 	//배송지 radio 버튼 선택 이벤트.
-	$("input[type='radio']").click(function(){
+	$("input[name='ship_option']").click(function(){
 		var value=$(this).val();
 		if(value==0){
 			$("#searchAddrBtn").addClass("disabled");
@@ -258,12 +281,10 @@
 				$("#use_point").text("0");
 			}
 		})
-	
 	}
 	//첫실행시 배송비 정함 (상품금액 5만원이상시 배송비 무료 아니면 2500원!)
 	var shipCharge=function(){
 		var totalprice=${totalprice};
-		console.log(totalprice);
 		var ship_charge=0;
 		if(Number(totalprice)>=50000){
 			ship_charge=0;
@@ -291,7 +312,7 @@
 		var shipcharge=$("#ship_charge").text();
 		var usepoint=$("#use_point").text();
 		var finalprice=Number(totalprice)+Number(shipcharge)-Number(usepoint);
-		$("#final_payment_price").text(finalprice);
+		$(".final_payment_price").text(finalprice);
 	}
 	
 	// 하단 포인트 사용 버튼 눌렀을때 
@@ -312,11 +333,10 @@
 		var usablepoint=$("#modal_usablepoint").val();
 		var usepoint=Number($("#modal_usepoint").val());
 		if(usepoint==""||!(usepoint>0&&usepoint<=usablepoint)){
-			console.log("rrrreeettt")
 			return;
 		}
 		var remainpoint=Number(usablepoint)-usepoint;
-		console.log(usepoint);
+
 		$("#modal_confirm").removeClass("disabled");
 		$("#modal_remainpoint").val(remainpoint);
 	});
@@ -398,6 +418,76 @@
             }
         }).open();
     }
-///////////// 주소 API 끝 ///////////////////////////////////////////////////////
+	///////////// 주소 API 끝 ///////////////////////////////////////////////////////
+	
+	///////////// 결제 API 시작 //////////////////////////////////////////////////////
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp22319375'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	$("#paymentBtn").click(function(){
+		var tablelength=$("#productTable >tbody tr").length; //첫번째행 제외.
+		var td=$("#productTable >tbody >tr").children(); //상품테이블 첫번째행의 td들..
+		var title=td.eq(1).text();
+		var ordername=title;
+		if(tablelength>1){ //상품테이블에 상품갯수가 하나가아닐때.
+			ordername=title+" 외 "+(tablelength-1)+"개 상품 포함"
+		}
+		var paymentOption=$("input[name='payment_option']:checked").val();
+		console.log('paymentOption : '+paymentOption)
+		if(paymentOption==0){ // 신용카드 선택
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : ordername,
+			    amount : $("#final_price").text(),
+			    buyer_email : '',
+			    buyer_name : '',
+			    buyer_tel : '',
+			    buyer_addr : '',
+			    buyer_postcode : '',
+			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		}
+		
+		/*else if(paymentOption==1){ //가상계좌선택
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명:결제테스트',
+			    amount : $("#final_price").text(),
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '구매자이름',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456',
+			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		}*/
+	})
+	
+	///////////// 결제 API 끝 ////////////////////////////////////////////////////////
 
 </script>

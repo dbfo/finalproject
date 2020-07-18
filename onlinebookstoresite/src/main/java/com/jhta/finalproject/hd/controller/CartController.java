@@ -37,14 +37,12 @@ public class CartController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
-		System.out.println("컨트롤러안 mnum : "+mnum);
 		List<UsedCartListVo>list=service.usedlist(mnum);
 		JSONArray jarr=new JSONArray();
 		List<String> sidList= new ArrayList<String>();
 		for(UsedCartListVo vo:list) {
 			JSONObject json=new JSONObject();
-			json.put("cartnum", vo.getCartnum());
-			System.out.println("장바구니번호 : "+vo.getCartnum());
+			json.put("cartnum", vo.getCartnum());	
 			json.put("bcount", vo.getBcount());
 			json.put("obnum", vo.getObnum());
 			json.put("btitle", vo.getObname());
@@ -71,7 +69,6 @@ public class CartController {
 			json.put("shipmentfee", vo.getObdelfee());
 			jarr.put(json);
 		}
-		System.out.println("컨트롤러 종료!!");
 		JSONObject json=new JSONObject();
 		if(sidList.size()!=0) {
 			json.put("sidlist", sidList);
@@ -82,6 +79,23 @@ public class CartController {
 	
 	//============== 중고 관련 AJAX 컨트롤러  끝 =============//
 	
+	//============== 중고/새상품 공용 AJAX 컨트롤러 시작 ===========//
+	//장바구니에서 상품 하나삭제 AJAX
+		@RequestMapping("/pay/deleteOneCart")
+		@ResponseBody
+		public String deleteOne(int cartNum) {
+			System.out.println("cartNum : "+cartNum);
+			int n=service.deleteOne(cartNum);
+			String result="fail";
+			if(n>0) {
+				result="success";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();	
+		}
+	
+	//============== 중고/새상품 공용 AJAX 컨트롤러 시작 ===========//
 	//============== 새상품 관련 AJAX 컨트롤러  시작 =============//
 	//장바구니 새상품 리스트 출력 AJAX
 	@RequestMapping(value="/pay/cartlist",produces = "application/json;charset=utf-8")
@@ -119,19 +133,7 @@ public class CartController {
 		}
 		return jarr.toString();
 	}
-	//장바구니에서 새상품 하나삭제 AJAX
-	@RequestMapping("/pay/deleteOneCart")
-	@ResponseBody
-	public String deleteOne(int cartNum) {
-		int n=service.deleteOne(cartNum);
-		String result="fail";
-		if(n>0) {
-			result="success";
-		}
-		JSONObject json=new JSONObject();
-		json.put("result", result);
-		return json.toString();	
-	}
+	
 	//새상품 수량변경 AJAX
 	@RequestMapping("/pay/changeCount")
 	@ResponseBody
