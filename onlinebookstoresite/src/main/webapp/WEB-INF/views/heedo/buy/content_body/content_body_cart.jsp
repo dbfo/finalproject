@@ -15,7 +15,7 @@
 <div class="tab-content container" style="border:1px solid black">
 	<!-- /// 새상품 div 시작 /// -->
 	<div id="newitem" class="tab-pane fade">
-		<h4 style='display:inline'><span style='color:#f51167'>새상품</span>장바구니</h4>
+		<h4 style='display:inline'><span style='color:#f51167'>새상품</span> 장바구니</h4>
 		<div id="topButton" style="height:35px; float:right">
 			<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
 			<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>

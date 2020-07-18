@@ -33,7 +33,7 @@
 	<!-- 상품페이지,리스트에서 바로 구매하기 버튼 클릭 -->
 	<select id="directorder" parameterType="int" resultType="orderVo">
 		select btitle,book.bnum,bprice,bpoint,imgsavefilename from
-		(select * from books) book,(select * from img where thumbnail=1)img
+		(select * from books) book,(select * from img where thumbnail=1 and btype=1)img
 		where book.bnum=img.bnum and book.bnum=#{bnum}
 	</select>
 	<!-- 주문페이지에서 배송지 SELECT 함 -->

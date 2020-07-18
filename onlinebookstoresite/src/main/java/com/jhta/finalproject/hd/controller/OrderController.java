@@ -181,6 +181,13 @@ public class OrderController {
 	//================== 중고/새상품 공용컨트롤러 시작 ========================//	
 	
 	//================== 새상품 주문 컨트롤러 시작 ===========================//
+	//주문완료 메소드
+	@RequestMapping(value="/order/complete",method=RequestMethod.POST)
+	@ResponseBody
+	public String orderComplet() {
+		return null;
+	}
+		
 	// 장바구니에서 주문하기 클릭했을때 처리함.
 	@RequestMapping(value="/order/order",method = RequestMethod.POST)
 	public String order(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {

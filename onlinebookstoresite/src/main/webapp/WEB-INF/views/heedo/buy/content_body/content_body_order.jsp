@@ -18,7 +18,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }" id="productTr">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td>${vo.btitle }</td>
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
@@ -203,7 +203,6 @@
       	<button type="button" class="btn btn-dark disabled" id="modal_confirm">확인</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -431,6 +430,28 @@
 		if(tablelength>1){ //상품테이블에 상품갯수가 하나가아닐때.
 			ordername=title+" 외 "+(tablelength-1)+"개 상품 포함"
 		}
+		//입금날짜기한 계산.
+		var date1=new Date(); //현재 날짜 
+		var date2=new Date(Date.parse(date1) + 7 * 1000 * 60 * 60 * 24); //일주일후 
+		var date3=date2.getFullYear()+("0"+(date2.getMonth()+1)).slice(-2)+("0"+date2.getDate()).slice(-2);
+		// YYYYMMdd 형태로 
+		
+		//각행마다 장바구니번호 , 책번호 ,책 수량 확인.
+		var bnumArray=[];
+		var bcountArray=[];
+		var cartNumArray=[];
+		$("#productTr").each(function(){
+			var bnum=$(this).data('bnum');
+			var bcount=$(this).data('bcount');
+			bnumArray.push(bnum);
+			bcoutArray.push(bcount);
+			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
+				cartNumArray.push($(this).data('cartnum'));
+			}
+		})
+		//사용포인트 , 적립포인트 , 
+		
+		//결제수단에 따라 분류.
 		var paymentOption=$("input[name='payment_option']:checked").val();
 		console.log('paymentOption : '+paymentOption)
 		if(paymentOption==0){ // 신용카드 선택
@@ -448,46 +469,91 @@
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid,
+				    		cartNumArray:cartNumArray,
+				    		bnumArray:bnumArray,
+				    		bcountArray:bcountArray,
+				    		
+				    		
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if ( everythings_fine ) {
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+
+			    			alert(msg);
+			    		} else {
+			    			//[3] 아직 제대로 결제가 되지 않았습니다.
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    		}
+			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
 			    }
-			    alert(msg);
 			});
-		}
-		
-		/*else if(paymentOption==1){ //가상계좌선택
+		}else if(paymentOption==1){ //가상계좌선택
 			IMP.request_pay({
 			    pg : 'inicis', // version 1.1.0부터 지원.
 			    pay_method : 'vbank',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명:결제테스트',
+			    name : ordername,
 			    amount : $("#final_price").text(),
-			    buyer_email : 'iamport@siot.do',
-			    buyer_name : '구매자이름',
-			    buyer_tel : '010-1234-5678',
-			    buyer_addr : '서울특별시 강남구 삼성동',
-			    buyer_postcode : '123-456',
+			    vbank_due:date3,
+			    buyer_email : '',
+			    buyer_name : '',
+			    buyer_tel : '',
+			    buyer_addr : '',
+			    buyer_postcode : '',
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if ( everythings_fine ) {
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+
+			    			alert(msg);
+			    		} else {
+			    			//[3] 아직 제대로 결제가 되지 않았습니다.
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    		}
+			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
 			    }
-			    alert(msg);
 			});
-		}*/
+		}
 	})
 	
 	///////////// 결제 API 끝 ////////////////////////////////////////////////////////
-
 </script>
