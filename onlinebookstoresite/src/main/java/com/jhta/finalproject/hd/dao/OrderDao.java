@@ -41,7 +41,7 @@ public class OrderDao {
 	
 	// ============ 중고상품 관련 dao 시작 ==========================//
 	public List<UsedOrderListVo> usedorderlist(Map<String,Object>map){
-		return sqlsession.selectList(NAMESPACE+".usedorderlist"+map);
+		return sqlsession.selectList(NAMESPACE+".usedorderlist",map);
 	}
 	
 	// ============ 중고상품 관련 dao 끝 ==========================//

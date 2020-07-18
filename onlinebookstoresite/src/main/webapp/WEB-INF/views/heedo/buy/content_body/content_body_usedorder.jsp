@@ -25,6 +25,7 @@
 			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td><span>${vo.statusString }</span>&nbsp ${vo.obname }</td>
+				<td>${vo.sid }</td>
 				<td>${vo.oborgprice }원</td>
 				<td>${vo.obsaleprice }원</td>
 				<td>${vo.bcount }</td>
@@ -38,7 +39,7 @@
 			<td rowspan="2">
 				<h5>배송일</h5>
 			</td>
-			<td colspan="6" >
+			<td colspan="7" >
 				<div id="divloc" style="display:inline-block;"><strong>배송지:</strong></div>
 				<div id="shipaddr" style="display:inline-block;">
 					<img src="${cp }/resources/hd/image/addricon_land.gif">

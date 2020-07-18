@@ -37,12 +37,14 @@ public class CartController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
+		System.out.println("컨트롤러안 mnum : "+mnum);
 		List<UsedCartListVo>list=service.usedlist(mnum);
 		JSONArray jarr=new JSONArray();
 		List<String> sidList= new ArrayList<String>();
 		for(UsedCartListVo vo:list) {
 			JSONObject json=new JSONObject();
 			json.put("cartnum", vo.getCartnum());
+			System.out.println("장바구니번호 : "+vo.getCartnum());
 			json.put("bcount", vo.getBcount());
 			json.put("obnum", vo.getObnum());
 			json.put("btitle", vo.getObname());
@@ -69,6 +71,7 @@ public class CartController {
 			json.put("shipmentfee", vo.getObdelfee());
 			jarr.put(json);
 		}
+		System.out.println("컨트롤러 종료!!");
 		JSONObject json=new JSONObject();
 		if(sidList.size()!=0) {
 			json.put("sidlist", sidList);

@@ -18,8 +18,6 @@
 		where cart.bnum=ob.obnum and cart.bnum=img.bnum and ob.snum=obs.snum and obs.mnum=members.mnum
 		order by sid desc
 	</select>
-	
-	
  	<!-- 장바구니 -> 주문페이지 갈때 사용하는 SELECT 문  -->
 	<select id="orderlist" parameterType="hashmap" resultType="orderVo">
 		select btitle,book.bnum,bprice,bpoint, imgsavefilename,cartNum,cart.bcount from

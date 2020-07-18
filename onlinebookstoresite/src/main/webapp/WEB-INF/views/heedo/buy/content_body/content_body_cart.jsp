@@ -86,10 +86,12 @@
 	})
 	//=====================중고 관린 스크립트 시작 ===========================//
 	var viewusedcart=function(){
+		
 		$.ajax({
 			url:"/finalproject/pay/usedlist",
 			dataType:"json",
 			success:function(data){
+				
 				// 장바구니에 데이터 없을경우.
 				if(data.length==0){
 					var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
@@ -169,6 +171,7 @@
 						status="하";
 					}
 					//=== 책 품질판단 끝 ====////
+					//=== 각 중고 판매자 테이블마다 장바구니에 들어있는 책 내용 추가 시작===///
 					var tbodyapp=
 						"<tr>"
 							+"<td><img src="+item.imgsrc+" class='cartlistimg'></td>"
@@ -177,13 +180,14 @@
 							+"<td>"+item.obsaleprice+"</td>"
 							+"<td>"+item.bcount+"</td>"
 							+"<td><strong>"+item.totalvalue+"</strong></td>"
-							+"<td><button type='button' class='btn btn-dark orderbtn' data-id="+item.obnum+">주문하기</button><br>"
+							+"<td><button type='button' class='btn btn-dark usedorderbtn' data-id="+item.obnum+" data-cartnum="+item.cartnum+">주문하기</button><br>"
 							+"<button type='button' class='btn btn-light deletebtn' data-id="+item.cartnum
 							+" data-toggle='modal'>삭제하기</button></td>"
 							+"<td><input style='zoom:1.5;' type='checkbox' checked='checked' data-sid="+item.sid
-								+" data-value="+item.totalvalue+" data-ship="+item.shipmentfee+" class='"+item.sid+"_checkTd usedCheckTd'></td>"
+								+" data-value="+item.totalvalue+" data-ship="+item.shipmentfee+"  data-cartnum="+item.cartnum+" class='"+item.sid+"_checkTd usedCheckTd'></td>"
 						+"</tr>";
 					$("tbody[id='"+item.sid+"_tbody']").append(tbodyapp);
+					//=== 각 중고 판매자 테이블마다 장바구니에 들어있는 책 내용 추가 끝===///
 					// 각테이블 상품총금액 계산 //
 					var value=$("#"+item.sid+"_total_value").text();
 					var newvalue=Number(value)+Number(item.totalvalue);
@@ -196,7 +200,7 @@
 					}
 					
 				})
-				// 하단 결젱정보 테이블 값 계산 //
+				// 하단 결재정보 테이블 값 계산 //
 				var allvalue=0;
 				var allshipfee=0;
 				for(var i=0;i<sidlist.length;i++){
@@ -231,6 +235,34 @@
 			}
 		});	
 	}
+	//맨아래 주문하기 버튼 클릭시.
+	$(document).on('click','#usedallorder',function(){
+		var form=$('<form></form>');
+		form.attr('action','${cp}/order/usedorder');
+		form.attr('method','post');
+		form.appendTo('body');
+		$(".usedCheckTd").each(function(){
+			if($(this).is(":checked")){
+				var cartNumValue=$(this).data('cartnum');
+				var cartNum=$("<input type='hidden' value="
+						+cartNumValue+" name='cartNum'>");
+				form.append(cartNum);
+			}
+		});
+		form.submit();
+	})
+	//중고 각상품마다 주문하기버튼 클릭시. 
+	$(document).on('click','.usedorderbtn',function(){
+		var cartNumValue=$(this).data('cartnum');
+		var form=$('<form></form>');
+		form.attr('action','${cp}/order/usedorder');
+		form.attr('method','post');
+		form.appendTo('body');
+		var cartNum=$("<input type='hidden' value="
+				+cartNumValue+" name='cartNum'>");
+		form.append(cartNum);
+		form.submit();
+	});
 	
 	//맨아래 결제정보 테이블 정보 변경 함수
 	var renewchargetable=function(){
