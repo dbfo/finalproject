@@ -107,7 +107,7 @@
 					<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney } 원</td>
 					<td scope="col" rowspan="2" style="text-align: center">
 						<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
-					</td>
+					</td> 
 					<td scope="col" rowspan="2" width="120" style="text-align: center">버튼</td>
 				</tr>
 				<tr>
