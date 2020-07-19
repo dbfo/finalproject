@@ -3,6 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.OrderMapper">
+	<!--//////////// 주문완료 관련 트랜잭션 DML 시작 ////////////-->
+		
+		<!-- 주문결제 테이블에 추가 ((카드결제 )) -->
+		<insert id="bpayment_card" parameterType="hashmap">
+			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},
+											sysdate,sysdate,1,#{orderprice},#{usepoint},0,#{receiver},#{shipCharge},#{mnum})
+		
+		</insert>
+		<!-- 방금 추가한 데이터 주문번호 가져오기. -->
+		<select id="getbpayNum" resultType="int">
+			select SEQ_bpayment_bpaynum.currval from dual
+		</select>
+		
+		<!-- 해당주문의 주문한책데이터 추가. -->
+		<insert id="paymentbook" parameterType="hashmap">
+			insert into paymentbook values(#{bpaynum},1,#{bnum},#{bcount},#{point},SEQ_paymentbook_num.nextval)
+		</insert>
+		<!-- 새책테이블에서 원래 수량 구하기 -->
+		<select id="books_bcount" parameterType="hashmap" resultType="int">
+			select bcount from books where bnum=#{bnum}
+		</select>
+		<!-- 새책테이블에서 수량변경  -->
+		<update id="change_count" parameterType="hashmap">
+			update books set bcount=#{changebcount} where bnum=#{bnum}
+		</update>
+		
+		<!-- 포인트사용 -->
+		<insert id="use_point" parameterType="hashmap">
+			insert into point values(#{mnum},#{bpaynum},#{usedpoint},sysdate)
+		</insert>
+		
+		<!-- 포인트적립 -->
+		<insert id="point_plus" parameterType="hashmap">
+			insert into point values(#{mnum},#{bpaynum},#{totalpoint},sysdate)
+		</insert>
+		
+	<!--//////////// 주문완료 관련 트랜잭션 DML 끝 /////////////-->
+	
 	<!-- 중고상품 장바구니->주문페이지 SELECT 문 -->
 	<select id="usedorderlist" parameterType="hashmap" resultType="usedOrderVo">
 		select cartnum,cart.bnum,cart.btype,cart.bcount,obname,obstatus,oborgprice,obsaleprice,obdelfee,members.mid sid,members.mnum smnum,imgsavefilename from 

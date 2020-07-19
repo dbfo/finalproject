@@ -182,10 +182,61 @@ public class OrderController {
 	
 	//================== 새상품 주문 컨트롤러 시작 ===========================//
 	//주문완료 메소드
-	@RequestMapping(value="/order/complete",method=RequestMethod.POST)
+	@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String orderComplet() {
-		return null;
+	public String orderComplete(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
+							   @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
+							   int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
+							   String receiver,String callnum,String method,String imp_uid,HttpSession session) {
+		int mnum=0;
+		String smnum=(String)session.getAttribute("mnum");
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}
+		int orderprice=pay_price+usepoint;
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("mnum",mnum);
+		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
+			map.put("cartNum",cartNum);
+		}
+		map.put("bnum", bnum);
+		map.put("bcount", bcount);
+		map.put("point", point);
+		map.put("usepoint",usepoint);
+		map.put("totalpoint",totalpoint);
+		map.put("shipCharge",shipCharge);
+		map.put("shipaddr",shipaddr);
+		map.put("pay_price", pay_price);
+		map.put("pay_price_noshipfee", pay_price_noshipfee);
+		map.put("pay_price", pay_price);
+		map.put("method",method); //결제수단
+		map.put("receiver",receiver);
+		map.put("callnum",callnum);
+		map.put("orderprice",orderprice);
+		
+		int n=service.ordercomplete(map);
+		JSONObject json=new JSONObject();
+		json.put("bpaynum", n);
+		return json.toString();
+		/*System.out.println("cartNum배열 크기:"+cartNum.length);
+		System.out.println("bnum배열 크기 : "+bnum.length);
+		for(int i=0;i<bnum.length;i++) {
+			System.out.println("==============");
+			System.out.println(cartNum[i]);
+			System.out.println(bnum[i]);
+			System.out.println(bcount[i]);
+			System.out.println(point[i]);
+			System.out.println("==============");
+		}
+		System.out.println("받는사람 : "+reciever);
+		System.out.println("배송주소 : "+shipaddr);
+		System.out.println("총결제금액 :"+pay_price);
+		System.out.println("결제금액(배송비제외) :"+pay_price_noshipfee);
+		System.out.println("배송비 : "+shipCharge);
+		System.out.println("총적립포인트 : "+totalpoint);
+		System.out.println("사용포인트:" +usepoint);
+		JSONObject json=new JSONObject();*/
+		
 	}
 		
 	// 장바구니에서 주문하기 클릭했을때 처리함.

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,8 +19,40 @@ public class OrderDao {
 	@Autowired
 	private SqlSession sqlsession;
 	private final String NAMESPACE="mybatis.mapper.OrderMapper";
+	//=========== 주문완료 트랜잭션 관련 dao 시작 ===================//
+	
+	//주문결제테이블에 데이터추가 ( 카드결제 )
+	public int bpayment_card(Map<String, Object>map) {
+		return sqlsession.insert(NAMESPACE+".bpayment_card",map);
+	}
+	//주문결제테이블에 추가한데이터 주문번호 가져오기.
+	public int getbpayNum() {
+		return sqlsession.selectOne(NAMESPACE+".getbpayNum");
+	}
+	//주문한책테이블에 데이터추가 
+	public int paymentbook(HashMap<String, Object> map) {
+		return sqlsession.insert(NAMESPACE+".paymentbook",map);
+	}
+	//새첵테이블에서 원래수량구하기.
+	public int books_bcount(HashMap<String,Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".books_bcount",map);
+	}
+	//새책테이블 수량변경
+	public int change_count(HashMap<String,Object>map) {
+		return sqlsession.update(NAMESPACE+".change_count", map);
+	}
+	//포인트사용
+	public int use_point(Map<String,Object>map) {
+		return sqlsession.insert(NAMESPACE+".use_point",map);
+	}
+	//포인트적립
+	public int point_plus(Map<String,Object>map) {
+		return sqlsession.insert(NAMESPACE+".point_plus", map);
+	}
 	
 	
+	
+	//=========== 주문완료 트랜잭션 관련 dao 끝 ===================//
 	// ============ 새상품 관련 dao 시작 ==========================//
 	//주문리스트 출력
 	public List<OrderListResultVo> inputorderlist(Map<String, Object>map){

@@ -18,7 +18,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }" data-point="${vo.totalpoint }" id="productTr">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }" data-point="${vo.totalpoint }" id="productTr" class="productTr">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td>${vo.btitle }</td>
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
@@ -107,18 +107,18 @@
 		</tr>
 		<tr>
 			<td  class="table-info tableloc"><strong>이름</strong></td>
-			<td><input type="text" id="name" value="" class="textbox1"></td>
+			<td><input type="text" id="name"  class="textbox1"></td>
 			<td rowspan="3" class="tableloc">
 				<table class="tableloc">
 					<tr>
-						<td>이름</td><td><input type="text"  readonly="readonly" id="ordername"></td>
+						<td>이름</td><td><input type="text"  id="ordername"></td>
 					</tr>
 					<tr>
 						<td>전화번호</td>
 						<td>
-							<input type="text" class="contact_number" id="orderphone1" readonly="readonly">
-						- <input type="text" class="contact_number" id="orderphone2" readonly="readonly">
-						- <input type="text" class="contact_number" id="orderphone3" readonly="readonly">
+							<input type="text" class="contact_number" id="orderphone1" >
+						- <input type="text" class="contact_number" id="orderphone2">
+						- <input type="text" class="contact_number" id="orderphone3" >
 						</td>
 					</tr>
 				</table>
@@ -432,6 +432,11 @@
 		if(tablelength>1){ //상품테이블에 상품갯수가 하나가아닐때.
 			ordername=title+" 외 "+(tablelength-1)+"개 상품 포함"
 		}
+		//구매자(주문자) 전화번호,
+		var orderphone1=$("#orderphone1").val();
+		var orderphone2=$("#orderphone2").val();
+		var orderphone3=$("#orderphone3").val();
+		var orderphone=orderphone1+"-"+orderphone2+"-"+orderphone3;
 		//입금날짜기한 계산.
 		var date1=new Date(); //현재 날짜 
 		var date2=new Date(Date.parse(date1) + 7 * 1000 * 60 * 60 * 24); //일주일후 
@@ -443,28 +448,49 @@
 		var bcountArray=[];
 		var cartNumArray=[];
 		var point=[];
-		$("#productTr").each(function(){
+		$(".productTr").each(function(){
 			var bnum=$(this).data('bnum');
 			var bcount=$(this).data('bcount');
-			var point=$(this).data('point');
+			var pointvalue=$(this).data('point');
 			bnumArray.push(bnum);
-			bcoutArray.push(bcount);
-			point.push(point);
+			bcountArray.push(bcount);
+			point.push(pointvalue);
+			console.log('장바구니번호 !! : '+$(this).data('cartnum'))
 			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
 				cartNumArray.push($(this).data('cartnum'));
 			}
 		})
+		console.log(bnumArray);
+		console.log(cartNumArray);
+		console.log(point);
+		console.log(bcountArray);
+		
 		//사용포인트 , 총적립포인트  
-		var usepoint=$("#use_point").text();
-		var totalpoint=$("#totalpoint").text();
+		var usepoint=$("#use_point").text(); //사용포인트
+		var totalpoint=$("#totalpoint").text(); //총 적립예정포인트.
 		
 		//배송주소 
-		var addr1=$("#addr1").text(); //우편번호
-		var addr2=$("#addr2").text(); //도로명주소 
-		var addr3=$("#addr3").text(); //지번주소
-		var addr4=$("#addr4").text(); //상세주소
-		var addr5=$("#addr5").text(); //참고주소. 
-		var addr=
+		var addr1=$("#addr1").val(); //우편번호
+		var addr2=$("#addr2").val(); //도로명주소 
+		var addr3=$("#addr3").val(); //지번주소
+		var addr4=$("#addr4").val(); //상세주소
+		var addr5=$("#addr5").val(); //참고주소. 
+		var addr=addr1+"|"+addr2+"|"+addr3+"|"+addr4+"|"+addr5; //데이터베이스에 저장할 주소.  '|'로 구분 
+		
+		//배송비 , 총결제금액 , 배송비제외 결제금액.
+		var ship_charge=$("#ship_charge").text();
+		var pay_price=$("#final_price").text();
+		var pay_price_noshipfee=(Number(pay_price)-Number(ship_charge));
+		
+		//수령자
+		var receiver=$("#name").val(); 
+		
+		//전화번호
+		var phone1=$("#phone1").val();
+		var phone2=$("#phone2").val();
+		var phone3=$("#phone3").val();
+		
+		var callnumber=phone1+"-"+phone2+"-"+phone3; //데이터베이스에 저장될 전화번호.
 		
 		
 		//결제수단에 따라 분류.
@@ -476,45 +502,54 @@
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : ordername,
-			    amount : $("#final_price").text(),
+			    amount : 10,//$("#final_price").text(),
 			    buyer_email : '',
-			    buyer_name : '',
-			    buyer_tel : '',
+			    buyer_name : $("#ordername").val(),
+			    buyer_tel : orderphone,
 			    buyer_addr : '',
 			    buyer_postcode : '',
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
+			    	console.log('payment_success')
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	$.ajax({
-			    		url: "/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
+			    		traditional:true,
 			    		dataType: 'json',
 			    		data: {
+			    			method:'card',
 				    		imp_uid : rsp.imp_uid,
-				    		cartNumArray:cartNumArray,
-				    		bnumArray:bnumArray,
-				    		bcountArray:bcountArray,
-				    		
-				    		
+				    		cartNum:cartNumArray,
+				    		bnum:bnumArray,
+				    		bcount:bcountArray,
+				    		point:point,
+				    		usepoint:usepoint,
+				    		totalpoint:totalpoint,
+				    		shipaddr:addr,
+				    		shipCharge:ship_charge,
+				    		pay_price:pay_price,
+				    		pay_price_noshipfee:pay_price_noshipfee,
+				    		receiver:receiver,
+				    		callnum:callnumber
 				    		//기타 필요한 데이터가 있으면 추가 전달
 			    		}
 			    	}).done(function(data) {
-			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-			    		if ( everythings_fine ) {
+			    		console.log('done');
+			    		var bpaynum=data.bpaynum;
+			    		console.log(bpaynum);
+							/*
 			    			var msg = '결제가 완료되었습니다.';
 			    			msg += '\n고유ID : ' + rsp.imp_uid;
 			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 			    			msg += '\결제 금액 : ' + rsp.paid_amount;
 			    			msg += '카드 승인번호 : ' + rsp.apply_num;
 
-			    			alert(msg);
-			    		} else {
-			    			//[3] 아직 제대로 결제가 되지 않았습니다.
-			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-			    		}
+			    			alert(msg);*/
 			    	});
 			    } else {
+			    	console.log('payment_fail')
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 
