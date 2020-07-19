@@ -22,8 +22,8 @@ public class OrderDao {
 	//=========== 주문완료 트랜잭션 관련 dao 시작 ===================//
 	
 	//주문결제테이블에 데이터추가 ( 카드결제 )
-	public int bpayment_card(Map<String, Object>map) {
-		return sqlsession.insert(NAMESPACE+".bpayment_card",map);
+	public int bpayment(Map<String, Object>map) {
+		return sqlsession.insert(NAMESPACE+".bpayment",map);
 	}
 	//주문결제테이블에 추가한데이터 주문번호 가져오기.
 	public int getbpayNum() {
@@ -52,6 +52,10 @@ public class OrderDao {
 	//주문/결제 할때 장바구니번호 있을경우 장바구니에서 삭제함.
 	public int delete_cart(Map<String,Object>map) {
 		return sqlsession.delete(NAMESPACE+".delete_cart", map);
+	}
+	// 가상계좌 주문/결제시 가상계좌 테이블에 데이터추가.
+	public int vbank(Map<String,Object>map) {
+		return sqlsession.insert(NAMESPACE+".vbank",map);
 	}
 	
 	

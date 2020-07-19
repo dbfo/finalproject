@@ -181,6 +181,11 @@ public class OrderController {
 	//================== 중고/새상품 공용컨트롤러 시작 ========================//	
 	
 	//================== 새상품 주문 컨트롤러 시작 ===========================//
+	//주문/결제 완료페이지로 이동함.
+	public String orderCompletePage(int bpaynum,String method,HttpSession session) {
+		return ".complete";
+	}
+		
 		
 	//가상계좌로 결제신청..
 	@RequestMapping(value="/order/vbankcomplete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
@@ -188,7 +193,7 @@ public class OrderController {
 	public String orderComplete_vbank(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
 								  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
 								  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
-								  String receiver,String callnum,String method,String imp_uid,
+								  String receiver,String callnum,String method,String imp_uid,String vbank_due,
 								  String vbank_name,String vbank_num,String vbank_holder,HttpSession session) {
 		int mnum=0;
 		String smnum=(String)session.getAttribute("mnum");
@@ -201,13 +206,19 @@ public class OrderController {
 		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
 			map.put("cartNum",cartNum);
 		}
+		
 		//가상계좌일때만 추가되는 map 값들
-		map.put("vbank_name",vbank_name);
-		map.put("vbank_holder",vbank_holder);
-		map.put("vbank_num",vbank_num);
-		System.out.println("은행이름 : "+vbank_name);
-		System.out.println("계좌번호 : "+vbank_num);
-		System.out.println("예금주 : "+vbank_holder);
+		if(method.equals("vbank")) {
+			if(vbank_name=="") {
+				vbank_name="케이뱅크";
+			}
+			map.put("vbank_name",vbank_name);
+			map.put("vbank_holder",vbank_holder);
+			map.put("vbank_num",vbank_num);
+			System.out.println("은행이름 : "+vbank_name);
+			System.out.println("계좌번호 : "+vbank_num);
+			System.out.println("예금주 : "+vbank_holder);
+		}
 		//=====================
 		map.put("bnum", bnum);
 		map.put("bcount", bcount);
@@ -224,19 +235,21 @@ public class OrderController {
 		map.put("callnum",callnum);
 		map.put("orderprice",orderprice);
 		
-		//int n=service.ordercomplete(map);
+		HashMap<String, Object>resultmap=service.ordercomplete(map);
 		JSONObject json=new JSONObject();
-		//json.put("bpaynum", n);
-		//json.put("method", method);
+		json.put("bpaynum", (int)resultmap.get("bpaynum"));
+		json.put("method", method);
 		return null;//json.toString();
 	}
-	//주문완료 메소드 카드사용.
-	@RequestMapping(value="/order/cardcomplete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+	
+	//주문완료 메소드
+	@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String orderComplete_card(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
-							   @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
-							   int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
-							   String receiver,String callnum,String method,String imp_uid,HttpSession session) {
+			  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
+			  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
+			  String receiver,String callnum,String method,String imp_uid,String vbank_due,
+			  String vbank_name,String vbank_num,String vbank_holder,HttpSession session) {
 		int mnum=0;
 		String smnum=(String)session.getAttribute("mnum");
 		if(smnum!=null) {
@@ -248,6 +261,20 @@ public class OrderController {
 		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
 			map.put("cartNum",cartNum);
 		}
+		
+		//가상계좌일때만 추가되는 map 값들
+		if(method.equals("vbank")) {
+			if(vbank_name=="") {
+				vbank_name="케이뱅크";
+			}
+			map.put("vbank_name",vbank_name);
+			map.put("vbank_holder",vbank_holder);
+			map.put("vbank_num",vbank_num);
+			System.out.println("은행이름 : "+vbank_name);
+			System.out.println("계좌번호 : "+vbank_num);
+			System.out.println("예금주 : "+vbank_holder);
+		}
+				//=====================
 		map.put("bnum", bnum);
 		map.put("bcount", bcount);
 		map.put("point", point);
@@ -263,12 +290,14 @@ public class OrderController {
 		map.put("callnum",callnum);
 		map.put("orderprice",orderprice);
 		
-		int n=service.ordercomplete(map);
+		HashMap<String, Object> resultmap=service.ordercomplete(map);
 		JSONObject json=new JSONObject();
-		json.put("bpaynum", n);
+		json.put("bpaynum", (int)resultmap.get("bpaynum"));
 		json.put("method", method);
 		return json.toString();
-		/*System.out.println("cartNum배열 크기:"+cartNum.length);
+		/*
+		 ======디버깅할때 사용함 ============================
+		 System.out.println("cartNum배열 크기:"+cartNum.length);
 		System.out.println("bnum배열 크기 : "+bnum.length);
 		for(int i=0;i<bnum.length;i++) {
 			System.out.println("==============");
@@ -284,8 +313,7 @@ public class OrderController {
 		System.out.println("결제금액(배송비제외) :"+pay_price_noshipfee);
 		System.out.println("배송비 : "+shipCharge);
 		System.out.println("총적립포인트 : "+totalpoint);
-		System.out.println("사용포인트:" +usepoint);
-		JSONObject json=new JSONObject();*/
+		System.out.println("사용포인트:" +usepoint);*/
 		
 	}
 		

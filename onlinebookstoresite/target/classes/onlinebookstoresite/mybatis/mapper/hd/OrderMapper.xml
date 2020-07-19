@@ -6,10 +6,19 @@
 	<!--//////////// 주문완료 관련 트랜잭션 DML 시작 ////////////-->
 		
 		<!-- 주문결제 테이블에 추가 ((카드결제 )) -->
-		<insert id="bpayment_card" parameterType="hashmap">
+		<insert id="bpayment" parameterType="hashmap">
 			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},
-											sysdate,sysdate,1,#{orderprice},#{usepoint},0,#{receiver},#{shipCharge},#{mnum})
-		
+											sysdate,sysdate,
+											<choose>
+											<when test="method=='card'">1</when>
+											<otherwise>0</otherwise>
+											</choose>
+											,#{orderprice},#{usepoint},
+											<choose>
+											<when test="method=='card'">0</when>
+											<otherwise>1</otherwise>
+											</choose>
+										    ,#{receiver},#{shipCharge},#{mnum})
 		</insert>
 		<!-- 방금 추가한 데이터 주문번호 가져오기. -->
 		<select id="getbpayNum" resultType="int">
@@ -39,12 +48,17 @@
 			insert into point values(#{mnum},#{bpaynum},#{totalpoint},sysdate)
 		</insert>
 		
+		<!-- 주문/결제완료후 장바구니 존재시 장바구니에서 삭제 -->
 		<delete id="delete_cart" parameterType="hashmap">
 			delete from cart where cartnum in
 			<foreach collection="cartNum" item="item" index="index" open="(" close=")" separator=",">
 				#{item}
 			</foreach>
 		</delete>
+		<!-- 가상계좌 선택시 가상계좌테이블에 계좌정보 입력. -->
+		<insert id="vbank" parameterType="hashmap">
+			insert into vbank values(#{bpaynum},#{vbank_name},#{vbank_num},#{vbank_holder})
+		</insert>		
 		
 	<!--//////////// 주문완료 관련 트랜잭션 DML 끝 /////////////-->
 	

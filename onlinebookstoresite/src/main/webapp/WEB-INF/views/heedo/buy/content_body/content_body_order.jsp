@@ -514,7 +514,7 @@
 			    	console.log('payment_success')
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	$.ajax({
-			    		url: "/finalproject/order/cardcomplete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
 			    		traditional:true,
 			    		dataType: 'json',
@@ -537,8 +537,17 @@
 			    		}
 			    	}).done(function(data) {
 			    		console.log('done');
-			    		var bpaynum=data.bpaynum;
-			    		console.log(bpaynum);
+			    		var bpaynum_value=data.bpaynum;
+			    		var method_value=data.method;
+			    		var form=$('<form></form>');
+			    		form.attr('action','${cp}/order/resultorder');
+			    		form.attr('method','post');
+			    		form.appendTo('body');
+			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
+			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		form.append(bpaynum);
+			    		form.append(method);
+			    		//form.submit();
 							/*
 			    			var msg = '결제가 완료되었습니다.';
 			    			msg += '\n고유ID : ' + rsp.imp_uid;
@@ -577,7 +586,7 @@
 			   		console.log(rsp.vbank_holder);
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	jQuery.ajax({
-			    		url: "/finalproject/order/vbankcomplete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
 			    		dataType: 'json',
 			    		traditional:true,
@@ -585,6 +594,7 @@
 			    			vbank_num:rsp.vbank_num, //가상계좌 계좌번호
 			    			vbank_name:rsp.vbank_name, //가상계좌 은행명
 			    			vbank_holder:rsp.vbank_holder, //가상계좌 예금주명
+			    			vbank_due:date3,
 			    			method:'vbank',
 				    		imp_uid : rsp.imp_uid,
 				    		cartNum:cartNumArray,
@@ -601,25 +611,21 @@
 				    		callnum:callnumber
 			    		}
 			    	}).done(function(data) {
-			    		console.log('done');
-			    		var bpaynum=data.bpaynum;
-			    		console.log(bpaynum);
-			    		
-			    		
-			    		/*	var msg = '결제가 완료되었습니다.';
-			    			msg += '\n고유ID : ' + rsp.imp_uid;
-			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-			    			msg += '\결제 금액 : ' + rsp.paid_amount;
-			    			msg += '카드 승인번호 : ' + rsp.apply_num;
-							*/
-			    		
-			    	
-			    		}
+			    		var bpaynum_value=data.bpaynum;
+			    		var method_value=data.method;
+			    		var form=$('<form></form>');
+			    		form.attr('action','${cp}/order/resultorder');
+			    		form.attr('method','post');
+			    		form.appendTo('body');
+			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
+			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		form.append(bpaynum);
+			    		form.append(method);
+			    		//form.submit();		    		
 			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
-
 			        alert(msg);
 			    }
 			});

@@ -63,6 +63,10 @@
 	<definition name=".usedorder" extends=".order">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_usedorder.jsp"/>
 	</definition>
+	<definition name=".complete" extends=".cart">
+		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_complete.jsp"/>
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_ordercomplete.jsp"/>
+	</definition>
 	
 	<!-- ///////////////////////////////////////////////////////////////////// -->
 	
