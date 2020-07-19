@@ -206,8 +206,8 @@ public class OrderController {
 			int bcount=vo.getBcount();
 			totalprice+=(price*bcount);
 			totalpoint+=(point*bcount);
-			vo.setTotalpoint(point*bcount);
-			vo.setTotalvalue(price*bcount);
+			vo.setTotalpoint(point*bcount); //각 행마다 적립될포인트.
+			vo.setTotalvalue(price*bcount); //각행마다 총합
 			vo.setImgpath(imgpath);
 		}
 		model.addAttribute("list", list);

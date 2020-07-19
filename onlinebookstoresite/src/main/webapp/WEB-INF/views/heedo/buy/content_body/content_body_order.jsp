@@ -18,7 +18,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }" id="productTr">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartNum }" data-point="${vo.totalpoint }" id="productTr">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td>${vo.btitle }</td>
 				<td>${vo.bprice }원</td><td>${vo.bpoint }</td>
@@ -59,7 +59,9 @@
 				<th class="table-secondary">사용포인트</th>
 				<td rowspan="2" class="table-danger">
 					<strong>최종 결제금액</strong><br>
-					<span class="final_payment_price"></span>원
+					<span class="final_payment_price"></span>원<br>
+					<strong>적립예정포인트</strong><br>
+					<span id="totalpoint">${totalpoint }</span>
 				</td>
 			</tr>	
 			<tr class="table-secondary">
@@ -436,20 +438,34 @@
 		var date3=date2.getFullYear()+("0"+(date2.getMonth()+1)).slice(-2)+("0"+date2.getDate()).slice(-2);
 		// YYYYMMdd 형태로 
 		
-		//각행마다 장바구니번호 , 책번호 ,책 수량 확인.
+		//각행마다 장바구니번호 , 책번호 ,책 수량 확인,각 행마다 적립포인트..
 		var bnumArray=[];
 		var bcountArray=[];
 		var cartNumArray=[];
+		var point=[];
 		$("#productTr").each(function(){
 			var bnum=$(this).data('bnum');
 			var bcount=$(this).data('bcount');
+			var point=$(this).data('point');
 			bnumArray.push(bnum);
 			bcoutArray.push(bcount);
+			point.push(point);
 			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
 				cartNumArray.push($(this).data('cartnum'));
 			}
 		})
-		//사용포인트 , 적립포인트 , 
+		//사용포인트 , 총적립포인트  
+		var usepoint=$("#use_point").text();
+		var totalpoint=$("#totalpoint").text();
+		
+		//배송주소 
+		var addr1=$("#addr1").text(); //우편번호
+		var addr2=$("#addr2").text(); //도로명주소 
+		var addr3=$("#addr3").text(); //지번주소
+		var addr4=$("#addr4").text(); //상세주소
+		var addr5=$("#addr5").text(); //참고주소. 
+		var addr=
+		
 		
 		//결제수단에 따라 분류.
 		var paymentOption=$("input[name='payment_option']:checked").val();
@@ -470,7 +486,7 @@
 			}, function(rsp) {
 			    if ( rsp.success ) {
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-			    	jQuery.ajax({
+			    	$.ajax({
 			    		url: "/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
 			    		dataType: 'json',
