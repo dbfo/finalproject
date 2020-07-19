@@ -181,10 +181,59 @@ public class OrderController {
 	//================== 중고/새상품 공용컨트롤러 시작 ========================//	
 	
 	//================== 새상품 주문 컨트롤러 시작 ===========================//
-	//주문완료 메소드
-	@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		
+	//가상계좌로 결제신청..
+	@RequestMapping(value="/order/vbankcomplete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String orderComplete(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
+	public String orderComplete_vbank(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
+								  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
+								  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
+								  String receiver,String callnum,String method,String imp_uid,
+								  String vbank_name,String vbank_num,String vbank_holder,HttpSession session) {
+		int mnum=0;
+		String smnum=(String)session.getAttribute("mnum");
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}
+		int orderprice=pay_price+usepoint;	
+		Map<String, Object>map=new HashMap<String, Object>();
+		map.put("mnum",mnum);
+		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
+			map.put("cartNum",cartNum);
+		}
+		//가상계좌일때만 추가되는 map 값들
+		map.put("vbank_name",vbank_name);
+		map.put("vbank_holder",vbank_holder);
+		map.put("vbank_num",vbank_num);
+		System.out.println("은행이름 : "+vbank_name);
+		System.out.println("계좌번호 : "+vbank_num);
+		System.out.println("예금주 : "+vbank_holder);
+		//=====================
+		map.put("bnum", bnum);
+		map.put("bcount", bcount);
+		map.put("point", point);
+		map.put("usepoint",usepoint);
+		map.put("totalpoint",totalpoint);
+		map.put("shipCharge",shipCharge);
+		map.put("shipaddr",shipaddr);
+		map.put("pay_price", pay_price);
+		map.put("pay_price_noshipfee", pay_price_noshipfee);
+		map.put("pay_price", pay_price);
+		map.put("method",method); //결제수단
+		map.put("receiver",receiver);
+		map.put("callnum",callnum);
+		map.put("orderprice",orderprice);
+		
+		//int n=service.ordercomplete(map);
+		JSONObject json=new JSONObject();
+		//json.put("bpaynum", n);
+		//json.put("method", method);
+		return null;//json.toString();
+	}
+	//주문완료 메소드 카드사용.
+	@RequestMapping(value="/order/cardcomplete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String orderComplete_card(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
 							   @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
 							   int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
 							   String receiver,String callnum,String method,String imp_uid,HttpSession session) {
@@ -217,6 +266,7 @@ public class OrderController {
 		int n=service.ordercomplete(map);
 		JSONObject json=new JSONObject();
 		json.put("bpaynum", n);
+		json.put("method", method);
 		return json.toString();
 		/*System.out.println("cartNum배열 크기:"+cartNum.length);
 		System.out.println("bnum배열 크기 : "+bnum.length);

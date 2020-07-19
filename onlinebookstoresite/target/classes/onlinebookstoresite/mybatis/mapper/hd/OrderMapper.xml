@@ -39,6 +39,13 @@
 			insert into point values(#{mnum},#{bpaynum},#{totalpoint},sysdate)
 		</insert>
 		
+		<delete id="delete_cart" parameterType="hashmap">
+			delete from cart where cartnum in
+			<foreach collection="cartNum" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		</delete>
+		
 	<!--//////////// 주문완료 관련 트랜잭션 DML 끝 /////////////-->
 	
 	<!-- 중고상품 장바구니->주문페이지 SELECT 문 -->

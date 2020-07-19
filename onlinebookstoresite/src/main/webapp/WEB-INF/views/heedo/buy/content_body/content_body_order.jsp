@@ -514,7 +514,7 @@
 			    	console.log('payment_success')
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	$.ajax({
-			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		url: "/finalproject/order/cardcomplete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
 			    		traditional:true,
 			    		dataType: 'json',
@@ -565,35 +565,55 @@
 			    amount : $("#final_price").text(),
 			    vbank_due:date3,
 			    buyer_email : '',
-			    buyer_name : '',
-			    buyer_tel : '',
+			    buyer_name : $("#ordername").val(),
+			    buyer_tel : orderphone,
 			    buyer_addr : '',
 			    buyer_postcode : '',
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
+			    	console.log(rsp.vbank_num)
+			   		console.log(rsp.vbank_name)
+			   		console.log(rsp.vbank_holder);
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	jQuery.ajax({
-			    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		url: "/finalproject/order/vbankcomplete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 			    		type: 'POST',
 			    		dataType: 'json',
+			    		traditional:true,
 			    		data: {
-				    		imp_uid : rsp.imp_uid
-				    		//기타 필요한 데이터가 있으면 추가 전달
+			    			vbank_num:rsp.vbank_num, //가상계좌 계좌번호
+			    			vbank_name:rsp.vbank_name, //가상계좌 은행명
+			    			vbank_holder:rsp.vbank_holder, //가상계좌 예금주명
+			    			method:'vbank',
+				    		imp_uid : rsp.imp_uid,
+				    		cartNum:cartNumArray,
+				    		bnum:bnumArray,
+				    		bcount:bcountArray,
+				    		point:point,
+				    		usepoint:usepoint,
+				    		totalpoint:totalpoint,
+				    		shipaddr:addr,
+				    		shipCharge:ship_charge,
+				    		pay_price:pay_price,
+				    		pay_price_noshipfee:pay_price_noshipfee,
+				    		receiver:receiver,
+				    		callnum:callnumber
 			    		}
 			    	}).done(function(data) {
-			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-			    		if ( everythings_fine ) {
-			    			var msg = '결제가 완료되었습니다.';
+			    		console.log('done');
+			    		var bpaynum=data.bpaynum;
+			    		console.log(bpaynum);
+			    		
+			    		
+			    		/*	var msg = '결제가 완료되었습니다.';
 			    			msg += '\n고유ID : ' + rsp.imp_uid;
 			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 			    			msg += '\결제 금액 : ' + rsp.paid_amount;
 			    			msg += '카드 승인번호 : ' + rsp.apply_num;
-
-			    			alert(msg);
-			    		} else {
-			    			//[3] 아직 제대로 결제가 되지 않았습니다.
-			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+							*/
+			    		
+			    	
 			    		}
 			    	});
 			    } else {

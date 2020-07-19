@@ -28,6 +28,7 @@ public class OrderService {
 		String [] bnum=(String [])map.get("bnum");
 		String [] bcount=(String [])map.get("bcount");
 		String [] point=(String [] )map.get("point");
+		
 		HashMap<String, Object> map1=new HashMap<String, Object>();
 		map.put("bpaynum", bpayNum);
 		map1.put("bpaynum", bpayNum);
@@ -47,6 +48,11 @@ public class OrderService {
 			map.put("usedpoint", usedpoint);
 			dao.use_point(map);
 			dao.point_plus(map);
+		}
+		if(map.get("cartNum")!=null) {
+			
+				
+			
 		}
 		return bpayNum;
 	}

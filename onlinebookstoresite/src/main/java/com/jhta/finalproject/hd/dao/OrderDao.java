@@ -49,7 +49,10 @@ public class OrderDao {
 	public int point_plus(Map<String,Object>map) {
 		return sqlsession.insert(NAMESPACE+".point_plus", map);
 	}
-	
+	//주문/결제 할때 장바구니번호 있을경우 장바구니에서 삭제함.
+	public int delete_cart(Map<String,Object>map) {
+		return sqlsession.delete(NAMESPACE+".delete_cart", map);
+	}
 	
 	
 	//=========== 주문완료 트랜잭션 관련 dao 끝 ===================//
