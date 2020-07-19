@@ -129,7 +129,7 @@
 			
 			 
 			<button type="button" class="btn btn-success btn-md" id = "applyBtn">승인</button>
-			<button type="button" class="btn btn-success btn-md">반려</button>
+<!-- 			<button type="button" class="btn btn-success btn-md">반려</button> -->
 
 		</div>
 	</div>

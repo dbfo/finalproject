@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.yr.dao.ShipManageDao;
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
+import com.jhta.finalproject.yr.vo.PointVo;
 
 @Service
 public class ShipManageService {
@@ -19,11 +20,8 @@ public class ShipManageService {
 		return dao.getShipCount();
 	}
 	
-	public int updateBeforeToPreparing(List<Integer> list) {
-		return dao.updateBeforeToPreparing(list);
-	}
-	
 	public int updatePrepareToShipping(int bpaynum) {
 		return dao.updatePrepareToShipping(bpaynum);
 	}
+	
 }	

@@ -15,7 +15,7 @@
 				cellspacing="0">
 				<thead>
 					<tr>
-<!-- 						입금전 취소 -->
+<!-- 						교환 -->
 						<th>주문일(신청일)</th>
 						<th>주문번호</th>
 						<th>주문자</th>
@@ -46,16 +46,14 @@
 							</td>
 							<td>${vo.ordermoney }</td>
 							<td>
-								<c:choose>
-									<c:when test="${vo.bstatus == 5 }">
-										<input class= "btn btn-secondary" type="button" 
-										value = "처리 완료" disabled="disabled"> 									
-									</c:when>
-									<c:otherwise>
-										<input class= "btn btn-success" id = "openModal2" type="button"  
-										value = "신청 처리"  onclick = "openModal(${vo.bpaynum})">
-									</c:otherwise>								
-								</c:choose>
+								<c:forEach items="${vo.CSAndPaymentBook}" var="book">
+									<c:if test="${book.status == 1 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
+									value = "신청 처리"  onclick = "openModal(${vo.bpaynum})"></c:if>
+									<c:if test="${book.status == 2 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
+									value = "처리 중"  onclick = "openModal(${vo.bpaynum})"></c:if>
+									<c:if test="${book.status == 3 }"><input class= "btn btn-secondary" type="button" 
+									value = "처리 완료" disabled="disabled"></c:if>
+								</c:forEach>							
 							</td>
 						</tr>
 					</c:forEach>
@@ -70,22 +68,22 @@
 	
 	function openModal(bpaynumId){
 		console.log("gggg");
-		sampleModalPopup1(bpaynumId);		
+		exchangeModalPopup(bpaynumId);		
 	}
 	
-    function sampleModalPopup1(bpaynum){
+    function exchangeModalPopup(bpaynum){
         // 팝업 호출 url
-        var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
+        var url = "${pageContext.request.contextPath}/cs/exchangeModal?bpaynum="+bpaynum;
         
         // 팝업 호출
-        $("#myModal1 > .modal-dialog").load(url, function() { 
-            $("#myModal1").modal("show"); 
+        $("#exchangeModal > .modal-dialog").load(url, function() { 
+            $("#exchangeModal").modal("show"); 
         });
     }
 </script>
 
 <!-- The Modal -->
-<div class="modal" id="myModal1">
+<div class="modal" id="exchangeModal">
   <div class="modal-dialog modal-lg">  
   </div>
 </div>

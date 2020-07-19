@@ -24,4 +24,8 @@ public class CSManageService {
 		return dao.paymentList(map);
 	}
 	
+	public int updateStatus(HashMap<String, Object> map) {
+		return dao.updateStatus(map);
+	}
+	
 }

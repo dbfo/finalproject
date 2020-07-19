@@ -70,10 +70,10 @@
 	
 	function openModal(bpaynumId){
 		console.log("gggg");
-		sampleModalPopup1(bpaynumId);		
+		cancelModalPopup1(bpaynumId);		
 	}
 	
-    function sampleModalPopup1(bpaynum){
+    function cancelModalPopup1(bpaynum){
         // 팝업 호출 url
         var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
         

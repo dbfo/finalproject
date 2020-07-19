@@ -25,6 +25,10 @@
 			alias="payment" />
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
 			alias="booksVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.DepositVo"
+			alias="depositVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.PointVo"
+			alias="pointVo" /> 
 	</typeAliases>
 	<mappers>
 		<!-- 연주 -->

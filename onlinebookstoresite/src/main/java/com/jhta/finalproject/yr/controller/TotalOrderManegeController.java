@@ -63,6 +63,7 @@ public class TotalOrderManegeController {
 		
 		List<PaymentAndBookListVo> list = service.paymentList(map);
 		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pfield",pfield);
 		model.addAttribute("pkeyword",pkeyword);

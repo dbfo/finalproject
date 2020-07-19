@@ -16,7 +16,7 @@
 						</select>
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="pkeyword">
+						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }">
 					</div>
 				</div>
 			</td>
@@ -61,21 +61,18 @@
 						</select>
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="bkeyword">
+						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }">
 					</div>
 				</div>
 			</td>
 		</tr>
 		<tr>
-			<th class="table-active">주문상태</th>
+			<th class="table-active">처리상태</th>
 			<td>
-				<input type="checkbox" name="status" value="-1" id="ototal"><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="1" id="oapply"><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing"><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>
-				<input type="checkbox" name="status" value="3"id="ocomplete"><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>
-				<c:if test="${path == 1 }">
-					<input type="checkbox" name="status" value="4"id="bdapply"><label for="bdapply"> &nbsp;입금전 취소&nbsp;&nbsp;</label>
-				</c:if>							
+				<input type="checkbox" name="status" value="-1" id="ototal" <c:if test="${status == '-1'}">checked</c:if> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="1" id="oapply" <c:if test="${status == '1'}">checked</c:if>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>
+				<input type="checkbox" name="status" value="3"id="ocomplete" <c:if test="${status == '3'}">checked</c:if>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
 			</td>
 		</tr>
 		<tr>

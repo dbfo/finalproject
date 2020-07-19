@@ -15,18 +15,18 @@
 				cellspacing="0">
 				<thead>
 					<tr>
-<!-- 						전체 취소 -->
+<!-- 						반품 -->
 						<th>주문일(신청일)</th>
 						<th>주문번호</th>
 						<th>주문자</th>
 						<th>책 제목</th>
 						<th>수량</th>
 						<th>결제예정금액</th>
-						<th>결제 수단</th>
 						<th>처리상태</th>
 					</tr>
 				</thead>
 				<tbody>
+
 					<c:forEach var="vo" items="${list}">
 						<tr>
 							<td>
@@ -45,24 +45,15 @@
 								</c:forEach>
 							</td>
 							<td>${vo.ordermoney }</td>
-							<c:choose>
-								<c:when test="${vo.methodpayment == 0}">
-									<td>카드</td>
-								</c:when>
-								<c:otherwise>
-									<td>무통장 입금</td>
-								</c:otherwise>
-							</c:choose>
 							<td>
-								<c:choose>
-									<c:when test="${vo.bstatus == 5 }">
-										<input class= "btn btn-secondary" type="button" value = "처리 완료" disabled="disabled"> 									
-									</c:when>
-									<c:otherwise>
-										<input class= "btn btn-success" id = "openModal" type="button"  
-										value = "신청 처리" onclick = "openModal1(${vo.bpaynum})">
-									</c:otherwise>								
-								</c:choose>
+								<c:forEach items="${vo.CSAndPaymentBook}" var="book">
+									<c:if test="${book.status == 1 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
+									value = "신청 처리"  onclick = "openModal(${vo.bpaynum})"></c:if>
+									<c:if test="${book.status == 2 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
+									value = "처리 중"  onclick = "openModal(${vo.bpaynum})"></c:if>
+									<c:if test="${book.status == 3 }"><input class= "btn btn-secondary" type="button" 
+									value = "처리 완료" disabled="disabled"></c:if>
+								</c:forEach>							
 							</td>
 						</tr>
 					</c:forEach>
@@ -72,25 +63,28 @@
 	</div>
 </div>
 </div>
+
 <script type="text/javascript">
-	function openModal1(bpaynumId){
-		cancelModalPopup(bpaynumId);		
+	
+	function openModal(bpaynumId){
+		console.log("gggg");
+		returnModalPopup(bpaynumId);		
 	}
 	
-	function cancelModalPopup(bpaynum){
-	    // 팝업 호출 url
-	    var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
-	    
-	    // 팝업 호출
-	    $("#myModal > .modal-dialog").load(url, function() { 
-	        $("#myModal").modal("show"); 
-	    });
-	}
+    function returnModalPopup(bpaynum){
+        // 팝업 호출 url
+        var url = "${pageContext.request.contextPath}/cs/returnModal?bpaynum="+bpaynum;
+        
+        // 팝업 호출
+        $("#returnModal > .modal-dialog").load(url, function() { 
+            $("#returnModal").modal("show"); 
+        });
+    }
 </script>
 
 <!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog modal-lg">
+<div class="modal" id="returnModal">
+  <div class="modal-dialog modal-lg">  
   </div>
 </div>
     

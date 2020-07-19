@@ -19,7 +19,7 @@ import com.jhta.finalproject.yr.vo.PaymentBooksVo;
 import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Controller
-public class CsCancelMangeController {
+public class CSCancelMangeController {
 	
 	@Autowired
 	private CSManageService service;
@@ -38,6 +38,7 @@ public class CsCancelMangeController {
 //		for (PaymentAndCSBookListVo vo : list) {
 //			System.out.println(vo);
 //		}
+		
 		model.addAttribute("List",list);
 		
 		return "/admin/yr/cs/cancelModal";
@@ -57,7 +58,6 @@ public class CsCancelMangeController {
 		
 		//list안에 환불한 책 갯수세기(새로운 주문 만들기)
 		//책정보
-	
 		PaymentVo cancelPayment = new PaymentVo();
 		List<PaymentBooksVo> paymentbookList = new ArrayList<PaymentBooksVo>();
 		List<Integer> paymentbookNumList = new ArrayList<Integer>();

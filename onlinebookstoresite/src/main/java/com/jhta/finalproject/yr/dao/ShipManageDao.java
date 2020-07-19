@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
+import com.jhta.finalproject.yr.vo.PointVo;
 
 @Repository
 public class ShipManageDao {
@@ -29,4 +30,20 @@ public class ShipManageDao {
 	public int updatePrepareToShipping(int bpaynum) {
 		return session.update(NAMESPACE+".updatePrepareToShipping",bpaynum);
 	}
+	
+	//입금중 누를때 포인트 증가시키기(얼마나 증가시킬지 포인트 가져옴)
+	public int getBookPoint(int bpaynum) {
+		return session.selectOne(NAMESPACE+".getBookPoint",bpaynum);
+	}
+	
+	//포인트 테이블에 가져온 포인트 만큼 적립시키기
+	public int pointPlus(PointVo pointvo ) {
+		return session.insert(NAMESPACE+".pointPlus", pointvo);
+	}
+	
+	//회원번호 가져오기
+	public int getMnum(int bpaynum) {
+		return session.selectOne(NAMESPACE+".getMnum", bpaynum);
+	}
+	
 }
