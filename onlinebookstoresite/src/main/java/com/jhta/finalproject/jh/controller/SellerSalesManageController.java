@@ -66,7 +66,7 @@ bpayment bstatus
 	public String salesManage2(
 			Model model,
 			@RequestParam(value="tabType",defaultValue = "2")int tabType,
-			@RequestParam(value="borderdate2",defaultValue = "1")int borderdate2,
+			@RequestParam(value="bpaydate2",defaultValue = "1")int bpaydate2,
 			String keyword2,
 			String startDay2,
 			String endDay2,
@@ -77,7 +77,7 @@ bpayment bstatus
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
-		map.put("borderdate2",borderdate2);
+		map.put("bpaydate2",bpaydate2);
 		map.put("startDay2",startDay2);
 		map.put("endDay2",endDay2);
 		map.put("field2",field2);

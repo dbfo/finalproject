@@ -64,8 +64,8 @@
 				<tr>
 					<td><input type="radio" name="bpaydate2" value="1" class="borderdate2">전체
 						<input type="radio" name="bpaydate2" value="2" class="borderdate2">결제일&nbsp;&nbsp;&nbsp;
-						<input type="date" name="startDay2" value=""><span>&nbsp;~</span>
-						<input type="date" name="endDay2" value=""></td>
+						<input type="date" name="startDay2" value="" disabled><span>&nbsp;~</span>
+						<input type="date" name="endDay2" value="" disabled></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="keyword2" class="form-control" id="keyword_menu2"
@@ -96,17 +96,19 @@
 			</thead>
 			<c:forEach var="vo" items="${list }" varStatus="status">
 				<tr>
-					<td scope="col" width="60" rowspan="2">NO</td>
-					<td scope="col" width="100" rowspan="2">${vo.bpaynum }</td>
+					<td scope="col" width="60" rowspan="2" style="text-align: center">NO</td>
+					<td scope="col" width="100" rowspan="2" style="text-align: center">${vo.bpaynum }</td>
 					<td scope="col" width="400">
 						<c:forEach var="book" items="${vo.sellerOldbooksVo }">
-							▶상품명 : ${book.obname } | 수량 : 1개 | 상품금액 : ${book.obsaleprice }<br>
+							▶상품명 : ${book.obname } | 수량 : 1개 | 상품금액 : ${book.obsaleprice }원<br>
 						</c:forEach>
 					</td>
-					<td scope="col">${vo.ordermoney }</td>
-					<td scope="col" rowspan="2">${vo.bfinalmoney }</td>
-					<td scope="col" rowspan="2">${vo.bpaydate }</td>
-					<td scope="col" rowspan="2" width="120">버튼</td>
+					<td scope="col" style="text-align: right;" >${vo.ordermoney }원</td>
+					<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney } 원</td>
+					<td scope="col" rowspan="2" style="text-align: center">
+						<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
+					</td>
+					<td scope="col" rowspan="2" width="120" style="text-align: center">버튼</td>
 				</tr>
 				<tr>
 					<td scope="col">
@@ -114,38 +116,38 @@
 						연락처 : ${vo.bphone } <br>
 						<span class="addr">배송주소 : ${vo.baddr }</span>
 					</td>
-					<td scope="col">배송비</td>
+					<td scope="col" style="text-align: right;">${vo.delfee }원</td>
 				</tr>
 			</c:forEach>
 			
 		</table>
-		<!-- 페이징버튼 
+		<!-- 페이징버튼 -->
 		<div>
 			<ul class="pagination justify-content-center">
-				이전버튼 
+				<!-- 이전버튼  -->
 				<c:if test="${pu.startPageNum>3 }">
 					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?
-									pageNum=${pu.startPageNum-1}&tabType=1&keyword1=${map.keyword1}&startDay=${map.startDay}&
-									endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
+						href="${cp}/seller/salesManagement2?
+									pageNum=${pu.startPageNum-1}&tabType=2&keyword2=${map.keyword2}&startDay2=${map.startDay2}&
+									endDay2=${map.endDay2}&field2=${map.field2}&bpaydate2=${map.bpaydate2}">
 							이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pu.startPageNum }"
 					end="${pu.endPageNum}">
 					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?pageNum=${i}&tabType=1
-									&keyword1=${map.keyword1}&startDay=${map.startDay}&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">${i}</a></li>
+						href="${cp}/seller/salesManagement2?pageNum=${i}&tabType=2
+									&keyword2=${map.keyword2}&startDay2=${map.startDay2}&endDay2=${map.endDay2}&field2=${map.field2}&bpaydate2=${map.bpaydate2}">${i}</a></li>
 				</c:forEach>
-				 다음버튼
+				<!-- 다음버튼 --> 
 				<c:if test="${pu.totalPageCount>pu.endPageNum}">
 					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}&tabType=1
-									&keyword1=${map.keyword1}&startDay=${map.startDay}
-									&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
+						href="${cp}/seller/salesManagement2?pageNum=${pu.endPageNum+1}&tabType=2
+									&keyword2=${map.keyword2}&startDay2=${map.startDay2}
+									&endDay2=${map.endDay2}&field2=${map.field2}&bpaydate2=${map.bpaydate2}">
 							다음</a></li>
 				</c:if>
 			</ul>
-		</div>-->
+		</div>
 	</div>
 </form>
 <script>
@@ -156,44 +158,44 @@
 			$(this).text(str);
 		});
 		
-		$("input:radio[name=borderdate1]").click(function(){
-			if($("input[name=borderdate1]:checked").val()=='2'){
-				$("input[name=startDay]").attr("disabled",false);
-				$("input[name=endDay]").attr("disabled",false);
+		$("input:radio[name=bpaydate2]").click(function(){
+			if($("input[name=bpaydate2]:checked").val()=='2'){
+				$("input[name=startDay2]").attr("disabled",false);
+				$("input[name=endDay2]").attr("disabled",false);
 			}
-			if($("input[name=borderdate1]:checked").val()=='1'){
-				$("input[name=startDay]").attr("disabled",true);
-				$("input[name=endDay]").attr("disabled",true);
+			if($("input[name=bpaydate2]:checked").val()=='1'){
+				$("input[name=startDay2]").attr("disabled",true);
+				$("input[name=endDay2]").attr("disabled",true);
 			}
 		});
 		//초기화버튼
-		$("#resetBt1").click(function() {
-			$("input[name=field1]")[0].checked=true;
-			$("input[name=borderdate1]")[0].checked=true;
-			$("input[name=startDay]").attr("disabled",true);
-			$("input[name=startDay]").val("");
-			$("input[name=endDay]").attr("disabled",true);
-			$("input[name=endDay]").val("");
-			$("input[name=keyword1]").val("");
+		$("#resetBt2").click(function() {
+			$("input[name=field2]")[0].checked=true;
+			$("input[name=bpaydate2]")[0].checked=true;
+			$("input[name=startDay2]").attr("disabled",true);
+			$("input[name=startDay2]").val("");
+			$("input[name=endDay2]").attr("disabled",true);
+			$("input[name=endDay2]").val("");
+			$("input[name=keyword2]").val("");
 		});
 		$("form").submit(function() {
 			//일자별 검색 유효성검사1
-			if($("input[name=borderdate1]:checked").val()=='2'){
-				if($("input[name=startDay]").val()==''){
+			if($("input[name=bpaydate2]:checked").val()=='2'){
+				if($("input[name=startDay2]").val()==''){
 					alert('시작 날짜를 입력해주세요.');
 					return false;
 				}
 			}
-			if($("input[name=borderdate1]:checked").val()=='2'){
-				if($("input[name=endDay]").val()==''){
+			if($("input[name=bpaydate2]:checked").val()=='2'){
+				if($("input[name=endDay2]").val()==''){
 					alert('종료 날짜를 입력해주세요.');
 					return false;
 				}
 			}
 					
 			//날짜 검색시 유효성검사2
-			var startDay=$("input[name=startDay]").val();
-			var endDay=$("input[name=endDay]").val();
+			var startDay=$("input[name=startDay]2").val();
+			var endDay=$("input[name=endDay2]").val();
 			var startArr=startDay.split('-');
 			var endArr=endDay.split('-');
 			var start=startArr[0]+startArr[1]+startArr[2];

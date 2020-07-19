@@ -96,13 +96,10 @@ p {
 		<section id="content2">
 			<jsp:include page="sellerMenu2.jsp"/>
 		</section>
-
 		<!-- 배송중/구매확정전 -->
 		<section id="content3">
 			<p>tab menu3의 내용</p>
 		</section>
-
-
 		<!-- 구매확정/정산대기 -->
 		<section id="content4">
 			<p>tab menu4의 내용</p>
