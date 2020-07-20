@@ -122,7 +122,11 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/exchangeTable.jsp" />
 	</definition>
-	
+<!-- 환불 -->
+	<definition name=".admin.refund" extends=".admin.cs">
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
+	</definition>
 
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />

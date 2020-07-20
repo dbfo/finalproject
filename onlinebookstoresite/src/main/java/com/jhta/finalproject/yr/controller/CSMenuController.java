@@ -9,8 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.finalproject.yr.service.CSManageService;
-import com.jhta.finalproject.yr.service.PaymentService;
+import com.jhta.finalproject.yr.service.DepositService;
 import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
+import com.jhta.finalproject.yr.vo.SettlementJoinVo;
 
 @Controller
 public class CSMenuController {
@@ -18,7 +19,8 @@ public class CSMenuController {
 	@Autowired	
 	private CSManageService service;
 	@Autowired
-	private PaymentService pService;
+	private DepositService dservice;
+
 	
 	
 	@RequestMapping("/cs/menu")
@@ -55,7 +57,7 @@ public class CSMenuController {
 		map.put("pfield",pfield);
 		map.put("pkeyword",pkeyword);
 		
-//		주문일, 결제일
+//		신청일, 주문일
 		
 		map.put("tfield",tfield);
 		map.put("startDate",startDate);
@@ -77,13 +79,30 @@ public class CSMenuController {
 //		회원타입(mname)
 		map.put("mType",mType);
 		
+		if(!PageName.equals("4") && !PageName.equals("5") && !PageName.equals("6")) {
+			
+			List<PaymentAndCSBookListVo> list = service.paymentList(map);
+			model.addAttribute("list", list);
+			
+		}else {
+			HashMap<String , Object> map1 = new HashMap<String, Object>();
+			
+			if(PageName.equals("4")) {
+				int sestatus = 0;
+				map1.put("sestatus",sestatus);
+
+			}else if(PageName.equals("5")) {
+				int sestatus = 1;				
+				map1.put("sestatus",sestatus);
+			}
+			
+			List<SettlementJoinVo> list= dservice.getSettlementList(map1);
+
+			model.addAttribute("list", list);	
+		}
 		
-//		List<PaymentAndBookListVo> list = pService.paymentList(map);
-		List<PaymentAndCSBookListVo> list = service.paymentList(map);
 		
-		
-		model.addAttribute("countList", CSCount);
-		model.addAttribute("list", list);
+		model.addAttribute("countList", CSCount);		
 		model.addAttribute("pfield",pfield);
 		model.addAttribute("pkeyword",pkeyword);
 		model.addAttribute("tfield",tfield);
@@ -96,7 +115,7 @@ public class CSMenuController {
 		
 		if(PageName.equals("0")) { //입금 전 취소
 			model.addAttribute("checked","tab2");
-			model.addAttribute("path",1);		
+			model.addAttribute("path",0);		
 			return ".cs.cancel";
 		}else if(PageName.equals("1")) { //취소
 			model.addAttribute("checked","tab1");
@@ -108,6 +127,18 @@ public class CSMenuController {
 		}else if(PageName.equals("3")) { //교환
 			model.addAttribute("path",3);		
 			return ".cs.exchange";		
+		}else if(PageName.equals("4")) { //환불
+			model.addAttribute("checked","tab1");
+			model.addAttribute("path",4);		
+			return ".cs.refund";		
+		}else if(PageName.equals("5")) { //환불
+			model.addAttribute("checked","tab2");
+			model.addAttribute("path",5);		
+			return ".cs.refund";		
+		}else if(PageName.equals("6")) { //환불
+			model.addAttribute("checked","tab3");
+			model.addAttribute("path",6);		
+			return ".cs.refund";		
 		}
 		
 		return "/admin/error";
@@ -120,9 +151,6 @@ public class CSMenuController {
 
 		array_word = str.split(","); 
 				
-//		for(int i=0;i<array_word.length;i++) { //출력
-//		    System.out.println("배열로  : " + array_word[i]);
-//		}
 		
 		return array_word;
 	}

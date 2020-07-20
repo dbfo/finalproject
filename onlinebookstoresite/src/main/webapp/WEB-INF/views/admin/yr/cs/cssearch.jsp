@@ -9,14 +9,16 @@
 			<td colspan="3">
 				<div class="form-group row">
 					<div class="col-xs-2 ">
-						<select class="form-control" name = "pfield">
+					
+						<select class="form-control" name = "pfield" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
 							<option value =''>--선택--</option>
 							<option value="bpaynum" <c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
 							<option value="mname"<c:if test="${pfield == 'mname'}">selected</c:if> >주문자명</option>
 						</select>
+						
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }">
+						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
 					</div>
 				</div>
 			</td>
@@ -54,14 +56,14 @@
 	
 				<div class="form-group row">
 					<div class="col-xs-2 ">
-						<select class="form-control" name="bfield">
+						<select class="form-control" name="bfield" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
 							<option value =''>--선택--</option>
 							<option value="btitle" <c:if test="${bfield == 'btitle'}">selected</c:if>>책 이름</option>
 							<option value="bnum" <c:if test="${bfield == 'bnum'}">selected</c:if>>책 번호</option>
 						</select>
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }">
+						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
 					</div>
 				</div>
 			</td>
@@ -71,7 +73,13 @@
 			<td>
 				<input type="checkbox" name="status" value="-1" id="ototal" <c:if test="${status == '-1'}">checked</c:if> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
 				<input type="checkbox" name="status" value="1" id="oapply" <c:if test="${status == '1'}">checked</c:if>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>
+				
+				<c:choose>
+					<c:when test="${path < 4  }">
+						<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>					
+					</c:when>
+				</c:choose>
+				
 				<input type="checkbox" name="status" value="3"id="ocomplete" <c:if test="${status == '3'}">checked</c:if>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
 			</td>
 		</tr>

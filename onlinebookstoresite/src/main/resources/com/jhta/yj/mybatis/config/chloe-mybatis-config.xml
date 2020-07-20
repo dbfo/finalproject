@@ -29,6 +29,8 @@
 			alias="depositVo" /> 
 		<typeAlias type="com.jhta.finalproject.yr.vo.PointVo"
 			alias="pointVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.SettlementJoinVo"
+			alias="SettlementJoinVo" /> 
 	</typeAliases>
 	<mappers>
 		<!-- 연주 -->
@@ -39,6 +41,7 @@
 		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/ShipMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/CSMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/DepositMapper.xml" />
 		
 	</mappers>
 </configuration>

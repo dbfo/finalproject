@@ -74,33 +74,42 @@ public class CSCancelMangeController {
 				paymentbookNumList.add(blist.getPaymentbook_num());
 				
 				if(blist.getBcount() - blist.getCount() > 0) { //주문한 책 갯수 - 취소한 책 갯수 
-					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount() - blist.getCount()));
+					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount() - blist.getCount(),blist.getPoint()));
 				}else if(blist.getType() != 1) { //취소하지 않은 책
-					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount()));
+					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount(), blist.getPoint()));
 				}
 			}
 		}
 		
-		if(!paymentbookList.isEmpty() && cancelPayment != null) {
-			//insert
-			int n = cservice.makeCancelPayment(cancelPayment, paymentbookList);
-			if(n < 1) {
-				System.out.println("insert 실패ㅜㅜㅜ");
-			}else {
-				System.out.println("성공");
-			}
-		}
-		
-		//update
-		int n = cservice.updateStatus(Integer.parseInt(bpaynum), paymentbookNumList);
 		JSONObject json = new JSONObject();
 		
-		if(n > 0) {
-			json.put("code", "success");			
-		}else {
+		try {
+			if(!paymentbookList.isEmpty() && cancelPayment != null) {
+				//insert
+				int n = cservice.makeCancelPayment(cancelPayment, paymentbookList);
+				if(n < 1) {
+					System.out.println("insert 실패ㅜㅜㅜ");
+				}else {
+					System.out.println("성공");
+				}
+			}
+			
+			//update
+			int n = cservice.updateStatus(Integer.parseInt(bpaynum), paymentbookNumList);
+			
+			if(n > 0) {
+				System.out.println("변경완료");
+				json.put("code", "success");			
+			}else {
+				System.out.println("변경실패");
+				json.put("code", "error");						
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			json.put("code", "error");						
+			return json.toString();
 		}
-		
+
 		return json.toString();
 	}
 }

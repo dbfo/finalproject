@@ -155,7 +155,7 @@
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");
-					location.href = "${pageContext.request.contextPath}/cs/menu?PageName=0";
+					location.href = "${pageContext.request.contextPath}/cs/menu?PageName=1";
 				}else{
 					alert("처리 실패 하셨습니다.")					
 				}

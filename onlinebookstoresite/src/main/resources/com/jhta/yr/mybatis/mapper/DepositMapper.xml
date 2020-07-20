@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jhta.yr.mybatis.mapper.DepositMapper">
+	
+	<sql id="sestatusKinds">
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(sestatus)">
+			and sestatus = #{sestatus}
+		</if>
+	</sql>
+
+	<select id="settlementList" resultType="SettlementJoinVo" parameterType="hashmap" >
+		select * from settlement, account, members where settlement.anum = account.anum and account.mnum = members.mnum
+		<include refid="sestatusKinds"/>
+	</select>
+	
+	
+</mapper>

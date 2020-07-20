@@ -79,16 +79,23 @@ public class CSReturnMangeController {
 		map.put("returnPrice", Integer.parseInt(returnPrice));
 		map.put("bpaynum", ibpaynum);
 		
-		int n1 = rservice.updateStatus("3", stringToArray(paymentbookNum),pointVo, depositVo, map);
-		
-		System.out.println("결과 : " + n1);
-		
-		
 		JSONObject json = new JSONObject();
-		if(n1 > 0) {
-			json.put("code", "success");			
-		}else {
+		try {
+			int n1 = rservice.updateStatus("3", stringToArray(paymentbookNum),pointVo, depositVo, map);
+			
+			System.out.println("결과 : " + n1);
+			
+			
+			if(n1 > 0) {
+				json.put("code", "success");			
+			}else {
+				json.put("code", "error");						
+			}
+						
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
 			json.put("code", "error");						
+			return json.toString();
 		}
 		
 		return json.toString();

@@ -55,7 +55,7 @@
 							</c:choose>
 							<td>
 								<c:choose>
-									<c:when test="${vo.bstatus == 5 }">
+									<c:when test="${vo.bstatus == 5 || vo.bstatus == 6 }">
 										<input class= "btn btn-secondary" type="button" value = "처리 완료" disabled="disabled"> 									
 									</c:when>
 									<c:otherwise>

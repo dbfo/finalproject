@@ -38,7 +38,7 @@ public class CSManageDao {
 	}
 	
 	public int updateCancelStatus(int bpaynum) {
-		return session.update(NAMESPACE+".updateStatus",bpaynum);
+		return session.update(NAMESPACE+".updateCancelStatus",bpaynum);
 	}
 
 	public int updateRefundStatus(int bpaynum) {

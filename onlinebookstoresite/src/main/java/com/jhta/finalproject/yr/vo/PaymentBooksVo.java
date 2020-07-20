@@ -12,24 +12,24 @@ public class PaymentBooksVo {
 	private int btype;
 	private int bnum;
 	private int bcount;
+	private int point;
 	private String btitle; //책이름
 	private int bprice; //책 가격
 	private int type; //타입
 	
 	
+	
 	public PaymentBooksVo() {
 	}
-	
-	
-	
 
-	public PaymentBooksVo(int paymentbook_num, int bpaynum, int btype, int bnum, int bcount) {
+	public PaymentBooksVo(int paymentbook_num, int bpaynum, int btype, int bnum, int bcount, int point) {
 		super();
 		this.paymentbook_num = paymentbook_num;
 		this.bpaynum = bpaynum;
 		this.btype = btype;
 		this.bnum = bnum;
 		this.bcount = bcount;
+		this.point = point;
 	}
 
 

@@ -121,7 +121,7 @@
 	</insert>
 
 	<insert id="paymentbooksInsert" parameterType="booksVo">
-		insert into paymentbook values (SEQ_BPAYMENT_BPAYNUM.currval, 1, #{bnum}, #{bcount}, SEQ_PAYMENTBOOK_NUM.nextval)
+		insert into paymentbook values (SEQ_BPAYMENT_BPAYNUM.currval, 1, #{bnum}, #{bcount}, SEQ_PAYMENTBOOK_NUM.nextval, #{point})
 	</insert>
 	
 	<update id="updateCancelStatus" parameterType="int">
