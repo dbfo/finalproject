@@ -98,7 +98,7 @@ p {
 		</section>
 		<!-- 배송중/구매확정전 -->
 		<section id="content3">
-			<p>tab menu3의 내용</p>
+			<jsp:include page="sellerMenu3.jsp"/>
 		</section>
 		<!-- 구매확정/정산대기 -->
 		<section id="content4">
@@ -113,6 +113,9 @@ p {
 		});
 		$("#tab2").click(function(){
 			location.href ="${cp}/seller/salesManagement2";
+		});
+		$("#tab3").click(function(){
+			location.href ="${cp}/seller/salesManagement3";
 		});
 	});
 </script>

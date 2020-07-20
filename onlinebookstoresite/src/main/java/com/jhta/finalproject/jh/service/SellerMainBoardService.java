@@ -17,7 +17,7 @@ public class SellerMainBoardService {
 	public int getOldbookCount(int snum) {
 		return dao.getOldbookCount(snum);
 	}
-	//상황판 최근 한달간 판매현황(1:입금대기중 , 2:입금완료/배송요청,  3: 판매완료/구매확정) 
+	//상황판 최근 한달간 판매현황(0:주문/입금대기중,	1:결제완료,2:배송중,3:수령완료(구매확정),4:환불) 
 	public int getOldbookSalestatusCount(HashMap<String, Object> map) {
 		return dao.getOldbookSalestatusCount(map);
 	}

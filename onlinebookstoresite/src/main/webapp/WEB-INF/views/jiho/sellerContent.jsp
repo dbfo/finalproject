@@ -22,11 +22,11 @@
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">배송중/구매확정전</span></a></th>
-					<td><a href="">0개</a></td>
+					<td><a href="">${getOldbookSalestatusCount3}개</a></td>
 				</tr>
 				<tr>
 					<th><a href=""><span style="color: black;">구매확정</span></a></th>
-					<td><a href="">${getOldbookSalestatusCount3}개</a></td>
+					<td><a href="">0개</a></td>
 				</tr>
 			</table>
 		</div>
@@ -54,10 +54,6 @@
 			<table class="table">
 				<tr>
 					<th>구매확정/정산대기</th>
-					<td><a href="">0개</a></td>
-				</tr>
-				<tr>
-					<th>정산신청</th>
 					<td><a href="">0개</a></td>
 				</tr>
 				<tr>

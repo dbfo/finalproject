@@ -24,4 +24,8 @@ public class SellerSalesManagementDao {
 	public int getTotRowCount(HashMap<String, Object> map){
 		return sqlSession.selectOne(NAMESPACE+".getTotRowCount", map);
 	}
+	//출고처리
+	public int goShipping(int bpaynum) {
+		return sqlSession.update(NAMESPACE+".goShipping", bpaynum);
+	}
 }

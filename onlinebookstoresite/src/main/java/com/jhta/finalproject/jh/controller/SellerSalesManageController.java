@@ -74,6 +74,7 @@ bpayment bstatus
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
 		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //결제완료
+		
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("snum", snum);
 		map.put("bstatus",bstatus);
@@ -95,4 +96,64 @@ bpayment bstatus
 		return ".seller.salesManagement";
 	}
 	
+	//출고처리 메소드
+	@RequestMapping("/seller/salesManagement2/shipping")
+	public String sellerShipping(int bpaynum,Model model) {
+		System.out.println("출고시킬 번호:"+bpaynum);
+		service.goShipping(bpaynum);
+		model.addAttribute("tabType", 2);
+		return "redirect:/seller/salesManagement2";
+	}
+	
+	//판매관리 메소드(배송중/구매확정전)
+		@RequestMapping("/seller/salesManagement3")
+		public String salesManage3(
+				Model model,
+				@RequestParam(value="tabType",defaultValue = "3")int tabType,
+				@RequestParam(value="bpaydate3",defaultValue = "1")int bpaydate3,
+				String keyword3,
+				String startDay3,
+				String endDay3,
+				String field3,
+				@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+			int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+			int bstatus=tabType-1; //결제완료
+			
+			HashMap<String, Object> map=new HashMap<String, Object>();
+			map.put("snum", snum);
+			map.put("bstatus",bstatus);
+			map.put("bpaydate3",bpaydate3);
+			map.put("startDay3",startDay3);
+			map.put("endDay3",endDay3);
+			map.put("field3",field3);
+			map.put("keyword3", keyword3);
+			int totRowCount=service.getTotRowCount(map);
+			PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
+			map.put("startRow",pu.getStartRow());
+			map.put("endRow",pu.getEndRow());
+			List<SellerSalesJoinVo> list=service.getSalesList(map);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("tabType", tabType);
+			model.addAttribute("pu", pu);
+			model.addAttribute("map", map);
+			return ".seller.salesManagement";
+		}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

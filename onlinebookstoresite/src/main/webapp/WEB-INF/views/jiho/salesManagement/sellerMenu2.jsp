@@ -55,21 +55,30 @@
 			<table class="table table-bordered">
 				<tr>
 					<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
-					<td><input type="radio" name="field2" value="all" class="field_menu2">전체
-						<input type="radio" name="field2" value="obname" class="field_menu2">상품명
-						<input type="radio" name="field2" value="mname" class="field_menu2">주문인
-						<input type="radio" name="field2" value="receiver" class="field_menu2">수령인
+					<td><input type="radio" name="field2" value="all" class="field_menu2"
+						<c:if test="${map.field2=='all' || map.field2==null || map.field2==''}">checked</c:if>>전체
+						<input type="radio" name="field2" value="obname" class="field_menu2"
+						<c:if test="${map.field2=='obname'}">checked</c:if>>상품명
+						<input type="radio" name="field2" value="mname" class="field_menu2"
+						<c:if test="${map.field2=='mname'}">checked</c:if>>주문인
+						<input type="radio" name="field2" value="receiver" class="field_menu2"
+						<c:if test="${map.field2=='receiver'}">checked</c:if>>수령인
 					</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="bpaydate2" value="1" class="borderdate2">전체
-						<input type="radio" name="bpaydate2" value="2" class="borderdate2">결제일&nbsp;&nbsp;&nbsp;
-						<input type="date" name="startDay2" value="" disabled><span>&nbsp;~</span>
-						<input type="date" name="endDay2" value="" disabled></td>
+					<td><input type="radio" name="bpaydate2" value="1" class="borderdate2"
+						<c:if test="${map.bpaydate2==1 || map.bpaydate2==null || map.bpaydate2==''}">checked</c:if>>전체
+						<input type="radio" name="bpaydate2" value="2" class="borderdate2"
+						<c:if test="${map.bpaydate2==2}">checked</c:if>>결제일&nbsp;&nbsp;&nbsp;
+						<input type="date" name="startDay2" value="${map.startDay2 }"
+						<c:if test="${map.bpaydate2==1 }">disabled</c:if>><span>&nbsp;~</span>
+						<input type="date" name="endDay2" value="${map.endDay2 }"
+						<c:if test="${map.bpaydate2==1 }">disabled</c:if>></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="keyword2" class="form-control" id="keyword_menu2"
-						placeholder="검색어를 입력하세요.">
+						placeholder="검색어를 입력하세요."
+						<c:if test="${keyword2!=null || keyword2 !=''}">value="${map.keyword2}"</c:if>>
 						<!-- 버튼 -->
 						<input type="submit" value="검색" class="btn btn-success" id="slaesListbt2">
 						<input type="button" value="검색조건 초기화" id="resetBt2" class="btn btn-secondary"></td>
@@ -77,7 +86,9 @@
 			</table>
 		</div>
 		<!-- 리스트 -->
-		<h2>LIST</h2>
+		<div>
+			<span>LIST</span>
+		</div>
 		<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr class="toptr">
@@ -86,7 +97,7 @@
 					<th scope="col" width="400">상품정보</th>
 					<th scope="col">상품합계</th>
 					<th scope="col" rowspan="2">총 합계</th>
-					<th scope="col" rowspan="2">결제일</th>
+					<th scope="col" rowspan="2" width="120">결제일</th>
 					<th scope="col" rowspan="2" width="120">출고처리</th>
 				</tr>
 				<tr class="toptr">
@@ -96,7 +107,9 @@
 			</thead>
 			<c:forEach var="vo" items="${list }" varStatus="status">
 				<tr>
-					<td scope="col" width="60" rowspan="2" style="text-align: center">NO</td>
+					<td scope="col" width="60" rowspan="2" style="text-align: center">
+						${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}
+					</td>
 					<td scope="col" width="100" rowspan="2" style="text-align: center">${vo.bpaynum }</td>
 					<td scope="col" width="400">
 						<c:forEach var="book" items="${vo.sellerOldbooksVo }">
@@ -108,7 +121,9 @@
 					<td scope="col" rowspan="2" style="text-align: center">
 						<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
 					</td> 
-					<td scope="col" rowspan="2" width="120" style="text-align: center">버튼</td>
+					<td scope="col" rowspan="2" width="120" style="text-align: center;">
+						<button type="button" class="btn btn-success" onclick="sendInfo(${vo.bpaynum})">출고처리</button>
+					</td>
 				</tr>
 				<tr>
 					<td scope="col">
@@ -150,8 +165,22 @@
 		</div>
 	</div>
 </form>
+
+
 <script>
+	//출고처리버튼
+	function sendInfo(bpaynum) {
+		var result=confirm('출고처리 하시겠습니까?');
+		if(result==true){
+			location.href="${cp }/seller/salesManagement2/shipping?bpaynum="+bpaynum;
+		}else{
+			return;
+		}
+	}
+
+
 	$(function(){
+		//주소
 		$(".addr").each(function(i, e) {
 			var str=$(this).text();
 			str=str.replace(/\|/gi,' ');
@@ -194,7 +223,7 @@
 			}
 					
 			//날짜 검색시 유효성검사2
-			var startDay=$("input[name=startDay]2").val();
+			var startDay=$("input[name=startDay2]").val();
 			var endDay=$("input[name=endDay2]").val();
 			var startArr=startDay.split('-');
 			var endArr=endDay.split('-');

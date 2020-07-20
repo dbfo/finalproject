@@ -10,10 +10,13 @@
 	<select id="getOldbookCount" resultType="int" parameterType="int">
 		select NVL(count(*),0) count from oldbooks where obregdate >= TO_DATE(add_months(sysdate,-1)) and snum=#{snum}
 	</select>
-	<!-- 최근 한달간 판매현황(1:입금대기중 , 2:입금완료/배송요청,  3: 판매완료/구매확정) -->
+	<!-- 최근 한달간 판매현황(0:주문/입금대기중,1:결제완료,2:배송중,3:수령완료(구매확정)) -->
 	<select id="getOldbookSalestatusCount" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) count from oldbooks 
-		where obregdate >= TO_DATE(add_months(sysdate,-1)) and obsalestatus=#{obsalestatus} and snum=#{snum}
+		select NVL(count(distinct(pay)),0) count from (
+		   select bp.bpaynum pay from 
+		   bpayment b,oldbooks o,paymentbook bp,members m 
+		   where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum 
+		   and bp.bnum=o.obnum and m.mnum=b.mnum and borderdate >= TO_DATE(add_months(sysdate,-1)))
 	</select>
 	
 </mapper>

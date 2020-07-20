@@ -24,4 +24,9 @@ public class SellerSalesManagementService {
 	public int getTotRowCount(HashMap<String, Object> map){
 		return dao.getTotRowCount(map); 
 	}
+	
+	//출고처리
+	public int goShipping(int bpaynum) {
+		return dao.goShipping(bpaynum);
+	}
 }
