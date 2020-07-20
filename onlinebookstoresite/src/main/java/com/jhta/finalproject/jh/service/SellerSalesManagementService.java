@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.jh.dao.SellerSalesManagementDao;
+import com.jhta.finalproject.jh.vo.SellerFeepayJoinVo;
 import com.jhta.finalproject.jh.vo.SellerSalesJoinVo;
 
 @Service
@@ -28,5 +29,10 @@ public class SellerSalesManagementService {
 	//출고처리
 	public int goShipping(int bpaynum) {
 		return dao.goShipping(bpaynum);
+	}
+	//구매확정 리스트
+	public List<SellerFeepayJoinVo> getfeeList(HashMap<String, Object> map){
+		List<SellerFeepayJoinVo> list=dao.getfeeList(map);
+		return list;
 	}
 }

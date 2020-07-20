@@ -144,4 +144,69 @@
 	</update>
 	
 	
+	
+	<!-- 구매확정/정산대기 리스트 -->	
+	<resultMap type="obfeepayjoin" id="obfeepayjoin">
+		<result column="bpaynum" property="bpaynum"/>
+		<result column="snum" property="snum"/>
+		<result column="btype" property="btype"/>
+		<result column="bcount" property="bcount"/>
+		<result column="baddr" property="baddr"/>
+		<result column="bphone" property="bphone"/>
+		<result column="bfinalmoney" property="bfinalmoney"/>
+		<result column="borderdate" property="borderdate"/>
+		<result column="bpaydate" property="bpaydate"/>
+		<result column="bstatus" property="bstatus"/>
+		<result column="ordermoney" property="ordermoney"/>
+		<result column="mothodpayment" property="mothodpayment"/>
+		<result column="receiver" property="receiver"/>
+		<result column="mnum" property="mnum"/>
+		<result column="delfee" property="delfee"/>
+		<result column="mname" property="mname"/>
+		<result column="obcnum" property="obcnum"/>
+		<result column="feepay" property="feepay"/>
+		<result column="settlement" property="settlement"/>
+		<result column="feedate" property="feedate"/>
+		<collection property="sellerOldbooksVo"	ofType="oldbooks">
+			<result property="obname" column="obname"/>
+			<result property="obsaleprice" column="obsaleprice"/>
+			<result property="obnum" column="obnum"/>
+		</collection>
+	</resultMap>
+	
+	
+	<!-- 구매확정/정산대기 리스트 -->	
+	<select id="getSalesFeeList" parameterType="hashmap" resultMap="obfeepayjoin">
+		    select * from(
+	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
+                    b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
+                    b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, ob.obcnum, ob.feepay, ob.settlement, ob.feedate
+                    o.obname OBNAME,o.obsaleprice OBSALEPRICE,o.obnum OBNUM
+	                from paymentbook p,( select * from
+                    (
+                    select * from(
+                        select a.*,rownum r from
+                        (
+                            select *
+                            from bpayment where bpaynum in 
+                             (select distinct(pay) from (
+                                select bp.bpaynum pay from 
+                                bpayment b,oldbooks o,paymentbook bp,members m, obcomplete ob 
+                                where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum 
+                                and bp.bnum=o.obnum and m.mnum=b.mnum and b.bpaynum=ob.obpaynum
+                                order by b.borderdate desc  
+                             ) 
+                           )
+                        )a
+	    <![CDATA[
+                    )where r>=#{startRow} and r<=#{endRow} ) )b, oldbooks o,members m 
+	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum     
+	           )
+		]]>
+	</select>
+	
+	
+	
+	
 </mapper>

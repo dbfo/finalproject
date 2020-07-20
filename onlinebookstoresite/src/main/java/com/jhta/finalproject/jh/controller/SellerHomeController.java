@@ -26,6 +26,9 @@ public class SellerHomeController {
 		HashMap<String, Object> map3=new HashMap<String, Object>();
 		map3.put("snum", snum);
 		map3.put("bstatus",2);
+		HashMap<String, Object> map4=new HashMap<String, Object>();
+		map4.put("snum", snum);
+		map4.put("bstatus",3);
 		
 		//판매현황
 		//최근 한달간 상품 등록
@@ -34,6 +37,7 @@ public class SellerHomeController {
 		model.addAttribute("getOldbookSalestatusCount1", service.getOldbookSalestatusCount(map1));
 		model.addAttribute("getOldbookSalestatusCount2", service.getOldbookSalestatusCount(map2));
 		model.addAttribute("getOldbookSalestatusCount3", service.getOldbookSalestatusCount(map3));
+		model.addAttribute("getOldbookSalestatusCount4", service.getOldbookSalestatusCount(map4));
 		
 		
 		

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.jh.vo.SellerFeepayJoinVo;
 import com.jhta.finalproject.jh.vo.SellerSalesJoinVo;
 
 @Repository
@@ -27,5 +28,10 @@ public class SellerSalesManagementDao {
 	//출고처리
 	public int goShipping(int bpaynum) {
 		return sqlSession.update(NAMESPACE+".goShipping", bpaynum);
+	}
+	//구매확정 리스트
+	public List<SellerFeepayJoinVo> getfeeList(HashMap<String, Object> map){
+		List<SellerFeepayJoinVo> list=sqlSession.selectList(NAMESPACE+".getSalesFeeList", map);
+		return list;
 	}
 }

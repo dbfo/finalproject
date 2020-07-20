@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ctc.wstx.shaded.msv_core.datatype.xsd.TotalDigitsFacet;
 import com.jhta.finalproject.jh.service.SellerSalesManagementService;
+import com.jhta.finalproject.jh.vo.SellerFeepayJoinVo;
 import com.jhta.finalproject.jh.vo.SellerSalesJoinVo;
 import com.jhta.page.util.PageUtil;
 
@@ -99,46 +100,79 @@ bpayment bstatus
 	//출고처리 메소드
 	@RequestMapping("/seller/salesManagement2/shipping")
 	public String sellerShipping(int bpaynum,Model model) {
-		System.out.println("출고시킬 번호:"+bpaynum);
 		service.goShipping(bpaynum);
 		model.addAttribute("tabType", 2);
 		return "redirect:/seller/salesManagement2";
 	}
 	
 	//판매관리 메소드(배송중/구매확정전)
-		@RequestMapping("/seller/salesManagement3")
-		public String salesManage3(
-				Model model,
-				@RequestParam(value="tabType",defaultValue = "3")int tabType,
-				@RequestParam(value="bpaydate3",defaultValue = "1")int bpaydate3,
-				String keyword3,
-				String startDay3,
-				String endDay3,
-				String field3,
-				@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-			int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
-			int bstatus=tabType-1; //결제완료
-			
-			HashMap<String, Object> map=new HashMap<String, Object>();
-			map.put("snum", snum);
-			map.put("bstatus",bstatus);
-			map.put("bpaydate3",bpaydate3);
-			map.put("startDay3",startDay3);
-			map.put("endDay3",endDay3);
-			map.put("field3",field3);
-			map.put("keyword3", keyword3);
-			int totRowCount=service.getTotRowCount(map);
-			PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
-			map.put("startRow",pu.getStartRow());
-			map.put("endRow",pu.getEndRow());
-			List<SellerSalesJoinVo> list=service.getSalesList(map);
-			
-			model.addAttribute("list", list);
-			model.addAttribute("tabType", tabType);
-			model.addAttribute("pu", pu);
-			model.addAttribute("map", map);
-			return ".seller.salesManagement";
-		}
+	@RequestMapping("/seller/salesManagement3")
+	public String salesManage3(
+			Model model,
+			@RequestParam(value="tabType",defaultValue = "3")int tabType,
+			@RequestParam(value="bpaydate3",defaultValue = "1")int bpaydate3,
+			String keyword3,
+			String startDay3,
+			String endDay3,
+			String field3,
+			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int bstatus=tabType-1; //결제완료
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("snum", snum);
+		map.put("bstatus",bstatus);
+		map.put("bpaydate3",bpaydate3);
+		map.put("startDay3",startDay3);
+		map.put("endDay3",endDay3);
+		map.put("field3",field3);
+		map.put("keyword3", keyword3);
+		int totRowCount=service.getTotRowCount(map);
+		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+		List<SellerSalesJoinVo> list=service.getSalesList(map);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("tabType", tabType);
+		model.addAttribute("pu", pu);
+		model.addAttribute("map", map);
+		return ".seller.salesManagement";
+	}
+	//판매관리 메소드(구매확정완료/정산처리전)
+	@RequestMapping("/seller/salesManagement4")
+	public String salesManage4(
+			Model model,
+			@RequestParam(value="tabType",defaultValue = "4")int tabType,
+			@RequestParam(value="bpaydate4",defaultValue = "1")int bpaydate4,
+			String keyword4,
+			String startDay4,
+			String endDay4,
+			String field4,
+			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
+		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int bstatus=tabType-1; //결제완료
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("snum", snum);
+		map.put("bstatus",bstatus);
+		map.put("bpaydate4",bpaydate4);
+		map.put("startDay4",startDay4);
+		map.put("endDay4",endDay4);
+		map.put("field4",field4);
+		map.put("keyword4", keyword4);
+		int totRowCount=service.getTotRowCount(map);
+		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+		List<SellerFeepayJoinVo> list=service.getfeeList(map);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("tabType", tabType);
+		model.addAttribute("pu", pu);
+		model.addAttribute("map", map);
+		return ".seller.salesManagement";
+	}
 	
 }
 
