@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -35,9 +36,13 @@ public class BooksDao {
 	public List<SmallCategoryVO> getSmallctg(int bcatenum) {
 		return sqlsession.selectList(NAMESPACE + ".smctg", bcatenum);
 	}
+	
+	public int count(HashMap<String, Object> map) {
+		return sqlsession.selectOne(NAMESPACE+".count", map);
+	}
 
-	public List<BooksVO> list() {
-		return sqlsession.selectList(NAMESPACE + ".list");
+	public List<BooksVO> list(HashMap<String, Object> map) {
+		return sqlsession.selectList(NAMESPACE + ".list", map);
 	}
 
 	public BooksVO getBooksInfo(int bnum) {

@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,12 @@ public class BooksImgService {
 		return bdao.getSmallctg(bcatenum);
 	}
 
-	public List<BooksVO> list() {
-		return bdao.list();
+	public int count(HashMap<String, Object> map) {
+		return bdao.count(map);
+	}
+
+	public List<BooksVO> list(HashMap<String, Object> map) {
+		return bdao.list(map);
 	}
 
 	public BooksVO getBooksInfo(int bnum) {

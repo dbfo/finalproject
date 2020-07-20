@@ -19,11 +19,20 @@ public class MembersDao {
 		this.session = session;
 	}
 
+	public int memCount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".memCount", map);
+	}
+
 	public List<MembersListVO> memList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".memList", map);
 	}
 	
-	public List<MembersListVO> ghostList() {
-		return session.selectList(NAMESPACE + ".ghostList");
+
+	public int ghostCount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".ghostCount", map);
+	}
+
+	public List<MembersListVO> ghostList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE + ".ghostList", map);
 	}
 }

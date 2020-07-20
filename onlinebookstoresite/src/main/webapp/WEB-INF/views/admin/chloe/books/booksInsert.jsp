@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<link href="${pageContext.request.contextPath }/resources/yjcss/css/made.css" rel="stylesheet" />
 
 <div class="card mb-4">
 	<div class="card-header">
@@ -11,7 +10,7 @@
 	<form method="post" action="${pageContext.request.contextPath }/booksInsert" enctype="multipart/form-data">
 		<table class="booksInsertTable table">
 			<tr>
-				<th align="center" class="table-active">카 테 고 리</th>
+				<th class="table-active">카 테 고 리</th>
 				<td colspan="3">
 					<select name="bctg" id="bctg">
 						<option value="">- 선택 -</option>
@@ -23,7 +22,8 @@
 						<select name="smctg" id="smctg">
 							<option value="">- 선택 -</option>
 						</select>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 
 			<tr>

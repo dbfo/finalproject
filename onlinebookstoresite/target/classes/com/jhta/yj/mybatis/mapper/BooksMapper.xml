@@ -9,8 +9,7 @@
 		insert into books values
 		(SEQ_BOOKS_BNUM.nextval, #{btitle}, #{bwriter}, #{bpublishdate},
 		#{bpublisher}, #{bprice}, #{bpoint}, #{bcount},
-		#{bcontent}, 0,
-		#{scatenum}, sysdate)
+		#{bcontent}, 0, #{scatenum}, sysdate)
 	</insert>
 
 	<insert id="imgInsert" parameterType="img">
@@ -57,9 +56,47 @@
 	<select id="getImgInfo" resultType="img" parameterType="int">
 		select * from img where bnum = #{bnum}
 	</select>
+	
+	<!-- 검색을 위한 sql -->
+	<sql id="search">
+		<if test="infoField != null and infoField != ''">
+			and ${infoField} like '%'||#{infoKeyword}||'%' 
+		</if>
+		
+		<if test="priceKeyword1 != null and priceKeyword1 != '' 
+			and priceKeyword2 != null and priceKeyword2 != ''">
+			<![CDATA[
+			and bprice <= #{priceKeyword2} and bprice >= #{priceKeyword1} 
+			]]>
+		</if>
+		
+		<if test="countKeyword1 != null and countKeyword1 != '' 
+			and countKeyword2 != null and countKeyword2 != ''">
+			<![CDATA[
+			and bcount <= #{countKeyword2} and bcount >= #{countKeyword1} 
+			]]>
+		</if>
+		
+		<if test="dateKeyword1 != null and dateKeyword1 != '' 
+			and dateKeyword2 != null and dateKeyword2 != '' ">
+			and bregdate BETWEEN TO_DATE(#{dateKeyword1}, 'YYYY/MM/DD') 
+			AND TO_DATE(#{dateKeyword2}, 'YYYY/MM/DD') + 1
+		</if>
+	</sql>
+	
+	<!-- 전체글의 개수 -->
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*), 0) cnt from books
+		where bnum > 0
+		<include refid="search"/>
+	</select>
 
-	<select id="list" resultType="books">
-		select * from books order by bnum desc
+	<select id="list" resultType="books" parameterType="hashmap">	
+		select * from 
+		(select aa.*, rownum rnum from 
+		(select * from books where bnum > 0 
+		<include refid="search"/> order by bnum desc) aa) 
+		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 
 	<!-- 카테고리 -->
@@ -71,7 +108,7 @@
 		select * from smallcategory
 		where bcatenum = #{bcatenum} order by scatenum
 	</select>
-
+	
 	<!-- 수정을 위한 큰 카테고리 가져오기 -->
 	<select id="updateBigCtg" resultType="int" parameterType="int">
 		select s.bcatenum from smallcategory s,

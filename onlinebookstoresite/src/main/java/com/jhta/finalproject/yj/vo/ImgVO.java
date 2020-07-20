@@ -1,12 +1,12 @@
 package com.jhta.finalproject.yj.vo;
 
 public class ImgVO {
-	private String imgorgfilename; // ¿ø·¡ÆÄÀÏÀÌ¸§
-	private int imgnum; // ÀÌ¹ÌÁö¹øÈ£
-	private String imgsavefilename; // ÀúÀåÆÄÀÏÀÌ¸§
-	private int thumbnail; // ½æ³×ÀÏ
-	private int btype; // Ã¥Å¸ÀÔ(Áß°íÀÎÁö »õÃ¥ÀÎÁö)
-	private int bnum; // Ã¥¹øÈ£
+	private String imgorgfilename; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+	private int imgnum; // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	private String imgsavefilename; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+	private int thumbnail; // ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int btype; // Ã¥Å¸ï¿½ï¿½(ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½)
+	private int bnum; // Ã¥ï¿½ï¿½È£
 
 	public ImgVO() {
 	}

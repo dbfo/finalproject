@@ -6,7 +6,7 @@
 <mapper namespace="com.jhta.yj.mybatis.mapper.MembersMapper">
 	<sql id="search">
 		<if test="infoField != null and infoField != '' ">
-			and ${infoField} like '%'|| #{infoKeyword}||'%'
+			and ${infoField} like '%'||#{infoKeyword}||'%'
 		</if>
 
 		<if test="ageKeyword1 != null and ageKeyword1 != '' 
@@ -17,26 +17,41 @@
 			]]>
 		</if>
 		
-		<if test="dateField != null and dateField != '' ">
-			and ${dateField} BETWEEN TO_DATE(#{dateKeyword}, 'YYYY/MM/DD') 
-			AND TO_DATE(#{dateKeyword}, 'YYYY/MM/DD') + 1
+		<if test="dateKeyword1 != null and dateKeyword1 != '' 
+			and dateKeyword2 != null and dateKeyword2 != '' ">
+			and regdate BETWEEN TO_DATE(#{dateKeyword1}, 'YYYY/MM/DD') 
+			AND TO_DATE(#{dateKeyword2}, 'YYYY/MM/DD') + 1
 		</if>
 	</sql>
+	
+	<!-- 전체 회원수 -->
+	<select id="memCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*), 0) cnt
+		from members where mstatus = 1
+		<include refid="search"/>
+	</select>
 
-	<select id="memList" resultType="members"
-		parameterType="hashmap">
-		select mname, mid, email, phone, regdate,
+	<select id="memList" resultType="members" parameterType="hashmap">
+		select mname, mid, email, phone, regdate, birth, 
 		FLOOR((months_between(sysdate, birth))/12) age
 		from members where mstatus = 1 
 		<include refid="search" /> 
-		order by regdate desc
+		order by mnum desc
 	</select>
 
+	<!-- 전체 탈퇴회원수 -->
+	<select id="ghostCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*), 0) cnt
+		from members where mstatus = 0
+		<include refid="search"/>
+	</select>
+	
 	<!-- 탈퇴회원 조회 -->
 	<select id="ghostList" resultType="members">
-		select mname, mid, email,
-		phone, regdate, FLOOR((months_between(sysdate, birth))/12) age from
+		select mname, mid, email, phone, regdate, birth, 
+		FLOOR((months_between(sysdate, birth))/12) age from
 		members where mstatus = 0 
+		<include refid="search" /> 
 		order by regdate desc
 	</select>
 </mapper>
