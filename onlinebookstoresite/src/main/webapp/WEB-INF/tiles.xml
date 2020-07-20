@@ -33,6 +33,12 @@
 	<definition name=".seller.salesManagement" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/salesManagement/sellerSalesManagement.jsp"/>
 	</definition>
+	<!-- 중고상품 정산조회 관리 메뉴관련 -->
+	<definition name=".seller.settlementCheck" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/settlementCheck/sellerSettlementCheck.jsp"/>
+	</definition>
+	
+	
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	
 	<!-- /////////////////////희도//////////////////////////////ㄴ -->

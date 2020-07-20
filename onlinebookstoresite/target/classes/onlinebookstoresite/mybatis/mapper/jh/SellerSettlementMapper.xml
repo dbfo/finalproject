@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.SellerSettlementMapper.jh">
+	<select id="getSettlementList" parameterType="hashmap" resultMap="obsalesjoin">
+		    select * from(
+	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
+                    b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
+                    b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, o.obname OBNAME,o.obsaleprice OBSALEPRICE,o.obnum OBNUM
+	                from paymentbook p,( select * from
+                    (
+                    select * from(
+                        select a.*,rownum r from
+                        (
+                            select *
+                            from bpayment where bpaynum in 
+                             (select distinct(pay) from (
+                                select bp.bpaynum pay from 
+                                bpayment b,oldbooks o,paymentbook bp,members m 
+                                where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum 
+                                and bp.bnum=o.obnum and m.mnum=b.mnum
+                                order by b.borderdate desc  
+                             ) 
+                           )
+                        )a
+	    <![CDATA[
+                    )where r>=#{startRow} and r<=#{endRow} ) )b, oldbooks o,members m 
+	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum     
+	           )
+		]]>
+	</select>
+
+
+</mapper>

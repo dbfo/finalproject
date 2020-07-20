@@ -189,6 +189,7 @@
 		<result column="feepay" property="feepay"/>
 		<result column="settlement" property="settlement"/>
 		<result column="feedate" property="feedate"/>
+		<result column="bocomstatus" property="bocomstatus"/>
 		<collection property="sellerOldbooksVo"	ofType="oldbooks">
 			<result property="obname" column="obname"/>
 			<result property="obsaleprice" column="obsaleprice"/>
@@ -203,7 +204,8 @@
 	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
                     b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
                     b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
-                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, ob.obcnum OBCNUM, ob.feepay FEEPAY, ob.settlement SETTLEMENT, ob.feedate FEEDATE,
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, ob.obcnum OBCNUM, ob.feepay FEEPAY, ob.settlement SETTLEMENT, 
+                    ob.feedate FEEDATE,ob.bocomstatus BOCOMSTATUS,
                     o.obname OBNAME,o.obsaleprice OBSALEPRICE,o.obnum OBNUM
 	                from paymentbook p,( select * from
                     (
@@ -228,6 +230,5 @@
 	           )
 		]]>
 	</select>
-	
 	
 </mapper>

@@ -24,7 +24,7 @@
 							<li><a href="${cp}/seller/salesManagement4?tabType=4">구매확정/정산대기</a></li>
 						</ul>
 					</li>
-					<li><a href="#">정산조회</a></li>
+					<li><a href="${cp }/seller/settlementCheck">정산조회</a></li>
 					<li><a href="#">게시판</a>
 						<ul class="sub-menu">
 							<li><a href="#">QnA관리</a></li>
