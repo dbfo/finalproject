@@ -74,26 +74,7 @@
 <!-- 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]> -->
 <!-- 	</select> -->
 
-	<select id="bestlist" parameterType="hashmap" resultType="alllist">
-	
-		select * from (
-			select aa.*,rownum rnum from
-			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1  
-                 <if test="field!=null and field!=''">
-					and ${field} like '%'||#{keyword}||'%' 
-				 </if>
-				 order by bhit desc
-			)aa
-		)
-		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 
-	</select>
-
-
-	
-	
 	<select id="bcatelist" resultType="bigcate">
 		select * from bigcategory order by bcatenum asc
 	</select>
@@ -135,15 +116,34 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
+				select b.*,i.imgsavefilename from books b,img i,
                  where b.scatenum = #{scatenum} and b.btitle like '%'||#{keyword}||'%'
-                 and b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1 
+                 and b.bnum = i.bnum(+) and i.thumbnail=1 
 				 order by b.bnum asc
 			)aa
 		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 
 	</select>
+	
+		
+	<select id="allbooklist" parameterType="hashmap" resultType="alllist">
+	
+		select * from (
+			select aa.*,rownum rnum from
+			(
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1  
+                 <if test="field!=null and field!=''">
+					and ${field} like '%'||#{keyword}||'%' 
+				 </if>
+				 order by b.bnum asc
+			)aa
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+
+	</select>
+	
 	
 <!-- 	<select id="sbooklist1count" resultType="int" parameterType="hashmap"> -->
 <!-- 		select NVL(count(*),0) cnt from -->
@@ -168,6 +168,8 @@
 		)
 		
 	</select>
+	
+	
 
 <!-- ///////////////////////////////////////////////////////////////// -->
 
@@ -599,8 +601,6 @@
 
 
 
-
-
 	<!--/////////////////////책 상세페이지//////////////////////////////////// -->
 	<select id="detail" parameterType="int" resultType="books">
 		select * from books where bnum=#{bnum}
@@ -659,23 +659,59 @@
 
 	</select>
 	
+	<select id="bestlist" parameterType="hashmap" resultType="alllist">
+	
+		select * from (
+			select aa.*,rownum rnum from
+			(
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1  
+                 <if test="field!=null and field!=''">
+					and ${field} like '%'||#{keyword}||'%' 
+				 </if>
+				 order by b.bhit desc
+			)aa
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+
+	</select>
+
+	
+	
+	
+	
+<!-- 	 //////////////////상세페이지 책(책,이미지,리스트 다 포함)/////////////////////////////////  -->
+<!-- 	<select id="bookdetail" parameterType="hashmap" resultType="alllist"> -->
+	
+<!-- 				select b.*,i.*,r.bscore from books b,img i,bookreview r  -->
+<!--                  where b.bnum =#{bnum} and b.bnum = i.bnum and b.bnum = r.bnum(+) -->
+<!-- 	</select> -->
+	
+<!-- 	 //////////////////상세페이지 책(책,이미지,리스트 다 포함)/////////////////////////////////  -->
+<!-- 	<select id="bookdetail" parameterType="hashmap" resultType="alllist"> -->
+	
+<!-- 				select b.*,i.* from books b,img i  -->
+<!--                  where b.bnum =#{bnum} and b.bnum = i.bnum(+) -->
+<!-- 	</select> -->
+	
 	<!-- //////////////////상세페이지 책(책,이미지,리스트 다 포함)///////////////////////////////// -->
 	<select id="bookdetail" parameterType="hashmap" resultType="alllist">
 	
-				select b.*,i.*,r.* from books b,img i,bookreview r 
-                 where b.bnum =#{bnum} and b.bnum = i.bnum and b.bnum = r.bnum(+)
+				select b.*,i.* from books b,img i 
+                 where b.bnum =#{bnum} and b.bnum = i.bnum(+)
 	</select>
 	
 	
 	<!-- 책리뷰 목록/////// -->
+<!-- 		아직 합치질 않아서 멤버즈 넘버를 임시로 4로 지정해뒀음 -->
 	<select id="reviewlist" parameterType="hashmap" resultType="breviewc">
 	select * from
 	(
 		select aa.*,rownum rnum from
 		(
-			select br.*,m.* from bookreview br,members m
-			where br.bnum=#{bnum}
-			order by br.bnum asc
+			select br.*,m.mname from bookreview br,members m 
+			where br.bnum=#{bnum} and br.mnum = m.mnum
+			order by br.bnum desc
 		)aa
 	)
 		<!-- CDATA - '<','>' 같은 특수기호문자들을 멋대로 해석하지(변환하지) 않고 그대로 쓰게 하는거임  -->
@@ -689,7 +725,8 @@
 		where bnum = #{bnum}
 	</select>
 	
-	<select id="breviewinsert" parameterType="breviewc">
+	<!-- 책 등록  -->
+	<select id="breviewinsert" parameterType="reviewinsert">
 		insert into bookreview values(SEQ_BOOKREVIEW_REVIEWNUM.nextval,
 		#{mnum},#{bnum},#{reviewcontent},#{bscore},sysdate)
 	</select>

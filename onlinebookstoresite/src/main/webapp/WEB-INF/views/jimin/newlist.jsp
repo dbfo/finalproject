@@ -60,7 +60,7 @@
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="#"> 
+							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -77,7 +77,7 @@
 						<div class="price">
 							<strong>${vo.bprice }</strong>
 							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>[10%]</span> <span>적립</span>
+							<span>적립</span>
 						</div>
 
 						<div class="review_score">
@@ -85,11 +85,8 @@
 							<span class="score"> <strong> [평점자리] </strong>
 							</span> <img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> <span class="review">리뷰
-									<strong>
-									[리뷰수]
-									</strong>
-							</span>
+								>
+							<strong>조회수&nbsp</strong><span>${vo.bhit }</span>
 						</div>
 		</div>
 		<div id="buycartbtn">
@@ -106,7 +103,7 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="list1?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="newlist?pageNum=${i }&field=${field}&keyword=${keyword}">
 <%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
@@ -114,7 +111,7 @@
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="list1?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="newlist?pageNum=${i }&field=${field}&keyword=${keyword}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>

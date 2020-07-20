@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jhta.finalproject.jm.service.BookdetailService;
 import com.jhta.finalproject.jm.service.BooksService;
 import com.jhta.finalproject.jm.vo.AllListVo;
 import com.jhta.finalproject.jm.vo.BooksVo;
 import com.jhta.finalproject.jm.vo.BreviewVo;
+import com.jhta.finalproject.jm.vo.ImgVo;
+import com.jhta.finalproject.jm.vo.ReviewinsertVo;
 import com.jhta.page.util.PageUtil;
 
 @Controller
@@ -27,8 +30,8 @@ public class BookdetailController {
 	@Autowired
 	private BookdetailService service;
 
-//	@RequestMapping(value = "/bdetail", method = RequestMethod.GET)
-	@GetMapping(value = "/bdetail")
+	@RequestMapping(value = "/bdetail", method = RequestMethod.GET)
+//	@GetMapping(value = "/bdetail")
 	public ModelAndView detailtest(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
 			@RequestParam(value = "field", defaultValue = "")String field,
 			@RequestParam(value = "keyword", defaultValue = "")String keyword,
@@ -48,32 +51,50 @@ public class BookdetailController {
 		map.put("field",field);
 		map.put("keyword",keyword);
 		
-		AllListVo bookvo=service.bookdetail(bnum);
+		List<AllListVo> bookvo=service.bookdetail(bnum);
 		List<BreviewVo> reviewvo=service.reviewlist(map);
+	//	ImgVo imglist=service.imginfo(bnum);
+
+		mv.addObject("bookvo",bookvo.get(0));
 		
+		for(AllListVo vo:bookvo) {
+			if(vo.getThumbnail()==1) {
+				mv.addObject("img1",vo);
+			}else {
+				mv.addObject("img2",vo);
+			}
+		}
 		
-		mv.addObject("bookvo",bookvo);
 		mv.addObject("reviewvo",reviewvo);
 		mv.addObject("bnum",bnum);
+	//	mv.addObject("img1",img1);
+	//	mv.addObject("img2",img2);
+		
+		
 		return mv;
 	}
 	
-	@RequestMapping(value="/enrllReview", method =  RequestMethod.GET)
+	@RequestMapping(value="/enrllReview", method = RequestMethod.GET)
 	public String enrollReview(@RequestParam(value = "reviewcontent", defaultValue = "0")String reviewcontent, 
 								@RequestParam(value = "bscore", defaultValue = "0")int bscore,
-								@RequestParam(value = "bnum", defaultValue = "0")int bnum) {
-		//insert 할때 밑에 Vo가 필요하다, mapper에 쿼리문이 작성되어있기떄문에 해당 필요한 3가지 bnum,rc,bs 같은거만 입력해준다.
-		BreviewVo vo=new BreviewVo(0, 4, bnum, reviewcontent, bscore, null);
-		//↑↑↑↑ 2020-07-17 vo에 members 컬럼도 추가 했는데 아직 어떻게 인설트 처리를 할지 모르겠음.
-		//집가서 좀더 고민해볼예정
+								@RequestParam(value = "mnum", defaultValue = "0")int mnum,
+								@RequestParam(value = "bnum", defaultValue = "0")int bnum,
+								RedirectAttributes redirect) {
 		
-		
-		int reviewinsert = service.breviewinsert(vo);// 해당 vo를 result 값으로 받는다.
-		
+		System.out.println("=====리뷰컨텐츠:"+reviewcontent);
+		System.out.println("=====스코어:"+bscore);
+		System.out.println("=====mnum:"+mnum);
+		System.out.println("=====bnum:"+bnum);
+		//insert 할때 밑에 Vo가 필요하다, mapper에 쿼리문이 작성되어있기떄문에 해당 필요한 4가지 mnum,bnum,reviewcontent,bscore 만 입력해준다.
+		ReviewinsertVo vo=new ReviewinsertVo(0, mnum, bnum, reviewcontent, bscore, null);
+
+		service.breviewinsert(vo);// 해당 vo를 result 값으로 받는다.
+
 //		List<BreviewVo> list=service.reviewlist(map);
 
+		redirect.addAttribute("bnum",bnum);
 		
-		return "";
+		return "redirect:/bdetail";
 
 	}
 }

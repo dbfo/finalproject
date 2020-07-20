@@ -77,7 +77,7 @@
 						<div class="price">
 							<strong>${vo.bprice }</strong>
 							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>[10%]</span> <span>적립</span>
+							<span>적립</span>
 						</div>
 
 						<div class="review_score">
@@ -85,11 +85,7 @@
 							<span class="score"> <strong> [평점자리] </strong>
 							</span> <img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> <span class="review">리뷰
-									<strong>
-									[리뷰수]
-									</strong>
-							</span>
+								> 
 						</div>
 		</div>
 		<div id="buycartbtn">

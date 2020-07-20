@@ -10,13 +10,15 @@ import com.jhta.finalproject.jm.dao.BookdetailDao;
 import com.jhta.finalproject.jm.vo.AllListVo;
 import com.jhta.finalproject.jm.vo.BooksVo;
 import com.jhta.finalproject.jm.vo.BreviewVo;
+import com.jhta.finalproject.jm.vo.ImgVo;
+import com.jhta.finalproject.jm.vo.ReviewinsertVo;
 
 @Service
 public class BookdetailService {
 	@Autowired
 	private BookdetailDao dao;
 	
-	public AllListVo bookdetail(int bnum){
+	public List<AllListVo> bookdetail(int bnum){
 		return dao.bookdetail(bnum);
 	}
 	public int addHit(int bnum) {
@@ -28,7 +30,11 @@ public class BookdetailService {
 	public int breviewcount(int bnum) {
 		return dao.breviewcount(bnum);
 	}
-	public int breviewinsert(BreviewVo vo) {
+	public ImgVo imginfo(int bnum) {
+		return dao.imginfo(bnum);
+	}
+	
+	public int breviewinsert(ReviewinsertVo vo) {
 		return dao.breviewinsert(vo);
 	}
 }

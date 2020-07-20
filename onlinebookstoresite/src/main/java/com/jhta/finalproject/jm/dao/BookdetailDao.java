@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.jhta.finalproject.jm.vo.AllListVo;
 import com.jhta.finalproject.jm.vo.BooksVo;
 import com.jhta.finalproject.jm.vo.BreviewVo;
+import com.jhta.finalproject.jm.vo.ImgVo;
+import com.jhta.finalproject.jm.vo.ReviewinsertVo;
 
 @Repository
 public class BookdetailDao {
@@ -17,8 +19,8 @@ public class BookdetailDao {
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="com.jhta.mybatis.mapper.BooksMapper";
 	
-	public AllListVo bookdetail(int bnum){
-		return sqlSession.selectOne(NAMESPACE + ".bookdetail",bnum);
+	public List<AllListVo> bookdetail(int bnum){
+		return sqlSession.selectList(NAMESPACE + ".bookdetail",bnum);
 	}
 	public int addHit(int bnum) {
 		return sqlSession.update(NAMESPACE + ".hit",bnum);
@@ -29,7 +31,11 @@ public class BookdetailDao {
 	public int breviewcount(int bnum) {
 		return sqlSession.selectOne(NAMESPACE + ".breviewcount",bnum);
 	}
-	public int breviewinsert(BreviewVo vo) {
+	public ImgVo imginfo(int bnum) {
+		return sqlSession.selectOne(NAMESPACE + ".imginfo",bnum);
+	}
+	
+	public int breviewinsert(ReviewinsertVo vo) {
 		return sqlSession.insert(NAMESPACE + ".breviewinsert",vo);
 	}
 	

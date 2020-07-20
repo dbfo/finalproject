@@ -50,18 +50,12 @@ public class ListController {
 //		List<BooksVo> list = service.list(map);
 		List<AllListVo> list=service.allbooklist(map);
 		List<BigcateVo> list2=service.list2();
-//		
-//		System.out.println("0번째 이미지:::"+imgvo.get(0));
-//		System.out.println("1번째 이미지:::"+imgvo.get(1));
-		
-//		int breviewcount=service.breviewcount(bnum);
-		
+
 		
 		mv.addObject("list", list);
 	
 		mv.addObject("list2", list2);
 
-		
 		mv.addObject("pu", pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword", keyword);

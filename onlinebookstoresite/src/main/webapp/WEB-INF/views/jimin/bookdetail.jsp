@@ -10,7 +10,7 @@
 		<div id="detailupper">
 			<div id="detailinfo">
 				<img id="detailbook_img"
-				src="${cp }/resources/JIMIN/images/${bookvo.imgsavefilename}" id="thumbnail">
+				src="${cp }/resources/JIMIN/images/${img1.imgsavefilename}" id="thumbnail">
 				
 				<div id="detailbookNameTitle">
 				<strong style="font-size: x-large;">${bookvo.btitle }</strong>
@@ -75,7 +75,7 @@
 					<br>
 					<h3 style="text-align: center;">상세정보
 					<br><br>
-					<img src="${cp }/resources/JIMIN/images/${bookvo.imgsavefilename}" id="detailimg"/>
+					<img src="${cp }/resources/JIMIN/images/${img2.imgsavefilename}" id="detailimg"/>
 					</h3>
 				  </div>
 				  <div class="tab-pane fade" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">
@@ -143,8 +143,10 @@
 							
 					<div class="tabWrite">	
 					<!-- <form name="form" method="post" action="/ypbooks/book/pop_review_proc.jsp" target="ifrmProc"> -->
-					<form name="form" method="post" action="${cp }/enrllReview">
+					<form id="insertform" method="GET" action="${cp }/enrllReview">
+					
 						<input type="hidden" name="bnum" value="${bnum}">
+						<input type="hidden" name="mnum" value="4">
 						
 						<div style=" width: 1110px;background-color:#f9f9f9 ;padding: 12px 20px 19px 20px; overflow: hidden; border: 2px solid #f9f9f9">
 							<span style="font-size: 20px;"><strong>독자서평 쓰기</strong></span>
@@ -154,22 +156,22 @@
 								<br>
 								<div>
 								<strong>도서평점</strong>&nbsp&nbsp&nbsp
-									<input type="radio" value="1" name="radio_revRate" class="b0">&nbsp ★
+									<input type="radio" value="1" name="bscore" class="writeRadio">&nbsp ★
 									&nbsp
-									<input type="radio" value="2" name="radio_revRate" class="writeRadio">&nbsp ★★
+									<input type="radio" value="2" name="bscore" class="writeRadio">&nbsp ★★
 									&nbsp
-									<input type="radio" value="3" name="radio_revRate" class="writeRadio" checked="checked">&nbsp ★★★
+									<input type="radio" value="3" name="bscore" class="writeRadio" checked="checked">&nbsp ★★★
 									&nbsp
-									<input type="radio" value="4" name="radio_revRate" class="writeRadio">&nbsp ★★★★
+									<input type="radio" value="4" name="bscore" class="writeRadio">&nbsp ★★★★
 									&nbsp
-									<input type="radio" value="5" name="radio_revRate" class="writeRadio">&nbsp ★★★★★
+									<input type="radio" value="5" name="bscore" class="writeRadio">&nbsp ★★★★★
 									&nbsp
 								</div>
 								<br>
 								<strong>내용</strong>
 								<br><br>
 								<span>
-									<textarea id="review_content" style="width:900px;height:100px;"></textarea>
+									<textarea name="reviewcontent" style="width:900px;height:100px;"></textarea>
 <!-- 									<a style="display:inline-block  ;float:right ;margin-bottom: 18px; " class="btn btn-success" id="enrollBtn">등록하기</a> -->
 									
 									<input type="submit" style="display:inline-block  ;float:right ;margin-bottom: 18px; " class="btn btn-success" id="enrollBtn" value="등록하기"> 
@@ -182,9 +184,27 @@
 						<tbody>
 						<c:forEach var ="rvo" items="${reviewvo }">
 						<tr>
-							<td style=" width:13%;" id="mid" >${rvo.mnum }</td>
+							<td style=" width:13%;" id="mid" >${rvo.mname }</td>
 							<td style="width:19%;" id="mscore">		
-								<span>${rvo.bscore }</span>
+							
+							<c:set var="score" value="${rvo.bscore }" />
+
+								<c:if test="${score eq 5 }">
+									<span>★★★★★</span>
+								</c:if>
+								<c:if test="${score eq 4 }">
+									<span>★★★★</span>
+								</c:if>
+								<c:if test="${score eq 3 }">
+									<span>★★★</span>
+								</c:if>
+								<c:if test="${score eq 2 }">
+									<span>★★</span>
+								</c:if>
+								<c:if test="${score eq 1 }">
+									<span>★</span>
+								</c:if>
+<%-- 								<span>${rvo.bscore }</span> --%>
 							</td>
 							<td class="tdCen" id="mdate"><fmt:formatDate value="${rvo.breviewregdate }"></fmt:formatDate></td>
 						</tr>
@@ -232,7 +252,6 @@
 <br>
 <br>
 <script>
-
 //JSon 방식 
 // 	$("#enrollBtn").click(function(){
 // 		var reviewcontent=$("#review_content").val();

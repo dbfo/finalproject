@@ -20,7 +20,7 @@
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
-					>
+					
 					<select id="scate2" name="scate2">
 						<option>[---소 분류---]</option>
 					</select>
@@ -77,7 +77,7 @@
 						<div class="price">
 							<strong>${vo.bprice }</strong>
 							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>[10%]</span> <span>적립</span>
+							<span>적립</span>
 						</div>
 
 						<div class="review_score">
@@ -85,11 +85,8 @@
 							<span class="score"> <strong> [평점자리] </strong>
 							</span> <img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> <span class="review">리뷰
-									<strong>
-									[리뷰수]
-									</strong>
-							</span>
+								> 
+							<strong>조회수&nbsp</strong><span>${vo.bhit }</span>
 						</div>
 		</div>
 		<div id="buycartbtn">
@@ -147,17 +144,17 @@
 
 	});
 	
-	function nullable(){
-		 var sv = document.getElementById("searchv");
-		 var sc = document.getElementById("scate2");
-		 if(sc.value == "[---대 분류---]") {
-			   alert("조건을 모두 채워주세요ㅋㅋ");
-			   return false; //submit 중지
-			  }
-		 else{
-			 return true;
-		 }
-	}
+// 	function nullable(){
+// 		 var sv = document.getElementById("searchv");
+// 		 var sc = document.getElementById("scate2");
+// 		 if(sc.value equals "[---대 분류---]") {
+// 			   alert("조건을 모두 채워주세요ㅋㅋ");
+// 			   return false; //submit 중지
+// 			  }
+// 		 else{
+// 			 return true;
+// 		 }
+// 	}
 
 	
 </script>
