@@ -105,34 +105,31 @@
 					<th scope="col">배송비</th>
 				</tr>
 			</thead>
-			<!-- 
+			 
 			<c:forEach var="vo" items="${list }" varStatus="status">
 				<tr>
 					<td scope="col" width="60" rowspan="2" style="text-align: center">
 						${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}
 					</td>
 					<td scope="col" width="100" rowspan="2" style="text-align: center">${vo.bpaynum }</td>
-					<td scope="col" width="400">
+					<td scope="col" width="400" rowspan="2" style="text-align: left;">
 						<c:forEach var="book" items="${vo.sellerOldbooksVo }">
 							▶상품명 : ${book.obname } | 수량 : 1개 | 상품금액 : ${book.obsaleprice }원<br>
 						</c:forEach>
 					</td>
-					<td scope="col" style="text-align: right;" >${vo.ordermoney }원</td>
-					<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney } 원</td>
-					<td scope="col" rowspan="2" style="text-align: center">
+					<td scope="col" rowspan="2" width="120" style="text-align: center">
 						<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
-					</td> 
+					</td>
+					<td scope="col" style="text-align: right;">${vo.ordermoney}원</td>
+					<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney}원</td>
+					<td scope="col" rowspan="2" width="120" style="text-align: right;">${vo.feepay }원</td>
+					<td scope="col" rowspan="2" width="120" style="text-align: right;">${vo.settlement }원</td>
 				</tr>
 				<tr>
-					<td scope="col">
-						주문인/수령인 : ${vo.mname } / ${vo.receiver }<br>
-						연락처 : ${vo.bphone } <br>
-						<span class="addr">배송주소 : ${vo.baddr }</span>
-					</td>
 					<td scope="col" style="text-align: right;">${vo.delfee }원</td>
 				</tr>
 			</c:forEach>
-			 -->
+			
 		</table>
 		<!-- 페이징버튼 -->
 		<div>
@@ -183,7 +180,7 @@
 			}
 		});
 		//초기화버튼
-		$("#resetBt3").click(function() {
+		$("#resetBt4").click(function() {
 			$("input[name=field4]")[0].checked=true;
 			$("input[name=bpaydate4]")[0].checked=true;
 			$("input[name=startDay4]").attr("disabled",true);

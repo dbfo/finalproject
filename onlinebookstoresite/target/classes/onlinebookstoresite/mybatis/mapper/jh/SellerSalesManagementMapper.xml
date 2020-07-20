@@ -27,7 +27,7 @@
 			or b.receiver like '%'||#{keyword1,jdbcType=VARCHAR}||'%')
 		</if>
 	</sql>
-	<!-- 입금대기중 검색조건 -->
+	<!-- 입금완료/배송요청 검색조건 -->
 	<sql id="search2">
 		<if test="startDay2!=null and startDay2!=''">
 			<![CDATA[
@@ -50,7 +50,6 @@
 		</if>
 	</sql>
 	<!-- 배송중/구매확정전 -->
-	<!-- 입금대기중 검색조건 -->
 	<sql id="search3">
 		<if test="startDay3!=null and startDay3!=''">
 			<![CDATA[
@@ -70,6 +69,28 @@
 			and (o.obname like '%'||#{keyword3,jdbcType=VARCHAR}||'%' 
 			or m.mname like '%'||#{keyword3,jdbcType=VARCHAR}||'%' 
 			or b.receiver like '%'||#{keyword3,jdbcType=VARCHAR}||'%')
+		</if>
+	</sql>
+	<!-- 구매확정/정산대기 리스트 -->
+	<sql id="search4">
+		<if test="startDay4!=null and startDay4!=''">
+			<![CDATA[
+				and bpaydate >= to_date(#{startDay4},'yyyy-mm-dd') and bpaydate <= to_date(#{endDay4},'yyyy_mm_dd')+0.99999
+			]]>
+		</if>
+		<if test='field4=="obname"'>
+			and o.obname like '%'||#{keyword4,jdbcType=VARCHAR}||'%'
+		</if>
+		<if test='field4=="mname"'>
+			and m.mname like '%'||#{keyword4,jdbcType=VARCHAR}||'%'
+		</if>
+		<if test='field4=="receiver"'>
+			and b.receiver like '%'||#{keyword4,jdbcType=VARCHAR}||'%'
+		</if>
+		<if test='field4=="all" and keyword4!=null and keyword4 !=""'>
+			and (o.obname like '%'||#{keyword4,jdbcType=VARCHAR}||'%' 
+			or m.mname like '%'||#{keyword4,jdbcType=VARCHAR}||'%' 
+			or b.receiver like '%'||#{keyword4,jdbcType=VARCHAR}||'%')
 		</if>
 	</sql>
 	<resultMap type="obsalesjoin" id="obsalesjoin">
@@ -136,6 +157,7 @@
 		<include refid="search"></include>
 		<include refid="search2"></include>
 		<include refid="search3"></include>
+		<include refid="search4"></include>
 	</select>
 	
 	<!-- 출고처리 -->
@@ -181,7 +203,7 @@
 	            select b.bpaynum BPAYNUM, o.SNUM SNUM, p.BTYPE BTYPE, p.BCOUNT BCOUNT, 
                     b.BADDR BADDR, b.BPHONE BPHONE, b.BFINALMONEY BFINALMONEY, b.BORDERDATE BORDERDATE, b.BPAYDATE BPAYDATE, 
                     b.BSTATUS BSTATUS, b.ORDERMONEY ORDERMONEY, b.MOTHODPAYMENT MOTHODPAYMENT, b.RECEIVER RECEIVER, 
-                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, ob.obcnum, ob.feepay, ob.settlement, ob.feedate
+                    b.MNUM MNUM, b.DELFEE DELFEE,m.mname MNAME, ob.obcnum OBCNUM, ob.feepay FEEPAY, ob.settlement SETTLEMENT, ob.feedate FEEDATE,
                     o.obname OBNAME,o.obsaleprice OBSALEPRICE,o.obnum OBNUM
 	                from paymentbook p,( select * from
                     (
@@ -194,19 +216,18 @@
                                 select bp.bpaynum pay from 
                                 bpayment b,oldbooks o,paymentbook bp,members m, obcomplete ob 
                                 where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum 
-                                and bp.bnum=o.obnum and m.mnum=b.mnum and b.bpaynum=ob.obpaynum
+                                and bp.bnum=o.obnum and m.mnum=b.mnum and b.bpaynum=ob.bpaynum and ob.bocomstatus=0
+                                <include refid="search4"></include>
                                 order by b.borderdate desc  
                              ) 
                            )
                         )a
 	    <![CDATA[
-                    )where r>=#{startRow} and r<=#{endRow} ) )b, oldbooks o,members m 
-	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum     
+                    )where r>=#{startRow} and r<=#{endRow} ) )b, oldbooks o,members m, obcomplete ob 
+	            where b.bpaynum=p.bpaynum and p.btype=2 and p.bnum=o.obnum and b.mnum=m.mnum and b.bpaynum=ob.bpaynum    
 	           )
 		]]>
 	</select>
-	
-	
 	
 	
 </mapper>
