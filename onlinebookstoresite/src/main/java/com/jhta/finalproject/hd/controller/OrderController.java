@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.OrderService;
+import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
+import com.jhta.finalproject.hd.vo.VbankVo;
 
 @Controller
 public class OrderController {
@@ -83,10 +86,10 @@ public class OrderController {
 		
 		return ".usedorder";
 	}
-	//바로 주문하기 클릭 (( 책번호랑 중고 받음 ))
+
 	//================== 중고상품 주문 컨트롤러 끝 ===========================//
 	@RequestMapping(value="/order/directUsedOrder")
-	public String directUsedOrder(HttpSession session,int obnum,int bcount,Model model) {
+	public String directUsedOrder(int obnum,int bcount,Model model,HttpSession session) {
 		String path=session.getAttribute("cp")+"/resources/hd/image";
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=0; //비회원 회원번호 0번으로 가정함.
@@ -95,26 +98,141 @@ public class OrderController {
 		}
 		int totalprice=0;
 		int totalpoint=0;
-		OrderListResultVo vo=service.directorder(obnum);
-		String imgpath=path+"\\"+vo.getImgsavefilename();
-		int point=vo.getBpoint();
-		int price=vo.getBprice();
+		UsedOrderListVo vo=service.directusedorder(obnum);
+		int status=vo.getObstatus();
+		String statusString="";
+		if(status==1) {
+			statusString="[중고-최상]";
+		}else if(status==2) {
+			statusString="[중고-상]";
+		}else if(status==3) {
+			statusString="[중고-중]";
+		}else if(status==4) {
+			statusString="[중고-하]";
+		}
+		vo.setStatusString(statusString);
+		int saleprice=vo.getObsaleprice();
 		vo.setBcount(bcount);
-		totalprice+=(price*bcount);
-		totalpoint+=(point*bcount);
-		vo.setTotalpoint(point*bcount);
-		vo.setTotalvalue(price*bcount);
+		vo.setTotalvalue(saleprice*bcount);
+		totalprice+=saleprice*bcount;
+		String imgpath=path+"\\"+vo.getImgsavefilename();
 		vo.setImgpath(imgpath);
-		List<OrderListResultVo> list=new ArrayList<OrderListResultVo>();
+		int totalshipfee=vo.getObdelfee();
+		List<UsedOrderListVo>list=new ArrayList<UsedOrderListVo>();
 		list.add(vo);
 		model.addAttribute("list", list);
 		model.addAttribute("totalprice", totalprice);
-		model.addAttribute("totalpoint", totalpoint);
-		model.addAttribute("mnum",mnum);
-		return ".order";
+		model.addAttribute("totalshipfee",totalshipfee);
+		return ".usedorder";
 	}
 	
 	//================== 중고/새상품 공용컨트롤러 시작 ========================//
+	//주문/결제 완료페이지로 이동함.
+		@RequestMapping(value="/order/resultorder",method=RequestMethod.POST)
+		public String orderCompletePage(int bpaynum,String method,String separate,HttpSession session,Model model) {
+			int mnum=0;
+			String smnum=(String)session.getAttribute("mnum");
+			if(smnum!=null) {
+				mnum=Integer.parseInt(smnum);
+			}
+			OrderCompleteResultVo vo=service.complete_info(bpaynum);
+			if(mnum!=0) {
+				vo.setName(service.getName(mnum));
+			}else {
+				vo.setName(vo.getReceiver());
+			}
+			String addr=vo.getAddr();
+			String [] addrGroup=addr.split("\\|");
+			String addr1=addrGroup[0]; //우편번호
+			String addr2=addrGroup[1]; // 도로명주소
+			String addr3=addrGroup[2]; // 지번주소
+			String addr4=addrGroup[3]; // 상세주소
+			String addr5=addrGroup[4]; // 참고주소
+			String jibunaddr="("+addr1+") "+addr3+" "+addr5+" "+addr4;
+			String roadaddr="("+addr1+") "+addr2+" "+addr5+" "+addr4;
+			vo.setJibunaddr(jibunaddr);
+			vo.setRoadaddr(roadaddr);
+			List<OrderCompleteListVo>list=service.getPaymentBook(bpaynum);
+			String path=session.getAttribute("cp")+"/resources/hd/image";
+			int totalpoint=0;
+			int totalprice=0;
+			for(OrderCompleteListVo vo1:list) {
+				String imgpath=path+"\\"+vo1.getImgsavefilename();
+				vo1.setImgpath(imgpath);
+				vo1.setTotalvalue(vo1.getBprice()*vo1.getBcount());
+				vo1.setTotalpoint(vo1.getBpoint()*vo1.getBcount());
+				totalpoint+=vo1.getBpoint()*vo1.getBcount();
+				totalprice+=vo1.getBprice()*vo1.getBcount();
+			}
+			if(method.equals("vbank")) {
+				VbankVo bankvo=service.vbank_info(bpaynum);
+				model.addAttribute("bank",bankvo);
+			}
+			int payvalue=vo.getPaymentmoney()+vo.getDelfee(); //입금해야할 금액.
+			model.addAttribute("payvalue", payvalue); 
+			model.addAttribute("totalpoint",totalpoint); //총 적립예정포인트
+			model.addAttribute("totalprice", totalprice);
+			model.addAttribute("method",method);
+			model.addAttribute("vo", vo);
+			model.addAttribute("list", list);
+			return ".complete";
+		}
+
+		//주문완료 메소드
+		@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String orderComplete_card(@RequestParam(value="cartNum")String[]cartNum, 
+				@RequestParam(value="bnum")String[]bnum,
+				  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
+				  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
+				  String receiver,String callnum,String method,String imp_uid,String vbank_due,String separate,
+				  String vbank_name,long vbank_num,String vbank_holder,HttpSession session) {
+			int mnum=0;
+			String smnum=(String)session.getAttribute("mnum");
+			if(smnum!=null) {
+				mnum=Integer.parseInt(smnum);
+			}
+			int orderprice=pay_price+usepoint;
+			Map<String, Object>map=new HashMap<String, Object>();
+			map.put("mnum",mnum);
+			if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
+				map.put("cartNum",cartNum);
+			}
+			map.put("separate",separate);
+			//가상계좌일때만 추가되는 map 값들
+			if(method.equals("vbank")) {
+				if(vbank_name=="") {
+					vbank_name="케이뱅크";
+				}
+				map.put("vbank_name",vbank_name);
+				map.put("vbank_holder",vbank_holder);
+				map.put("vbank_num",vbank_num);
+			}
+			//=====================
+			map.put("bnum", bnum);
+			map.put("bcount", bcount);
+			map.put("point", point);
+			map.put("usepoint",usepoint);
+			map.put("totalpoint",totalpoint);
+			map.put("shipCharge",shipCharge);
+			map.put("shipaddr",shipaddr);
+			map.put("pay_price", pay_price);
+			map.put("pay_price_noshipfee", pay_price_noshipfee);
+			map.put("pay_price", pay_price);
+			map.put("method",method); //결제수단
+			map.put("receiver",receiver);
+			map.put("callnum",callnum);
+			map.put("orderprice",orderprice);
+			
+			HashMap<String, Object> resultmap=service.ordercomplete(map);
+			JSONObject json=new JSONObject();
+			json.put("bpaynum", (int)resultmap.get("bpaynum"));
+			json.put("method", method);
+			json.put("separate",separate);
+			return json.toString();
+		}
+			
+	
 	//주문페이지에서 현재 사용가능한 포인트조회..
 		@RequestMapping(value="/order/usablepoint",method=RequestMethod.POST)
 		@ResponseBody
@@ -178,145 +296,12 @@ public class OrderController {
 			json.put("phone3", phone3);
 			return json.toString();
 		}
-	//================== 중고/새상품 공용컨트롤러 시작 ========================//	
+	//================== 중고/새상품 공용컨트롤러 끝 ========================//	
 	
+		
+		
 	//================== 새상품 주문 컨트롤러 시작 ===========================//
-	//주문/결제 완료페이지로 이동함.
-	public String orderCompletePage(int bpaynum,String method,HttpSession session) {
-		return ".complete";
-	}
-		
-		
-	//가상계좌로 결제신청..
-	@RequestMapping(value="/order/vbankcomplete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String orderComplete_vbank(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
-								  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
-								  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
-								  String receiver,String callnum,String method,String imp_uid,String vbank_due,
-								  String vbank_name,String vbank_num,String vbank_holder,HttpSession session) {
-		int mnum=0;
-		String smnum=(String)session.getAttribute("mnum");
-		if(smnum!=null) {
-			mnum=Integer.parseInt(smnum);
-		}
-		int orderprice=pay_price+usepoint;	
-		Map<String, Object>map=new HashMap<String, Object>();
-		map.put("mnum",mnum);
-		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
-			map.put("cartNum",cartNum);
-		}
-		
-		//가상계좌일때만 추가되는 map 값들
-		if(method.equals("vbank")) {
-			if(vbank_name=="") {
-				vbank_name="케이뱅크";
-			}
-			map.put("vbank_name",vbank_name);
-			map.put("vbank_holder",vbank_holder);
-			map.put("vbank_num",vbank_num);
-			System.out.println("은행이름 : "+vbank_name);
-			System.out.println("계좌번호 : "+vbank_num);
-			System.out.println("예금주 : "+vbank_holder);
-		}
-		//=====================
-		map.put("bnum", bnum);
-		map.put("bcount", bcount);
-		map.put("point", point);
-		map.put("usepoint",usepoint);
-		map.put("totalpoint",totalpoint);
-		map.put("shipCharge",shipCharge);
-		map.put("shipaddr",shipaddr);
-		map.put("pay_price", pay_price);
-		map.put("pay_price_noshipfee", pay_price_noshipfee);
-		map.put("pay_price", pay_price);
-		map.put("method",method); //결제수단
-		map.put("receiver",receiver);
-		map.put("callnum",callnum);
-		map.put("orderprice",orderprice);
-		
-		HashMap<String, Object>resultmap=service.ordercomplete(map);
-		JSONObject json=new JSONObject();
-		json.put("bpaynum", (int)resultmap.get("bpaynum"));
-		json.put("method", method);
-		return null;//json.toString();
-	}
 	
-	//주문완료 메소드
-	@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String orderComplete_card(@RequestParam(value="cartNum")String[]cartNum, @RequestParam(value="bnum")String[]bnum,
-			  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
-			  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
-			  String receiver,String callnum,String method,String imp_uid,String vbank_due,
-			  String vbank_name,String vbank_num,String vbank_holder,HttpSession session) {
-		int mnum=0;
-		String smnum=(String)session.getAttribute("mnum");
-		if(smnum!=null) {
-			mnum=Integer.parseInt(smnum);
-		}
-		int orderprice=pay_price+usepoint;
-		Map<String, Object>map=new HashMap<String, Object>();
-		map.put("mnum",mnum);
-		if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
-			map.put("cartNum",cartNum);
-		}
-		
-		//가상계좌일때만 추가되는 map 값들
-		if(method.equals("vbank")) {
-			if(vbank_name=="") {
-				vbank_name="케이뱅크";
-			}
-			map.put("vbank_name",vbank_name);
-			map.put("vbank_holder",vbank_holder);
-			map.put("vbank_num",vbank_num);
-			System.out.println("은행이름 : "+vbank_name);
-			System.out.println("계좌번호 : "+vbank_num);
-			System.out.println("예금주 : "+vbank_holder);
-		}
-				//=====================
-		map.put("bnum", bnum);
-		map.put("bcount", bcount);
-		map.put("point", point);
-		map.put("usepoint",usepoint);
-		map.put("totalpoint",totalpoint);
-		map.put("shipCharge",shipCharge);
-		map.put("shipaddr",shipaddr);
-		map.put("pay_price", pay_price);
-		map.put("pay_price_noshipfee", pay_price_noshipfee);
-		map.put("pay_price", pay_price);
-		map.put("method",method); //결제수단
-		map.put("receiver",receiver);
-		map.put("callnum",callnum);
-		map.put("orderprice",orderprice);
-		
-		HashMap<String, Object> resultmap=service.ordercomplete(map);
-		JSONObject json=new JSONObject();
-		json.put("bpaynum", (int)resultmap.get("bpaynum"));
-		json.put("method", method);
-		return json.toString();
-		/*
-		 ======디버깅할때 사용함 ============================
-		 System.out.println("cartNum배열 크기:"+cartNum.length);
-		System.out.println("bnum배열 크기 : "+bnum.length);
-		for(int i=0;i<bnum.length;i++) {
-			System.out.println("==============");
-			System.out.println(cartNum[i]);
-			System.out.println(bnum[i]);
-			System.out.println(bcount[i]);
-			System.out.println(point[i]);
-			System.out.println("==============");
-		}
-		System.out.println("받는사람 : "+reciever);
-		System.out.println("배송주소 : "+shipaddr);
-		System.out.println("총결제금액 :"+pay_price);
-		System.out.println("결제금액(배송비제외) :"+pay_price_noshipfee);
-		System.out.println("배송비 : "+shipCharge);
-		System.out.println("총적립포인트 : "+totalpoint);
-		System.out.println("사용포인트:" +usepoint);*/
-		
-	}
-		
 	// 장바구니에서 주문하기 클릭했을때 처리함.
 	@RequestMapping(value="/order/order",method = RequestMethod.POST)
 	public String order(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {

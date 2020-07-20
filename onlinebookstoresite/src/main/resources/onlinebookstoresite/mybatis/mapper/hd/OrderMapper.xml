@@ -27,7 +27,12 @@
 		
 		<!-- 해당주문의 주문한책데이터 추가. -->
 		<insert id="paymentbook" parameterType="hashmap">
-			insert into paymentbook values(#{bpaynum},1,#{bnum},#{bcount},#{point},SEQ_paymentbook_num.nextval)
+			insert into paymentbook values(#{bpaynum},
+											<choose>
+											<when test="separate=='new'">1</when>
+											<otherwise>2</otherwise>
+											</choose>
+											,#{bnum},#{bcount},#{point},SEQ_paymentbook_num.nextval)
 		</insert>
 		<!-- 새책테이블에서 원래 수량 구하기 -->
 		<select id="books_bcount" parameterType="hashmap" resultType="int">
@@ -37,7 +42,17 @@
 		<update id="change_count" parameterType="hashmap">
 			update books set bcount=#{changebcount} where bnum=#{bnum}
 		</update>
-		
+		<!--  중고책테이블에서 중고책 상태변경 -->
+		<update id="change_salestatus" parameterType="hashmap">
+			update oldbooks set obsalestatus=<choose>
+											<when test="method=='card'">2</when>
+											<otherwise>1</otherwise>
+											</choose>
+											where obnum in 	
+											<foreach collection="bnum" item="item" index="index" open="(" close=")" separator=",">
+												#{item}
+											</foreach>
+		</update>
 		<!-- 포인트사용 -->
 		<insert id="use_point" parameterType="hashmap">
 			insert into point values(#{mnum},#{bpaynum},#{usedpoint},sysdate)
@@ -62,6 +77,28 @@
 		
 	<!--//////////// 주문완료 관련 트랜잭션 DML 끝 /////////////-->
 	
+	<!-- 주문번호받아서 주문에대한 정보 받아옴 -->
+	<select id="complete_info" parameterType="int" resultType="completeVo">
+		select baddr addr,receiver,bpaynum ordernum,bfinalmoney paymentmoney
+		,usedpoint,delfee from bpayment where bpaynum=#{bpaynum}
+	</select>
+	<!-- 해당회원번호를 가진 회원의 이름 -->
+	<select id="getName" parameterType="int" resultType="string">
+		select mname from members where mnum=#{mnum}
+	</select>
+	<!-- 해당주문번호에 해당하는 주문한책들. -->
+	<select id="getPaymentBook" parameterType="int" resultType="completeList" >
+		select imgsavefilename,btitle,bprice,bpoint,paymentbook.bcount from
+		(select * from paymentbook where bpaynum=#{bpaynum})paymentbook,
+		(select * from books)books,
+		(select * from img where btype=1 and thumbnail=1)img
+		where paymentbook.bnum=books.bnum and books.bnum=img.bnum
+	</select>
+	
+	<select id="vbank_info" parameterType="int" resultType="vbankVo">
+		select * from vbank where bpaynum=#{bpaynum}
+	</select>
+	
 	<!-- 중고상품 장바구니->주문페이지 SELECT 문 -->
 	<select id="usedorderlist" parameterType="hashmap" resultType="usedOrderVo">
 		select cartnum,cart.bnum,cart.btype,cart.bcount,obname,obstatus,oborgprice,obsaleprice,obdelfee,members.mid sid,members.mnum smnum,imgsavefilename from 
@@ -76,6 +113,15 @@
 		(select * from members) members 
 		where cart.bnum=ob.obnum and cart.bnum=img.bnum and ob.snum=obs.snum and obs.mnum=members.mnum
 		order by sid desc
+	</select>
+	<select id="directusedorder" parameterType="int" resultType="usedOrderVo">
+		select obnum bnum,img.btype,obname,obstatus,oborgprice,obsaleprice,obdelfee,members.mid sid,members.mnum smnum,imgsavefilename
+		from
+		(select * from oldbooks where obnum=#{obnum})ob,
+		(select * from obseller)obs,
+		(select * from img where btype=2 and thumbnail=1) img,
+		(select * from members)members
+		where ob.obnum = img.bnum and ob.snum=obs.snum and obs.mnum=members.mnum
 	</select>
  	<!-- 장바구니 -> 주문페이지 갈때 사용하는 SELECT 문  -->
 	<select id="orderlist" parameterType="hashmap" resultType="orderVo">

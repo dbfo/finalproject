@@ -69,14 +69,6 @@
 				<td><span id="ship_charge"></span>원</td>
 				<td>
 					<span id="use_point"></span>원
-					<button type="button" class="btn btn-dark btn-sm disabled" id="point_cancel">취소</button>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" style="padding:0px;">
-					사용가능한 포인트 : <strong><span id="usable_point"></span></strong> 포인트  
-					<button type="button"  id="usePbtn" class="btn btn-dark btn-sm" 
-							data-toggle="modal" data-target="#modal_point">사용</button>
 				</td>
 			</tr>
 	</table>
@@ -211,13 +203,9 @@
 
 <!-- ////////// 포인트사용 모달 끝//////////////////////// -->
 
-<!-- 주소 API 사용 스크립트 시작-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 주소 API 사용 스크립트 끝-->
-
-<!-- 아임포트 결제 API 사용 스크립트 시작 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<!-- 아임포트 결제 API 사용 스크립트 끝 -->
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -225,6 +213,7 @@
 		usablepoint();
 		shipCharge();
 		finalprice();
+	
 	});
 
 	//상세주소 입력시.
@@ -528,6 +517,7 @@
 				    		usepoint:usepoint,
 				    		totalpoint:totalpoint,
 				    		shipaddr:addr,
+				    		separate:'new',
 				    		shipCharge:ship_charge,
 				    		pay_price:pay_price,
 				    		pay_price_noshipfee:pay_price_noshipfee,
@@ -539,15 +529,18 @@
 			    		console.log('done');
 			    		var bpaynum_value=data.bpaynum;
 			    		var method_value=data.method;
+			    		var separate_value=data.separate;
 			    		var form=$('<form></form>');
 			    		form.attr('action','${cp}/order/resultorder');
 			    		form.attr('method','post');
 			    		form.appendTo('body');
 			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
 			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		var separate="<input type='hidden' value="+separate_value+" name='separate'>";
 			    		form.append(bpaynum);
 			    		form.append(method);
-			    		//form.submit();
+			    		form.append(separate);
+			    		form.submit();
 							/*
 			    			var msg = '결제가 완료되었습니다.';
 			    			msg += '\n고유ID : ' + rsp.imp_uid;
@@ -601,6 +594,7 @@
 				    		bnum:bnumArray,
 				    		bcount:bcountArray,
 				    		point:point,
+				    		separate:'new',
 				    		usepoint:usepoint,
 				    		totalpoint:totalpoint,
 				    		shipaddr:addr,
@@ -613,15 +607,18 @@
 			    	}).done(function(data) {
 			    		var bpaynum_value=data.bpaynum;
 			    		var method_value=data.method;
+			    		var separate_value=data.separate;
 			    		var form=$('<form></form>');
 			    		form.attr('action','${cp}/order/resultorder');
 			    		form.attr('method','post');
 			    		form.appendTo('body');
 			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
 			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		var separate="<input type='hidden' value="+separate_value+" name='separate'>";
 			    		form.append(bpaynum);
 			    		form.append(method);
-			    		//form.submit();		    		
+			    		form.append(separate);
+			    		form.submit();		    		
 			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
@@ -630,7 +627,7 @@
 			    }
 			});
 		}
-	})
+	});
 	
 	///////////// 결제 API 끝 ////////////////////////////////////////////////////////
 </script>

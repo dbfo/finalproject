@@ -10,9 +10,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
+import com.jhta.finalproject.hd.vo.VbankVo;
 
 @Repository
 public class OrderDao {
@@ -57,9 +60,28 @@ public class OrderDao {
 	public int vbank(Map<String,Object>map) {
 		return sqlsession.insert(NAMESPACE+".vbank",map);
 	}
-	
+	public int change_salestatus(Map<String,Object>map) {
+		return sqlsession.update(NAMESPACE+".change_salestatus",map);
+	}
 	
 	//=========== 주문완료 트랜잭션 관련 dao 끝 ===================//
+	
+	public OrderCompleteResultVo complete_info(int bpaynum) {
+		return sqlsession.selectOne(NAMESPACE+".complete_info", bpaynum);
+	}
+	
+	public String getName(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".getName",mnum);
+	}
+	
+	public List<OrderCompleteListVo> getPaymentBook(int bpaynum){
+		return sqlsession.selectList(NAMESPACE+".getPaymentBook",bpaynum);
+	}
+	
+	public VbankVo vbank_info(int bpaynum) {
+		return sqlsession.selectOne(NAMESPACE+".vbank_info",bpaynum);
+	}
+	
 	// ============ 새상품 관련 dao 시작 ==========================//
 	//주문리스트 출력
 	public List<OrderListResultVo> inputorderlist(Map<String, Object>map){
@@ -79,9 +101,13 @@ public class OrderDao {
 	}
 	// ============ 새상품 관련 dao 끝 ==========================//
 	
+	
 	// ============ 중고상품 관련 dao 시작 ==========================//
 	public List<UsedOrderListVo> usedorderlist(Map<String,Object>map){
 		return sqlsession.selectList(NAMESPACE+".usedorderlist",map);
+	}
+	public UsedOrderListVo directUsedOrder(int obnum) {
+		return sqlsession.selectOne(NAMESPACE+".directusedorder",obnum);
 	}
 	
 	// ============ 중고상품 관련 dao 끝 ==========================//

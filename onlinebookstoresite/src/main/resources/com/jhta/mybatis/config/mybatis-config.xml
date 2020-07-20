@@ -19,6 +19,10 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.ShipmentInfoVo" alias="shipVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.UsedCartListVo" alias="usedVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.UsedOrderListVo" alias="usedOrderVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteResultVo" alias="completeVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteListVo" alias="completeList"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.VbankVo" alias="vbankVo"/>
+  	
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->

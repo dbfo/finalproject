@@ -5,7 +5,7 @@
 <div class="container" style="border:1px solid black">
 <!--/////////// 주문상품 리스트 테이블 시작 ///////////////-->
 <h4><span style='color:#f51167'>상품</span>확인</h4>
-<table class="table">
+<table class="table" id="productTable">
 	<thead class="thead-dark">
 		<tr>
 			<th colspan="2">상품명</th>
@@ -19,7 +19,7 @@
 	</thead>
 	<tbody>
 		<c:forEach var="vo" items="${list }" >
-			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartnum }">
+			<tr data-bnum="${vo.bnum }" data-bcount="${vo.bcount }" data-cartnum="${vo.cartnum }" id="productTr" class="productTr">
 				<td class="imgTd"><img src="${vo.imgpath }" class="orderlistimg"></td>
 				<td><span>${vo.statusString }</span>&nbsp ${vo.obname }</td>
 				<td>${vo.sid }</td>
@@ -62,7 +62,7 @@
 				<th class="table-secondary">사용포인트</th>
 				<td rowspan="2" class="table-danger">
 					<strong>최종 결제금액</strong><br>
-					<span id="final_payment_price"></span>원
+					<span class="final_payment_price"></span>원
 				</td>
 			</tr>	
 			<tr class="table-secondary">
@@ -108,7 +108,7 @@
 		</tr>
 		<tr>
 			<td  class="table-info tableloc"><strong>이름</strong></td>
-			<td><input type="text" id="name" value="" class="textbox1"></td>
+			<td><input type="text" id="name"  class="textbox1"></td>
 			<td rowspan="3" class="tableloc">
 				<table class="tableloc">
 					<tr>
@@ -152,8 +152,30 @@
 <br>
 <div class="container" style="border:1px solid black;">
 		<h4><span style='color:#f51167'>결제</span>정보</h4>
-		<table>
-		
+		<table class="table table-borderd">
+			<tr>
+				<td rowspan="2">결제수단</td>
+				<td rowspan="2">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="payment_option" checked="checked" value="0">신용카드
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="payment_option" value="1">가상계좌 무통장입금
+						</label>
+					</div>
+				</td>
+				<td>
+					최종결제금액
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="final_payment_price" id="final_price"></span>원
+				</td>
+			</tr>
 		</table>
 		
 
@@ -190,10 +212,8 @@
 </div>
 <!-- ////////// 포인트사용 모달 끝//////////////////////// -->
 
-<!-- 주소 API 사용 스크립트 시작-->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 주소 API 사용 스크립트 끝-->
-<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <!-- ////// 스크립트 시작 ///////// -->
 <script type="text/javascript">
@@ -201,6 +221,9 @@
 		shipAddr();
 		usablepoint();
 		finalprice();
+		$(".productTr").each(function(){
+			console.log('장바구니번호:'+$(this).data('cartnum'))
+		});
 	});
 	//상세주소 입력시.
 	$("#addr4").on('keyup',function(){
@@ -279,7 +302,7 @@
 		var shipcharge=$("#ship_charge").text();
 		var usepoint=$("#use_point").text();
 		var finalprice=Number(totalprice)+Number(shipcharge)-Number(usepoint);
-		$("#final_payment_price").text(finalprice);
+		$(".final_payment_price").text(finalprice);
 	}
 	
 	// 하단 포인트 사용 버튼 눌렀을때 
@@ -388,4 +411,215 @@
     }
 	///////////// 주소 API 끝 ///////////////////////////////////////////////////////
 
+	
+	///////////// 결제 API 시작 //////////////////////////////////////////////////////
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp22319375'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	$("#paymentBtn").click(function(){
+		var tablelength=$("#productTable >tbody tr").length; //첫번째행 제외.
+		var td=$("#productTable >tbody >tr").children(); //상품테이블 첫번째행의 td들..
+		var title=td.eq(1).text();
+		var ordername=title;
+		if(tablelength>1){ //상품테이블에 상품갯수가 하나가아닐때.
+			ordername=title+" 외 "+(tablelength-1)+"개 상품 포함"
+		}
+		//구매자(주문자) 전화번호,
+		var orderphone1=$("#orderphone1").val();
+		var orderphone2=$("#orderphone2").val();
+		var orderphone3=$("#orderphone3").val();
+		var orderphone=orderphone1+"-"+orderphone2+"-"+orderphone3;
+		//입금날짜기한 계산.
+		var date1=new Date(); //현재 날짜 
+		var date2=new Date(Date.parse(date1) + 7 * 1000 * 60 * 60 * 24); //일주일후 
+		var date3=date2.getFullYear()+("0"+(date2.getMonth()+1)).slice(-2)+("0"+date2.getDate()).slice(-2);
+		// YYYYMMdd 형태로 
+		
+		//각행마다 장바구니번호 , 책번호 ,책 수량 확인,각 행마다 적립포인트..
+		var bnumArray=[];
+		var bcountArray=[];
+		var cartNumArray=[];
+		$(".productTr").each(function(){
+			var bnum=$(this).data('bnum');
+			var bcount=$(this).data('bcount');
+			bnumArray.push(bnum);
+			bcountArray.push(bcount);
+			console.log('장바구니번호 !! : '+$(this).data('cartnum'))
+			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
+				cartNumArray.push($(this).data('cartnum'));
+			}
+		})
+		//사용포인트 , 총적립포인트  
+		var usepoint=$("#use_point").text(); //사용포인트
+		
+		//배송주소 
+		var addr1=$("#addr1").val(); //우편번호
+		var addr2=$("#addr2").val(); //도로명주소 
+		var addr3=$("#addr3").val(); //지번주소
+		var addr4=$("#addr4").val(); //상세주소
+		var addr5=$("#addr5").val(); //참고주소. 
+		var addr=addr1+"|"+addr2+"|"+addr3+"|"+addr4+"|"+addr5; //데이터베이스에 저장할 주소.  '|'로 구분 
+		
+		//배송비 , 총결제금액 , 배송비제외 결제금액.
+		var ship_charge=$("#ship_charge").text();
+		var pay_price=$("#final_price").text();
+		var pay_price_noshipfee=(Number(pay_price)-Number(ship_charge));
+		
+		//수령자
+		var receiver=$("#name").val(); 
+		//전화번호
+		var phone1=$("#phone1").val();
+		var phone2=$("#phone2").val();
+		var phone3=$("#phone3").val();
+		
+		var callnumber=phone1+"-"+phone2+"-"+phone3; //데이터베이스에 저장될 전화번호.
+		
+		
+		//결제수단에 따라 분류.
+		var paymentOption=$("input[name='payment_option']:checked").val();
+		console.log('paymentOption : '+paymentOption)
+		if(paymentOption==0){ // 신용카드 선택
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : ordername,
+			    amount : 10,//$("#final_price").text(),
+			    buyer_email : '',
+			    buyer_name : $("#ordername").val(),
+			    buyer_tel : orderphone,
+			    buyer_addr : '',
+			    buyer_postcode : '',
+			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			    	console.log('payment_success')
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	$.ajax({
+			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		type: 'POST',
+			    		traditional:true,
+			    		dataType: 'json',
+			    		data: {
+			    			method:'card',
+				    		imp_uid : rsp.imp_uid,
+				    		cartNum:cartNumArray,
+				    		bnum:bnumArray,
+				    		bcount:bcountArray,
+				    		usepoint:usepoint,
+				    		shipaddr:addr,
+				    		point:'0',
+			    			totalpoint:'0',
+				    		shipCharge:ship_charge,
+				    		separate:'used',
+				    		pay_price:pay_price,
+				    		pay_price_noshipfee:pay_price_noshipfee,
+				    		receiver:receiver,
+				    		callnum:callnumber
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		console.log('done');
+			    		var bpaynum_value=data.bpaynum;
+			    		var method_value=data.method;
+			    		var separate_value=data.separate;
+			    		var form=$('<form></form>');
+			    		form.attr('action','${cp}/order/resultorder');
+			    		form.attr('method','post');
+			    		form.appendTo('body');
+			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
+			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		var separate="<input type='hidden' value="+separate_value+" name='separate'>";
+			    		form.append(bpaynum);
+			    		form.append(method);
+			    		form.append(separate);
+			    		form.submit();
+							/*
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+
+			    			alert(msg);*/
+			    	});
+			    } else {
+			    	console.log('payment_fail')
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
+			    }
+			});
+		}else if(paymentOption==1){ //가상계좌선택
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : ordername,
+			    amount : $("#final_price").text(),
+			    vbank_due:date3,
+			    buyer_email : '',
+			    buyer_name : $("#ordername").val(),
+			    buyer_tel : orderphone,
+			    buyer_addr : '',
+			    buyer_postcode : '',
+			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			    	console.log(rsp.vbank_num)
+			   		console.log(rsp.vbank_name)
+			   		console.log(rsp.vbank_holder);
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		traditional:true,
+			    		data: {
+			    			vbank_num:rsp.vbank_num, //가상계좌 계좌번호
+			    			vbank_name:rsp.vbank_name, //가상계좌 은행명
+			    			vbank_holder:rsp.vbank_holder, //가상계좌 예금주명
+			    			vbank_due:date3,
+			    			method:'vbank',
+			    			separate:'used',
+			    			point:'0',
+			    			totalpoint:'0',
+				    		imp_uid : rsp.imp_uid,
+				    		cartNum:cartNumArray,
+				    		bnum:bnumArray,
+				    		bcount:bcountArray,
+				    		usepoint:usepoint,
+				    		shipaddr:addr,
+				    		shipCharge:ship_charge,
+				    		pay_price:pay_price,
+				    		pay_price_noshipfee:pay_price_noshipfee,
+				    		receiver:receiver,
+				    		callnum:callnumber
+			    		}
+			    	}).done(function(data) {
+			    		var bpaynum_value=data.bpaynum;
+			    		var method_value=data.method;
+			    		var separate_value=data.separate;
+			    		var form=$('<form></form>');
+			    		form.attr('action','${cp}/order/resultorder');
+			    		form.attr('method','post');
+			    		form.appendTo('body');
+			    		var bpaynum="<input type='hidden' value="+bpaynum_value+" name='bpaynum'>";
+			    		var method="<input type='hidden' value="+method_value+" name='method'>";
+			    		var separate="<input type='hidden' value="+separate_value+" name='separate'>";
+			    		form.append(bpaynum);
+			    		form.append(method);
+			    		form.append(separate);
+			    		form.submit();		    		
+			    	});
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			        alert(msg);
+			    }
+			});
+		}
+	})
+	
+	///////////// 결제 API 끝 ////////////////////////////////////////////////////////
 </script>

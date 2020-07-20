@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.finalproject.hd.dao.OrderDao;
+import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
+import com.jhta.finalproject.hd.vo.VbankVo;
 
 @Service
 public class OrderService {
@@ -27,27 +30,36 @@ public class OrderService {
 		String [] bcount=(String [])map.get("bcount");
 		String [] point=(String [] )map.get("point");
 		String method=(String)map.get("method");
+		String separate=(String)map.get("separate");
 		dao.bpayment(map);
 		int bpayNum=dao.getbpayNum();
 		HashMap<String, Object> map1=new HashMap<String, Object>();
 		map.put("bpaynum", bpayNum);
 		map1.put("bpaynum", bpayNum);
+		map1.put("separate",separate);
 		for(int i=0;i<bnum.length;i++) {
 			map1.put("bnum", bnum[i]);
-			int orgbcount=dao.books_bcount(map1); //현재 테이블에서 수량 구하기.
-			int orderbcount=Integer.parseInt(bcount[i]);//주문한수량.
-			int changebcount=orgbcount-orderbcount; 
 			map1.put("bcount",bcount[i]);
-			map1.put("changebcount",changebcount);
-			map1.put("point",point[i]);
-			dao.paymentbook(map1); // paymentbook 테이블에 데이터추가.
-			dao.change_count(map1); //book테이블 수량변경 
+			if(separate.equals("new")) {
+				int orgbcount=dao.books_bcount(map1); //현재 테이블에서 수량 구하기.
+				int orderbcount=Integer.parseInt(bcount[i]);//주문한수량.
+				int changebcount=orgbcount-orderbcount; 
+				map1.put("changebcount",changebcount);
+				map1.put("point",point[i]);
+				dao.change_count(map1); //book테이블 수량변경 
+			}else {
+				map1.put("point",0);
+			}
+			dao.paymentbook(map1); // paymentbook 테이블에 데이터추가.	
+		}
+		if(separate.equals("used")) {
+			dao.change_salestatus(map);
 		}
 		if((int)map.get("mnum")!=0) {
 			int usedpoint=(int)map.get("usepoint")*(-1);
 			map.put("usedpoint", usedpoint);
 			dao.use_point(map); //포인트 사용내역 insert
-			if(method.equals("vbank")) { //가상계좌의경우 결제완료될때 포인트적립이되야하므로...
+			if(method.equals("card")&&separate.equals("new")) { //카드일떄만 바로 ..
 				dao.point_plus(map); //적립포인트 +
 			}
 		}
@@ -61,23 +73,41 @@ public class OrderService {
 		resultmap.put("bpaynum",bpayNum);
 		return resultmap;
 	}
+	// =====주문완료 트랜잭션 끝========= //
 	
-	// 주문완료 트랜잭션 끝 //
+	public OrderCompleteResultVo complete_info(int bpaynum) {
+		return dao.complete_info(bpaynum);
+	}
+	public String getName(int mnum) {
+		return dao.getName(mnum);
+	}
+	public List<OrderCompleteListVo> getPaymentBook(int bpaynum){
+		return dao.getPaymentBook(bpaynum);
+	}
+	public VbankVo vbank_info(int bpaynum) {
+		return dao.vbank_info(bpaynum);
+	}
 	
+	//새상품 주문리스트
 	public List<OrderListResultVo> inputorderlist(Map<String, Object>map){
 		return dao.inputorderlist(map);
 	}
+	//바로구매클릭시 주문리스트
 	public OrderListResultVo directorder(int bnum) {
 		return dao.directOrder(bnum);
 	}
+	//배송주소 받아오기
 	public ShipmentInfoVo getAddr(int mnum) {
 		return dao.getAddr(mnum);
 	}
+	//사용가능한 주소
 	public int getPoint(int mnum) {
 		return dao.getPoint(mnum);
 	}
 	public List<UsedOrderListVo> usedorderlist(Map<String,Object>map){
 		return dao.usedorderlist(map);
 	}
-	
+	public UsedOrderListVo directusedorder(int obnum) {
+		return dao.directUsedOrder(obnum);
+	}
 }
