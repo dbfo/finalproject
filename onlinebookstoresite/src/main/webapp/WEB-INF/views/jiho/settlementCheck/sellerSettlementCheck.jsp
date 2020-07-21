@@ -48,7 +48,6 @@
 }
 
 </style>
-<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <div id="settlementContent">
 <h2>정산조회</h2>
 	<form action="${cp }/seller/settlementCheck">

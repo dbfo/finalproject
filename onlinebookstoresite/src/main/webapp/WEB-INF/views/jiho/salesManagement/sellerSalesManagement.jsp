@@ -77,7 +77,7 @@ p {
 	display: block;
 }
 </style>
-<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
+
 <div id="salesManagement">
 	<h2>판매관리</h2>
 	<!-- 상단 탭메뉴 -->

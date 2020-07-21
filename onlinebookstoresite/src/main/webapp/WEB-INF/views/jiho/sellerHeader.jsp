@@ -25,9 +25,9 @@
 						</ul>
 					</li>
 					<li><a href="${cp }/seller/settlementCheck">정산조회</a></li>
-					<li><a href="#">게시판</a>
+					<li><a href="${cp }/seller/qnalist">게시판</a>
 						<ul class="sub-menu">
-							<li><a href="#">QnA관리</a></li>
+							<li><a href="${cp }/seller/qnalist">QnA관리</a></li>
 							<li><a href="#">구매리뷰관리</a></li>
 						</ul>
 					</li>

@@ -35,4 +35,8 @@ public class SellerSalesManagementService {
 		List<SellerFeepayJoinVo> list=dao.getfeeList(map);
 		return list;
 	}
+	//getFeeTotRowCount(전체 행의 갯수(구매확정/정산대기))
+	public int getFeeTotRowCount(HashMap<String, Object> map) {
+		return dao.getFeeTotRowCount(map);
+	}
 }

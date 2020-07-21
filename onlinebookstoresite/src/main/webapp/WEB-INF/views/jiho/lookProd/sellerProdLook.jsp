@@ -8,7 +8,7 @@
 
 </style>
 -->
-<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.5.1.js"></script>
 <script>
 
 	$(function(){

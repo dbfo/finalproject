@@ -34,4 +34,8 @@ public class SellerSalesManagementDao {
 		List<SellerFeepayJoinVo> list=sqlSession.selectList(NAMESPACE+".getSalesFeeList", map);
 		return list;
 	}
+	//getFeeTotRowCount(전체 행의 갯수(구매확정/정산대기))
+	public int getFeeTotRowCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".getFeeTotRowCount", map);
+	}
 }
