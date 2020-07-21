@@ -34,6 +34,7 @@ public class OrderService {
 		String separate=(String)map.get("separate");
 		dao.bpayment(map);
 		int bpayNum=dao.getbpayNum();
+		System.out.println("bpaynum : "+bpayNum);
 		HashMap<String, Object> map1=new HashMap<String, Object>();
 		map.put("bpaynum", bpayNum);
 		map1.put("bpaynum", bpayNum);

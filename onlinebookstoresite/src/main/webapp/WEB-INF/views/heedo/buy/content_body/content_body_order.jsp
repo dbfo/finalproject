@@ -65,10 +65,17 @@
 				</td>
 			</tr>	
 			<tr class="table-secondary">
-				<td>${totalprice }원</td>
-				<td><span id="ship_charge"></span>원</td>
+				<td>${totalprice }원</td><td><span id="ship_charge">${totalshipfee }</span>원</td>
 				<td>
 					<span id="use_point"></span>원
+					<button type="button" class="btn btn-dark btn-sm disabled" id="point_cancel">취소</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding:0px;">
+					사용가능한 포인트 : <strong><span id="usable_point"></span></strong> 포인트  
+					<button type="button"  id="usePbtn" class="btn btn-dark btn-sm" 
+							data-toggle="modal" data-target="#modal_point" >사용</button>
 				</td>
 			</tr>
 	</table>

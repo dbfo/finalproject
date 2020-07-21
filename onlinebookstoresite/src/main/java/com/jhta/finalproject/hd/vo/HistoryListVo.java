@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class HistoryListVo {
 	private int ordernum;
-	private Date boderdate;
+	private Date borderdate;
 	private int bfinalmoney;
 	private int delfee;
 	private int bstatus;
@@ -16,11 +16,11 @@ public class HistoryListVo {
 	
 	public HistoryListVo() {}
 
-	public HistoryListVo(int ordernum, Date boderdate, int bfinalmoney, int delfee, int bstatus, int ordermoney,
+	public HistoryListVo(int ordernum, Date borderdate, int bfinalmoney, int delfee, int bstatus, int ordermoney,
 			String mname, String receiver, int btype, String ordername) {
 		super();
 		this.ordernum = ordernum;
-		this.boderdate = boderdate;
+		this.borderdate = borderdate;
 		this.bfinalmoney = bfinalmoney;
 		this.delfee = delfee;
 		this.bstatus = bstatus;
@@ -39,12 +39,12 @@ public class HistoryListVo {
 		this.ordernum = ordernum;
 	}
 
-	public Date getBoderdate() {
-		return boderdate;
+	public Date getBorderdate() {
+		return borderdate;
 	}
 
-	public void setBoderdate(Date boderdate) {
-		this.boderdate = boderdate;
+	public void setBorderdate(Date borderdate) {
+		this.borderdate = borderdate;
 	}
 
 	public int getBfinalmoney() {
@@ -111,4 +111,5 @@ public class HistoryListVo {
 		this.ordername = ordername;
 	}
 	
+
 }

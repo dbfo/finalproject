@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +28,7 @@ public class OrderHistoryController {
 		return ".orderhistory";
 	}
 	
-	@RequestMapping("/orderhistroy/newview")
+	@RequestMapping(value="/orderhistroy/newview",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String vieworderhistroy(HttpSession session,@RequestParam(defaultValue = "0")String date1,
 											@RequestParam(defaultValue = "0")String date2) {
@@ -37,9 +38,12 @@ public class OrderHistoryController {
 		List<HistoryListVo> list1=new ArrayList<HistoryListVo>();
 		for(HistoryListVo vo:list) {
 			int bpaynum=vo.getOrdernum();
+			System.out.println("bpaynum:"+bpaynum);
 			HashMap<String,Object>map=service.confirmtype(bpaynum);
-			int btype=(int)map.get("btype");
-			int bnum=(int)map.get("bnum");
+			Object ob=map.get("BTYPE");
+			System.out.println(ob);
+			int btype=Integer.parseInt(String.valueOf(map.get("BTYPE")));
+			int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
 			if(btype==1){
 				int bfinalmoney=vo.getBfinalmoney();
 				int delfee=vo.getDelfee();
@@ -61,8 +65,24 @@ public class OrderHistoryController {
 		for(HistoryListVo vo1:list1) {
 			JSONObject json=new JSONObject();
 			json.put("ordernum", vo1.getOrdernum());
-			json.put("borderdate", vo1.getBoderdate());
-			json.put("bstatus", vo1.getBstatus());
+			json.put("borderdate", vo1.getBorderdate());
+			String status="";
+			int bstatus=vo1.getBstatus();
+			if(bstatus==0) {
+				status="주문";
+			}else if(bstatus==1) {
+				status="결제완료";
+			}else if(bstatus==2) {
+				status="배송중";
+			}else if(bstatus==3) {
+				status="수령완료(구매확정)";
+			}else if(bstatus==4) {
+				status="반품신청";
+			}else if(bstatus==5) {
+				status="반품완료";
+			}
+			json.put("bstatus", bstatus);
+			json.put("status", status);
 			json.put("ordermoney", vo1.getOrdermoney());
 			json.put("mname", vo1.getMname());
 			json.put("receiver", vo1.getReceiver());
@@ -83,8 +103,8 @@ public class OrderHistoryController {
 		for(HistoryListVo vo:list) {
 			int bpaynum=vo.getOrdernum();
 			HashMap<String,Object>map=service.confirmtype(bpaynum);
-			int btype=(int)map.get("btype");
-			int bnum=(int)map.get("bnum");
+			int btype=Integer.parseInt(String.valueOf(map.get("BTYPE")));
+			int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
 			if(btype==2) {
 				int bfinalmoney=vo.getBfinalmoney();
 				int delfee=vo.getDelfee();
@@ -117,7 +137,7 @@ public class OrderHistoryController {
 		for(HistoryListVo vo1:list1) {
 			JSONObject json=new JSONObject();
 			json.put("ordernum", vo1.getOrdernum());
-			json.put("borderdate", vo1.getBoderdate());
+			json.put("borderdate", vo1.getBorderdate());
 			json.put("bstatus", vo1.getBstatus());
 			json.put("ordermoney", vo1.getOrdermoney());
 			json.put("mname", vo1.getMname());

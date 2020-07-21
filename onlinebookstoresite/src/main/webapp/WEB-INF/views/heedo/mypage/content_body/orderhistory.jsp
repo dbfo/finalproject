@@ -33,10 +33,10 @@
 						<th>주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
-						<th>주문상태</th>
 						<th>주문자</th>
 						<th>수령자</th>
 						<th>주문일자</th>
+						<th>주문상태</th>
 					</thead>
 					<tbody>
 					
@@ -49,6 +49,11 @@
 		</div>
 	</div>
 <script>
+	$(document).ready(function(){
+		viewNewOrderlist();
+		
+	});
+	
 	var viewNewOrderlist=function(){
 		$.ajax({
 			url:'/finalproject/orderhistroy/newview',
@@ -56,14 +61,24 @@
 			type:'post',
 			//data:{},
 			success:function(data){
+				console.log(data.length);
 				if(data.length==0){ //값이없을때..
 					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
 					$("#newTable > tbody").append(tableapp);
-					break;
+					return;
 				}
+				
 				$(data).each(function(index,item){
 					var tableapp="<tr>"
-							    	+"<td>";
+							    +"<td>"+item.ordernum+"</td>"
+							    +"<td>"+item.ordername+"</td>"
+							    +"<td>"+item.ordermoney+"</td>"
+							    +"<td>"+item.mname+"</td>"
+							    +"<td>"+item.receiver+"</td>"
+							    +"<td>"+item.borderdate+"</td>"
+							    +"<td>"+item.status+"</td>"
+							  +"</tr>";
+					$("#newTable > tbody").append(tableapp);
 				})
 				
 			}

@@ -97,6 +97,7 @@ public class OrderController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
+		
 		int totalprice=0;
 		int totalpoint=0;
 		UsedOrderListVo vo=service.directusedorder(obnum);
@@ -136,6 +137,7 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
+			System.out.println("mnum : "+mnum);
 			OrderCompleteResultVo vo=service.complete_info(bpaynum);
 			if(mnum!=0) {
 				vo.setName(service.getName(mnum));
@@ -222,6 +224,7 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
+			System.out.println("mnum : "+mnum);
 			int orderprice=pay_price+usepoint;
 			Map<String, Object>map=new HashMap<String, Object>();
 			map.put("mnum",mnum);

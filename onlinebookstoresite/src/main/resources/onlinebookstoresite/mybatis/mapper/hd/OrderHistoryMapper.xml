@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="confirmtype" parameterType="int" resultType="hashmap">
-		select btype,bnum from paymentbook where bpaynum=1 and rownum=1;
+		select btype,bnum from paymentbook where bpaynum=#{bpaynum} and rownum=1
 	</select>
 	
 	<select id="countPaymentBook" parameterType="int" resultType="int">
@@ -26,6 +26,6 @@
 	</select>
 	
 	<select id="usedBtitle" parameterType="int" resultType="hashmap">
-		select obname,obstatus from oldbooks where obnum=#{bnum};
+		select obname,obstatus from oldbooks where obnum=#{bnum}
 	</select>
 </mapper>
