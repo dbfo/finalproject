@@ -66,13 +66,13 @@
 				</tr>
 				<tr>
 					<td><input type="radio" name="bpaydate4" value="1" class="borderdate4"
-						<c:if test="${map.bpaydate4==1 || map.bpaydate4==null || map.bpaydate4==''}">checked</c:if>>전체
+							<c:if test="${map.bpaydate4==1 || map.bpaydate4==null || map.bpaydate4==''}">checked</c:if>>전체
 						<input type="radio" name="bpaydate4" value="2" class="borderdate4"
-						<c:if test="${map.bpaydate4==2}">checked</c:if>>결제일&nbsp;&nbsp;&nbsp;
+							<c:if test="${map.bpaydate4==2}">checked</c:if>>결제일&nbsp;&nbsp;&nbsp;
 						<input type="date" name="startDay4" value="${map.startDay4 }"
-						<c:if test="${map.bpaydate4==1 }">disabled</c:if>><span>&nbsp;~</span>
+							<c:if test="${map.bpaydate4==1 }">disabled</c:if>><span>&nbsp;~</span>
 						<input type="date" name="endDay4" value="${map.endDay4 }"
-						<c:if test="${map.bpaydate4==1 }">disabled</c:if>></td>
+							<c:if test="${map.bpaydate4==1 }">disabled</c:if>></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="keyword4" class="form-control" id="keyword_menu4"
