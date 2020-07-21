@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class = "container-fluid">
 <form action="${pageContext.request.contextPath }/cs/menu?PageName=${path}" method="post">
+	<h2>판매자 정산 관리</h2>
 	<table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>
@@ -65,43 +66,6 @@
 							<input class="form-control" type="date" name = "endDate" id = "endDate" value="${endDate }">
 						</div>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<th class="table-active">상품</th>
-			<td colspan="3">
-	
-				<div class="form-group row">
-					<div class="col-xs-2 ">
-						<select class="form-control" name="bfield" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
-							<option value =''>--선택--</option>
-							<option value="btitle" <c:if test="${bfield == 'btitle'}">selected</c:if>>책 이름</option>
-							<option value="bnum" <c:if test="${bfield == 'bnum'}">selected</c:if>>책 번호</option>
-						</select>
-					</div>
-					<div class="col-xs-3">
-						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
-					</div>
-				</div>
-			</td>
-		</tr>
-		<c:if test="${path < 4 }">
-		<tr>
-			<th class="table-active">처리상태</th>
-			<td>
-				<input type="checkbox" name="status" value="-1" id="ototal" <c:if test="${status == '-1'}">checked</c:if> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="1" id="oapply" <c:if test="${status == '1'}">checked</c:if>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>									
-				<input type="checkbox" name="status" value="3"id="ocomplete" <c:if test="${status == '3'}">checked</c:if>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
-			</td>
-		</tr>
-		</c:if>
-		<tr>
-			<th class="table-active">회원 / 비회원</th>
-			<td>
-				<input type="radio" name="mType" value="-1" id = "mtotal" <c:if test="${mType == '-1'}">checked</c:if>><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-				<input type="radio" name="mType" value="1" id = "member"<c:if test="${mType == '1'}">checked</c:if>><label for ="member"> &nbsp;회원 &nbsp;&nbsp;</label>
-				<input type="radio" name="mType" value="2" id = "nonemember"<c:if test="${mType == '2'}">checked</c:if>><label for="nonemember"> &nbsp;비회원 &nbsp;&nbsp;</label>
 			</td>
 		</tr>
 		<tr>

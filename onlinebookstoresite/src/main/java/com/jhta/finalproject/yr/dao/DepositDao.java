@@ -19,4 +19,11 @@ public class DepositDao {
 	public List<SettlementJoinVo> getSettlementList(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".settlementList",map);
 	}
+	
+	public int updateSestatus(int senum) {
+		return session.update(NAMESPACE+".updateSestatus", senum);
+	}
+	public int decreaseDeposit(HashMap<String, Object> map) {
+		return session.insert(NAMESPACE+".decreaseDeposit", map);
+	}	
 }

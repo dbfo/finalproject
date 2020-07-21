@@ -24,6 +24,7 @@
 						<a class="nav-link" href="${pageContext.request.contextPath}/totalOrder">전체주문목록</a>
 						<a class="nav-link" href="${pageContext.request.contextPath}/ship/menu?PageName=0">배송관리</a>
 						<a class="nav-link" href="${pageContext.request.contextPath}/cs/menu?PageName=1">취소/교환/반품/환불</a>
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/seller">판매자 수수료정산</a>
 					</nav>
 				</div>
 				<!-- 주문관리 -->

@@ -85,19 +85,18 @@ public class CSMenuController {
 			model.addAttribute("list", list);
 			
 		}else {
-			HashMap<String , Object> map1 = new HashMap<String, Object>();
-			
+						
 			if(PageName.equals("4")) {
 				int sestatus = 0;
-				map1.put("sestatus",sestatus);
+				map.put("sestatus",sestatus);
 
 			}else if(PageName.equals("5")) {
 				int sestatus = 1;				
-				map1.put("sestatus",sestatus);
+				map.put("sestatus",sestatus);
 			}
 			
-			List<SettlementJoinVo> list= dservice.getSettlementList(map1);
-
+			List<SettlementJoinVo> list= dservice.getSettlementList(map);
+			
 			model.addAttribute("list", list);	
 		}
 		

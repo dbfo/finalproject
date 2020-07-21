@@ -14,7 +14,7 @@
 						<div class = "col-xs-2 ">
 							<select class="form-control" name = "pfield">
 								<option value=''>--선택--</option>
-								<option value="bpaynum" <c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
+								<option value="bpaynum"<c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
 								<option value="mname" <c:if test="${pfield == 'mname'}">selected</c:if>>주문자명</option>
 							</select>
 						</div>

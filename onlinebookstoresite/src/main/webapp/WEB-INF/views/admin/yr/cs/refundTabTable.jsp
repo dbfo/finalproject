@@ -11,14 +11,20 @@
 		<input id="tab3" type="radio" name="tabs" <c:if test="${checked == 'tab3'}"> checked </c:if>><label for="tab3">전체</label>
 	
 		<section id="content1" >
-			<jsp:include page="refundTable.jsp" />	
+			<c:if test="${path == 4 }">
+				<jsp:include page="refundTable.jsp" />	
+			</c:if>
 		</section>
 		<section id="content2">
-			<jsp:include page="refundTable.jsp" />	
+			<c:if test="${path == 5 }">
+				<jsp:include page="refundTable.jsp" />	
+			</c:if>
 		</section>
 	
 		<section id="content3">
-			<jsp:include page="refundTable.jsp" />	
+			<c:if test="${path == 6 }">
+				<jsp:include page="refundTable.jsp" />	
+			</c:if>
 		</section>
 	</div>	
 </div>

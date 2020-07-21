@@ -28,6 +28,17 @@ public class SettlementJoinVo {
 	private Date appdate;
 	private Date comdate;
 	
+	
+	
+
+	@Override
+	public String toString() {
+		return "SettlementJoinVo [anum=" + anum + ", mnum=" + mnum + ", bank=" + bank + ", account=" + account
+				+ ", mname=" + mname + ", senum=" + senum + ", reqmoney=" + reqmoney + ", sestatus=" + sestatus
+				+ ", appdate=" + appdate + ", comdate=" + comdate + "]";
+	}
+
+
 
 	public SettlementJoinVo() {
 		// TODO Auto-generated constructor stub

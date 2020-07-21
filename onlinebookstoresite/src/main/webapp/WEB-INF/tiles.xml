@@ -127,8 +127,24 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
 	</definition>
+	
+
 
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
+	</definition>
+	
+	<!-- 중고판매자 정산 -->
+	<definition name=".admin.seller"
+		template="/WEB-INF/views/admin/yr/usedbookseller/sellerlayout.jsp">
+		<put-attribute name="sellersearch"
+			value="/WEB-INF/views/admin/yr/usedbookseller/sellersearch.jsp" />
+		<put-attribute name="sellertables"
+			value="/WEB-INF/views/admin/yr/usedbookseller/sellertables.jsp" />
+	</definition>
+	
+	
+	<definition name=".usedbookseller" extends=".main">
+		<put-attribute name="content" value=".admin.seller" />
 	</definition>
 </tiles-definitions>
