@@ -60,7 +60,6 @@ public class MembersListController {
 		mv.addObject("dateKeyword1", dateKeyword1);
 		mv.addObject("dateKeyword2", dateKeyword2);
 		mv.addObject("pu", pu);
-		
 		mv.setViewName(".membersList");
 		return mv;
 	}

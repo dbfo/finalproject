@@ -10,7 +10,7 @@
 	<form method="post" action="${pageContext.request.contextPath }/booksInsert" enctype="multipart/form-data">
 		<table class="booksInsertTable table">
 			<tr>
-				<th class="table-active">카 테 고 리</th>
+				<th style="text-align: center;" class="table-active">카 테 고 리</th>
 				<td colspan="3">
 					<select name="bctg" id="bctg">
 						<option value="">- 선택 -</option>
@@ -27,44 +27,44 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책 제 목</th>
+				<th style="text-align: center;" class="table-active">책 제 목</th>
 				<td><input type="text" name="btitle" id="btitle" size="70"></td>
-				<th align="center" class="table-active">작가 (지은이)</th>
+				<th style="text-align: center;" class="table-active">작가 (지은이)</th>
 				<td><input type="text" name="bwriter" class="normalText"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출 간 일</th>
+				<th style="text-align: center;" class="table-active">출 간 일</th>
 				<td><input type="date" name="bpublishdate" id="bpublishdate"></td>
 
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출 판 사</th>
+				<th style="text-align: center;" class="table-active">출 판 사</th>
 				<td colspan="3"><input type="text" name="bpublisher" class="normalText"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책 가 격</th>
+				<th style="text-align: center;" class="table-active">책 가 격</th>
 				<td><input type="text" name="bprice" size="50" class="normalText"> 원</td>
-				<th align="center" class="table-active">적립포인트</th>
+				<th style="text-align: center;" class="table-active">적립포인트</th>
 				<td><input type="text" name="bpoint" size="30" readonly="readonly"> point 적립예정</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">입 고 수 량</th>
+				<th style="text-align: center;" class="table-active">입 고 수 량</th>
 				<td colspan="3"><input type="text" name="bcount" class="normalText"> 개</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">썸 네 일</th>
+				<th style="text-align: center;" class="table-active">썸 네 일</th>
 				<td><input type="file" name="thumbnail"></td>
-				<th align="center" class="table-active">이미지</th>
+				<th style="text-align: center;" class="table-active">이미지</th>
 				<td><input type="file" name="img1"></td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책 설 명</th>
+				<th style="text-align: center;" class="table-active">책 설 명</th>
 				<td colspan="3">
 					<textarea rows="30" cols="200" name="bcontent"></textarea>
 				</td>

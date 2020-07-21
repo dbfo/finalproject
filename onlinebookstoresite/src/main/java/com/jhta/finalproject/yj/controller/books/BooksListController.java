@@ -55,7 +55,7 @@ public class BooksListController {
 		map.put("dateKeyword2", dateKeyword2);
 		
 		int totalRowCnt = service.count(map); // 전체 글의 개수
-		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 20, 5);
+		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 20, 5); // 한 페이지에 20개 목록과 5개 페이지 수
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
@@ -71,7 +71,6 @@ public class BooksListController {
 		mv.addObject("dateKeyword1", dateKeyword1);
 		mv.addObject("dateKeyword2", dateKeyword2);
 		mv.addObject("pu", pu);
-
 		mv.setViewName(".booksList");
 		return mv;
 	}

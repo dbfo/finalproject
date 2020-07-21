@@ -4,14 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<link href="${pageContext.request.contextPath }/resources/yjcss/css/made.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/yjcss/css/madeByChloe.css" rel="stylesheet" />
 
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 회원검색
 	</div>
-	<form action="${pageContext.request.contextPath }/membersList"
-		method="post">
+	<form action="${pageContext.request.contextPath }/membersList" method="post">
 		<table class="memSearchTable table">
 			<tr>
 				<th class="table-active">검색어</th>
@@ -58,8 +57,8 @@
 <!-- 리스트 -->
 <div class="card mb-4">
 	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 회원 목록 <span style="font-size: 13px;">검색결과
-			: ${pu.totalRowCnt }명</span>
+		<i class="fas fa-table mr-1"></i> 회원 목록 
+		<span style="font-size: 13px;">검색결과 : ${pu.totalRowCnt }명</span>
 	</div>
 	<table class="membersListTable table">
 		<thead>

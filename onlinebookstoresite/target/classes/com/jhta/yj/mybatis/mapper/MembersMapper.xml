@@ -32,11 +32,14 @@
 	</select>
 
 	<select id="memList" resultType="members" parameterType="hashmap">
-		select mname, mid, email, phone, regdate, birth, 
+		select * from 
+		(select aa.*, rownum rnum from 
+		(select mname, mid, email, phone, regdate, birth, 
 		FLOOR((months_between(sysdate, birth))/12) age
 		from members where mstatus = 1 
 		<include refid="search" /> 
-		order by mnum desc
+		order by mnum desc) aa)
+		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 
 	<!-- 전체 탈퇴회원수 -->
@@ -48,10 +51,13 @@
 	
 	<!-- 탈퇴회원 조회 -->
 	<select id="ghostList" resultType="members">
-		select mname, mid, email, phone, regdate, birth, 
-		FLOOR((months_between(sysdate, birth))/12) age from
-		members where mstatus = 0 
+		select * from 
+		(select aa.*, rownum rnum from 
+		(select mname, mid, email, phone, regdate, birth, 
+		FLOOR((months_between(sysdate, birth))/12) age
+		from members where mstatus = 0 
 		<include refid="search" /> 
-		order by regdate desc
+		order by mnum desc) aa)
+		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 </mapper>

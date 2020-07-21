@@ -4,22 +4,18 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!-- booksUpdate -->
-<link
-	href="${pageContext.request.contextPath }/resources/yjcss/css/made.css"
-	rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/yjcss/css/madeByChloe.css" rel="stylesheet" />
 
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 상품수정
 	</div>
-	<form method="post"
-		action="${pageContext.request.contextPath }/booksUpdate"
-		enctype="multipart/form-data">
+	<form method="post" action="${pageContext.request.contextPath }/booksUpdate" enctype="multipart/form-data">
+		
 		<input type="hidden" name="bnum" value="${bvo.bnum }">
 		<table class="booksUpdateTable table">
 			<tr>
-				<th align="center" class="table-active">카테고리</th>
+				<th style="text-align: center;" class="table-active">카테고리</th>
 				<td colspan="3">
 					<select name="bctg" id="bctg">
 						<c:forEach var="big" items="${getBigctg }">
@@ -28,6 +24,7 @@
 							</option>
 						</c:forEach>
 					</select>
+					
 					<div id="smctgDiv" style="display: inline-block">
 						<select name="smctg" id="smctg">
 							<option value="">- 선택 -</option>
@@ -42,19 +39,19 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책제목</th>
+				<th style="text-align: center;" class="table-active">책제목</th>
 				<td>
 					<input type="text" name="btitle" id="btitle" size="60" value="${bvo.btitle }">
 				</td>
 				
-				<th align="center" class="table-active">작가 (지은이)</th>
+				<th style="text-align: center;" class="table-active">작가 (지은이)</th>
 				<td>
 					<input type="text" name="bwriter" id="bwriter" size="50" value="${bvo.bwriter }">
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출간일</th>
+				<th style="text-align: center;" class="table-active">출간일</th>
 				<fmt:formatDate value="${bvo.bpublishdate }" pattern="yyyy-MM-dd" var="bpublishdate" />
 				<td>
 					<input type="date" name="bpublishdate" id="bpublishdate" value="${bpublishdate }">
@@ -62,72 +59,68 @@
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">출판사</th>
+				<th style="text-align: center;" class="table-active">출판사</th>
 				<td colspan="3">
 					<input type="text" name="bpublisher" size="50" value="${bvo.bpublisher }">
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책가격</th>
+				<th style="text-align: center;" class="table-active">책가격</th>
 				<td>
 					<input type="text" name="bprice" id="bprice" size="50" value="${bvo.bprice }"> 원
 				</td>
 				
-				<th align="center" class="table-active">적립포인트</th>
+				<th style="text-align: center;" class="table-active">적립포인트</th>
 					<td>
 						<input type="text" name="bpoint" id="bpoint" size="50" readonly="readonly" value="${bvo.bpoint }"> point 적립예정
 					</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">입고수량</th>
+				<th style="text-align: center;" class="table-active">입고수량</th>
 				<td colspan="3">
 					<input type="text" name="bcount" size="50" value="${bvo.bcount }"> 개
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">기존 썸네일</th>
+				<th style="text-align: center;" class="table-active">기존 썸네일</th>
 				<td>
 					<input type="hidden" name="thumbNum" value="${thumbImg.imgnum }">
 					<div id="savedThumbImg" style="text-align: center;">
-						<img width="300px" height="350px"
-							src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
+						<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
 					</div>
 				</td>
 				
-				<th align="center" class="table-active">기존 이미지</th>
+				<th style="text-align: center;" class="table-active">기존 이미지</th>
 				<td>
 					<c:if test="${!empty img1 }">
 						<input type="hidden" name="imgNum" value="${img1.imgnum }">
 						<div id="savedImg" style="text-align: center;">
-							<img width="300px" height="350px"
-								src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
+							<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
 						</div>
 					</c:if>
 				</td>
 			</tr>
 
 			<tr>
-				<th align="center" class="table-active">수정할 썸네일</th>
-				<td>
-					<input type="file" name="thumbnail">
-				</td>
+				<th style="text-align: center;" class="table-active">수정할 썸네일</th>
+				<td><input type="file" name="thumbnail"></td>
 				
-				<th align="center" class="table-active">수정할 이미지</th>
-					<td><input type="file" name="img1"></td>
-				</tr>
+				<th style="text-align: center;" class="table-active">수정할 이미지</th>
+				<td><input type="file" name="img1"></td>
+			</tr>
 
 			<tr>
-				<th align="center" class="table-active">책설명</th>
+				<th style="text-align: center;" class="table-active">책설명</th>
 				<td colspan="3">
 					<textarea rows="30" cols="200" name="bcontent">${bvo.bcontent }</textarea>
 				</td>
 			</tr>
 
 			<tr>
-				<td align="center" colspan="4">
+				<td style="text-align: center;" colspan="4">
 					<input type="submit" value="수  정" class="btn btn-primary">
 					<input type="reset" value="초기화" class="btn btn-secondary resetBtn">
 				</td>

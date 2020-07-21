@@ -21,7 +21,7 @@ public class PageUtil {
 		this.pageBlockCnt = pageBlockCnt; // 한 페이지에 보여질 페이지 수
 
 		// 시작행
-		startRow = (pageNum - 1) * rowBlockCnt;
+		startRow = (pageNum - 1) * rowBlockCnt + 1;
 		// 마지막행
 		endRow = startRow + rowBlockCnt - 1;
 		// 전체 페이지 개수

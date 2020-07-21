@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+/* 페이징처리 */
+#listPaging {
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+/* ---------- */
+
+/* 미리보기 */
+#contentWrap {
+	border: 1px solid black;
+	width: 1700px;
+}
+
+#thumbDiv, #imgDiv {
+	/*  	border: 1px solid red;  */
+	margin-top: 10px;
+	text-align: center;
+}
+
+#introTextDiv, #contentTextDiv {
+	margin-top: 50px;
+	/* 	margin-bottom: 40px; */
+}
+
+#titleDiv, #wppDiv, #priceDiv, #pointDiv {
+	margin-top: 15px;
+	/* 	margin-bottom: 30px; */
+}
+
+.btnDiv {
+	/* 	margin-left: 5px; */
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+/* ---------- */
