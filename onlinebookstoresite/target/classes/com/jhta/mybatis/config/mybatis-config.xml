@@ -32,6 +32,7 @@
     <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerMainBoardMapper.xml"/>
   	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSalesManagementMapper.xml"/>
   	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSettlementMapper.xml"/>
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerBoardMapper.xml"/>
   	
   	<!-- ////희도//// -->
   	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/>

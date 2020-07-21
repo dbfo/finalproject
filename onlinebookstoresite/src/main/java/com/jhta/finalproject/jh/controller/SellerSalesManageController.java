@@ -162,29 +162,16 @@ bpayment bstatus
 		map.put("field4",field4);
 		map.put("keyword4", keyword4);
 		int totRowCount=service.getFeeTotRowCount(map);//전체 행의 갯수 구하기
-		System.out.println("te:"+totRowCount);
-		
-		
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		List<SellerFeepayJoinVo> list=service.getfeeList(map);
-		
-		
-		System.out.println("페이지번호:"+pageNum);
-		System.out.println("시작로우:"+pu.getStartRow());
-		System.out.println("끝로우:"+pu.getEndRow());
-		System.out.println("전체페이지수:"+pu.getTotalPageCount());
-		//2
-		
-		
 		model.addAttribute("list", list);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
 		model.addAttribute("map", map);
 		return ".seller.salesManagement";
 	}
-	
 }
 
 
