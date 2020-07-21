@@ -60,7 +60,7 @@
 		<i class="fas fa-table mr-1"></i> 회원 목록 
 		<span style="font-size: 13px;">검색결과 : ${pu.totalRowCnt }명</span>
 	</div>
-	<table class="membersListTable table">
+	<table class="table">
 		<thead>
 			<tr class="table-active">
 				<th>이름</th>

@@ -1,6 +1,5 @@
 package com.jhta.finalproject.yj.controller.members;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,13 +89,13 @@ public class MembersListController {
 		map.put("dateKeyword1", dateKeyword1);
 		map.put("dateKeyword2", dateKeyword2);
 		
-		int totalRowCnt = service.ghostCount(map); // 전체 글의 개수
+		int totalRowCnt = service.memCount(map); // 전체 글의 개수
 		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 20, 5);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
 		ModelAndView mv = new ModelAndView();
-		List<MembersListVO> list = service.ghostList(map);
+		List<MembersListVO> list = service.memList(map);
 		mv.addObject("list", list);
 		mv.addObject("infoField", infoField);
 		mv.addObject("infoKeyword", infoKeyword);

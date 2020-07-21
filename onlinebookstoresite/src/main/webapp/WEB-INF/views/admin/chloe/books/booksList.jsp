@@ -90,15 +90,12 @@
 				<tr>
 <%-- 					<td>${vo.bnum }</td> --%>
 					<td>${vo.btitle }</td>
-					<td><a
-						href="${pageContext.request.contextPath}/preview?bnum=${vo.bnum}">미리보기</a>
-					</td>
+					<td><a href="${pageContext.request.contextPath}/preview?bnum=${vo.bnum}">미리보기</a></td>
 					<td>${vo.bwriter }</td>
 					<td>${vo.bpublisher }</td>
 					<td>${vo.bprice }</td>
 					<td>${vo.bcount }</td>
-					<fmt:formatDate value="${vo.bregdate }" pattern="yy/MM/dd"
-						var="bregdate" />
+					<fmt:formatDate value="${vo.bregdate }" pattern="yy/MM/dd" var="bregdate" />
 					<td>${bregdate }</td>
 				</tr>
 			</c:forEach>

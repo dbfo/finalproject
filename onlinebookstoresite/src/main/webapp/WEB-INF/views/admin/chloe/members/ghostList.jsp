@@ -57,11 +57,10 @@
 <!-- 리스트 -->
 <div class="card mb-4">
 	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 탈퇴 회원 목록 
+		<i class="fas fa-table mr-1"></i> 회원 목록 
 		<span style="font-size: 13px;">검색결과 : ${pu.totalRowCnt }명</span>
 	</div>
-	
-	<table class="ghostListTable table">
+	<table class="table">
 		<thead>
 			<tr class="table-active">
 				<th>이름</th>
@@ -108,7 +107,7 @@
 		<c:choose>
 			<c:when test="${pu.startPageNum > 3 }">
 				<a
-					href="${pageContext.request.contextPath }/ghostList?pageNum=${pu.startPageNum - 1}">
+					href="${pageContext.request.contextPath }/membersList?pageNum=${pu.startPageNum - 1}">
 					<span style="color: black;">[이전]</span>
 				</a>
 			</c:when>
@@ -121,14 +120,14 @@
 			<c:choose>
 				<c:when test="${i == pu.pageNum }">
 					<a
-						href="${pageContext.request.contextPath }/ghostList?pageNum=${i}">
+						href="${pageContext.request.contextPath }/membersList?pageNum=${i}">
 						<!-- &infoField=${infoField}&infoKeyword=${infoKeyword}&priceKeyword1=${priceKeyword1}&priceKeyword2=${priceKeyword2}&countKeyword1=${countKeyword1}&countKeyword2=${countKeyword2}&dateKeyword1=${dateKeyword1}&dateKeyword2=${dateKeyword2} -->
 						<span style="color: blue;">${i }</span>
 					</a>
 				</c:when>
 				<c:otherwise>
 					<a
-						href="${pageContext.request.contextPath }/ghostList?pageNum=${i}">
+						href="${pageContext.request.contextPath }/membersList?pageNum=${i}">
 						<span style="color: gray">${i }</span>
 					</a>
 				</c:otherwise>
@@ -138,7 +137,7 @@
 		<c:choose>
 			<c:when test="${pu.totalPageCnt > pu.endPageNum }">
 				<a
-					href="${pageContext.request.contextPath }/ghostList?pageNum=${pu.endPageNum + 1}">
+					href="${pageContext.request.contextPath }/membersList?pageNum=${pu.endPageNum + 1}">
 					<span style="color: black;">[다음]</span>
 				</a>
 			</c:when>
@@ -151,16 +150,18 @@
 </div>
 
 <script>
-	$("#ageKeyword1").change(function() {
-		$("#ageKeyword2").prop('disabled', false);
+	$("input[name='ageKeyword1']").change(function() {
+		$("input[name='ageKeyword2']").prop('disabled', false);
 	});
 
-	$("#ageKeyword2").change(function() {
-		var ageKeyword1 = parseInt($("#ageKeyword1").val());
-		var ageKeyword2 = parseInt($("#ageKeyword2").val());
+	$("input[name='ageKeyword2']").change(function() {
+		var ageKeyword1 = parseInt($("input[name='ageKeyword1']").val());
+		var ageKeyword2 = parseInt($("input[name='ageKeyword2']").val());
 		if (ageKeyword1 > ageKeyword2) {
-			$("#ageKeyword2").val('');
-			alert("숫자를 다시 정확히 입력해주세요");
+			$("input[name='ageKeyword1']").val('');
+			$("input[name='ageKeyword1']").focus();
+			$("input[name='ageKeyword2']").val('');
+			alert("숫자 범위를 정확히 입력해주세요");
 		}
 	});
 	

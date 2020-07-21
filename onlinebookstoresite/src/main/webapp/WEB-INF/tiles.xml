@@ -46,6 +46,12 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
+	
+	<!-- qna -->
+	<definition name=".qnaList" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/qna/qnaList.jsp" />
+	</definition>
 
 <!-- 	주문관리 -->
 	<definition name = ".admin.order" template = "/WEB-INF/views/admin/yr/order/orderlayout.jsp">

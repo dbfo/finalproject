@@ -35,7 +35,7 @@
 
 			<tr>
 				<th style="text-align: center;" class="table-active">출 간 일</th>
-				<td><input type="date" name="bpublishdate" id="bpublishdate"></td>
+				<td colspan="3"><input type="date" name="bpublishdate" id="bpublishdate"></td>
 
 			</tr>
 

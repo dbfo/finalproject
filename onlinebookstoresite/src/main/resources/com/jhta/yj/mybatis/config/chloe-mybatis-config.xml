@@ -20,16 +20,26 @@
 		<typeAlias type="com.jhta.finalproject.yj.vo.MembersListVO"
 			alias="members" />
 
+		<!-- qna -->
+		<typeAlias type="com.jhta.finalproject.yj.vo.QnaVO"
+			alias="qna" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.QnaAnswerVO"
+			alias="qnaAnswer" />
+		
 		<!-- 유래 -->
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
 			alias="payment" />
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
 			alias="booksVo" /> 
 	</typeAliases>
+	
+	<!-- 매퍼파일 -->
 	<mappers>
 		<!-- 연주 -->
 		<mapper resource="com/jhta/yj/mybatis/mapper/BooksMapper.xml" />
 		<mapper resource="com/jhta/yj/mybatis/mapper/MembersMapper.xml" />
+		<mapper resource="com/jhta/yj/mybatis/mapper/QnaMapper.xml" />
+		<mapper resource="com/jhta/yj/mybatis/mapper/QnaAnswerMapper.xml" />
 
 		<!-- 유래 -->
 		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
