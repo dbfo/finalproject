@@ -1,6 +1,7 @@
 package com.jhta.finalproject.hd.vo;
 
 public class OrderCompleteListVo {
+	private int bnum;
 	private String imgsavefilename;
 	private String btitle;
 	private int bprice;
@@ -12,9 +13,10 @@ public class OrderCompleteListVo {
 	
 	public OrderCompleteListVo() {}
 
-	public OrderCompleteListVo(String imgsavefilename, String btitle, int bprice, int bpoint, int bcount,
+	public OrderCompleteListVo(int bnum, String imgsavefilename, String btitle, int bprice, int bpoint, int bcount,
 			int totalvalue, int totalpoint, String imgpath) {
 		super();
+		this.bnum = bnum;
 		this.imgsavefilename = imgsavefilename;
 		this.btitle = btitle;
 		this.bprice = bprice;
@@ -23,6 +25,14 @@ public class OrderCompleteListVo {
 		this.totalvalue = totalvalue;
 		this.totalpoint = totalpoint;
 		this.imgpath = imgpath;
+	}
+
+	public int getBnum() {
+		return bnum;
+	}
+
+	public void setBnum(int bnum) {
+		this.bnum = bnum;
 	}
 
 	public String getImgsavefilename() {
@@ -90,6 +100,7 @@ public class OrderCompleteListVo {
 	}
 	
 	
+
 	
 	
 }

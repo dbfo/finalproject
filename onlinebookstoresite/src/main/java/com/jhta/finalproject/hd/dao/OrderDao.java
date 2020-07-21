@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
 import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteUsedListVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
@@ -76,6 +77,9 @@ public class OrderDao {
 	
 	public List<OrderCompleteListVo> getPaymentBook(int bpaynum){
 		return sqlsession.selectList(NAMESPACE+".getPaymentBook",bpaynum);
+	}
+	public List<OrderCompleteUsedListVo> getUsedPaymentBook(int bpaynum){
+		return sqlsession.selectList(NAMESPACE+".getUsedPaymentBook", bpaynum);
 	}
 	
 	public VbankVo vbank_info(int bpaynum) {

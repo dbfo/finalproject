@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.finalproject.hd.service.OrderService;
 import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
 import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteUsedListVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
@@ -152,29 +153,57 @@ public class OrderController {
 			String roadaddr="("+addr1+") "+addr2+" "+addr5+" "+addr4;
 			vo.setJibunaddr(jibunaddr);
 			vo.setRoadaddr(roadaddr);
-			List<OrderCompleteListVo>list=service.getPaymentBook(bpaynum);
 			String path=session.getAttribute("cp")+"/resources/hd/image";
-			int totalpoint=0;
-			int totalprice=0;
-			for(OrderCompleteListVo vo1:list) {
-				String imgpath=path+"\\"+vo1.getImgsavefilename();
-				vo1.setImgpath(imgpath);
-				vo1.setTotalvalue(vo1.getBprice()*vo1.getBcount());
-				vo1.setTotalpoint(vo1.getBpoint()*vo1.getBcount());
-				totalpoint+=vo1.getBpoint()*vo1.getBcount();
-				totalprice+=vo1.getBprice()*vo1.getBcount();
-			}
+			if(separate.equals("new")) {
+				List<OrderCompleteListVo>list=service.getPaymentBook(bpaynum);
+				int totalpoint=0;
+				int totalprice=0;
+				for(OrderCompleteListVo vo1:list) {
+					String imgpath=path+"\\"+vo1.getImgsavefilename();
+					vo1.setImgpath(imgpath);
+					vo1.setTotalvalue(vo1.getBprice()*vo1.getBcount());
+					vo1.setTotalpoint(vo1.getBpoint()*vo1.getBcount());
+					totalpoint+=vo1.getBpoint()*vo1.getBcount();
+					totalprice+=vo1.getBprice()*vo1.getBcount();
+				}
+				model.addAttribute("list", list);
+				model.addAttribute("totalpoint",totalpoint); //총 적립예정포인트
+				model.addAttribute("totalprice", totalprice);
+			}else {
+				List<OrderCompleteUsedListVo>list=service.getUsedPaymentBook(bpaynum);
+				int totalprice=0;
+				for(OrderCompleteUsedListVo vo1:list) {
+					String imgpath=path+"\\"+vo1.getImgsavefilename();
+					vo1.setImgpath(imgpath);
+					vo1.setTotalvalue(vo1.getObsaleprice()*vo1.getBcount());
+					totalprice+=vo1.getObsaleprice()*vo1.getBcount();
+					int status=vo1.getObstatus();
+					String statusString="";
+					if(status==1) {
+						statusString="[중고-최상]";
+					}else if(status==2) {
+						statusString="[중고-상]";
+					}else if(status==3) {
+						statusString="[중고-중]";
+					}else if(status==4) {
+						statusString="[중고-하]";
+					}
+					vo1.setStatusString(statusString);
+				}
+				model.addAttribute("list", list);
+				model.addAttribute("totalprice", totalprice);
+				
+			}		
 			if(method.equals("vbank")) {
 				VbankVo bankvo=service.vbank_info(bpaynum);
 				model.addAttribute("bank",bankvo);
 			}
+			
 			int payvalue=vo.getPaymentmoney()+vo.getDelfee(); //입금해야할 금액.
 			model.addAttribute("payvalue", payvalue); 
-			model.addAttribute("totalpoint",totalpoint); //총 적립예정포인트
-			model.addAttribute("totalprice", totalprice);
 			model.addAttribute("method",method);
 			model.addAttribute("vo", vo);
-			model.addAttribute("list", list);
+			model.addAttribute("separate",separate);
 			return ".complete";
 		}
 
@@ -185,8 +214,9 @@ public class OrderController {
 				@RequestParam(value="bnum")String[]bnum,
 				  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
 				  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
-				  String receiver,String callnum,String method,String imp_uid,String vbank_due,String separate,
-				  String vbank_name,long vbank_num,String vbank_holder,HttpSession session) {
+				  String receiver,String callnum,String method,String imp_uid,@RequestParam(required = false)String vbank_due
+				  ,String separate,@RequestParam(required = false)String vbank_name,
+				  @RequestParam(required = false,defaultValue = "0")long vbank_num,@RequestParam(required = false)String vbank_holder,HttpSession session) {
 			int mnum=0;
 			String smnum=(String)session.getAttribute("mnum");
 			if(smnum!=null) {

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jhta.finalproject.hd.dao.OrderDao;
 import com.jhta.finalproject.hd.vo.OrderCompleteListVo;
 import com.jhta.finalproject.hd.vo.OrderCompleteResultVo;
+import com.jhta.finalproject.hd.vo.OrderCompleteUsedListVo;
 import com.jhta.finalproject.hd.vo.OrderListResultVo;
 import com.jhta.finalproject.hd.vo.ShipmentInfoVo;
 import com.jhta.finalproject.hd.vo.UsedOrderListVo;
@@ -83,6 +84,9 @@ public class OrderService {
 	}
 	public List<OrderCompleteListVo> getPaymentBook(int bpaynum){
 		return dao.getPaymentBook(bpaynum);
+	}
+	public List<OrderCompleteUsedListVo> getUsedPaymentBook(int bpaynum){
+		return dao.getUsedPaymentBook(bpaynum);
 	}
 	public VbankVo vbank_info(int bpaynum) {
 		return dao.vbank_info(bpaynum);

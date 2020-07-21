@@ -233,7 +233,7 @@
 	});
 	
 	//배송지 radio 버튼 선택 이벤트.
-	$("input[type='radio']").click(function(){
+	$("input[name='ship_option']").click(function(){
 		var value=$(this).val();
 		if(value==0){
 			$("#searchAddrBtn").addClass("disabled");
@@ -470,7 +470,6 @@
 		var phone1=$("#phone1").val();
 		var phone2=$("#phone2").val();
 		var phone3=$("#phone3").val();
-		
 		var callnumber=phone1+"-"+phone2+"-"+phone3; //데이터베이스에 저장될 전화번호.
 		
 		

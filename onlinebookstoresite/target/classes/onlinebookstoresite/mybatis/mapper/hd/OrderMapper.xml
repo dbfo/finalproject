@@ -5,13 +5,12 @@
 <mapper namespace="mybatis.mapper.OrderMapper">
 	<!--//////////// 주문완료 관련 트랜잭션 DML 시작 ////////////-->
 		
-		<!-- 주문결제 테이블에 추가 ((카드결제 )) -->
+		<!-- 주문결제 테이블에 추가 -->
 		<insert id="bpayment" parameterType="hashmap">
-			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},
-											sysdate,sysdate,
+			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},TO_DATE(sysdate,'YYYY/MM/DD'),
 											<choose>
-											<when test="method=='card'">1</when>
-											<otherwise>0</otherwise>
+												<when test="method=='card'">TO_DATE(sysdate,'YYYY/MM/DD'),1</when>
+												<otherwise>'',0</otherwise>
 											</choose>
 											,#{orderprice},#{usepoint},
 											<choose>
@@ -88,11 +87,21 @@
 	</select>
 	<!-- 해당주문번호에 해당하는 주문한책들. -->
 	<select id="getPaymentBook" parameterType="int" resultType="completeList" >
-		select imgsavefilename,btitle,bprice,bpoint,paymentbook.bcount from
+		select books.bnum,imgsavefilename,btitle,bprice,bpoint,paymentbook.bcount from
 		(select * from paymentbook where bpaynum=#{bpaynum})paymentbook,
 		(select * from books)books,
 		(select * from img where btype=1 and thumbnail=1)img
 		where paymentbook.bnum=books.bnum and books.bnum=img.bnum
+	</select>
+	<!-- 해당주문번호에 해당하는 중고 책들.. -->
+	<select id="getUsedPaymentBook" parameterType="int" resultType="usedcompleteList">
+		select ob.obnum bnum,imgsavefilename,obname,oborgprice,obstatus,obsaleprice,paymentbook.bcount,mid sid from
+		(select * from paymentbook where bpaynum=#{bpaynum})paymentbook,
+		(select * from oldbooks) ob,
+		(select * from img where btype=2 and thumbnail=1)img,
+		(select * from members) members,
+		(select * from obseller) obs
+		where paymentbook.bnum=ob.obnum and ob.obnum=img.bnum and ob.snum=obs.snum and obs.mnum=members.mnum
 	</select>
 	
 	<select id="vbank_info" parameterType="int" resultType="vbankVo">
