@@ -27,6 +27,19 @@
 				<br>
 				<br>
 				<div id="detailprice">
+						<span style="font-size:17px;color: #7d7d7d; float:left; margin-left: 1px;">평점</span>
+						<span style="font-size: 22px;font-weight: bold ;float: left;margin-left: 118px;" >
+						<img src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif">&nbsp
+						</span>
+						<c:set var="avg" value="${avg }" />
+						<c:if test="${avg == null }">
+						<span style="font-size: 22px;font-weight: bold ; color: black;float: left;">0.0</span>
+						</c:if>
+						<c:if test="${avg > 0.0 }">
+						<span style="font-size: 22px;font-weight: bold ; color: black;float: left;">${avg }</span>
+						</c:if>
+						<br>
+						<br>
 						<span style="font-size:17px;color: #7d7d7d; float:left; margin-left: 1px;">판매가</span>
 						<span style="font-size: 22px;font-weight: bold ; color: red;float: left;margin-left: 100px;" >
 						${bookvo.bprice } </span>
@@ -57,6 +70,12 @@
 				<br>
 				<br>
 				<button class="btn btn-success btn-lg btn-block"><a href="#">장바구니</a></button>
+				<br>
+				<br>
+				<span style="text-align: center;"><strong>재고수량:</strong><strong style="color: red;">${bcnt }</strong></span>
+				<br>
+				<br>
+				<input type="text" style="width: 200px;" id="bcnt">
 			</div>
 		</div>
 		
@@ -156,15 +175,15 @@
 								<br>
 								<div>
 								<strong>도서평점</strong>&nbsp&nbsp&nbsp
-									<input type="radio" value="1" name="bscore" class="writeRadio">&nbsp ★
+									<input type="radio" value="1" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★</span>
 									&nbsp
-									<input type="radio" value="2" name="bscore" class="writeRadio">&nbsp ★★
+									<input type="radio" value="2" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★</span>
 									&nbsp
-									<input type="radio" value="3" name="bscore" class="writeRadio" checked="checked">&nbsp ★★★
+									<input type="radio" value="3" name="bscore" class="writeRadio" checked="checked"><span style="color: red;">&nbsp ★★★</span>
 									&nbsp
-									<input type="radio" value="4" name="bscore" class="writeRadio">&nbsp ★★★★
+									<input type="radio" value="4" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★★★</span>
 									&nbsp
-									<input type="radio" value="5" name="bscore" class="writeRadio">&nbsp ★★★★★
+									<input type="radio" value="5" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★★★★</span>
 									&nbsp
 								</div>
 								<br>
@@ -180,9 +199,9 @@
 						</div>
 					</form>
 					<!-- <iframe src="/blank.html" name="ifrmProc" id="ifrmProc" width="0" height="0"></iframe> -->
-					<table style="width:648px;" class="writeList1">
-						<tbody>
+					<table style="width:1110px;" class="writeList1">
 						<c:forEach var ="rvo" items="${reviewvo }">
+						<tbody style="width:1110px;border: 1px solid #7d7d7d;">
 						<tr>
 							<td style=" width:13%;" id="mid" >${rvo.mname }</td>
 							<td style="width:19%;" id="mscore">		
@@ -190,19 +209,19 @@
 							<c:set var="score" value="${rvo.bscore }" />
 
 								<c:if test="${score eq 5 }">
-									<span>★★★★★</span>
+									<span style="color: red;">★★★★★</span>
 								</c:if>
 								<c:if test="${score eq 4 }">
-									<span>★★★★</span>
+									<span style="color: red;">★★★★</span>
 								</c:if>
 								<c:if test="${score eq 3 }">
-									<span>★★★</span>
+									<span style="color: red;">★★★</span>
 								</c:if>
 								<c:if test="${score eq 2 }">
-									<span>★★</span>
+									<span style="color: red;">★★</span>
 								</c:if>
 								<c:if test="${score eq 1 }">
-									<span>★</span>
+									<span style="color: red;">★</span>
 								</c:if>
 <%-- 								<span>${rvo.bscore }</span> --%>
 							</td>
@@ -213,9 +232,46 @@
 								<span>${rvo.reviewcontent }</span>
 							</td>
 						</tr>
-						</c:forEach>
 						</tbody>
+						</c:forEach>
 					</table>
+					<br>
+						<div>
+						   <c:choose>
+				               <c:when test="${pu.startPageNum>1 }">
+				                  <button style="width: 50px; border-radius: 5px / 5px;">
+				                  	<a style="color: black;" href="bdetail?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}&bnum=${bnum}">
+				                  	<strong style="color: black;">이전글</strong>
+				                  	</a>
+				                  </button>
+				               </c:when>
+				               <c:otherwise>
+				                  <button disabled="disabled">
+				                  	<a href="#">이전글</a>
+				                  </button>
+				               </c:otherwise>
+				            </c:choose>
+								<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+								<c:choose>
+									<c:when test="${i==pu.pageNum }">
+										<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
+									 	<a href="bdetail?pageNum=${i }&field=${field}&keyword=${keyword}&bnum=${bnum}">
+						<%-- 			 	<span style="color:red">${i }</span> --%>
+									 	<strong style="color:red">${i }</strong>
+									 	</a>
+									 	</button>
+								 	</c:when>
+								 	<c:otherwise>
+								 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
+									 	<a href="bdetail?pageNum=${i }&field=${field}&keyword=${keyword}&bnum=${bnum}">
+						<%-- 			 	<span style="color: black">${i }</span> --%>
+									 	<strong style="color:black">${i }</strong>
+									 	</a>
+									 	</button>
+								 	</c:otherwise>
+							 	</c:choose>
+								</c:forEach>
+							</div>
 <!-- 					<table width="100%" border="0" cellspacing="0" cellpadding="0"> -->
 <!-- 						<tbodㅡy><tr> -->
 <!-- 							<td align="center"> -->

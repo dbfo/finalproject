@@ -84,7 +84,8 @@ public class BooksDao {
 	}
 	public int imginfo(int bnum) {
 		return sqlSession.selectOne(NAMESPACE + ".imginfo",bnum);
-	}	
+	}
+	
 	public List<AllListVo> allbooklist(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".allbooklist",map);
 	}

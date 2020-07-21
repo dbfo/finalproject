@@ -127,22 +127,22 @@
 	</select>
 	
 		
-	<select id="allbooklist" parameterType="hashmap" resultType="alllist">
+<!-- 	<select id="allbooklist" parameterType="hashmap" resultType="alllist"> -->
 	
-		select * from (
-			select aa.*,rownum rnum from
-			(
-				select b.*,i.imgsavefilename from books b,img i 
-                 where b.bnum = i.bnum(+) and i.thumbnail=1  
-                 <if test="field!=null and field!=''">
-					and ${field} like '%'||#{keyword}||'%' 
-				 </if>
-				 order by b.bnum asc
-			)aa
-		)
-		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+<!-- 		select * from ( -->
+<!-- 			select aa.*,rownum rnum from -->
+<!-- 			( -->
+<!-- 				select b.*,i.imgsavefilename from books b,img i  -->
+<!--                  where b.bnum = i.bnum(+) and i.thumbnail=1   -->
+<!--                  <if test="field!=null and field!=''"> -->
+<!-- 					and ${field} like '%'||#{keyword}||'%'  -->
+<!-- 				 </if> -->
+<!-- 				 order by b.bnum asc -->
+<!-- 			)aa -->
+<!-- 		) -->
+<!-- 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]> -->
 
-	</select>
+<!-- 	</select> -->
 	
 	
 <!-- 	<select id="sbooklist1count" resultType="int" parameterType="hashmap"> -->
@@ -720,10 +720,19 @@
 	
 	
 	<!-- 책리뷰카운터 -->
-	<select id="breviewcount" resultType="int" parameterType="int">
-	    select NVL(count(*),0) cnt from bookreview br,members m
-		where bnum = #{bnum}
+	<select id="breviewcount" resultType="int" parameterType="hashmap">
+	select NVL(count(*),0) cnt from(
+		select * from (
+			select aa.*,rownum rnum from
+			(
+			select br.*,m.mname from bookreview br,members m 
+			where br.bnum=#{bnum} and br.mnum = m.mnum
+			order by br.bnum desc
+			)aa
+		)
+	)
 	</select>
+	
 	
 	<!-- 책 등록  -->
 	<select id="breviewinsert" parameterType="reviewinsert">

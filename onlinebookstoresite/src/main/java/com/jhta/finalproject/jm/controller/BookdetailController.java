@@ -32,29 +32,27 @@ public class BookdetailController {
 
 	@RequestMapping(value = "/bdetail", method = RequestMethod.GET)
 //	@GetMapping(value = "/bdetail")
-	public ModelAndView detailtest(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
-			@RequestParam(value = "field", defaultValue = "")String field,
-			@RequestParam(value = "keyword", defaultValue = "")String keyword,
-			@RequestParam(value = "bnum", defaultValue = "0")int bnum)  {
+	public ModelAndView detailtest(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum)  {
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("field",field);
+		map.put("keyword",keyword);
 		service.addHit(bnum);
 		
 		
 		ModelAndView mv = new ModelAndView(".bdetail");
 		int totalRowCount = service.breviewcount(bnum);// 리뷰 갯수
-		
-		
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		map.put("bnum",bnum);
-		map.put("field",field);
-		map.put("keyword",keyword);
 		
 		List<AllListVo> bookvo=service.bookdetail(bnum);
 		List<BreviewVo> reviewvo=service.reviewlist(map);
 	//	ImgVo imglist=service.imginfo(bnum);
 
+		//썸네일,상세이미지 구분하기
 		mv.addObject("bookvo",bookvo.get(0));
 		
 		for(AllListVo vo:bookvo) {
@@ -64,7 +62,31 @@ public class BookdetailController {
 				mv.addObject("img2",vo);
 			}
 		}
+		////////////////////
+		//별점평균구하기
+		int cnt = 0;
+		int tot = 0;
+		double avg=0;
+		for(BreviewVo vo:reviewvo) {
+			int i =+ vo.getBscore();
+			cnt ++;
+			tot += i;
+			avg = tot/cnt;
+			mv.addObject("avg",avg);					
+		}
+		System.out.println("AVG에 뭐들어있냐?"+avg);
+
+		///////////////////
 		
+		int bcnt=0;
+		
+		for(AllListVo vo:bookvo) {
+			bcnt=vo.getBcount();
+			mv.addObject("bcnt",bcnt);
+		}
+		
+		System.out.println("bcnt는???"+bcnt);
+		mv.addObject("pu",pu);
 		mv.addObject("reviewvo",reviewvo);
 		mv.addObject("bnum",bnum);
 	//	mv.addObject("img1",img1);

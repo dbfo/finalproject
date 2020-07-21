@@ -82,8 +82,7 @@
 
 						<div class="review_score">
 							<!-- 평점 -->
-							<span class="score"> <strong> [평점자리] </strong>
-							</span> <img
+							<img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
 								> 
 							<strong>조회수&nbsp</strong><span>${vo.bhit }</span>
@@ -99,6 +98,10 @@
 	</c:forEach>
 
 	<div>
+<%-- 		<c:if test="${pu.startPageNum != 1 }"> --%>
+<%-- 			<a href="/spring10/board/list1?pageNum=${pu.startPageNum - 1 }&field=${pu.rowBlockCount}">&lt;</a> --%>
+<%-- 		</c:if> --%>
+		
 		<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
@@ -118,8 +121,11 @@
 			 	</button>
 		 	</c:otherwise>
 	 	</c:choose>
-	 	
 		</c:forEach>
+		
+<%-- 		<c:if test="${(pu.endPageNum/10) != 0}"> --%>
+<%-- 			<a href="/spring10/board/list1?pageNum=${pu.endPageNum+1 }&rowBlockCount=${pu.totalPageCount}">&gt;</a> --%>
+<%-- 		</c:if> --%>
 	</div>
 </div>
 

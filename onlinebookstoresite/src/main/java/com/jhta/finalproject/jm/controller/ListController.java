@@ -42,7 +42,7 @@ public class ListController {
 
 		ModelAndView mv = new ModelAndView(".list1");
 		int totalRowCount = service.count1(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
