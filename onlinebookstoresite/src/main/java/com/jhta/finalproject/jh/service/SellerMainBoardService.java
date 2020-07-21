@@ -21,4 +21,8 @@ public class SellerMainBoardService {
 	public int getOldbookSalestatusCount(HashMap<String, Object> map) {
 		return dao.getOldbookSalestatusCount(map);
 	}
+	//상황판 최근 한달간 정산현황(0:정산전,1:정산완료) 
+	public int getObcompleteCount(HashMap<String, Object> map) {
+		return dao.getObcompleteCount(map);
+	}
 }

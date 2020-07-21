@@ -23,12 +23,10 @@
 	<definition name=".seller.prodLook" extends=".seller">
 	 	<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/lookProd/sellerProdLook.jsp"/>
 	</definition>
-	
 	<!-- 중고상품 수정관련 -->
 	<definition name=".seller.prodUpdateView" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/lookProd/sellerProdUpdateView.jsp"/>
 	</definition>
-	
 	<!-- 중고상품 판매관리 메뉴 관련 -->
 	<definition name=".seller.salesManagement" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/salesManagement/sellerSalesManagement.jsp"/>
@@ -37,7 +35,10 @@
 	<definition name=".seller.settlementCheck" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/settlementCheck/sellerSettlementCheck.jsp"/>
 	</definition>
-	
+	<!-- 중고상품 게시판(QnA/리뷰) 관련 -->
+	<definition name=".seller.qna" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
+	</definition>
 	
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	

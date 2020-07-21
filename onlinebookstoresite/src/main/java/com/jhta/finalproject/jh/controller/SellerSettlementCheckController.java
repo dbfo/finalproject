@@ -13,7 +13,7 @@ import com.jhta.finalproject.jh.service.SellerSettlmentService;
 import com.jhta.finalproject.jh.vo.SellerFeepayJoinVo;
 import com.jhta.page.util.PageUtil;
 @Controller
-public class SellerSettlementCheck {
+public class SellerSettlementCheckController {
 	@Autowired
 	private SellerSettlmentService service;
 	

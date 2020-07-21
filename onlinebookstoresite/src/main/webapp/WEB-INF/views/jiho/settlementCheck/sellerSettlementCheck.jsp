@@ -125,10 +125,10 @@
 					</td>
 					<td scope="col" rowspan="2" width="140" style="text-align: center;">
 						<c:if test="${vo.bocomstatus=='0' }">
-							처리중
+							<span class="badge badge-secondary">처리중</span>
 						</c:if>
 						<c:if test="${vo.bocomstatus=='1' }">
-							정산완료
+							<span class="badge badge-success">정산완료</span>
 						</c:if>
 					</td>
 					<td scope="col" style="text-align: right;">${vo.ordermoney }원</td>

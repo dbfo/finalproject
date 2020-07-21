@@ -17,6 +17,7 @@ public class SellerHomeController {
 	@RequestMapping(value = "/seller")
 	public String sellerTest(Model model) {
 		int snum=1;//나중에 세션에서 판매자번호 얻어오기
+		//판매현황
 		HashMap<String, Object> map1=new HashMap<String, Object>();
 		map1.put("snum", snum);
 		map1.put("bstatus",0);
@@ -29,6 +30,13 @@ public class SellerHomeController {
 		HashMap<String, Object> map4=new HashMap<String, Object>();
 		map4.put("snum", snum);
 		map4.put("bstatus",3);
+		//정산현황
+		HashMap<String, Object> map5=new HashMap<String, Object>();
+		map5.put("snum", snum);
+		map5.put("bocomstatus", 0);
+		HashMap<String, Object> map6=new HashMap<String, Object>();
+		map6.put("snum", snum);
+		map6.put("bocomstatus", 1);
 		
 		//판매현황
 		//최근 한달간 상품 등록
@@ -38,8 +46,9 @@ public class SellerHomeController {
 		model.addAttribute("getOldbookSalestatusCount2", service.getOldbookSalestatusCount(map2));
 		model.addAttribute("getOldbookSalestatusCount3", service.getOldbookSalestatusCount(map3));
 		model.addAttribute("getOldbookSalestatusCount4", service.getOldbookSalestatusCount(map4));
-		
-		
+		//최근 한달간 정산현황(0:정산전,1:정산후)
+		model.addAttribute("getObcompleteCount1", service.getObcompleteCount(map5));
+		model.addAttribute("getObcompleteCount2", service.getObcompleteCount(map6));
 		
 		return ".seller";
 	}

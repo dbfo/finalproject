@@ -54,11 +54,11 @@
 			<table class="table">
 				<tr>
 					<th>구매확정/정산대기</th>
-					<td><a href="">${getOldbookSalestatusCount4}개</a></td>
+					<td><a href="">${getObcompleteCount1}개</a></td>
 				</tr>
 				<tr>
 					<th>정산완료</th>
-					<td><a href="">0개</a></td>
+					<td><a href="">${getObcompleteCount2}개</a></td>
 				</tr>
 			</table>
 		</div>
