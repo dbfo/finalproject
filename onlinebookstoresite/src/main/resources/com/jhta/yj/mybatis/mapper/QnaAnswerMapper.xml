@@ -4,5 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jhta.yj.mybatis.mapper.QnaAnswerMapper">
-
+	<!-- 답변달기 -->
+<!-- 	<insert id="qnaReply" parameterType="qnaAnswer"> -->
+<!-- 		insert into qnaanswer values(#{maid}, #{qnanum}, #{qnacontent}, sysdate) -->
+<!-- 	</insert> -->
 </mapper>

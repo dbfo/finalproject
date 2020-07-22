@@ -62,7 +62,7 @@
 				<div class="collapse" id="collapseQNA"
 					aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="${pageContext.request.contextPath }/qnaList">1:1문의</a>
+						<a class="nav-link" href="${pageContext.request.contextPath }/unAnswerList">1:1문의</a>
 					</nav>
 				</div>
 

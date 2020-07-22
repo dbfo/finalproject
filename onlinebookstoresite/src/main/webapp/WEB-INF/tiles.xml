@@ -48,9 +48,19 @@
 	</definition>
 	
 	<!-- qna -->
-	<definition name=".qnaList" extends=".main">
+	<definition name=".unAnswerList" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/admin/chloe/qna/qnaList.jsp" />
+			value="/WEB-INF/views/admin/chloe/qna/unAnswerList.jsp" />
+	</definition>
+	
+	<definition name=".answerList" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/qna/answerList.jsp" />
+	</definition>
+	
+	<definition name=".qnaDetail" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/qna/qnaDetail.jsp" />
 	</definition>
 
 <!-- 	주문관리 -->

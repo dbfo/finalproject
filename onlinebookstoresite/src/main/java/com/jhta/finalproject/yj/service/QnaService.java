@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,26 @@ import com.jhta.finalproject.yj.vo.QnaVO;
 public class QnaService {
 	@Autowired
 	private QnaDao dao;
-	
-	public List<QnaVO> unAnswerList() {
-		return dao.unAnswerList();
+
+	// 미답변
+	public int unAnswerCount() {
+		return dao.unAnswerCount();
+	}
+
+	public List<QnaVO> unAnswerList(HashMap<String, Object> map) {
+		return dao.unAnswerList(map);
+	}
+
+	public QnaVO unAnswerInfo(int qnanum) {
+		return dao.unAnswerInfo(qnanum);
+	}
+
+	// 답변완료
+	public int answerCount() {
+		return dao.answerCount();
+	}
+
+	public List<QnaVO> answerList(HashMap<String, Object> map) {
+		return dao.answerList(map);
 	}
 }

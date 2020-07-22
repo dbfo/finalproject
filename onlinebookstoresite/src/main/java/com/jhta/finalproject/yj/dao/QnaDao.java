@@ -1,5 +1,6 @@
 package com.jhta.finalproject.yj.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,7 +15,25 @@ public class QnaDao {
 	private SqlSessionTemplate session;
 	private final String NAMESPACE = "com.jhta.yj.mybatis.mapper.QnaMapper";
 
-	public List<QnaVO> unAnswerList() {
-		return session.selectList(NAMESPACE + ".unAnswerList");
+	// 미답변
+	public int unAnswerCount() {
+		return session.selectOne(NAMESPACE + ".unAnswerCount");
+	}
+
+	public List<QnaVO> unAnswerList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE + ".unAnswerList", map);
+	}
+
+	public QnaVO unAnswerInfo(int qnanum) {
+		return session.selectOne(NAMESPACE + ".unAnswerInfo", qnanum);
+	}
+
+	// 답변완료
+	public int answerCount() {
+		return session.selectOne(NAMESPACE + ".answerCount");
+	}
+
+	public List<QnaVO> answerList(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE + ".answerList", map);
 	}
 }
