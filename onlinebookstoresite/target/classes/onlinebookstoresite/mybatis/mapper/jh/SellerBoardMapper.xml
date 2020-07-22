@@ -4,10 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerBoardMapper.jh">
 	<!-- 중고판매자 QnA리스트 가져오기 -->
-	<select id="getSellerQnaList">
-		select o.obname OBNAME, oq.obqtitle OBQTITLE, m.mid MID, oq.obqstatus OBQSTATUS,oq.obqdate OBQDATE
+	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="int">
+		select o.obname OBNAME, oq.obqtitle OBQTITLE, oq.obqcontent OBQCONTENT, m.mid MID, oq.obqstatus OBQSTATUS,
+		oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
 		from oldbooks o,obqna oq, members m
-		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=1
+		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+        order by oq.obqdate desc
 	</select>
-
+	
+	<!-- 중고판매자 Qna답변 가져오기 -->
+	<select id="getSellerAnswerList" resultType="obqanswer" parameterType="int">
+		select * from obqanswer where snum=#{snum}
+	</select>
+	
+	<!-- 문의사항 답변하기 -->
+	<insert id="insertObqanswer" parameterType="hashmap">
+		insert into obqanswer VALUES(#{obqnum},#{snum},#{obqacontent},sysdate)
+	</insert>
+	<!-- 문의리스트 상태 업데이트 -->
+	<update id="updateQnastatus" parameterType="hashmap">
+		update obqna set obqstatus=1 where obqnum=#{obqnum}
+	</update>
 </mapper>

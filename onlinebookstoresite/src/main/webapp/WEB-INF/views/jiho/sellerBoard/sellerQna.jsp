@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
+
 <style>
 /*=========중고판매자 Qna관련 css==========*/
 #sellerQnaContent{
@@ -21,6 +24,11 @@
 	height: 900px;
 	border: 1px solid green;
 }
+/*답변css*/
+.sellerDap{
+    padding-left: 70px;
+    padding-right: 70px;
+}
 
 </style>
 <div id="sellerQnaContent">
@@ -34,35 +42,57 @@
 		<div class="layer1">
 			<table class="table table-bordered">
 				<thead class="thead-dark">
-					<tr>
-						<th>NO</th>
-						<th>상품명</th>
+					<tr style="text-align: center">
+						<th width="80">NO</th>
+						<th width="300">상품명</th>
 						<th>문의제목</th>
-						<th>작성자</th>
-						<th>답변상태</th>
-						<th>작성일</th>
+						<th width="200">작성자</th>
+						<th width="120">답변상태</th>
+						<th width="120">작성일</th>
 					</tr>
 				</thead>
+				<c:forEach var="vo" items="${list }" >
+						<tr>
+							<td style="text-align: center;">번호</td>					
+							<td>${vo.obname }</td>					
+							<td>${vo.obqtitle }</td>					
+							<td style="text-align: center;">${vo.mid }</td>					
+							<td style="text-align: center;">
+								<c:if test="${vo.obqstatus==0 }">
+									미답변
+								</c:if>
+								<c:if test="${vo.obqstatus==1 }">
+									답변완료
+								</c:if>
+							</td>					
+							<td style="text-align: center;"><fmt:formatDate value="${vo.obqdate }" pattern="yyyy-MM-dd"/></td>					
+						</tr>
+				</c:forEach>
 			</table>
-			
-			
-			
-			<p class="heading">제목 1</p>
-			<div class="content">첫 번째 컨텐츠<br>첫 번째 컨텐츠
-			</div>
-			<p class="heading">제목 2</p>
-			<div class="content">
-				두 번째 컨텐츠<br>두 번째 컨텐츠
-			</div>
-			<p class="heading">제목 3</p>
-			<div class="content">
-				세 번째 컨텐츠<br>세 번째 컨텐츠
-			</div>
 		</div>
 	</div>
 </div>
 <script>
 
+//	답글처리기능
+	function insertAnswer(obqnum) {
+		var content=$("input[name=content]").val();
+		$.ajax({
+			url: "${cp}/seller/insertAnswer?obqnum="+obqnum+"&obqacontent="+content,
+			dataType:"json",
+			success:function(data){
+				console.log(data.code);
+				if(data.code=="success"){
+					alert("성공");
+				}else{
+					alert("실패");
+				}
+			}
+		});
+	}	
+	
+	
+/*
 	$(document).ready(
 		function() {
 			jQuery(".content").hide();
@@ -71,5 +101,6 @@
 				function() {
 					$(".content").not($(this).next(".content").slideToggle(500)).slideUp();
 			});
-		});
+		
+	});*/
 </script>

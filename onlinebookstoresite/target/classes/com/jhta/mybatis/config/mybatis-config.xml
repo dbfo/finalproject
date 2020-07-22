@@ -12,6 +12,8 @@
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerImgVo" alias="img"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerSalesJoinVo" alias="obsalesjoin"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerFeepayJoinVo" alias="obfeepayjoin"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.SellerQnaListJoinVo" alias="qnalistjoin"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.SellerObqanswerVo" alias="obqanswer"/>
  	<!-- /////// -->
  	
  	<!-- ////희도//// -->
