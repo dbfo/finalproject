@@ -4,8 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jhta.mybatis.mapper.SellerMainBoardMapper.jh">
-	<!-- 중고판매자 상황판 관련 Mapper파일 -->
-
+	<!-- 중고판매자 메인 관련 Mapper파일 -->
+	
+	
+	<!-- 중고판매자 인증된 회원 등록 -->
+	<insert id="sellerInsert" parameterType="int">
+		insert into obseller values(SEQ_OBSELLER_SNUM.nextval,#{mnum})
+	</insert>
+	
 	<!-- 최근 한달간 등록 상품 -->
 	<select id="getOldbookCount" resultType="int" parameterType="int">
 		select NVL(count(*),0) count from oldbooks where obregdate >= TO_DATE(add_months(sysdate,-1)) and snum=#{snum}

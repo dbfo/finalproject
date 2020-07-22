@@ -12,6 +12,12 @@ public class SellerMainBoardService {
 	@Autowired
 	private SellerMainBoardDao dao;
 	
+	//중고판매자 인증
+	public int sellerInsert(int mnum) {
+		return dao.sellerInsert(mnum);
+	}
+
+	
 	//상황판 판매현황
 	//상황판(최근 한달간 등록한 상품)
 	public int getOldbookCount(int snum) {
