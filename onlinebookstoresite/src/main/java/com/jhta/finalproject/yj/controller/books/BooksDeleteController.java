@@ -19,14 +19,19 @@ public class BooksDeleteController {
 
 	@RequestMapping("/booksDelete")
 	public String imgDelete(int bnum, HttpSession session) {
-		service.booksDelete(bnum);
+		int n1 = service.booksDelete(bnum);
 		List<ImgVO> imgList = service.getImgInfo(bnum);
 		String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
 		for (int i = 0; i < imgList.size(); i++) {
 			File file = new File(uploadPath + "\\" + imgList.get(i).getImgsavefilename());
 			file.delete();
 		}
-		service.imgDelete(bnum);
-		return "redirect:/booksList";
+		int n2 = service.imgDelete(bnum);
+//		return "redirect:/booksList";
+		if (n1 > 0 && n2 > 0) {
+			return "/admin/success";
+		} else {
+			return "/admin/fail";
+		}
 	}
 }

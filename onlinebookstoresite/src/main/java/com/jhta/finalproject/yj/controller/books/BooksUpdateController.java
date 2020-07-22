@@ -65,6 +65,7 @@ public class BooksUpdateController {
 	@PostMapping("/booksUpdate")
 	public String updateOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req,
 			int thumbNum, int imgNum) {
+		int n = 0;
 		try {
 			int bnum = Integer.parseInt(req.getParameter("bnum"));
 			String btitle = req.getParameter("btitle");
@@ -85,30 +86,7 @@ public class BooksUpdateController {
 			List<ImgVO> imgList = service.getImgInfo(bnum);
 
 			// file
-			if (!(thumbnail.isEmpty()) && img1.isEmpty()) { // 썸네일만 존재하면
-				// 기존파일 삭제하기
-				File f = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
-				f.delete();
-
-				// 전송된 파일 업로드
-				String imgorgfilename = thumbnail.getOriginalFilename();
-				String imgsavefilename = UUID.randomUUID() + "_" + imgorgfilename;
-				InputStream fis = thumbnail.getInputStream();
-				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + imgsavefilename);
-
-				// 파일복사
-				FileCopyUtils.copy(fis, fos);
-				fis.close();
-				fos.close();
-
-				// DB에 파일정보 저장하기
-				BooksVO bvo = new BooksVO(bnum, btitle, bwriter, bpublishdate, bpublisher, bprice, bpoint, bcount,
-						bcontent, 0, smctg, null);
-				ImgVO ivo = new ImgVO(imgorgfilename, thumbNum, imgsavefilename, 1, 1, bnum);
-				service.booksUpdate(bvo);
-				updateService.update(ivo, null);
-
-			} else if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) { // 둘 다 존재하면
+			if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) { // 둘 다 존재하면
 				// 썸네일
 				File f1 = new File(uploadPath + "\\" + imgList.get(0).getImgsavefilename());
 				f1.delete();
@@ -141,13 +119,18 @@ public class BooksUpdateController {
 
 				ImgVO ivo2 = new ImgVO(imgorgfilename2, imgNum, imgsavefilename2, 0, 1, bnum);
 				service.booksUpdate(bvo1);
-				updateService.update(ivo1, ivo2);
+				n = updateService.update(ivo1, ivo2);
 			}
 		} catch (ParseException pe) {
 			System.out.println(pe.getMessage());
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
 		}
-		return "redirect:/booksList";
+//		return "redirect:/booksList";
+		if (n > 0) {
+			return "/admin/success";
+		} else {
+			return "/admin/fail";
+		}
 	}
 }

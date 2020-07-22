@@ -45,7 +45,8 @@ public class BooksInsertController {
 		model.addAttribute("getBigctg", getBigctg);
 		return ".booksInsert";
 	}
-
+	
+	// 큰카테고리에 해당하는 작은카테고리 불러오는 메소드
 	@RequestMapping(value = "/booksctg", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String sctgList(int bcatenum) {
@@ -63,18 +64,17 @@ public class BooksInsertController {
 
 	@PostMapping("/booksInsert")
 	public String insertOk(MultipartFile thumbnail, MultipartFile img1, HttpSession session, HttpServletRequest req) {
+		int n = 0;
 		try {
 			String btitle = req.getParameter("btitle");
 			String bwriter = req.getParameter("bwriter");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date bpublishdate = sdf.parse(req.getParameter("bpublishdate"));
-//			System.out.println("bpublishdate:" + bpublishdate);
 			String bpublisher = req.getParameter("bpublisher");
 			int bprice = Integer.parseInt(req.getParameter("bprice"));
 			int bpoint = Integer.parseInt(req.getParameter("bpoint"));
 			int bcount = Integer.parseInt(req.getParameter("bcount"));
 			String bcontent = req.getParameter("bcontent");
-//			System.out.println(req.getParameter("smctg"));
 			int smctg = Integer.parseInt(req.getParameter("smctg"));
 
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
@@ -106,13 +106,18 @@ public class BooksInsertController {
 
 				ImgVO ivo2 = new ImgVO(imgorgfilename2, 0, imgsavefilename2, 0, 1, bvo.getBnum());
 				list.add(ivo2);
-				insertService.insertList(bvo, list);
+				n = insertService.insertList(bvo, list);
 			}
 		} catch (ParseException pe) {
 			System.out.println(pe.getMessage());
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
 		}
-		return "redirect:/booksList";
+//		return "redirect:/booksList";
+		if (n > 0) {
+			return "/admin/success";
+		} else {
+			return "/admin/fail";
+		}
 	}
 }

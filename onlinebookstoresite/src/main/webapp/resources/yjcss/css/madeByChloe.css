@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+/* 성공또는실패 고북이 이미지 */
+.successORfailIMG {
+	display: block;
+	margin: 0px auto;
+	width: 1200px;
+	height: 800px;
+}
+
+.successORfail {
+	font-size:30px;
+	text-align: center;
+}
+
 /* 페이징처리 */
 #listPaging {
 	text-align: center;

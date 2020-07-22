@@ -105,10 +105,10 @@
 			</tr>
 
 			<tr>
-				<th style="text-align: center;" class="table-active">수정할 썸네일</th>
+				<th style="text-align: center;" class="table-active">수정할 썸네일 *</th>
 				<td><input type="file" name="thumbnail"></td>
 				
-				<th style="text-align: center;" class="table-active">수정할 이미지</th>
+				<th style="text-align: center;" class="table-active">수정할 이미지 *</th>
 				<td><input type="file" name="img1"></td>
 			</tr>
 

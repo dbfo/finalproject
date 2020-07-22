@@ -39,7 +39,7 @@
 					<fmt:formatDate value="${vo.qnadate }" pattern="yyyy/MM/dd"
 						var="qnadate" />
 					<td>${qnadate }</td>
-					<td><a href="${pageContext.request.contextPath}/qnaDetail">답변달기</a></td>
+					<td><a href="${pageContext.request.contextPath}/qnaReply">답변달기(모달)</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
