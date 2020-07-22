@@ -9,6 +9,6 @@ public class SellerBoardConteoller {
 	//중고판매자 QnA리스트
 	@RequestMapping("/seller/qnalist")
 	public String sellerQnaList() {
-		return ".seller.qna";
+		return ".seller.qna";  
 	}
 }
