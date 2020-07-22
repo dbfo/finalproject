@@ -14,8 +14,8 @@ public class OrderHistoryService {
 	@Autowired
 	private OrderHistoryDao dao;
 	
-	public List<HistoryListVo> orderhistory(int mnum){
-		return dao.orderhistory(mnum);
+	public List<HistoryListVo> orderhistory(HashMap<String, Object>map){
+		return dao.orderhistory(map);
 	}
 	public HashMap<String,Object> confirmtype(int bpaynum) {
 		return dao.confirmtype(bpaynum);
@@ -30,5 +30,8 @@ public class OrderHistoryService {
 	
 	public HashMap<String, Object> usedBtitle(int bnum){
 		return dao.usedBtilte(bnum);
+	}
+	public int countHistory(HashMap<String, Object>map) {
+		return dao.countHistory(map);
 	}
 }

@@ -28,9 +28,14 @@
 #menubar a:hover{
 	color:#e83e8c;
 }
+#content_all{
+	width:1110px;
+	border:2px solid grey;
+	padding:0px;
+}
 #content_body{
 	position: relative;
     display: inline-block;
     border: 2px solid black;
-    width: 925px;
+    width: 920px;
 }

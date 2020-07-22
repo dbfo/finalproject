@@ -1,6 +1,6 @@
 package com.jhta.finalproject.hd.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class HistoryListVo {
 	private int ordernum;

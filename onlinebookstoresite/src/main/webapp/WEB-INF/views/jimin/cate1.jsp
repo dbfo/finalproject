@@ -49,10 +49,7 @@
 	
 	<div id="listwrap">
 	<div id="image">
-<<<<<<< HEAD
-				<a href="#"> <img
-				src="${cp }/resources/images/JIMIN/광규2.png" id="thumbnail">
-=======
+
 			<c:if test="${empty vo.imgsavefilename}">
 				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
@@ -61,7 +58,6 @@
 			
 				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
->>>>>>> refs/remotes/origin/JIMIN2
 				</a>
 
 	</div>

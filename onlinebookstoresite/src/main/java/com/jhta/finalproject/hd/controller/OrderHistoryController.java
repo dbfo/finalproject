@@ -1,5 +1,6 @@
 package com.jhta.finalproject.hd.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,18 +31,27 @@ public class OrderHistoryController {
 	
 	@RequestMapping(value="/orderhistroy/newview",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String vieworderhistroy(HttpSession session,@RequestParam(defaultValue = "0")String date1,
-											@RequestParam(defaultValue = "0")String date2) {
+	public String vieworderhistroy(HttpSession session,@RequestParam(required=false)String startDay,
+											@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
+		
+		
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
-		List<HistoryListVo> list=service.orderhistory(mnum);
+		System.out.println("mnum:"+mnum);
+		HashMap<String,Object>datemap=new HashMap<String, Object>();
+		datemap.put("startDay", startDay);
+		datemap.put("endDay",endDay);
+		datemap.put("mnum",mnum);
+		int totalcount=service.countHistory(datemap);
+		PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
+		datemap.put("startRow", pu.getStartRow());
+		datemap.put("endRow", pu.getEndRow());
+		List<HistoryListVo> list=service.orderhistory(datemap);
 		List<HistoryListVo> list1=new ArrayList<HistoryListVo>();
 		for(HistoryListVo vo:list) {
+			System.out.println("주문일자:"+vo.getBorderdate());
 			int bpaynum=vo.getOrdernum();
-			System.out.println("bpaynum:"+bpaynum);
-			HashMap<String,Object>map=service.confirmtype(bpaynum);
-			Object ob=map.get("BTYPE");
-			System.out.println(ob);
+			HashMap<String,Object>map=service.confirmtype(bpaynum);		
 			int btype=Integer.parseInt(String.valueOf(map.get("BTYPE")));
 			int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
 			if(btype==1){
@@ -55,7 +65,7 @@ public class OrderHistoryController {
 				String btitle=service.newBtitle(bnum);
 				String ordername=btitle;
 				if(count>1) {
-					ordername=" 외 "+(count-1)+"종";
+					ordername+=" 외 "+(count-1)+"종";
 				}
 				vo.setOrdername(ordername);	
 				list1.add(vo);
@@ -81,6 +91,7 @@ public class OrderHistoryController {
 			}else if(bstatus==5) {
 				status="반품완료";
 			}
+			
 			json.put("bstatus", bstatus);
 			json.put("status", status);
 			json.put("ordermoney", vo1.getOrdermoney());
@@ -89,7 +100,16 @@ public class OrderHistoryController {
 			json.put("ordername", vo1.getOrdername());
 			jarr.put(json);
 		}
-	
+		JSONObject json=new JSONObject();
+		json.put("pageNum", pu.getPageNum());
+		json.put("totalPageCount", pu.getTotalPageCount());
+		json.put("startPageNum", pu.getStartPageNum());
+		if(pu.getEndPageNum()>=pu.getTotalPageCount()) {
+			pu.setEndPageNum(pu.getTotalPageCount());
+		}
+		json.put("endPageNum", pu.getEndPageNum());
+		
+		jarr.put(json);
 		return jarr.toString();
 	}
 	@RequestMapping("/orderhistroy/usedview")
@@ -98,7 +118,8 @@ public class OrderHistoryController {
 											@RequestParam(defaultValue = "0")String date2) {
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
-		List<HistoryListVo> list=service.orderhistory(mnum);
+		HashMap<String, Object>datemap=new HashMap<String, Object>();
+		List<HistoryListVo> list=service.orderhistory(datemap);
 		List<HistoryListVo> list1=new ArrayList<HistoryListVo>();
 		for(HistoryListVo vo:list) {
 			int bpaynum=vo.getOrdernum();

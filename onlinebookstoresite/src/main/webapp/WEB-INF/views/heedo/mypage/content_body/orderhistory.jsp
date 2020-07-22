@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${cp }/resources/hd/datepicker/bootstrap-datepicker.css">
-<script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.js"></script>
-<script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script>
+<link rel="stylesheet" href="${cp }/resources/hd/datepicker/jquery-ui.css">
+<script src="${cp }/resources/hd/datepicker/jquery-ui.js"></script> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
 	<!-- /// 최상단 tab 영역 시작 /// -->
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
@@ -18,14 +19,18 @@
 		<div id="newitem" class="tab-pane active">
 			<div class="date_picker">
 				<ul class="list-group list-group-horizontal" id="dateUl">
-					<li class="list-group-item selectdate">최근 일주일</li>
-					<li class="list-group-item active selectdate">1개월</li>
-					<li class="list-group-item selectdate">3개월</li>
-					<li class="list-group-item selectdate">6개월</li>
+					<li class="list-group-item selectdate" onclick="changeDate(7,0)">최근 일주일</li>
+					<li class="list-group-item active selectdate" onclick="changeDate(0,1)">1개월</li>
+					<li class="list-group-item selectdate" onclick="changeDate(0,3)">3개월</li>
+					<li class="list-group-item selectdate" onclick="changeDate(0,6)">6개월</li>
 				</ul>
-				<input type="text" id="date1" class="form-control">
-				<input type="text" id="date2" class="form-control">
-				<button type="button" class='btn btn-dark' id="testbtn">테스트</button>
+				<input type="text" id="date1" class="form-control" readonly="readonly">
+				<i class="far fa-calendar-alt fa-2x calenderIcon" id="startday"></i>
+				&nbsp&nbsp<span>~</span>&nbsp&nbsp
+				<input type="text" id="date2" class="form-control" readonly="readonly">
+				<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
+				
+				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 			</div>
 			<div class="tableDiv" id="tablediv">
 				<table class="table" id="newTable">
@@ -43,6 +48,9 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="pagingDiv" id="newPaging">
+				
+			</div>
 		</div>
 		<div id="useditem" class="tab-pane fade">
 			 
@@ -50,18 +58,18 @@
 	</div>
 <script>
 	$(document).ready(function(){
-		viewNewOrderlist();
-		
+		defaultDate();
+		var startDay=$("#date1").val();
+		var endDay=$("#date2").val();
+		viewNewOrderlist(startDay,endDay);	
 	});
-	
-	var viewNewOrderlist=function(){
+	var viewNewOrderlist=function(startDay,endDay){
 		$.ajax({
 			url:'/finalproject/orderhistroy/newview',
 			dataType:'json',
 			type:'post',
-			//data:{},
+			data:{startDay:startDay,endDay:endDay},
 			success:function(data){
-				console.log(data.length);
 				if(data.length==0){ //값이없을때..
 					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
 					$("#newTable > tbody").append(tableapp);
@@ -69,6 +77,21 @@
 				}
 				
 				$(data).each(function(index,item){
+					if(index==data.length-1){
+						console.log(item.pageNum);
+						console.log(item.totalPageCount);
+						var paginationapp="<ul class='pagination'>"
+										+"<li class='page-item'><a class='page-link' href='#'><<</a></li>";
+						for(let i=item.startPageNum;i<=item.endPageNum;i++){
+							paginationapp+="<li class='page-item'><a class='page-link' href='#'>"+i+"</a></li>"
+						}
+						paginationapp+="<li class='page-item'><a class='page-link' href='#'>>></a></li>";
+						$("#newPaging").append(paginationapp);
+						return;
+						
+					}
+					var date=new Date(Date.parse(item.borderdate));
+					console.log(date);
 					var tableapp="<tr>"
 							    +"<td>"+item.ordernum+"</td>"
 							    +"<td>"+item.ordername+"</td>"
@@ -77,15 +100,20 @@
 							    +"<td>"+item.receiver+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
-							  +"</tr>";
+							  +"</tr>"; 
 					$("#newTable > tbody").append(tableapp);
 				})
+				
 				
 			}
 			
 		})
 		
 	}
+	var clearNewlist=function(){
+		$("#newTable > tbody").empty();
+	}
+	
 	var viewUsedOrderlist=function(){
 		$.ajax({
 			url:'/finalproject/orderhistroy/usedview',
@@ -98,9 +126,6 @@
 		})
 		
 	}
-	
-
-
 	//ul 선택 이펙트
 	$(".selectdate").click(function(){
 		$(".selectdate").each(function(){
@@ -108,25 +133,113 @@
 		});
 		$(this).addClass('active');
 	});
-	$('#testbtn').click(function(){
-		$('#date1').datepicker('show');
-		$('#date1').datepicker({
-		    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-		    endDate: 'd',	//달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
-		    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-		    templates : {
-		        leftArrow: '&laquo;',
-		        rightArrow: '&raquo;'
-		    }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
-		    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
-		    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
-		    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
-		    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-		}).on("changeDate", function(e) {
-	        console.log(e);// 찍어보면 event 객체가 나온다.
-	        console.log(e.date);
-	   });
+	//============ 데이트 피커 설정 시작 ==================//
+	$("#startday").click(function(){
+		$("#date1").datepicker('show')
 	})
+	$("#endday").click(function(){
+		$("#date2").datepicker('show')
+	})
+	$("#date1, #date2").datepicker({
+			showOn: "none",
+			buttonText: "Calendar",
+			dateFormat:"yy/mm/dd",
+			dayNamesMin: ["일","월","화","수","목","금","토"],
+			monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+			yearSuffix: "년",
+			showMonthAfterYear: true,
+			maxDate:0,
+			
+	});
+	$("#date1").datepicker("option","onClose",function(d){
+		$("#date2").datepicker("option","minDate",d);
+	});
+	$("#date2").datepicker("option","onClose",function(d){
+		$("#date1").datepicker("option","maxDate",d);
+	});
+	//처음 날짜 지정.
+	var defaultDate=function(){
+		var date=new Date();
+		var year=date.getFullYear();
+		var month1=date.getMonth();
+		var month=date.getMonth()+1;
+		var day=date.getDate();
+		if((month+"").length<2){ 
+			month="0"+month;
+		}
+		if((day+"").length<2){ 
+			day="0"+day;
+		}
+		var today=year+"/"+month+"/"+day;
+		$("#date2").val(today);
+		date.setMonth(month1-1);
+		var year1=date.getFullYear();
+		var month2=date.getMonth()+1;
+		var day1=date.getDate();
+		if((month2+"").length<2){ 
+			month2="0"+month2;
+		}
+		if((day1+"").length<2){ 
+			day1="0"+day1;
+		}
+		var day1=year1+"/"+month2+"/"+day1;
+		$("#date1").val(day1);
+	}
+	//li버튼 클릭시 날짜변경이벤트.
+	var changeDate=function(vdate,vmonth){
+		var date=new Date();
+		var day=date.getDate();
+		if(vdate!=null&&vdate!=0){
+			date.setDate(day-7);
+		}
+		var month=date.getMonth();
+		if(vmonth!=null&&vmonth!=0){
+			date.setMonth(month-vmonth);
+		}
+		var year=date.getFullYear();
+		var month1=date.getMonth()+1;
+		var day1=date.getDate();
+		if((month1+"").length<2){ 
+			month1="0"+month1;
+		}
+		if((day1+"").length<2){ 
+			day1="0"+day1;
+		}
+		var today=year+"/"+month1+"/"+day1;
+		
+		var todate=new Date();
+		var toyear=todate.getFullYear();
+		var tomonth=todate.getMonth()+1;
+		var dayto=todate.getDate();
+		if((tomonth+"").length<2){ 
+			tomonth="0"+tomonth;
+		}
+		if((dayto+"").length<2){ 
+			dayto="0"+dayto;
+		}
+		var today1=toyear+"/"+tomonth+"/"+dayto;
+		$("#date2").val(today1);
+		$("#date1").val(today);	 
+	};
+	//============ 데이트 피커 설정 끝 ==================//
+	$("#dateUl li").on('click',function(){
+		var startDay=$("#date1").val();
+		var endDay=$("#date2").val();
+		console.log('startDay:'+date1);
+		console.log('endDay:'+date2);
+		clearNewlist();
+		viewNewOrderlist(startDay,endDay);
+	});
+	$("#researchBtn").on('click',function(){
+		var startDay=$("#date1").val();
+		var endDay=$("#date2").val();
+		console.log('startDay:'+date1);
+		console.log('endDay:'+date2);
+		clearNewlist();
+		viewNewOrderlist(startDay,endDay);
+	});
+	
+
 	
 	
 	
@@ -134,6 +247,13 @@
   
 </script>
 <style>
+	.calenderIcon{
+		position:relative;
+		top:8px;
+	}
+	.list-group{
+		display:inline-flex;
+	}
 	.date_picker{
 		margin-top: 30px;
 		border:2px solid grey;

@@ -15,8 +15,8 @@ public class OrderHistoryDao {
 	private SqlSession sqlsession;
 	private final String NAMESPACE="mybatis.mapper.OrderHistoryMapper";
 	
-	public List<HistoryListVo> orderhistory(int mnum){
-		return sqlsession.selectList(NAMESPACE+".orderhistory", mnum);
+	public List<HistoryListVo> orderhistory(HashMap<String, Object> map){
+		return sqlsession.selectList(NAMESPACE+".orderhistory",map);
 	}
 	
 	public HashMap<String, Object> confirmtype(int bpaynum) {
@@ -32,6 +32,9 @@ public class OrderHistoryDao {
 	}
 	public HashMap<String, Object> usedBtilte(int bnum){
 		return sqlsession.selectOne(NAMESPACE+".usedBtitle",bnum);
+	}
+	public int countHistory(HashMap<String, Object> map) {
+		return sqlsession.selectOne(NAMESPACE+".countHistory",map);
 	}
 	
 }

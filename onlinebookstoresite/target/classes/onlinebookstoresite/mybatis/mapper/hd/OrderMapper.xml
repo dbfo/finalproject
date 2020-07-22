@@ -7,9 +7,9 @@
 		
 		<!-- 주문결제 테이블에 추가 -->
 		<insert id="bpayment" parameterType="hashmap">
-			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},TO_DATE(sysdate,'YYYY/MM/DD'),
+			insert into bpayment values(SEQ_bpayment_bpaynum.nextval,#{shipaddr},#{callnum},#{pay_price_noshipfee},sysdate,
 											<choose>
-												<when test="method=='card'">TO_DATE(sysdate,'YYYY/MM/DD'),1</when>
+												<when test="method=='card'">sysdate,1</when>
 												<otherwise>'',0</otherwise>
 											</choose>
 											,#{orderprice},#{usepoint},
