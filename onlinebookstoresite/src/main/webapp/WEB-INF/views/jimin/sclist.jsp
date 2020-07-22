@@ -12,12 +12,12 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist">
-					
-					<select id="bcate2" name="bcate2">
+					<form method="post" action="sbooklist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
+					<br>
+					<select id="bcate2" name="bcate2" >
 						<option>[---대 분류---]</option>
 					<c:forEach var="vo" items="${list2 }">	
-						<option  value="${vo.bcatenum }">${vo.bcataname }</option>
+						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
 					>
@@ -28,9 +28,9 @@
 <!-- 				</div> -->
 				<div id="search">
 					
-						<input type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
+						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 <!-- 						<button>검색</button> -->
-				<input type="submit" value="검색~">
+				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
 					
@@ -42,27 +42,18 @@
 	<c:if test="">
 	
 	</c:if>
-	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${bestlist }">
+	<!--////////////// 책 목록출력시 /////////////////-->
+	<c:forEach  var="vo" items="${sbooklist1 }">
 	
 	<div id="listwrap">
 	<div id="image">
-
-			<c:if test="${empty vo.imgsavefilename}">
-				<a href="bdetail?bnum=${vo.bnum }"> <img
+				<a href="#"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
-				</a>			
-			</c:if>
-			
-				<a href="bdetail?bnum=${vo.bnum }"> <img
-				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
-
 				</a>
-
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }"> 
+							<a  style="font-size:20px; color:green;" href="#"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -79,7 +70,7 @@
 						<div class="price">
 							<strong>${vo.bprice }</strong>
 							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>적립</span>
+							<span>[10%]</span> <span>적립</span>
 						</div>
 
 						<div class="review_score">
@@ -87,14 +78,18 @@
 							<span class="score"> <strong> [평점자리] </strong>
 							</span> <img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> 
+								> <span class="review">리뷰
+									<strong>
+									[리뷰수]
+									</strong>
+							</span>
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a style="color: white;" href="#">구매하기</a></button>
+			<button class="btn btn-success"><a href="#">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success"><a style="color: white;" href="#">장바구니</a></button>
+			<button class="btn btn-success"><a href="#">장바구니</a></button>
 		</div>
 	</div>
 	</c:forEach>
@@ -104,7 +99,7 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="sbooklist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
@@ -112,7 +107,7 @@
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="sbooklist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
@@ -142,8 +137,20 @@
 			}
 		});
 
+
 	});
 	
+	function nullable(){
+		 var sv = document.getElementById("searchv");
+		 var bc = document.getElementById("bcate2");
+		 if(bc.value == "[---대 분류---]") {
+			   alert("조건을 모두 채워주세요ㅋㅋ");
+			   return false; //submit 중지
+			  }
+		 else{
+			 return true;
+		 }
+	}
+
 	
 </script>
-

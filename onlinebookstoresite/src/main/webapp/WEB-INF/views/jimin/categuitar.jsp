@@ -12,12 +12,12 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist">
-					
-					<select id="bcate2" name="bcate2">
-						<option>[---대 분류---]</option>
+					<form method="post" action="sbooklist" id="catesearch">
+					<br>
+					<select id="bcate2" name="bcate2" >
+						<option>[--- 대 분류 ---]</option>
 					<c:forEach var="vo" items="${list2 }">	
-						<option  value="${vo.bcatenum }">${vo.bcataname }</option>
+						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
 					>
@@ -28,9 +28,9 @@
 <!-- 				</div> -->
 				<div id="search">
 					
-						<input type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
+						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 <!-- 						<button>검색</button> -->
-				<input type="submit" value="검색~">
+				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
 					
@@ -43,11 +43,10 @@
 	
 	</c:if>
 	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${bestlist }">
+	<c:forEach  var="vo" items="${categuitar }">
 	
 	<div id="listwrap">
 	<div id="image">
-
 			<c:if test="${empty vo.imgsavefilename}">
 				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
@@ -56,7 +55,6 @@
 			
 				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
-
 				</a>
 
 	</div>
@@ -87,14 +85,14 @@
 							<span class="score"> <strong> [평점자리] </strong>
 							</span> <img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> 
+								>
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a style="color: white;" href="#">구매하기</a></button>
+			<button class="btn btn-success"><a href="#">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success"><a style="color: white;" href="#">장바구니</a></button>
+			<button class="btn btn-success"><a href="#">장바구니</a></button>
 		</div>
 	</div>
 	</c:forEach>
@@ -104,15 +102,13 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
-<%-- 			 	<span style="color:red">${i }</span> --%>
-			 	<strong style="color:red">${i }</strong>
-			 	</a>
+			 	<a href="cguitar?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
+			 	<strong style="color:red">${i }</strong></a>
 			 	</button>
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="cguitar?pageNum=${i }&scate3=${scatenum}&keyword=${keyword}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
@@ -142,8 +138,8 @@
 			}
 		});
 
+
 	});
-	
+
 	
 </script>
-

@@ -53,20 +53,20 @@
 			<ul class="main-menu">
 				<li><a href="${cp}/list1">카테고리</a>
 					<ul class="sub-menu">
-						<li><a href="#">소설</a></li>
-						<li><a href="#">시/에세이</a></li>
-						<li><a href="#">인문</a></li>
-						<li><a href="#">경제/경영</a></li>
-						<li><a href="#">자기계발</a></li>
-						<li><a href="#">역사/문화</a></li>
-						<li><a href="#">취업/수험서</a></li>
-						<li><a href="#">여행/지도</a></li>
-						<li><a href="#">컴퓨터/IT</a></li>
-						<li><a href="#">만화</a></li>
-						<li><a href="#">기타</a></li>
+						<li><a href="${cp }/cnovel">소설</a></li>
+						<li><a href="${cp }/cpoetry">시/에세이</a></li>
+						<li><a href="${cp }/chuman">인문</a></li>
+						<li><a href="${cp }/ceconomy">경제/경영</a></li>
+						<li><a href="${cp }/cselfdev">자기계발</a></li>
+						<li><a href="${cp }/chistory">역사/문화</a></li>
+						<li><a href="${cp }/cjob">취업/수험서</a></li>
+						<li><a href="${cp }/ctravel">여행/지도</a></li>
+						<li><a href="${cp }/cit">컴퓨터/IT</a></li>
+						<li><a href="${cp }/ccartoon">만화</a></li>
+						<li><a href="${cp }/cguitar">기타</a></li>
 					</ul></li>
 				<li><a href="${cp }/list2">베스트</a></li>
-				<li><a href="#">신간 <span class="new">New</span>
+				<li><a href="${cp }/newlist">신간 <span class="new">New</span>
 				</a></li>
 				<li><a href="#">중고</a></li>
 				<li><a href="${cp }/mypage/main">마이페이지</a>

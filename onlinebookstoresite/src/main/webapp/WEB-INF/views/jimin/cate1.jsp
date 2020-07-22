@@ -12,15 +12,17 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist">
-					
+
+					<form method="post" action="sbooklist" id="catesearch" onsubmit="return nullable()">
+					<br>
+
 					<select id="bcate2" name="bcate2" >
-						<option>[--- 대 분류 ---]</option>
+						<option id="bcate3">[--- 대 분류 ---]</option>
 					<c:forEach var="vo" items="${list2 }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
-					>
+					
 					<select id="scate2" name="scate2">
 						<option>[---소 분류---]</option>
 					</select>
@@ -28,9 +30,9 @@
 <!-- 				</div> -->
 				<div id="search">
 					
-						<input type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
+						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 <!-- 						<button>검색</button> -->
-				<input type="submit" value="검색~">
+				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
 					
@@ -43,17 +45,29 @@
 	
 	</c:if>
 	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${list }">
+	<c:forEach  var="vo" items="${list }" >
 	
 	<div id="listwrap">
 	<div id="image">
+<<<<<<< HEAD
 				<a href="#"> <img
 				src="${cp }/resources/images/JIMIN/광규2.png" id="thumbnail">
+=======
+			<c:if test="${empty vo.imgsavefilename}">
+				<a href="bdetail?bnum=${vo.bnum }"> <img
+				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
+				</a>			
+			</c:if>
+			
+				<a href="bdetail?bnum=${vo.bnum }"> <img
+				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
+>>>>>>> refs/remotes/origin/JIMIN2
 				</a>
+
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a	href="#"> 
+							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }"> 
 								<strong>
 									${vo.btitle }
 								</strong>
@@ -70,31 +84,31 @@
 						<div class="price">
 							<strong>${vo.bprice }</strong>
 							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>[10%]</span> <span>적립</span>
+							<span>적립</span>
 						</div>
 
 						<div class="review_score">
 							<!-- 평점 -->
-							<span class="score"> <strong> [평점자리] </strong>
-							</span> <img
+							<img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> <span class="review">리뷰
-									<strong>
-									[리뷰수]
-									</strong>
-							</span>
+								> 
+							<strong>조회수&nbsp</strong><span>${vo.bhit }</span>
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success">구매하기</button>
+			<button class="btn btn-success"><a href="#">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success">장바구니</button>
+			<button class="btn btn-success"><a href="#">장바구니</a></button>
 		</div>
 	</div>
 	</c:forEach>
 
 	<div>
+<%-- 		<c:if test="${pu.startPageNum != 1 }"> --%>
+<%-- 			<a href="/spring10/board/list1?pageNum=${pu.startPageNum - 1 }&field=${pu.rowBlockCount}">&lt;</a> --%>
+<%-- 		</c:if> --%>
+		
 		<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
@@ -114,8 +128,11 @@
 			 	</button>
 		 	</c:otherwise>
 	 	</c:choose>
-	 	
 		</c:forEach>
+		
+<%-- 		<c:if test="${(pu.endPageNum/10) != 0}"> --%>
+<%-- 			<a href="/spring10/board/list1?pageNum=${pu.endPageNum+1 }&rowBlockCount=${pu.totalPageCount}">&gt;</a> --%>
+<%-- 		</c:if> --%>
 	</div>
 </div>
 
@@ -139,6 +156,18 @@
 
 
 	});
+	
+// 	function nullable(){
+// 		 var sv = document.getElementById("searchv");
+// 		 var sc = document.getElementById("scate2");
+// 		 if(sc.value equals "[---대 분류---]") {
+// 			   alert("조건을 모두 채워주세요ㅋㅋ");
+// 			   return false; //submit 중지
+// 			  }
+// 		 else{
+// 			 return true;
+// 		 }
+// 	}
 
 	
 </script>

@@ -93,6 +93,52 @@
 	<definition name=".list2" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jimin/cate2.jsp"/>
 	</definition>
+	<definition name=".newlist" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/newlist.jsp"/>
+	</definition>
+	<definition name=".cnovel" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catenovel.jsp"/>
+	</definition>
+	<definition name=".cpoetry" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catepoetry.jsp"/>
+	</definition>
+	<definition name=".chuman" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catehuman.jsp"/>
+	</definition>
+	<definition name=".ceconomy" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cateeconomy.jsp"/>
+	</definition>
+	<definition name=".cselfdev" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cateselfdev.jsp"/>
+	</definition>
+	<definition name=".chistory" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catehistory.jsp"/>
+	</definition>
+	<definition name=".cjob" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catejob.jsp"/>
+	</definition>
+	<definition name=".ctravel" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catetravel.jsp"/>
+	</definition>
+	<definition name=".cit" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/cateit.jsp"/>
+	</definition>
+	<definition name=".ccartoon" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/catecartoon.jsp"/>
+	</definition>
+	<definition name=".cguitar" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/categuitar.jsp"/>
+	</definition>
+	
+	
+	<definition name=".sclist" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/sclist.jsp"/>
+	</definition>
+	
+	<definition name=".bdetail" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/bookdetail.jsp"/>
+	</definition>
+	
 	
 	<definition name=".*.*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}/{3}.jsp"/>				

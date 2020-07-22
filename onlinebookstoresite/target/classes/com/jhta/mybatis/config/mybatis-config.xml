@@ -30,9 +30,14 @@
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->
-	<typeAlias type="com.jhta.finalproject.jm.vo.BooksVo" alias="books"/> <!-- books라고 줄여쓰겠다. -->
+		<typeAlias type="com.jhta.finalproject.jm.vo.BooksVo" alias="books"/> <!-- books라고 줄여쓰겠다. -->
 		<typeAlias type="com.jhta.finalproject.jm.vo.BigcateVo" alias="bigcate"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.SmallcateVo" alias="smallcate"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.BreviewVo" alias="breviewc"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.ReviewinsertVo" alias="reviewinsert"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.ImgVo" alias="jmimg"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.ListimgVo" alias="listimg"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.AllListVo" alias="alllist"/>
 	<!-- /////////////// -->
 </typeAliases>
   <mappers>
