@@ -24,7 +24,7 @@ public class HomeJsonController {
 	@Autowired
 	private HomeService service;
 	
-	//홈화면 베스트셀러
+	//홈화면   베스트셀러
 	@RequestMapping(value="/home/bestlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String bestlist(HttpSession session,@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
@@ -74,4 +74,6 @@ public class HomeJsonController {
 		}
 		return jarr.toString();
 	}
+	
+	
 }

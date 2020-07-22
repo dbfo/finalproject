@@ -17,6 +17,16 @@
  	<!-- ////희도//// -->
   	<typeAlias type="com.jhta.finalproject.hd.vo.HomeBestVo" alias="homebest"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.CartListVo" alias="cartview"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderListResultVo" alias="orderVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.ShipmentInfoVo" alias="shipVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.UsedCartListVo" alias="usedVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.UsedOrderListVo" alias="usedOrderVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteResultVo" alias="completeVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteListVo" alias="completeList"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteUsedListVo" alias="usedcompleteList"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.VbankVo" alias="vbankVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryListVo" alias="historyVo"/>
+  	
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->
@@ -35,9 +45,11 @@
   	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerBoardMapper.xml"/>
   	
   	<!-- ////희도//// -->
-  	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/>
-    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/CartMapper.xml"/>
-    
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/><!-- 홈화면 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/CartMapper.xml"/><!-- 장바구니 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/OrderMapper.xml"/><!-- 주문화면 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/MemberMapper.xml"/><!-- 회원관련(로그인,회원가입) -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/hd/OrderHistoryMapper.xml"/><!-- 주문내역,주문관련맵퍼 -->
     <!-- ////지민//// -->
     <mapper resource="onlinebookstoresite/mybatis/mapper/jm/BooksMapper.xml"/>
 

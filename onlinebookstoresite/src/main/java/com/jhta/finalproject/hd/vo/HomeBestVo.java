@@ -1,12 +1,14 @@
 package com.jhta.finalproject.hd.vo;
 
+//홈화면 신간,베스트 리스트!!!
+
 public class HomeBestVo {
-	private int bnum;
-	private String btitle;
-	private String bwriter;
-	private String bpublisher;
-	private int bprice;
-	private String imgsavefilename;
+	private int bnum;  //책번호
+	private String btitle;  //책제목
+	private String bwriter; //저자 
+	private String bpublisher; //출간사
+	private int bprice;  //가격
+	private String imgsavefilename; //책섬네일 사진.(파일명)
 	public HomeBestVo() {}
 	public HomeBestVo(int bnum, String btitle, String bwriter, String bpublisher, int bprice, String imgsavefilename) {
 		super();

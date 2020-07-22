@@ -51,8 +51,7 @@
 			<div id="menu">
 				<tiles:insertAttribute name="menu" />
 			</div>
-			
-			<div id="content_body">
+			<div class="container" id="content_body">
 				<tiles:insertAttribute name="content_body" />
 			</div>
 		</div>

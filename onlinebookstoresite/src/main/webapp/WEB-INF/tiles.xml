@@ -60,13 +60,30 @@
 		<put-attribute name="footer" value="/WEB-INF/views/heedo/main/footer.jsp"/>
 	</definition>
 	
+	<definition name=".orderhistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderhistory.jsp"/>
+	</definition>
+	
 	<!-- 장바구니. -->
-	<definition name=".cart" template="/WEB-INF/views/heedo/layout/cartlayout.jsp">
+	<definition name=".cart" template="/WEB-INF/views/heedo/layout/buylayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/heedo/main/header.jsp"/>
-		<put-attribute name="content_header" value="/WEB-INF/views/heedo/pay/content_header/content_header_cart.jsp"/>
-		<put-attribute name="content_body" value="/WEB-INF/views/heedo/pay/content_body/content_body.jsp"/>
+		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_cart.jsp"/>
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_cart.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/heedo/main/footer.jsp"/>
 	</definition>
+	<!-- 주문페이지. -->
+	<definition name=".order" extends=".cart">
+		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_order.jsp"/>
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_order.jsp"/>
+	</definition>
+	<definition name=".usedorder" extends=".order">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_usedorder.jsp"/>
+	</definition>
+	<definition name=".complete" extends=".cart">
+		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_complete.jsp"/>
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_ordercomplete.jsp"/>
+	</definition>
+	
 	<!-- ///////////////////////////////////////////////////////////////////// -->
 	
 	<!-- //////////////////////지민//////////////////////////////////////////// -->

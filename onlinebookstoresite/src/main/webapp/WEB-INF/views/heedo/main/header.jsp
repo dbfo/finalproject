@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page Preloder-->
 <!--  
 <div id="preloder">
@@ -12,8 +13,7 @@
 			<div class="row">
 				<div class="text-center text-lg-left">
 					<!-- logo -->
-					<a href="${cp }/" class="site-logo"> <img
-						src="${cp }/resources/hd/img/logo2.jpg" id="logoImg" alt="">
+					<a href="${cp }/" class="site-logo"> <img src="${cp }/resources/hd/img/logo2.jpg" id="logoImg" alt="">
 					</a>
 				</div>
 				<div class="col-xl-6 col-lg-5">
@@ -27,8 +27,14 @@
 				<div class="col-xl-4 col-lg-5">
 					<div class="user-panel">
 						<div class="up-item">
-							<i class="flaticon-profile"></i><a href="#">로그인</a> / <a
-								href="#">회원가입</a>
+							<i class="flaticon-profile"></i>
+							<c:if test="${ empty sessionScope.mid }">
+								<a href="${cp }/login">로그인</a> / <a href="#">회원가입</a>
+							</c:if>
+							<c:if test="${not empty sessionScope.mid }">
+								<a href="${cp }/logout">로그아웃</a>
+							</c:if>
+							
 						</div>
 						<div class="up-item">
 							<div class="shopping-card">
@@ -65,7 +71,7 @@
 				<li><a href="#">중고</a></li>
 				<li><a href="${cp }/mypage/main">마이페이지</a>
 					<ul class="sub-menu">
-						<li><a href="#">주문내역</a></li>
+						<li><a href="${cp }/mypage/orderhistory">주문내역</a></li>
 						<li><a href="#">반품/취소/환불</a></li>
 						<li><a href="#">나의계좌</a></li>
 						<li><a href="#">나의정보</a></li>

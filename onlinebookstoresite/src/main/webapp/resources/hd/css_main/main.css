@@ -10,7 +10,8 @@
 	border:1px solid black;
 }
 #content-card{
-
+	display:table-cell;
+	vertical-align:middle;
 	border:2px solid red;
 	width:1110px;
 	height:456px;

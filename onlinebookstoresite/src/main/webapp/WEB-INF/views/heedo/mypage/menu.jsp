@@ -9,7 +9,7 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="#">- 주문내역</a><br>
+			<a href="${cp }/mypage/orderhistory">- 주문내역</a><br>
 			<a href="#">- 반품/환불/취소</a><br>
 		</td>
 	</tr>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.CartDao;
 import com.jhta.finalproject.hd.vo.CartListVo;
+import com.jhta.finalproject.hd.vo.UsedCartListVo;
 
 @Service
 public class CartService {
@@ -31,4 +32,13 @@ public class CartService {
 	public int deleteSelected(HashMap<String, Object> map) {
 		return dao.deleteSelected(map);
 	}
+	//중고 장바구니 리스트 출력 Service
+	public List<UsedCartListVo> usedlist(int mnum) {
+		return dao.usedlist(mnum);
+	}
+	public String getSid(int snum) {
+		return dao.getSid(snum);
+	}
+	
+	
 }
