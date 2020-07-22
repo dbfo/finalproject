@@ -1,4 +1,4 @@
-package com.jhta.finalproject.yr.controller;
+package com.jhta.finalproject.yr.controller.order;
 
 import java.util.HashMap;
 import java.util.List;

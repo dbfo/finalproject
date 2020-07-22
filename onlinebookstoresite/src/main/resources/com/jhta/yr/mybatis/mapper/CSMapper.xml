@@ -96,7 +96,7 @@
 	<sql id="selectPaynum">
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bpaynum)">
 			and bpayment.bpaynum = #{bpaynum}
-		</if>		
+		</if>			
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(type)">
 			and type = #{type}
 		</if>

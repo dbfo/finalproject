@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class = "container-fluid">
-<form action="${pageContext.request.contextPath }/cs/menu?PageName=${path}" method="post">
+<form action="${pageContext.request.contextPath }/admin/seller" method="post">
 	<h2>판매자 정산 관리</h2>
 	<table class="table searchbox">
 		<tr>
@@ -11,15 +11,15 @@
 				<div class="form-group row">
 					<div class="col-xs-2 ">
 					
-						<select class="form-control" name = "pfield" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
+						<select class="form-control" name = "pfield">
 							<option value =''>--선택--</option>
-							<option value="bpaynum" <c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
-							<option value="mname"<c:if test="${pfield == 'mname'}">selected</c:if> >주문자명</option>
+							<option value="sellername" <c:if test="${pfield == 'sellername'}">selected</c:if>>판매자</option>
+							<option value="mname"<c:if test="${pfield == 'mname'}">selected</c:if> >구매자</option>
 						</select>
 						
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
+						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }">
 					</div>
 				</div>
 			</td>
@@ -29,25 +29,8 @@
 			<td colspan="3">
 				<div class="row">
 					<select name = "tfield" class = "col form-control col-xs-2">
-					
-						<c:choose>
-							<c:when test="${path >= 4 }">
-								<option value="appdate" <c:if test="${tfield == 'appdate'}">selected</c:if>>접수일</option>													
-							</c:when>
-							<c:otherwise>
-								<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>			
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when test="${path >= 4 }">
-								<option value="comdate" <c:if test="${tfield == 'comdate'}">selected</c:if>>처리일</option>													
-							</c:when>
-							<c:otherwise>
-								<option value="aplctdate" <c:if test="${tfield == 'aplctdate'}">selected</c:if>>접수일</option>						
-							</c:otherwise>
-						</c:choose>
-						
+						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>													
+						<option value="bpaydate" <c:if test="${tfield == 'bpaydate'}">selected</c:if>>결제일</option>			
 					</select>
 					<div class='col-md-4'>
 						<input class="btn btn-outline-success btn-sm dbtn" type="button"

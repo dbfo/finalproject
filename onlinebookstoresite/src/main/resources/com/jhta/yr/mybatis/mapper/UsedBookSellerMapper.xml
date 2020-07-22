@@ -3,11 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.yr.mybatis.mapper.UsedBookSellerMapper">
-	<select id="getList">
-		select aa.*, members.mname
+
+	<resultMap type = "com.jhta.finalproject.yr.vo.UsedOldBookSellerInfoVo" id = "uosellerinfovo">
+		<result property="borderdate" column="borderdate"/>
+		<result property="bpaydate" column="bpaydate"/>
+		<result property="bpaynum" column="bpaynum"/>
+		<result property="fprice" column="fprice"/>
+		<result property="settlement" column="settlement"/>
+		<result property="bocomstatus" column="bocomstatus"/>
+		<result property="seller" column="seller"/>
+		<result property="buyer" column="buyer"/>
+		<result property="sellername" column="sellername"/>
+		<result property="buyername" column="buyername"/>
+		<collection property="obname" ofType = "string">
+			<result property="obname" column="obname"/>		
+		</collection>
+	</resultMap>
+	
+	<sql id="search">
+<!-- 	판매자, 구매자로 검색 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(pfield)">	
+			<choose>
+				<when test="pfield == 'sellername'">
+					and sellername like '%'||#{pkeyword}||'%'
+				</when>
+				<when test="pfield == 'mname'">
+					and members.mname like '%'||#{pkeyword}||'%'
+				</when>
+			</choose>
+		</if>
+		
+<!-- 		구매일, 결제일로 검색 -->
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startDate)">
+			 and TRUNC(${tfield}) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate})
+		</if>	
+		
+	</sql>
+
+	<select id="getList" resultMap="uosellerinfovo" parameterType="hashmap">
+		select aa.*, members.mname buyername
 		from
 		(
-			select borderdate, bpayment.bpaynum, obname, fprice, settlement, bocomstatus , obseller.mnum, bpayment.mnum buyer, sname.mname
+			select borderdate, bpaydate, bpayment.bpaynum, obname, fprice, settlement, bocomstatus , obseller.mnum seller, bpayment.mnum buyer, sname.mname sellername
 			from bpayment, paymentbook, obseller, members, oldbooks, obcomplete,
 			(select mname from obseller, members where obseller.mnum = members.mnum) sname
 			where bpayment.bpaynum = paymentbook.bpaynum
@@ -16,8 +53,19 @@
 			and obseller.mnum = members.mnum
 			and obcomplete.bpaynum = bpayment.bpaynum
 			and members.mname = sname.mname
+            order by obcomplete.bocomstatus, borderdate
 		) aa
 		, members
-		where aa.buyer= members.mnum														
+		where aa.buyer= members.mnum
+		<include refid="search"/>													
 	</select>
+
+	<update id="updateObcomplete" parameterType="int"> 
+		update obcomplete set bocomstatus = 1 where bpaynum = #{bpaynum}
+	</update>
+	
+	<insert id="insertDeposit" parameterType="depositVo">
+		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, #{bpaynum}, #{dtran}, sysdate, 0)
+	</insert>
+		
 </mapper>	
