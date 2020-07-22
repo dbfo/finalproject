@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.jh.dao.SellerBoardDao;
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 
@@ -21,11 +22,24 @@ public class SellerBoardService implements SellerBoard{
 		List<SellerQnaListJoinVo> list=dao.getSellerQnaList(snum);
 		return list;
 	}
-	//중고판매자 답변 리스트 가져오기
-	public List<SellerObqanswerVo> getSellerAnswerList(int snum){
-		List<SellerObqanswerVo> list=dao.getSellerAnswerList(snum);
-		return list;
+	
+	//중고판매자 문의사항 리스트 가져오기(디테일)
+	public SellerQnaListJoinVo getSellerQnaDetail(int obqnum){
+		SellerQnaListJoinVo vo=dao.getSellerQnaDetail(obqnum);
+		return vo;
 	}
+	//중고판매자 썸네일이미지 가져오기(디테일)
+	public SellerImgVo getQnaDetailImg(int bnum) {
+		SellerImgVo vo=dao.getQnaDetailImg(bnum);
+		return vo;
+	}
+	//중고판매자 답변 리스트 가져오기(디테일)
+	public SellerObqanswerVo getSellerAnswerList(int obqnum){
+		SellerObqanswerVo vo=dao.getSellerAnswerList(obqnum);
+		return vo;
+	}
+	
+	
 	//중고판매자 답변하기
 	@Override
 	public int sellerQnaInsert(HashMap<String, Object> map) {

@@ -12,11 +12,23 @@
         order by oq.obqdate desc
 	</select>
 	
-	<!-- 중고판매자 Qna답변 가져오기 -->
-	<select id="getSellerAnswerList" resultType="obqanswer" parameterType="int">
-		select * from obqanswer where snum=#{snum}
+	<!-- 중고판매자 디테일:문의내용 가져오기 -->
+	<select id="getSellerQnaDetail" resultType="qnalistjoin" parameterType="int">
+		select o.obname OBNAME, oq.obqtitle OBQTITLE,oq.obqcontent OBQCONTENT ,m.mid MID, 
+		oq.obqstatus OBQSTATUS,oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
+		from oldbooks o,obqna oq, members m
+		where o.obnum=oq.obnum and oq.mnum=m.mnum and oq.obqnum=#{obqnum}
 	</select>
 	
+	<!-- 중고판매자 디테일:Qna답변 가져오기 -->
+	<select id="getSellerAnswerList" resultType="obqanswer" parameterType="int">
+		select * from obqanswer where obqnum=#{obqnum}
+	</select>
+	
+	<!-- 중고판매자 디테일:상품 썸네일 이미지 가져오기 -->
+	<select id="getQnaDetailImg" resultType="img" parameterType="int">
+		select * from img where bnum=#{bnum} and thumbnail=1
+	</select>
 	<!-- 문의사항 답변하기 -->
 	<insert id="insertObqanswer" parameterType="hashmap">
 		insert into obqanswer VALUES(#{obqnum},#{snum},#{obqacontent},sysdate)

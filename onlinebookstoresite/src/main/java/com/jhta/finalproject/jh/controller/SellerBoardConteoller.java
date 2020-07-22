@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.jh.service.SellerBoardService;
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 
@@ -26,10 +27,21 @@ public class SellerBoardConteoller {
 	public String sellerQnaList(Model model,HttpSession session) {
 		int snum=(Integer)session.getAttribute("snum");
 		List<SellerQnaListJoinVo> list=service.getSellerQnaList(snum);//문의글리스트
-		List<SellerObqanswerVo> answerList= service.getSellerAnswerList(snum);//답변리스트
 		model.addAttribute("list", list);
-		model.addAttribute("answerList", answerList);
 		return ".seller.qna";  
+	}
+	
+	//중고 문의사항 상세페이지로 이동
+	@RequestMapping("/seller/qnadetail")
+	public String obQnaDetail(int obqnum,Model model) {
+		SellerQnaListJoinVo qnaList=service.getSellerQnaDetail(obqnum); //문의사항
+		SellerObqanswerVo answerList=service.getSellerAnswerList(obqnum); //답변
+		
+		SellerImgVo img=service.getQnaDetailImg(qnaList.getObnum());
+		model.addAttribute("answerList", answerList);
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("img", img);
+		return ".seller.qnadetail";
 	}
 	
 	//중고Qna답글달기 

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 
@@ -21,10 +22,21 @@ public class SellerBoardDao {
 		List<SellerQnaListJoinVo> list= sqlSession.selectList(NAMESPACE+".getSellerQnaList", snum);
 		return list;
 	}
-	//중고판매자 답변 리스트 가져오기
-	public List<SellerObqanswerVo> getSellerAnswerList(int snum){
-		List<SellerObqanswerVo> list=sqlSession.selectList(NAMESPACE+".getSellerAnswerList", snum);
-		return list;
+	//중고판매자 문의사항 리스트 가져오기(디테일)
+	public SellerQnaListJoinVo getSellerQnaDetail(int obqnum){
+		SellerQnaListJoinVo vo=sqlSession.selectOne(NAMESPACE+".getSellerQnaDetail", obqnum);
+		return vo;
+	}
+	//중고판매자 썸네일이미지 가져오기(디테일)
+	public SellerImgVo getQnaDetailImg(int bnum) {
+		SellerImgVo vo=sqlSession.selectOne(NAMESPACE+".getQnaDetailImg", bnum);
+		return vo;
+	}
+	
+	//중고판매자 답변 리스트 가져오기(디테일)
+	public SellerObqanswerVo getSellerAnswerList(int obqnum){
+		SellerObqanswerVo vo=sqlSession.selectOne(NAMESPACE+".getSellerAnswerList", obqnum);
+		return vo;
 	}
 	//중고판매자 Qna상태 업데이트
 	public int updateQnastatus(HashMap<String, Object> map) {

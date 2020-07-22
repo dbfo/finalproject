@@ -45,7 +45,9 @@
 	<definition name=".seller.qna" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
 	</definition>
-	
+	<definition name=".seller.qnadetail" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaDetail.jsp"/>
+	</definition>
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	
 	<!-- /////////////////////희도//////////////////////////////ㄴ -->
