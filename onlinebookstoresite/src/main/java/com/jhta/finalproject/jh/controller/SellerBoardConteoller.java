@@ -36,8 +36,8 @@ public class SellerBoardConteoller {
 	public String obQnaDetail(int obqnum,Model model) {
 		SellerQnaListJoinVo qnaList=service.getSellerQnaDetail(obqnum); //문의사항
 		SellerObqanswerVo answerList=service.getSellerAnswerList(obqnum); //답변
-		
-		SellerImgVo img=service.getQnaDetailImg(qnaList.getObnum());
+		System.out.println("답변:"+answerList);
+		SellerImgVo img=service.getQnaDetailImg(qnaList.getObnum()); //썸네일이미지
 		model.addAttribute("answerList", answerList);
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("img", img);
