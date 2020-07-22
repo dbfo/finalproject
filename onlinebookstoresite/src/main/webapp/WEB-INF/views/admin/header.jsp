@@ -37,10 +37,10 @@
 	</ul>
 </nav>
 <!-- 여기까지 -->
-<script>
-	//Toggle the side navigation
-	$("#sidebarToggle").on("click", function(e) {
-		e.preventDefault();
-		$("body").toggleClass("sb-sidenav-toggled");
-	});
+<script type="text/javascript">
+    // Toggle the side navigation
+    $("#sidebarToggle").on("click", function(e) {
+        e.preventDefault();
+        $("body").toggleClass("sb-sidenav-toggled");
+    });
 </script>

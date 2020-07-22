@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.yr.mybatis.mapper.UsedBookSellerMapper">
+	<select id="getList">
+		select aa.*, members.mname
+		from
+		(
+			select borderdate, bpayment.bpaynum, obname, fprice, settlement, bocomstatus , obseller.mnum, bpayment.mnum buyer, sname.mname
+			from bpayment, paymentbook, obseller, members, oldbooks, obcomplete,
+			(select mname from obseller, members where obseller.mnum = members.mnum) sname
+			where bpayment.bpaynum = paymentbook.bpaynum
+			and paymentbook.bnum = oldbooks.obnum
+			and oldbooks.snum = obseller.snum
+			and obseller.mnum = members.mnum
+			and obcomplete.bpaynum = bpayment.bpaynum
+			and members.mname = sname.mname
+		) aa
+		, members
+		where aa.buyer= members.mnum														
+	</select>
+</mapper>	

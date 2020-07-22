@@ -18,4 +18,17 @@
 	<update id="updatePrepareToShipping" parameterType="int">
 		update bpayment set bstatus = 2 where bpaynum = #{bpaynum} 
 	</update>
+	
+	<select id="getBookPoint" parameterType="int" resultType="int">
+		select sum(point) sum from paymentbook where bpaynum = #{bpaynum}
+	</select>
+		
+	<insert id="pointPlus" parameterType="pointVo">
+		insert into point values (#{mnum}, #{bpaynum}, #{tranpoint}, sysdate)
+	</insert>
+	
+	<select id="getMnum" resultType="int" parameterType="int">
+		select mnum from bpayment where bpaynum = #{bpaynum}
+	</select>
+	
 </mapper>

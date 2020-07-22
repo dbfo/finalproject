@@ -9,14 +9,16 @@
 			<td colspan="3">
 				<div class="form-group row">
 					<div class="col-xs-2 ">
-						<select class="form-control" name = "pfield">
+					
+						<select class="form-control" name = "pfield" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
 							<option value =''>--선택--</option>
 							<option value="bpaynum" <c:if test="${pfield == 'bpaynum'}">selected</c:if>>주문번호</option>
 							<option value="mname"<c:if test="${pfield == 'mname'}">selected</c:if> >주문자명</option>
 						</select>
+						
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="pkeyword">
+						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
 					</div>
 				</div>
 			</td>
@@ -26,8 +28,25 @@
 			<td colspan="3">
 				<div class="row">
 					<select name = "tfield" class = "col form-control col-xs-2">
-						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>
-						<option value="aplctdate" <c:if test="${tfield == 'aplctdate'}">selected</c:if>>접수일</option>
+					
+						<c:choose>
+							<c:when test="${path >= 4 }">
+								<option value="appdate" <c:if test="${tfield == 'appdate'}">selected</c:if>>접수일</option>													
+							</c:when>
+							<c:otherwise>
+								<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>			
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${path >= 4 }">
+								<option value="comdate" <c:if test="${tfield == 'comdate'}">selected</c:if>>처리일</option>													
+							</c:when>
+							<c:otherwise>
+								<option value="aplctdate" <c:if test="${tfield == 'aplctdate'}">selected</c:if>>접수일</option>						
+							</c:otherwise>
+						</c:choose>
+						
 					</select>
 					<div class='col-md-4'>
 						<input class="btn btn-outline-success btn-sm dbtn" type="button"
@@ -54,30 +73,29 @@
 	
 				<div class="form-group row">
 					<div class="col-xs-2 ">
-						<select class="form-control" name="bfield">
+						<select class="form-control" name="bfield" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
 							<option value =''>--선택--</option>
 							<option value="btitle" <c:if test="${bfield == 'btitle'}">selected</c:if>>책 이름</option>
 							<option value="bnum" <c:if test="${bfield == 'bnum'}">selected</c:if>>책 번호</option>
 						</select>
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="bkeyword">
+						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
 					</div>
 				</div>
 			</td>
 		</tr>
+		<c:if test="${path < 4 }">
 		<tr>
-			<th class="table-active">주문상태</th>
+			<th class="table-active">처리상태</th>
 			<td>
-				<input type="checkbox" name="status" value="-1" id="ototal"><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="1" id="oapply"><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing"><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>
-				<input type="checkbox" name="status" value="3"id="ocomplete"><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>
-				<c:if test="${path == 1 }">
-					<input type="checkbox" name="status" value="4"id="bdapply"><label for="bdapply"> &nbsp;입금전 취소&nbsp;&nbsp;</label>
-				</c:if>							
+				<input type="checkbox" name="status" value="-1" id="ototal" <c:if test="${status == '-1'}">checked</c:if> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="1" id="oapply" <c:if test="${status == '1'}">checked</c:if>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>									
+				<input type="checkbox" name="status" value="3"id="ocomplete" <c:if test="${status == '3'}">checked</c:if>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
 			</td>
 		</tr>
+		</c:if>
 		<tr>
 			<th class="table-active">회원 / 비회원</th>
 			<td>

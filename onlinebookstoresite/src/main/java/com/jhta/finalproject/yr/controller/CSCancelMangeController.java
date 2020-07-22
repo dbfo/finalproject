@@ -19,7 +19,7 @@ import com.jhta.finalproject.yr.vo.PaymentBooksVo;
 import com.jhta.finalproject.yr.vo.PaymentVo;
 
 @Controller
-public class CsCancelMangeController {
+public class CSCancelMangeController {
 	
 	@Autowired
 	private CSManageService service;
@@ -38,7 +38,7 @@ public class CsCancelMangeController {
 //		for (PaymentAndCSBookListVo vo : list) {
 //			System.out.println(vo);
 //		}
-
+		
 		model.addAttribute("List",list);
 		
 		return "/admin/yr/cs/cancelModal";
@@ -47,7 +47,7 @@ public class CsCancelMangeController {
 	
 	@RequestMapping("/cs/cancelapproval")
 	@ResponseBody
-	public String cancelApproval(String bpaynum) {
+	public String cancelApproval(String bpaynum, String cancelPrice) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("bpaynum", bpaynum);
@@ -58,9 +58,9 @@ public class CsCancelMangeController {
 		
 		//list안에 환불한 책 갯수세기(새로운 주문 만들기)
 		//책정보
-	
 		PaymentVo cancelPayment = new PaymentVo();
 		List<PaymentBooksVo> paymentbookList = new ArrayList<PaymentBooksVo>();
+		List<Integer> paymentbookNumList = new ArrayList<Integer>();
 		
 		for (PaymentAndCSBookListVo vo : list) {
 			
@@ -70,33 +70,46 @@ public class CsCancelMangeController {
 			List<CSAndPaymentBookVo> bookList = vo.getCSAndPaymentBook();
 			
 			for (CSAndPaymentBookVo blist : bookList) {				
+				
+				paymentbookNumList.add(blist.getPaymentbook_num());
+				
 				if(blist.getBcount() - blist.getCount() > 0) { //주문한 책 갯수 - 취소한 책 갯수 
-					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount() - blist.getCount()));
+					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount() - blist.getCount(),blist.getPoint()));
 				}else if(blist.getType() != 1) { //취소하지 않은 책
-					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount()));
+					paymentbookList.add(new PaymentBooksVo(0, 0, 1, blist.getBnum(), blist.getBcount(), blist.getPoint()));
 				}
 			}
 		}
 		
-		if(!paymentbookList.isEmpty() && cancelPayment != null) {
-			//insert
-			int n = cservice.makeCancelPayment(cancelPayment, paymentbookList);
-			if(n < 1) {
-				System.out.println("insert 실패ㅜㅜㅜ");
-			}else {
-				System.out.println("성공");
-			}
-		}
-		
-		//update
-		
-		
-		
 		JSONObject json = new JSONObject();
-		json.put("code", "success");
 		
-		
-		
+		try {
+			if(!paymentbookList.isEmpty() && cancelPayment != null) {
+				//insert
+				int n = cservice.makeCancelPayment(cancelPayment, paymentbookList);
+				if(n < 1) {
+					System.out.println("insert 실패ㅜㅜㅜ");
+				}else {
+					System.out.println("성공");
+				}
+			}
+			
+			//update
+			int n = cservice.updateStatus(Integer.parseInt(bpaynum), paymentbookNumList);
+			
+			if(n > 0) {
+				System.out.println("변경완료");
+				json.put("code", "success");			
+			}else {
+				System.out.println("변경실패");
+				json.put("code", "error");						
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			json.put("code", "error");						
+			return json.toString();
+		}
+
 		return json.toString();
 	}
 }

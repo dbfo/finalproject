@@ -19,9 +19,9 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-sync fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=2">교환
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=3">교환
 					<c:forEach items="${countList }" var="list">						
-						<c:if test="${list.TYPE == '2'}">
+						<c:if test="${list.TYPE == '3'}">
 							[${list['COUNT']}]
 						</c:if>
 					</c:forEach>
@@ -30,9 +30,9 @@
 		</li>
 		<li>
 			<span class="thumb"><i class="fas fa-undo-alt fa-3x"></i>
-				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=3">반품
+				<span class = "title"><a href="${pageContext.request.contextPath}/cs/menu?PageName=2">반품
 					<c:forEach items="${countList }" var="list">						
-						<c:if test="${list.TYPE == '3'}">
+						<c:if test="${list.TYPE == '2'}">
 							[${list['COUNT']}]
 						</c:if>
 					</c:forEach>

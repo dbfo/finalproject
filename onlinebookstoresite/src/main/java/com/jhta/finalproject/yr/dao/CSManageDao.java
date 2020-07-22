@@ -36,4 +36,16 @@ public class CSManageDao {
 	public int paymentbooksInsert(PaymentBooksVo booksVo) {
 		return session.insert(NAMESPACE + ".paymentbooksInsert", booksVo);
 	}
+	
+	public int updateCancelStatus(int bpaynum) {
+		return session.update(NAMESPACE+".updateCancelStatus",bpaynum);
+	}
+
+	public int updateRefundStatus(int bpaynum) {
+		return session.update(NAMESPACE+".updateRefundStatus",bpaynum);
+	}
+	
+	public int updateStatus(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".updateStatus",map);
+	}
 }

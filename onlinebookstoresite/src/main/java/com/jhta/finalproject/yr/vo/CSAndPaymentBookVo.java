@@ -9,6 +9,8 @@ import java.util.Date;
 //TYPE                     NUMBER 
 //COUNT                    NUMBER 
 
+
+//refund, books, paymentbook
 public class CSAndPaymentBookVo {
 
 	private int bpaynum;
@@ -17,6 +19,7 @@ public class CSAndPaymentBookVo {
 	private int bcount;
 	private String btitle; // 책이름
 	private int bprice; // 책 가격
+	private int point; // 포인트
 	private int paymentbook_num; // cs책번호
 	private int status; // 상태
 	private Date aplctdate; // 신청날짜
@@ -28,7 +31,9 @@ public class CSAndPaymentBookVo {
 		super();
 	}
 
-	public CSAndPaymentBookVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice,
+
+
+	public CSAndPaymentBookVo(int bpaynum, int btype, int bnum, int bcount, String btitle, int bprice, int point,
 			int paymentbook_num, int status, Date aplctdate, Date recomdate, int type, int count) {
 		super();
 		this.bpaynum = bpaynum;
@@ -37,6 +42,7 @@ public class CSAndPaymentBookVo {
 		this.bcount = bcount;
 		this.btitle = btitle;
 		this.bprice = bprice;
+		this.point = point;
 		this.paymentbook_num = paymentbook_num;
 		this.status = status;
 		this.aplctdate = aplctdate;
@@ -48,10 +54,25 @@ public class CSAndPaymentBookVo {
 	@Override
 	public String toString() {
 		return "CSAndPaymentBookVo [bpaynum=" + bpaynum + ", btype=" + btype + ", bnum=" + bnum + ", bcount=" + bcount
-				+ ", btitle=" + btitle + ", bprice=" + bprice + ", paymentbook_num=" + paymentbook_num + ", status="
-				+ status + ", aplctdate=" + aplctdate + ", recomdate=" + recomdate + ", type=" + type + ", count="
-				+ count + "]";
+				+ ", btitle=" + btitle + ", bprice=" + bprice + ", point=" + point + ", paymentbook_num="
+				+ paymentbook_num + ", status=" + status + ", aplctdate=" + aplctdate + ", recomdate=" + recomdate
+				+ ", type=" + type + ", count=" + count + "]";
 	}
+
+
+	
+	
+	public int getPoint() {
+		return point;
+	}
+
+
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+
 
 	public int getBpaynum() {
 		return bpaynum;

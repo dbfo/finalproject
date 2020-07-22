@@ -113,22 +113,44 @@
 			value="/WEB-INF/views/admin/yr/cs/cstables.jsp" />
 	</definition>
 	
-	
+<!-- 	취소 -->
 	<definition name=".admin.cancel" extends=".admin.cs">
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/csCancelTables.jsp" />
 	</definition>
-
+<!-- 반품 -->
 	<definition name=".admin.return" extends=".admin.cs">
-	
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/returnTable.jsp" />	
 	</definition>
-
+<!-- 교환 -->
 	<definition name=".admin.exchange" extends=".admin.cs">
-	
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/exchangeTable.jsp" />
+	</definition>
+<!-- 환불 -->
+	<definition name=".admin.refund" extends=".admin.cs">
+		<put-attribute name="cstables"
+			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
 	</definition>
 	
+
 
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
+	</definition>
+	
+	<!-- 중고판매자 정산 -->
+	<definition name=".admin.seller"
+		template="/WEB-INF/views/admin/yr/usedbookseller/sellerlayout.jsp">
+		<put-attribute name="sellersearch"
+			value="/WEB-INF/views/admin/yr/usedbookseller/sellersearch.jsp" />
+		<put-attribute name="sellertables"
+			value="/WEB-INF/views/admin/yr/usedbookseller/sellertables.jsp" />
+	</definition>
+	
+	
+	<definition name=".usedbookseller" extends=".main">
+		<put-attribute name="content" value=".admin.seller" />
 	</definition>
 </tiles-definitions>

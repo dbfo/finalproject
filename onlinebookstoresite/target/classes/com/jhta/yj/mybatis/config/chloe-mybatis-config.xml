@@ -31,6 +31,12 @@
 			alias="payment" />
 		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
 			alias="booksVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.DepositVo"
+			alias="depositVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.PointVo"
+			alias="pointVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.SettlementJoinVo"
+			alias="SettlementJoinVo" /> 
 	</typeAliases>
 	
 	<!-- 매퍼파일 -->
@@ -45,6 +51,8 @@
 		<mapper resource="com/jhta/yr/mybatis/mapper/PaymentMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/ShipMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/CSMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/DepositMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/UsedBookSellerMapper.xml" />
 		
 	</mappers>
 </configuration>

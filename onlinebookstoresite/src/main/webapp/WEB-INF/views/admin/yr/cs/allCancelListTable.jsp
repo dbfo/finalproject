@@ -22,11 +22,11 @@
 						<th>책 제목</th>
 						<th>수량</th>
 						<th>결제예정금액</th>
+						<th>결제 수단</th>
 						<th>처리상태</th>
 					</tr>
 				</thead>
 				<tbody>
-
 					<c:forEach var="vo" items="${list}">
 						<tr>
 							<td>
@@ -45,9 +45,24 @@
 								</c:forEach>
 							</td>
 							<td>${vo.ordermoney }</td>
+							<c:choose>
+								<c:when test="${vo.methodpayment == 0}">
+									<td>카드</td>
+								</c:when>
+								<c:otherwise>
+									<td>무통장 입금</td>
+								</c:otherwise>
+							</c:choose>
 							<td>
-								<input class= "btn btn-success" id = "openModal" type="button"  value = "신청 처리">
-<!-- 								<input type="button" value = "처리 완료"> -->
+								<c:choose>
+									<c:when test="${vo.bstatus == 5 || vo.bstatus == 6 }">
+										<input class= "btn btn-secondary" type="button" value = "처리 완료" disabled="disabled"> 									
+									</c:when>
+									<c:otherwise>
+										<input class= "btn btn-success" id = "openModal" type="button"  
+										value = "신청 처리" onclick = "openModal1(${vo.bpaynum})">
+									</c:otherwise>								
+								</c:choose>
 							</td>
 						</tr>
 					</c:forEach>
@@ -57,56 +72,25 @@
 	</div>
 </div>
 </div>
-
 <script type="text/javascript">
+	function openModal1(bpaynumId){
+		cancelModalPopup(bpaynumId);		
+	}
 	
-	$(function(){
-		$('#openModal').on('click',function(){
-			console.log("gggg");
-			
-			var index = $('#openModal').index(this);
-			
-			var bpaynumId = $('#bpaynumId').eq(index).text();
-			console.log(bpaynumId);
-			
-//	 		$.ajax({
-//	 			url : "${pageContext.request.contextPath}/cs/cancelModal",
-//	 			dataType : json,
-//	 			data : {bpaynum : bpaynumId},
-//	 			success: function(data){
-					
-//	 			}
-//	 		})
-			
-//	 	    $("#myModal").modal();
-
-			sampleModalPopup(bpaynumId);
-		})
-		
-		
-	})
-	
-
-    function sampleModalPopup(bpaynum){
-        // 팝업 호출 url
-        var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
-        
-        // 팝업 호출
-        $("#myModal > .modal-dialog").load(url, function() { 
-            $("#myModal").modal("show"); 
-        });
-    }
-
-
-
+	function cancelModalPopup(bpaynum){
+	    // 팝업 호출 url
+	    var url = "${pageContext.request.contextPath}/cs/cancelModal?bpaynum="+bpaynum;
+	    
+	    // 팝업 호출
+	    $("#myModal > .modal-dialog").load(url, function() { 
+	        $("#myModal").modal("show"); 
+	    });
+	}
 </script>
-
-
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
   <div class="modal-dialog modal-lg">
-    
   </div>
 </div>
     
