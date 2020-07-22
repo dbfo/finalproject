@@ -5,7 +5,7 @@
 
 <div class="card mb-4">
 	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> ${vo.mid }님의 질문의 상세내용
+		<i class="fas fa-table mr-1"></i> ${vo.mid }님의 질문 상세내용
 	</div>
 	<table class="table">
 		<tr>
@@ -37,8 +37,9 @@
 
 		<tr>
 			<td align="center" colspan="4">
-				<button type="button" class="btn btn-success" 
-				data-toggle="modal" data-target="#myModal">답변달기</button>
+				<!-- 				<button type="button" class="btn btn-success" data-toggle="modal" -->
+				<!-- 					data-target="#myModal">답변달기</button> --> <a
+				data-toggle="modal" href="#myModal">답답답</a>
 			</td>
 		</tr>
 	</table>
@@ -55,18 +56,33 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
-			<!-- Modal body -->
-			<div class="modal-body">Modal body..</div>
-
-			<!-- Modal footer -->
+			<div class="modal-body">
+				<form method="post"
+					action="${pageContext.request.contextPath }/qnaAnswerInsert"
+					id="frm">
+					<input type="hidden" name="qnanum" value="${vo.qnanum }">
+					<table class="table">
+						<tr>
+							<th style="text-align: center;" class="table-active">답 변 내 용</th>
+							<td><textarea rows="10" cols="100" name="qnacontent"></textarea></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-secondary">작성</button>
+				<input type="button" value="작성" class="btn btn-primary"
+					id="submitBtn">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
-
 		</div>
 	</div>
 </div>
+
+<script>
+	$("#submitBtn").click(function() {
+		$("#frm").submit();
+	});
+</script>
 
 <style>
 table th {

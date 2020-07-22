@@ -36,4 +36,9 @@ public class QnaDao {
 	public List<QnaVO> answerList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".answerList", map);
 	}
+
+	// 답변완료됐을 때 상태 수정
+	public int qnastatusUpdate(QnaVO vo) {
+		return session.update(NAMESPACE + ".qnastatusUpdate", vo);
+	}
 }

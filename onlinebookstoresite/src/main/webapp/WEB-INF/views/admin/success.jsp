@@ -8,6 +8,6 @@
 <img class="successORfailIMG" src="${pageContext.request.contextPath}/resources/img/1success.jpg" />
 
 <p class="successORfail">
-	<button onclick="location.href='${pageContext.request.contextPath}/booksList'"
-		type="button" class="btn btn-outline-secondary">확인</button>
+	<button onclick="location.href='${pageContext.request.contextPath}/'"
+		type="button" class="btn btn-outline-secondary">관리자 메인으로 돌아가기</button>
 </p>

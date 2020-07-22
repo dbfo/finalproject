@@ -44,7 +44,7 @@
 		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]> 
 	</select>
 	
-	<!-- 답변완료됐을 때 qnastatus=1로 수정 -->
+	<!-- 답변완료됐을 때 qnastatus = 1로 수정 -->
 	<update id="qnastatusUpdate" parameterType="qna">
 		update qna set qnastatus = 1 where qnanum = #{qnanum}
 	</update>
