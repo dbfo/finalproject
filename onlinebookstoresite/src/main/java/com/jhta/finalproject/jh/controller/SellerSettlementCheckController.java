@@ -31,7 +31,7 @@ public class SellerSettlementCheckController {
 		map.put("snum",snum);
 		map.put("bocomstatus",bocomstatus); //정산상태
 		map.put("feedate",feedate);
-		map.put("startDay",startDay); 
+		map.put("startDay",startDay);  
 		map.put("endDay",endDay);
 		int totalRowCount=service.getTotRowCount(map);//전체행갯수
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 3);//페이징
