@@ -2,6 +2,8 @@ package com.jhta.finalproject.jh.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,10 @@ public class SellerHomeController {
 	private SellerMainBoardService service;
 	//====================중고판매자 페이지이동==========================
 	@RequestMapping(value = "/seller")
-	public String sellerTest(Model model) {
-		int snum=1;//나중에 세션에서 판매자번호 얻어오기
+	public String sellerTest(Model model,HttpSession session) {
+		//String smnum=(String)session.getAttribute("mnum");
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//나중에 세션에서 판매자번호 얻어오기
 		//판매현황
 		HashMap<String, Object> map1=new HashMap<String, Object>();
 		map1.put("snum", snum);

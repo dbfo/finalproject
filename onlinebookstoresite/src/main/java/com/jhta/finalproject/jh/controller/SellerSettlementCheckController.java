@@ -3,6 +3,8 @@ package com.jhta.finalproject.jh.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,13 @@ public class SellerSettlementCheckController {
 	
 	@RequestMapping("/seller/settlementCheck")
 	public String settlementCheckList(
-			Model model,
+			Model model,HttpSession session,
 			String bocomstatus,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
 			String feedate,String startDay,String endDay
 			) {
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		System.out.println("페이지넘:"+pageNum);
 		map.put("snum",snum);

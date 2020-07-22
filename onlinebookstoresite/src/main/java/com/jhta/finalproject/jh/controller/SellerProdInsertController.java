@@ -56,7 +56,8 @@ public class SellerProdInsertController {
 			MultipartFile img2,MultipartFile img3,MultipartFile img4) {
 		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
 		try {
-			int snum=1;  //판매자번호(테스트용) 추후 로그인 후 세션에서 받아올 예정
+			int snum=(Integer)session.getAttribute("snum");
+//			int snum=1;  //판매자번호(테스트용) 추후 로그인 후 세션에서 받아올 예정
 			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
 					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
 			int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료

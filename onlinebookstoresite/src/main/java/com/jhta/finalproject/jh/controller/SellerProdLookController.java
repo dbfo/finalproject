@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class SellerProdLookController {
 	
 	//========================중고상품 조회/수정페이지로 이동========================
 	@RequestMapping("/seller/prodLook")
-	public String sellerProdLook(Model model,HttpServletRequest req,
+	public String sellerProdLook(Model model,HttpServletRequest req,HttpSession session,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum, //페이지번호
 			@RequestParam(value="obsalestatus",defaultValue = "4")int obsalestatus, //판매상태
 			String field,
@@ -30,8 +31,8 @@ public class SellerProdLookController {
 			String startDay, //시작일
 			String endDay, //종료일
 			@RequestParam(value="regdate",defaultValue = "0")int regdate) {
-		
-		int snum=1;//판매자번호 추후 세션에서 받아오기
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//판매자번호 추후 세션에서 받아오기
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		map.put("snum", snum);//판매자번호
 		map.put("obsalestatus",obsalestatus);

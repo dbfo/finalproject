@@ -3,6 +3,8 @@ package com.jhta.finalproject.jh.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ bpayment bstatus
 	//판매관리 메소드(입금대기중)
 	@RequestMapping("/seller/salesManagement")
 	public String salesManage(
-			Model model,
+			Model model,HttpSession session,
 			@RequestParam(value="tabType",defaultValue = "1")int tabType,
 			@RequestParam(value="borderdate1",defaultValue = "1")int borderdate1,
 			String keyword1,
@@ -39,7 +41,8 @@ bpayment bstatus
 			String endDay,
 			String field1,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //주문,입금전
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("snum", snum);
@@ -65,7 +68,7 @@ bpayment bstatus
 	//판매관리 메소드(입금완료)
 	@RequestMapping("/seller/salesManagement2")
 	public String salesManage2(
-			Model model,
+			Model model,HttpSession session,
 			@RequestParam(value="tabType",defaultValue = "2")int tabType,
 			@RequestParam(value="bpaydate2",defaultValue = "1")int bpaydate2,
 			String keyword2,
@@ -73,7 +76,8 @@ bpayment bstatus
 			String endDay2,
 			String field2,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //결제완료
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
@@ -108,7 +112,7 @@ bpayment bstatus
 	//판매관리 메소드(배송중/구매확정전)
 	@RequestMapping("/seller/salesManagement3")
 	public String salesManage3(
-			Model model,
+			Model model,HttpSession session,
 			@RequestParam(value="tabType",defaultValue = "3")int tabType,
 			@RequestParam(value="bpaydate3",defaultValue = "1")int bpaydate3,
 			String keyword3,
@@ -116,7 +120,8 @@ bpayment bstatus
 			String endDay3,
 			String field3,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //결제완료
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
@@ -142,7 +147,7 @@ bpayment bstatus
 	//판매관리 메소드(구매확정완료/정산처리전)
 	@RequestMapping("/seller/salesManagement4")
 	public String salesManage4(
-			Model model,
+			Model model,HttpSession session,
 			@RequestParam(value="tabType",defaultValue = "4")int tabType,
 			@RequestParam(value="bpaydate4",defaultValue = "1")int bpaydate4,
 			String keyword4,
@@ -150,7 +155,8 @@ bpayment bstatus
 			String endDay4,
 			String field4,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
-		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum");
+//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
 		int bstatus=tabType-1; //결제완료
 		
 		HashMap<String, Object> map=new HashMap<String, Object>();
