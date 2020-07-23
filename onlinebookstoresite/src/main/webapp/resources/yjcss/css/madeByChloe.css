@@ -1,4 +1,11 @@
 @charset "UTF-8";
+/* 폰트 */
+* {
+	font-family: 'IBMPlexSansKR-Text';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
 /* 성공또는실패 고북이 이미지 */
 .successORfailIMG {
@@ -9,7 +16,7 @@
 }
 
 .successORfail {
-	font-size:30px;
+	font-size: 30px;
 	text-align: center;
 }
 

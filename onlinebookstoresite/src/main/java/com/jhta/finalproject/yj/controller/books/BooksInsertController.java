@@ -78,6 +78,7 @@ public class BooksInsertController {
 			int smctg = Integer.parseInt(req.getParameter("smctg"));
 
 			String uploadPath = session.getServletContext().getRealPath("/resources/imgUpload");
+//			C:\web\Spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\onlinebookstoresite\resources\imgUpload
 
 			// file
 			if (!(thumbnail.isEmpty()) && !(img1.isEmpty())) {
