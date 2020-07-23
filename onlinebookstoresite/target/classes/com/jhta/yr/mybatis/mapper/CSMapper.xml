@@ -10,9 +10,6 @@
 	<sql id="CSStatus">
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
 			and type = #{CSStatus}				
-			<if test="CSStatus == 0">
-				and bstatus = 0 or bstatus = 5
-			</if>
 	    </if>		
 	</sql>
 	

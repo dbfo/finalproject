@@ -16,5 +16,12 @@ public class SalesDao {
 	public List<HashMap<String, String>> getList(HashMap<String,Object> map){
 		return session.selectList(NAMESPACE+".getList",map);
 	}
+
+	public List<HashMap<String, String>> mothList(HashMap<String,Object> map){
+		return session.selectList(NAMESPACE+".mothList",map);
+	}
 	
+	public List<HashMap<String, String>> weekList(HashMap<String,Object> map){
+		return session.selectList(NAMESPACE+".weekList",map);
+	}
 }

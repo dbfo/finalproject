@@ -33,7 +33,7 @@
 		</ul>
 	</div>
 	
-	<form action="${pageContext.request.contextPath }/sales?menu=${menu}" method = "post" id="searchform">
+		<input type="hidden" value = "${menu}" id = "menu">
 		<table class="table searchbox">
 <!-- 			일별 검색 -->
 			<c:if test="${menu == 1 }">
@@ -81,15 +81,15 @@
 						</select>
 						<span>&nbsp;년 &nbsp;</span>
 						<select id = "startMonth" name = "startMonth" class="form-control col-md-1">
-							<option value = "1">1</option>
-							<option value = "2">2</option>
-							<option value = "3">3</option>
-							<option value = "4">4</option>
-							<option value = "5">5</option>
-							<option value = "6">6</option>
-							<option value = "7">7</option>
-							<option value = "8">8</option>
-							<option value = "9">9</option>
+							<option value = "01">1</option>
+							<option value = "02">2</option>
+							<option value = "03">3</option>
+							<option value = "04">4</option>
+							<option value = "05">5</option>
+							<option value = "06">6</option>
+							<option value = "07">7</option>
+							<option value = "08">8</option>
+							<option value = "09">9</option>
 							<option value = "10">10</option>
 							<option value = "11">11</option>
 							<option value = "12">12</option>
@@ -104,15 +104,15 @@
 						</select>
 						<span>&nbsp;년&nbsp;</span>
 						<select name = "endMonth" id ="endMonth" class="form-control col-md-1">
-							<option value = "1">1</option>
-							<option value = "2">2</option>
-							<option value = "3">3</option>
-							<option value = "4">4</option>
-							<option value = "5">5</option>
-							<option value = "6">6</option>
-							<option value = "7">7</option>
-							<option value = "8">8</option>
-							<option value = "9">9</option>
+							<option value = "01">1</option>
+							<option value = "02">2</option>
+							<option value = "03">3</option>
+							<option value = "04">4</option>
+							<option value = "05">5</option>
+							<option value = "06">6</option>
+							<option value = "07">7</option>
+							<option value = "08">8</option>
+							<option value = "09">9</option>
 							<option value = "10">10</option>
 							<option value = "11">11</option>
 							<option value = "12">12</option>
@@ -123,11 +123,10 @@
 			</c:if>
 			<tr>
 				<td align="center" colspan="4">
-					<input class="btn btn-success float-center yrbtn" type = "submit" value = "검색" >
+					<input id="searchBtn" class="btn btn-success float-center yrbtn" type = "submit" value = "검색" >
 				</td>		
 			</tr>
 		</table>
-	</form>
 </div>
 
 
@@ -153,6 +152,7 @@
 <script type="text/javascript">
 
 	$(function(){
+		var menu = $("#menu").val();
 		var startDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		var week = $("#week").val();
@@ -162,19 +162,36 @@
 		var endMonth = $("#endMonth").val();
 		
 		
-// 		console.log(" sd : " +startDate + " ed : " + endDate + " w : " + week + " sy : " +  startYear + " sm : " + startMonth 
-// 				+ " ey : " + endYear + " em : " + endMonth);
+		console.log(" sd : " +startDate + " ed : " + endDate + " w : " + week + " sy : " +  startYear + " sm : " + startMonth 
+				+ " ey : " + endYear + " em : " + endMonth);
 		
-		ajdraw(startDate, endDate, week, startYear, startMonth, endYear, endMonth);
+		ajdraw(menu,startDate, endDate, week, startYear, startMonth, endYear, endMonth);
 		
 	})
 	
+	$('#searchBtn').click(function(){
+		var menu= $("#menu").val();
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		var week = $("#week").val();
+		var startYear = $("#startYear").val();
+		var startMonth = $("#startMonth").val();
+		var endYear = $("#endYear").val();
+		var endMonth = $("#endMonth").val();
+		
+		console.log(" sd : " +startDate + " ed : " + endDate + " w : " + week + " sy : " +  startYear + " sm : " + startMonth 
+				+ " ey : " + endYear + " em : " + endMonth);
 	
-	function ajdraw(startDate, endDate, week, startYear, startMonth, endYear, endMonth){
+		
+		ajdraw(menu,startDate, endDate, week, startYear, startMonth, endYear, endMonth);		
+	})
+	
+	
+	function ajdraw(menu,startDate, endDate, week, startYear, startMonth, endYear, endMonth){
 		$.ajax({
 			url: "${pageContext.request.contextPath}/sales/getInfo",
 			dataType : "json",
-			data : {startDate : startDate , endDate : endDate,  week:week , startYear:startYear, 
+			data : {menu:menu, startDate : startDate , endDate : endDate,  week:week , startYear:startYear, 
 				startMonth:startMonth, endYear:endYear, endMonth:endMonth},
 			success : function(data){
 				if(data[0].code == "success"){

@@ -16,4 +16,12 @@ public class SalesService {
 	public List<HashMap<String, String>> getList(HashMap<String,Object> map){
 		return dao.getList(map);
 	}
+	
+	public List<HashMap<String, String>> mothList(HashMap<String,Object> map){
+		return dao.mothList(map);
+	}
+	
+	public List<HashMap<String, String>> weekList(HashMap<String,Object> map){
+		return dao.weekList(map);
+	}
 }
