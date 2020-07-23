@@ -11,13 +11,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.OrderHistoryService;
+import com.jhta.finalproject.hd.vo.HistoryDetailBookListVo;
+import com.jhta.finalproject.hd.vo.HistoryDetailInfoVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.VbankVo;
 
 @Controller
 public class OrderHistoryController {
@@ -170,5 +174,47 @@ public class OrderHistoryController {
 		}
 	
 		return jarr.toString();
+	}
+	
+	//주문상세정보 페이지.
+	@RequestMapping(value="/orderhistory/detailview")
+	public String detailvew(int bpaynum,Model model) {
+		int totalprice=0;
+		int totalpoint=0;
+		//책리스트
+		List<HistoryDetailBookListVo>blist=service.orderbooklist(bpaynum);
+		for(HistoryDetailBookListVo bvo:blist) {
+			int bcount=bvo.getBcount();
+			int bprice=bvo.getBprice();
+			int totalvalue=bcount*bprice;
+			totalprice+=totalvalue;
+			bvo.setTotalvalue(totalvalue);
+			int point=bvo.getPoint();
+			totalpoint+=point;
+		}
+		HistoryDetailInfoVo ivo=service.orderinfo(bpaynum);
+	
+		String addr=ivo.getBaddr();
+		String [] addrGroup=addr.split("\\|");
+		String addr1=addrGroup[0]; //우편번호
+		String addr2=addrGroup[1]; // 도로명주소
+		String addr3=addrGroup[2]; // 지번주소
+		String addr4=addrGroup[3]; // 상세주소
+		String addr5=addrGroup[4]; // 참고주소
+		String jibunaddr="("+addr1+") "+addr3+" "+addr5+" "+addr4;
+		String roadaddr="("+addr1+") "+addr2+" "+addr5+" "+addr4;
+		
+		int method=ivo.getMethodpayment();
+		if(method==1) {
+			VbankVo vbvo=service.vbank_info(bpaynum);
+			model.addAttribute("vbvo",vbvo);
+		}
+		model.addAttribute("jibunaddr", jibunaddr);
+		model.addAttribute("roadaddr", roadaddr);
+		model.addAttribute("blist",blist);
+		model.addAttribute("ivo",ivo);
+		model.addAttribute("totalprice",totalprice);
+		model.addAttribute("totalpoint", totalpoint);
+		return ".orderdetail";
 	}
 }

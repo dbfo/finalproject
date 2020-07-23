@@ -38,7 +38,4 @@
 #content_body{
 	position: absolute;
     display: inline-block;
-    border: 2px solid black;
-    width: 920px;
-    height: 670px;
 }

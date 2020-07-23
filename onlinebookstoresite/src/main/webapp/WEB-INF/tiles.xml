@@ -64,6 +64,10 @@
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderhistory.jsp"/>
 	</definition>
 	
+	<definition name=".orderdetail" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderdetail.jsp"/>
+	</definition>
+	
 	<!-- 장바구니. -->
 	<definition name=".cart" template="/WEB-INF/views/heedo/layout/buylayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/heedo/main/header.jsp"/>
@@ -76,9 +80,11 @@
 		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_order.jsp"/>
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_order.jsp"/>
 	</definition>
+	
 	<definition name=".usedorder" extends=".order">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_usedorder.jsp"/>
 	</definition>
+	
 	<definition name=".complete" extends=".cart">
 		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_complete.jsp"/>
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_ordercomplete.jsp"/>

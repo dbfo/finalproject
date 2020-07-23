@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.OrderHistoryDao;
+import com.jhta.finalproject.hd.vo.HistoryDetailBookListVo;
+import com.jhta.finalproject.hd.vo.HistoryDetailInfoVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.VbankVo;
 
 @Service
 public class OrderHistoryService {
@@ -33,5 +36,15 @@ public class OrderHistoryService {
 	}
 	public int countHistory(HashMap<String, Object>map) {
 		return dao.countHistory(map);
+	}
+	//주문상세페이지에서 주문한책 리스트 가져옴 
+	public List<HistoryDetailBookListVo> orderbooklist(int bpaynum){
+		return dao.orderbooklist(bpaynum);
+	}
+	public HistoryDetailInfoVo orderinfo(int bpaynum) {
+		return dao.orderinfo(bpaynum);
+	}
+	public VbankVo vbank_info(int bpaynum) {
+		return dao.vbank_info(bpaynum);
 	}
 }

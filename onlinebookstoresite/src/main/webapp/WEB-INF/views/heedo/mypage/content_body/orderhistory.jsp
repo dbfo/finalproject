@@ -4,6 +4,7 @@
 <script src="${cp }/resources/hd/datepicker/jquery-ui.js"></script> 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
+<div id="content_history">	
 	<!-- /// 최상단 tab 영역 시작 /// -->
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
@@ -57,6 +58,7 @@
 			 
 		</div>
 	</div>
+</div>
 <script>
 	$(document).ready(function(){
 		defaultDate();
@@ -109,7 +111,7 @@
 					var date=new Date(Date.parse(item.borderdate));
 					console.log(date);
 					var tableapp="<tr>"
-							    +"<td><a href='#'>"+item.ordernum+"</a></td>"
+							    +"<td><a href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
 							    +"<td><a href='#'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
 							    +"<td>"+item.mname+"</td>"
@@ -264,6 +266,13 @@
   
 </script>
 <style>
+	#content_history{
+	position: absolute;
+    display: inline-block;
+    border: 2px solid black;
+    width: 920px;
+    height: 670px;
+	}
 	#newitem{
 		padding:0px 10px;
 	}

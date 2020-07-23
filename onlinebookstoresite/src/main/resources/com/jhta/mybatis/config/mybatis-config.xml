@@ -26,6 +26,9 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.OrderCompleteUsedListVo" alias="usedcompleteList"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.VbankVo" alias="vbankVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryListVo" alias="historyVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryDetailBookListVo" alias="historybooklist"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryDetailInfoVo" alias="orderdetailinfo"/>
+  	
   	
   	<!-- /////////// -->
   	

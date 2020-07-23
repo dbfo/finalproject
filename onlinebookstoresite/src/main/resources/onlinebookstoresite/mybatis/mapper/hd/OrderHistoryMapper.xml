@@ -12,7 +12,7 @@
 		select bpayment.bpaynum ordernum,borderdate,bfinalmoney,delfee,bstatus,mname,receiver from
 		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
 		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
-		 )bpayment,						
+		<![CDATA[ and bstatus>=0 and bstatus<=4)bpayment,		]]>				
 		(select * from members)members
 		where members.mnum=bpayment.mnum
 		order by borderdate desc
@@ -42,5 +42,24 @@
 	
 	<select id="usedBtitle" parameterType="int" resultType="hashmap">
 		select obname,obstatus from oldbooks where obnum=#{bnum}
+	</select>
+	
+	<!--====== 주문내역 에서 상세주문내역 클릭시 ====== -->
+	<select id="orderbooklist" parameterType="int" resultType="historybooklist">
+		select pb.bpaynum,pb.bnum,pb.point,pb.bcount,books.bprice,btitle,paymentbook_num pbnum from 
+		(select * from paymentbook where bpaynum=#{bpaynum})pb,
+		(select bprice,bnum,btitle from books )books
+		where books.bnum=pb.bnum
+	</select>
+	
+	<select id="orderinfo" parameterType="int" resultType="orderdetailinfo">
+			select bp.bpaynum,bp.borderdate,mid,mname,receiver,bphone,baddr,delfee,bfinalmoney,methodpayment,usedpoint,bpaydate,bstatus from
+			(select * from bpayment where bpaynum=#{bpaynum})bp,
+			(select * from members)m
+			where bp.mnum=m.mnum
+	</select>
+	
+	<select id="vbank_info" parameterType="int" resultType="vbankVo">
+		select * from vbank where bpaynum=#{bpaynum}
 	</select>
 </mapper>
