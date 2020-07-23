@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,7 +37,6 @@ public class SellerBoardConteoller {
 	public String obQnaDetail(int obqnum,Model model) {
 		SellerQnaListJoinVo qnaList=service.getSellerQnaDetail(obqnum); //문의사항
 		SellerObqanswerVo answerList=service.getSellerAnswerList(obqnum); //답변
-		System.out.println("답변:"+answerList);
 		SellerImgVo img=service.getQnaDetailImg(qnaList.getObnum()); //썸네일이미지
 		model.addAttribute("answerList", answerList);
 		model.addAttribute("qnaList", qnaList);
@@ -44,26 +44,23 @@ public class SellerBoardConteoller {
 		return ".seller.qnadetail";
 	}
 	
-	//중고Qna답글달기 
-	@RequestMapping("/seller/insertAnswer")
-	@ResponseBody
-	public String insertAnswer(int obqnum,String obqacontent,HttpSession session) {
+	//중고Qna답글달기 (트랜잭션)
+//	@RequestMapping("")
+	@PostMapping("/seller/insertAnswer")
+	public String insertAnswer(int obqnum,String obqacontent,HttpSession session,Model model) {
 		int snum=(Integer)session.getAttribute("snum");
-		System.out.println("번호:"+obqnum);
-		System.out.println("답글내용:"+obqacontent);
+		System.out.println("★★번호:"+obqnum);
+		System.out.println("★★답글내용:"+obqacontent);
+		
 		try {
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("snum",snum);
 			map.put("obqnum",obqnum);
 			map.put("obqacontent",obqacontent);
 			int n=service.sellerQnaInsert(map);
-			JSONObject json=new JSONObject();
-			if(n>0) {
-				json.put("code", "success");
-			}else {
-				json.put("code", "error");
-			}
-			return json.toString();
+			System.out.println("결과:"+n);
+			model.addAttribute("obqnum", obqnum);
+			return "redirect:/seller/qnadetail";
 		}catch(Exception e){
 			e.printStackTrace();
 			return ".seller.insertfail";

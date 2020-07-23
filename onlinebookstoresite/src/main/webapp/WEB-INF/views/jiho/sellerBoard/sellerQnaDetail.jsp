@@ -66,6 +66,37 @@
 	margin: 0px;
 	padding: 0px;
 }
+/*답글있을 때 css*/
+#sellerdapOk{
+	border: 1px solid black;
+	height: 180px;
+}
+#sellerAnswer{
+	width: 800px;
+	height: 150px;
+	border: 1px solid green;
+	margin-left: 180px;
+	margin-top: 13px;
+	border: 2px solid #6E6E6E;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #EDEDED;
+}
+#dapimgok{
+	width: 120px;
+	height: 120px;
+	margin-top:10px;
+	margin-left: 10px; 
+	float:left;
+}
+#answerContent{
+	width: 630px;
+	height: 120px;
+	float:left;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-left: 5px;
+	padding-top: 5px;
+}
 </style>
 <div id="obQnaDetail">
 	<h1>문의사항 상세</h1>
@@ -88,27 +119,43 @@
 				<td colspan="3" style="padding-left: 10px">${qnaList.obqcontent }</td>
 			</tr>
 		</table>
-		<input type="hidden" value="${qnaList.obqnum } id="obqnum">
+		
 		<%--답변이 없을 경우 --%>
-		<c:if test="${answerList==nul }">
-			<div id="sellerdap">
-				<img id="dapimg" src="${cp}/resources/jh/jhimages/문의답글이미지.jpg" >
-					<textarea rows="5" cols="110" id="dapTextarea"></textarea>
-			</div>
-			<button type="button" class="btn btn-primary" onclick="insertDap(${qnaList.obqnum})">답변등록하기</button>
-			<button type="button" class="btn btn-secondary">리스트보기</button>
+		<c:if test="${answerList==null }">
+			<form action="${cp }//seller/insertAnswer" method="post">
+				<div id="sellerdap">
+					<input type="hidden" value="${qnaList.obqnum }" name="obqnum">
+					<img id="dapimg" src="${cp}/resources/jh/jhimages/문의답글이미지.jpg" >
+						<textarea rows="5" cols="110" id="dapTextarea" name="obqacontent"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">답변등록하기</button>
+				<a href="${cp }/seller/qnalist"><button type="button" class="btn btn-secondary">리스트보기</button></a>
+			</form>
 		</c:if>
+		
 		<%--답변이 있을 경우 --%>
 		<c:if test="${answerList !=null }">
-			답변있음~
+			<div id="sellerdapOk">
+				<input type="hidden" value="${qnaList.obqnum }" name="obqnum">
+				<img id="dapimg" src="${cp}/resources/jh/jhimages/문의답글이미지.jpg" >
+					<div id="sellerAnswer">
+						<img id="dapimgok" src="${cp }/resources/jh/jhimages/프로필사진.jpg">
+						<div id="answerContent">${answerList.obqacontent }</div>
+					</div>
+			</div>
+				<button type="submit" class="btn btn-primary">답변수정하기</button>
+				<a href="${cp }/seller/qnalist"><button type="button" class="btn btn-secondary">리스트보기</button></a>
 		</c:if>
 	</div>
 </div>
 <script>
-	function insertDap(obqnum) {
-		var obqacontent=$("#dapTextarea").val();
-		alert(obqacontent);
-	}
-
-
+	$(function(){
+		$("form").submit(function(){
+			var obqacontent=$("#dapTextarea").val();
+			if(obqacontent==""){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+		});
+	});
 </script>
