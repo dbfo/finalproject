@@ -23,4 +23,8 @@ public class QnaAnswerDao {
 	public int answerUpdate(QnaAnswerVO vo) {
 		return session.update(NAMESPACE + ".answerUpdate", vo);
 	}
+
+	public int answerDelete(int qnanum) {
+		return session.delete(NAMESPACE + ".answerDelete", qnanum);
+	}
 }

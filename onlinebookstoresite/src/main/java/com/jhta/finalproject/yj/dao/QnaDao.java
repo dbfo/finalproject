@@ -38,7 +38,12 @@ public class QnaDao {
 	}
 
 	// 답변완료됐을 때 상태 수정
-	public int qnastatusUpdate(QnaVO vo) {
-		return session.update(NAMESPACE + ".qnastatusUpdate", vo);
+	public int qnastatusInsertUpdate(QnaVO vo) {
+		return session.update(NAMESPACE + ".qnastatusInsertUpdate", vo);
+	}
+
+	// 답변 삭제됐을 때 상태 수정
+	public int qnastatusDeleteUpdate(QnaVO vo) {
+		return session.update(NAMESPACE + ".qnastatusDeleteUpdate", vo);
 	}
 }

@@ -27,8 +27,7 @@ public class QnaAnswerInsertController {
 			String qnatitle = req.getParameter("qnatitle");
 			String qnacontent = req.getParameter("qnacontent");
 			QnaVO qvo = new QnaVO(qnanum, mnum, qnatitle, qnacontent, 0, null);
-
-			n = service.answerInsertUpdate(avo, qvo);
+			n = service.qnastatusInsertUpdate(avo, qvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/admin/fail";

@@ -18,9 +18,20 @@ public class QnaAnswerTranImpl implements QnaAnswerTranService {
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int answerInsertUpdate(QnaAnswerVO avo, QnaVO qvo) throws Exception {
+	public int qnastatusInsertUpdate(QnaAnswerVO avo, QnaVO qvo) throws Exception {
 		int n1 = adao.qnaAnswerInsert(avo);
-		int n2 = qdao.qnastatusUpdate(qvo);
+		int n2 = qdao.qnastatusInsertUpdate(qvo);
+		if (n2 <= 0) {
+			throw new Exception();
+		}
+		return 1;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int qnastatusDeleteUpdate(int qnanum, QnaVO qvo) throws Exception {
+		int n1 = adao.answerDelete(qnanum);
+		int n2 = qdao.qnastatusDeleteUpdate(qvo);
 		if (n2 <= 0) {
 			throw new Exception();
 		}

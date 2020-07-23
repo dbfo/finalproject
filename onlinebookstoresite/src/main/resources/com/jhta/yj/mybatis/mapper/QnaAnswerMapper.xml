@@ -20,8 +20,8 @@
 		update qnaanswer set qnacontent = #{acontent} where qnanum = #{qnanum}
 	</update>
 	
-	<!-- 답변 삭제()-->
+	<!-- 답변 삭제-->
 	<delete id="answerDelete" parameterType="int">
-		delete from qnaanswer qnanum = #{qnanum}
+		delete from qnaanswer where qnanum = #{qnanum}
 	</delete>
 </mapper>

@@ -54,7 +54,7 @@
 		<tr>
 			<td align="center" colspan="4">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">답변수정(모달)</button>
-				<button type="button" onclick="location.href='${pageContext.request.contextPath}'" class="btn btn-danger">답변삭제</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/qnaAnswerDelete?qnanum=${vo.qnanum}'" class="btn btn-danger">답변삭제</button>
 			</td>
 		</tr>
 	</table>

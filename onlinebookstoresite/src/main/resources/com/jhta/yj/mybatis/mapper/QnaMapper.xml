@@ -45,7 +45,12 @@
 	</select>
 	
 	<!-- 답변완료됐을 때 qnastatus = 1로 수정 -->
-	<update id="qnastatusUpdate" parameterType="qna">
+	<update id="qnastatusInsertUpdate" parameterType="qna">
 		update qna set qnastatus = 1 where qnanum = #{qnanum}
+	</update>
+	
+	<!-- 답변 삭제됐을 때 qnastatus = 0으로 수정 -->
+	<update id="qnastatusDeleteUpdate" parameterType="qna">
+		update qna set qnastatus = 0 where qnanum = #{qnanum}
 	</update>
 </mapper>
