@@ -16,11 +16,14 @@ public class QnaAnswerTranImpl implements QnaAnswerTranService {
 	@Autowired
 	private QnaDao qdao;
 
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int answerInsertUpdate(QnaAnswerVO avo, QnaVO qvo) {
-		adao.qnaAnswerInsert(avo);
-		qdao.qnastatusUpdate(qvo);
+	public int answerInsertUpdate(QnaAnswerVO avo, QnaVO qvo) throws Exception {
+		int n1 = adao.qnaAnswerInsert(avo);
+		int n2 = qdao.qnastatusUpdate(qvo);
+		if (n2 <= 0) {
+			throw new Exception();
+		}
 		return 1;
 	}
 }

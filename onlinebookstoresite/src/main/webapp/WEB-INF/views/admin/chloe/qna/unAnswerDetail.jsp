@@ -37,9 +37,7 @@
 
 		<tr>
 			<td align="center" colspan="4">
-				<!-- 				<button type="button" class="btn btn-success" data-toggle="modal" -->
-				<!-- 					data-target="#myModal">답변달기</button> --> <a
-				data-toggle="modal" href="#myModal">답답답</a>
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">답변달기</button>
 			</td>
 		</tr>
 	</table>
@@ -60,18 +58,20 @@
 				<form method="post"
 					action="${pageContext.request.contextPath }/qnaAnswerInsert"
 					id="frm">
-					<input type="hidden" name="qnanum" value="${vo.qnanum }">
+					<input type="hidden" name="qnanum" value="${vo.qnanum }"> <input
+						type="hidden" name="mnum" value="${vo.mnum }"> <input
+						type="hidden" name="qnatitle" value="${vo.qnatitle }"> <input
+						type="hidden" name="qnacontent" value="${vo.qnacontent }">
 					<table class="table">
 						<tr>
 							<th style="text-align: center;" class="table-active">답 변 내 용</th>
-							<td><textarea rows="10" cols="100" name="qnacontent"></textarea></td>
+							<td><textarea rows="10" cols="100" name="answercontent">${vo.mid }님 안녕하세요.</textarea></td>
 						</tr>
 					</table>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<input type="button" value="작성" class="btn btn-primary"
-					id="submitBtn">
+				<input type="button" value="작성" class="btn btn-primary" id="submitBtn">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>

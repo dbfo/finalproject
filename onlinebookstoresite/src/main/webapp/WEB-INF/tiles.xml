@@ -25,12 +25,12 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksList.jsp" />
 	</definition>
-	
+
 	<definition name=".booksPreview" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksPreview.jsp" />
 	</definition>
-	
+
 	<definition name=".booksUpdate" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/books/booksUpdate.jsp" />
@@ -46,27 +46,35 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
-	
+
 	<!-- qna -->
 	<definition name=".unAnswerList" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/qna/unAnswerList.jsp" />
 	</definition>
-	
+
 	<definition name=".answerList" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/qna/answerList.jsp" />
 	</definition>
-	
-	<definition name=".qnaDetail" extends=".main">
+
+	<definition name=".unAnswerDetail" extends=".main">
 		<put-attribute name="content"
-			value="/WEB-INF/views/admin/chloe/qna/qnaDetail.jsp" />
+			value="/WEB-INF/views/admin/chloe/qna/unAnswerDetail.jsp" />
 	</definition>
 
-<!-- 	주문관리 -->
-	<definition name = ".admin.order" template = "/WEB-INF/views/admin/yr/order/orderlayout.jsp">
-		<put-attribute name="ordersearch" value = "/WEB-INF/views/admin/yr/order/totalOrder.jsp" />	
-		<put-attribute name="ordertables" value = "/WEB-INF/views/admin/yr/order/tables.jsp" />
+	<definition name=".answerDetail" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/qna/answerDetail.jsp" />
+	</definition>
+
+	<!-- 주문관리 -->
+	<definition name=".admin.order"
+		template="/WEB-INF/views/admin/yr/order/orderlayout.jsp">
+		<put-attribute name="ordersearch"
+			value="/WEB-INF/views/admin/yr/order/totalOrder.jsp" />
+		<put-attribute name="ordertables"
+			value="/WEB-INF/views/admin/yr/order/tables.jsp" />
 	</definition>
 
 
@@ -84,24 +92,25 @@
 			value="/WEB-INF/views/admin/yr/ship/shipStatus.jsp" />
 		<put-attribute name="shipsearch"
 			value="/WEB-INF/views/admin/yr/ship/shipsearch.jsp" />
-		<put-attribute name="shiptables"
-			value="" />
+		<put-attribute name="shiptables" value="" />
 	</definition>
 
-<!-- 	입금전 -->
-	<definition name=".admin.beforeDeposit" extends = ".admin.ship">
+	<!-- 입금전 -->
+	<definition name=".admin.beforeDeposit"
+		extends=".admin.ship">
 		<put-attribute name="shiptables"
 			value="/WEB-INF/views/admin/yr/ship/beforeDepositTables.jsp" />
 	</definition>
 
-<!-- 	배송 준비중 -->
-	<definition name=".admin.preparingShip" extends = ".admin.ship">
+	<!-- 배송 준비중 -->
+	<definition name=".admin.preparingShip"
+		extends=".admin.ship">
 		<put-attribute name="shiptables"
 			value="/WEB-INF/views/admin/yr/ship/preparingShipTables.jsp" />
 	</definition>
 
-<!-- 	배송 중, 배송완료 -->
-	<definition name=".admin.shipInfo" extends = ".admin.ship">
+	<!-- 배송 중, 배송완료 -->
+	<definition name=".admin.shipInfo" extends=".admin.ship">
 		<put-attribute name="shiptables"
 			value="/WEB-INF/views/admin/yr/ship/shipInfoTables.jsp" />
 	</definition>
@@ -110,7 +119,7 @@
 	<definition name=".ship.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
 	</definition>
-	
+
 
 	<!-- cs관리 -->
 	<definition name=".admin.cs"
@@ -122,34 +131,34 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/cstables.jsp" />
 	</definition>
-	
-<!-- 	취소 -->
+
+	<!-- 취소 -->
 	<definition name=".admin.cancel" extends=".admin.cs">
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/csCancelTables.jsp" />
 	</definition>
-<!-- 반품 -->
+	<!-- 반품 -->
 	<definition name=".admin.return" extends=".admin.cs">
 		<put-attribute name="cstables"
-			value="/WEB-INF/views/admin/yr/cs/returnTable.jsp" />	
+			value="/WEB-INF/views/admin/yr/cs/returnTable.jsp" />
 	</definition>
-<!-- 교환 -->
+	<!-- 교환 -->
 	<definition name=".admin.exchange" extends=".admin.cs">
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/exchangeTable.jsp" />
 	</definition>
-<!-- 환불 -->
+	<!-- 환불 -->
 	<definition name=".admin.refund" extends=".admin.cs">
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
 	</definition>
-	
+
 
 
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
 	</definition>
-	
+
 	<!-- 중고판매자 정산 -->
 	<definition name=".admin.seller"
 		template="/WEB-INF/views/admin/yr/usedbookseller/sellerlayout.jsp">
@@ -158,8 +167,8 @@
 		<put-attribute name="sellertables"
 			value="/WEB-INF/views/admin/yr/usedbookseller/sellertables.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name=".usedbookseller" extends=".main">
 		<put-attribute name="content" value=".admin.seller" />
 	</definition>

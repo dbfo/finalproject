@@ -7,4 +7,11 @@
 	<insert id="qnaAnswerInsert" parameterType="qnaAnswer">
 		insert into qnaanswer values('admin', #{qnanum}, #{qnacontent}, sysdate)
 	</insert>
+	
+	<select id="answerInfo" resultType="qnaAnswer" parameterType="int">
+		select maid, a.qnanum qnanum, a.qnacontent acontent, qnaregdate adate, 
+		m.mnum mnum, mid, qnatitle, q.qnacontent qcontent, qnastatus, qnadate qdate 
+		from qnaanswer a, qna q, members m 
+		where q.qnanum = a.qnanum and q.mnum = m.mnum and q.qnanum = #{qnanum}
+	</select>
 </mapper>

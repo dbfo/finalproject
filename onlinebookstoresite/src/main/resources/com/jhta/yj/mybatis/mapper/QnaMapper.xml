@@ -40,7 +40,7 @@
 		from qna q, members m 
 		where q.mnum = m.mnum 
 		and qnastatus = 1 
-		order by qnadate, qnanum) aa) 
+		order by qnadate desc) aa) 
 		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]> 
 	</select>
 	

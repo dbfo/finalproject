@@ -15,4 +15,8 @@ public class QnaAnswerDao {
 	public int qnaAnswerInsert(QnaAnswerVO vo) {
 		return session.insert(NAMESPACE + ".qnaAnswerInsert", vo);
 	}
+
+	public QnaAnswerVO answerInfo(int qnanum) {
+		return session.selectOne(NAMESPACE + ".answerInfo", qnanum);
+	}
 }

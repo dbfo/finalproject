@@ -123,8 +123,10 @@ public class BooksUpdateController {
 			}
 		} catch (ParseException pe) {
 			System.out.println(pe.getMessage());
+			return "/admin/fail";
 		} catch (IOException ie) {
 			System.out.println(ie.getMessage());
+			return "/admin/fail";
 		}
 //		return "redirect:/booksList";
 		if (n > 0) {

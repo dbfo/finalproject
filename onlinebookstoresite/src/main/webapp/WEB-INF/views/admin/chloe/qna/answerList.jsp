@@ -25,10 +25,10 @@
 	<!-- 탭 -->
 	<div class="container">
 		<ul class="nav nav-pills nav-justified">
-			<li class="nav-item"><a class="nav-link active qnaSelector"
-				href="${pageContext.request.contextPath}/unAnswerList">미답변&nbsp;[${pu.totalRowCnt }건]</a>
-			</li>
 			<li class="nav-item"><a class="nav-link qnaSelector"
+				href="${pageContext.request.contextPath}/unAnswerList">미답변</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active qnaSelector"
 				href="${pageContext.request.contextPath}/answerList">답변완료&nbsp;[${pu.totalRowCnt }건]</a></li>
 		</ul>
 	</div>
@@ -46,7 +46,7 @@
 				<th scope="col">번호</th>
 				<th scope="col">작성자</th>
 				<th scope="col" style="text-align: center;">제목</th>
-				<th scope="col">작성일</th>
+				<th scope="col">질문작성일</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -54,7 +54,7 @@
 				<th>번호</th>
 				<th>작성자</th>
 				<th>제목</th>
-				<th>작성일</th>
+				<th>질문작성일</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -62,9 +62,8 @@
 				<tr>
 					<td>${vo.qnanum }</td>
 					<td>${vo.mid }</td>
-					<td>${vo.qnatitle }</td>
-					<fmt:formatDate value="${vo.qnadate }" pattern="yyyy/MM/dd"
-						var="qnadate" />
+					<td>${vo.qnatitle }&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/answerDetail?qnanum=${vo.qnanum}">더보기</a></td>
+					<fmt:formatDate value="${vo.qnadate }" pattern="yyyy/MM/dd" var="qnadate" />
 					<td>${qnadate }</td>
 				</tr>
 			</c:forEach>

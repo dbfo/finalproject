@@ -46,7 +46,7 @@
 				<th scope="col">번호</th>
 				<th scope="col">작성자</th>
 				<th scope="col" style="text-align: center;">제목</th>
-				<th scope="col">작성일</th>
+				<th scope="col">질문작성일</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -54,7 +54,7 @@
 				<th>번호</th>
 				<th>작성자</th>
 				<th>제목</th>
-				<th>작성일</th>
+				<th>질문작성일</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -62,7 +62,7 @@
 				<tr>
 					<td>${vo.qnanum }</td>
 					<td>${vo.mid }</td>
-					<td>${vo.qnatitle }&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/qnaDetail?qnanum=${vo.qnanum}">더보기</a></td>
+					<td>${vo.qnatitle }&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/unAnswerDetail?qnanum=${vo.qnanum}">더보기</a></td>
 					<fmt:formatDate value="${vo.qnadate }" pattern="yyyy/MM/dd"
 						var="qnadate" />
 					<td>${qnadate }</td>

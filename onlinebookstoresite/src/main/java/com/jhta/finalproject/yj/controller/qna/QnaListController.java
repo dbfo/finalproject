@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jhta.finalproject.yj.service.QnaService;
 import com.jhta.finalproject.yj.vo.PageUtil;
+import com.jhta.finalproject.yj.vo.QnaAnswerVO;
 import com.jhta.finalproject.yj.vo.QnaVO;
 
 @Controller
@@ -55,9 +56,9 @@ public class QnaListController {
 		return mv;
 	}
 
-	// 더보기
-	@RequestMapping("/qnaDetail")
-	public String qnaDetail(Model model, int qnanum) {
+	// 미답변 더보기
+	@RequestMapping("/unAnswerDetail")
+	public String unAnswerDetail(Model model, int qnanum) {
 		QnaVO vo = service.unAnswerInfo(qnanum);
 		String qnacontent = vo.getQnacontent();
 		if (qnacontent != null) {
@@ -65,6 +66,22 @@ public class QnaListController {
 		}
 		vo.setQnacontent(qnacontent);
 		model.addAttribute("vo", vo);
-		return ".qnaDetail";
+		return ".unAnswerDetail";
+	}
+
+	// 답변완료 더보기
+	@RequestMapping("/answerDetail")
+	public String answerDatail(Model model, int qnanum) {
+		QnaAnswerVO vo = service.answerInfo(qnanum);
+		String acontent = vo.getAcontent(); // 답변내용
+		String qcontent = vo.getQcontent(); // 질문내용
+		if (acontent != null && qcontent != null) {
+			acontent = acontent.replace("\n", "<br>");
+			qcontent = qcontent.replace("\n", "<br>");
+		}
+		vo.setAcontent(acontent);
+		vo.setQcontent(qcontent);
+		model.addAttribute("vo", vo);
+		return ".answerDetail";
 	}
 }

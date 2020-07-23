@@ -7,5 +7,5 @@ import com.jhta.finalproject.yj.vo.QnaVO;
 
 @Service
 public interface QnaAnswerTranService {
-	int answerInsertUpdate(QnaAnswerVO avo, QnaVO qvo);
+	int answerInsertUpdate(QnaAnswerVO avo, QnaVO qvo) throws Exception;
 }
