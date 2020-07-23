@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.yr.mybatis.mapper.SalesMapper">
+	
+	<sql id="daySearch">			
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startDate)">
+			where TRUNC(bpaydate) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate})
+		</if>
+	</sql>
+	
+	
+	<select id="getList" parameterType="hashmap" resultType="hashmap">
+		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment 
+		<include refid="daySearch"/>
+		group by bpaydate order by bpaydate
+	</select>
+	
+	
+	<select id="mothList">
+		select  to_char(bpaydate,'yyyy-mm'), sum(bfinalmoney) from bpayment where bpaydate BETWEEN TO_DATE('20/06/01') AND TO_DATE('20/07/31') 
+		group by to_char(bpaydate,'yyyy-mm')
+	</select>
+	
+	<select id="weekList">
+		 select to_char(bpaydate, 'IW'), sum(bfinalmoney) from bpayment where bpaydate BETWEEN TO_DATE('20/06/01') AND TO_DATE('20/07/31') 
+		 group by  to_char(bpaydate, 'IW')
+	</select>
+	 
+</mapper>	

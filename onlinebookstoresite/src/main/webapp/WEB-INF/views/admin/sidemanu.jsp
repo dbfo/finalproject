@@ -98,7 +98,7 @@
 				<div class="collapse" id="collapseSales"
 					aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="${pageContext.request.contextPath }/sales">판매매출</a>
+						<a class="nav-link" href="${pageContext.request.contextPath }/sales?menu=1">판매매출</a>
 						<a class="nav-link" href="#">상품별매출</a>
 					</nav>
 				</div>
