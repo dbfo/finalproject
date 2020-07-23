@@ -101,6 +101,8 @@ public class OrderHistoryController {
 			jarr.put(json);
 		}
 		JSONObject json=new JSONObject();
+		json.put("startDay", startDay);
+		json.put("endDay", endDay);
 		json.put("pageNum", pu.getPageNum());
 		json.put("totalPageCount", pu.getTotalPageCount());
 		json.put("startPageNum", pu.getStartPageNum());

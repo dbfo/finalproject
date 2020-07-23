@@ -47,10 +47,11 @@
 					
 					</tbody>
 				</table>
-			</div>
-			<div class="pagingDiv" id="newPaging">
-				
-			</div>
+				</div>
+				<div class="pagingDiv" id="newPaging">
+					
+				</div>
+			
 		</div>
 		<div id="useditem" class="tab-pane fade">
 			 
@@ -63,29 +64,44 @@
 		var endDay=$("#date2").val();
 		viewNewOrderlist(startDay,endDay);	
 	});
-	var viewNewOrderlist=function(startDay,endDay){
+	var viewNewOrderlist=function(startDay,endDay,pageNum){
+		clearNewlist();
+		if(pageNum==null){
+			pageNum=1;
+		}
+		console.log('pp2:'+pageNum);
+		var paginationapp="<ul class='pagination pageul'>"
+			+"<li class='page-item'><a class='page-link' href='#'><<</a></li>"
+			+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
+			+"<li class='page-item'><a class='page-link' href='#'>>></a></li>"
+			$("#newPaging").append(paginationapp);
 		$.ajax({
 			url:'/finalproject/orderhistroy/newview',
 			dataType:'json',
 			type:'post',
-			data:{startDay:startDay,endDay:endDay},
+			data:{startDay:startDay,endDay:endDay,pageNum:pageNum},
 			success:function(data){
 				if(data.length==0){ //값이없을때..
 					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
 					$("#newTable > tbody").append(tableapp);
-					return;
+					
+						return;
 				}
 				
 				$(data).each(function(index,item){
 					if(index==data.length-1){
-						console.log(item.pageNum);
-						console.log(item.totalPageCount);
-						var paginationapp="<ul class='pagination'>"
-										+"<li class='page-item'><a class='page-link' href='#'><<</a></li>";
+						$("#newPaging").empty();
+						var paginationapp="<ul class='pagination pageul'>"
+										+"<li class='page-item '><a class='page-link pageli' href='#'><<</a></li>";
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
-							paginationapp+="<li class='page-item'><a class='page-link' href='#'>"+i+"</a></li>"
+							var yy=item.startDay;
+							var mm=item.endDay;
+							
+							paginationapp+="<li class='page-item'><a class='page-link pageli' "
+							paginationapp+="href='javascript:viewNewOrderlist(\""+yy+"\",\""+mm+"\","+i+")'>"+i+"</a></li>"
+							
 						}
-						paginationapp+="<li class='page-item'><a class='page-link' href='#'>>></a></li>";
+						paginationapp+="<li class='page-item'><a class='page-link pageli' href='#'>>></a></li>";
 						$("#newPaging").append(paginationapp);
 						return;
 						
@@ -93,8 +109,8 @@
 					var date=new Date(Date.parse(item.borderdate));
 					console.log(date);
 					var tableapp="<tr>"
-							    +"<td>"+item.ordernum+"</td>"
-							    +"<td>"+item.ordername+"</td>"
+							    +"<td><a href='#'>"+item.ordernum+"</a></td>"
+							    +"<td><a href='#'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
 							    +"<td>"+item.mname+"</td>"
 							    +"<td>"+item.receiver+"</td>"
@@ -112,6 +128,7 @@
 	}
 	var clearNewlist=function(){
 		$("#newTable > tbody").empty();
+		$("#newPaging").empty();
 	}
 	
 	var viewUsedOrderlist=function(){
@@ -247,6 +264,9 @@
   
 </script>
 <style>
+	#newitem{
+		padding:0px 10px;
+	}
 	.calenderIcon{
 		position:relative;
 		top:8px;
@@ -278,7 +298,27 @@
 	#tablediv{
 		margin-top: 20px;
 		font-size:14px;
+		border:2px solid pink;
+		width:896px;
+		height:435px;
+		
 	}
+	#newPaging{
+		text-align: center;
+	}
+	.pageul{
+	
+	}
+	.pageli{
+		width:34px;
+	}
+	#newPaging{
+		position:absolute;
+		top:620px;
+		left:370px;
+		border:2px solid black;
+	}
+	
 	
 	
 </style>

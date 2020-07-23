@@ -10,7 +10,8 @@
 	<tr>
 		<td>
 			<a href="${cp }/mypage/orderhistory">- 주문내역</a><br>
-			<a href="#">- 반품/환불/취소</a><br>
+			<a href="#">- 반품/환불 신청 및 조회</a><br>
+			<a href="#">- 취소 주문내역</a><br>
 		</td>
 	</tr>
 	<tr>
