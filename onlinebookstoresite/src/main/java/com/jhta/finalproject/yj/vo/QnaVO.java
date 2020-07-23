@@ -8,11 +8,11 @@ public class QnaVO {
 	private String qnatitle;
 	private String qnacontent;
 	private int qnastatus; // 0: 미답변, 1: 답변
-	private Date qnadate;
+	private Date qnadate; // 질문작성일자
 
 	// 조인 시 사용될
 	private String mid; // 회원 아이디
-	private Date qnaregdate; // 답변일자
+	private Date adate; // 답변일자
 
 	public QnaVO() {
 	}
@@ -28,7 +28,7 @@ public class QnaVO {
 	}
 
 	public QnaVO(int qnanum, int mnum, String qnatitle, String qnacontent, int qnastatus, Date qnadate, String mid,
-			Date qnaregdate) {
+			Date adate) {
 		super();
 		this.qnanum = qnanum;
 		this.mnum = mnum;
@@ -37,7 +37,7 @@ public class QnaVO {
 		this.qnastatus = qnastatus;
 		this.qnadate = qnadate;
 		this.mid = mid;
-		this.qnaregdate = qnaregdate;
+		this.adate = adate;
 	}
 
 	public int getQnanum() {
@@ -96,11 +96,11 @@ public class QnaVO {
 		this.mid = mid;
 	}
 
-	public Date getQnaregdate() {
-		return qnaregdate;
+	public Date getAdate() {
+		return adate;
 	}
 
-	public void setQnaregdate(Date qnaregdate) {
-		this.qnaregdate = qnaregdate;
+	public void setAdate(Date adate) {
+		this.adate = adate;
 	}
 }

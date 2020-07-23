@@ -5,7 +5,7 @@
 
 <mapper namespace="com.jhta.yj.mybatis.mapper.QnaAnswerMapper">
 	<insert id="qnaAnswerInsert" parameterType="qnaAnswer">
-		insert into qnaanswer values('admin', #{qnanum}, #{qnacontent}, sysdate)
+		insert into qnaanswer values('admin', #{qnanum}, #{acontent}, sysdate)
 	</insert>
 	
 	<select id="answerInfo" resultType="qnaAnswer" parameterType="int">
@@ -14,4 +14,14 @@
 		from qnaanswer a, qna q, members m 
 		where q.qnanum = a.qnanum and q.mnum = m.mnum and q.qnanum = #{qnanum}
 	</select>
+	
+	<!-- 답변 수정 -->
+	<update id="answerUpdate" parameterType="qnaAnswer">
+		update qnaanswer set qnacontent = #{acontent} where qnanum = #{qnanum}
+	</update>
+	
+	<!-- 답변 삭제()-->
+	<delete id="answerDelete" parameterType="int">
+		delete from qnaanswer qnanum = #{qnanum}
+	</delete>
 </mapper>

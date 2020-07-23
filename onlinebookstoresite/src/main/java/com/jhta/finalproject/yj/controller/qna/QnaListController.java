@@ -38,7 +38,21 @@ public class QnaListController {
 		return mv;
 	}
 
-	// 답변 리스트_상태:1
+	// 미답변 더보기
+	@RequestMapping("/unAnswerDetail")
+	public String unAnswerDetail(Model model, int qnanum) {
+		QnaVO vo = service.unAnswerInfo(qnanum);
+		String qnacontent = vo.getQnacontent();
+		if (qnacontent != null) {
+			qnacontent = qnacontent.replace("\n", "<br>");
+		}
+		vo.setQnacontent(qnacontent);
+		System.out.println();
+		model.addAttribute("vo", vo);
+		return ".unAnswerDetail";
+	}
+
+	// 답변완료 리스트_상태:1
 	@RequestMapping("/answerList")
 	public ModelAndView answerList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		int totalRowCnt = service.answerCount(); // 전체글의 개수
@@ -54,19 +68,6 @@ public class QnaListController {
 		mv.addObject("pu", pu);
 		mv.setViewName(".answerList");
 		return mv;
-	}
-
-	// 미답변 더보기
-	@RequestMapping("/unAnswerDetail")
-	public String unAnswerDetail(Model model, int qnanum) {
-		QnaVO vo = service.unAnswerInfo(qnanum);
-		String qnacontent = vo.getQnacontent();
-		if (qnacontent != null) {
-			qnacontent = qnacontent.replace("\n", "<br>");
-		}
-		vo.setQnacontent(qnacontent);
-		model.addAttribute("vo", vo);
-		return ".unAnswerDetail";
 	}
 
 	// 답변완료 더보기

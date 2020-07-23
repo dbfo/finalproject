@@ -20,8 +20,8 @@ public class QnaAnswerInsertController {
 		int n = 0;
 		try {
 			int qnanum = Integer.parseInt(req.getParameter("qnanum"));
-			String answercontent = req.getParameter("answercontent");
-			QnaAnswerVO avo = new QnaAnswerVO(null, qnanum, answercontent, null);
+			String acontent = req.getParameter("acontent");
+			QnaAnswerVO avo = new QnaAnswerVO(null, qnanum, acontent, null);
 
 			int mnum = Integer.parseInt(req.getParameter("mnum"));
 			String qnatitle = req.getParameter("qnatitle");

@@ -55,17 +55,22 @@
 			</div>
 
 			<div class="modal-body">
-				<form method="post"
-					action="${pageContext.request.contextPath }/qnaAnswerInsert"
-					id="frm">
-					<input type="hidden" name="qnanum" value="${vo.qnanum }"> <input
-						type="hidden" name="mnum" value="${vo.mnum }"> <input
-						type="hidden" name="qnatitle" value="${vo.qnatitle }"> <input
-						type="hidden" name="qnacontent" value="${vo.qnacontent }">
+				<form method="post" action="${pageContext.request.contextPath }/qnaAnswerInsert" id="frm">
+					<input type="hidden" name="qnanum" value="${vo.qnanum }">
+					<input type="hidden" name="mnum" value="${vo.mnum }">
+					<input type="hidden" name="qnatitle" value="${vo.qnatitle }">
+					<input type="hidden" name="qnacontent" value="${vo.qnacontent }">
+					
 					<table class="table">
+					<tr>
+						<th style="text-align: center;" class="table-active">본 문 내 용</th>
+						<td>
+							<div style="height: 300px;">${vo.qnacontent }</div>
+						</td>
+					</tr>
 						<tr>
 							<th style="text-align: center;" class="table-active">답 변 내 용</th>
-							<td><textarea rows="10" cols="100" name="answercontent">${vo.mid }님 안녕하세요.</textarea></td>
+							<td><textarea rows="10" cols="100" name="acontent">${vo.mid }님 안녕하세요.</textarea></td>
 						</tr>
 					</table>
 				</form>

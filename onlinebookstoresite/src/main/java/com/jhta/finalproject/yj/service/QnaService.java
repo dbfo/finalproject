@@ -45,4 +45,8 @@ public class QnaService {
 	public QnaAnswerVO answerInfo(int qnanum) {
 		return adao.answerInfo(qnanum);
 	}
+	
+	public int answerUpdate(QnaAnswerVO vo) {
+		return adao.answerUpdate(vo);
+	}
 }

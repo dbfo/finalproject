@@ -36,12 +36,12 @@
 	<select id="answerList" resultType="qna" parameterType="hashmap">
 		select * from 
 		(select aa.*, rownum rnum from 
-		(select qnanum, q.mnum mnum, qnatitle, qnacontent, qnastatus, qnadate, mid 
-		from qna q, members m 
-		where q.mnum = m.mnum 
-		and qnastatus = 1 
-		order by qnadate desc) aa) 
-		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]> 
+		(select q.qnanum qnanum, m.mnum mnum, qnatitle, q.qnacontent qcontent, 
+		qnastatus, qnadate, mid, a.qnaregdate adate 
+        from qna q, members m, qnaanswer a 
+		where q.mnum = m.mnum and q.qnanum = a.qnanum and qnastatus = 1 
+		order by a.qnaregdate desc) aa) 
+		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 	
 	<!-- 답변완료됐을 때 qnastatus = 1로 수정 -->

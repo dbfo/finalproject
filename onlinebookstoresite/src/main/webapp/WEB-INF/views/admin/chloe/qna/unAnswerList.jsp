@@ -40,6 +40,7 @@
 			<col width="15%">
 			<col width="">
 			<col width="10%">
+			<col width="10%">
 		</colgroup>
 		<thead>
 			<tr class="table-active">
@@ -47,6 +48,7 @@
 				<th scope="col">작성자</th>
 				<th scope="col" style="text-align: center;">제목</th>
 				<th scope="col">질문작성일</th>
+				<th scope="col">답변일자</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -55,6 +57,7 @@
 				<th>작성자</th>
 				<th>제목</th>
 				<th>질문작성일</th>
+				<th>답변일자</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -66,6 +69,7 @@
 					<fmt:formatDate value="${vo.qnadate }" pattern="yyyy/MM/dd"
 						var="qnadate" />
 					<td>${qnadate }</td>
+					<td>미답변</td>
 				</tr>
 			</c:forEach>
 		</tbody>
