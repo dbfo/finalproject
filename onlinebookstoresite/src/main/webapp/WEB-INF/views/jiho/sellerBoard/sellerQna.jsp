@@ -35,41 +35,92 @@
 	<!-- 검색박스 -->
 	<div id="sellerQnaSearchBox">
 		<h2>QnA리스트1111111111</h2>
+			<table class="table table-bordered">
+				<tr>
+					<td class="tdstyle" id="statusa">답변 상태별 조회</td>
+					<td class="prodLooktdStyle">
+						<input type="radio" name="obqstatus" value="2">전체
+						<input type="radio" name="obqstatus" value="0">미답변
+						<input type="radio" name="obqstatus" value="1">답변완료
+					</td>
+				</tr>
+				<tr>
+					<td class="tdstyle">등록일자별 조회</td>
+					<td class="prodLooktdStyle">
+						<input type="radio" name="obqdate" value="all">전체
+						<input type="radio" name="obqdate" value="date">일자별&nbsp;&nbsp;&nbsp;
+						<input type="date" name="startDay"><span>&nbsp;~</span>
+						<input type="date" name="endDay">
+					</td>
+				</tr>
+				<tr>
+					<td class="tdstyle">키워드로 검색</td>
+					<td>
+						<div class="input-group mt-1 mb-1">
+							<div class="input-group-prepend">
+								<select name="field" class="form-control">
+									<option value="all">전체</option>
+									<option value="obqtitle">문의제목</option>
+									<option value="mid">작성자</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요.">
+							<!-- 버튼 -->
+							<input type="submit" value="검색" class="btn btn-success" id="list2bt">
+							<input type="button" value="검색조건 초기화" id="resetBt" class="btn btn-secondary">
+						</div>
+					</td>
+				</tr>
+			</table>
 	</div>
 	<!-- QnA리스트 -->
 	<div id="sellerQnaList">
-		<h3>문의리스트</h3>
-		<div class="layer1">
-			<table class="table table-bordered">
-				<thead class="thead-dark">
-					<tr style="text-align: center">
-						<th width="80">NO</th>
-						<th>문의제목</th>
-						<th width="200">작성자</th>
-						<th width="120">답변상태</th>
-						<th width="120">답변관리</th>
-						<th width="120">작성일</th>
-					</tr>
-				</thead>
-				<c:forEach var="vo" items="${list }" >
-						<tr>
-							<td style="text-align: center;">번호</td>					
-							<td><a href="${cp }/seller/qnadetail?obqnum=${vo.obqnum}"><span style="color: black;">${vo.obqtitle }</span></a></td>					
-							<td style="text-align: center;">${vo.mid }</td>					
-							<td style="text-align: center;">
-								<c:if test="${vo.obqstatus==0 }">
-									미답변
-								</c:if>
-								<c:if test="${vo.obqstatus==1 }">
-									답변완료
-								</c:if>
-							</td>				
-							<td>버튼</td>	
-							<td style="text-align: center;"><fmt:formatDate value="${vo.obqdate }" pattern="yyyy-MM-dd"/></td>					
+		<form action="">
+			<h3>문의리스트</h3>
+			<div class="layer1">
+				<table class="table table-bordered">
+					<thead 
+					class="thead-dark">
+						<tr style="text-align: center">
+							<th width="80">NO</th>
+							<th>문의제목</th>
+							<th width="200">작성자</th>
+							<th width="120">답변상태</th>
+							<th width="120">게시물관리</th>
+							<th width="120">작성일</th>
 						</tr>
-				</c:forEach>
-			</table>
-		</div>
+					</thead>
+					<c:forEach var="vo" items="${list }" >
+							<tr>
+								<td style="text-align: center;">번호</td>					
+								<td><a href="${cp }/seller/qnadetail?obqnum=${vo.obqnum}"><span style="color: black;">${vo.obqtitle }</span></a></td>					
+								<td style="text-align: center;">${vo.mid }</td>					
+								<td style="text-align: center;">
+									<c:if test="${vo.obqstatus==0 }">
+										<span class="badge badge-primary">미답변</span>
+									</c:if>
+									<c:if test="${vo.obqstatus==1 }">
+										<span class="badge badge-secondary">답변완료</span>
+									</c:if>
+								</td>				
+								<td style="text-align: center;">
+									<c:if test="${vo.obqstatus==0 }">
+										<a href="${cp }/seller/qnadetail?obqnum=${vo.obqnum}">
+											<button type="button" class="btn btn-primary btn-sm" >답변하기</button>
+										</a>
+									</c:if>
+									<c:if test="${vo.obqstatus==1 }">
+										<a href="${cp }/seller/qnaupdate?obqnum=${vo.obqnum}">
+											<button type="button" class="btn btn-secondary btn-sm">수정하기</button>
+										</a>
+									</c:if>
+								</td>	
+								<td style="text-align: center;"><fmt:formatDate value="${vo.obqdate }" pattern="yyyy-MM-dd"/></td>					
+							</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</form>
 	</div>
 </div>
 <script>

@@ -7,7 +7,6 @@
 	<definition name=".seller.certified" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmail.jsp"/>
 	</definition>
-
 	
 	<!-- 중고판매자 tiles설정-->
 	<definition name=".seller" template="/WEB-INF/views/jiho/sellerLayout.jsp">
@@ -47,6 +46,9 @@
 	</definition>
 	<definition name=".seller.qnadetail" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaDetail.jsp"/>
+	</definition>
+	<definition name=".seller.qnaupdate" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaUpdate.jsp"/>
 	</definition>
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	

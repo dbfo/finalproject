@@ -3,15 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerBoardMapper.jh">
+	<!-- 검색조건 -->
+	<sql id="search">
+		
+	
+	</sql>
 	<!-- 중고판매자 QnA리스트 가져오기 -->
-	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="int">
+	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="hashmap">
 		select o.obname OBNAME, oq.obqtitle OBQTITLE, oq.obqcontent OBQCONTENT, m.mid MID, oq.obqstatus OBQSTATUS,
 		oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
 		from oldbooks o,obqna oq, members m
 		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
         order by oq.obqdate desc
 	</select>
-	
+	<!-- 중고판매자 QnA총 글갯수 가져오기 -->
+	<select id="getSellerQnaCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) count
+		from oldbooks o,obqna oq, members m
+		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+	</select>
 	<!-- 중고판매자 디테일:문의내용 가져오기 -->
 	<select id="getSellerQnaDetail" resultType="qnalistjoin" parameterType="int">
 		select o.obname OBNAME, oq.obqtitle OBQTITLE,oq.obqcontent OBQCONTENT ,m.mid MID, 
@@ -36,5 +46,9 @@
 	<!-- 문의리스트 상태 업데이트 -->
 	<update id="updateQnastatus" parameterType="hashmap">
 		update obqna set obqstatus=1 where obqnum=#{obqnum}
+	</update>
+	<!-- 중고판매자 문의사항 답변 수정하기 -->
+	<update id="updateObqanswer" parameterType="hashmap">
+		update obqanswer set obqacontent=#{obqacontent} where obqnum=#{obqnum}
 	</update>
 </mapper>

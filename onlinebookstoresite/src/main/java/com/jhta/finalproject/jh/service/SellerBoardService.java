@@ -18,11 +18,14 @@ public class SellerBoardService implements SellerBoard{
 	
 	
 	//중고판매자 Qna리스트 가져오기
-	public List<SellerQnaListJoinVo> getSellerQnaList(int snum){
-		List<SellerQnaListJoinVo> list=dao.getSellerQnaList(snum);
+	public List<SellerQnaListJoinVo> getSellerQnaList(HashMap<String, Object> map){
+		List<SellerQnaListJoinVo> list=dao.getSellerQnaList(map);
 		return list;
 	}
-	
+	//중고판매자 Qna리스트 글갯수 가져오기
+	public int getSellerQnaCount(HashMap<String, Object> map) {
+		return dao.getSellerQnaCount(map);
+	}
 	//중고판매자 문의사항 리스트 가져오기(디테일)
 	public SellerQnaListJoinVo getSellerQnaDetail(int obqnum){
 		SellerQnaListJoinVo vo=dao.getSellerQnaDetail(obqnum);
@@ -38,13 +41,15 @@ public class SellerBoardService implements SellerBoard{
 		SellerObqanswerVo vo=dao.getSellerAnswerList(obqnum);
 		return vo;
 	}
-	
-	
 	//중고판매자 답변하기
 	@Override
 	public int sellerQnaInsert(HashMap<String, Object> map) {
 		dao.updateQnastatus(map);
 		dao.insertObqanswer(map);
 		return 1;
+	}
+	//중고판매자 답글 수정하기
+	public int updateObqanswer(HashMap<String, Object> map) {
+		return dao.updateObqanswer(map);
 	}
 }

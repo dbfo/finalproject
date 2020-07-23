@@ -31,7 +31,6 @@
 							<li><a href="#">구매리뷰관리</a></li>
 						</ul>
 					</li>
-					<li><a href="#">반품관리</a></li>
 				</ul>
 			</div>
 		</nav>

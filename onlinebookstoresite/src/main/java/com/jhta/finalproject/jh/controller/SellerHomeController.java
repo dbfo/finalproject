@@ -25,7 +25,6 @@ public class SellerHomeController {
 			return ".seller.certified";
 		}else {//중고판매자인 회원이동
 			int snum=(Integer)session.getAttribute("snum");
-			System.out.println("지호판매자번호:"+session.getAttribute("snum"));
 	//		int snum=1;//나중에 세션에서 판매자번호 얻어오기
 			//판매현황
 			HashMap<String, Object> map1=new HashMap<String, Object>();

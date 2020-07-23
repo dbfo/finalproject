@@ -18,10 +18,15 @@ public class SellerBoardDao {
 	private final String NAMESPACE="com.jhta.mybatis.mapper.SellerBoardMapper.jh";
 	
 	//중고판매자 Qna리스트 가져오기
-	public List<SellerQnaListJoinVo> getSellerQnaList(int snum){
-		List<SellerQnaListJoinVo> list= sqlSession.selectList(NAMESPACE+".getSellerQnaList", snum);
+	public List<SellerQnaListJoinVo> getSellerQnaList(HashMap<String, Object> map){
+		List<SellerQnaListJoinVo> list= sqlSession.selectList(NAMESPACE+".getSellerQnaList", map);
 		return list;
 	}
+	//중고판매자 Qna리스트 글갯수 가져오기
+	public int getSellerQnaCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE, map);
+	}
+	
 	//중고판매자 문의사항 리스트 가져오기(디테일)
 	public SellerQnaListJoinVo getSellerQnaDetail(int obqnum){
 		SellerQnaListJoinVo vo=sqlSession.selectOne(NAMESPACE+".getSellerQnaDetail", obqnum);
@@ -45,5 +50,9 @@ public class SellerBoardDao {
 	//중고판매자 답글달기
 	public int insertObqanswer(HashMap<String, Object> map) {
 		return sqlSession.insert(NAMESPACE+".insertObqanswer", map);
+	}
+	//중고판매자 답글 수정하기
+	public int updateObqanswer(HashMap<String, Object> map) {
+		return sqlSession.update(NAMESPACE+".updateObqanswer", map);
 	}
 }
