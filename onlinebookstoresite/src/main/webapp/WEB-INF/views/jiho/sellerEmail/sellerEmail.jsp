@@ -4,8 +4,8 @@
 <style>
 /*중고판매자 이메일인증 css관련*/
 #emailContent{
-	width: 1300px;
-	height: 1000px;
+	width: 1100px;
+	height: 700px;
 	border: 1px solid black;
 	margin: auto;
 }
