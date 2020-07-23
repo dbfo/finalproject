@@ -17,13 +17,13 @@
 	border: 1px solid red;
 	margin: auto;
 }
-#sellerMoon table{
+#sellerQnatable tr,td{
 	border: 1px solid black;
 	border-collapse: collapse;
 	width: 1000px;
 	
 }
-#sellerMoon table tr,td{
+#sellerQnatable tr,td{
 	border: 1px solid #B4B7B7;
 }
 .moondetail{
@@ -42,11 +42,35 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+/*답변css*/
+#dapTable{
+    margin-top: 30px;
+   
+}
+#dapTextarea{
+    margin-left: 10px;
+    margin-top: 30px;
+    border: 2px solid black;
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    display: inline;
+}
+#sellerdap{
+	border: 1px solid black;
+	height: 180px;
+}
+#dapimg{
+	float:left;
+	width: 160px;
+	margin: 0px;
+	padding: 0px;
+}
 </style>
 <div id="obQnaDetail">
 	<h1>문의사항 상세</h1>
 	<div id="sellerMoon">
-		<table>
+		<table id="sellerQnatable">
 			<tr height="70">
 				<td class="moondetail">작성자</td>
 				<td class="moondetailText">${qnaList.mid }</td>
@@ -64,16 +88,27 @@
 				<td colspan="3" style="padding-left: 10px">${qnaList.obqcontent }</td>
 			</tr>
 		</table>
+		<input type="hidden" value="${qnaList.obqnum } id="obqnum">
 		<%--답변이 없을 경우 --%>
 		<c:if test="${answerList==nul }">
-			<table>
-				<tr>
-					<td>이미지</td>
-					<td>
-						<textarea rows="5" cols="200"></textarea>
-					</td>
-				</tr>
-			</table>
+			<div id="sellerdap">
+				<img id="dapimg" src="${cp}/resources/jh/jhimages/문의답글이미지.jpg" >
+					<textarea rows="5" cols="110" id="dapTextarea"></textarea>
+			</div>
+			<button type="button" class="btn btn-primary" onclick="insertDap(${qnaList.obqnum})">답변등록하기</button>
+			<button type="button" class="btn btn-secondary">리스트보기</button>
+		</c:if>
+		<%--답변이 있을 경우 --%>
+		<c:if test="${answerList !=null }">
+			답변있음~
 		</c:if>
 	</div>
 </div>
+<script>
+	function insertDap(obqnum) {
+		var obqacontent=$("#dapTextarea").val();
+		alert(obqacontent);
+	}
+
+
+</script>
