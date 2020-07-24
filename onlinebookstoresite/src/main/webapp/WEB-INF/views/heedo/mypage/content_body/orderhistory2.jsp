@@ -5,11 +5,19 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
 <div id="content_history">	
-	<div class="tabs">
-	  <div class="tab-2">
-	    <label for="tab2-1" style="background-color:#212529;color:white;">새상품</label>
-	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-	    <div id="newtab">
+	<!-- /// 최상단 tab 영역 시작 /// -->
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#newitem">새상품</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link " data-toggle="tab" href="#useditem">중고상품</a>
+		</li>
+	</ul>    
+	<!-- /// 최상단 tab 영역 끝 /// -->
+	
+	<div class="tab-content">
+		<div id="newitem" class="tab-pane active">
 			<div class="date_picker">
 				<ul class="list-group list-group-horizontal" id="dateUl">
 					<li class="list-group-item selectdate" onclick="changeDate(7,0)">최근 일주일</li>
@@ -22,22 +30,16 @@
 				&nbsp&nbsp<span>~</span>&nbsp&nbsp
 				<input type="text" id="date2" class="form-control" readonly="readonly">
 				<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
+				
 				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 			</div>
+			<div>
 			
+			</div>
 			<div class="tableDiv" id="tablediv">
-				<div style="text-align: right" id="selectboxdiv">
-				
-					<select class="form-control" id="statusSelect">
-						<option value="all">전체</option>
-						<option value="order">주문</option>
-						<option value="complepayment">결제완료</option>
-						<option value="confrim">구매확정</option>
-					</select>
-				</div>
 				<table class="table" id="newTable">
 					<thead class="table-dark">
-						<th style="text-align:center;">주문번호</th>
+						<th>주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
 						<th>주문자</th>
@@ -49,60 +51,14 @@
 					
 					</tbody>
 				</table>
-			</div>
-			<div class="pagingDiv" id="newPaging">
-							
-			</div>
-		</div>
-	</div>
-		<div class="tab-2" style="border:1px solid black">
-		   	<label for="tab2-2"  style="background-color:#212529;color:white;">중고상품</label>
-		   	<input id="tab2-2" name="tabs-two" type="radio">
-		   	<div id="newtab">
-			<div class="date_picker">
-				<ul class="list-group list-group-horizontal" id="dateUl">
-					<li class="list-group-item selectdate" onclick="changeDate(7,0)">최근 일주일</li>
-					<li class="list-group-item active selectdate" onclick="changeDate(0,1)">1개월</li>
-					<li class="list-group-item selectdate" onclick="changeDate(0,3)">3개월</li>
-					<li class="list-group-item selectdate" onclick="changeDate(0,6)">6개월</li>
-				</ul>
-				<input type="text" id="date1" class="form-control" readonly="readonly">
-				<i class="far fa-calendar-alt fa-2x calenderIcon" id="startday"></i>
-				&nbsp&nbsp<span>~</span>&nbsp&nbsp
-				<input type="text" id="date2" class="form-control" readonly="readonly">
-				<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
-				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
-			</div>
-			
-			<div class="tableDiv" id="tablediv">
-				<div style="text-align: right" id="selectboxdiv">
-				
-					<select class="form-control" id="statusSelect">
-						<option value="all">전체</option>
-						<option value="order">주문</option>
-						<option value="complepayment">결제완료</option>
-						<option value="confrim">구매확정</option>
-					</select>
 				</div>
-				<table class="table" id="newTable">
-					<thead class="table-dark">
-						<th style="text-align:center;">주문번호</th>
-						<th>주문내역</th>
-						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
-						<th>주문일자</th>
-						<th>주문상태</th>
-					</thead>
-					<tbody>
+				<div class="pagingDiv" id="newPaging">
 					
-					</tbody>
-				</table>
-			</div>
-			<div class="pagingDiv" id="newPaging">
-							
-			</div>
+				</div>
+			
 		</div>
+		<div id="useditem" class="tab-pane fade">
+			 
 		</div>
 	</div>
 </div>
@@ -158,8 +114,8 @@
 					var date=new Date(Date.parse(item.borderdate));
 					console.log(date);
 					var tableapp="<tr>"
-							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
-							    +"<td><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
+							    +"<td><a href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
+							    +"<td><a href='#'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
 							    +"<td>"+item.mname+"</td>"
 							    +"<td>"+item.receiver+"</td>"
@@ -330,7 +286,7 @@
 	}
 	.date_picker{
 		 border-radius: 8px;
-		margin-top: 15px;
+		margin-top: 30px;
 		border:1px solid grey;
 		padding:15px;
 		box-shadow: 0px 0px 4px grey;
@@ -351,11 +307,6 @@
 		font-size:12px;
 		display:inline-block;
 	}
-	.movedetail:link{
-		color:black;text-decoration: none;
-	}
-	.movedetail:visited{color:black;text-decoration:none;}
-	.movedetail:hover{color:#f51167;}
 	#tablediv{
 	 border-radius: 8px;
 		margin-top: 20px;
@@ -369,6 +320,9 @@
 	#newPaging{
 		text-align: center;
 	}
+	.pageul{
+	
+	}
 	.pageli{
 		width:34px;
 	}
@@ -377,113 +331,7 @@
 		top:620px;
 		left:370px;
 	}
-	#newtab{
-		padding:0px;
-	}
-	.pageli{
-		padding:8px;
-	}
-	.list-group-item.active{
-		background-color:#f51167;
-		border-color:#f51167;
-	}
-
 	
-	
-sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 0.01em;
-  line-height: 1.6em;
-  margin: 0;
-  padding: 100px; }
-
-}
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none; }
-
-.tabs {
-  display: block;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin: 0;
-  overflow: hidden; }
-  .tabs [class^="tab"] label,
-  .tabs [class*=" tab"] label {
-    cursor: pointer;
-    display: block;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1em;
-    padding: 1rem 0;
-    text-align: center; }
-  .tabs [class^="tab"] [type="radio"],
-  .tabs [class*=" tab"] [type="radio"] {
-    border-bottom: 1px solid rgba(239, 237, 239, 0.5);
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: block;
-    width: 100%;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out; }
-    .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
-    .tabs [class*=" tab"] [type="radio"]:hover,
-    .tabs [class*=" tab"] [type="radio"]:focus {
-      border-bottom: 1px solid #f51167; }
-    .tabs [class^="tab"] [type="radio"]:checked,
-    .tabs [class*=" tab"] [type="radio"]:checked {
-      border-bottom: 2px solid #f51167; }
-    .tabs [class^="tab"] [type="radio"]:checked + div,
-    .tabs [class*=" tab"] [type="radio"]:checked + div {
-      opacity: 1; }
-    .tabs [class^="tab"] [type="radio"] + div,
-    .tabs [class*=" tab"] [type="radio"] + div {
-      display: block;
-      opacity: 0;
-      padding: 2rem 0;
-      width: 90%;
-      -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out; }
-  .tabs .tab-2 {
-    width: 50%; }
-    .tabs .tab-2 [type="radio"] + div {
-      width: 200%;
-      margin-left: 200%; }
-    .tabs .tab-2 [type="radio"]:checked + div {
-      margin-left: 0; }
-    .tabs .tab-2:last-child [type="radio"] + div {
-      margin-left: 100%; }
-    .tabs .tab-2:last-child [type="radio"]:checked + div {
-      margin-left: -100%; }
-	 #statusSelect{
-  		outline:gray;
-		height: 25px;
-	    width: 130px;
-	    display: inline-block;
-	    font-size: 11.5px;
-	    padding-left: 15px;
-	    padding-top: 0px;
-	    padding-bottom: 2px;
-	}
-	#statusSelect:focus{
-		outline: navy;
-	}
-		#selectboxdiv{
-		width:890px;
-	}
 	
 	
 </style>

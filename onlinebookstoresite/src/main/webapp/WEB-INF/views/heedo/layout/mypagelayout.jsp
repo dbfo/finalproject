@@ -45,9 +45,6 @@
 			<div id="content_header">
 				<tiles:insertAttribute name="content_header" />
 			</div>
-			<div id="content_body_top">
-				<tiles:insertAttribute name="content_body_top"/>
-			</div>
 			<div id="menu">
 				<tiles:insertAttribute name="menu" />
 			</div>

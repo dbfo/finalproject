@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.OrderManagerMapper">
+	<!-- 주문상태일때 주문취소 (( 바로 취소시킴 )) -->
+	<update id="orderCancel" parameterType="hashmap">
+		update bpayment set 
+		bstatus=
+		<choose>
+				<when test="bstatus==0">6</when>
+				<otherwise>4</otherwise>
+		</choose>
+		where bpaynum=#{bpaynum}	
+	</update>
+	<!-- 결제완료상태 주문취소/반품 신청  (bstatus = 1)-->
+	
+	<!-- 주문에 해당하는 책들 리스트가져옴 -->
+	<select id="getpaymentbook" parameterType="hashmap" resultType="BookVo">
+		select bnum,bcount from paymentbook where btype=1 and bpaynum=#{bpaynum}
+	</select>	
+	
+	<!-- 반품신청 -->
+	<insert id="inputrefund" parameterType="hashmap">
+		insert into refundhistory values(1,sysdate,null,
+		<choose>
+			<when test="apply=='cancel'">
+				1
+			</when>
+			<when test="apply=='return'">
+				2
+			</when>
+			<otherwise> <!-- 교환.. -->
+				3
+			</otherwise>
+		</choose>
+		,#{bnum},#{bcount})
+	</insert>
+</mapper>

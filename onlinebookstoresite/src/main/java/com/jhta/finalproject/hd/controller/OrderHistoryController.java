@@ -28,11 +28,12 @@ public class OrderHistoryController {
 	@Autowired
 	private OrderHistoryService service;
 	
+	//주문내역페이지로 이동
 	@RequestMapping("/mypage/orderhistory")
 	public String pageorderhistory() {
 		return ".orderhistory";
 	}
-	
+	//새상품 주문내역 보기.
 	@RequestMapping(value="/orderhistroy/newview",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String vieworderhistroy(HttpSession session,@RequestParam(required=false)String startDay,
@@ -41,7 +42,6 @@ public class OrderHistoryController {
 		
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
-		System.out.println("mnum:"+mnum);
 		HashMap<String,Object>datemap=new HashMap<String, Object>();
 		datemap.put("startDay", startDay);
 		datemap.put("endDay",endDay);
@@ -53,7 +53,6 @@ public class OrderHistoryController {
 		List<HistoryListVo> list=service.orderhistory(datemap);
 		List<HistoryListVo> list1=new ArrayList<HistoryListVo>();
 		for(HistoryListVo vo:list) {
-			System.out.println("주문일자:"+vo.getBorderdate());
 			int bpaynum=vo.getOrdernum();
 			HashMap<String,Object>map=service.confirmtype(bpaynum);		
 			int btype=Integer.parseInt(String.valueOf(map.get("BTYPE")));
@@ -118,6 +117,7 @@ public class OrderHistoryController {
 		jarr.put(json);
 		return jarr.toString();
 	}
+	//중고제품 주문내역
 	@RequestMapping("/orderhistroy/usedview")
 	@ResponseBody
 	public String viewusedorderhistroy(HttpSession session,@RequestParam(defaultValue = "0")String date1,
@@ -176,7 +176,7 @@ public class OrderHistoryController {
 		return jarr.toString();
 	}
 	
-	//주문상세정보 페이지.
+	//새상품 주문상세정보 페이지.
 	@RequestMapping(value="/orderhistory/detailview")
 	public String detailvew(int bpaynum,Model model) {
 		int totalprice=0;

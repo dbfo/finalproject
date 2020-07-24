@@ -3,16 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.OrderHistoryMapper">
-
-
-
 	<select id="orderhistory" parameterType="hashmap" resultType="historyVo">
 		select * from(
 		SELECT aa.*,rownum rnum FROM (
 		select bpayment.bpaynum ordernum,borderdate,bfinalmoney,delfee,bstatus,mname,receiver from
 		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
 		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
-		<![CDATA[ and bstatus>=0 and bstatus<=4)bpayment,		]]>				
+		<![CDATA[ and bstatus>=0 and bstatus<=3)bpayment,		]]>				
 		(select * from members)members
 		where members.mnum=bpayment.mnum
 		order by borderdate desc
@@ -23,10 +20,11 @@
 	<select id="countHistory" parameterType="hashmap" resultType="int">
 		select NVL(count(*),0) from
 		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
-		TO_CHAR(BORDERDATE,'YY/MM/DD') BETWEEN TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD') 
-		order by borderdate desc )bpayment,						
+		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+		<![CDATA[ and bstatus>=0 and bstatus<=3)bpayment,		]]>			
 		(select * from members)members
 		where members.mnum=bpayment.mnum
+		order by borderdate desc 
 	</select>
 	<select id="confirmtype" parameterType="int" resultType="hashmap">
 		select btype,bnum from paymentbook where bpaynum=#{bpaynum} and rownum=1
@@ -40,9 +38,15 @@
 		select btitle from books where bnum=#{bnum}
 	</select>
 	
-	<select id="usedBtitle" parameterType="int" resultType="hashmap">
-		select obname,obstatus from oldbooks where obnum=#{bnum}
+	<select id="usedTitle" parameterType="int" resultType="historyUsedVo">
+		select obname,obstatus,ob.snum,mid sid,m.mnum smnum from
+		(select obname,obstatus,snum from oldbooks where obnum=#{bnum})obs,
+		(select * from obseller)ob,
+		(select * from members)m
+		where obs.snum=ob.snum and ob.mnum=m.mnum;
 	</select>
+	
+
 	
 	<!--====== 주문내역 에서 상세주문내역 클릭시 ====== -->
 	<select id="orderbooklist" parameterType="int" resultType="historybooklist">
@@ -51,6 +55,17 @@
 		(select bprice,bnum,btitle from books )books
 		where books.bnum=pb.bnum
 	</select>
+	
+	<select id="orderusedlist" parameterType="int" resultType="historybooklist">
+		select pb.bpaynum,pb.bnum,pb.bcount,obs.obsaleprice bprice,obname btitle,paymentbook_num pbnum,obstatus,m.mid sid from
+		(select * from paymentbook where bpaynum=#{bpaynum})pb,
+		(select obsaleprice,obnum,obname,obstatus,snum from oldbooks)obs,
+		(select * from obseller)ob,
+		(select * from members)m
+		where pb.bnum=obs.obnum and obs.snum=ob.snum and ob.mnum=m.mnum
+		
+	</select>
+	
 	
 	<select id="orderinfo" parameterType="int" resultType="orderdetailinfo">
 			select bp.bpaynum,bp.borderdate,mid,mname,receiver,bphone,baddr,delfee,bfinalmoney,methodpayment,usedpoint,bpaydate,bstatus from

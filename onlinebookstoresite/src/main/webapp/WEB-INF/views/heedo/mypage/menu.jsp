@@ -9,9 +9,9 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="${cp }/mypage/orderhistory">- 주문내역</a><br>
-			<a href="#">- 반품/환불 신청 및 조회</a><br>
-			<a href="#">- 취소 주문내역</a><br>
+			<a class="menuAtag" href="${cp }/mypage/orderhistory">- 주문내역</a><br>
+			<a class="menuAtag" href="#">- 반품/환불 신청 및 조회</a><br>
+			<a class="menuAtag" href="#">- 취소 주문내역</a><br>
 		</td>
 	</tr>
 	<tr>
@@ -19,8 +19,8 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="#">- 회원정보</a><br>
-			<a href="#">- 회원탈퇴</a>
+			<a class="menuAtag" href="#">- 회원정보</a><br>
+			<a class="menuAtag" href="#">- 회원탈퇴</a>
 		</td>
 	</tr>
 	<tr>
@@ -28,13 +28,17 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="#">- 모임관리</a><br>
+			<a class="menuAtag" href="#">- 모임관리</a><br>
 		</td>
 	</tr>
 	<tr>
 		<th>중고관리</th>
 	</tr>
 	<tr>
-		<td><a href="${cp }/seller">-중고판매자매니저</a></td>
+		<td><a class="menuAtag" href="${cp }/seller">-중고판매자매니저</a></td>
 	</tr>
 </table>
+<style>
+	
+
+</style>
