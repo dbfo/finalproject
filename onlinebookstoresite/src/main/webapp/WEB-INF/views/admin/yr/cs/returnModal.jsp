@@ -53,9 +53,9 @@
 					</thead>
 					<tbody>
 						<c:forEach var="vo" items="${List}">
-							<c:set var="point" value="0"/>
+							<c:set var = "totalpoint" value = "0"/>
 							<c:forEach items="${vo.CSAndPaymentBook}" var="book">
-								<c:set var="point" value="${point+book.point }"/>
+								<c:set var = "totalpoint" value = "${totalpoint+book.point }"/>
 								<tr>
 									<td>${book.bnum}</td>
 									<td>${book.btitle}</td>
@@ -67,7 +67,7 @@
 							</c:forEach>
 							<tr>
 								<td colspan="5" align="right">
-									<c:out value="${point }"/>
+									<c:out value="${totalpoint }"/>
 								</td>
 								<td colspan="1" align="right">${vo.ordermoney}</td>
 							</tr>
@@ -99,7 +99,7 @@
 										<td>${book.btitle}</td>
 										<td>${book.count}</td>
 										<td>${book.bprice}</td>
-										<td>${book.point }</td>
+										<td><c:out value = "${ book.point/book.bcount}"/></td>
 									</tr>
 									<tr>
 										<td colspan="5" align="right">
@@ -154,7 +154,7 @@
 						<c:out value="${returnPrice}"/>
 					</td>
 					<td>
-						<c:out value="${point}"/>					
+						${Point }					
 					</td>
 					<td>
 						<c:out value="${returnPrice}"/>
@@ -163,7 +163,7 @@
 				<tr>
 					<td colspan="3" align="right" >
 							<button type="button" class="btn btn-success btn-md"
-								id="giveBtn" onclick = "clickGiveBtn(${List[0].bpaynum },${returnPrice},${point })">예치금 전달</button>
+								id="giveBtn" onclick = "clickGiveBtn(${List[0].bpaynum },${returnPrice},${Point })">예치금 전달</button>
 					</td>
 				</tr>
 
@@ -189,17 +189,18 @@
 		
 		//pickupBtn이 여러개일 수도 있으니깐 배열로 해야함
 		
-		console.log("길이 : " + $("#pickupBtn").length);
-		console.log("bpaynum : " + bpaynum);
-		console.log("paymentbookNum : " + $(".paymentbookNum").text());
+// 		console.log("길이 : " + $("#pickupBtn").length);
+// 		console.log("bpaynum : " + bpaynum);
+// 		console.log("paymentbookNum : " + $(".paymentbookNum").text());
+// 		alert("point : " + point);
 		
 		var length = $("#pickupBtn").length;
 
 		$("#pickupBtn").each(function(idx, item){
 			
 			if($(this).prop("disabled")){
+				console.log(idx)
 				if(idx == length-1){
-					alert("ggggg")
 					ajGivefunction(bpaynum,returnPrice, point);
 				}
 			}else{

@@ -1,5 +1,8 @@
 package com.jhta.finalproject.yr.service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +22,22 @@ public class OrderFirstStepServiceImpl implements OrderFirstStepService{
 	@Override
 	public int plusPointAndUpdateStatus(List<Integer> bpaynumList) {
 		dao.updateBeforeToPreparing(bpaynumList);
-
+		
 		for (Integer bnum : bpaynumList) {
-			int point = dao.getBookPoint(bnum);
-			int mnum = dao.getMnum(bnum);
-			PointVo pv = new PointVo(mnum, bnum, point, null);
 			
-			dao.pointPlus(pv);
+			List<HashMap<String, Integer>> list = dao.getBookList(bnum);
+			for (HashMap<String,Integer> hashMap : list) {
+				int getType = Integer.parseInt(String.valueOf(hashMap.get("BTYPE")));
+				if(getType != 2) {
+					int point = dao.getBookPoint(bnum);
+					int mnum = dao.getMnum(bnum);
+					PointVo pv = new PointVo(mnum, bnum, point, null);
+					dao.pointPlus(pv);			
+				}else {
+					int getbnum =  Integer.parseInt(String.valueOf(hashMap.get("BNUM")));
+					dao.updateObsalestatus(getbnum);
+				}
+			}			
 		}
 		
 		return 1;

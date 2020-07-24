@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.CSManageService;
 import com.jhta.finalproject.yr.service.ReturnService;
+import com.jhta.finalproject.yr.vo.CSAndPaymentBookVo;
 import com.jhta.finalproject.yr.vo.DepositVo;
 import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
 import com.jhta.finalproject.yr.vo.PointVo;
@@ -31,8 +32,26 @@ public class CSReturnMangeController {
 		map.put("bpaynum", bpaynum);
 		
 		List<PaymentAndCSBookListVo> list = service.paymentList(map);
+		int point = 0;
+		for (PaymentAndCSBookListVo vo : list) {
+			
+			List<CSAndPaymentBookVo> csbook = vo.getCSAndPaymentBook();
+			for (CSAndPaymentBookVo csvo : csbook) {
+				
+				if(csvo.getType() == 2) {
+					if(csvo.getBcount() - csvo.getCount() > 0) {
+						point += csvo.getPoint()/csvo.getBcount() * (csvo.getBcount() - csvo.getCount());
+					}else{
+						point += csvo.getPoint();
+					}
+				}
+			}
+		}
+		
+		System.out.println(point);
 		
 		model.addAttribute("List", list);
+		model.addAttribute("Point", point);
 		
 		return "/admin/yr/cs/returnModal";
 	}
@@ -74,7 +93,7 @@ public class CSReturnMangeController {
 		
 		//포인트 차감, 예치금 증감 시키기, 상태 변화시키기
 		PointVo pointVo = new PointVo(mnum, ibpaynum, Integer.parseInt(point)*-1 , null);
-		DepositVo depositVo = new DepositVo(0, mnum, ibpaynum, Integer.parseInt(returnPrice), null, 0);
+		DepositVo depositVo = new DepositVo(0, mnum, ibpaynum, Integer.parseInt(returnPrice), null, 2);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("returnPrice", Integer.parseInt(returnPrice));
 		map.put("bpaynum", ibpaynum);

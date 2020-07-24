@@ -21,13 +21,16 @@
 				<thead>
 					<tr>
 						<th>주문번호</th>
+						<th>주문자 이름</th>
 						<th>주문 일자</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="vo" items="${List}">
+						<input type="hidden" value = ${vo.mnum } id = "mnum">
 						<tr>
 							<td id="bpaynum">${vo.bpaynum }</td>							
+							<td id = "mname">${vo.mname }</td>							
 							<td> <fmt:formatDate value="${vo.borderdate }" pattern="yyyy-MM-dd"/> </td>							
 						</tr>
 					</c:forEach>
@@ -89,7 +92,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:set var="price" value="0"/>
 					<c:forEach var="vo" items="${List}">
 						<c:forEach items="${vo.CSAndPaymentBook}" var="book">
 							<c:if test="${book.type == 1 }">
@@ -102,7 +104,6 @@
 									<td></td>
 									<td></td>
 								</tr>
-								<c:set var="price" value="${price+book.bprice }"/>
 							</c:if>
 						</c:forEach>
 									
@@ -121,8 +122,8 @@
 					</c:forEach>
 					<tr>
 						<td colspan="5" align="right">배송비</td>
-						<td colspan="1" align="right" id = "cancelPrice"><c:out value="${price }" /></span></td>
-						<td colspan="1" align="right"><span style = "color : red"><c:out value="${price }" /></span></td>
+						<td colspan="1" align="right" id = "cancelPrice">${cancelPrice }</span></td>
+						<td colspan="1" align="right"><span style = "color : red">${cancelPrice }</td>
 					</tr>
 				</tbody>
 			</table>
@@ -135,15 +136,7 @@
 			<table class="table table-bordered">
 					<tr>
 						<th>회수 포인트</th>
-						<c:forEach var="vo" items="${List}">
-							<c:forEach items="${vo.CSAndPaymentBook}" var="book">
-								<c:set var="point" value="0"/>
-								<c:if test="${book.type == 1 }">
-									<c:set var = "point" value = "${point+book.point }"/>
-										<td>${point}</td>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
+						<td id = "cancelPoint">${cancelPoint }</td>
 					</tr>
 			</table>
 			
@@ -166,12 +159,12 @@
 	
 	$("#applyBtn").click(function () {
 		
-		alert( $('#bpaynum').text());
+		alert( $("#mnum").val());
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/cancelapproval",
 			dataType : "json",
-			data : {bpaynum : $('#bpaynum').text(), cancelPrice : $('#cancelPrice').text()},
+			data : {mnum : $("#mnum").val(), bpaynum : $('#bpaynum').text(), cancelPrice : $('#cancelPrice').text(), cancelPoint :  $('#cancelPoint').text()},
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");

@@ -15,12 +15,25 @@
 		</foreach>	
 	</update>
 	
+<!-- 	중고책 status결제완료로 업데이트 -->
+	<update id = "updateObsalestatus" parameterType="int" >
+		update oldbooks set obsalestatus = 2 where obnum = #{obnum}
+	</update>
+	
+<!-- 	중고책인지 아닌지 -->
+	<select id="getBookList" parameterType="int" resultType="hashmap">
+	    select btype, bnum
+	    from bpayment, paymentbook
+	    where bpayment.bpaynum = paymentbook.bpaynum
+	    and bpayment.bpaynum = #{bpaynum}
+	</select>
+		
 	<update id="updatePrepareToShipping" parameterType="int">
 		update bpayment set bstatus = 2 where bpaynum = #{bpaynum} 
 	</update>
 	
 	<select id="getBookPoint" parameterType="int" resultType="int">
-		select sum(point) sum from paymentbook where bpaynum = #{bpaynum}
+		select nvl(sum(point),0) sum from paymentbook where bpaynum = #{bpaynum}
 	</select>
 		
 	<insert id="pointPlus" parameterType="pointVo">

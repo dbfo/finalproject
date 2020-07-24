@@ -24,13 +24,18 @@ public class SalesManageController {
 	public String goSales(Model model,String menu, String startDate, String endDate, String week,
 			String startYear, String startMonth, String endYear, String endMonth) {
 		
-		System.out.println(
-				 menu + " : "+ startDate + " : "+ endDate+ " : "+ week
-				 + " : "+startYear+ " : "+ startMonth + " : "+endYear+ " : "+endMonth);
+//		System.out.println(
+//				 menu + " : "+ startDate + " : "+ endDate+ " : "+ week
+//				 + " : "+startYear+ " : "+ startMonth + " : "+endYear+ " : "+endMonth);
 		
+		model.addAttribute("menu", menu);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("menu", menu);
+		model.addAttribute("week", endDate);
+		model.addAttribute("startYear", startYear);
+		model.addAttribute("startMonth", startMonth);
+		model.addAttribute("endYear", endYear);
+		model.addAttribute("endMonth", endMonth);
 		
 		return ".sales";
 	}
@@ -45,9 +50,9 @@ public class SalesManageController {
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
 		
-		System.out.println(
-				 menu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
-				 + " :sy "+startYear+ " :sm "+ startMonth + " :ey "+endYear+ " :em "+endMonth);
+//		System.out.println(
+//				 menu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
+//				 + " :sy "+startYear+ " :sm "+ startMonth + " :ey "+endYear+ " :em "+endMonth);
 		
 		
 		List<HashMap<String,String>> result = getDate( menu, startDate, endDate, week

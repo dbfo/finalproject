@@ -42,7 +42,10 @@
 								<td>${vo.mname }</td>
 								<td>
 									<c:forEach items="${vo.paymentbook}" var="book">
-										<p>${book.btitle}</p>
+										 <c:if test="${book.btype == 2 }">
+										 	<p>[중고]</p>
+										 </c:if>
+										<p>${book.btitle}</p>									
 									</c:forEach>
 								</td>
 								<td>${vo.bfinalmoney}</td>
