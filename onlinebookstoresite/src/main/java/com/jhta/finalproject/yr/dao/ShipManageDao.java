@@ -27,6 +27,7 @@ public class ShipManageDao {
 		return session.update(NAMESPACE+".updateBeforeToPreparing",list);
 	}
 	
+	//준비중 -> 배송중으로 상태 업데이트
 	public int updatePrepareToShipping(int bpaynum) {
 		return session.update(NAMESPACE+".updatePrepareToShipping",bpaynum);
 	}
@@ -44,6 +45,16 @@ public class ShipManageDao {
 	//회원번호 가져오기
 	public int getMnum(int bpaynum) {
 		return session.selectOne(NAMESPACE+".getMnum", bpaynum);
+	}
+	
+	//책리스트 가져오기
+	public List<HashMap<String, Integer>> getBookList(int bpaynum) {
+		return session.selectList(NAMESPACE+".getBookList", bpaynum);
+	}
+
+	//중고책 status업데이트
+	public int updateObsalestatus(int bpaynum) {
+		return session.update(NAMESPACE+".updateObsalestatus", bpaynum);
 	}
 	
 }

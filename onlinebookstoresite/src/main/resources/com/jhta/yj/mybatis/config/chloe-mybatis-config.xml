@@ -53,6 +53,7 @@
 		<mapper resource="com/jhta/yr/mybatis/mapper/CSMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/DepositMapper.xml" />
 		<mapper resource="com/jhta/yr/mybatis/mapper/UsedBookSellerMapper.xml" />
+		<mapper resource="com/jhta/yr/mybatis/mapper/SalesMapper.xml" />
 		
 	</mappers>
 </configuration>

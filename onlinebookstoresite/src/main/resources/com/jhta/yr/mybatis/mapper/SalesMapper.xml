@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.yr.mybatis.mapper.SalesMapper">
+	
+	<sql id="daySearch">			
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startDate)">
+			where TRUNC(bpaydate) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate}) and bstatus in (3,5)
+		</if>
+	</sql>
+
+	<sql id="weekSearch">			
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(week)">
+			 where to_char(bpaydate,'iw') between TO_CHAR(sysdate-#{week}, 'iw') and TO_CHAR(sysdate, 'iw') and bstatus in (3,5)
+		</if>
+	</sql>
+	
+	<sql id="monthSearch">
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startYearAndMonth)">
+			where bpaydate BETWEEN TO_date(#{startYearAndMonth},'yyyy-mm') AND TO_date(#{endYearAndMonth},'yyyy-mm') and bstatus in (3,5)
+		</if>
+	</sql>
+	
+	
+	<select id="getList" parameterType="hashmap" resultType="hashmap">
+		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment 
+		<include refid="daySearch"/>
+		group by bpaydate order by bpaydate
+	</select>
+	
+	
+	<select id="mothList" parameterType="hashmap" resultType="hashmap">
+		select  to_char(bpaydate,'yyyy-mm') bpaydate, sum(bfinalmoney) from bpayment
+		<include refid="monthSearch"/> 
+		group by to_char(bpaydate,'yyyy-mm') order by bpaydate	
+	</select>
+	
+	<select id="weekList" parameterType="hashmap" resultType="hashmap">
+		select to_char(bpaydate, 'IW') bpaydate, sum(bfinalmoney) from bpayment
+		<include refid="weekSearch"/> 
+		 group by to_char(bpaydate, 'IW') order by bpaydate
+	</select>
+	 
+</mapper>	

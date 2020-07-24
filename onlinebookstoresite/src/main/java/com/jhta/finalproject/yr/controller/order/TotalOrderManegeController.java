@@ -1,4 +1,4 @@
-package com.jhta.finalproject.yr.controller;
+package com.jhta.finalproject.yr.controller.order;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +33,6 @@ public class TotalOrderManegeController {
 		map.put("startDate",startDate);
 		map.put("endDate",endDate);
 		
-		
 //		책제목, 책번호
 
 		map.put("bfield",bfield);
@@ -52,9 +51,7 @@ public class TotalOrderManegeController {
 			map.put("type",typeArray);			
 		}
 		
-		
 
-		
 //		입금상태
 		map.put("payType",payType);
 		

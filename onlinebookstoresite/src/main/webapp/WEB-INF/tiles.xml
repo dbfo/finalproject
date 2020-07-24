@@ -152,9 +152,7 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
 	</definition>
-
-
-
+	
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
 	</definition>
@@ -168,8 +166,15 @@
 			value="/WEB-INF/views/admin/yr/usedbookseller/sellertables.jsp" />
 	</definition>
 
-
 	<definition name=".usedbookseller" extends=".main">
 		<put-attribute name="content" value=".admin.seller" />
 	</definition>
+
+	<!-- 매출관리 -->
+
+	<definition name=".sales" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/yr/sales/chart.jsp" />
+	</definition>
+
 </tiles-definitions>

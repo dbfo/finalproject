@@ -105,22 +105,20 @@
 	
 		
 	function ajDeposit(tdArr, mnumArr, priceArr){
-		
-		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/refundMoneyGoMembers",
 			dataType : "json",
 			data : {"senum":tdArr, "mnum" : mnumArr , "priceArr" : priceArr},
 			success : function(data){
-				console.log(data.code);
+				console.log(data);
 				if(data.code == "success"){
 					alert("예치금이 전송 되었습니다.")
 					window.location.reload();
 				}else{
-					alert("예치금 전송에 실패하였습니다.")						
+					alert("예치금 전송에 실패하였습니다.")	
+					window.location.reload();
 				}
-			}			
-		
+			}						
 		})
 	}
 

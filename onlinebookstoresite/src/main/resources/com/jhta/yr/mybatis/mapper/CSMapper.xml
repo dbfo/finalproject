@@ -10,9 +10,6 @@
 	<sql id="CSStatus">
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(CSStatus)">
 			and type = #{CSStatus}				
-			<if test="CSStatus == 0">
-				and bstatus = 0 or bstatus = 5
-			</if>
 	    </if>		
 	</sql>
 	
@@ -96,7 +93,7 @@
 	<sql id="selectPaynum">
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(bpaynum)">
 			and bpayment.bpaynum = #{bpaynum}
-		</if>		
+		</if>			
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(type)">
 			and type = #{type}
 		</if>
@@ -117,7 +114,7 @@
 <!-- 취소 -->
 	<insert id="cancelPaymentInsert" parameterType="payment">
 		insert into bpayment values (SEQ_BPAYMENT_BPAYNUM.nextval,#{baddr},#{bphone},#{bfinalmoney},
-			#{borderdate},null,0,#{ordermoney},0,#{methodpayment},#{receiver},#{mnum})
+			sysdate, null,0,#{ordermoney},0,#{methodpayment},#{receiver},#{mnum})
 	</insert>
 
 	<insert id="paymentbooksInsert" parameterType="booksVo">
@@ -128,8 +125,10 @@
 		update bpayment set bstatus = 6 where bpaynum = #{bpaynum}
 	</update>
 	
+	
+	
 	<update id="updateRefundStatus" parameterType="int">
-		update refundhistory set status = 3 where paymentbook_num = #{paymentbook_num}
+		update refundhistory set status = 3, recomdate = sysdate where paymentbook_num = #{paymentbook_num}
 	</update>
 
 <!-- 교환, 반품 상태 업데이트 -->
@@ -150,7 +149,7 @@
 	
 <!-- 	예치금 증감 -->
 	<insert id="giveDeposit" parameterType="depositVo">
-		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, #{bpaynum}, #{dtran}, sysdate, '2')
+		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, #{bpaynum}, #{dtran}, sysdate, #{dereason})
 	</insert>
 	
 <!-- 	최종금액 업데이트 -->

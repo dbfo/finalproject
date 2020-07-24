@@ -44,7 +44,7 @@
 								</c:choose>
 								</td>	
 								<td rowspan="2">${vo.mname }</td>
-								<td rowspan="2"><input type="checkbox" id = "chb"></td>
+								<td rowspan="2"><input type="checkbox" id = "chb" <c:if test = "${vo.paymentbook[0].btype == 2 }">disabled</c:if>></td>
 								<td rowspan="1"><select id="courier" name="courier">
 										<option value=''>--택배사 선택--</option>
 										<option value='cj'>CJ대한통운</option>
@@ -55,12 +55,11 @@
 									class="btn btn-success btn-sm" type="button" value="저장"
 									name="saveBtn"></td>
 
-								<td rowspan="1"><c:forEach items="${vo.paymentbook}"
-										var="book">
+								<td rowspan="1"><c:forEach items="${vo.paymentbook}" var="book">
+										<c:if test="${book.btype == 2 }">[중고]</c:if>
 										<p>${book.btitle}</p>
 									</c:forEach></td>
-								<td rowspan="1"><c:forEach items="${vo.paymentbook}"
-										var="book">
+								<td rowspan="1"><c:forEach items="${vo.paymentbook}" var="book">
 										<p>${book.bcount}</p>
 									</c:forEach></td>
 								<td rowspan="1"><c:forEach items="${vo.paymentbook}"
