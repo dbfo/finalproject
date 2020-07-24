@@ -67,12 +67,16 @@
 						<div class="input-group mt-1 mb-1">
 							<div class="input-group-prepend">
 								<select name="field" class="form-control">
-									<option value="all">전체</option>
-									<option value="obqtitle">문의제목</option>
-									<option value="mid">작성자</option>
+									<option value="all" 
+										<c:if test="${map.field=='all' || map.field==null || map.field=='' }">selected</c:if>>전체</option>
+									<option value="obqtitle"
+										<c:if test="${map.field=='obqtitle'}">selected</c:if>>문의제목</option>
+									<option value="mid"
+										<c:if test="${map.field=='mid'}">selected</c:if>>작성자</option>
 								</select>
 							</div>
-							<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요.">
+							<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요."
+								value="${map.keyword}">
 							<!-- 버튼 -->
 							<input type="submit" value="검색" class="btn btn-success" id="list2bt">
 							<input type="button" value="검색조건 초기화" id="resetBt" class="btn btn-secondary">

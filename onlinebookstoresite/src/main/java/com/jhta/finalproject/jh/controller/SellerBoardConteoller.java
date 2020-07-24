@@ -70,8 +70,6 @@ public class SellerBoardConteoller {
 	@PostMapping("/seller/insertAnswer")
 	public String insertAnswer(int obqnum,String obqacontent,HttpSession session,Model model) {
 		int snum=(Integer)session.getAttribute("snum");
-		System.out.println("★★번호:"+obqnum);
-		System.out.println("★★답글내용:"+obqacontent);
 		
 		try {
 			HashMap<String, Object> map=new HashMap<String, Object>();

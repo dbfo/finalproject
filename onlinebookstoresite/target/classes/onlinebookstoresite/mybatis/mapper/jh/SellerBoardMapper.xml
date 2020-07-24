@@ -3,10 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerBoardMapper.jh">
+	<!-- 중고판매자 QnA관련  -->
 	<!-- 검색조건-->
 	<sql id="search">
-		
-	
+		<if test="obqstatus == 0">
+			and oq.obqstatus=0
+		</if>
+		<if test="obqstatus == 1">
+			and oq.obqstatus=1
+		</if>
+		<if test="startDay!=null and startDay!=''">
+			<![CDATA[
+				and oq.obqdate >= to_date(#{startDay},'yyyy-mm-dd') and oq.obqdate <= to_date(#{endDay},'yyyy_mm_dd')+0.99999
+			]]>
+		</if>
+		<if test='field=="all" and keyword != null and keyword !=""'>
+			and oq.obqtitle like '%'||#{keyword}||'%'
+			or m.mid like '%'||#{keyword}||'%'
+		</if>
+		<if test='field == "obqtitle"'>
+			and oq.obqtitle like '%'||#{keyword}||'%'
+		</if>
+		<if test='field == "mid"'>
+			and m.mid like '%'||#{keyword}||'%'
+		</if>
 	</sql> 
 	<!-- 중고판매자 QnA리스트 가져오기 -->
 	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="hashmap">
@@ -18,6 +38,7 @@
 			oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
 			from oldbooks o,obqna oq, members m
 			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+			<include refid="search"/>
        		order by oq.obqdate desc)qna)a
         <![CDATA[
 		where rnum>=#{startRow} and rnum<=#{endRow}
@@ -28,6 +49,7 @@
 		select NVL(count(*),0) count
 		from oldbooks o,obqna oq, members m
 		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+		<include refid="search"/>
 	</select>
 	<!-- 중고판매자 디테일:문의내용 가져오기 -->
 	<select id="getSellerQnaDetail" resultType="qnalistjoin" parameterType="int">
