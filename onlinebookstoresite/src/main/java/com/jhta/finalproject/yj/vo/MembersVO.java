@@ -16,8 +16,25 @@ public class MembersVO {
 	private Date birth;
 	private String sex;
 
+	// 회원목록 뽑을 때 필요한
+	private int age;
+
 	public MembersVO() {
 		super();
+	}
+
+	// 회원목록 뽑을 때 필요한
+	public MembersVO(String mname, String mid, String email, String phone, Date regdate, int mstatus, Date birth,
+			int age) {
+		super();
+		this.mname = mname;
+		this.mid = mid;
+		this.email = email;
+		this.phone = phone;
+		this.regdate = regdate;
+		this.mstatus = mstatus;
+		this.birth = birth;
+		this.age = age;
 	}
 
 	public MembersVO(int mnum, String mname, String mid, String mpwd, String email, String phone, String addr,
@@ -131,5 +148,13 @@ public class MembersVO {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

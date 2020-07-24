@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.yj.dao.MembersDao;
-import com.jhta.finalproject.yj.vo.MembersListVO;
+import com.jhta.finalproject.yj.vo.MembersVO;
 
 @Service
 public class MembersService {
@@ -18,7 +18,7 @@ public class MembersService {
 		return dao.memCount(map);
 	}
 
-	public List<MembersListVO> memList(HashMap<String, Object> map) {
+	public List<MembersVO> memList(HashMap<String, Object> map) {
 		return dao.memList(map);
 	}
 
@@ -26,7 +26,16 @@ public class MembersService {
 		return dao.ghostCount(map);
 	}
 
-	public List<MembersListVO> ghostList(HashMap<String, Object> map) {
+	public List<MembersVO> ghostList(HashMap<String, Object> map) {
 		return dao.ghostList(map);
+	}
+
+	// 엑셀
+	public List<MembersVO> excelMemList() {
+		return dao.excelMemList();
+	}
+
+	public List<MembersVO> excelGhostList() {
+		return dao.excelGhostList();
 	}
 }

@@ -6,16 +6,18 @@
 
 <link href="${pageContext.request.contextPath }/resources/yjcss/css/madeByChloe.css" rel="stylesheet" />
 
-<div class="card mb-4">
-	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 상세 미리보기
+<div class="container-fluid">
+	<br>
+	<div style="font-size: 2rem; margin-left: 25px">
+		<i class="fas fa-table mr-1"></i> 상세&nbsp;미리보기
 	</div>
+	<br>
+		
 	<div class="container-fluid">
 		<div class="row">
-		
 			<div class="btnDiv">
-				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksUpdate?bnum=${vo.bnum }'" class="btn btn-success">수정</button>
-				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksDelete?bnum=${vo.bnum }'" class="btn btn-danger">삭제</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksUpdate?bnum=${vo.bnum }'" class="btn btn-outline-success">수정</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksDelete?bnum=${vo.bnum }'" class="btn btn-outline-danger">삭제</button>
 			</div>
 			
 			<div id="contentWrap">
@@ -27,9 +29,9 @@
 						<div class="col-md-5">
 							<div id="titleDiv" style="font-size: 35px; font-weight: 600;">${vo.btitle }</div>
 							<fmt:formatDate value="${vo.bpublishdate }" pattern="yyyy/MM/dd" var="bpublishdate" />
-							<div id="wppDiv" style="font-size: 18px;">${vo.bwriter } 지음 | ${vo.bpublisher } | ${bpublishdate } 출간</div>
+							<div id="wppDiv" style="font-size: 18px;">${vo.bwriter }&nbsp;지음&nbsp;&nbsp;|&nbsp;&nbsp;${vo.bpublisher }&nbsp;&nbsp;|&nbsp;&nbsp;${bpublishdate }&nbsp;출간</div>
 							<div id="priceDiv" style="font-size: 30px; font-weight: 500;">${vo.bprice }원</div>
-							<div id="pointDiv">(${vo.bpoint } point 적립 예정)</div>
+							<div id="pointDiv">(${vo.bpoint }point&nbsp;적립&nbsp;예정)</div>
 						</div>
 					</div>
 					
@@ -45,8 +47,8 @@
 				</div>
 			</div>
 			<div class="btnDiv">
-				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksUpdate?bnum=${vo.bnum }'" class="btn btn-success">수정</button>
-				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksDelete?bnum=${vo.bnum }'" class="btn btn-danger">삭제</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksUpdate?bnum=${vo.bnum }'" class="btn btn-outline-success">수정</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/booksDelete?bnum=${vo.bnum }'" class="btn btn-outline-danger">삭제</button>
 			</div>
 		</div>
 	</div>

@@ -63,4 +63,8 @@ public class BooksImgService {
 	public int imgUpdateDelete(int imgnum) {
 		return idao.imgUpdateDelete(imgnum);
 	}
+
+	public List<BooksVO> excelList() {
+		return bdao.excelList();
+	}
 }

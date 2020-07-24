@@ -36,9 +36,9 @@ public class BooksDao {
 	public List<SmallCategoryVO> getSmallctg(int bcatenum) {
 		return sqlsession.selectList(NAMESPACE + ".smctg", bcatenum);
 	}
-	
+
 	public int count(HashMap<String, Object> map) {
-		return sqlsession.selectOne(NAMESPACE+".count", map);
+		return sqlsession.selectOne(NAMESPACE + ".count", map);
 	}
 
 	public List<BooksVO> list(HashMap<String, Object> map) {
@@ -48,12 +48,17 @@ public class BooksDao {
 	public BooksVO getBooksInfo(int bnum) {
 		return sqlsession.selectOne(NAMESPACE + ".getBooksInfo", bnum);
 	}
-	
+
 	public int updateBigCtg(int bnum) {
 		return sqlsession.selectOne(NAMESPACE + ".updateBigCtg", bnum);
 	}
 
 	public int booksUpdate(BooksVO vo) {
 		return sqlsession.update(NAMESPACE + ".booksUpdate", vo);
+	}
+	
+	// 엑셀 리스트
+	public List<BooksVO> excelList() {
+		return sqlsession.selectList(NAMESPACE + ".excelList");
 	}
 }

@@ -6,127 +6,131 @@
 
 <link href="${pageContext.request.contextPath }/resources/yjcss/css/madeByChloe.css" rel="stylesheet" />
 
-<div class="card mb-4">
-	<div class="card-header">
+<div class="container-fluid">
+	<br>
+	<div style="font-size: 2rem; margin-left: 25px">
 		<i class="fas fa-table mr-1"></i> 상품수정
 	</div>
-	<form method="post" action="${pageContext.request.contextPath }/booksUpdate" enctype="multipart/form-data">
-		
-		<input type="hidden" name="bnum" value="${bvo.bnum }">
-		<table class="booksUpdateTable table">
-			<tr>
-				<th style="text-align: center;" class="table-active">카테고리</th>
-				<td colspan="3">
-					<select name="bctg" id="bctg">
-						<c:forEach var="big" items="${getBigctg }">
-							<option value="${big.bcatenum}"
-								<c:if test="${big.bcatenum == bcatenum }">selected</c:if>>${big.bcataname }
-							</option>
-						</c:forEach>
-					</select>
-					
-					<div id="smctgDiv" style="display: inline-block">
-						<select name="smctg" id="smctg">
-							<option value="">- 선택 -</option>
-							<c:forEach var="sm" items="${getsctg }">
-								<option value="${sm.scatenum}"
-									<c:if test="${sm.scatenum == bvo.scatenum }">selected</c:if>>${sm.scataname }
+	<br>
+	<div class="container-fluid">
+		<form method="post" action="${pageContext.request.contextPath }/booksUpdate" enctype="multipart/form-data">
+			<input type="hidden" name="bnum" value="${bvo.bnum }">
+			<table class="table">
+				<tr>
+					<th style="text-align: center;" class="table-active">카&nbsp;테&nbsp;고&nbsp;리</th>
+					<td colspan="4">
+						<select name="bctg" id="bctg">
+							<c:forEach var="big" items="${getBigctg }">
+								<option value="${big.bcatenum}"
+									<c:if test="${big.bcatenum == bcatenum }">selected</c:if>>${big.bcataname }
 								</option>
 							</c:forEach>
 						</select>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">책제목</th>
-				<td>
-					<input type="text" name="btitle" id="btitle" size="60" value="${bvo.btitle }">
-				</td>
-				
-				<th style="text-align: center;" class="table-active">작가 (지은이)</th>
-				<td>
-					<input type="text" name="bwriter" id="bwriter" size="50" value="${bvo.bwriter }">
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">출간일</th>
-				<fmt:formatDate value="${bvo.bpublishdate }" pattern="yyyy-MM-dd" var="bpublishdate" />
-				<td>
-					<input type="date" name="bpublishdate" id="bpublishdate" value="${bpublishdate }">
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">출판사</th>
-				<td colspan="3">
-					<input type="text" name="bpublisher" size="50" value="${bvo.bpublisher }">
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">책가격</th>
-				<td>
-					<input type="text" name="bprice" id="bprice" size="50" value="${bvo.bprice }"> 원
-				</td>
-				
-				<th style="text-align: center;" class="table-active">적립포인트</th>
-					<td>
-						<input type="text" name="bpoint" id="bpoint" size="50" readonly="readonly" value="${bvo.bpoint }"> point 적립예정
-					</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">입고수량</th>
-				<td colspan="3">
-					<input type="text" name="bcount" size="50" value="${bvo.bcount }"> 개
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">기존 썸네일</th>
-				<td>
-					<input type="hidden" name="thumbNum" value="${thumbImg.imgnum }">
-					<div id="savedThumbImg" style="text-align: center;">
-						<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
-					</div>
-				</td>
-				
-				<th style="text-align: center;" class="table-active">기존 이미지</th>
-				<td>
-					<c:if test="${!empty img1 }">
-						<input type="hidden" name="imgNum" value="${img1.imgnum }">
-						<div id="savedImg" style="text-align: center;">
-							<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
+						
+						<div id="smctgDiv" style="display: inline-block">
+							<select name="smctg" id="smctg">
+								<option value="">&nbsp;-&nbsp;선택&nbsp;-&nbsp;</option>
+								<c:forEach var="sm" items="${getsctg }">
+									<option value="${sm.scatenum}"
+										<c:if test="${sm.scatenum == bvo.scatenum }">selected</c:if>>${sm.scataname }
+									</option>
+								</c:forEach>
+							</select>
 						</div>
-					</c:if>
-				</td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">수정할 썸네일 *</th>
-				<td><input type="file" name="thumbnail"></td>
-				
-				<th style="text-align: center;" class="table-active">수정할 이미지 *</th>
-				<td><input type="file" name="img1"></td>
-			</tr>
-
-			<tr>
-				<th style="text-align: center;" class="table-active">책설명</th>
-				<td colspan="3">
-					<textarea rows="30" cols="200" name="bcontent">${bvo.bcontent }</textarea>
-				</td>
-			</tr>
-
-			<tr>
-				<td style="text-align: center;" colspan="4">
-					<input type="submit" value="수  정" class="btn btn-primary">
-					<input type="reset" value="초기화" class="btn btn-secondary resetBtn">
-				</td>
-			</tr>
-		</table>
-	</form>
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">책&nbsp;제&nbsp;목</th>
+					<td>
+						<input type="text" name="btitle" size="50" value="${bvo.btitle }">
+					</td>
+					
+					<th style="text-align: center;" class="table-active">작가&nbsp;(지은이)</th>
+					<td>
+						<input type="text" name="bwriter" size="50" value="${bvo.bwriter }">
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">출&nbsp;간&nbsp;일</th>
+					<fmt:formatDate value="${bvo.bpublishdate }" pattern="yyyy-MM-dd" var="bpublishdate" />
+					<td  colspan="4">
+						<input type="date" name="bpublishdate" value="${bpublishdate }">
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">출&nbsp;판&nbsp;사</th>
+					<td colspan="4">
+						<input type="text" name="bpublisher" size="50" value="${bvo.bpublisher }">
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">책&nbsp;가&nbsp;격</th>
+					<td>
+						<input type="text" name="bprice" value="${bvo.bprice }">&nbsp;원
+					</td>
+					
+					<th style="text-align: center;" class="table-active">적립포인트</th>
+						<td>
+							<input type="text" name="bpoint" readonly="readonly" value="${bvo.bpoint }">&nbsp;point&nbsp;적립예정
+						</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">입&nbsp;고&nbsp;수&nbsp;량</th>
+					<td colspan="4">
+						<input type="text" name="bcount" value="${bvo.bcount }">&nbsp;개
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">기존&nbsp;썸네일</th>
+					<td>
+						<input type="hidden" name="thumbNum" value="${thumbImg.imgnum }">
+						<div id="savedThumbImg" style="text-align: center;">
+							<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${thumbImg.imgsavefilename }">
+						</div>
+					</td>
+					
+					<th style="text-align: center;" class="table-active">기존&nbsp;이미지</th>
+					<td>
+						<c:if test="${!empty img1 }">
+							<input type="hidden" name="imgNum" value="${img1.imgnum }">
+							<div id="savedImg" style="text-align: center;">
+								<img width="300px" height="350px" src="${pageContext.request.contextPath}/resources/imgUpload/${img1.imgsavefilename }">
+							</div>
+						</c:if>
+					</td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">썸&nbsp;네&nbsp;일&nbsp;*</th>
+					<td><input type="file" name="thumbnail"></td>
+					
+					<th style="text-align: center;" class="table-active">이&nbsp;미&nbsp;지&nbsp;*</th>
+					<td><input type="file" name="img1"></td>
+				</tr>
+	
+				<tr>
+					<th style="text-align: center;" class="table-active">책&nbsp;설&nbsp;명</th>
+					<td colspan="4">
+						<textarea rows="20" cols="200" name="bcontent">${bvo.bcontent }</textarea>
+					</td>
+				</tr>
+	
+				<tr>
+					<td align="center" colspan="4">
+						<input type="submit" value="수&nbsp;&nbsp;정" class="btn btn-outline-success">
+						<input type="reset" value="초기화" class="btn btn-outline-secondary">
+					</td>
+				</tr>
+			</table>
+			<br>
+		</form>
+	</div>
 </div>
 
 <!-- 스크립트 -->
@@ -144,7 +148,7 @@
 					success : function(data) {
 						// 				$("#smctgDiv").css("display", "inline-block");
 						$("#smctg").empty();
-						$("#smctg").append("<option value=''>- 선택 -</option>")
+						$("#smctg").append("<option value=''>&nbsp;-&nbsp;선택&nbsp;-&nbsp;</option>")
 						$(data).each(
 								function(i, sm) {
 									$("#smctg").append(

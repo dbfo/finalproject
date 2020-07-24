@@ -60,4 +60,17 @@
 		order by mnum desc) aa)
 		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
+	
+	<!-- 엑셀 리스트 -->
+	<select id="excelMemList" resultType="members">
+		select aa.* from 
+		(select * from members where mstatus = 1
+		order by mnum desc) aa
+	</select>
+	
+	<select id="excelGhostList" resultType="members">
+		select aa.* from 
+		(select * from members where mstatus = 0
+		order by mnum desc) aa
+	</select>
 </mapper>

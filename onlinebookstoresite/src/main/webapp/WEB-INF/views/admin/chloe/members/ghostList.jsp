@@ -36,22 +36,22 @@
 				<tr>
 					<th class="table-active">나이</th>
 					<td>
-						<input type="text" name="ageKeyword1" value="${ageKeyword1 }" size="3"> 세 ~ 
-						<input type="text" name="ageKeyword2" value="${ageKeyword2 }" size="3" disabled="disabled"> 세
+						<input type="text" name="ageKeyword1" value="${ageKeyword1 }" size="3">&nbsp;세&nbsp;~
+						<input type="text" name="ageKeyword2" value="${ageKeyword2 }" size="3" disabled="disabled">&nbsp;세
 					</td>
 				</tr>
 				
 				<tr>
 					<th class="table-active">가입일</th>
 					<td>
-						<input type="date" name="dateKeyword1" value="${dateKeyword1 }"> ~ 
+						<input type="date" name="dateKeyword1" value="${dateKeyword1 }">&nbsp;~ 
 						<input type="date" name="dateKeyword2" value="${dateKeyword2 }">
 					</td>
 				</tr>
 
 				<tr>
 					<td align="center" colspan="4">
-						<input type="submit" value="검  색" class="btn btn-outline-success">
+						<input type="submit" value="검&nbsp;&nbsp;색" class="btn btn-outline-success">
 					</td>
 				</tr>
 			</table>
@@ -61,8 +61,10 @@
 
 	<!-- 리스트 -->
 	<div style="font-size: 2rem; margin-left: 25px">
-		<i class="fas fa-table mr-1"></i> 회원 목록
-		<span style="font-size: 13px;">검색결과 : ${pu.totalRowCnt }명</span>
+		<i class="fas fa-table mr-1"></i> 회원&nbsp;목록
+		<span style="font-size: 15px;">검색결과&nbsp;:&nbsp;${pu.totalRowCnt }명</span>
+				<span style="margin-left: 1150px;"> <button onclick="location.href='${pageContext.request.contextPath}/excelGhostList'" type="button" class="btn btn-outline-success">엑셀 다운로드</button></span>
+		
 	</div>
 	<br>
 	
@@ -75,7 +77,7 @@
 					<th>휴대전화</th>
 					<th>이메일</th>
 					<th>생년월일</th>
-					<th>만 나이</th>
+					<th>만&nbsp;나이</th>
 					<th>가입일</th>
 				</tr>
 			</thead>
@@ -86,7 +88,7 @@
 					<th>휴대전화</th>
 					<th>이메일</th>
 					<th>생년월일</th>
-					<th>만 나이</th>
+					<th>만&nbsp;나이</th>
 					<th>가입일</th>
 				</tr>
 			</tfoot>

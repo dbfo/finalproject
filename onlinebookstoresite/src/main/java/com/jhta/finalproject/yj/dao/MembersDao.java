@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jhta.finalproject.yj.vo.MembersListVO;
+import com.jhta.finalproject.yj.vo.MembersVO;
 
 @Repository
 public class MembersDao {
@@ -23,16 +23,24 @@ public class MembersDao {
 		return session.selectOne(NAMESPACE + ".memCount", map);
 	}
 
-	public List<MembersListVO> memList(HashMap<String, Object> map) {
+	public List<MembersVO> memList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".memList", map);
 	}
-	
 
 	public int ghostCount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".ghostCount", map);
 	}
 
-	public List<MembersListVO> ghostList(HashMap<String, Object> map) {
+	public List<MembersVO> ghostList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".ghostList", map);
+	}
+
+	// 엑셀 리스트
+	public List<MembersVO> excelMemList() {
+		return session.selectList(NAMESPACE + ".excelMemList");
+	}
+
+	public List<MembersVO> excelGhostList() {
+		return session.selectList(NAMESPACE + ".excelGhostList");
 	}
 }

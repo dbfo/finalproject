@@ -17,7 +17,7 @@
 			type="com.jhta.finalproject.yj.vo.SmallCategoryVO" alias="smctg" />
 
 		<!-- members -->
-		<typeAlias type="com.jhta.finalproject.yj.vo.MembersListVO"
+		<typeAlias type="com.jhta.finalproject.yj.vo.MembersVO"
 			alias="members" />
 
 		<!-- qna -->

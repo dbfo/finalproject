@@ -16,6 +16,13 @@
 	</properties>
 	<dependencies>
 
+		<!-- excel download -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
+
 		<!-- json -->
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>

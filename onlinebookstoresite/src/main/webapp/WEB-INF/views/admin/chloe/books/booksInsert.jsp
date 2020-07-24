@@ -15,76 +15,75 @@
 		<form method="post" action="${pageContext.request.contextPath }/booksInsert" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
-					<th style="text-align: center;" class="table-active">카 테 고 리</th>
+					<th style="text-align: center;" class="table-active">카&nbsp;테&nbsp;고&nbsp;리</th>
 					<td colspan="3">
 						<select name="bctg" id="bctg">
-							<option value="">- 선택 -</option>
+							<option value="">&nbsp;-&nbsp;선택&nbsp;-&nbsp;</option>
 							<c:forEach var="big" items="${getBigctg }">
 								<option value="${big.bcatenum }">${big.bcataname }</option>
 							</c:forEach>
 						</select>
 						<div id="smctgDiv" style="display: none">
 							<select name="smctg" id="smctg">
-								<option value="">- 선택 -</option>
+								<option value="">&nbsp;-&nbsp;선택&nbsp;-&nbsp;</option>
 							</select>
 						</div>
 					</td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">책 제 목</th>
-					<td><input type="text" name="btitle" id="btitle" size="70"></td>
-					<th style="text-align: center;" class="table-active">작가 (지은이)</th>
-					<td><input type="text" name="bwriter" class="normalText"></td>
+					<th style="text-align: center;" class="table-active">책&nbsp;제&nbsp;목</th>
+					<td><input type="text" name="btitle" size="50"></td>
+					<th style="text-align: center;" class="table-active">작가&nbsp;(지은이)</th>
+					<td><input type="text" name="bwriter" size="50"></td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">출 간 일</th>
-					<td colspan="3"><input type="date" name="bpublishdate" id="bpublishdate"></td>
+					<th style="text-align: center;" class="table-active">출&nbsp;간&nbsp;일</th>
+					<td colspan="3"><input type="date" name="bpublishdate"></td>
 
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">출 판 사</th>
-					<td colspan="3"><input type="text" name="bpublisher" class="normalText"></td>
+					<th style="text-align: center;" class="table-active">출&nbsp;판&nbsp;사</th>
+					<td colspan="3"><input type="text" name="bpublisher" size="50"></td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">책 가 격</th>
-					<td><input type="text" name="bprice" size="50" class="normalText"> 원</td>
+					<th style="text-align: center;" class="table-active">책&nbsp;가&nbsp;격</th>
+					<td><input type="text" name="bprice">&nbsp;원</td>
 					<th style="text-align: center;" class="table-active">적립포인트</th>
-					<td><input type="text" name="bpoint" size="30" readonly="readonly"> point 적립예정</td>
+					<td><input type="text" name="bpoint" readonly="readonly">&nbsp;point&nbsp;적립예정</td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">입 고 수 량</th>
-					<td colspan="3"><input type="text" name="bcount" class="normalText"> 개</td>
+					<th style="text-align: center;" class="table-active">입&nbsp;고&nbsp;수&nbsp;량</th>
+					<td colspan="3"><input type="text" name="bcount">&nbsp;개</td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">썸 네 일</th>
+					<th style="text-align: center;" class="table-active">썸&nbsp;네&nbsp;일</th>
 					<td><input type="file" name="thumbnail"></td>
-					<th style="text-align: center;" class="table-active">이미지</th>
+					<th style="text-align: center;" class="table-active">이&nbsp;미&nbsp;지</th>
 					<td><input type="file" name="img1"></td>
 				</tr>
 
 				<tr>
-					<th style="text-align: center;" class="table-active">책 설 명</th>
-					<td colspan="3"><textarea rows="30" cols="200" name="bcontent"></textarea></td>
+					<th style="text-align: center;" class="table-active">책&nbsp;설&nbsp;명</th>
+					<td colspan="3"><textarea rows="20" cols="200" name="bcontent"></textarea></td>
 				</tr>
 
 				<tr>
 					<td align="center" colspan="4">
-						<input type="submit" value="등  록" class="btn btn-outline-success">
+						<input type="submit" value="등&nbsp;&nbsp;록" class="btn btn-outline-success">
 						<input type="reset" value="초기화" class="btn btn-outline-secondary">
 					</td>
 				</tr>
 			</table>
+			<br>
 		</form>
 	</div>
 </div>
-<!-- </div> -->
-
 
 <!-- 스크립트 -->
 <script>
@@ -101,7 +100,7 @@
 					success : function(data) {
 						$("#smctgDiv").css("display", "inline-block");
 						$("#smctg").empty();
-						$("#smctg").append("<option value=''>- 선택 -</option>")
+						$("#smctg").append("<option value=''>&nbsp;-&nbsp;선택&nbsp;-&nbsp;</option>")
 						$(data).each(
 								function(i, sm) {
 									$("#smctg").append(

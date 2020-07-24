@@ -32,28 +32,28 @@
 
 					<th style="text-align: center;" class="table-active">가격</th>
 					<td>
-						<input type="text" name="priceKeyword1" value="${priceKeyword1 }" size="10"> 원 ~ 
-						<input type="text" name="priceKeyword2" value="${priceKeyword2 }" size="10" disabled="disabled"> 원
+						<input type="text" name="priceKeyword1" value="${priceKeyword1 }" size="10">&nbsp;원&nbsp;~
+						<input type="text" name="priceKeyword2" value="${priceKeyword2 }" size="10" disabled="disabled">&nbsp;원
 					</td>
 				</tr>
 
 				<tr>
 					<th style="text-align: center;" class="table-active">재고수량</th>
 					<td>
-						<input type="text" name="countKeyword1" value="${countKeyword1 }" size="6"> 개 ~ 
-						<input type="text" name="countKeyword2" value="${countKeyword2 }" size="6" disabled="disabled"> 개
+						<input type="text" name="countKeyword1" value="${countKeyword1 }" size="6">&nbsp;개&nbsp;~
+						<input type="text" name="countKeyword2" value="${countKeyword2 }" size="6" disabled="disabled">&nbsp;개
 					</td>
 
 					<th style="text-align: center;" class="table-active">등록일</th>
 					<td>
-						<input type="date" name="dateKeyword1" value="${dateKeyword1 }"> ~ 
+						<input type="date" name="dateKeyword1" value="${dateKeyword1 }">&nbsp;~&nbsp;
 						<input type="date" name="dateKeyword2" value="${dateKeyword2 }" disabled="disabled">
 					</td>
 				</tr>
 
 				<tr>
 					<td align="center" colspan="4">
-						<input type="submit" value="검  색" class="btn btn-outline-success">
+						<input type="submit" value="검&nbsp;&nbsp;색" class="btn btn-outline-success">
 					</td>
 				</tr>
 			</table>
@@ -63,7 +63,11 @@
 	
 	<div style="font-size: 2rem; margin-left: 25px">
 		<i class="fas fa-table mr-1"></i> 등록상품조회
-		<span style="font-size: 13px;">검색결과 : ${pu.totalRowCnt }개</span>
+		<span style="font-size: 15px;">검색결과&nbsp;:&nbsp;${pu.totalRowCnt }개</span>
+		<span style="margin-left: 1080px;">
+			<button onclick="location.href='${pageContext.request.contextPath}/booksExcelDownload'" 
+						type="button" class="btn btn-outline-success">엑셀 다운로드</button>
+		</span>
 	</div>
 	<br>
 	<div class="container-fluid">
@@ -74,8 +78,8 @@
 					<th>미리보기</th>
 					<th>작가(지은이)</th>
 					<th>출판사</th>
-					<th>가격 (원)</th>
-					<th>재고 (개)</th>
+					<th>가격&nbsp;(원)</th>
+					<th>재고&nbsp;(개)</th>
 					<th>등록일</th>
 				</tr>
 			</thead>
@@ -85,8 +89,8 @@
 					<th>미리보기</th>
 					<th>작가(지은이)</th>
 					<th>출판사</th>
-					<th>가격 (원)</th>
-					<th>재고 (개)</th>
+					<th>가격&nbsp;(원)</th>
+					<th>재고&nbsp;(개)</th>
 					<th>등록일</th>
 				</tr>
 			</tfoot>
@@ -94,7 +98,7 @@
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td>${vo.btitle }</td>
-						<td><a href="${pageContext.request.contextPath}/preview?bnum=${vo.bnum}">미리보기</a></td>
+						<td><a href="${pageContext.request.contextPath}/preview?bnum=${vo.bnum}" class="btn-outline-success">미리보기</a></td>
 						<td>${vo.bwriter }</td>
 						<td>${vo.bpublisher }</td>
 						<td>${vo.bprice }</td>

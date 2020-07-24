@@ -115,4 +115,10 @@
 		(select * from books where bnum = #{bnum}) b
 		where s.scatenum = b.scatenum
 	</select>
+	
+	<!-- 엑셀 다운을 위한 전체 리스트 -->
+	<select id="excelList" resultType="books">
+		select aa.* from 
+		(select * from books order by bnum desc) aa
+	</select>
 </mapper>
