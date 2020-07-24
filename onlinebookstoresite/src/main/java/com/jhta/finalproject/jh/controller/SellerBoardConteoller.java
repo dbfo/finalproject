@@ -35,7 +35,8 @@ public class SellerBoardConteoller {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 //		int snum=;//판매자번호
-		map.put("snum",(Integer)session.getAttribute("snum"));//판매자번호
+		System.out.println("게시판 판매자번호:"+session.getAttribute("snum"));
+		map.put("snum",session.getAttribute("snum"));//판매자번호
 		map.put("obqstatus", obqstatus);
 		map.put("obqdate", obqdate);
 		map.put("startDay", startDay);
@@ -43,6 +44,7 @@ public class SellerBoardConteoller {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		int totalRowCount=service.getSellerQnaCount(map);//글갯수
+		System.out.println("글개수:"+totalRowCount);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());

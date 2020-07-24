@@ -12,7 +12,7 @@ public class SellerMainBoardService {
 	@Autowired
 	private SellerMainBoardDao dao;
 	
-	//중고판매자 인증
+	//중고판매자 인증완료되면 판매자번호 부여
 	public int sellerInsert(int mnum) {
 		return dao.sellerInsert(mnum);
 	}

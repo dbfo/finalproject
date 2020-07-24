@@ -7,6 +7,9 @@
 	<definition name=".seller.certified" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmail.jsp"/>
 	</definition>
+	<definition name=".seller.emailInjeung" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmailCk.jsp"/>
+	</definition>
 	
 	<!-- 중고판매자 tiles설정-->
 	<definition name=".seller" template="/WEB-INF/views/jiho/sellerLayout.jsp">

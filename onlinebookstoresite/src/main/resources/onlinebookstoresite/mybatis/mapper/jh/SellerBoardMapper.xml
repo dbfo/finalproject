@@ -3,11 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.mapper.SellerBoardMapper.jh">
-	<!-- 검색조건 -->
+	<!-- 검색조건
 	<sql id="search">
 		
 	
-	</sql>
+	</sql> -->
 	<!-- 중고판매자 QnA리스트 가져오기 -->
 	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="hashmap">
 		select OBNAME,OBQTITLE,OBQCONTENT,MID,OBQSTATUS,OBQDATE,OBNUM,OBQNUM,MNUM
@@ -18,7 +18,6 @@
 			oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
 			from oldbooks o,obqna oq, members m
 			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
-        	<!-- 검색조건넣을거임.. -->
        		order by oq.obqdate desc)qna)a
         <![CDATA[
 		where rnum>=#{startRow} and rnum<=#{endRow}

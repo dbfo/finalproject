@@ -24,7 +24,7 @@ public class SellerBoardDao {
 	}
 	//중고판매자 Qna리스트 글갯수 가져오기
 	public int getSellerQnaCount(HashMap<String, Object> map) {
-		return sqlSession.selectOne(NAMESPACE, map);
+		return sqlSession.selectOne(NAMESPACE+".getSellerQnaCount", map);
 	}
 	
 	//중고판매자 문의사항 리스트 가져오기(디테일)
