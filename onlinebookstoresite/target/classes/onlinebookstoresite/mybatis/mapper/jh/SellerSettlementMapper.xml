@@ -36,7 +36,6 @@
 		<result column="mnum" property="mnum"/>
 		<result column="delfee" property="delfee"/>
 		<result column="mname" property="mname"/>
-		<result column="obcnum" property="obcnum"/>
 		<result column="feepay" property="feepay"/>
 		<result column="settlement" property="settlement"/>
 		<result column="feedate" property="feedate"/>

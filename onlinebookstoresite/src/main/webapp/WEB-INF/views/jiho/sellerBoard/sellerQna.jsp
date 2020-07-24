@@ -34,23 +34,31 @@
 <div id="sellerQnaContent">
 	<!-- 검색박스 -->
 	<div id="sellerQnaSearchBox">
+	<form action="${cp }/seller/qnalist">
 		<h2>QnA리스트1111111111</h2>
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">답변 상태별 조회</td>
 					<td class="prodLooktdStyle">
-						<input type="radio" name="obqstatus" value="2">전체
-						<input type="radio" name="obqstatus" value="0">미답변
-						<input type="radio" name="obqstatus" value="1">답변완료
+						<input type="radio" name="obqstatus" value="2" 
+							<c:if test="${map.obqstatus==2 || map.obqstatus==null || map.obqstatus=='' }">checked</c:if>>전체
+						<input type="radio" name="obqstatus" value="0"
+							<c:if test="${map.obqstatus==0 }">checked</c:if>>미답변
+						<input type="radio" name="obqstatus" value="1"
+							<c:if test="${map.obqstatus==1 }">checked</c:if>>답변완료
 					</td>
 				</tr>
 				<tr>
 					<td class="tdstyle">등록일자별 조회</td>
 					<td class="prodLooktdStyle">
-						<input type="radio" name="obqdate" value="all">전체
-						<input type="radio" name="obqdate" value="date">일자별&nbsp;&nbsp;&nbsp;
-						<input type="date" name="startDay"><span>&nbsp;~</span>
-						<input type="date" name="endDay">
+						<input type="radio" name="obqdate" value="all"
+							<c:if test="${map.obqdate=='all' || map.obqdate==null}">checked</c:if>>전체
+						<input type="radio" name="obqdate" value="date"
+							<c:if test="${map.obqdate=='date'}">checked</c:if>>일자별&nbsp;&nbsp;&nbsp;
+						<input type="date" name="startDay" value="${map.startDay }"
+							<c:if test="${map.obqdate=='all'|| map.obqdate==null}">disabled</c:if>><span>&nbsp;~</span>
+						<input type="date" name="endDay" value="${map.endDay }"
+							<c:if test="${map.obqdate=='all'|| map.obqdate==null}">disabled</c:if>>
 					</td>
 				</tr>
 				<tr>
@@ -75,7 +83,6 @@
 	</div>
 	<!-- QnA리스트 -->
 	<div id="sellerQnaList">
-		<form action="">
 			<h3>문의리스트</h3>
 			<div class="layer1">
 				<table class="table table-bordered">
@@ -120,36 +127,86 @@
 					</c:forEach>
 				</table>
 			</div>
+			<!-- 페이징처리 -->
+			<div>
+				<ul class="pagination justify-content-center">
+					<!-- 이전버튼 -->
+					<c:if test="${pu.startPageNum>3 }">
+						<li class="page-item">
+							<a class="page-link" href="${cp }/seller/qnalist?pageNum=${pu.startPageNum-1}&
+							keyword=${map.keyword}&field=${map.field}&obqstatus=${map.obqstatus}
+							&obqdate=${map.obqdate}&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
+					</c:if>
+					<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
+						<li class="page-item">
+							<a class="page-link" href="${cp }/seller/qnalist?pageNum=${i}&
+							keyword=${map.keyword}&field=${map.field}&obqstatus=${map.obqstatus}
+							&obqdate=${map.obqdate}&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a></li>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pu.totalPageCount>pu.endPageNum}">
+						<li class="page-item"><a class="page-link"
+							href="${cp }/seller/qnalist?pageNum=${pu.endPageNum+1}&
+							keyword=${map.keyword}&field=${map.field}&obqstatus=${map.obqstatus}
+							&obqdate=${map.obqdate}&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
+					</c:if>
+				</ul>
+			</div>
 		</form>
 	</div>
 </div>
 <script>
-
-//	답글처리기능
-	function insertAnswer(obqnum) {
-		var content=$("input[name=content]").val();
-		$.ajax({
-			url: "${cp}/seller/insertAnswer?obqnum="+obqnum+"&obqacontent="+content,
-			dataType:"json",
-			success:function(data){
-				console.log(data.code);
-				if(data.code=="success"){
-					alert("성공");
-				}else{
-					alert("실패");
-				}
+$(function(){
+	//날짜 검색 disabled처리
+	$("input:radio[name=obqdate]").click(function(){
+		if($("input[name=obqdate]:checked").val()=='date'){
+			$("input[name=startDay]").attr("disabled",false);
+			$("input[name=endDay]").attr("disabled",false);
+		}
+		if($("input[name=obqdate]:checked").val()=='all'){
+			$("input[name=startDay]").attr("disabled",true);
+			$("input[name=endDay]").attr("disabled",true);
+		}
+	});	
+	//초기화버튼
+	$("#resetBt").click(function() {
+		$("input[name=obqstatus]")[0].checked=true;
+		$("input[name=obqdate]")[0].checked=true;
+		$("input[name=startDay]").attr("disabled",true);
+		$("input[name=startDay]").val("");
+		$("input[name=endDay]").attr("disabled",true);
+		$("input[name=endDay]").val("");
+		$("select[name=field]").val('all').attr("selected","selected");
+		$("input[name=keyword]").val("");
+	});
+	
+	//입력 유효성검사
+	$("form").submit(function() {
+		//일자별 검색 유효성검사1
+		if($("input[name=obqdate]:checked").val()=='date'){
+			if($("input[name=startDay]").val()==''){
+				alert('시작 날짜를 입력해주세요.');
+				return false;
 			}
-		});
-	}	
-/*
-	$(document).ready(
-		function() {
-			jQuery(".content").hide();
-			//content 클래스를 가진 div를 표시/숨김(토글)
-			$(".heading").click(
-				function() {
-					$(".content").not($(this).next(".content").slideToggle(500)).slideUp();
-			});
-		
-	});*/
+		}
+		if($("input[name=obqdate]:checked").val()=='date'){
+			if($("input[name=endDay]").val()==''){
+				alert('종료 날짜를 입력해주세요.');
+				return false;
+			}
+		}
+				
+		//날짜 검색시 유효성검사2
+		var startDay=$("input[name=startDay]").val();
+		var endDay=$("input[name=endDay]").val();
+		var startArr=startDay.split('-');
+		var endArr=endDay.split('-');
+		var start=startArr[0]+startArr[1]+startArr[2];
+		var end=endArr[0]+endArr[1]+endArr[2];
+		if(start>end){
+			alert('검색 날짜를 올바르게 입력해주세요.');
+			return false;
+		}
+	});
+});
 </script>

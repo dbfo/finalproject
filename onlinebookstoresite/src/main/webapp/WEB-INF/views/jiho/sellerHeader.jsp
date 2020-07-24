@@ -7,7 +7,6 @@
 	<a href="${cp}/">메인화면으로</a>
 	<a href="${cp}/seller">중고관리메인</a>
 	<a href="#">로그아웃</a>
-	<a href="#">판매자탈퇴</a>
 </div>
 <div>
 	<nav class="main-navbar">

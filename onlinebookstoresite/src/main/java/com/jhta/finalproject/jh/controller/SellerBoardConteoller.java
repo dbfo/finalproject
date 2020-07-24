@@ -33,9 +33,7 @@ public class SellerBoardConteoller {
 			String obqdate,String startDay,String endDay,String field,
 			String keyword) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		
-//		int snum=;//판매자번호
-		System.out.println("게시판 판매자번호:"+session.getAttribute("snum"));
+		System.out.println("키워드:"+keyword);
 		map.put("snum",session.getAttribute("snum"));//판매자번호
 		map.put("obqstatus", obqstatus);
 		map.put("obqdate", obqdate);
@@ -44,7 +42,6 @@ public class SellerBoardConteoller {
 		map.put("field", field);
 		map.put("keyword", keyword);
 		int totalRowCount=service.getSellerQnaCount(map);//글갯수
-		System.out.println("글개수:"+totalRowCount);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
@@ -52,6 +49,8 @@ public class SellerBoardConteoller {
 		List<SellerQnaListJoinVo> list=service.getSellerQnaList(map);//문의글리스트
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pu", pu);
+		model.addAttribute("map", map);
 		return ".seller.qna";  
 	}
 	
