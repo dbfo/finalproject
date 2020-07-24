@@ -27,7 +27,7 @@
 					<li><a href="${cp }/seller/qnalist">게시판</a>
 						<ul class="sub-menu">
 							<li><a href="${cp }/seller/qnalist">QnA관리</a></li>
-							<li><a href="#">구매리뷰관리</a></li>
+							<li><a href="${cp }/seller/review">구매리뷰관리</a></li>
 						</ul>
 					</li>
 				</ul>

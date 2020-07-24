@@ -18,13 +18,14 @@ import com.jhta.finalproject.jh.service.SellerBoardService;
 import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
+import com.jhta.finalproject.jh.vo.SellerReviewJoinVo;
 import com.jhta.page.util.PageUtil;
 
 @Controller
 public class SellerBoardConteoller {
 	@Autowired
 	private SellerBoardService service;
-	
+	//====================Qna===========================
 	//중고판매자 QnA리스트
 	@RequestMapping("/seller/qnalist")
 	public String sellerQnaList(Model model,HttpSession session,
@@ -108,5 +109,17 @@ public class SellerBoardConteoller {
 		service.updateObqanswer(map);
 		model.addAttribute("obqnum", obqnum);
 		return "redirect:/seller/qnadetail";
+	}
+	
+	//====================리뷰========================
+	//중고판매자 리뷰페이지
+	@RequestMapping("/seller/review")
+	public String sellerReview(HttpSession session,Model model) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("snum",session.getAttribute("snum"));//판매자번호 
+		
+		List<SellerReviewJoinVo> list=service.getObreviewList(map);
+		model.addAttribute("list", list);
+		return ".seller.review";
 	}
 }

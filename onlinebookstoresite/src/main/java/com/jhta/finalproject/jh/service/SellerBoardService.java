@@ -10,6 +10,7 @@ import com.jhta.finalproject.jh.dao.SellerBoardDao;
 import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
+import com.jhta.finalproject.jh.vo.SellerReviewJoinVo;
 
 @Service
 public class SellerBoardService implements SellerBoard{
@@ -51,5 +52,10 @@ public class SellerBoardService implements SellerBoard{
 	//중고판매자 답글 수정하기
 	public int updateObqanswer(HashMap<String, Object> map) {
 		return dao.updateObqanswer(map);
+	}
+	//중고판매 리뷰 리스트
+	public List<SellerReviewJoinVo> getObreviewList(HashMap<String, Object> map){
+		List<SellerReviewJoinVo> list=dao.getObreviewList(map);
+		return list;
 	}
 }

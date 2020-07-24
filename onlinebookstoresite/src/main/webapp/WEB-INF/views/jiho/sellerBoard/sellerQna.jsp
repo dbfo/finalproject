@@ -90,8 +90,7 @@
 			<h3>문의리스트</h3>
 			<div class="layer1">
 				<table class="table table-bordered">
-					<thead 
-					class="thead-dark">
+					<thead class="thead-dark">
 						<tr style="text-align: center">
 							<th width="80">NO</th>
 							<th>문의제목</th>
@@ -101,9 +100,9 @@
 							<th width="120">작성일</th>
 						</tr>
 					</thead>
-					<c:forEach var="vo" items="${list }" >
+					<c:forEach var="vo" items="${list }" varStatus="status">
 							<tr>
-								<td style="text-align: center;">번호</td>					
+								<td style="text-align: center;">${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>					
 								<td><a href="${cp }/seller/qnadetail?obqnum=${vo.obqnum}"><span style="color: black;">${vo.obqtitle }</span></a></td>					
 								<td style="text-align: center;">${vo.mid }</td>					
 								<td style="text-align: center;">

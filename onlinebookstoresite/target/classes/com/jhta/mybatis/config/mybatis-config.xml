@@ -14,6 +14,7 @@
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerFeepayJoinVo" alias="obfeepayjoin"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerQnaListJoinVo" alias="qnalistjoin"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerObqanswerVo" alias="obqanswer"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.SellerReviewJoinVo" alias="obreviewjoin"/>
  	<!-- /////// -->
  	
  	<!-- ////희도//// -->

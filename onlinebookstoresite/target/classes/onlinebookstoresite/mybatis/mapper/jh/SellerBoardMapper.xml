@@ -80,4 +80,29 @@
 	<update id="updateObqanswer" parameterType="hashmap">
 		update obqanswer set obqacontent=#{obqacontent} where obqnum=#{obqnum}
 	</update>
+	
+	<!-- ///////////////중고판매자 리뷰 관련/////////////// -->
+	<!-- 중고판매자 리뷰 리스트 가져오기 -->
+	<select id="getObreviewList" parameterType="hashmap" resultType="obreviewjoin">
+		select re.sreviewnum SREVIEWNUM,o.obname OBNAME,re.sreviewcontent SREVIEWCONTENT, re.sscore SSCORE, 
+		re.sreviewregdate SREVIEWREGDATE,	m.mid MID, m.mnum MNUM, o.obnum OBNUM, os.snum SNUM
+		from sellerreview re,members m,oldbooks o,obseller os
+		where re.mnum=m.mnum and re.obnum=o.obnum and o.snum=os.snum and os.snum=#{snum}
+		order by re.sreviewregdate desc
+	</select>
+	<!-- 총 글 갯수구하기 -->
+	<select id="">
+	
+	</select>
+	<!-- 평점구하기 -->
+	<select id="getReviewAvg" parameterType="int" resultType="int">
+		select NVL(round(avg(re.sscore),1),0) avg
+		from sellerreview re,members m,oldbooks o,obseller os
+		where re.mnum=m.mnum and re.obnum=o.obnum and o.snum=os.snum and os.snum=#{snum}
+	</select>
+	
+	
+	
+	
+	
 </mapper>

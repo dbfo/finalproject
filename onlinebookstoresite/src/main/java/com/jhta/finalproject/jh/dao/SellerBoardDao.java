@@ -10,12 +10,14 @@ import org.springframework.stereotype.Repository;
 import com.jhta.finalproject.jh.vo.SellerImgVo;
 import com.jhta.finalproject.jh.vo.SellerObqanswerVo;
 import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
+import com.jhta.finalproject.jh.vo.SellerReviewJoinVo;
 
 @Repository
 public class SellerBoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="com.jhta.mybatis.mapper.SellerBoardMapper.jh";
+	//========================Qna관련=======================//
 	
 	//중고판매자 Qna리스트 가져오기
 	public List<SellerQnaListJoinVo> getSellerQnaList(HashMap<String, Object> map){
@@ -55,4 +57,28 @@ public class SellerBoardDao {
 	public int updateObqanswer(HashMap<String, Object> map) {
 		return sqlSession.update(NAMESPACE+".updateObqanswer", map);
 	}
+	
+	
+	//========================리뷰관련=======================//
+	//중고판매 리뷰 리스트
+	public List<SellerReviewJoinVo> getObreviewList(HashMap<String, Object> map){
+		List<SellerReviewJoinVo> list=sqlSession.selectList(NAMESPACE+".getObreviewList", map);
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

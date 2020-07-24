@@ -43,7 +43,7 @@
 	<definition name=".seller.settlementCheck" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/settlementCheck/sellerSettlementCheck.jsp"/>
 	</definition>
-	<!-- 중고상품 게시판(QnA/리뷰) 관련 -->
+	<!-- 중고상품 게시판(QnA) 관련 -->
 	<definition name=".seller.qna" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
 	</definition>
@@ -53,6 +53,12 @@
 	<definition name=".seller.qnaupdate" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaUpdate.jsp"/>
 	</definition>
+	<!-- 중고상품 게시판(리뷰) 관련 -->
+	<definition name=".seller.review" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerReview.jsp"/>
+	</definition>
+	
+	
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	
 	<!-- /////////////////////희도//////////////////////////////ㄴ -->
