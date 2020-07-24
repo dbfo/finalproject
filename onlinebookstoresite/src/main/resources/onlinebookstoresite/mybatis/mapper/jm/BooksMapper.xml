@@ -34,17 +34,6 @@
 		)
 	</select>
 
-	
-<!-- 	<select id="count" resultType="int" parameterType="hashmap"> -->
-<!-- 				NVL(count(*),0) -> null인경우 0으로 나온다~ -->
-<!-- 		select NVL(count(*),0) cnt from books b,img i -->
-<!--                  where b.bnum = i.bnum and i.thumbnail=1   -->
-<!--                  <if test="field!=null and field!=''"> -->
-<!-- 					and ${field} like '%'||#{keyword}||'%'  -->
-<!-- 				 </if> -->
-<!-- 	</select> -->
-	
-	
 	<select id="list" parameterType="hashmap" resultType="books">
 	select * from
 	(
@@ -59,21 +48,6 @@
 		<!-- CDATA - '<','>' 같은 특수기호문자들을 멋대로 해석하지(변환하지) 않고 그대로 쓰게 하는거임  -->
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
-
-<!-- 	조회수순위별목록 -->
-<!-- 	<select id="bestlist" parameterType="hashmap" resultType="books"> -->
-<!-- 	select * from -->
-<!-- 	( -->
-<!-- 		select aa.*,rownum rnum from -->
-<!-- 		( -->
-<!-- 			select * from books -->
-<!-- 			<include refid="search"/> -->
-<!-- 			 order by bhit desc -->
-<!-- 		)aa -->
-<!-- 	) -->
-<!-- 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]> -->
-<!-- 	</select> -->
-
 
 	<select id="bcatelist" resultType="bigcate">
 		select * from bigcategory order by bcatenum asc
@@ -116,9 +90,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,
-                 where b.scatenum = #{scatenum} and b.btitle like '%'||#{keyword}||'%'
-                 and b.bnum = i.bnum(+) and i.thumbnail=1 
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.scatenum = #{scatenum} and b.btitle like '%'||#{keyword}||'%' and b.bnum = i.bnum(+) and i.thumbnail=1 
 				 order by b.bnum asc
 			)aa
 		)
@@ -159,9 +132,9 @@
 			select * from (
 				select aa.* from
 					(
-						select b.*,i.imgsavefilename from books b,img i,bookreview r
+						select b.*,i.imgsavefilename from books b,img i
 		                 where b.scatenum =#{scatenum} and b.btitle like '%'||#{keyword}||'%' 
-							and b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1  
+							and b.bnum = i.bnum(+) and i.thumbnail=1 
 						 order by b.bnum asc
 				)aa
 			)
@@ -194,8 +167,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1  
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1  
                  <if test="field!=null and field!=''">
 					and ${field} like '%'||#{keyword}||'%' 
 				 </if>
@@ -233,8 +206,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 100)  
 				 order by b.bnum asc
 			)aa
@@ -250,8 +223,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 100)  
 				 order by b.bnum asc
 			)aa
@@ -280,8 +253,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 110)  
 				 order by b.bnum asc
 			)aa
@@ -302,8 +275,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 110)  
 				 order by b.bnum asc
 			)aa
@@ -319,8 +292,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 120)  
 				 order by b.bnum asc
 			)aa
@@ -335,8 +308,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 120)  
 				 order by b.bnum asc
 			)aa
@@ -350,8 +323,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 160)  
 				 order by b.bnum asc
 			)aa
@@ -366,8 +339,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 160)  
 				 order by b.bnum asc
 			)aa
@@ -382,8 +355,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 170)  
 				 order by b.bnum asc
 			)aa
@@ -398,8 +371,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 160)  
 				 order by b.bnum asc
 			)aa
@@ -414,8 +387,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 190)  
 				 order by b.bnum asc
 			)aa
@@ -430,8 +403,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 190)  
 				 order by b.bnum asc
 			)aa
@@ -446,8 +419,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 260)  
 				 order by b.bnum asc
 			)aa
@@ -462,8 +435,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 260)  
 				 order by b.bnum asc
 			)aa
@@ -478,8 +451,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 270)  
 				 order by b.bnum asc
 			)aa
@@ -494,8 +467,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 270)  
 				 order by b.bnum asc
 			)aa
@@ -510,8 +483,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 280)  
 				 order by b.bnum asc
 			)aa
@@ -526,8 +499,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 280)  
 				 order by b.bnum asc
 			)aa
@@ -542,8 +515,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 330)  
 				 order by b.bnum asc
 			)aa
@@ -551,6 +524,7 @@
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 
 	</select>
+	
 
 <select id="cartooncount" resultType="int" parameterType="hashmap">
 		
@@ -558,8 +532,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 330)  
 				 order by b.bnum asc
 			)aa
@@ -568,14 +542,15 @@
 </select>
 
 
-		<!-- 만화 -->
+
+		<!-- 기타 -->
 <select id="categuitar" parameterType="hashmap" resultType="alllist">
 	
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 550)  
 				 order by b.bnum asc
 			)aa
@@ -590,8 +565,8 @@
 		select * from (
 			select aa.*,rownum rnum from
 			(
-				select b.*,i.imgsavefilename from books b,img i,bookreview r 
-                 where b.bnum = i.bnum and b.bnum = r.bnum(+) and i.thumbnail=1
+				select b.*,i.imgsavefilename from books b,img i 
+                 where b.bnum = i.bnum(+) and i.thumbnail=1
                  and b.scatenum in (select scatenum from smallcategory where bcatenum = 550)  
 				 order by b.bnum asc
 			)aa
@@ -734,7 +709,7 @@
 	</select>
 	
 	
-	<!-- 책 등록  -->
+	<!-- 리뷰 등록  -->
 	<select id="breviewinsert" parameterType="reviewinsert">
 		insert into bookreview values(SEQ_BOOKREVIEW_REVIEWNUM.nextval,
 		#{mnum},#{bnum},#{reviewcontent},#{bscore},sysdate)
@@ -764,5 +739,11 @@
     	<![CDATA[)where rnum<=5]]>
 	</select>
 
+	<!-- cart에 인서트 할거임 -->
+	
+	<select id="cartinsert" parameterType="cart" resultType="int">
+		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},1,#{bnum})
+	</select>
+	
 	
 </mapper>

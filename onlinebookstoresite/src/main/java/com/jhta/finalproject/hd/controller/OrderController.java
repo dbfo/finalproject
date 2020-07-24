@@ -362,6 +362,7 @@ public class OrderController {
 		model.addAttribute("totalpoint", totalpoint);
 		return ".order";
 	}
+	//***************************************************************//
 	// 바로 주문하기 눌렀을때  (( 책번호랑 몇개주문했는지 bcount 받아야함 )):
 	@RequestMapping(value="/order/directorder")
 	public String directOrder(HttpSession session,int bnum,int bcount,Model model) {

@@ -68,7 +68,7 @@
 				<li><a href="${cp }/list2">베스트</a></li>
 				<li><a href="${cp }/newlist">신간 <span class="new">New</span>
 				</a></li>
-				<li><a href="#">중고</a></li>
+				<li><a href="${cp }/oldallbook">중고</a></li>
 				<li><a href="${cp }/mypage/main">마이페이지</a>
 					<ul class="sub-menu">
 						<li><a href="${cp }/mypage/orderhistory">주문내역</a></li>

@@ -97,6 +97,7 @@ public class CartController {
 	
 	//============== 중고/새상품 공용 AJAX 컨트롤러 시작 ===========//
 	//============== 새상품 관련 AJAX 컨트롤러  시작 =============//
+		
 	//장바구니 새상품 리스트 출력 AJAX
 	@RequestMapping(value="/pay/cartlist",produces = "application/json;charset=utf-8")
 	@ResponseBody

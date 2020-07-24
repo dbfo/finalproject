@@ -47,9 +47,16 @@
 	
 	<div id="listwrap">
 	<div id="image">
-				<a href="#"> <img
+			<c:if test="${empty vo.imgsavefilename}">
+				<a href="bdetail?bnum=${vo.bnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
+				</a>			
+			</c:if>
+			
+				<a href="bdetail?bnum=${vo.bnum }"> <img
+				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
 				</a>
+
 	</div>
 		<div id="detail">
 						<div class="title">
@@ -68,28 +75,25 @@
 						</div>
 
 						<div class="price">
-							<strong>${vo.bprice }</strong>
-							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
-							<span>[10%]</span> <span>적립</span>
+							<strong>${vo.bprice } 원</strong>
+							<span>|</span> <strong class="mileage">${vo.bpoint } p</strong>
+							<span>적립</span>
 						</div>
 
 						<div class="review_score">
 							<!-- 평점 -->
-							<span class="score"> <strong> [평점자리] </strong>
-							</span> <img
+							<img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> <span class="review">리뷰
-									<strong>
-									[리뷰수]
-									</strong>
-							</span>
+								>
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a href="#">구매하기</a></button>
+			<button class="btn btn-success"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success"><a href="#">장바구니</a></button>
+			<button class="btn btn-success" id="cartBtn">장바구니</button>
+			<input type="hidden" id="bnum" value="${vo.bnum} ">
+	
 		</div>
 	</div>
 	</c:forEach>
@@ -139,12 +143,24 @@
 
 
 	});
+	$("#cartBtn").click(function(){
+		var bnum=$("#bnum").val();
+		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
+			console.log("callback");
+			if(data=="success"){
+				alert("장바구니에 담았음");
+			}else{
+				alert("장바구니 담기 실패ㅜㅜ");
+			}
+		});
+	});
+	
 	
 	function nullable(){
-		 var sv = document.getElementById("searchv");
-		 var bc = document.getElementById("bcate2");
-		 if(bc.value == "[---대 분류---]") {
-			   alert("조건을 모두 채워주세요ㅋㅋ");
+		 var bc3= "[--- 대 분류 ---]" ;
+		 var bc2= $("#bcate2 option:selected").val();
+		 if(bc2 == bc3) {
+			 alert("카테고리 분류를 모두 선택 해 주세요ㅎ");
 			   return false; //submit 중지
 			  }
 		 else{

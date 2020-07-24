@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.OldBooksMapper">
+
+		<!-- ====================중고====================== -->
+	
+	<select id="oldalllist" parameterType="hashmap" resultType="oldall">
+	
+		select * from (
+			select aa.*,rownum rnum from
+			(
+				select ob.*,i.imgsavefilename from oldbooks ob,img i  
+                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2 
+				 order by ob.obnum asc
+			)aa
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+
+	</select>
+	
+	<!-- 중고전체카운트 -->
+	<select id="oldallcount" resultType="int" parameterType="hashmap">
+
+		select NVL(count(*),0) from(
+		
+		select * from (
+			select aa.*,rownum rnum from
+			(
+				select ob.*,i.imgsavefilename from oldbooks ob,img i  
+                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2
+				 order by ob.obnum asc
+			)aa
+		)
+		)
+	</select>
+	
+		<!-- 중고/검색 -->
+	<select id="oldsclist" parameterType="hashmap" resultType="oldall">
+	
+		select * from (
+			select aa.*,rownum rnum from
+			(
+				select ob.*,i.imgsavefilename from oldbooks ob,img i
+                 where ob.scatenum = #{scatenum} and ob.obname like '%'||#{keyword}||'%'
+                 	and ob.obnum = i.bnum(+) and i.thumbnail=1 
+				 order by ob.obnum asc
+			)aa
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+
+	</select>
+	
+	<select id="oldsccount" resultType="int" parameterType="hashmap">
+	
+		select NVL(count(*),0) from(
+			select * from (
+				select aa.* from
+					(
+						select ob.*,i.imgsavefilename from oldbooks ob,img i
+		                 where ob.scatenum =#{scatenum} and ob.obname like '%'||#{keyword}||'%' 
+							and ob.obnum = i.bnum(+) and i.thumbnail=1 
+						 order by ob.obnum asc
+				)aa
+			)
+		)
+		
+	</select>
+	
+	
+		<!-- 조회수 증가하기 -->
+	<update id="hit" parameterType="int">
+		update oldbooks set obhit=obhit+1 where obnum=#{obnum}
+	</update>
+	
+	<!-- 이미지 불러오기 -->
+	<select id="imginfo" parameterType="int" resultType="jmimg">
+		select * from img where bnum=#{bnum}
+	</select>
+	
+	<!--  큰 카테고리 목록 가져오기   -->
+	<select id="bcatelist" resultType="bigcate">
+		select * from bigcategory order by bcatenum asc
+	</select>
+	
+	<!--  작은 카테고리 목록 불러오기 -->
+	<select id="scatelist" parameterType="int" resultType="smallcate">
+		select * from smallcategory where bcatenum=#{bcatenum} order by scatenum asc
+	</select>
+
+		<!-- cart에 인서트 할거임 -->
+	
+	<select id="oldcartinsert" parameterType="oldcart" resultType="int">
+		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},1,#{obnum})
+	</select>
+
+</mapper>

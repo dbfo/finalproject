@@ -38,6 +38,9 @@
 		<typeAlias type="com.jhta.finalproject.jm.vo.ImgVo" alias="jmimg"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.ListimgVo" alias="listimg"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.AllListVo" alias="alllist"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.CartVo" alias="cart"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldAllListVo" alias="oldall"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldCartVo" alias="oldcart"/>
 	<!-- /////////////// -->
 </typeAliases>
   <mappers>
@@ -57,6 +60,7 @@
     <mapper resource="onlinebookstoresite/mybatis/mapper/hd/OrderHistoryMapper.xml"/><!-- 주문내역,주문관련맵퍼 -->
     <!-- ////지민//// -->
     <mapper resource="onlinebookstoresite/mybatis/mapper/jm/BooksMapper.xml"/>
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jm/OldBooksMapper.xml"/>
 
   </mappers>
 </configuration>

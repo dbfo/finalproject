@@ -139,6 +139,16 @@
 		<put-attribute name="content" value="/WEB-INF/views/jimin/bookdetail.jsp"/>
 	</definition>
 	
+	<!-- =============중고================== -->
+	<definition name=".oldallbook" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/OLDBOOK/oldall.jsp"/>	
+	</definition>
+	
+	<definition name=".oldsclist" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jimin/OLDBOOK/oldsclist.jsp"/>
+	</definition>
+	
+	
 	
 	<definition name=".*.*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}/{3}.jsp"/>				

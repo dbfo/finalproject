@@ -12,11 +12,11 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
+					<form method="post" action="oldsclist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
-						<option>[--- 대 분류 ---]</option>
-					<c:forEach var="vo" items="${list2 }">	
+						<option>[---대 분류---]</option>
+					<c:forEach var="vo" items="${bclist }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
@@ -42,63 +42,98 @@
 	<c:if test="">
 	
 	</c:if>
-	<!-- 전체목록출력시 -->
-	<c:forEach  var="vo" items="${bestlist }">
+	<!--////////////// 책 목록출력시 /////////////////-->
+	<c:forEach  var="vo" items="${oldsclist }">
 	
 	<div id="listwrap">
 	<div id="image">
-
 			<c:if test="${empty vo.imgsavefilename}">
-				<a href="bdetail?bnum=${vo.bnum }"> <img
+				<a href="bdetail?bnum=${vo.obnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
 				</a>			
 			</c:if>
 			
-				<a href="bdetail?bnum=${vo.bnum }"> <img
+				<a href="bdetail?bnum=${vo.obnum }"> <img
 				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
-
 				</a>
 
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }"> 
+							<a  style="font-size:20px; color:green;" href="#"> 
 								<strong>
-									${vo.btitle }
+									${vo.obname }
 								</strong>
 							</a>
 						</div>
 						<div class="pub_info">
-							<span class="author">${vo.bwriter }</span> | <span class="publication">${vo.bpublisher }</span>
+							<span class="author">${vo.obwriter }</span> | <span class="publication">${vo.obpublisher }</span>
 							
-							|<fmt:formatDate value="${vo.bpublishdate }" pattern="yyyy-MM-dd" var="regdate"/>
+							|<fmt:formatDate value="${vo.obpdate }" pattern="yyyy-MM-dd" var="regdate"/>
 								<span>${regdate }</span>
 <%-- 							<span class="publication"> ${vo.bpublishdate } </span> --%>
 						</div>
 
 						<div class="price">
-							<strong>${vo.bprice } 원</strong>
-							<span>|</span> <strong class="mileage">${vo.bpoint } p</strong>
-							<span>적립</span>
+							<span>정상가 </span><strike><strong>${vo.oborgprice } 원</strong></strike>
+							<span>▶</span> 
+							<span>판매가 </span><strong style="color: red;">${vo.obsaleprice } 원</strong>
 						</div>
+						
+						
+						<c:set var="status" value="${vo.obstatus }"/>
+						
+						<c:if test="${status == 1 }">
+							<div class="review_score">
+								<!-- 평점 -->
+							<span>상태 </span><strong>최상</strong>
+								<img
+									src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
+									> 
+								<strong>조회수&nbsp</strong><span>${vo.obhit }</span>
+							</div>						
+						</c:if>
+						<c:if test="${status == 2 }">
+							<div class="review_score">
+								<!-- 평점 -->
+							<span>상태 </span><strong>상</strong>
+								<img
+									src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
+									> 
+								<strong>조회수&nbsp</strong><span>${vo.obhit }</span>
+							</div>						
+						</c:if>
+						<c:if test="${status == 3 }">
+							<div class="review_score">
+								<!-- 평점 -->
+							<span>상태 </span><strong>중</strong>
+								<img
+									src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
+									> 
+								<strong>조회수&nbsp</strong><span>${vo.obhit }</span>
+							</div>						
+						</c:if>
+						<c:if test="${status == 4 }">
+							<div class="review_score">
+								<!-- 평점 -->
+							<span>상태 </span><strong>하</strong>
+								<img
+									src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
+									> 
+								<strong>조회수&nbsp</strong><span>${vo.obhit }</span>
+							</div>						
+						</c:if>
 
-						<div class="review_score">
-							<!-- 평점 -->
-							<img
-								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
-								> 
-							<strong>조회수&nbsp</strong><span>${vo.bhit }</span>
-						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
+			<button class="btn btn-success"><a href="${cp }/order/directUsedOrder?obnum=${vo.obnum}&bcount=1">구매하기</a></button>
 			<br>
 			<br>
 			<button class="btn btn-success" id="cartBtn">장바구니</button>
-			<input type="hidden" id="bnum" value="${vo.bnum} ">
+			<input type="hidden" id="obnum" value="${obnum} ">
 	
 		</div>
-	</div>
+		</div>
 	</c:forEach>
 
 	<div>
@@ -106,7 +141,7 @@
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="oldsclist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
@@ -114,7 +149,7 @@
 		 	</c:when>
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
-			 	<a href="list2?pageNum=${i }&field=${field}&keyword=${keyword}">
+			 	<a href="oldsclist?pageNum=${i }&scate2=${scatenum}&keyword=${keyword}&bcate2=${bcatenum}">
 <%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
@@ -144,11 +179,11 @@
 			}
 		});
 
+
 	});
-	
 	$("#cartBtn").click(function(){
 		var bnum=$("#bnum").val();
-		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
+		$.post("${cp }/cart/oldinsert?bnum="+bnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="success"){
 				alert("장바구니에 담았음");
@@ -170,6 +205,6 @@
 			 return true;
 		 }
 	}
+
 	
 </script>
-

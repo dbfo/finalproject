@@ -102,18 +102,27 @@ public class ListController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ModelAndView mv = new ModelAndView(".sclist");
 		map.put("keyword", keyword);
-		System.out.println(scate2);
+		map.put("bcatenum", bcate2);
+		map.put("scatenum", scate2);
+		
 		System.out.println(keyword);
 
 		int totalRowCount = service.sbooklist1count(map);// 전체글의 갯수
+		
+		System.out.println("전체"+totalRowCount);
 
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
 		// 검색조건 Map에 담기
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		map.put("bcatenum", bcate2);
-		map.put("scatenum", scate2);
-		List<BooksVo> sbooklist1=service.sbooklist1(map);
+
+		
+		System.out.println("scate2가 뭐냐?" + scate2);
+		System.out.println("bcate2가 뭐임?" + bcate2);
+		
+		System.out.println(pu.getStartRow()+"/"+pu.getEndRow()+"/"+scate2);
+		
+		List<AllListVo> sbooklist1=service.sbooklist1(map);
 		List<BigcateVo> list2=service.list2();
 
 		System.out.println("pu:" + pu);

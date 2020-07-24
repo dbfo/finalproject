@@ -119,5 +119,6 @@ public class BookdetailController {
 		return "redirect:/bdetail";
 
 	}
+
 }
 

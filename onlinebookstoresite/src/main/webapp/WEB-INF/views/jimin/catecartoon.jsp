@@ -12,7 +12,7 @@
 			<div id="topcate">
 <!-- 					<div id="bcate"> -->
 <!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
-					<form method="post" action="sbooklist" id="catesearch">
+					<form method="post" action="sbooklist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
 						<option>[--- 대 분류 ---]</option>
@@ -75,24 +75,25 @@
 						</div>
 
 						<div class="price">
-							<strong>${vo.bprice }</strong>
-							<span>|</span> <strong class="mileage">${vo.bpoint }</strong>
+							<strong>${vo.bprice } 원</strong>
+							<span>|</span> <strong class="mileage">${vo.bpoint } p</strong>
 							<span>적립</span>
 						</div>
 
 						<div class="review_score">
 							<!-- 평점 -->
-							<span class="score"> <strong> [평점자리] </strong>
-							</span> <img
+							<img
 								src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif"
 								>
 						</div>
 		</div>
 		<div id="buycartbtn">
-			<button class="btn btn-success"><a href="#">구매하기</a></button>
+			<button class="btn btn-success"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success"><a href="#">장바구니</a></button>
+			<button class="btn btn-success" id="cartBtn">장바구니</button>
+			<input type="hidden" id="bnum" value="${vo.bnum} ">
+	
 		</div>
 	</div>
 	</c:forEach>
@@ -122,24 +123,46 @@
 
 <script>
 
-	$("#bcate2").change(function(){
-		var bval=$(this).val();
-		$.ajax({
+$("#bcate2").change(function(){
+	var bval=$(this).val();
+	$.ajax({
+		
+		url:"${cp}/sclist" ,
+		data:{bcatenum:bval},
+		success:function(data){
+			$("#scate2").empty();
+//				$("#scate2").append("<option>---소 분류---</option>")
+			$(data).each(function(i,mem){
+				$("#scate2").append("<option value='"+ mem.scatenum +"'>"+mem.scataname+"</option>")
+			});
 			
-			url:"${cp}/sclist" ,
-			data:{bcatenum:bval},
-			success:function(data){
-				$("#scate2").empty();
-// 				$("#scate2").append("<option>---소 분류---</option>")
-				$(data).each(function(i,mem){
-					$("#scate2").append("<option value='"+ mem.scatenum +"'>"+mem.scataname+"</option>")
-				});
-				
-			}
-		});
-
-
+		}
 	});
 
-	
+});
+
+$("#cartBtn").click(function(){
+	var bnum=$("#bnum").val();
+	$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
+		console.log("callback");
+		if(data=="success"){
+			alert("장바구니에 담았음");
+		}else{
+			alert("장바구니 담기 실패ㅜㅜ");
+		}
+	});
+});
+
+function nullable(){
+	 var bc3= "[--- 대 분류 ---]" ;
+	 var bc2= $("#bcate2 option:selected").val();
+	 if(bc2 == bc3) {
+		 alert("카테고리 분류를 모두 선택 해 주세요ㅎ");
+		   return false; //submit 중지
+		  }
+	 else{
+		 return true;
+	 }
+}
+
 </script>
