@@ -9,7 +9,25 @@
 		select bpayment.bpaynum ordernum,borderdate,bfinalmoney,delfee,bstatus,mname,receiver from
 		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
 		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
-		<![CDATA[ and bstatus>=0 and bstatus<=3)bpayment,		]]>				
+		and 
+			<choose>
+			<when test="value=='all'">
+				<![CDATA[bstatus>=0 and bstatus<=3]]>
+			</when>
+			<when test="value=='order'">
+				bstatus=0
+			</when>
+			<when test="value=='complepayment'">
+				bstatus=1
+			</when>
+			<when test="value=='ship'">
+				bstatus=2
+			</when>
+			<otherwise>
+				bstatus=3
+			</otherwise>
+		</choose>
+		)bpayment,			
 		(select * from members)members
 		where members.mnum=bpayment.mnum
 		order by borderdate desc
@@ -20,8 +38,27 @@
 	<select id="countHistory" parameterType="hashmap" resultType="int">
 		select NVL(count(*),0) from
 		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
-		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
-		<![CDATA[ and bstatus>=0 and bstatus<=3)bpayment,		]]>			
+		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+			AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+		and	
+		<choose>
+			<when test="value=='all'">
+				<![CDATA[bstatus>=0 and bstatus<=3]]>
+			</when>
+			<when test="value=='order'">
+				bstatus=0
+			</when>
+			<when test="value=='complepayment'">
+				bstatus=1
+			</when>
+			<when test="value=='ship'">
+				bstatus=2
+			</when>
+			<otherwise>
+				bstatus=3
+			</otherwise>
+		</choose>
+		)bpayment,						
 		(select * from members)members
 		where members.mnum=bpayment.mnum
 		order by borderdate desc 

@@ -6,8 +6,8 @@
 <%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
 <div id="content_history">	
 	<div class="tabs">
-	  <div class="tab-2">
-	    <label for="tab2-1" style="background-color:#212529;color:white;">새상품</label>
+	  <div class="tab-2" id="new_tab-2" style="z-index:2">
+	    <label for="tab2-1" style="background-color:#212529;color:white;" id="tabnew">새상품</label>
 	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
 	    <div id="newtab">
 			<div class="date_picker">
@@ -29,10 +29,11 @@
 				<div style="text-align: right" id="selectboxdiv">
 				
 					<select class="form-control" id="statusSelect">
-						<option value="all">전체</option>
+						<option value="all" selected="selected">전체</option>
 						<option value="order">주문</option>
 						<option value="complepayment">결제완료</option>
-						<option value="confrim">구매확정</option>
+						<option value="ship">배송</option>
+						<option value="confrim">수령확인</option>
 					</select>
 				</div>
 				<table class="table" id="newTable">
@@ -55,70 +56,38 @@
 			</div>
 		</div>
 	</div>
-		<div class="tab-2" style="border:1px solid black">
+		<div class="tab-2" id="used_tab-2">
 		   	<label for="tab2-2"  style="background-color:#212529;color:white;">중고상품</label>
 		   	<input id="tab2-2" name="tabs-two" type="radio">
-		   	<div id="newtab">
-			<div class="date_picker">
-				<ul class="list-group list-group-horizontal" id="dateUl">
-					<li class="list-group-item selectdate" onclick="changeDate(7,0)">최근 일주일</li>
-					<li class="list-group-item active selectdate" onclick="changeDate(0,1)">1개월</li>
-					<li class="list-group-item selectdate" onclick="changeDate(0,3)">3개월</li>
-					<li class="list-group-item selectdate" onclick="changeDate(0,6)">6개월</li>
-				</ul>
-				<input type="text" id="date1" class="form-control" readonly="readonly">
-				<i class="far fa-calendar-alt fa-2x calenderIcon" id="startday"></i>
-				&nbsp&nbsp<span>~</span>&nbsp&nbsp
-				<input type="text" id="date2" class="form-control" readonly="readonly">
-				<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
-				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
-			</div>
+		   	<div id="usedtab">
 			
-			<div class="tableDiv" id="tablediv">
-				<div style="text-align: right" id="selectboxdiv">
-				
-					<select class="form-control" id="statusSelect">
-						<option value="all">전체</option>
-						<option value="order">주문</option>
-						<option value="complepayment">결제완료</option>
-						<option value="confrim">구매확정</option>
-					</select>
-				</div>
-				<table class="table" id="newTable">
-					<thead class="table-dark">
-						<th style="text-align:center;">주문번호</th>
-						<th>주문내역</th>
-						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
-						<th>주문일자</th>
-						<th>주문상태</th>
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-			</div>
-			<div class="pagingDiv" id="newPaging">
-							
 			</div>
 		</div>
-		</div>
-	</div>
 </div>
 <script>
 	$(document).ready(function(){
 		defaultDate();
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
-		viewNewOrderlist(startDay,endDay);	
+		var value=$("#statusSelect").val();
+		viewNewOrderlist(startDay,endDay,1,value);	
 	});
-	var viewNewOrderlist=function(startDay,endDay,pageNum){
+	// 상단 중고상품, 새상품 탭클릭시마다. div z-index 조정....
+	$("#tabnew").click(function(){
+		console.log('111')
+		$("#new_tab-2").css('z-index','2')
+		$("#newtab").css('z-index','2');
+		$("#used_tab-2").css('z-index','1')
+	});
+	
+	
+	
+	var viewNewOrderlist=function(startDay,endDay,pageNum,value){
 		clearNewlist();
 		if(pageNum==null){
 			pageNum=1;
 		}
-		console.log('pp2:'+pageNum);
+	
 		var paginationapp="<ul class='pagination pageul'>"
 			+"<li class='page-item'><a class='page-link' href='#'><<</a></li>"
 			+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
@@ -128,7 +97,7 @@
 			url:'/finalproject/orderhistroy/newview',
 			dataType:'json',
 			type:'post',
-			data:{startDay:startDay,endDay:endDay,pageNum:pageNum},
+			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
 			success:function(data){
 				if(data.length==0){ //값이없을때..
 					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
@@ -147,7 +116,7 @@
 							var mm=item.endDay;
 							
 							paginationapp+="<li class='page-item'><a class='page-link pageli' "
-							paginationapp+="href='javascript:viewNewOrderlist(\""+yy+"\",\""+mm+"\","+i+")'>"+i+"</a></li>"
+							paginationapp+="href='javascript:viewNewOrderlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
 							
 						}
 						paginationapp+="<li class='page-item'><a class='page-link pageli' href='#'>>></a></li>";
@@ -179,7 +148,13 @@
 		$("#newTable > tbody").empty();
 		$("#newPaging").empty();
 	}
-	
+	$("#statusSelect").change(function(){
+		var value=$(this).val();
+		clearNewlist();
+		var startDay=$("#date1").val();
+		var endDay=$("#date2").val();
+		viewNewOrderlist(startDay,endDay,1,value);
+	});
 	var viewUsedOrderlist=function(){
 		$.ajax({
 			url:'/finalproject/orderhistroy/usedview',
@@ -291,18 +266,20 @@
 	$("#dateUl li").on('click',function(){
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
+		var value=$("#statusSelect").val()
 		console.log('startDay:'+date1);
 		console.log('endDay:'+date2);
 		clearNewlist();
-		viewNewOrderlist(startDay,endDay);
+		viewNewOrderlist(startDay,endDay,1,value);
 	});
 	$("#researchBtn").on('click',function(){
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
+		var value=$("#statusSelect").val()
 		console.log('startDay:'+date1);
 		console.log('endDay:'+date2);
 		clearNewlist();
-		viewNewOrderlist(startDay,endDay);
+		viewNewOrderlist(startDay,endDay,1,value);
 	});
 	
 
@@ -387,6 +364,9 @@
 		background-color:#f51167;
 		border-color:#f51167;
 	}
+	.ui-datepicker{ z-index: 9999 !important;}
+
+	
 
 	
 	
