@@ -24,7 +24,7 @@
 #jumsu{
 	font-size: 40px;
 	color: #FE2E64;
-	margin-left: 825px;
+	margin-left: 810px;
 	font-weight: bold;
 }
 /*리뷰테이블 css*/
@@ -35,7 +35,7 @@
 	margin: auto;
 	margin-top: 20px;
 }
-#reviewTable a{
+.reviewOrder{
 	color: black;
 }
 #reviewTable table{
@@ -44,10 +44,11 @@
 </style>
 <div id="sellerReviewMain">
 	<div id="reviewHeader">
-		<span id="jumsu">5점</span>
+		<span id="jumsu">${reviewAvg}점</span>
 	</div>
 	<div id="reviewTable">
-		<a href="">▼ 평점높은순</a>&nbsp<a href="">▼ 평점낮은순</a>
+		<a href="" class="reviewOrder">▼ 평점높은순</a>&nbsp
+		<a href="" class="reviewOrder">▼ 평점낮은순</a>
 		<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr>
@@ -74,6 +75,28 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div>
+			<ul class="pagination justify-content-center">
+				<!-- 이전버튼 -->
+				<c:if test="${pu.startPageNum>3 }">
+					<li class="page-item">
+						<a class="page-link" href="${cp }/seller/review?pageNum=${pu.startPageNum-1}">
+						이전</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
+					<li class="page-item">
+						<a class="page-link" href="${cp }/seller/review?pageNum=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<!-- 다음버튼 -->
+				<c:if test="${pu.totalPageCount>pu.endPageNum}">
+					<li class="page-item"><a class="page-link"
+						href="${cp }/seller/review?pageNum=${pu.endPageNum+1}">다음</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
 	</div>
 	
 </div>

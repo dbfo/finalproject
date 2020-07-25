@@ -114,12 +114,21 @@ public class SellerBoardConteoller {
 	//====================리뷰========================
 	//중고판매자 리뷰페이지
 	@RequestMapping("/seller/review")
-	public String sellerReview(HttpSession session,Model model) {
+	public String sellerReview(HttpSession session,Model model,
+			@RequestParam(value="pageNum", defaultValue = "1")int pageNum) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("snum",session.getAttribute("snum"));//판매자번호 
+		int totalRowCount=service.getObreviewCount(map);//글갯수
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 3);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		List<SellerReviewJoinVo> list=service.getObreviewList(map);//리뷰리스트
+		//판매자 평점
+		Double reviewAvg=service.getReviewAvg((Integer)session.getAttribute("snum"));
 		
-		List<SellerReviewJoinVo> list=service.getObreviewList(map);
 		model.addAttribute("list", list);
+		model.addAttribute("reviewAvg", reviewAvg);
+		model.addAttribute("pu", pu);
 		return ".seller.review";
 	}
 }

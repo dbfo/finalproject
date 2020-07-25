@@ -17,7 +17,6 @@ public class SellerBoardService implements SellerBoard{
 	@Autowired
 	private SellerBoardDao dao;
 	
-	
 	//중고판매자 Qna리스트 가져오기
 	public List<SellerQnaListJoinVo> getSellerQnaList(HashMap<String, Object> map){
 		List<SellerQnaListJoinVo> list=dao.getSellerQnaList(map);
@@ -58,4 +57,13 @@ public class SellerBoardService implements SellerBoard{
 		List<SellerReviewJoinVo> list=dao.getObreviewList(map);
 		return list;
 	}
+	//중고판매 평점 
+	public double getReviewAvg(int snum) {
+		return dao.getReviewAvg(snum);
+	}
+	//총 글의 갯수 구하기
+	public int getObreviewCount(HashMap<String, Object> map) {
+		return dao.getObreviewCount(map);
+	}
+		
 }

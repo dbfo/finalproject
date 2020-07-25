@@ -65,8 +65,14 @@ public class SellerBoardDao {
 		List<SellerReviewJoinVo> list=sqlSession.selectList(NAMESPACE+".getObreviewList", map);
 		return list;
 	}
-	
-	
+	//중고판매 평점 
+	public double getReviewAvg(int snum) {
+		return sqlSession.selectOne(NAMESPACE+".getReviewAvg", snum);
+	}
+	//총 글의 갯수 구하기
+	public int getObreviewCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".getObreviewCount", map);
+	}
 	
 	
 	
