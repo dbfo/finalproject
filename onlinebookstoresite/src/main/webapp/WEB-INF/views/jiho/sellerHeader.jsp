@@ -8,10 +8,12 @@
 
 </style>
 <div id="sellerTop">
-	<a href="${cp}/seller"><img	src="${cp}/resources/jh/jhimages/중고판매로고.png" id="sellerhomeIcon"></a>
-	<a href="${cp}/">홈으로/</a>
-	<a href="${cp}/seller">중고관리메인</a>
-	<a href="${cp }/logout">로그아웃</a>
+	<div style="width: 1100px;">
+		<a href="${cp}/seller"><img	src="${cp}/resources/jh/jhimages/중고판매로고.png" id="sellerhomeIcon"></a>
+		<a href="${cp}/">홈으로/</a>
+		<a href="${cp}/seller">중고관리메인</a>
+		<a href="${cp }/logout">로그아웃</a>
+	</div>
 </div>
 <div>
 	<nav class="main-navbar">
