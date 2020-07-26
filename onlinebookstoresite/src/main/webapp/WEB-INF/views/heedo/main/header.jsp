@@ -77,8 +77,9 @@
 						<li><a href="#">나의정보</a></li>
 						<li><a href="${cp }/seller">중고판매관리</a></li>
 						<li><a href="#">모임관리</a></li>
+						<li><a href="${cp }/seller">문의게시판</a></li>
 					</ul></li>
-					<li><a href="#">고객센터</a></li>
+					
 			</ul>
 		</div>
 	</nav>

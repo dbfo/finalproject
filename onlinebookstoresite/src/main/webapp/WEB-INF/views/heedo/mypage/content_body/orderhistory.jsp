@@ -83,7 +83,7 @@
 						<option value="order">주문</option>
 						<option value="complepayment">결제완료</option>
 						<option value="ship">배송</option>
-						<option value="confrim">수령확인</option>
+						<option value="confrim">구매확정</option>
 					</select>
 				</div>
 				<table class="table" id="usedTable">

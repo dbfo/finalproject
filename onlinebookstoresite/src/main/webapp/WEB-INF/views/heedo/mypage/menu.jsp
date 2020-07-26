@@ -37,6 +37,12 @@
 	<tr>
 		<td><a class="menuAtag" href="${cp }/seller">-중고판매자매니저</a></td>
 	</tr>
+	<tr>
+		<th>고객센터</th>
+	</tr>
+	<tr>
+		<td><a class="menuAtag" href="#">-문의내역/문의하기</a></td>
+	</tr>
 </table>
 <style>
 	

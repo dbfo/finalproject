@@ -16,7 +16,6 @@
 					<th>수량</th>
 					<th>가격</th>
 					<th>판매자</th>
-					<th>선택<input type="checkbox" id="allcheck"></th>
 				</thead>
 				<tbody>
 					<c:forEach var="bvo" items="${blist }">
@@ -25,14 +24,13 @@
 							<td style="width:7%">${bvo.bcount }</td>
 							<td style="width:15%">${bvo.bprice }원</td>
 							<td style="width:15%">${bvo.sid }</td>
-							<td><input class='checkTd' type='checkbox'></td>
 						</tr>
 					</c:forEach>
 					
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="2">합계</td>
+						<td>합계</td>
 						<td>${totalprice }원</td>
 						<td>0</td>
 						<c:choose>
@@ -68,7 +66,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="3">주문 총 금액 : ${tatalprice+ivo.delfee }원</td>
+									<td colspan="3">총 주문  금액 : ${totalprice+ivo.delfee }원</td>
 									
 								</tr>
 							</table>
@@ -110,7 +108,10 @@
 			<h5><span class="colorFont">결제</span> 정보</h5>
 			<table class="table table-orderd">
 				<tr>
-					<td class="tableloc">총주문금액</td><td colspan="3">${totalprice+ivo.delfee }원</td>
+					<td class="tableloc">총주문금액</td>
+					<td colspan="3" id="totalprice" data-totalvalue="${totalprice }" data-delfee=" ${ivo.delfee }">
+						${totalprice+ivo.delfee }원
+					</td>
 				</tr>
 				<tr>
 					<td class="tableloc">사용포인트</td><td>${ivo.usedpoint }</td>
@@ -273,9 +274,18 @@
 		var bstatus=$(this).data('bstatus');
 		var bpaynum=$(this).data('bpaynum');
 		var apply=$(this).data('apply');
+		var totalvalue=Number($("#totalprice").data("totalvalue"));
+		var delfee=Number($("#totalprice").data("delfee"));
+		var totalprice=totalvalue+delfee;
 		$.ajax({
 			url:"/finalproject/order/usedmanage",
-			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply},
+			data:{bstatus:bstatus,
+				  bpaynum:bpaynum,
+				  apply:apply,
+				  totalprice:totalprice,
+				  totalvalue:totalvalue,
+				  delfee:delfee
+				  },
 			type:"post",
 			dataType: "json",
 			success:function(data){

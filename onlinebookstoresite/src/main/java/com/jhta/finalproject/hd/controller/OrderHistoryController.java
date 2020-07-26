@@ -80,7 +80,7 @@ public class OrderHistoryController {
 			}else if(bstatus==2) {
 				status="배송중";
 			}else if(bstatus==3) {
-				status="수령완료(구매확정)";
+				status="구매확정";
 			}else if(bstatus==4) {
 				status="반품신청";
 			}else if(bstatus==5) {

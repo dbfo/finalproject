@@ -29,6 +29,11 @@ public class OrderManagerService {
 			bmap.put("bcount", bcount);
 			dao.returnBookCount(bmap);
 		}
+		int usedpoint=dao.getUsedpoint(map);
+		if(usedpoint>0) {
+			map.put("point", usedpoint);
+			dao.returnPoint(map);
+		}
 		return 1;
 	}
 	
@@ -47,7 +52,40 @@ public class OrderManagerService {
 			dao.inputrefund(map);
 		}
 		return 1;
+	}
+	//중고상품 구매확정 트랜잭션
+	@Transactional
+	public int confirmorder(HashMap<String, Object>map) throws Exception{
+		dao.confirmold(map);
+		dao.confirmBpayment(map);
+		int fee=dao.getfee();
+		int totalvalue=(int)map.get("totalvalue");
+		int totalprice=(int)map.get("totalprice");
+		int feepay=(totalvalue*(fee/100));
+		System.out.println("수수료 떄간금액:"+feepay);
+		int settlement=totalprice-feepay;
+		int settlementB=totalvalue-feepay;
+		System.out.println("수수료 제외한 금액:"+settlement);
+		System.out.println("상품금액에서 수수료제외한금액ㅇ :"+settlementB);
+		map.put("feeper", fee);
+		map.put("feepay", feepay);
+		map.put("settlement", settlement);
+		map.put("fprice", totalprice);
+		dao.insertComple(map);
 		
+		return 1;
+	}
+	//중고상품 취소
+	@Transactional
+	public int cancelUsedorder(HashMap<String, Object>map) throws Exception {
+		dao.orderCancel(map);
+		dao.cancelmold(map);
+		int usedpoint=dao.getUsedpoint(map);
+		if(usedpoint>0) {
+			map.put("point", usedpoint);
+			dao.returnPoint(map);
+		}
+		return 1;
 	}
 	
 	public List<refundBookVo> getpaymentbook(HashMap<String, Object> map) {
