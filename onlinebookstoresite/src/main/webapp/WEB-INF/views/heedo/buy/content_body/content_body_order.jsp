@@ -451,7 +451,6 @@
 			bnumArray.push(bnum);
 			bcountArray.push(bcount);
 			point.push(pointvalue);
-			console.log('장바구니번호 !! : '+$(this).data('cartnum'))
 			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
 				cartNumArray.push($(this).data('cartnum'));
 			}

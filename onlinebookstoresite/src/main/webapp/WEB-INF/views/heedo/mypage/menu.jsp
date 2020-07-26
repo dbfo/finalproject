@@ -11,7 +11,7 @@
 		<td>
 			<a class="menuAtag" href="${cp }/mypage/orderhistory">- 주문내역</a><br>
 			<a class="menuAtag" href="#">- 반품/환불 신청 및 조회</a><br>
-			<a class="menuAtag" href="#">- 취소 주문내역</a><br>
+			<a class="menuAtag" href="${cp }/mypage/cancelhistorypage">- 취소 주문내역</a><br>
 		</td>
 	</tr>
 	<tr>

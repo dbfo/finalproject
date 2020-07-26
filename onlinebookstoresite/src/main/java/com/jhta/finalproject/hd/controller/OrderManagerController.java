@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.OrderManagerService;
@@ -20,9 +21,10 @@ public class OrderManagerController {
 	@Autowired
 	private OrderManagerService service;
 	
+	//새상품관련..
 	@RequestMapping(value="/order/manage",method = RequestMethod.POST)
 	@ResponseBody
-	public String orderManage(int bpaynum,int bstatus,String apply,HttpSession session) {
+	public String orderManage(int bpaynum,int bstatus,String apply,@RequestParam(value="bnum")String[]bnum,HttpSession session) {
 		int mnum=0;
 		String smnum=(String)session.getAttribute("mnum");
 		if(smnum!=null) {
@@ -39,6 +41,7 @@ public class OrderManagerController {
 			map.put("mnum", mnum);
 			map.put("bstatus", bstatus);
 			map.put("apply",apply);
+			map.put("bnum", bnum);
 			if(bstatus==0) { //주문전체취소할때
 				int n=service.orderCancel(map);
 				if(n>0) {

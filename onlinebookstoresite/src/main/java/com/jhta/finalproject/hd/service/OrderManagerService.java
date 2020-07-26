@@ -41,14 +41,11 @@ public class OrderManagerService {
 	@Transactional
 	public int orderapply(HashMap<String, Object>map) throws Exception{
 		dao.orderCancel(map);
-		List<refundBookVo>list=(ArrayList<refundBookVo>)map.get("list");
-		for(refundBookVo vo:list) {
-			int bcount=vo.getBcount();
-			int bnum=vo.getBnum();
-			System.out.println("서비스안 : "+bnum);
-			System.out.println("서비스안 : "+bcount);
+		String [] bnum=(String[])map.get("bnum");
+		for(int i=0;i<bnum.length;i++) {
+			map.put("bnum", bnum[i]);
+			int bcount=dao.getbcount(map);
 			map.put("bcount", bcount);
-			map.put("bnum", bnum);
 			dao.inputrefund(map);
 		}
 		return 1;

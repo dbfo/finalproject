@@ -36,6 +36,10 @@
 		select bnum,bcount from paymentbook where bpaynum=#{bpaynum}
 	</select>	
 	
+	<select id="getbcount" parameterType="hashmap" resultType="int">
+		select bcount from paymentbook where btype=1 and bnum=#{bnum}
+	</select>
+	
 	<!-- 반품신청 -->
 	<insert id="inputrefund" parameterType="hashmap">
 		insert into refundhistory values(1,sysdate,null,

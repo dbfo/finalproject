@@ -30,6 +30,9 @@ public class OrderHistoryDao {
 	public int countPaymentBook(int bpaynum) {
 		return sqlsession.selectOne(NAMESPACE+".countPaymentBook",bpaynum);
 	}
+	public int getbcount(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".getbcount", map);
+	}
 	
 	public String newBtitle(int bnum) {
 		return sqlsession.selectOne(NAMESPACE+".newBtitle", bnum);

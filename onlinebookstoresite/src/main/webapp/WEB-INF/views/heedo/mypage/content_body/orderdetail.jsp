@@ -25,7 +25,7 @@
 							<td style="width:7%">${bvo.bcount }</td>
 							<td style="width:15%">${bvo.bprice }원</td>
 							<td style="width:15%">${bvo.point }</td>
-							<td><input class='checkTd' type='checkbox'></td>
+							<td><input class='checkTd' type='checkbox' data-bnum="${bvo.bnum }"></td>
 						</tr>
 					</c:forEach>
 					
@@ -277,7 +277,7 @@
 			});
 		}	
 	});
-	//주문리스트 버튼 클릭시.
+	//상품리스트쪽 버튼 클릭시.
 	$(".orderbtn").click(function(){
 		var apply=$(this).data('apply');
 		console.log('리스트버튼 apply : '+apply);
@@ -292,6 +292,14 @@
 			$("#confirmModalLabel").text('반품신청');
 			$("#confirm_modal_body").text('선택하신 상품을 반품신청 하시겠습니까?')
 		}
+		$(".checkTd").each(function(){
+			if($(this).is(":checked")){
+				var bnum=$(this).data("bnum")
+				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("confirm_modal_body");
+			}
+			
+		});
+		
 		$("#confirmModal").modal('show');
 	});
 	
@@ -301,11 +309,17 @@
 		var bstatus=$(this).data('bstatus');
 		var bpaynum=$(this).data('bpaynum');
 		var apply=$(this).data('apply');
+		var bnum=[];
+		$(".bnumgroup").each(function(){
+			bnum.push($(this).val())
+		});
+		console.log('bnumgroub:'+bnum);
 		console.log('모달버튼 apply:'+apply);
 		$.ajax({
 			url:"/finalproject/order/manage",
-			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply},
+			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply,bnum:bnum},
 			type:"post",
+			traditional:true,
 			dataType: "json",
 			success:function(data){
 				console.log(data.result);
