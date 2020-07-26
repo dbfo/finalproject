@@ -6,7 +6,7 @@
 		src="${cp}/resources/jh/jhimages/gobook.png"></a>
 	<a href="${cp}/">메인화면으로</a>
 	<a href="${cp}/seller">중고관리메인</a>
-	<a href="#">로그아웃</a>
+	<a href="${cp }/logout">로그아웃</a>
 </div>
 <div>
 	<nav class="main-navbar">

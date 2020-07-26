@@ -12,7 +12,7 @@
 
 </style>
 <div id="emailContent">
-	<h1>중고판매자 이메일인증</h1>
+	<img src="${cp }/resources/jh/jhimages/중고이메일인증베너.png">
 	<p>판매자 인증 후 사용가능 합니다.</p>
 	<form action="${cp }/seller/mail" method="post">
 		<input type="text" name="email1">

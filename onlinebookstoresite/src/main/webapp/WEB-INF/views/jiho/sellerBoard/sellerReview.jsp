@@ -47,8 +47,6 @@
 		<span id="jumsu">${reviewAvg}점</span>
 	</div>
 	<div id="reviewTable">
-		<a href="" class="reviewOrder">▼ 평점높은순</a>&nbsp
-		<a href="" class="reviewOrder">▼ 평점낮은순</a>
 		<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr>
@@ -61,17 +59,19 @@
 			</thead>
 			<c:forEach var="vo" items="${list }">
 				<tr>
-					<td>번호</td>				
-					<td style="text-align: left;">${vo.obname }</td>				
-					<td>${vo.mid}</td>				
-					<td>
+					<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>				
+					<td style="text-align: left;" onclick="show('${vo.sreviewcontent}')">${vo.obname }</td>				
+					<td onclick="show('${vo.sreviewcontent}')">${vo.mid}</td>				
+					<td onclick="show('${vo.sreviewcontent}')">
 						<c:if test="${vo.sscore==1 }">★</c:if>
 						<c:if test="${vo.sscore==2 }">★★</c:if>
 						<c:if test="${vo.sscore==3 }">★★★</c:if>
 						<c:if test="${vo.sscore==4 }">★★★★</c:if>
 						<c:if test="${vo.sscore==5 }">★★★★★</c:if>
 					</td>				
-					<td><fmt:formatDate value="${vo.sreviewregdate }" pattern="yyyy-MM-dd"/></td>				
+					<td onclick="show('${vo.sreviewcontent}')">
+						<fmt:formatDate value="${vo.sreviewregdate }" pattern="yyyy-MM-dd"/>
+					</td>				
 				</tr>
 			</c:forEach>
 		</table>
@@ -98,5 +98,36 @@
 			</ul>
 		</div>
 	</div>
-	
 </div>
+<!-- 모달 -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">[중고판매 코멘트]</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <span>리뷰 : ${vo.sreviewcontent }</span><br>
+          <span id="reviewcontent"></span>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<script>
+	function show(str){
+		$("#reviewcontent").html(str);
+		$('#myModal').modal('show');
+	}
+
+
+</script>
