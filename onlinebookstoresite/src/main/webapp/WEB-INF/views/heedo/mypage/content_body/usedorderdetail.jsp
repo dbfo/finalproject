@@ -39,10 +39,14 @@
 								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel">전체취소</button>
 							</td>		
 						</c:when>
-						<c:otherwise>
+						<c:when test="${ivo.bstatus==1||ivo.bstatus==2 }">
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
 								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="confirm">구매확정</button>
 							</td>	
+						</c:when>
+						<c:otherwise>
+							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
+							</td>
 						</c:otherwise>
 					
 					</c:choose>

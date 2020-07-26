@@ -23,7 +23,7 @@
 	</update>
 	
 	<!-- 사용포인트량 구함. -->
-	<select id="getUsedpoint" parameterType="hashmap">
+	<select id="getUsedpoint" parameterType="hashmap" resultType="int">
 		select usedpoint from bpayment where bpaynum=#{bpaynum}
 	</select>
 	
@@ -54,11 +54,11 @@
 	</insert>
 	<!-- 중고상품 취소 클릭시 다시 상태 0번으로 변경 -->
 	<update id="cancelmold" parameterType="hashmap">
-		update oldbooks set obsalestatus=0 where obnum=(select bnum obnum from paymentbook where bpaynum=#{bpaynum})
+		update oldbooks set obsalestatus=0 where obnum in (select bnum obnum from paymentbook where bpaynum=#{bpaynum})
 	</update>
 	<!-- 중고상품 구매확정 클릭시 판매상태 변경. -->
 	<update id="confirmold" parameterType="hashmap">
-		update oldbooks set obsalestatus=3 where obnum=(select bnum obnum from paymentbook where bpaynum=#{bpaynum})
+		update oldbooks set obsalestatus=3 where obnum in (select bnum obnum from paymentbook where bpaynum=#{bpaynum})
 	</update>
 	<!-- 중고상품 구매확정클릭시 bpayment 상태변경 -->
 	<update id="confirmBpayment" parameterType="hashmap">

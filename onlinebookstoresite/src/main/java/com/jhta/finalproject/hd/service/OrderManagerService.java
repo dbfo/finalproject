@@ -59,14 +59,19 @@ public class OrderManagerService {
 		dao.confirmold(map);
 		dao.confirmBpayment(map);
 		int fee=dao.getfee();
+		System.out.println("수수료 퍼센트 : "+fee);
 		int totalvalue=(int)map.get("totalvalue");
 		int totalprice=(int)map.get("totalprice");
-		int feepay=(totalvalue*(fee/100));
+		double feea=fee/100;
+		double feeb=(double)map.get("feea");
+		double feepay=totalvalue*feeb;
+		
+		System.out.println("나누기:"+feeb);
 		System.out.println("수수료 떄간금액:"+feepay);
-		int settlement=totalprice-feepay;
-		int settlementB=totalvalue-feepay;
+		double settlement=totalprice-feepay;
+		double settlementB=totalvalue-feepay;
 		System.out.println("수수료 제외한 금액:"+settlement);
-		System.out.println("상품금액에서 수수료제외한금액ㅇ :"+settlementB);
+		System.out.println("상품금액에서 수수료제외한금액 :"+settlementB);
 		map.put("feeper", fee);
 		map.put("feepay", feepay);
 		map.put("settlement", settlement);
@@ -90,5 +95,8 @@ public class OrderManagerService {
 	
 	public List<refundBookVo> getpaymentbook(HashMap<String, Object> map) {
 		return dao.getpaymentbook(map);
+	}
+	public int getfee() {
+		return dao.getfee();
 	}
 }
