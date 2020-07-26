@@ -25,10 +25,8 @@ public class SellerEmailController {
 	//인증메일 발송하는 메소드
 	@RequestMapping("/seller/mail")
 	public String sellerMail(String email1,HttpServletRequest req,Model model) {
-		System.out.println("전달받은 이메일:"+email1);
 		TempKey tk=new TempKey();
 		String code=tk.generateKey(5);
-		System.out.println("인증코드:"+code);
 		
 		String setform="dkswlgh95@gmail.com";
 		String tomail=email1;//받는사람
@@ -55,7 +53,9 @@ public class SellerEmailController {
 		System.out.println("인증완료 컨트롤러");
 		System.out.println("인증회원번호:"+session.getAttribute("mnum"));
 		int mnum=Integer.parseInt((String)session.getAttribute("mnum"));
-		service.sellerInsert(mnum);
+		service.sellerInsert(mnum);//중고판매자 등록하기
+		int snum=service.getSnum(mnum);//중고판매자 번호 가져오기
+		session.setAttribute("snum", snum);//중고판매자번호 세션에 저장
 		return ".seller";
 	}
 }

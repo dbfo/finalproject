@@ -15,7 +15,10 @@ public class SellerMainBoardDao {
 	public int sellerInsert(int mnum) {
 		return sqlSession.insert(NAMESPACE+".sellerInsert", mnum);
 	}
-	
+	//인증완료된 중고판매자 회원번호 가져오기getSnum
+	public int getSnum(int mnum) {
+		return sqlSession.selectOne(NAMESPACE+".getSnum", mnum);
+	}
 	
 	//상황판(최근 한달간 등록한 상품)
 	public int getOldbookCount(int snum) {

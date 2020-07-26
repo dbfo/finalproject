@@ -6,11 +6,15 @@
 <mapper namespace="com.jhta.mybatis.mapper.SellerMainBoardMapper.jh">
 	<!-- 중고판매자 메인 관련 Mapper파일 -->
 	
-	
 	<!-- 중고판매자 인증된 회원 등록 -->
 	<insert id="sellerInsert" parameterType="int">
 		insert into obseller values(SEQ_OBSELLER_SNUM.nextval,#{mnum})
 	</insert>
+	<!-- 인증완료된 중고판매자 회원번호 가져오기 -->
+	<select id="getSnum" parameterType="int" resultType="int">
+		select snum from obseller where mnum=#{mnum}
+	</select>
+	
 	
 	<!-- 최근 한달간 등록 상품 -->
 	<select id="getOldbookCount" resultType="int" parameterType="int">

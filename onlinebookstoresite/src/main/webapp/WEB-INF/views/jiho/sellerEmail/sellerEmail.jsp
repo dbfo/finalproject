@@ -6,16 +6,33 @@
 #emailContent{
 	width: 1100px;
 	height: 700px;
-	border: 1px solid black;
 	margin: auto;
+	background-image: url("${cp}/resources/jh/jhimages/중고이메일인증폼.png");
 }
-
+input[name='email1']{
+	width: 300px;
+	margin-left: 400px;
+}
+#emailBt{
+	margin-left: 500px;
+	margin-top: 20px;
+}
 </style>
 <div id="emailContent">
-	<img src="${cp }/resources/jh/jhimages/중고이메일인증베너.png">
-	<p>판매자 인증 후 사용가능 합니다.</p>
+	<p style="text-align: center;padding-top: 260px;">@를 포함한 이메일 주소를 정확하게 입력해 주세요.</p>
 	<form action="${cp }/seller/mail" method="post">
-		<input type="text" name="email1">
-		<input type="submit" value="이메일인증">
+		<input type="email" name="email1" placeholder="email@email.com" class="form-control">
+		<input type="submit" value="이메일발송" class="btn btn-outline-success" id="emailBt">
 	</form>
 </div>
+<script>
+	$(function(){
+		$("form").submit(function() {
+			var email=$("input[name='email1']").val();
+			if(email==''){
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+		});
+	});
+</script>

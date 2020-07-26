@@ -5,22 +5,28 @@
 #injeung{
 	width: 1100px;
 	height: 700px;
-	border: 1px solid black;
 	margin: auto;
+	background-image: url("${cp}/resources/jh/jhimages/인증번호입력.png");
+}
+#injeungMsg{
+    margin-left: 650px;
+    padding-top: 180px;
+}
+input[name='email_injeung']{
+    margin-left: 650px;
 }
 </style>
 <div id="injeung">
-	<p>전송받은 인증번호 입력해주세요</p>
-	<form action="${cp }/seller/injeung" method="post">
-		<input type="text" name="email_injeung">
-		<input type="submit" value="입력">
-	</form>
+	<form class="login-form" action="${cp }/seller/injeung" method="post">
+		<p id="injeungMsg">인증번호를 입력해주세요.</p>
+		<input type="text" placeholder="인증번호 입력" name="email_injeung">
+		<input type="submit" value="입력" id="injeungBt" class="btn btn-success">
+    </form>
 </div>
 <script type="text/javascript">
 	$(function(){
 		$("form").submit(function() {
 			var incode=$("input[name='email_injeung']").val();
-			alert('${code}');
 			var code='${code}';
 			if(incode!=code){
 				alert("인증번호가 일치하지 않습니다.");
