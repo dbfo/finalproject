@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<style>
+#sellerhomeIcon{
+	margin-left: 400px;
+}
+
+</style>
 <div id="sellerTop">
-	<a href="${cp}/seller"><img
-		src="${cp}/resources/jh/jhimages/gobook.png"></a>
-	<a href="${cp}/">메인화면으로</a>
+	<a href="${cp}/seller"><img	src="${cp}/resources/jh/jhimages/중고판매로고.png" id="sellerhomeIcon"></a>
+	<a href="${cp}/">홈으로/</a>
 	<a href="${cp}/seller">중고관리메인</a>
 	<a href="${cp }/logout">로그아웃</a>
 </div>
