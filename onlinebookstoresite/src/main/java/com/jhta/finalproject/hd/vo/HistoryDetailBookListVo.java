@@ -11,11 +11,12 @@ public class HistoryDetailBookListVo {
 	private int totalvalue;
 	//중고일때만 사용함 ///
 	private int obstatus;
+	private String statusString;
 	private String sid;
 	// ============///
 	public HistoryDetailBookListVo() {}
 	public HistoryDetailBookListVo(int bpaynum, int bnum, int point, int bcount, int bprice, String btitle, int pbnum,
-			int totalvalue, int obstatus, String sid) {
+			int totalvalue, int obstatus, String statusString, String sid) {
 		super();
 		this.bpaynum = bpaynum;
 		this.bnum = bnum;
@@ -26,6 +27,7 @@ public class HistoryDetailBookListVo {
 		this.pbnum = pbnum;
 		this.totalvalue = totalvalue;
 		this.obstatus = obstatus;
+		this.statusString = statusString;
 		this.sid = sid;
 	}
 	public int getBpaynum() {
@@ -82,12 +84,19 @@ public class HistoryDetailBookListVo {
 	public void setObstatus(int obstatus) {
 		this.obstatus = obstatus;
 	}
+	public String getStatusString() {
+		return statusString;
+	}
+	public void setStatusString(String statusString) {
+		this.statusString = statusString;
+	}
 	public String getSid() {
 		return sid;
 	}
 	public void setSid(String sid) {
 		this.sid = sid;
 	}
+	
 	
 	
 	

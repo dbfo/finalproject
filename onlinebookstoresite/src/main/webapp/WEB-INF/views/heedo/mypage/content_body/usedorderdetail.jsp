@@ -15,16 +15,16 @@
 					<th style='text-align: center'>상품명</th>
 					<th>수량</th>
 					<th>가격</th>
-					<th>포인트</th>
+					<th>판매자</th>
 					<th>선택<input type="checkbox" id="allcheck"></th>
 				</thead>
 				<tbody>
 					<c:forEach var="bvo" items="${blist }">
 						<tr>
-							<td style="width:49%;text-align:center">${bvo.btitle }</td>
+							<td style="width:49%;text-align:center">${bvo.statusString} ${bvo.btitle }</td>
 							<td style="width:7%">${bvo.bcount }</td>
 							<td style="width:15%">${bvo.bprice }원</td>
-							<td style="width:15%">${bvo.point }</td>
+							<td style="width:15%">${bvo.sid }</td>
 							<td><input class='checkTd' type='checkbox'></td>
 						</tr>
 					</c:forEach>
@@ -34,29 +34,19 @@
 					<tr>
 						<td colspan="2">합계</td>
 						<td>${totalprice }원</td>
-						<td>${totalpoint }</td>
+						<td>0</td>
 						<c:choose>
 							<c:when test="${ivo.bstatus==0 }">
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
 								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel">전체취소</button>
 							</td>		
 						</c:when>
-						<c:when test="${ivo.bstatus==1}">
+						<c:otherwise>
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel">주문취소</button>
-							</td>			
-						</c:when>
-						<c:when test="${ivo.bstatus==2}">				
-							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
-							</td>				
-						</c:when>
-							<c:when test="${ivo.bstatus==3}">				
-							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="change">교환신청</button>
-							</td>				
-						</c:when>
+								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="confirm">구매확정</button>
+							</td>	
+						</c:otherwise>
+					
 					</c:choose>
 					
 						
@@ -74,7 +64,7 @@
 									</td>
 									<td></td>
 									<td>
-										적립예정포인트 : ${totalpoint }
+										적립예정포인트 : 0
 									</td>
 								</tr>
 								<tr>
@@ -93,7 +83,7 @@
 			<table class="table table-borderd">
 				<tr>
 					<td class="tableloc">포인트적립일</td>
-					<td colspan="3">결제완료 후 지급</td>
+					<td colspan="3">중고제품은 적립되지않습니다.</td>
 				</tr>
 				<tr>
 					<td class="tableloc">주문번호</td><td>${ivo.bpaynum }</td><td class="tableloc">주문일자</td><td>${ivo.borderdate }</td>
@@ -124,7 +114,7 @@
 				</tr>
 				<tr>
 					<td class="tableloc">사용포인트</td><td>${ivo.usedpoint }</td>
-					<td class="tableloc">포인트적립예정액</td><td>${totalpoint }</td>
+					<td class="tableloc">포인트적립예정액</td><td>0</td>
 				</tr>
 				<tr>
 					<td class="tableloc">결제(할)금액</td><td>${totalprice+ivo.delfee-ivo.usedpoint }원</td>
@@ -163,12 +153,9 @@
         	<c:when test="${ivo.bstatus==0 }">
      			전체취소 
      		</c:when>
-     		<c:when test="${ivo.bstatus==1 }">
-     			주문취소
-     		</c:when>
-     		<c:when test="${ivo.bstatus==2}">	
-     			반품신청
-     		</c:when>
+     		<c:otherwise>
+     			구매확정
+     		</c:otherwise>
   
      	</c:choose>
         </h5>
@@ -181,12 +168,9 @@
      		<c:when test="${ivo.bstatus==0 }">
      			전체취소 하시겠습니까?
      		</c:when>
-     		<c:when test="${ivo.bstatus==1 }">
-     			선택하신 상품을 주문취소 하시겠습니까?
-     		</c:when>
-     		<c:when test="${ivo.bstatus==2}">	
-     			선택하신 상품을 반품신청 하시겠습니까?
-     		</c:when>
+     		<c:otherwise>
+     			구매확정하시겠습니까?
+     		</c:otherwise>
      	</c:choose>
       </div>
       <div class="modal-footer">
@@ -214,12 +198,9 @@
      		<c:when test="${ivo.bstatus==0 }">
      			전체취소가 완료되었습니다.
      		</c:when>
-     		<c:when test="${ivo.bstatus==1 }">
-     			주문취소 신청이 완료되었습니다.
-     		</c:when>
-     		<c:when test="${ivo.bstatus==2 ||ivo.bstatus==3}">	
-     			반품신청이 완료되었습니다.
-     		</c:when>
+     		<c:otherwise>
+     			구매확정이 완료되었습니다.
+     		</c:otherwise>
      	</c:choose>
       </div>
       <div class="modal-footer">
@@ -283,15 +264,6 @@
 		console.log('리스트버튼 apply : '+apply);
 		$("#confirmbtn_modal").data('apply',apply)
 		var bstatus=$(this).data('bstatus');
-		if(bstatus==3&&apply=='change'){
-			$("#result_modal_body").text('교환신청이 완료되었습니다.');
-			$("#confirmModalLabel").text('교환신청');
-			$("#confirm_modal_body").text('선택하신 상품을 교환신청 하시겠습니까?')
-		}else if(bstatus==3&&apply=='return'){
-			$("#result_modal_body").text('반품신청이 완료되었습니다.');
-			$("#confirmModalLabel").text('반품신청');
-			$("#confirm_modal_body").text('선택하신 상품을 반품신청 하시겠습니까?')
-		}
 		$("#confirmModal").modal('show');
 	});
 	
@@ -301,9 +273,8 @@
 		var bstatus=$(this).data('bstatus');
 		var bpaynum=$(this).data('bpaynum');
 		var apply=$(this).data('apply');
-		console.log('모달버튼 apply:'+apply);
 		$.ajax({
-			url:"/finalproject/order/manage",
+			url:"/finalproject/order/usedmanage",
 			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply},
 			type:"post",
 			dataType: "json",

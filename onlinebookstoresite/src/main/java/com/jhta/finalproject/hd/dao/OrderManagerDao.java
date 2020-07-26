@@ -18,7 +18,13 @@ public class OrderManagerDao {
 	public int orderCancel(HashMap<String,Object>map) {
 		return sqlsession.update(NAMESPACE+".orderCancel", map);
 	}
-	
+	//전체취소 책수량복구를 위해 현재 책수량을 가져옴
+	public int commonCount(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".commonCount", map);
+	}
+	public int returnBookCount(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".returnBookCount", map);
+	}
 	public List<refundBookVo> getpaymentbook(HashMap<String, Object> map) {
 		return sqlsession.selectList(NAMESPACE+".getpaymentbook",map);
 	}

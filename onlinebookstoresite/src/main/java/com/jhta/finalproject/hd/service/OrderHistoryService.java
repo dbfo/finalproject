@@ -41,6 +41,10 @@ public class OrderHistoryService {
 	public List<HistoryDetailBookListVo> orderbooklist(int bpaynum){
 		return dao.orderbooklist(bpaynum);
 	}
+	//주문상세페이지에서 주문한책 리스트 가져옴 
+		public List<HistoryDetailBookListVo> usedorderbooklist(int bpaynum){
+			return dao.usedorderbooklist(bpaynum);
+		}
 	public HistoryDetailInfoVo orderinfo(int bpaynum) {
 		return dao.orderinfo(bpaynum);
 	}

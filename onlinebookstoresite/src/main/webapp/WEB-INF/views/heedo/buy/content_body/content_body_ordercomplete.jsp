@@ -121,7 +121,7 @@
 			</table>
 	</div>
 	<div id="buttondiv">
-		<button type="button" class="btn btn-dark" >메인으로이동</button> 
-		<button type="button" class="btn btn-light">마이페이지</button>
+		<a href="${cp }/"><button type="button" class="btn btn-dark" >메인으로이동</button></a> 
+		<a href="${cp }/mypage/main"><button type="button" class="btn btn-light">마이페이지</button></a>
 	</div>
 </div>

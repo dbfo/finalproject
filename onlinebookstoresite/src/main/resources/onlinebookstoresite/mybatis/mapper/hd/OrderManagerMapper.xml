@@ -13,12 +13,21 @@
 		</choose>
 		where bpaynum=#{bpaynum}	
 	</update>
-	<!-- 결제완료상태 주문취소/반품 신청  (bstatus = 1)-->
+	<!-- 전체취소시 새책수량복구를 위해 테이블에서 현재수량을 구해옴. -->
+	<select id="commonCount" parameterType="hashmap" resultType="int">
+		select bcount from books where bnum=#{bnum}
+	</select>
+	
+	<update id="returnBookCount" parameterType="hashmap">
+		update books set bcount=#{bcount} where bnum=#{bnum}
+	</update>
 	
 	<!-- 주문에 해당하는 책들 리스트가져옴 -->
 	<select id="getpaymentbook" parameterType="hashmap" resultType="BookVo">
 		select bnum,bcount from paymentbook where btype=1 and bpaynum=#{bpaynum}
 	</select>	
+	
+	
 	
 	<!-- 반품신청 -->
 	<insert id="inputrefund" parameterType="hashmap">

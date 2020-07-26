@@ -67,6 +67,10 @@
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderdetail.jsp"/>
 	</definition>
 	
+	<definition name=".usedorderdetail" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/usedorderdetail.jsp"/>
+	</definition>
+	
 	<!-- 장바구니. -->
 	<definition name=".cart" template="/WEB-INF/views/heedo/layout/buylayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/heedo/main/header.jsp"/>

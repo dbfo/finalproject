@@ -35,7 +35,7 @@ public class OrderHistoryDao {
 		return sqlsession.selectOne(NAMESPACE+".newBtitle", bnum);
 	}
 	public HashMap<String, Object> usedBtilte(int bnum){
-		return sqlsession.selectOne(NAMESPACE+".usedBtitle",bnum);
+		return sqlsession.selectOne(NAMESPACE+".usedTitle",bnum);
 	}
 	public int countHistory(HashMap<String, Object> map) {
 		return sqlsession.selectOne(NAMESPACE+".countHistory",map);
@@ -43,6 +43,10 @@ public class OrderHistoryDao {
 	//주문 상세페이지에서 주문한책리스트.
 	public List<HistoryDetailBookListVo> orderbooklist(int bpaynum){
 		return sqlsession.selectList(NAMESPACE+".orderbooklist",bpaynum);
+	}
+	//주문 상세페이지에서 주문한중고책리스트.
+	public List<HistoryDetailBookListVo> usedorderbooklist(int bpaynum){
+		return sqlsession.selectList(NAMESPACE+".orderusedlist",bpaynum);
 	}
 	public HistoryDetailInfoVo orderinfo(int bpaynum) {
 		return sqlsession.selectOne(NAMESPACE+".orderinfo",bpaynum);

@@ -38,7 +38,6 @@ public class OrderManagerController {
 				}
 			}else {
 				List<refundBookVo>list=service.getpaymentbook(map);
-				System.out.println("list사이즈 :"+list.size());
 				map.put("list",list);
 				int n=service.orderapply(map);	
 				if(n==1) {

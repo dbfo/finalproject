@@ -17,8 +17,19 @@ public class OrderManagerService {
 	private OrderManagerDao dao;
 	
 	//주문상태인거 주문취소.
+	@Transactional
 	public int orderCancel(HashMap<String,Object>map) {
-		return dao.orderCancel(map);
+		dao.orderCancel(map);
+		List<refundBookVo>list=dao.getpaymentbook(map);
+		for(refundBookVo vo:list) {
+			HashMap<String, Object> bmap=new HashMap<String, Object>();
+			bmap.put("bnum", vo.getBnum());
+			int commBcount=dao.commonCount(bmap);
+			int bcount=commBcount+vo.getBcount();
+			bmap.put("bcount", bcount);
+			dao.returnBookCount(bmap);
+		}
+		return 1;
 	}
 	
 	//그외상태에서 반품신청/교환신청
