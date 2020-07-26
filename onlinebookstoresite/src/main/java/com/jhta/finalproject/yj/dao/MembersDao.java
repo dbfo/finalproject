@@ -18,6 +18,11 @@ public class MembersDao {
 	public void setSession(SqlSessionTemplate session) {
 		this.session = session;
 	}
+	
+	// 회원가입
+	public int join(MembersVO vo) {
+		return session.insert(NAMESPACE + ".join", vo);
+	}
 
 	public int memCount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".memCount", map);

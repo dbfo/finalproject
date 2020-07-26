@@ -13,6 +13,10 @@ import com.jhta.finalproject.yj.vo.MembersVO;
 public class MembersService {
 	@Autowired
 	private MembersDao dao;
+	
+	public int join(MembersVO vo) {
+		return dao.join(vo);
+	}
 
 	public int memCount(HashMap<String, Object> map) {
 		return dao.memCount(map);
