@@ -111,7 +111,6 @@ public class MyPageController {
 			datemap.put("value",value);
 			datemap.put("separate","used");
 			int totalcount=service.countHistory(datemap);
-			System.out.println("중고주문리스트 내역 총행 : "+totalcount);
 			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 			datemap.put("startRow", pu.getStartRow());
 			datemap.put("endRow", pu.getEndRow());

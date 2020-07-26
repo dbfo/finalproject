@@ -30,9 +30,6 @@ public class OrderManagerController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
-		System.out.println("컨트롤러 bstatus : "+bstatus);
-		System.out.println("컨트롤러 bpaynum : "+bpaynum);
-		System.out.println("컨트롤러 apply : "+apply);
 		try {
 			JSONObject json=new JSONObject();
 			boolean result=false;
@@ -74,9 +71,6 @@ public class OrderManagerController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
-		System.out.println("컨트롤러 bstatus : "+bstatus);
-		System.out.println("컨트롤러 bpaynum : "+bpaynum);
-		System.out.println("컨트롤러 apply : "+apply);
 		try {
 			JSONObject json=new JSONObject();
 			boolean result=false;
@@ -90,7 +84,6 @@ public class OrderManagerController {
 			if(apply.equals("confirm")) { //중고제품 구매확정누를때
 				int fee=service.getfee();
 				double feea=fee/100;
-				System.out.println("컨트롤러 안 feea : "+feea);
 				map.put("feea", feea);
 				service.confirmorder(map);
 				result=true;

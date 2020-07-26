@@ -530,10 +530,12 @@
 		display:inline-flex;
 	}
 	.date_picker{
-		 border-radius: 8px;
+		 
 		margin-top: 15px;
-		border:1px solid grey;
 		padding:15px;
+		border-radius: 8px;
+		border:1px solid grey;
+		
 		box-shadow: 0px 0px 4px grey;
 	}
 	.selectdate{

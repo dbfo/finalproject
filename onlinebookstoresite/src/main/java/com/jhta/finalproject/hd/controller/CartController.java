@@ -84,7 +84,6 @@ public class CartController {
 		@RequestMapping("/pay/deleteOneCart")
 		@ResponseBody
 		public String deleteOne(int cartNum) {
-			System.out.println("cartNum : "+cartNum);
 			int n=service.deleteOne(cartNum);
 			String result="fail";
 			if(n>0) {

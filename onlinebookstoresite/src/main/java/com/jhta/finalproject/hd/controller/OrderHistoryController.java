@@ -36,7 +36,6 @@ public class OrderHistoryController {
 	@ResponseBody
 	public String vieworderhistroy(HttpSession session,@RequestParam(required=false)String startDay,String value,
 											@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
-		System.out.println("새상품 주문리스트 시작!!");
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
 		HashMap<String,Object>datemap=new HashMap<String, Object>();
@@ -46,7 +45,6 @@ public class OrderHistoryController {
 		datemap.put("value",value);
 		datemap.put("separate", "new");
 		int totalcount=service.countHistory(datemap);
-		System.out.println("새상품주문리스트 내역 총행 : "+totalcount);
 		PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 		datemap.put("startRow", pu.getStartRow());
 		datemap.put("endRow", pu.getEndRow());
@@ -115,8 +113,6 @@ public class OrderHistoryController {
 	@ResponseBody
 	public String viewusedorderhistroy(HttpSession session,@RequestParam(required=false)String startDay,String value,
 			@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
-		System.out.println("중고주문리스트 시작!");
-		System.out.println("중고주문리스트 value:"+value);
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
 		HashMap<String,Object>datemap=new HashMap<String, Object>();
@@ -126,7 +122,6 @@ public class OrderHistoryController {
 		datemap.put("value",value);
 		datemap.put("separate","used");
 		int totalcount=service.countHistory(datemap);
-		System.out.println("중고주문리스트 내역 총행 : "+totalcount);
 		PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 		datemap.put("startRow", pu.getStartRow());
 		datemap.put("endRow", pu.getEndRow());
@@ -142,8 +137,6 @@ public class OrderHistoryController {
 			HashMap<String,Object> usedmap=service.usedBtitle(bnum);
 			String btitle=(String)usedmap.get("OBNAME");
 			int status=Integer.parseInt(String.valueOf(usedmap.get("OBSTATUS")));
-			System.out.println("중고리스트 컨트롤러 : "+btitle);
-			System.out.println("중고리스트 컨트롤러 : "+status);
 			String statusString="";
 			if(status==1) {
 				statusString="[중고-최상]";

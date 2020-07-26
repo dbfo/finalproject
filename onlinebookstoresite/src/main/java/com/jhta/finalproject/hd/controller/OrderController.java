@@ -137,7 +137,6 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
-			System.out.println("mnum : "+mnum);
 			OrderCompleteResultVo vo=service.complete_info(bpaynum);
 			if(mnum!=0) {
 				vo.setName(service.getName(mnum));

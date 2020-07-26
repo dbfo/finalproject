@@ -243,12 +243,8 @@
 		});
 		var allHeight=parseInt($("#content_all").css("height"));
 		var detailHeight=parseInt($("#content_history_detail").css("height"));
-		console.log('all1:'+allHeight);
-		console.log('del1:'+detailHeight);
 		allHeight+=50*(tr-1);
 		detailHeight+=50*(tr-1);
-		console.log('all2:'+allHeight);
-		console.log('del2:'+detailHeight);
 		$("#content_all").css("height",allHeight);
 		$("#detailHeight").css("height",detailHeight)
 		/////////////////////////////////////////////
@@ -280,7 +276,6 @@
 	//상품리스트쪽 버튼 클릭시.
 	$(".orderbtn").click(function(){
 		var apply=$(this).data('apply');
-		console.log('리스트버튼 apply : '+apply);
 		$("#confirmbtn_modal").data('apply',apply)
 		var bstatus=$(this).data('bstatus');
 		if(bstatus==3&&apply=='change'){
@@ -313,8 +308,6 @@
 		$(".bnumgroup").each(function(){
 			bnum.push($(this).val())
 		});
-		console.log('bnumgroub:'+bnum);
-		console.log('모달버튼 apply:'+apply);
 		$.ajax({
 			url:"/finalproject/order/manage",
 			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply,bnum:bnum},
@@ -322,7 +315,6 @@
 			traditional:true,
 			dataType: "json",
 			success:function(data){
-				console.log(data.result);
 				if(data.result){	
 					$("#resultModal").modal('show');
 				}

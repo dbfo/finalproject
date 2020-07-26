@@ -114,6 +114,27 @@
 								+"<td colspan='8' align='center'><strong><span>장바구니에 담긴 상품이 없습니다.</span></strong></td>"
 								+"</tr></table>";
 					 c.append(tableapp);
+					 var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
+						var htitle="<h5 style='display:inline'><span style='color:#f51167'>결제</span>정보</h5>"
+						c.append(htitle);
+						var chargeApp="<table class='table table-bordered' style='text-align:center;'>"
+										 +"<tr>"
+										 	+"<th class='table-info' style='width:33.3%'>총 상품 총 금액</th>"
+										 	+"<th class='table-info' style='width:33.3%'>총 배송비</th>"
+										 	+"<th bgcolor='#80d4ff' style='width:33.3%'>최종 결제금액</th>"
+										 +"</tr>"
+										 +"<tr>"
+										 	+"<td><span id='all_total_value'>0</span>원</td>"
+										 	+"<td><span id='all_total_shipfee'>0</span>원</td>"
+										 	+"<td bgcolor='#80d4ff'><span id='final_payment_value' style='color:#f51167;'>0</span><span style='#f51167'>원</span></td>"
+										 +"<tr>"
+										+"</table>";
+						c.append(chargeApp); 
+						// 하단 결제정보 테이블 끝 //	
+						var bottomBtnGroup="<div style='text-align:center;''>"
+							  	+"<a href='${cp}/'><button type='button' class='btn btn-light btn-lg'>쇼핑계속하기</button></a>"
+							  	+"</div>"
+						c.append(bottomBtnGroup);
 					 return;
 				}
 				var lastindex=data.length;

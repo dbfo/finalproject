@@ -129,7 +129,7 @@
 		$("#content-new-card").empty();
 	}
 </script>
-<div class="container">
+<div class="container" id="main_container">
 	<div id="carosel_wrap">
 		<div class="center-block">
 			<div id="imgslide" class="carousel slide" data-ride="carousel">
@@ -174,12 +174,12 @@
 		</div>
 	</div>
 	<div id="content-mid-best">
-		<h3>베스트셀러</h3>
+		<h3><span class="colorfont">베스트</span> 셀러</h3>
 		<div id="content-best-card"></div>
 	</div>
 	<br>
 	<div id="content-mid-new">
-		<h3>신간</h3>
+		<h3><span class="colorfont">신</span>간</h3>
 		<div id="content-new-card"></div>
 	</div>
 	<br> <br>
