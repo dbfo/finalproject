@@ -20,8 +20,8 @@ public class ShipManageService {
 		return dao.getShipCount();
 	}
 	
-	public int updatePrepareToShipping(int bpaynum) {
-		return dao.updatePrepareToShipping(bpaynum);
+	public int updateBstatus(HashMap<String,Object> map) {
+		return dao.updateBstatus(map);
 	}
 	
 }	

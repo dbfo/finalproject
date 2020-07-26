@@ -96,6 +96,13 @@
 			}
 		})
 		
+		
+		//주소 | 빼고 나오게 하기
+		$('.addr').each(function(idx,item){
+			var addr = $(this).text();
+			addr =  addr.replace(/\|/g, ' ');
+			$(this).text(addr);			
+		})
 	})
 	
 

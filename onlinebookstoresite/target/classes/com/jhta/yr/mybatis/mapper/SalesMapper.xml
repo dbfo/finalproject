@@ -5,41 +5,76 @@
 <mapper namespace="com.jhta.yr.mybatis.mapper.SalesMapper">
 	
 	<sql id="daySearch">			
+		<choose>
+			<when test="field != bpaydate">where</when>
+			<otherwise>and</otherwise>
+		</choose>
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startDate)">
-			where TRUNC(bpaydate) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate}) and bstatus in (3,5)
+			TRUNC(${field}) BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate}) 
 		</if>
 	</sql>
 
 	<sql id="weekSearch">			
+		<choose>
+			<when test="field != bpaydate">where</when>
+			<otherwise>and</otherwise>
+		</choose>
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(week)">
-			 where to_char(bpaydate,'iw') between TO_CHAR(sysdate-#{week}, 'iw') and TO_CHAR(sysdate, 'iw') and bstatus in (3,5)
+			 to_char(${field},'iw') between TO_CHAR(sysdate-#{week}, 'iw') and TO_CHAR(sysdate, 'iw')
 		</if>
 	</sql>
 	
 	<sql id="monthSearch">
+		<choose>
+			<when test="field != bpaydate">where</when>
+			<otherwise>and</otherwise>
+		</choose>
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startYearAndMonth)">
-			where bpaydate BETWEEN TO_date(#{startYearAndMonth},'yyyy-mm') AND TO_date(#{endYearAndMonth},'yyyy-mm') and bstatus in (3,5)
+			${field} BETWEEN TO_date(#{startYearAndMonth},'yyyy-mm') AND TO_date(#{endYearAndMonth},'yyyy-mm')
 		</if>
 	</sql>
 	
 	
 	<select id="getList" parameterType="hashmap" resultType="hashmap">
-		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment 
+		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment, paymentbook 
+        where bpayment.bpaynum = paymentbook.bpaynum and btype = 1 and bstatus in (3,5)
 		<include refid="daySearch"/>
 		group by bpaydate order by bpaydate
 	</select>
 	
 	
 	<select id="mothList" parameterType="hashmap" resultType="hashmap">
-		select  to_char(bpaydate,'yyyy-mm') bpaydate, sum(bfinalmoney) from bpayment
+		select  to_char(bpaydate,'yyyy-mm') bpaydate, sum(bfinalmoney) from bpayment, paymentbook 
+        where bpayment.bpaynum = paymentbook.bpaynum and btype = 1 and bstatus in (3,5)
 		<include refid="monthSearch"/> 
 		group by to_char(bpaydate,'yyyy-mm') order by bpaydate	
 	</select>
 	
 	<select id="weekList" parameterType="hashmap" resultType="hashmap">
-		select to_char(bpaydate, 'IW') bpaydate, sum(bfinalmoney) from bpayment
+		select to_char(bpaydate, 'IW') bpaydate, sum(bfinalmoney) from bpayment, paymentbook 
+        where bpayment.bpaynum = paymentbook.bpaynum and btype = 1 and bstatus in (3,5)
 		<include refid="weekSearch"/> 
 		 group by to_char(bpaydate, 'IW') order by bpaydate
 	</select>
+	
+	<select id="usedbookgetList" parameterType="hashmap" resultType="hashmap">
+		select  to_char(feedate,'yyyy-mm-dd') feedate, sum(feepay) from obcomplete
+		<include refid="daySearch"/>
+		group by feedate order by feedate
+	</select>
+	
+	<select id="usedbookmothList" parameterType="hashmap" resultType="hashmap">
+		select  to_char(feedate,'yyyy-mm') feedate, sum(feepay) from obcomplete
+		<include refid="monthSearch"/> 
+		group by to_char(feedate,'yyyy-mm') order by feedate	
+	</select>
+	
+	<select id="usedbookweekList" parameterType="hashmap" resultType="hashmap">
+		select to_char(feedate, 'IW') feedate, sum(feepay) from obcomplete 
+		<include refid="weekSearch"/> 
+		 group by to_char(feedate, 'IW') order by feedate
+	</select>
+	
+	
 	 
 </mapper>	

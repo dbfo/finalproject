@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- The Modal -->
 
 <div class="modal-content">
@@ -57,6 +58,7 @@
 							<c:forEach items="${vo.CSAndPaymentBook}" var="book">
 								<c:set var = "totalpoint" value = "${totalpoint+book.point }"/>
 								<tr>
+									
 									<td>${book.bnum}</td>
 									<td>${book.btitle}</td>
 									<td>${book.bcount}</td>
@@ -90,28 +92,32 @@
 						<c:set var="price" value="0" />
 						<c:forEach var="vo" items="${List}">
 							<c:set var = "returnPrice" value = "0"/>
+							<c:set var="length" value="${fn:length(vo.CSAndPaymentBook) }"/>
+							<c:set var="statusCount" value = "0"/>
 							<c:forEach items="${vo.CSAndPaymentBook}" var="book">
 								<c:if test="${book.type == 2 }">
 									<tr>
 										<c:set var="returnPrice" value = "${returnPrice + book.bprice }"/>
-										<td class = "paymentbookNum" style="display: none">${book.paymentbook_num}</td>
+										<td>
+											<input type="checkbox" <c:if test = "${book.status == 2 }"><c:set var = "statusCount" value = "${statusCount + 1}"/>disabled</c:if>>
+											<input type="hidden" name = "paymentbook_num"value="${book.paymentbook_num}">										
+										</td>
 										<td>${book.bnum}</td>
 										<td>${book.btitle}</td>
 										<td>${book.count}</td>
 										<td>${book.bprice}</td>
 										<td><c:out value = "${ book.point/book.bcount}"/></td>
 									</tr>
+								</c:if>
+							</c:forEach>
 									<tr>
-										<td colspan="5" align="right">
-											<button type="button" class="btn btn-success btn-md"
-												id="pickupBtn" onclick="pickupBtnClick(${book.paymentbook_num})"
-												<c:if test = "${vo.CSAndPaymentBook[0].status == 2}">disabled</c:if>>
+										<td colspan="6" align="right">
+											<button type="button" class="btn btn-success btn-md" <c:if test = "${length == statusCount}">disabled</c:if>
+												onclick = "clickPickupBtn(${length})" id="pickupBtn">
 												수거 완료
 											</button>
 										</td>
 									</tr>
-								</c:if>
-							</c:forEach>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -131,7 +137,7 @@
 							<tr>
 								<td>${vo.receiver }</td>
 								<td>${vo.bphone }</td>
-								<td>${vo.baddr }</td>
+								<td class = "addr">${vo.baddr }</td>
 							</tr>					
 						</c:forEach>
 					</tbody>
@@ -179,38 +185,50 @@
 
 <script type="text/javascript">
  
- 	function pickupBtnClick(paymentbookNum){
- 		console.log("bbbbb : "+paymentbookNum);
- 		ajpickUpfunction(paymentbookNum);	
- 	}
- 	
+	function clickPickupBtn(length){
+		var tdArr = new Array();
+		var idxArr = new Array();
+		var checkbox = $("input[type=checkbox]:checked");
+	
+		if(checkbox.length == 0){
+			alert("수거한 상품을 체크를 해주세요..")
+			return 
+		}
+		checkbox.each(function(i){
+			// checkbox.parent() : checkbox의 부모는 <td>이다.
+			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
+		
+			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+			var no = $("input[name=paymentbook_num]").eq(i).val();
+			
+			if(no != "책번호"){
+				tdArr.push(no);					
+				idxArr.push(i);
+			}
+			
+		})
+ 		ajpickUpfunction(length,tdArr,idxArr);
+	} 
  
 	function clickGiveBtn(bpaynum, returnPrice, point){
-		
-		//pickupBtn이 여러개일 수도 있으니깐 배열로 해야함
 		
 // 		console.log("길이 : " + $("#pickupBtn").length);
 // 		console.log("bpaynum : " + bpaynum);
 // 		console.log("paymentbookNum : " + $(".paymentbookNum").text());
 // 		alert("point : " + point);
 		
-		var length = $("#pickupBtn").length;
-
-		$("#pickupBtn").each(function(idx, item){
-			
-			if($(this).prop("disabled")){
-				console.log(idx)
-				if(idx == length-1){
-					ajGivefunction(bpaynum,returnPrice, point);
-				}
-			}else{
-				alert("먼저 수거 확인 부터 해주세요~");
-			}
-		})
+		if($("#pickupBtn").prop("disabled")){
+			ajGivefunction(bpaynum,returnPrice, point);
+		}else{
+			alert("먼저 수거 확인 부터 해주세요~");
+		}
 	}
 	
 	
-	function ajpickUpfunction(paymentbookNum){
+	function ajpickUpfunction(length,paymentbookNum,idxArr){
+
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/returnPickup",
 			dataType : "json",
@@ -218,7 +236,13 @@
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");
-					$("#pickupBtn").prop("disabled",true);
+					
+					 $("input[type=checkbox]:checked").each(function(i){
+						 $(this).prop("disabled","disabled")
+					 })
+					 if($("input[type=checkbox]:disabled").length == length){
+						 $("#pickupBtn").prop("disabled","disabled")
+					 }
 				}else{
 					alert("처리 실패 하셨습니다.")					
 				}
@@ -227,10 +251,19 @@
 	}
 	
 	function ajGivefunction(bpaynum,returnPrice, point){
+		console.log(bpaynum);
+		
+		var paybookArr = new Array();
+		$("input[name=paymentbook_num]").each(function(i){
+			paybookArr.push($(this).val());
+		})
+		
+		console.log(paybookArr);
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/doReturn",
 			dataType : "json",
-			data : {bpaynum : bpaynum, paymentbookNum : $(".paymentbookNum").text(), returnPrice : returnPrice, point : point},
+			data : {bpaynum : bpaynum, paymentbookNum : paybookArr , returnPrice : returnPrice, point : point},
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");
@@ -242,7 +275,13 @@
 		})	
 	}
  		
-
+	$(function(){
+		$('.addr').each(function(idx,item){
+			var addr = $(this).text();
+			addr =  addr.replace(/\|/g, ' ');
+			$(this).text(addr);			
+		})
+	})	
 
 </script>
 

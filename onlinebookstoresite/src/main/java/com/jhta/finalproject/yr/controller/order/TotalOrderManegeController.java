@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.jhta.finalproject.yj.vo.PageUtil;
 import com.jhta.finalproject.yr.service.PaymentService;
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 
@@ -19,9 +22,9 @@ public class TotalOrderManegeController {
 	
 	
 	@RequestMapping("/totalOrder")
-	public String ordersearch(Model model, String pfield, String  pkeyword,
+	public String ordersearch(Model model, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String pfield, String  pkeyword,
 			String tfield, String startDate, String endDate ,String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
-
+		
 //		주문번호, 주문자명		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pfield",pfield);
@@ -58,9 +61,19 @@ public class TotalOrderManegeController {
 //		회원타입(mname)
 		map.put("mType",mType);
 		
+//		페이징
+		int totalRowCnt = service.getTotalCount(map); // 전체글의 개수
+		System.out.println("ttt :" +totalRowCnt);
+		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
+
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		
 		List<PaymentAndBookListVo> list = service.paymentList(map);
 		
 		
+		model.addAttribute("pu", pu);
 		model.addAttribute("list", list);
 		model.addAttribute("pfield",pfield);
 		model.addAttribute("pkeyword",pkeyword);

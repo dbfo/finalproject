@@ -21,8 +21,26 @@ public class PaymentDao {
 //		return session.selectList(NAMESPACE+".allList",map);
 //	}
 	
-	//전체리스트보이도록
+	//새책 전체리스트보이도록
 	public List<PaymentAndBookListVo> paymentList(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".paymentList",map);
 	}
+	
+	//중고책 전체리스트보이도록
+
+	public List<PaymentAndBookListVo> usedBookPaymentList(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".usedBookPaymentList",map);
+	}
+	
+	//새책 전체 글 갯수
+	public int getTotalCount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getTotalCount",map);		
+	}
+
+	//중고책 전체 글 갯수
+	public int getusedBookTotalCount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getusedBookTotalCount",map);		
+	}
+	
+	
 }

@@ -11,7 +11,7 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
+				<table class="table table-bordered" width="100%"
 					cellspacing="0">
 					<thead>
 						<tr>
@@ -96,6 +96,42 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<div class="container-fluid">
+				<!-- 페이징 -->
+				<div id="listPaging">
+					<c:choose>
+						<c:when test="${pu.startPageNum > 1 }">
+							<button onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'" 
+								type="button" class="btn btn-outline-success">이전</button>
+						</c:when>
+					</c:choose>
+		
+					<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+						<c:choose>
+							<c:when test="${i == pu.pageNum }">
+									<button type="button" class="btn btn-success"
+										onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'">${i }</button>
+								</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-outline-success" 
+									onclick ="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'">${i }</button>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+		
+					<c:choose>
+							<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+								<button
+									onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${pu.endPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'"
+									type="button" class="btn btn-outline-success">다음</button>
+							</c:when>
+						</c:choose>
+				</div>
+				<br>
+				<!-- ////////////////// -->
+			</div>
+				
 			</div>
 		</div>
 	</div>

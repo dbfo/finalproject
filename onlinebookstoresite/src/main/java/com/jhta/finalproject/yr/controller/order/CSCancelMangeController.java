@@ -34,7 +34,7 @@ public class CSCancelMangeController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("bpaynum", bpaynum);
 		
-		List<PaymentAndCSBookListVo> list = service.paymentList(map);
+		List<PaymentAndCSBookListVo> list = service.getOnePayment(map);
 		int point = 0;
 		int deposit = 0;
 		

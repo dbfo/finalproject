@@ -70,6 +70,7 @@
 		<result property="ordermoney" column="ordermoney"/>
 		<result property="usedpoint" column="usedpoint"/>
 		<result property="methodpayment" column="methodpayment"/>
+		<result property="delfee" column="delfee"/>
 		<result property="receiver" column="receiver"/>
 		<result property="mnum" column="mnum"/>
 		<result property="mname" column="mname"/>
@@ -98,17 +99,54 @@
 			and type = #{type}
 		</if>
 	</sql>
-
-	<select id="paymentList" resultMap="CSAndPaymentBookList">
+	
+	<select id="getOnePayment" resultMap="CSAndPaymentBookList">
 		select bpayment.*, paymentbook.*, books.* ,members.mname, refundhistory.*
 	    from bpayment, paymentbook, members, books, refundhistory
 	    where bpayment.bpaynum = paymentbook.bpaynum
 	    and members.mnum = bpayment.mnum
 	    and paymentbook.bnum= books.bnum
 	    and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
-	    <include refid="CSStatus"/>
-	    <include refid="selectPaynum"/>	    
-	    <include refid="search"/>	    
+		<include refid="CSStatus"/>
+    	<include refid="selectPaynum"/>	    
+    	<include refid="search"/>	      
+	</select>
+
+	<select id="paymentList" resultMap="CSAndPaymentBookList">
+		select * from bpayment, paymentbook, members, books, refundhistory WHERE BPAYMENT.BPAYNUM in(
+             select bpaynum from (
+                 select a.*, ROWNUM rum from    
+                    (
+                           select DISTINCT bpayment.bpaynum
+                            from bpayment, paymentbook, members, books, refundhistory 
+                            where bpayment.bpaynum = paymentbook.bpaynum
+                            and members.mnum = bpayment.mnum 
+                            and paymentbook.bnum= books.bnum
+                            and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
+                            and btype = 1
+				    	    <include refid="CSStatus"/>
+					    	<include refid="selectPaynum"/>	    
+					    	<include refid="search"/>	  
+                    ) a
+                )   <![CDATA[where rum >= #{startRow} and rum <= #{endRow}]]>
+            )AND members.mnum = bpayment.mnum
+            and paymentbook.bpaynum = bpayment.bpaynum
+            and paymentbook.bnum= books.bnum
+            and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
+            order by bpayment.bpaynum
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+			select count(distinct bpayment.bpaynum) total
+		    from bpayment, paymentbook, members, books, refundhistory
+		    where bpayment.bpaynum = paymentbook.bpaynum
+		    and members.mnum = bpayment.mnum
+		    and paymentbook.bnum= books.bnum
+		    and paymentbook.paymentbook_num = refundhistory.paymentbook_num(+)
+		    and btype = 1
+    	    <include refid="CSStatus"/>
+	    	<include refid="selectPaynum"/>	    
+	    	<include refid="search"/>	
 	</select>
 
 <!-- 취소 -->
@@ -133,8 +171,11 @@
 
 <!-- 교환, 반품 상태 업데이트 -->
 	<update id="updateStatus" parameterType="hashmap">
-		update refundhistory set status = #{status} where 
+		update refundhistory set status = #{status} 
+		where 
+		<foreach collection="paymentbook_num" item = "paymentbook_num" separator="or">
 		paymentbook_num = #{paymentbook_num}
+		</foreach>	
 	</update>
 
 <!-- 회원번호 가져오기 -->

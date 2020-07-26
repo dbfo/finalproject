@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.CSManageService;
@@ -60,7 +61,7 @@ public class CSReturnMangeController {
 	//수거완료 눌렸을때
 	@RequestMapping("/cs/returnPickup")
 	@ResponseBody
-	public String changeStatus(String paymentbookNum) {
+	public String changeStatus(@RequestParam(value="paymentbookNum[]") List<Integer> paymentbookNum) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
@@ -68,6 +69,8 @@ public class CSReturnMangeController {
 		map.put("paymentbook_num", paymentbookNum);
 		
 		int n = service.updateStatus(map);
+		
+		System.out.println(n);
 		
 		JSONObject json = new JSONObject();
 		
@@ -84,12 +87,13 @@ public class CSReturnMangeController {
 	//예치금 전달 클릭시
 	@RequestMapping("cs/doReturn")
 	@ResponseBody
-	public String doReturnFuction(String bpaynum, String paymentbookNum, String returnPrice, String point) {
+	public String doReturnFuction(String bpaynum, @RequestParam(value="paymentbookNum[]") List<Integer> paymentbookNum, String returnPrice, String point) {
 		
 		int ibpaynum = Integer.parseInt(bpaynum);
 		
 		//회원 번호 가져오기
 		int mnum = rservice.getMnum(ibpaynum);
+		
 		
 		//포인트 차감, 예치금 증감 시키기, 상태 변화시키기
 		PointVo pointVo = new PointVo(mnum, ibpaynum, Integer.parseInt(point)*-1 , null);
@@ -100,7 +104,7 @@ public class CSReturnMangeController {
 		
 		JSONObject json = new JSONObject();
 		try {
-			int n1 = rservice.updateStatus("3", stringToArray(paymentbookNum),pointVo, depositVo, map);
+			int n1 = rservice.updateStatus("3", paymentbookNum,pointVo, depositVo, map);
 			
 			System.out.println("결과 : " + n1);
 			

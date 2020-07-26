@@ -61,7 +61,7 @@
 	</select>
 
 	<update id="updateObcomplete" parameterType="int"> 
-		update obcomplete set bocomstatus = 1 where bpaynum = #{bpaynum}
+		update obcomplete set bocomstatus = 1, feedate = sysdate where bpaynum = #{bpaynum}
 	</update>
 	
 	<insert id="insertDeposit" parameterType="depositVo">

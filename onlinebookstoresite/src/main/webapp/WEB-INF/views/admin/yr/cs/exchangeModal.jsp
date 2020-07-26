@@ -83,7 +83,7 @@
 							<tr>
 								<td>${vo.receiver }</td>
 								<td>${vo.bphone }</td>
-								<td>${vo.baddr }</td>
+								<td class = "addr">${vo.baddr }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -143,16 +143,18 @@
 <script type="text/javascript">
 	
 	function changeStatusClick(level, paymentBookNum){
-		alert(paymentBookNum);
 		doAjax(level, paymentBookNum);
 	}
 
 	function doAjax(level, paymentBookNum){
 		
+		var paymentBookNumArr = new Array();
+		paymentBookNumArr.push(paymentBookNum);
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/doExchange",
 			dataType : "json",
-			data : {paymentbookNum : paymentBookNum, level : level},
+			data : {paymentbookNum : paymentBookNumArr, level : level},
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");
@@ -164,5 +166,12 @@
 		})		
 	}
 	
+	$(function(){
+		$('.addr').each(function(idx,item){
+			var addr = $(this).text();
+			addr =  addr.replace(/\|/g, ' ');
+			$(this).text(addr);			
+		})
+	})	
 </script>
 

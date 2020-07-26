@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.CSManageService;
@@ -35,7 +36,7 @@ public class CSExchangeMangeController {
 	
 	@RequestMapping("cs/doExchange")
 	@ResponseBody
-	public String changeExchangeStatus(String paymentbookNum, String level) {
+	public String changeExchangeStatus(@RequestParam(value="paymentbookNum[]") List<Integer> paymentbookNum, String level) {
 
 //		System.out.println(paymentbookNum + " : " + level);
 		

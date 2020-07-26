@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhta.finalproject.yj.vo.PageUtil;
 import com.jhta.finalproject.yr.service.CSManageService;
 import com.jhta.finalproject.yr.service.DepositService;
 import com.jhta.finalproject.yr.vo.PaymentAndCSBookListVo;
@@ -24,8 +26,8 @@ public class CSMenuController {
 	
 	
 	@RequestMapping("/cs/menu")
-	public String goCSMenu(Model model, String PageName, String pfield, String  pkeyword,
-			String tfield, String startDate, String endDate ,String  bfield, String bkeyword,
+	public String goCSMenu(Model model, String PageName,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+			String pfield, String  pkeyword,String tfield, String startDate, String endDate ,String  bfield, String bkeyword,
 			String status,String mType ) {
 		
 		//상단 cs 갯수 상황판
@@ -35,10 +37,6 @@ public class CSMenuController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		String CSStatus = PageName; 
-		
-		if( PageName.equals("0")) {
-			CSStatus = "1";
-		}
 		
 //		System.out.println(	"2pfield : "+ pfield
 //		+" 2pkeyword : "+ pkeyword
@@ -79,6 +77,16 @@ public class CSMenuController {
 //		회원타입(mname)
 		map.put("mType",mType);
 		
+		int totalRowCnt = service.getTotalCount(map); // 전체글의 개수
+		
+		System.out.println("tr : " + totalRowCnt);
+		
+		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
+
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		
 		if(!PageName.equals("4") && !PageName.equals("5") && !PageName.equals("6")) {
 			
 			List<PaymentAndCSBookListVo> list = service.paymentList(map);
@@ -101,6 +109,7 @@ public class CSMenuController {
 		}
 		
 		
+		model.addAttribute("pu", pu);		
 		model.addAttribute("countList", CSCount);		
 		model.addAttribute("pfield",pfield);
 		model.addAttribute("pkeyword",pkeyword);
@@ -111,12 +120,9 @@ public class CSMenuController {
 		model.addAttribute("bkeyword",bkeyword);
 		model.addAttribute("status",status);
 		model.addAttribute("mType",mType);	
+		model.addAttribute("PageName",PageName);	
 		
-		if(PageName.equals("0")) { //입금 전 취소
-			model.addAttribute("checked","tab2");
-			model.addAttribute("path",0);		
-			return ".cs.cancel";
-		}else if(PageName.equals("1")) { //취소
+		if(PageName.equals("1")) { //취소
 			model.addAttribute("checked","tab1");
 			model.addAttribute("path",1);		
 			return ".cs.cancel";

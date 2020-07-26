@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yr.service.PaymentService;
@@ -15,14 +16,23 @@ import com.jhta.finalproject.yr.service.ShipManageService;
 import com.jhta.finalproject.yr.vo.PaymentAndBookListVo;
 
 @Controller
-public class SMPreparingShipController {
+public class SMChangeShipStatusController {
 	@Autowired
 	private ShipManageService service;
 	
 	@RequestMapping(value="/ship/changeToShipping")
 	@ResponseBody
-	public String changeToShipping(int bpaynum) {
-		int n = service.updatePrepareToShipping(bpaynum);
+	public String changeToShipping(@RequestParam(value="bpaynum[]") List<Integer> bpaynum, int bstatus) {
+		
+		for (Integer integer : bpaynum) {
+			
+			System.out.println(integer);
+		}
+			
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bpaynum", bpaynum);
+		map.put("bstatus", bstatus);
+		int n = service.updateBstatus(map);
 		
 		JSONObject json = new JSONObject();
 		if(n>0) {
@@ -30,9 +40,7 @@ public class SMPreparingShipController {
 		}else {
 			json.put("code","error");						
 		}
-		
 		return json.toString();
-		
 	}
 	
 }

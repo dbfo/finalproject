@@ -24,4 +24,15 @@ public class SalesService {
 	public List<HashMap<String, String>> weekList(HashMap<String,Object> map){
 		return dao.weekList(map);
 	}
+	
+	public List<HashMap<String, String>> usedbookgetList(HashMap<String,Object> map){
+		return dao.usedbookgetList(map);
+	}
+	
+	public List<HashMap<String, String>> usedbookmothList(HashMap<String,Object> map){
+		return dao.usedbookmothList(map);
+	}
+	public List<HashMap<String, String>> usedbookweekList(HashMap<String,Object> map){
+		return dao.usedbookweekList(map);
+	}
 }

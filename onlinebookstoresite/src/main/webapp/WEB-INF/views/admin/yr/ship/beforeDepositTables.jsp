@@ -10,7 +10,7 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
+				<table class="table table-bordered" width="100%"
 					cellspacing="0">
 					<thead>
 						<tr>
@@ -19,6 +19,7 @@
 							<th>주문일(결제일)</th>
 							<th>주문자</th>
 							<th>책 제목</th>
+							<th>배송료</th>
 							<th>총 실제 결제 금액</th>
 							<th>결제수단</th>
 						</tr>
@@ -49,6 +50,7 @@
 									</c:forEach>
 								</td>
 								
+								<td>${vo.delfee}</td>
 								<td>${vo.bfinalmoney}</td>
 								<!-- 결제수단 -->
 								<c:choose>
@@ -65,6 +67,41 @@
 				</table>
 				<input class="btn btn-outline-success" id = "checkBtn" type = "button" value = "입금확인">
 			</div>
+			
+			<div class="container-fluid">
+			<!-- 페이징 -->
+			<div id="listPaging">
+				<c:choose>
+					<c:when test="${pu.startPageNum > 1 }">
+						<button onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'" 
+							type="button" class="btn btn-outline-success">이전</button>
+					</c:when>
+				</c:choose>
+	
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${i == pu.pageNum }">
+								<button type="button" class="btn btn-success"
+									onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'">${i }</button>
+							</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-success" 
+								onclick ="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'">${i }</button>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+				<c:choose>
+						<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+							<button
+								onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'"
+								type="button" class="btn btn-outline-success">다음</button>
+						</c:when>
+					</c:choose>
+			</div>
+			<br>
+			<!-- ////////////////// -->
+		</div>
 		</div>
 	</div>
 </div>

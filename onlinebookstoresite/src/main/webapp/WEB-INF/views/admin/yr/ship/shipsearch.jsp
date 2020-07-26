@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="${pageContext.request.contextPath }/ship/menu?PageName=${path}" method="post">
+<form action="${pageContext.request.contextPath }/ship/menu?PageName=${path}&type=${type}" method="post">
 <table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>

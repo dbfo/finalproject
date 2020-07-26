@@ -15,6 +15,7 @@ public class PaymentAndBookListVo {
 	private int ordermoney; // 주문금액
 	private int usedpoint; // 포인트 사용량
 	private int methodpayment; // 지불방법(0:카드,1:무통장)
+	private int delfee;// 배송료
 	private String receiver;// 수령인
 	private int mnum; // 회원 번호
 	private String mname;// 회원이름(주문자이름)
@@ -23,20 +24,19 @@ public class PaymentAndBookListVo {
 	
 
 
+
 	@Override
 	public String toString() {
 		return "PaymentAndBookListVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
 				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
-				+ ", odermoney=" + ordermoney + ", usedpoint=" + usedpoint + ", methodpayment=" + methodpayment
-				+ ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname  +  ", paymentbook=" + paymentbook + "]";
+				+ ", ordermoney=" + ordermoney + ", usedpoint=" + usedpoint + ", methodpayment=" + methodpayment
+				+ ", delfee=" + delfee + ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname
+				+ ", paymentbook=" + paymentbook + "]";
 	}
 
-
-
-
 	public PaymentAndBookListVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate,
-			Date bpaydate, int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int mnum,
-			String mname, List<PaymentBooksVo> paymentbook) {
+			Date bpaydate, int bstatus, int ordermoney, int usedpoint, int methodpayment, int delfee, String receiver,
+			int mnum, String mname, List<PaymentBooksVo> paymentbook) {
 		super();
 		this.bpaynum = bpaynum;
 		this.baddr = baddr;
@@ -48,14 +48,12 @@ public class PaymentAndBookListVo {
 		this.ordermoney = ordermoney;
 		this.usedpoint = usedpoint;
 		this.methodpayment = methodpayment;
+		this.delfee = delfee;
 		this.receiver = receiver;
 		this.mnum = mnum;
 		this.mname = mname;
 		this.paymentbook = paymentbook;
 	}
-
-
-
 
 	public PaymentAndBookListVo() {
 		super();
@@ -137,7 +135,7 @@ public class PaymentAndBookListVo {
 		return ordermoney;
 	}
 
-	public void setOdermoney(int ordermoney) {
+	public void setOrdermoney(int ordermoney) {
 		this.ordermoney = ordermoney;
 	}
 
@@ -164,6 +162,17 @@ public class PaymentAndBookListVo {
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
+	
+	public int getDelfee() {
+		return delfee;
+	}
+
+	public void setDelfee(int delfee) {
+		this.delfee = delfee;
+	}
+
+
+
 
 	public int getMnum() {
 		return mnum;
