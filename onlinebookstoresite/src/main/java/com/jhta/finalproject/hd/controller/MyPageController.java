@@ -7,15 +7,21 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.finalproject.hd.service.MyPageService;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
 
 @Controller
 public class MyPageController {
+	@Autowired
+	private MyPageService service;
+	
 	@RequestMapping("/mypage/main")
 	public String conMyPage() {
 		return ".mypage";
@@ -24,9 +30,9 @@ public class MyPageController {
 	public String cancelHistorypage() {
 		return ".cancelhistory";
 	}
-	@RequestMapping("/mypage/cancelhistory")
+	@RequestMapping(value="/mypage/cancelhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String cancelhistory(HttpSession session,@RequestParam(required=false)String startDay,
+	public String cancelhistory(HttpSession session,@RequestParam(required=false)String startDay,String value,
 			@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
@@ -60,14 +66,19 @@ public class MyPageController {
 			JSONObject json=new JSONObject();
 			json.put("ordernum", vo1.getOrdernum());
 			json.put("borderdate", vo1.getBorderdate());
-			String status="취소";
+			String status="";
+			int bstatus=vo1.getBstatus();
+			if(bstatus==6) {
+				status="취소";
+			}else if(bstatus==4) {
+				status="반품신청";
+			}else if(bstatus==5) {
+				status="반품완료";
+			}
 			
-			
-			json.put("bstatus", 6);
+			json.put("bstatus", bstatus);
 			json.put("status", status);
 			json.put("ordermoney", vo1.getOrdermoney());
-			json.put("mname", vo1.getMname());
-			json.put("receiver", vo1.getReceiver());
 			json.put("ordername", vo1.getOrdername());
 			jarr.put(json);
 		}
@@ -86,5 +97,87 @@ public class MyPageController {
 		jarr.put(json);
 		return jarr.toString();
 	}
-	
+	//중고제품 주문내역
+		@RequestMapping(value="/mypage/usedcancelhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String viewusedorderhistroy(HttpSession session,@RequestParam(required=false)String startDay,String value,
+				@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String,Object>datemap=new HashMap<String, Object>();
+			datemap.put("startDay", startDay);
+			datemap.put("endDay",endDay);
+			datemap.put("mnum",mnum);
+			datemap.put("value",value);
+			datemap.put("separate","used");
+			int totalcount=service.countHistory(datemap);
+			System.out.println("중고주문리스트 내역 총행 : "+totalcount);
+			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
+			datemap.put("startRow", pu.getStartRow());
+			datemap.put("endRow", pu.getEndRow());
+			List<HistoryListVo> list=service.orderhistory(datemap);
+			for(HistoryListVo vo:list) {
+				int bpaynum=vo.getOrdernum();
+				HashMap<String,Object>map=service.confirmtype(bpaynum);		
+				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
+				int bfinalmoney=vo.getBfinalmoney();
+				int delfee=vo.getDelfee();
+				vo.setOrdermoney(bfinalmoney+delfee);
+				int count=service.countPaymentBook(bpaynum);
+				HashMap<String,Object> usedmap=service.usedBtitle(bnum);
+				String btitle=(String)usedmap.get("OBNAME");
+				int status=Integer.parseInt(String.valueOf(usedmap.get("OBSTATUS")));
+				String statusString="";
+				if(status==1) {
+					statusString="[중고-최상]";
+				}else if(status==2) {
+					statusString="[중고-상]";
+				}else if(status==3) {
+					statusString="[중고-중]";
+				}else if(status==4) {
+					statusString="[중고-하]";
+				}
+				String ordername=statusString+" "+btitle;
+				if(count>1) {
+					ordername+=" 외 "+(count-1)+"종";
+				}
+				vo.setOrdername(ordername);
+							
+			}
+			JSONArray jarr=new JSONArray();
+			for(HistoryListVo vo1:list) {
+				JSONObject json=new JSONObject();
+				json.put("ordernum", vo1.getOrdernum());
+				json.put("borderdate", vo1.getBorderdate());
+				String status="";
+				int bstatus=vo1.getBstatus();
+				if(bstatus==6) {
+					status="취소";
+				}else if(bstatus==4) {
+					status="반품신청";
+				}else if(bstatus==5) {
+					status="반품완료";
+				}
+				
+				json.put("bstatus", bstatus);
+				json.put("status", status);
+				json.put("ordermoney", vo1.getOrdermoney());
+				json.put("ordername", vo1.getOrdername());
+				jarr.put(json);
+			}
+			JSONObject json=new JSONObject();
+			json.put("value", value);
+			json.put("startDay", startDay);
+			json.put("endDay", endDay);
+			json.put("pageNum", pu.getPageNum());
+			json.put("totalPageCount", pu.getTotalPageCount());
+			json.put("startPageNum", pu.getStartPageNum());
+			if(pu.getEndPageNum()>=pu.getTotalPageCount()) {
+				pu.setEndPageNum(pu.getTotalPageCount());
+			}
+			json.put("endPageNum", pu.getEndPageNum());
+			
+			jarr.put(json);
+			return jarr.toString();
+		}
 }

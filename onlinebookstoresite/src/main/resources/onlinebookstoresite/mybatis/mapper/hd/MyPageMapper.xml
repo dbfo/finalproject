@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.MyPageMapper">
+	<select id="orderhistory" parameterType="hashmap" resultType="historyVo">
+		select * from(
+		SELECT aa.*,rownum rnum FROM (
+		select bpayment.bpaynum ordernum,borderdate,bfinalmoney,delfee,bstatus,mname,receiver,btype from
+		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
+		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+		and 
+		<choose>
+			<when test="value=='return'">
+				<![CDATA[bstatus>=4 and bstatus<6]]>
+			</when>
+			<otherwise>
+				bstatus=6
+			</otherwise>
+		</choose>
+		)bpayment,			
+		(select * from members)members,
+		 (select bpaynum,max(btype) btype from 
+            paymentbook 
+            group by bpaynum 
+            having max(btype)=
+            <choose>
+	        	<when test="separate=='new'">
+	        	1
+	        	</when>
+	        	<otherwise>
+	        	2
+	        	</otherwise>
+        	</choose>
+            )pb
+		where members.mnum=bpayment.mnum and pb.bpaynum=bpayment.bpaynum
+		order by borderdate desc
+		) aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<select id="countHistory" parameterType="hashmap" resultType="int">
+		select NVL(count(*),0) from
+		(select TO_DATE(borderdate,'YY/MM/DD') borderdate,bpaynum,bfinalmoney,delfee,bstatus,receiver,mnum from bpayment where mnum=#{mnum} and 
+		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+			AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+		and	
+		<choose>
+			<when test="value=='return'">
+				<![CDATA[bstatus>=4 and bstatus<6]]>
+			</when>
+		
+			<otherwise>
+				bstatus=6
+			</otherwise>
+		</choose>
+		)bpayment,						
+		(select * from members)members,
+		(select bpaynum,max(btype)  from 
+        paymentbook 
+        group by bpaynum 
+        having max(btype)=
+        <choose>
+        	<when test="separate=='new'">
+        	1
+        	</when>
+        	<otherwise>
+        	2
+        	</otherwise>
+        </choose>
+        )pb
+		where members.mnum=bpayment.mnum and bpayment.bpaynum=pb.bpaynum
+	</select>
+	<select id="confirmtype" parameterType="int" resultType="hashmap">
+		select btype,bnum from paymentbook where bpaynum=#{bpaynum} and rownum=1
+	</select>
+	
+	<select id="countPaymentBook" parameterType="int" resultType="int">
+		select count(*) from paymentbook where bpaynum=#{bpaynum}
+	</select>
+	
+	<select id="newBtitle" parameterType="int" resultType="string">
+		select btitle from books where bnum=#{bnum}
+	</select>
+	
+	<select id="usedTitle" parameterType="int" resultType="hashmap">
+		select obname,obstatus from oldbooks where obnum=#{bnum}
+	</select>
+	
+	
+	
+</mapper>

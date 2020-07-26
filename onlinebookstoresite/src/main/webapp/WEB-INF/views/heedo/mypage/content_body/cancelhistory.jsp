@@ -31,10 +31,8 @@
 						<th style="text-align:center;">주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
 						<th>주문일자</th>
-						<th>주문상태</th>
+						<th>상태</th>
 					</thead>
 					<tbody>
 					
@@ -71,10 +69,8 @@
 						<th style="text-align:center;">주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
 						<th>주문일자</th>
-						<th>주문상태</th>
+						<th>상태</th>
 					</thead>
 					<tbody>
 					
@@ -122,13 +118,13 @@
 			+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
 			$("#usedPaging").append(paginationapp);
 		$.ajax({
-			url:'/finalproject/orderhistroy/usedview',
+			url:'/finalproject/mypage/usedcancelhistory',
 			dataType:'json',
 			type:'post',
-			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
+			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:"cancel"},
 			success:function(data){
 				if(data.length==1){ //값이없을때..
-					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
+					var tableapp="<tr><td colspan='7'>취소내역이 없습니다.</td></tr>";
 					$("#usedTable > tbody").append(tableapp);
 					
 					return;
@@ -179,8 +175,6 @@
 							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/useddetailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
 							    +"<td><a class='movedetail' href='${cp}/orderhistory/useddetailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
-							    +"<td>"+item.mname+"</td>"
-							    +"<td>"+item.receiver+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 
@@ -208,10 +202,10 @@
 			url:'/finalproject/mypage/cancelhistory',
 			dataType:'json',
 			type:'post',
-			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
+			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:"cancel"},
 			success:function(data){
 				if(data.length==1){ //값이없을때..
-					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
+					var tableapp="<tr><td colspan='7'>취소내역이 없습니다.</td></tr>";
 					$("#newTable > tbody").append(tableapp);
 					
 						return;
@@ -262,8 +256,6 @@
 							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
 							    +"<td><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
-							    +"<td>"+item.mname+"</td>"
-							    +"<td>"+item.receiver+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 
