@@ -68,19 +68,22 @@
 			<tr>
 				<th class="table-active">주문상태</th>
 				<td colspan="3">
-					<input class = "searchChb" type="checkbox" name= "bstatus" value="-1" id = "pstotal" <c:if test="${bstatus == '-1'}">checked</c:if>><label for="pstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-					<input class = "searchChb"type="checkbox" name= "bstatus" value="0,1" id = "beforeShip" <c:if test="${bstatus == '0,1' }">checked</c:if>><label for="beforeShip"> &nbsp;배송전&nbsp;&nbsp;</label>
-					<input class = "searchChb"type="checkbox" name= "bstatus" value="2" id = "shipping" <c:if test="${bstatus == '2'}">checked</c:if>><label for="shipping"> &nbsp;배송중&nbsp;&nbsp;</label>
-					<input class = "searchChb" type="checkbox" name= "bstatus" value="3" id = "completeShip" <c:if test="${bstatus == '3'}">checked</c:if>><label for="completeShip"> &nbsp;배송 완료&nbsp;&nbsp;</label>
+					
+						<input class = "searchChb" type="checkbox" name= "bstatus" value="-1" id = "pstotal"<c:forEach var="bstatus" items="${bstatus }"> <c:if test="${bstatus == '-1'}">checked</c:if></c:forEach>><label for="pstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+						<input class = "searchChb"type="checkbox" name= "bstatus" value="0,1" id = "beforeShip"<c:forEach var="bstatus" items="${bstatus }"> <c:if test="${bstatus == '0' || bstatus == '1' }">checked</c:if></c:forEach>><label for="beforeShip"> &nbsp;배송전&nbsp;&nbsp;</label>
+						<input class = "searchChb"type="checkbox" name= "bstatus" value="2" id = "shipping" <c:forEach var="bstatus" items="${bstatus }"><c:if test="${bstatus == '2'}">checked</c:if></c:forEach>><label for="shipping"> &nbsp;배송중&nbsp;&nbsp;</label>
+						<input class = "searchChb" type="checkbox" name= "bstatus" value="3" id = "completeShip" <c:forEach var="bstatus" items="${bstatus }"><c:if test="${bstatus == '3'}">checked</c:if></c:forEach>><label for="completeShip"> &nbsp;배송 완료&nbsp;&nbsp;</label>
+					
 				</td>
 			</tr>
 			<tr>
 				<th class="table-active">cs주문상태</th>
 				<td colspan="3">
-					<input class = "searchChb"type="checkbox" name= "type" value="-1" id = "cpstotal" <c:if test="${type == '-1'}">checked</c:if>><label for="cpstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-					<input class = "searchChb"type="checkbox" name= "type" value="1" id = "cancle" <c:if test="${type == '1'}">checked</c:if>><label for="cancle"> &nbsp;취소 &nbsp;&nbsp;</label>
-					<input class = "searchChb"type="checkbox" name= "type" value="2" id = "return" <c:if test="${type == '2'}">checked</c:if>><label for="return"> &nbsp;반품 &nbsp;&nbsp;</label>
-					<input class = "searchChb"type="checkbox" name= "type" value="3" id = "exchange" <c:if test="${type == '3'}">checked</c:if>><label for="exchange"> &nbsp;교환 &nbsp;&nbsp;</label>
+					
+						<input class = "searchChb"type="checkbox" name= "type" value="-1" id = "cpstotal" <c:forEach var="type" items="${type}"><c:if test="${type == '-1'}">checked</c:if></c:forEach>><label for="cpstotal"> &nbsp;전체 &nbsp;&nbsp;</label>
+						<input class = "searchChb"type="checkbox" name= "type" value="1" id = "cancle" <c:forEach var="type" items="${type}"><c:if test="${type == '1'}">checked</c:if></c:forEach>><label for="cancle"> &nbsp;취소 &nbsp;&nbsp;</label>
+						<input class = "searchChb"type="checkbox" name= "type" value="2" id = "return" <c:forEach var="type" items="${type}"><c:if test="${type == '2'}">checked</c:if></c:forEach>><label for="return"> &nbsp;반품 &nbsp;&nbsp;</label>
+						<input class = "searchChb"type="checkbox" name= "type" value="3" id = "exchange" <c:forEach var="type" items="${type}"><c:if test="${type == '3'}">checked</c:if></c:forEach>><label for="exchange"> &nbsp;교환 &nbsp;&nbsp;</label>
 				</td>
 			</tr>
 			<tr>

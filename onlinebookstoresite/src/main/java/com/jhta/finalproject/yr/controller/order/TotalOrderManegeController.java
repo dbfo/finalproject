@@ -42,15 +42,17 @@ public class TotalOrderManegeController {
 		map.put("bkeyword",bkeyword);
 
 //		주문상태
+		String[] bstatusArray = {};
 		if(bstatus != null && bstatus != "") {
-			String[] bstatusArray = stringToArray(bstatus);
+			bstatusArray = stringToArray(bstatus);
 			map.put("bstatus",bstatusArray);			
 		}
 		
 //		cs주문상태
 //		refundhistory --- 0 : 없음, 1 :취소, 2: 반품, 3: 교환
+		String[] typeArray = {};
 		if(type != null && type != "") {
-			String[] typeArray= stringToArray(type);
+			typeArray = stringToArray(type);
 			map.put("type",typeArray);			
 		}
 		
@@ -81,8 +83,8 @@ public class TotalOrderManegeController {
 		model.addAttribute("endDate",endDate);
 		model.addAttribute("bfield",bfield);
 		model.addAttribute("bkeyword",bkeyword);
-		model.addAttribute("bstatus",bstatus);
-		model.addAttribute("type",type);
+		model.addAttribute("bstatus",bstatusArray);
+		model.addAttribute("type",typeArray);
 		model.addAttribute("payType",payType);
 		model.addAttribute("mType",mType);		
 		
