@@ -25,6 +25,10 @@ public class MyPageController {
 	
 	@RequestMapping("/mypage/main")
 	public String conMyPage() {
+		
+		
+		
+		
 		return ".mypage";
 	}
 	@RequestMapping("/mypage/cancelhistorypage")

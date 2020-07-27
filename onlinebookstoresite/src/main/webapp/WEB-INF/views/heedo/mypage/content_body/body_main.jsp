@@ -3,7 +3,7 @@
 <div id="content_history">
 	
 	<div class="maintable" id="recentorderTable">
-	<h5>최근주문내역</h5>
+	<h5>최근주문내역(새상품)</h5>
 		<table class="table table-borderd" id="ordertable">
 			<thead class="table-dark">
 				<th>주문번호</th>

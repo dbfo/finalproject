@@ -146,4 +146,6 @@
 		insert into qna values(SEQ_qna_qnanum.nextval,#{mnum},#{qnatitle},#{qnacontent},0,sysdate)
 	</insert>
 	
+	<!-- 마이페이지 메인관련 sql문 -->
+	
 </mapper>
