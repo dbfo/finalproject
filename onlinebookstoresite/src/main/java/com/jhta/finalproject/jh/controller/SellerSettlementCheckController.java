@@ -27,10 +27,8 @@ public class SellerSettlementCheckController {
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
 			String feedate,String startDay,String endDay
 			) {
-		int snum=(Integer)session.getAttribute("snum");
-//		int snum=1;//중고판매자번호 나중에 세션에서 얻어옴@@@@@@@@@
+		int snum=(Integer)session.getAttribute("snum"); //중고판매자번호
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		System.out.println("페이지넘:"+pageNum);
 		map.put("snum",snum);
 		map.put("bocomstatus",bocomstatus); //정산상태
 		map.put("feedate",feedate);
@@ -40,8 +38,6 @@ public class SellerSettlementCheckController {
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 3);//페이징
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		System.out.println("startRow:"+pu.getStartRow());
-		System.out.println("endRow:"+pu.getEndRow());
 		List<SellerFeepayJoinVo> list=service.getSettlementList(map);
 		model.addAttribute("list", list);
 		model.addAttribute("pu", pu);

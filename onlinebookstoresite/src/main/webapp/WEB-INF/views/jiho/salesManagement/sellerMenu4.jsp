@@ -51,7 +51,7 @@
 			<!-- 검색박스 -->
 			<table class="table table-bordered">
 				<tr>
-					<th scope="col" rowspan="3" style="background-color: silver;text-align: center;" width="250">주문조회</th>
+					<th scope="col" rowspan="3" style="background-color: silver;text-align: center;padding-top: 65px;" width="250">주문조회</th>
 					<td><input type="radio" name="field4" value="all" class="field_menu4"
 						<c:if test="${map.field4=='all' || map.field4==null || map.field4==''}">checked</c:if>>전체
 						<input type="radio" name="field4" value="obname" class="field_menu4"

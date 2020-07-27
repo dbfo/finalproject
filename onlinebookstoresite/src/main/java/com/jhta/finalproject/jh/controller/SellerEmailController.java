@@ -50,8 +50,6 @@ public class SellerEmailController {
 	//인증코드가 완료되면 중고판매자 번호 insert
 	@RequestMapping("/seller/injeung")
 	public String sellerInjeung(HttpSession session) {
-		System.out.println("인증완료 컨트롤러");
-		System.out.println("인증회원번호:"+session.getAttribute("mnum"));
 		int mnum=Integer.parseInt((String)session.getAttribute("mnum"));
 		service.sellerInsert(mnum);//중고판매자 등록하기
 		int snum=service.getSnum(mnum);//중고판매자 번호 가져오기

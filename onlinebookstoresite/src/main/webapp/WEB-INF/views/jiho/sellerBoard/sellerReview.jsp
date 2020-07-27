@@ -3,7 +3,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-
+<style>
+#sellerReviewMain{
+	width: 1300px;
+	height: 700px;
+	margin:auto;
+}
+/*리뷰 헤더css*/
+#reviewHeader{
+	width: 1100px;
+	height: 200px;
+	margin:auto;
+	margin-top:30px;
+    padding-top: 65px;
+	background-image: url("${cp}/resources/jh/jhimages/판매자리뷰베너.png");
+}
+#jumsu{
+	font-size: 40px;
+	color: #FE2E64;
+	margin-left: 810px;
+	font-weight: bold;
+}
+/*리뷰테이블 css*/
+#reviewTable{
+	width: 1100px;
+	height: 400px;
+	margin: auto;
+	margin-top: 20px;
+}
+.reviewOrder{
+	color: black;
+}
+#reviewTable table{
+	text-align: center;
+}
+</style>
 <div id="sellerReviewMain">
 	<div id="reviewHeader">
 		<span id="jumsu">${reviewAvg}점</span>
@@ -19,7 +53,7 @@
 					<th width="150px">작성일자</th>
 				</tr>
 			</thead>
-			<c:forEach var="vo" items="${list }">
+			<c:forEach var="vo" items="${list }" varStatus="status">
 				<tr>
 					<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>				
 					<td style="text-align: left;" onclick="show('${vo.sreviewcontent}')">${vo.obname }</td>				

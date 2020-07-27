@@ -34,4 +34,12 @@ public class SellerMainBoardService {
 	public int getObcompleteCount(HashMap<String, Object> map) {
 		return dao.getObcompleteCount(map);
 	}
+	//최근 한달 Qna 미답변
+	public int getMainQnaCount(int snum) {
+		return dao.getMainQnaCount(snum);
+	}
+	//최근한달 리뷰갯수
+	public int getSellerReviewCount(int snum) {
+		return dao.getSellerReviewCount(snum);
+	}
 }

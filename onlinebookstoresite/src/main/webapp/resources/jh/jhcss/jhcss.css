@@ -25,18 +25,17 @@
 }
 /* ////////중고판매 현황판css///// */
 #sellerContentMain {
-	width: 1300px;
-	height: 900px;
-	border: 1px solid red;
+	width: 1150px;
+	height: 750px;
 	margin: auto;
+	background-color: #F5ECCE;
 }
 
 .sellerCard {
 	width: 600px;
-	height: 400px;
-	border: 1px solid black;
+	height: 550px;
 	float: left;
-	margin: 20px;
+	margin-left: 280px;
 }
 
 /* ////////////////////////////중고 상품등록폼 관련 css ///////////////////////////*/
@@ -160,143 +159,46 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
-
-
-
-
-
-
-/*=========================문의사항 상세페이지css========================*/
-#obQnaDetail{
-	width: 1300px;
-	height: 850px;
-	margin: auto;
+/*=============================판매관리css=============================*/
+/*메뉴1 입금대기중*/
+/*입금대기중 css*/
+#detail1 {
+	height: 1000px;
 }
-#sellerMoon{
-	width: 1000px;
-	height: 650px;
-	margin: auto;
-}
-#sellerQnatable tr,td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	width: 1000px;
-	
-}
-#sellerQnatable tr,td{
-	border: 1px solid #B4B7B7;
-}
-.moondetail{
+.toptr {
 	text-align: center;
-	background-color: #EDEDED;
-	width: 200px;
 }
-.moondetailText{
-	text-align: center;
-	width: 400px;
+
+#detail1 table .toptr {
+	height: 30px;
+	background-color: silver;
 }
-#thumb{
-	border: 1px solid #eaeaea;
-	width: 120px;
-	height: 180px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-/*답변css*/
-#dapTable{
-    margin-top: 30px;
-   
-}
-#dapTextarea{
-    margin-left: 50px;
-    margin-top: 30px;
-    border: 2px solid black;
-    border-radius: 10px 10px 10px 10px;
-    padding-left: 10px;
-    margin-right: 10px;
-    display: inline;
-}
-#sellerdap{
-	height: 180px;
-}
-#dapimg{
-	float:left;
-	margin-left:10px;
-	width: 160px;
-	margin: 0px;
-	padding: 0px;
-}
-/*답글있을 때 css*/
-#sellerdapOk{
-	height: 180px;
-}
-#sellerAnswer{
-	width: 800px;
-	height: 150px;
-	border: 1px solid green;
-	margin-left: 180px;
-	margin-top: 13px;
-	border: 2px solid #6E6E6E;
-    border-radius: 10px 10px 10px 10px;
-    background-color: #EDEDED;
-}
-#dapimgok{
-	width: 120px;
-	height: 120px;
-	margin-top:10px;
-	margin-left: 10px; 
-	float:left;
-}
-#answerContent{
-	width: 630px;
-	height: 120px;
-	float:left;
-	margin-top: 10px;
-	margin-left: 10px;
-	padding-left: 5px;
-	padding-top: 5px;
-}
-#dapinsertbt{
-	margin-left: 380px;
-}
-#dapupdatebt{
-	margin-left: 380px;
-}
-/*===================================리뷰관련 css==================*/
-#sellerReviewMain{
-	width: 1300px;
-	height: 700px;
-	margin:auto;
-}
-/*리뷰 헤더css*/
-#reviewHeader{
-	width: 1100px;
+
+#searchBox1 {
+	width: 1200px;
 	height: 200px;
-	margin:auto;
-	margin-top:30px;
-    padding-top: 65px;
-	background-image: url("${cp}/resources/jh/jhimages/판매자리뷰베너.png");
 }
-#jumsu{
-	font-size: 40px;
-	color: #FE2E64;
-	margin-left: 810px;
-	font-weight: bold;
+
+input[name='borderdate1'] {
+	margin-left: 20px;
+	margin-right: 10px;
 }
-/*리뷰테이블 css*/
-#reviewTable{
-	width: 1100px;
-	height: 400px;
-	margin: auto;
-	margin-top: 20px;
+
+input[name='keyword1'] {
+	margin-left: 20px;
+	width: 400px;
+	display: inline;
 }
-.reviewOrder{
-	color: black;
+
+#slaesListbt1 {
+	margin-left: 10px;
+	margin-right: 10px;
 }
-#reviewTable table{
-	text-align: center;
+
+input[name='field1'] {
+	margin-right: 10px;
+	margin-left: 20px;
 }
-/*==============================중고판매자 이메일인증 css관련======================*/
 
 
 

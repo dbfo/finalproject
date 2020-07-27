@@ -3,7 +3,105 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<style>
 
+/*=========================문의사항 상세페이지css========================*/
+#obQnaDetail{
+	width: 1300px;
+	height: 850px;
+	margin: auto;
+}
+#sellerMoon{
+	width: 1000px;
+	height: 650px;
+	margin: auto;
+}
+#sellerQnatable tr,td{
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 1000px;
+	
+}
+#sellerQnatable tr,td{
+	border: 1px solid #B4B7B7;
+}
+.moondetail{
+	text-align: center;
+	background-color: #EDEDED;
+	width: 200px;
+}
+.moondetailText{
+	text-align: center;
+	width: 400px;
+}
+#thumb{
+	border: 1px solid #eaeaea;
+	width: 120px;
+	height: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*답변css*/
+#dapTable{
+    margin-top: 30px;
+   
+}
+#dapTextarea{
+    margin-left: 50px;
+    margin-top: 30px;
+    border: 2px solid black;
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    display: inline;
+}
+#sellerdap{
+	height: 180px;
+}
+#dapimg{
+	float:left;
+	margin-left:10px;
+	width: 160px;
+	margin: 0px;
+	padding: 0px;
+}
+/*답글있을 때 css*/
+#sellerdapOk{
+	height: 180px;
+}
+#sellerAnswer{
+	width: 800px;
+	height: 150px;
+	border: 1px solid green;
+	margin-left: 180px;
+	margin-top: 13px;
+	border: 2px solid #6E6E6E;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #EDEDED;
+}
+#dapimgok{
+	width: 120px;
+	height: 120px;
+	margin-top:10px;
+	margin-left: 10px; 
+	float:left;
+}
+#answerContent{
+	width: 630px;
+	height: 120px;
+	float:left;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+#dapinsertbt{
+	margin-left: 380px;
+}
+#dapupdatebt{
+	margin-left: 380px;
+}
+</style>
 <div id="obQnaDetail">
 	<h1><img src="${cp }/resources/jh/jhimages/문의사항상세_1.png" style="margin-left: 125px;"></h1>
 	<div id="sellerMoon">

@@ -40,7 +40,6 @@ public class SellerProdInsertController {
 		return ".seller.product";
 	}
 	
-	
 	//========================대분류 선택시 소분류 가져오는 메소드========================
 	@RequestMapping("/seller/getSmallcate")
 	@ResponseBody
@@ -49,15 +48,13 @@ public class SellerProdInsertController {
 		return list;
 	}
 	
-	
 	//========================상품등록하기 위한 메소드========================
 	@RequestMapping(value="/seller/prodInsert") 
 	public String insertProd(HttpServletRequest req,HttpSession session, MultipartFile img1,//img1--thumbnail
 			MultipartFile img2,MultipartFile img3,MultipartFile img4) {
 		SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd");//날짜형식 지정
 		try {
-			int snum=(Integer)session.getAttribute("snum");
-//			int snum=1;  //판매자번호(테스트용) 추후 로그인 후 세션에서 받아올 예정
+			int snum=(Integer)session.getAttribute("snum");//중고판매자번호
 			String selleraddr=req.getParameter("addr1")+"|"+req.getParameter("addr2")+"|"+req.getParameter("addr3")+"|"+
 					req.getParameter("addr4")+"|"+req.getParameter("addr5"); //출고주소
 			int obdelfee=Integer.parseInt(req.getParameter("obdelfee"));//배송료

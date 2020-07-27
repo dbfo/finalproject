@@ -43,8 +43,6 @@
 	margin-right: 10px;
 	margin-left: 20px;
 }
-
-
 </style>
 <form action="${cp }/seller/salesManagement3?tabType=3&keyword3=${map.keyword3}&startDay3=${map.startDay3}&
 							endDay3=${map.endDay3}&field3=${map.field3}&bpaydate3=${map.bpaydate3}">
@@ -53,7 +51,7 @@
 			<!-- 검색박스 -->
 			<table class="table table-bordered">
 				<tr>
-					<th scope="col" rowspan="3" style="background-color: silver;text-align: center;" width="250">주문조회</th>
+					<th scope="col" rowspan="3" style="background-color: silver;text-align: center;padding-top: 65px;" width="250">주문조회</th>
 					<td><input type="radio" name="field3" value="all" class="field_menu3"
 						<c:if test="${map.field3=='all' || map.field3==null || map.field3==''}">checked</c:if>>전체
 						<input type="radio" name="field3" value="obname" class="field_menu3"

@@ -222,7 +222,6 @@ public class SellerProdUpdateController {
 	//상품삭제하는 메소드
 	@RequestMapping("/seller/oldbookDel")
 	public String oldbookDel(int obnum,HttpSession session) {
-		System.out.println("상품번호:"+obnum);
 		List<SellerImgVo> list=lookService.delImglist(obnum);
 		String uploadpath=session.getServletContext().getRealPath("/resources/jh/jhobupload");
 		for(int n=0;n<list.size();n++) {

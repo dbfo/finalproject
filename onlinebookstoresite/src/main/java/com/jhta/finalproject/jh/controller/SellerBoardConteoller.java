@@ -34,7 +34,6 @@ public class SellerBoardConteoller {
 			String obqdate,String startDay,String endDay,String field,
 			String keyword) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		System.out.println("키워드:"+keyword);
 		map.put("snum",session.getAttribute("snum"));//판매자번호
 		map.put("obqstatus", obqstatus);
 		map.put("obqdate", obqdate);
@@ -78,7 +77,6 @@ public class SellerBoardConteoller {
 			map.put("obqnum",obqnum);
 			map.put("obqacontent",obqacontent);
 			int n=service.sellerQnaInsert(map);
-			System.out.println("결과:"+n);
 			model.addAttribute("obqnum", obqnum);
 			return "redirect:/seller/qnadetail";
 		}catch(Exception e){
@@ -102,8 +100,6 @@ public class SellerBoardConteoller {
 	@RequestMapping("/seller/goqnaupdate")
 	public String sellerQnaUpdateOk(String obqnum,String obqacontent,Model model) throws Exception{
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		System.out.println("수정번호:"+obqnum);
-		System.out.println("수정내용:"+obqacontent);
 		map.put("obqnum",obqnum);
 		map.put("obqacontent",obqacontent);
 		service.updateObqanswer(map);

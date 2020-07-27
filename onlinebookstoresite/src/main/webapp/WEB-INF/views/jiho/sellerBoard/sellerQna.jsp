@@ -15,6 +15,9 @@
 	width: 1300px;
 	height: 330px;
 }
+.daptdstyle{
+	background-color: silver;
+}
 /*중고판매자 Qna 리스트 css*/
 #sellerQnaList{
 	width: 1250px;
@@ -25,6 +28,7 @@
     padding-left: 70px;
     padding-right: 70px;
 }
+
 </style>
 <div id="sellerQnaContent">
 	<!-- 검색박스 -->
@@ -33,7 +37,7 @@
 		<h2><img src="${cp }/resources/jh/jhimages/qna리스트_1.png"></h2>
 			<table class="table table-bordered">
 				<tr>
-					<td class="tdstyle" id="statusa">답변 상태별 조회</td>
+					<td class="daptdstyle" id="statusa">답변 상태별 조회</td>
 					<td class="prodLooktdStyle">
 						<input type="radio" name="obqstatus" value="2" 
 							<c:if test="${map.obqstatus==2 || map.obqstatus==null || map.obqstatus=='' }">checked</c:if>>전체
@@ -44,7 +48,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="tdstyle">등록일자별 조회</td>
+					<td class="daptdstyle">등록일자별 조회</td>
 					<td class="prodLooktdStyle">
 						<input type="radio" name="obqdate" value="all"
 							<c:if test="${map.obqdate=='all' || map.obqdate==null}">checked</c:if>>전체
@@ -57,7 +61,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="tdstyle">키워드로 검색</td>
+					<td class="daptdstyle">키워드로 검색</td>
 					<td>
 						<div class="input-group mt-1 mb-1">
 							<div class="input-group-prepend">

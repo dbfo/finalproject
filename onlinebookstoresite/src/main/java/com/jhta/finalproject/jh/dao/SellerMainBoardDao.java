@@ -32,4 +32,12 @@ public class SellerMainBoardDao {
 	public int getObcompleteCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE+".getObcompleteCount", map);
 	}
+	//최근 한달 Qna 미답변
+	public int getMainQnaCount(int snum) {
+		return sqlSession.selectOne(NAMESPACE+".getMainQnaCount", snum);
+	}
+	//최근 한달 리뷰갯수
+	public int getSellerReviewCount(int snum) {
+		return sqlSession.selectOne(NAMESPACE+".getSellerReviewCount", snum);
+	}
 }

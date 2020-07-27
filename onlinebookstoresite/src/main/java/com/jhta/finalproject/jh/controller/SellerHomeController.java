@@ -24,9 +24,7 @@ public class SellerHomeController {
 		if(session.getAttribute("snum")==null) {
 			return ".seller.certified";
 		}else {//중고판매자인 회원이동
-			int snum=(Integer)session.getAttribute("snum");
-			System.out.println("중고판매자번호:"+snum);
-	//		int snum=1;//나중에 세션에서 판매자번호 얻어오기
+			int snum=(Integer)session.getAttribute("snum");//중고판매자번호
 			//판매현황
 			HashMap<String, Object> map1=new HashMap<String, Object>();
 			map1.put("snum", snum);
@@ -59,6 +57,10 @@ public class SellerHomeController {
 			//최근 한달간 정산현황(0:정산전,1:정산후)
 			model.addAttribute("getObcompleteCount1", service.getObcompleteCount(map5));
 			model.addAttribute("getObcompleteCount2", service.getObcompleteCount(map6));
+			//최근 한달 Qna미답변
+			model.addAttribute("getMainQnaCount", service.getMainQnaCount(snum));
+			//최근 한달 리뷰갯수
+			model.addAttribute("getSellerReviewCount", service.getSellerReviewCount(snum));
 			return ".seller";
 		}
 	}

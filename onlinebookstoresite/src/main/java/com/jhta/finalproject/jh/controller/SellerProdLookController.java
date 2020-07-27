@@ -31,8 +31,7 @@ public class SellerProdLookController {
 			String startDay, //시작일
 			String endDay, //종료일
 			@RequestParam(value="regdate",defaultValue = "0")int regdate) {
-		int snum=(Integer)session.getAttribute("snum");
-//		int snum=1;//판매자번호 추후 세션에서 받아오기
+		int snum=(Integer)session.getAttribute("snum");//중고판매자번호
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		map.put("snum", snum);//판매자번호
 		map.put("obsalestatus",obsalestatus);
