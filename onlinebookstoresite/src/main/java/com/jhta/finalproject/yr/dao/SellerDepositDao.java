@@ -16,8 +16,14 @@ public class SellerDepositDao {
 	private SqlSessionTemplate session;
 	private final String NAMESPACE = "com.jhta.yr.mybatis.mapper.UsedBookSellerMapper";
 	
+	//해당 리스트 가져오기
 	public List<UsedOldBookSellerInfoVo> getList(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".getList",map);
+	}
+	
+	//전체 글갯구 가져오기
+	public int getCount(HashMap<String, Object> map){
+		return session.selectOne(NAMESPACE+".getCount",map);
 	}
 	
 	public int updateObcomplete(int bpaynum) {

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class = "container-fluid">
-<form action="${pageContext.request.contextPath }/admin/seller" method="post">
+<form action="${pageContext.request.contextPath }/admin/seller" method="post" id="searchform">
 	<h2>판매자 정산 관리</h2>
 	<table class="table searchbox">
 		<tr>
@@ -28,7 +28,8 @@
 			<th class="table-active">기간</th>
 			<td colspan="3">
 				<div class="row">
-					<select name = "tfield" class = "col form-control col-xs-2">
+					<select name = "tfield" class = "col col form-control col-md-1">
+						<option value =''>--선택--</option>
 						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>													
 						<option value="bpaydate" <c:if test="${tfield == 'bpaydate'}">selected</c:if>>결제일</option>			
 					</select>
@@ -45,8 +46,8 @@
 							name="sixmonth" value="6개월">
 					</div>
 						<div>
-							<input class="form-control" type="date" name = "startDate" id = "startDate" value="${startDate }"> &nbsp;~ &nbsp;
-							<input class="form-control" type="date" name = "endDate" id = "endDate" value="${endDate }">
+							<input type="date" name = "startDate" id = "startDate" value="${startDate }"> &nbsp;~ &nbsp;
+							<input type="date" name = "endDate" id = "endDate" value="${endDate }">
 						</div>
 				</div>
 			</td>
@@ -55,7 +56,7 @@
 			<td align="center" colspan="4"><input
 				class="btn btn-outline-success float-right yrbtn" type="reset"
 				value="초기화"> <input class="btn btn-success float-right yrbtn"
-				type="submit" value="검색"></td>
+				id = "searchSubmitBtn" type = "button" value="검색"></td>
 		</tr>
 	</table>
 </form>

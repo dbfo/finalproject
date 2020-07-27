@@ -16,7 +16,7 @@
 				<thead>
 					<tr>
 <!-- 						환불 -->
-						<c:if test="${path == 4 || path == 6 }">
+						<c:if test="${path == 4 || path == 5 }">
 							<th><input type = "checkbox"></th>
 						</c:if>
 						<th>번호</th>
@@ -32,7 +32,7 @@
 
 					<c:forEach var="vo" items="${list}">
 						<tr>
-							<c:if test="${path == 4 || path == 6 }">
+							<c:if test="${path == 4 || path == 5 }">
 								<td><input type = "checkbox" id = "sechb" <c:if test = "${vo.sestatus == 1 }">disabled</c:if>></td>
 							</c:if>
 							<td id = "senum">${vo.senum }</td>
@@ -54,16 +54,16 @@
 						</tr>
 					</c:forEach>
 						<tr>
-							<td colspan="8">
-								<c:if test="${path == 4 || path == 6 }">
+							<c:if test="${path == 4 || path == 5 }">
+								<td colspan="8">
 									<input id = "refundBtn" onclick = "abcbtn(${path})" class = "btn btn-success" type = "button" value = "처리하기">
-								</c:if>
-							</td>
+								</td>
+							</c:if>
 						</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="container-fluid">
+		<div class="pagination justify-content-center">
 			<!-- 페이징 -->
 			<div id="listPaging">
 				<c:choose>

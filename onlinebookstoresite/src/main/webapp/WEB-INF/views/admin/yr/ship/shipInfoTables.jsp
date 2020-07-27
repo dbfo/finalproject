@@ -80,7 +80,7 @@
 					<input class = "btn btn-success" type="button" id= "shipCompleteBtn" value = "배송완료 처리">
 				</c:if>
 			</div>
-			<div class="container-fluid">
+			<div class="pagination justify-content-center">
 			<!-- 페이징 -->
 			<div id="listPaging">
 				<c:choose>
@@ -128,6 +128,7 @@
 	function changeBstatusAja(bstatus,msg){
 		var tdArr = new Array();
 		var checkbox = $("input[type=checkbox]:checked");
+		
 
 		checkbox.each(function(i){
 			var tr = checkbox.parent().parent().eq(i);

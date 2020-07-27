@@ -76,7 +76,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="container-fluid">
+		<div class="pagination justify-content-center">
 			<!-- 페이징 -->
 			<div id="listPaging">
 				<c:choose>

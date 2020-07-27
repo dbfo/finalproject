@@ -6,10 +6,14 @@
 		float: left;
 /* 		display : inline-block;	 */
 	}
+	
+
+	
 </style>
 
-<div class="container-fluid ">
-	<h1 class="mt-4">Charts</h1>
+<h2 class="mt-4 mainTitle">Charts</h2>
+
+<div class="container-fluid" >
 	
 	<div>
 		<ul class = "tab">

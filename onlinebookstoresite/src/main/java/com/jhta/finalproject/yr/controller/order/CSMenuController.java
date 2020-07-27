@@ -77,31 +77,43 @@ public class CSMenuController {
 //		회원타입(mname)
 		map.put("mType",mType);
 		
-		int totalRowCnt = service.getTotalCount(map); // 전체글의 개수
-		
-		System.out.println("tr : " + totalRowCnt);
-		
-		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
-
-		map.put("startRow", pu.getStartRow());
-		map.put("endRow", pu.getEndRow());
+		PageUtil pu = new PageUtil();
 		
 		
 		if(!PageName.equals("4") && !PageName.equals("5") && !PageName.equals("6")) {
+			
+			int totalRowCnt = service.getTotalCount(map); // 전체글의 개수
+			
+//			System.out.println("tr : " + totalRowCnt);
+			
+			pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
+
+			map.put("startRow", pu.getStartRow());
+			map.put("endRow", pu.getEndRow());
+			
 			
 			List<PaymentAndCSBookListVo> list = service.paymentList(map);
 			model.addAttribute("list", list);
 			
 		}else {
 						
-			if(PageName.equals("4")) {
+			if(PageName.equals("5")) {
 				int sestatus = 0;
 				map.put("sestatus",sestatus);
 
-			}else if(PageName.equals("5")) {
+			}else if(PageName.equals("6")) {
 				int sestatus = 1;				
 				map.put("sestatus",sestatus);
 			}
+			
+			int totalRowCnt = dservice.getCount(map); // 전체글의 개수
+			
+			System.out.println("dtr : " + totalRowCnt);
+			
+			pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
+
+			map.put("startRow", pu.getStartRow());
+			map.put("endRow", pu.getEndRow());
 			
 			List<SettlementJoinVo> list= dservice.getSettlementList(map);
 			

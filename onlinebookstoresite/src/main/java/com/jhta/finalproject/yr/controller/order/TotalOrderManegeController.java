@@ -63,7 +63,6 @@ public class TotalOrderManegeController {
 		
 //		페이징
 		int totalRowCnt = service.getTotalCount(map); // 전체글의 개수
-		System.out.println("ttt :" +totalRowCnt);
 		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
 
 		map.put("startRow", pu.getStartRow());

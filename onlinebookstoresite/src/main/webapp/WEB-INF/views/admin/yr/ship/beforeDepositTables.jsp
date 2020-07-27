@@ -68,7 +68,7 @@
 				<input class="btn btn-outline-success" id = "checkBtn" type = "button" value = "입금확인">
 			</div>
 			
-			<div class="container-fluid">
+			<div class="pagination justify-content-center">
 			<!-- 페이징 -->
 			<div id="listPaging">
 				<c:choose>

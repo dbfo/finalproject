@@ -18,6 +18,7 @@
 							<th><input type ="checkbox"></th>
 							<th>주문일(결제일)</th>
 							<th>주문번호</th>
+							<th>책 주문번호</th>
 							<th>판매자[판매자 번호]</th>
 							<th>책 제목</th>
 							<th>구매자[구매자 번호]</th>
@@ -43,6 +44,7 @@
 									</c:choose>
 								</td>
 								<td>${vo.bpaynum}</td>
+								<td>${vo.paymentbook_num}</td>
 								<td>
 									<p>${vo.sellername }</p>
 									<u>${vo.seller}</u>
@@ -78,6 +80,38 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="pagination justify-content-center">
+			<!-- 페이징 -->
+			<div id="listPaging">
+				<c:choose>
+					<c:when test="${pu.startPageNum > 1 }">
+						<button onclick="location.href='${pageContext.request.contextPath }/admin/seller?&pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}'" 
+							type="button" class="btn btn-outline-success">이전</button>
+					</c:when>
+				</c:choose>
+	
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${i == pu.pageNum }">
+								<button type="button" class="btn btn-success"
+									onclick="location.href='${pageContext.request.contextPath }/admin/seller?&pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}'">${i }</button>
+							</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-success" 
+								onclick ="location.href='${pageContext.request.contextPath }/admin/seller?&pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}'">${i }</button>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+				<c:choose>
+						<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+							<button
+								onclick="location.href='${pageContext.request.contextPath }/admin/seller?&pageNum=${pu.startPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}'"
+								type="button" class="btn btn-outline-success">다음</button>
+						</c:when>
+					</c:choose>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>
@@ -88,23 +122,24 @@
 		
 		var sellernumArr = new Array();
  		var bpaynumArr = new Array();
+ 		var paymentbookArr = new Array();
  		var priceArr = new Array();
 		var checkbox = $("input[type=checkbox]:checked");
 		
 		checkbox.each(function(i){
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
 			var tr = checkbox.parent().parent().eq(i);
 			var td = tr.children();
 		
-			var pnum = td.eq(2).text();
-			var price = td.eq(6).text();
+			var pnum = td.eq(2).text(); //주문번호
+			var paymentbook = td.eq(3).text(); // 책 주문번호
+			var price = td.eq(8).text(); // 정산가격
 //  			var sellernum = td.eq(3).text();
-  			var std = td.eq(3);
-  			var sellernum = std.children().eq(1).text();
+  			var std = td.eq(4); 
+  			var sellernum = std.children().eq(1).text(); //판매자 번호
  			
   			if(pnum != '주문번호'){
 				bpaynumArr.push(pnum);
+				paymentbookArr.push(paymentbook);
 				sellernumArr.push(sellernum);
 				priceArr.push(price);  				
   			}
@@ -113,14 +148,14 @@
 		
 // 		console.log( bpaynumArr + "=====" + sellernumArr + " ====== " + priceArr );
 		
-		ajDepositToSeller(bpaynumArr,sellernumArr, priceArr);
+		ajDepositToSeller(paymentbookArr,bpaynumArr,sellernumArr, priceArr);
 	})
 	
-	function ajDepositToSeller(bpaynumArr,sellernumArr, priceArr){
+	function ajDepositToSeller(paymentbookArr,bpaynumArr,sellernumArr, priceArr){
 		$.ajax({
 			url : "${pageContext.request.contextPath}/admin/depositToSeller",
 			dataType : "json",
-			data : {bpaynum:bpaynumArr, sellernum:sellernumArr, price:priceArr},
+			data : {paymentBookNum:paymentbookArr, bpaynum : bpaynumArr ,sellernum:sellernumArr, price:priceArr},
 			success : function(data){
 				//var data=JSON.parse(dataa)
 				if(data.code == "success"){

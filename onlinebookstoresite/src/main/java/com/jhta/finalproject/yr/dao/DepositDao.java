@@ -26,4 +26,10 @@ public class DepositDao {
 	public int decreaseDeposit(HashMap<String, Object> map) {
 		return session.insert(NAMESPACE+".decreaseDeposit", map);
 	}	
+	
+	//갯수세기
+	public int getCount(HashMap<String, Object> map){
+		return session.selectOne(NAMESPACE+".getCount",map);
+	}
+	
 }

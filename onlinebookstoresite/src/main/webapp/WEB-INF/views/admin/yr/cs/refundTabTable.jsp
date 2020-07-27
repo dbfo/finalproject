@@ -6,9 +6,9 @@
 	<!-- 상단 탭메뉴 -->
 	<div class="salesTopMenu">
 	
-		<input id="tab1" type="radio" name="tabs"  <c:if test="${checked == 'tab1'}"> checked </c:if>><label for="tab1">신청</label>
-		<input id="tab2" type="radio" name="tabs" <c:if test="${checked == 'tab2'}"> checked </c:if>><label for="tab2">완료</label>
-		<input id="tab3" type="radio" name="tabs" <c:if test="${checked == 'tab3'}"> checked </c:if>><label for="tab3">전체</label>
+		<input id="tab1" type="radio" name="tabs"  <c:if test="${checked == 'tab1'}"> checked </c:if>><label for="tab1">전체</label>
+		<input id="tab2" type="radio" name="tabs" <c:if test="${checked == 'tab2'}"> checked </c:if>><label for="tab2">신청</label>
+		<input id="tab3" type="radio" name="tabs" <c:if test="${checked == 'tab3'}"> checked </c:if>><label for="tab3">완료</label>
 	
 		<section id="content1" >
 			<c:if test="${path == 4 }">
@@ -20,7 +20,6 @@
 				<jsp:include page="refundTable.jsp" />	
 			</c:if>
 		</section>
-	
 		<section id="content3">
 			<c:if test="${path == 6 }">
 				<jsp:include page="refundTable.jsp" />	

@@ -23,12 +23,17 @@ public class SellerDepositServiceImpl implements SellerDepositService{
 	
 	@Transactional
 	@Override
-	public int updateSellerDepositStatus(List<Integer> bpaynumList, List<Integer> sellernum, List<Integer> price) {
+	public int updateSellerDepositStatus(List<Integer> paymentBookNum,List<Integer> bpaynumList, List<Integer> sellernum, List<Integer> price) {
 		for (int i = 0; i < bpaynumList.size(); i++) {
-			int n = dao.updateObcomplete(bpaynumList.get(i));
+			int n = dao.updateObcomplete(paymentBookNum.get(i));
 			DepositVo vo = new DepositVo(0, sellernum.get(i), bpaynumList.get(i), price.get(i), null, 0); 
 			int n2 = dao.insertDeposit(vo);
 		}
 		return 1;
+	}
+	
+	@Override
+	public int getCount(HashMap<String, Object> map){
+		return dao.getCount(map);
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="${pageContext.request.contextPath }/ship/menu?PageName=${path}&type=${type}" method="post">
+<form action="${pageContext.request.contextPath }/ship/menu?PageName=${path}&type=${type}" method="post" id="searchform">
 <table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>
@@ -24,7 +24,8 @@
 			<th class="table-active">기간</th>
 			<td colspan="3">
 				<div class = "row">
-					<select name = "tfield" class = "col form-control col-xs-2">
+					<select name = "tfield" class = "col form-control col-md-1">
+						<option value =''>--선택--</option>
 						<option value="borderdate" <c:if test="${tfield == 'borderdate'}">selected</c:if>>주문일</option>
 						<option value="bpaydate" <c:if test="${tfield == 'bpaydate'}">selected</c:if>>결제일</option>
 					</select>
@@ -71,7 +72,7 @@
 		<tr>
 			<td align="center" colspan="4">
 				<input  class="btn btn-outline-success float-right yrbtn" type = "reset" value = "초기화">
-				<input class="btn btn-success float-right yrbtn" type = "submit" value = "검색" >
+				<input class="btn btn-success float-right yrbtn" id = "searchSubmitBtn" type = "button" value = "검색" >
 			</td>		
 		</tr>
 	</table>

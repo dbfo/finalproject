@@ -123,6 +123,11 @@ public class SalesManageController {
 		if(menu != null && menu != "") {
 			map.put("field","bpaydate");
 			
+			for (String key : map.keySet()) {
+				System.out.println(key + " : " + map.get(key));
+			}
+			
+			
 			if(menu.equals("1") ) {
 				result = service.getList(map);				
 			}else if(menu.equals("2")) {
