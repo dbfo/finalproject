@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.yj.service.MembersService;
 import com.jhta.finalproject.yj.vo.MembersVO;
@@ -22,7 +25,10 @@ public class JoinController {
 	public String join() {
 		return ".join";
 	}
-
+	
+//	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+//	@ResponseBody
+	
 	@PostMapping("/join")
 	public String joinOk(HttpServletRequest req) {
 		int n = 0;
