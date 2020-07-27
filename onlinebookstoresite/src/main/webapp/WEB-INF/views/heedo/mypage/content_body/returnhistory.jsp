@@ -5,7 +5,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
 <div id="content_history">	
-	<h4><span class="colorfont">반품</span>/<span class="colorfont">취소</span> 내역</h4>
+	<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span class="colorfont">반품</span>/<span class="colorfont">교환</span> 신청,완료 내역</h4>
 	<div class="tabs">
 	  <div class="tab-2" id="new_tab-2" style="z-index:2">
 	    <label for="tab2-1" style="background-color:#212529;color:white;" id="tabnew">새상품</label>
@@ -30,11 +30,10 @@
 				<div style="text-align: right" id="selectboxdiv">
 				
 					<select class="form-control" id="statusSelect">
-						<option value="all" selected="selected">전체</option>
-						<option value="order">주문</option>
-						<option value="complepayment">결제완료</option>
-						<option value="ship">배송</option>
-						<option value="confrim">수령확인</option>
+						<option value="returnall" selected="selected">전체</option>
+						<option value="apply">신청</option>
+						<option value="complete">완료</option>
+						
 					</select>
 				</div>
 				<table class="table" id="newTable">
@@ -42,10 +41,8 @@
 						<th style="text-align:center;">주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
 						<th>주문일자</th>
-						<th>주문상태</th>
+						<th>상태</th>
 					</thead>
 					<tbody>
 					
@@ -80,11 +77,10 @@
 				<div style="text-align: right" id="usedselectboxdiv">
 				
 					<select class="form-control" id="usedstatusSelect">
-						<option value="all" selected="selected">전체</option>
-						<option value="order">주문</option>
-						<option value="complepayment">결제완료</option>
-						<option value="ship">배송</option>
-						<option value="confrim">구매확정</option>
+						<option value="returnall" selected="selected">전체</option>
+						<option value="apply">신청</option>
+						<option value="complete">완료</option>
+						
 					</select>
 				</div>
 				<table class="table" id="usedTable">
@@ -92,10 +88,8 @@
 						<th style="text-align:center;">주문번호</th>
 						<th>주문내역</th>
 						<th>주문금액</th>
-						<th>주문자</th>
-						<th>수령자</th>
 						<th>주문일자</th>
-						<th>주문상태</th>
+						<th>상태</th>
 					</thead>
 					<tbody>
 					
@@ -115,11 +109,11 @@
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#statusSelect").val();
-		viewNewOrderlist(startDay,endDay,1,value);	
+		viewNewReturnlist(startDay,endDay,1,value);	
 		var usedstartDay=$("#useddate1").val();
 		var usedendDay=$("#useddate2").val();
 		var usedvalue=$("#usedstatusSelect").val();
-		viewUsedOrderlist(usedstartDay,usedendDay,1,usedvalue);
+		viewUsedReturnlist(usedstartDay,usedendDay,1,usedvalue);
 	});
 	// 상단 중고상품, 새상품 탭클릭시마다. div z-index 조정....
 	$("#tabnew").click(function(){
@@ -132,7 +126,7 @@
 		$("#newtab").css('z-index','1');
 		$("#new_tab-2").css('z-index','1');
 	});
-	var viewUsedOrderlist=function(startDay,endDay,pageNum,value){
+	var viewUsedReturnlist=function(startDay,endDay,pageNum,value){
 		clearUsedlist();
 		if(pageNum==null){
 			pageNum=1;
@@ -144,13 +138,13 @@
 			+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
 			$("#usedPaging").append(paginationapp);
 		$.ajax({
-			url:'/finalproject/orderhistroy/usedview',
+			url:'/finalproject/mypage/usedReturnhistory',
 			dataType:'json',
 			type:'post',
 			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
 			success:function(data){
 				if(data.length==1){ //값이없을때..
-					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
+					var tableapp="<tr><td colspan='5' style='text-align:center;'>신청내역이 없습니다.</td></tr>";
 					$("#usedTable > tbody").append(tableapp);
 					
 					return;
@@ -198,11 +192,9 @@
 					}
 					var date=new Date(Date.parse(item.borderdate));
 					var tableapp="<tr>"
-							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/useddetailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
-							    +"<td><a class='movedetail' href='${cp}/orderhistory/useddetailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
+							    +"<td style='text-align:center;'>"+item.ordernum+"</td>"
+							    +"<td><a class='movedetail'>"+item.ordername+"</td>"
 							    +"<td>"+item.ordermoney+"</td>"
-							    +"<td>"+item.mname+"</td>"
-							    +"<td>"+item.receiver+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 
@@ -215,27 +207,26 @@
 		})
 		
 	}
-	var viewNewOrderlist=function(startDay,endDay,pageNum,value){
+	var viewNewReturnlist=function(startDay,endDay,pageNum,value){
 		clearNewlist();
 		if(pageNum==null){
 			pageNum=1;
 		}
 	
 		var paginationapp="<ul class='pagination pageul'>"
-			+"<li class='page-item'><a class='page-link' href='#'><<</a></li>"
+			+"<li class='page-item disabled'><a class='page-link' href='#'><<</a></li>"
 			+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
-			+"<li class='page-item'><a class='page-link' href='#'>>></a></li>"
+			+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
 			$("#newPaging").append(paginationapp);
 		$.ajax({
-			url:'/finalproject/orderhistroy/newview',
+			url:'/finalproject/mypage/newReturnhistory',
 			dataType:'json',
 			type:'post',
 			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
 			success:function(data){
 				if(data.length==1){ //값이없을때..
-					var tableapp="<tr><td colspan='7'>주문내역이 없습니다.</td></tr>";
+					var tableapp="<tr><td colspan='5' style='text-align:center;'>신청내역이 없습니다.</td></tr>";
 					$("#newTable > tbody").append(tableapp);
-					
 						return;
 				}
 				
@@ -284,8 +275,6 @@
 							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
 							    +"<td><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
 							    +"<td>"+item.ordermoney+"</td>"
-							    +"<td>"+item.mname+"</td>"
-							    +"<td>"+item.receiver+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 
@@ -311,14 +300,14 @@
 		clearNewlist();
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
-		viewNewOrderlist(startDay,endDay,1,value);
+		viewNewReturnlist(startDay,endDay,1,value);
 	});
 	$("#usedstatusSelect").change(function(){
 		var value=$(this).val();
 		clearUsedlist();
 		var startDay=$("#useddate1").val();
 		var endDay=$("#useddate2").val();
-		viewUsedOrderlist(startDay,endDay,1,value);
+		viewUsedReturnlist(startDay,endDay,1,value);
 	});
 	
 	//ul 선택 이펙트
@@ -477,7 +466,7 @@
 		var endDay=$("#date2").val();
 		var value=$("#statusSelect").val()
 		clearNewlist();
-		viewNewOrderlist(startDay,endDay,1,value);
+		viewNewReturnlist(startDay,endDay,1,value);
 	});
 	
 	$("#useddateUl li").on('click',function(){
@@ -485,14 +474,14 @@
 		var endDay=$("#useddate2").val();
 		var value=$("#usedstatusSelect").val()
 		clearUsedlist();
-		viewUsedOrderlist(startDay,endDay,1,value);
+		viewUsedReturnlist(startDay,endDay,1,value);
 	});
 	$("#researchBtn").on('click',function(){
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#statusSelect").val()
 		clearNewlist();
-		viewNewOrderlist(startDay,endDay,1,value);
+		viewNewReturnlist(startDay,endDay,1,value);
 	});
 	$("#usedresearchBtn").on('click',function(){
 		var startDay=$("#useddate1").val();
@@ -500,7 +489,7 @@
 		var value=$("#usedstatusSelect").val()
 	
 		clearUsedlist();
-		viewUsedOrderlist(startDay,endDay,1,value);
+		viewUsedReturnlist(startDay,endDay,1,value);
 	});
 	
 

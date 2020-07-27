@@ -42,6 +42,9 @@ public class MyPageService {
 	public List<QnaHistoryVo> qnahistory(HashMap<String, Object>map){
 		return dao.qnahistory(map);
 	}
+	public int qnawrite(HashMap<String, Object>map) {
+		return dao.qnawrite(map);
+	}
 	
 
 }

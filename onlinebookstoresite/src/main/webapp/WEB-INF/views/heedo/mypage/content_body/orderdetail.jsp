@@ -4,7 +4,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <div id="content_history_detail">
 	<div>
-		<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span class="colorFont">주문</span>내역</h4>
+		<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span class="colorFont">상세 주문</span>내역</h4>
 	</div>
 	<br>
 	<div id="content_initial">		

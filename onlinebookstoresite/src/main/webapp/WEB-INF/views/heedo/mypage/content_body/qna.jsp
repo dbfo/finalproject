@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <div id="content_history">	
-		<h3><span id="colorfont">문의</span>내역</h3>
+		<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span id="colorfont">문의</span>내역</h4>
 		<div class="date_picker">
 			<ul class="list-group list-group-horizontal" id="dateUl">
 				<li class="list-group-item selectdate qnaselect" onclick="changeDate(7,0)">최근 일주일</li>
@@ -42,8 +42,94 @@
 							
 		</div>
 		<div id="btnDiv">
-			<button type="button" class="btn btn-default">문의하기</button>
+			<button type="button" class="btn btn-default" id="writeQna" 
+					data-toggle="modal" data-target="#writemodal">문의하기</button>
 		</div>
+</div>
+
+<!-- ==== 모달창 ======== -->
+<div id="writemodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #b3d9ff ">
+       <h4 class="modal-title" >문의사항 작성</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	제목<br>
+        	<input type="text" id="qnatitle" placeholder="제목을 작성하세요."><br>
+        	문의내용
+        	<textarea rows="5" cols="50" id="qnacontent"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-dark" id="modal_confirmBtn" data-dismiss="modal" >문의하기</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="alertmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">경고</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	제목,내용을 전부 작성해주셔야합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="confirmmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #b3ffb3">
+       <h4 class="modal-title">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	문의사항 작성완료!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="falsemmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	문의사항 작성실패
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 
@@ -55,6 +141,32 @@
 		var endDay=$("#date2").val();
 		var value=$("#qnaSelect").val();
 		viewQnalist(startDay,endDay,1,value);	
+	});
+	$("#modal_confirmBtn").click(function(){
+		var qnatitle=$("#qnatitle").val();
+		var qnacontent=$("#qnacontent").val();
+		if(qnatitle=="" || qnacontent==""){
+			$("#alertmodal").modal('show')
+			return;
+		}
+		$.ajax({
+			url:"/finalproject/mypage/writeqna",
+			type:"post",
+			data:{qnatitle:qnatitle,qnacontent:qnacontent},
+			success:function(data){
+				if(data.result){
+					var startDay=$("#date1").val();
+					var endDay=$("#date2").val();
+					var value=$("#qnaSelect").val();
+					viewQnalist(startDay,endDay,1,value);
+					$("#confirmmodal").modal('show')
+					
+				}else{
+					$("#falsemodal").modal('show')
+				}
+			}
+		})
+	
 	});
 	
 	var viewQnalist=function(startDay,endDay,pageNum,value){
@@ -121,7 +233,7 @@
 					}
 					var tableapp="<tr>"
 							    +"<td>"+item.qnanum+"</td>"
-							    +"<td>"+item.qnatitle+"</td>"
+							    +"<td><a class='movedetail' href='${cp}/mypage/qnadetail?qnanum="+item.qnanum+"'>"+item.qnatitle+"</a></td>"
 							    +"<td>"+item.qnadate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 

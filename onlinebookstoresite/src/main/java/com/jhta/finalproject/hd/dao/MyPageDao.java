@@ -47,4 +47,7 @@ public class MyPageDao {
 	public List<QnaHistoryVo> qnahistory(HashMap<String, Object>map){
 		return sqlsession.selectList(NAMESPACE+".qnaHistory",map);
 	}
+	public int qnawrite(HashMap<String, Object>map) {
+		return sqlsession.insert(NAMESPACE+".qnawrite", map);
+	}
 }

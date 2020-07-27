@@ -11,8 +11,14 @@
 		<![CDATA[TO_CHAR(BORDERDATE,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
 		and 
 		<choose>
-			<when test="value=='return'">
+			<when test="value=='returnall'">
 				<![CDATA[bstatus>=4 and bstatus<6]]>
+			</when>
+			<when test="value=='apply'">
+				bstatus=4
+			</when>
+			<when test="value=='complete'">
+				bstatus=5
 			</when>
 			<otherwise>
 				bstatus=6
@@ -46,10 +52,15 @@
 			AND TO_CHAR(BORDERDATE,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
 		and	
 		<choose>
-			<when test="value=='return'">
+			<when test="value=='returnall'">
 				<![CDATA[bstatus>=4 and bstatus<6]]>
 			</when>
-		
+			<when test="value=='apply'">
+				bstatus=4
+			</when>
+			<when test="value=='complete'">
+				bstatus=5
+			</when>
 			<otherwise>
 				bstatus=6
 			</otherwise>
@@ -130,6 +141,9 @@
 			)aa
 		<![CDATA[where rnum>=1 and rnum<=10]]>
 	</select>
-	
+	<!-- 문의사항작성 -->
+	<insert id="qnawrite" parameterType="hashmap">
+		insert into qna values(SEQ_qna_qnanum.nextval,#{mnum},#{qnatitle},#{qnacontent},0,sysdate)
+	</insert>
 	
 </mapper>

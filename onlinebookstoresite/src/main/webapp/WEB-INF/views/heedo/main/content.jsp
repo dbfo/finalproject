@@ -146,15 +146,15 @@
 					<div class="carousel-item active" id="slideForm">
 						<!--가로-->
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test1.svg" alt="First slide">
+							src="${cp }/resources/hd/img/slide/slide1.png" alt="First slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test2.svg" alt="Second slide">
+							src="${cp }/resources/hd/img/slide/slide2.png" alt="Second slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test3.svg" alt="Third slide">
+							src="${cp }/resources/hd/img/slide/slide3.png" alt="Third slide">
 					</div>
 					<!-- / 슬라이드 쇼 끝 -->
 					<!-- 왼쪽 오른쪽 화살표 버튼 -->
