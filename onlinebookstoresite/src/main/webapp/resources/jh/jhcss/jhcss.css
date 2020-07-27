@@ -40,25 +40,25 @@
 
 /* ////////////////////////////중고 상품등록폼 관련 css ///////////////////////////*/
 #prodInputForm {
-	width: 1300px;
+	width: 1100px;
 	height: 2000px;
 	margin: auto;
 	background-color: #F2FAF4;
 }
 
 #cate {
-	width: 1300px;
+	width: 1100px;
 	height: 200px;
 }
 
 #cateck {
-	width: 1300px;
+	width: 1100px;
 	height: 200px;
 	background-color: silver;
 }
 
 #basic {
-	width: 1300px;
+	width: 1100px;
 	height: 500px;
 }
 
@@ -68,18 +68,18 @@
 }
 
 #prodInputForm {
-	width: 1300px;
+	width: 1100px;
 	height: 2100px;
 	margin: auto;
 }
 /*카테고리css*/
 #cate {
-	width: 1300px;
+	width: 1100px;
 	height: 200px;
 }
 
 #cateck {
-	width: 1300px;
+	width: 1100px;
 	height: 50%;
 	background-color: silver;
 }
@@ -91,7 +91,7 @@
 }
 /*상품기본정보 css*/
 #basic {
-	width: 1300px;
+	width: 1100px;
 	height: 300px;
 }
 
@@ -101,7 +101,7 @@
 }
 /*상품가격css*/
 #price {
-	width: 1300px;
+	width: 1100px;
 	height: 300px;
 }
 
@@ -111,7 +111,7 @@
 }
 /*배송정보*/
 #ship {
-	width: 1300px;
+	width: 1100px;
 	height: 300px;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .addr {
-	width: 500px;
+	width: 400px;
 }
 
 #infotable4 tr td input {
@@ -148,10 +148,10 @@
 	padding-left: 20px;
 }
 #insertbt{
-	margin-left: 650px;
+	margin-left: 550px;
 }
 #updatebt{
-	margin-left: 650px;
+	margin-left: 550px;
 }
 
 /*검색버튼*/

@@ -6,7 +6,7 @@
 	<!-- 판매현황카드 -->
 	<div id="salesStatus" class="sellerCard">
 		<div class="card bg-light">
-		<p style="margin-left: 20px;">최근1개월 현황</p>
+		<p style="margin-left: 20px;">* 최근1개월 현황</p>
 		<br>
 			<table class="table">
 				<tr>
