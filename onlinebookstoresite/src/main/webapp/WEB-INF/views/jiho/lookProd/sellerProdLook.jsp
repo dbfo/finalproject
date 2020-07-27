@@ -4,13 +4,54 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <style>
-#tableicon{
-	width: 40px;
-	height: 40px;
-	margin-right: 10px;
+/*=====================상품조회/수정관련css=====================*/
+#sellerProdLook {
+	width: 1300px;
+	height: 900px;
+	margin: auto;
+}
+/*검색박스*/
+#selectBox {
+	width: 1300px;
+	height: 250px;
+}
+
+#selectBox table {
+	border: 1px;
+}
+
+.tdstyle {
+	background-color: silver;
+	width: 300px;
+	height: 70px;
+	text-align: center;
+}
+
+.prodLooktdStyle input[type="radio"] {
+	width: 50px;
+}
+
+.prodLooktdStyle input[type="text"] {
+	width: 300px;
+}
+
+.form-control {
+	width: 150px;
+}
+/*테이블박스*/
+#showTable {
+	width: 1250px;
+	height: 450px;
+}
+
+#showTable table {
+	text-align: center;
+}
+
+.title {
+	background-color: silver;
 }
 </style>
-
 <script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.5.1.js"></script>
 <script>
 

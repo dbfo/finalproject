@@ -3,39 +3,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-
 <style>
 /*=========중고판매자 Qna관련 css==========*/
 #sellerQnaContent{
 	width: 1300px;
-	height: 900px;
+	height: 950px;
 	margin: auto;
-	border: 1px solid black;
 }
 /*중고판매자 QnA검색박스css*/
 #sellerQnaSearchBox{
 	width: 1300px;
-	height: 300px;
-	border: 1px solid red;
+	height: 330px;
 }
 /*중고판매자 Qna 리스트 css*/
 #sellerQnaList{
-	width: 1300px;
-	height: 600px;
-	border: 1px solid green;
+	width: 1250px;
+	height: 450px;
 }
 /*답변css*/
 .sellerDap{
     padding-left: 70px;
     padding-right: 70px;
 }
-
 </style>
 <div id="sellerQnaContent">
 	<!-- 검색박스 -->
 	<div id="sellerQnaSearchBox">
 	<form action="${cp }/seller/qnalist">
-		<h2>QnA리스트1111111111</h2>
+		<h2><img src="${cp }/resources/jh/jhimages/qna리스트_1.png"></h2>
 			<table class="table table-bordered">
 				<tr>
 					<td class="tdstyle" id="statusa">답변 상태별 조회</td>
@@ -86,8 +81,10 @@
 			</table>
 	</div>
 	<!-- QnA리스트 -->
-	<div id="sellerQnaList">
-			<h3>문의리스트</h3>
+	<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">Q&A리스트</div>
+			<div class="card-body">
+				<div id="sellerQnaList">
 			<div class="layer1">
 				<table class="table table-bordered">
 					<thead class="thead-dark">
@@ -155,8 +152,10 @@
 					</c:if>
 				</ul>
 			</div>
-		</form>
+			</div>
+		</div>
 	</div>
+	</form>
 </div>
 <script>
 $(function(){

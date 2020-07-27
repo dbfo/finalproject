@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <style>
+/*이메일 인증번호 입력css*/
 #injeung{
 	width: 1100px;
 	height: 700px;

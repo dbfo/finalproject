@@ -17,7 +17,12 @@
 	height: 40px;
 	margin-right: 10px;
 }
-
+/*중고판매자 성공/실패 페이지 css*/
+#imgok{
+	width:1300px;
+	height:900px;
+	margin: auto;
+}
 /* ////////중고판매 현황판css///// */
 #sellerContentMain {
 	width: 1300px;
@@ -149,203 +154,149 @@
 #updatebt{
 	margin-left: 650px;
 }
-/*=====================상품조회/수정관련css=====================*/
-#sellerProdLook {
-	width: 1300px;
-	height: 900px;
-	margin: auto;
-}
-/*검색박스*/
-#selectBox {
-	width: 1300px;
-	height: 250px;
-}
 
-#selectBox table {
-	border: 1px;
-}
-
-.tdstyle {
-	background-color: silver;
-	width: 300px;
-	height: 70px;
-	text-align: center;
-}
-
-.prodLooktdStyle input[type="radio"] {
-	width: 50px;
-}
-
-.prodLooktdStyle input[type="text"] {
-	width: 300px;
-}
-
-.form-control {
-	width: 150px;
-}
-/*테이블박스*/
-#showTable {
-	width: 1250px;
-	height: 450px;
-}
-
-#showTable table {
-	text-align: center;
-}
-
-.title {
-	background-color: silver;
-}
 /*검색버튼*/
 #list2bt {
 	margin-left: 10px;
 	margin-right: 10px;
 }
-/*=============판매관리메뉴 메인================*/
-#salesManagement {
+
+
+
+
+
+
+/*=========================문의사항 상세페이지css========================*/
+#obQnaDetail{
 	width: 1300px;
-	height: 1400px;
+	height: 850px;
 	margin: auto;
 }
-/*판매관리 상단메뉴css*/
-/*
-body {
-	color: #555;
-	background: #eeeeee;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+#sellerMoon{
+	width: 1000px;
+	height: 650px;
+	margin: auto;
 }
-*/
-p {
-	margin: 0 0 20px;
-	line-height: 1.5;
+#sellerQnatable tr,td{
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 1000px;
+	
 }
-
-.salesTopMenu {
+#sellerQnatable tr,td{
+	border: 1px solid #B4B7B7;
+}
+.moondetail{
+	text-align: center;
+	background-color: #EDEDED;
+	width: 200px;
+}
+.moondetailText{
+	text-align: center;
+	width: 400px;
+}
+#thumb{
+	border: 1px solid #eaeaea;
+	width: 120px;
+	height: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*답변css*/
+#dapTable{
+    margin-top: 30px;
+   
+}
+#dapTextarea{
+    margin-left: 50px;
+    margin-top: 30px;
+    border: 2px solid black;
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    display: inline;
+}
+#sellerdap{
+	height: 180px;
+}
+#dapimg{
+	float:left;
+	margin-left:10px;
+	width: 160px;
+	margin: 0px;
+	padding: 0px;
+}
+/*답글있을 때 css*/
+#sellerdapOk{
+	height: 180px;
+}
+#sellerAnswer{
+	width: 800px;
+	height: 150px;
+	border: 1px solid green;
+	margin-left: 180px;
+	margin-top: 13px;
+	border: 2px solid #6E6E6E;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #EDEDED;
+}
+#dapimgok{
+	width: 120px;
+	height: 120px;
+	margin-top:10px;
+	margin-left: 10px; 
+	float:left;
+}
+#answerContent{
+	width: 630px;
+	height: 120px;
+	float:left;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+#dapinsertbt{
+	margin-left: 380px;
+}
+#dapupdatebt{
+	margin-left: 380px;
+}
+/*===================================리뷰관련 css==================*/
+#sellerReviewMain{
 	width: 1300px;
-	height:1200px;
-	/*max-width: 800px;*/
-	padding: 50px;
-	margin: 0 auto;
-	background: #ffffff;
+	height: 700px;
+	margin:auto;
 }
-
-.salesTopMenu section {
-	display: none;
-	padding: 20px 0 0;
-	border-top: 1px solid #ddd;
-}
-
-/*라디오버튼 숨김*/
-.salesTopMenu input[name='tabs'] {
-	display: none;
-}
-
-.salesTopMenu label {
-	display: inline-block;
-	margin: 0 0 -1px;
-	padding: 15px 25px;
-	font-weight: 600;
-	text-align: center;
-	color: #bbb;
-	border: 1px solid transparent;
-}
-
-.salesTopMenu label:hover {
-	color: #2e9cdf;
-	cursor: pointer;
-}
-
-/*input 클릭시, label 스타일*/
-.salesTopMenu input:checked+label {
-	color: #555;
-	border: 1px solid #ddd;
-	border-top: 2px solid #2e9cdf;
-	border-bottom: 1px solid #ffffff;
-}
-
-#tab1:checked ~ #content1, 
-#tab2:checked ~ #content2, 
-#tab3:checked ~	#content3, 
-#tab4:checked ~ #content4 {
-	display: block;
-}
-/*메뉴1 입금대기중*/
-/*입금대기중 css*/
-#detail1 {
-	height: 1000px;
-}
-.toptr {
-	text-align: center;
-}
-
-#detail1 table .toptr {
-	height: 30px;
-	background-color: silver;
-}
-
-#searchBox1 {
-	width: 1200px;
+/*리뷰 헤더css*/
+#reviewHeader{
+	width: 1100px;
 	height: 200px;
+	margin:auto;
+	margin-top:30px;
+    padding-top: 65px;
+	background-image: url("${cp}/resources/jh/jhimages/판매자리뷰베너.png");
 }
-
-input[name='borderdate1'] {
-	margin-left: 20px;
-	margin-right: 10px;
+#jumsu{
+	font-size: 40px;
+	color: #FE2E64;
+	margin-left: 810px;
+	font-weight: bold;
 }
-
-input[name='keyword1'] {
-	margin-left: 20px;
-	width: 400px;
-	display: inline;
+/*리뷰테이블 css*/
+#reviewTable{
+	width: 1100px;
+	height: 400px;
+	margin: auto;
+	margin-top: 20px;
 }
-
-#slaesListbt1 {
-	margin-left: 10px;
-	margin-right: 10px;
+.reviewOrder{
+	color: black;
 }
-
-input[name='field1'] {
-	margin-right: 10px;
-	margin-left: 20px;
-}
-/*입금완료/배송요청중 css*/
-#detail2 {
-	height: 1000px;
-}
-
-.toptr {
+#reviewTable table{
 	text-align: center;
 }
+/*==============================중고판매자 이메일인증 css관련======================*/
 
-#detail2 table .toptr {
-	height: 30px;
-	background-color: silver;
-}
 
-#searchBox2 {
-	width: 1200px;
-	height: 200px;
-}
 
-.borderdate2 {
-	margin-left: 20px;
-	margin-right: 10px;
-}
-
-#keyword_menu2{
-	margin-left: 20px;
-	width: 400px;
-	display: inline;
-}
-
-#slaesListbt2 {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.field_menu2 {
-	margin-right: 10px;
-	margin-left: 20px;
-}

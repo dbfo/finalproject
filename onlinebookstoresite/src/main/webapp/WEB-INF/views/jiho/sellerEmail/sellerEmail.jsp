@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <style>
-/*중고판매자 이메일인증 css관련*/
 #emailContent{
 	width: 1100px;
 	height: 700px;

@@ -4,17 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <style>
-/*정산조회 관련 css*/
+/*===============정산조회 관련메뉴 css===============*/
 #settlementContent{
-	border: 1px solid black;
 	width: 1300px;
-	height: 1100px;
+	height: 1300px;
 	margin: auto;
 }	
 /*검색박스*/
 #settlementSearchBox{
-	border: 1px solid red;
-	height: 300px;
+	height: 230px;
 	width: 1300px;
 	
 }
@@ -35,26 +33,26 @@
 /*정산안내박스*/
 #moneyInfoBox{
 	width: 1100px;
-	height: 100px;
+	height: 80px;
 	background-color: #CADCC6;
 	margin: auto;
 	padding: 15px;
+	border-radius: 15px;
 }
 /*검색 리스트*/
 #settlementList{
-	border: 1px solid green;
-	width: 1300px;
+	width: 1250px;
 	height: 800px;
 }
 
 </style>
 <div id="settlementContent">
-<h2>정산조회</h2>
+<h2><img src="${cp }/resources/jh/jhimages/정산조회_1.png"></h2>
 	<form action="${cp }/seller/settlementCheck">
 		<div id="settlementSearchBox">
 			<table class="table table-bordered" id="settlementTable"> 
 				<tr>
-					<th rowspan="3">판매 정산조회</th>
+					<th rowspan="3" style="text-align: center;">판매 정산조회</th>
 				</tr>
 				<tr>
 					<td>
@@ -87,8 +85,10 @@
 			</div>
 		</div>
 		<!-- 테이블 -->
-		<div id="settlementList">
-		<span>LIST</span>
+		<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">판매관리 리스트</div>
+			<div class="card-body">
+					<div id="settlementList">
 		<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr style="text-align: center;">
@@ -169,6 +169,10 @@
 				</ul>
 			</div>
 		</div>
+		
+			</div>
+		</div>
+		
 	</form>
 </div>
 <script>

@@ -3,6 +3,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
+<style>
+/*입금완료/배송요청중 css*/
+#detail2 {
+	height: 1000px;
+}
+
+.toptr {
+	text-align: center;
+}
+
+#detail2 table .toptr {
+	height: 30px;
+	background-color: silver;
+}
+
+#searchBox2 {
+	width: 1200px;
+	height: 200px;
+}
+
+.borderdate2 {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+#keyword_menu2{
+	margin-left: 20px;
+	width: 400px;
+	display: inline;
+}
+
+#slaesListbt2 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.field_menu2 {
+	margin-right: 10px;
+	margin-left: 20px;
+}
+</style>
 <script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <form action="${cp }/seller/salesManagement2?tabType=2&keyword2=${map.keyword2}&startDay2=${map.startDay2}&
 							endDay2=${map.endDay2}&field2=${map.field2}&bpaydate2=${map.bpaydate2}">
@@ -11,7 +52,7 @@
 			<!-- 검색박스 -->
 			<table class="table table-bordered">
 				<tr>
-					<th scope="col" rowspan="3" style="background-color: silver;" width="250">주문조회</th>
+					<th scope="col" rowspan="3" style="background-color: silver; text-align: center;" width="250">주문조회</th>
 					<td><input type="radio" name="field2" value="all" class="field_menu2"
 						<c:if test="${map.field2=='all' || map.field2==null || map.field2==''}">checked</c:if>>전체
 						<input type="radio" name="field2" value="obname" class="field_menu2"

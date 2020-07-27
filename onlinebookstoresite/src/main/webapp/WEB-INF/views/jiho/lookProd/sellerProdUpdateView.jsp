@@ -15,11 +15,7 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- css적용 추후 파일에 따로 분리 예정임 -->
-<style>
 
-
-
-</style>
 <script>
 	//에디터api적용
 	$(document).ready(function() {

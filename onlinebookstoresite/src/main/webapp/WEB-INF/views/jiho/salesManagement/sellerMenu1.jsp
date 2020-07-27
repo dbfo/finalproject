@@ -4,6 +4,45 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <style>
+/*메뉴1 입금대기중*/
+/*입금대기중 css*/
+#detail1 {
+	height: 1000px;
+}
+.toptr {
+	text-align: center;
+}
+
+#detail1 table .toptr {
+	height: 30px;
+	background-color: silver;
+}
+
+#searchBox1 {
+	width: 1200px;
+	height: 200px;
+}
+
+input[name='borderdate1'] {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+input[name='keyword1'] {
+	margin-left: 20px;
+	width: 400px;
+	display: inline;
+}
+
+#slaesListbt1 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+input[name='field1'] {
+	margin-right: 10px;
+	margin-left: 20px;
+}
 
 </style>
 <script type="text/javascript"
@@ -16,7 +55,7 @@
 			<!-- 검색박스 -->
 			<table class="table table-bordered">
 				<tr>
-					<th scope="col" rowspan="3" style="background-color: silver;"
+					<th scope="col" rowspan="3" style="background-color: silver; text-align: center;"
 						width="250">주문조회</th>
 					<td><input type="radio" name="field1" value="all"
 						<c:if test="${map.field1=='all' || map.field1==null || map.field1==''}">checked</c:if>>전체
