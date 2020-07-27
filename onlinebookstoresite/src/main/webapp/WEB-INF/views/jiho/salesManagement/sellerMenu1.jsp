@@ -4,47 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <style>
-/*입금대기중 css*/
-#detail1 {
-	border: 1px solid green;
-	height: 1400px;
-}
 
-.toptr {
-	text-align: center;
-}
-
-#detail1 table .toptr {
-	height: 30px;
-	background-color: silver;
-}
-
-#searchBox1 {
-	width: 1200px;
-	height: 200px;
-	border: 1px solid red;
-}
-
-input[name='borderdate1'] {
-	margin-left: 20px;
-	margin-right: 10px;
-}
-
-input[name='keyword1'] {
-	margin-left: 20px;
-	width: 400px;
-	display: inline;
-}
-
-#slaesListbt1 {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-input[name='field1'] {
-	margin-right: 10px;
-	margin-left: 20px;
-}
 </style>
 <script type="text/javascript"
 	src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
@@ -90,71 +50,76 @@ input[name='field1'] {
 			</table>
 		</div>
 		<!-- 리스트 -->
-		<h2>LIST</h2>
-		<table class="table table-bordered">
-			<thead class="thead-dark">
-				<tr class="toptr">
-					<th scope="col" width="60" rowspan="2">NO</th>
-					<th scope="col" width="100" rowspan="2">주문번호</th>
-					<th scope="col" rowspan="2" width="400">상품정보</th>
-					<th scope="col">주문인</th>
-					<th scope="col">총 주문금액</th>
-					<th scope="col" rowspan="2">총 합계</th>
-					<th scope="col" rowspan="2">주문일</th>
-				</tr>
-				<tr class="toptr">
-					<th scope="col">수령인</th>
-					<th scope="col">배송비</th>
-				</tr>
-			</thead>
-			<c:forEach var="vo" items="${list1 }" varStatus="status">
-				<tr>
-					<th scope="col" width="60" rowspan="2" style="text-align: center;">
-						${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</th>
-					<th scope="col" width="100" rowspan="2" style="text-align: center;">${vo.bpaynum }</th>
-					<th scope="col" rowspan="2" width="400">
-						<c:forEach var="oldbook" items="${vo.sellerOldbooksVo }">
-							▶ 상품명 : ${oldbook.obname } | 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원 <br>
-						</c:forEach></th>
-					<th scope="col" style="text-align: center; margin: auto;">${vo.mname }</th>
-					<th scope="col" style="text-align: right;">${vo.ordermoney }원</th>
-					<th scope="col" rowspan="2"
-						style="text-align: right; margin: auto;">${vo.bfinalmoney }원</th>
-					<th scope="col" rowspan="2" style="text-align: center;"><fmt:formatDate
-							value="${vo.borderdate }" pattern="yyyy-MM-dd" /></th>
-				</tr>
-				<tr>
-					<th scope="col" style="text-align: center;">${vo.receiver }</th>
-					<th scope="col" style="text-align: right;">${vo.delfee }원</th>
-				</tr>
-			</c:forEach>
-		</table>
-		<!-- 페이징버튼 -->
-		<div>
-			<ul class="pagination justify-content-center">
-				<!-- 이전버튼 -->
-				<c:if test="${pu.startPageNum>3 }">
-					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?
-									pageNum=${pu.startPageNum-1}&tabType=1&keyword1=${map.keyword1}&startDay=${map.startDay}&
-									endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
-							이전</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${pu.startPageNum }"
-					end="${pu.endPageNum}">
-					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?pageNum=${i}&tabType=1
-									&keyword1=${map.keyword1}&startDay=${map.startDay}&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">${i}</a></li>
-				</c:forEach>
-				<!-- 다음버튼 -->
-				<c:if test="${pu.totalPageCount>pu.endPageNum}">
-					<li class="page-item"><a class="page-link"
-						href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}&tabType=1
-									&keyword1=${map.keyword1}&startDay=${map.startDay}
-									&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
-							다음</a></li>
-				</c:if>
-			</ul>
+		<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">판매관리 리스트</div>
+			<div class="card-body">
+				<table class="table table-bordered">
+					<thead class="thead-dark">
+						<tr class="toptr">
+							<th scope="col" width="60" rowspan="2">NO</th>
+							<th scope="col" width="100" rowspan="2">주문번호</th>
+							<th scope="col" rowspan="2" width="400">상품정보</th>
+							<th scope="col">주문인</th>
+							<th scope="col">총 주문금액</th>
+							<th scope="col" rowspan="2">총 합계</th>
+							<th scope="col" rowspan="2">주문일</th>
+						</tr>
+						<tr class="toptr">
+							<th scope="col">수령인</th>
+							<th scope="col">배송비</th>
+						</tr>
+					</thead>
+					<c:forEach var="vo" items="${list1 }" varStatus="status">
+						<tr>
+							<th scope="col" width="60" rowspan="2"
+								style="text-align: center;">${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</th>
+							<th scope="col" width="100" rowspan="2"
+								style="text-align: center;">${vo.bpaynum }</th>
+							<th scope="col" rowspan="2" width="400"><c:forEach
+									var="oldbook" items="${vo.sellerOldbooksVo }">
+								▶ 상품명 : ${oldbook.obname } | 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원 <br>
+								</c:forEach></th>
+							<th scope="col" style="text-align: center; margin: auto;">${vo.mname }</th>
+							<th scope="col" style="text-align: right;">${vo.ordermoney }원</th>
+							<th scope="col" rowspan="2"
+								style="text-align: right; margin: auto;">${vo.bfinalmoney }원</th>
+							<th scope="col" rowspan="2" style="text-align: center;"><fmt:formatDate
+									value="${vo.borderdate }" pattern="yyyy-MM-dd" /></th>
+						</tr>
+						<tr>
+							<th scope="col" style="text-align: center;">${vo.receiver }</th>
+							<th scope="col" style="text-align: right;">${vo.delfee }원</th>
+						</tr>
+					</c:forEach>
+				</table>
+				<!-- 페이징버튼 -->
+				<div>
+					<ul class="pagination justify-content-center">
+						<!-- 이전버튼 -->
+						<c:if test="${pu.startPageNum>3 }">
+							<li class="page-item"><a class="page-link"
+								href="${cp}/seller/salesManagement?
+										pageNum=${pu.startPageNum-1}&tabType=1&keyword1=${map.keyword1}&startDay=${map.startDay}&
+										endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
+									이전</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${pu.startPageNum }"
+							end="${pu.endPageNum}">
+							<li class="page-item"><a class="page-link"
+								href="${cp}/seller/salesManagement?pageNum=${i}&tabType=1
+										&keyword1=${map.keyword1}&startDay=${map.startDay}&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">${i}</a></li>
+						</c:forEach>
+						<!-- 다음버튼 -->
+						<c:if test="${pu.totalPageCount>pu.endPageNum}">
+							<li class="page-item"><a class="page-link"
+								href="${cp}/seller/salesManagement?pageNum=${pu.endPageNum+1}&tabType=1
+										&keyword1=${map.keyword1}&startDay=${map.startDay}
+										&endDay=${map.endDay}&field1=${map.field1}&borderdate1=${map.borderdate1}">
+									다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </form>

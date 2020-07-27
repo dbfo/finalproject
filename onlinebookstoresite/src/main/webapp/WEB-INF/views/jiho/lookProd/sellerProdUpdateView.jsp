@@ -99,10 +99,10 @@
 	
 	
 	<div id="prodInputForm">
-		<h2>상품수정</h2>
+		<i><img src="${cp }/resources/jh/jhimages/상품수정_1.png"></i>
 		<!-- 카테고리등록 -->
 		<div id="cate">
-			<p>카테고리확인&emsp;</p>
+			<p>[카테고리확인]&emsp;</p>
 			<!-- <input type="button" class="btn btn-primary" value="분류추가" id="catebt"><br><br> -->
 			<table id="infotable" class="table table-bordered">
 				<tr>
@@ -126,7 +126,7 @@
 		</div>
 		<!-- 상품기본정보등록 -->
 		<div id="basic">
-			<p>상품기본정보</p>
+			<p>[상품기본정보]</p>
 			<table id="infotable1" class="table table-bordered">
 				<tr>
 					<td class="bgtd">도서명</td>
@@ -148,7 +148,7 @@
 		</div>
 		<!-- 상품가격정보등록 -->
 		<div id="price">
-			<p>상품가격정보</p>
+			<p>[상품가격정보]</p>
 			<table id="infotable2" class="table table-bordered">
 				<tr>
 					<td class="bgtd">정가</td>
@@ -172,7 +172,7 @@
 		</div>
 		<!-- 배송정보등록 -->
 		<div id="ship">
-			<p>배송정보</p>
+			<p>[배송정보]</p>
 			<table id="infotable3" class="table table-bordered">
 				<tr>
 					<td class="bgtd">택배비</td>
@@ -200,7 +200,7 @@
 		</div>
 		<!-- 상품이미지등록 -->
 		<div id="imginfo">
-			<p>상품이미지등록</p>
+			<p>[상품이미지등록]</p>
 			<table id="infotable4" class="table table-bordered">
 				<tr id="selectimg1">
 					<td class="bgtd">대표(기본이미지)-필수</td>
@@ -259,7 +259,7 @@
 		</div>
 		<!-- 상품설명 등록 -->
 		<div id="info">
-			<p>상품설명</p>
+			<p>[상품설명]</p>
 			<table id="infotable5" class="table table-bordered">
 				<tr>
 					<td class="bgtd">상품설명</td>
@@ -267,7 +267,7 @@
 				</tr>
 			</table>
 		</div>
-	<button type="submit" class="btn btn-success btn-lg" id="insertbt">수정하기</button>
+	<button type="submit" class="btn btn-success btn-lg" id="updatebt">수정하기</button>
 	</div>
 </form>
 
@@ -309,30 +309,6 @@
 		}
 	}
 	
-	/*
-	//숫자 입력폼 천단위 comma
-	function comma(str) { 
-		str = String(str);
-		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
-	}
-	function uncomma(str) { 
-		str = String(str);
-		return str.replace(/[^\d]+/g, '');
-	}
-	function numberComma(data) {
-		//data.replace(/,/g,'');
-		//$("input[name=oborgprice]").val(data.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		
-		//var parts = num.toString().split(".");
-		//$("input[name=oborgprice]").val(data.toLocaleString());
-		// return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		//data=String(data);
-		//data.replace(/[^\d]+/g, '');
-		uncomma(data);
-		$("input[name=oborgprice]").val(data.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		//$("input[name=oborgprice]").val(data.toLocaleString('en'));
-	}
-	*/
 	//입력폼 유효성검사
 	$("form").submit(function() {
 		var number= /[^0-9]/g //정규식(숫자만)

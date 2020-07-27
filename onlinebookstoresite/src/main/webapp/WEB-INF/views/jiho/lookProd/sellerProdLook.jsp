@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<!-- 추후 css파일 분리예정 
 <style>
-
+#tableicon{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
 </style>
--->
+
 <script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.5.1.js"></script>
 <script>
 
@@ -26,7 +29,7 @@
 </script>
 <div id="sellerProdLook">
 	<div>
-		<h2>상품조회/수정페이지</h2>
+		<h2><img src="${cp }/resources/jh/jhimages/상품조회_수정.png"></h2>
 	</div>
 	<form
 		action="${cp }/seller/prodLook?keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}
@@ -91,85 +94,90 @@
 			</table>
 		</div>
 		<!-- 상품 리트스 테이블 -->
-		<div id="showTable">
-			<h2>상품 리스트</h2>
-			<table class="table table-bordered">
-				<tr class="title">
-					<td width="50">NO</td>
-					<td width="300">상품명</td>
-					<td>출판사</td>
-					<td>저자</td>
-					<td width="110">판매상태</td>
-					<td>품질</td>
-					<td>판매가</td>
-					<td width="120">등록일</td>
-					<td width="80">수정</td>
-					<td width="80">삭제</td>
-				</tr>
-				<c:forEach var="vo" items="${list}" varStatus="status">
-					<tr>
-						<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>
-						<td>${vo.obname}</td>
-						<td>${vo.obwriter}</td>
-						<td>${vo.obpublisher}</td>
-						<td><c:if test="${vo.obsalestatus==0}">판매중</c:if> 
-							<c:if test="${vo.obsalestatus==1}">입금대기중</c:if> 
-							<c:if test="${vo.obsalestatus==2}">결제완료</c:if>
-							<c:if test="${vo.obsalestatus==3}">판매완료</c:if>
-						</td>
-						<td><c:if test="${vo.obstatus==1}">최상</c:if>
-							<c:if test="${vo.obstatus==2}">상</c:if>
-							<c:if test="${vo.obstatus==3}">중</c:if>
-							<c:if test="${vo.obstatus==4}">하</c:if>
-						</td>
-						<td>${vo.obsaleprice}원</td>
-						<td><fmt:formatDate value="${vo.obregdate}"	pattern="yyyy-MM-dd" /></td>
-						<td><c:choose>
-								<c:when test="${vo.obsalestatus==0}">
-									<a href="${cp}/seller/prodUpdateView?obnum=${vo.obnum}"> <input
-										type="button" value="수정" class="btn btn-primary"></a>
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="수정" class="btn btn-primary"
-										disabled="disabled">
-								</c:otherwise>
-							</c:choose></td>
-						<td><c:choose>
-								<c:when test="${vo.obsalestatus==0}">
-									<!-- <a href="${cp }/seller/oldbookDel?obnum=${vo.obnum}"></a> -->
-									<input type="button" value="삭제" class="btn btn-secondary"
-										onclick="del(${vo.obnum})">
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="삭제" class="btn btn-secondary"
-										disabled="disabled">
-								</c:otherwise>
-							</c:choose></td>
-					</tr>
-				</c:forEach>
-			</table>
-			<!-- 페이징처리 -->
-			<div>
-				<ul class="pagination justify-content-center">
-					<!-- 이전버튼 -->
-					<c:if test="${pu.startPageNum>3 }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/seller/prodLook?pageNum=${pu.startPageNum-1}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
-					</c:if>
-					<c:forEach var="i" end="${pu.endPageNum}"
-						begin="${pu.startPageNum }">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/seller/prodLook?pageNum=${i}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a></li>
-					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pu.totalPageCount>pu.endPageNum}">
-						<li class="page-item"><a class="page-link"
-							href="${cp }/seller/prodLook?pageNum=${pu.endPageNum+1}&
-						keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
-					</c:if>
-				</ul>
+		<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">상품리스트</div>
+					<div class="card-body">
+						<div id="showTable">
+					<table class="table table-bordered">
+						<tr class="title">
+							<td width="50">NO</td>
+							<td width="300">상품명</td>
+							<td>출판사</td>
+							<td>저자</td>
+							<td width="110">판매상태</td>
+							<td>품질</td>
+							<td>판매가</td>
+							<td width="120">등록일</td>
+							<td width="80">수정</td>
+							<td width="80">삭제</td>
+						</tr>
+						<c:forEach var="vo" items="${list}" varStatus="status">
+							<tr>
+								<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>
+								<td>${vo.obname}</td>
+								<td>${vo.obwriter}</td>
+								<td>${vo.obpublisher}</td>
+								<td><c:if test="${vo.obsalestatus==0}">판매중</c:if> 
+									<c:if test="${vo.obsalestatus==1}">입금대기중</c:if> 
+									<c:if test="${vo.obsalestatus==2}">결제완료</c:if>
+									<c:if test="${vo.obsalestatus==3}">판매완료</c:if>
+								</td>
+								<td><c:if test="${vo.obstatus==1}">최상</c:if>
+									<c:if test="${vo.obstatus==2}">상</c:if>
+									<c:if test="${vo.obstatus==3}">중</c:if>
+									<c:if test="${vo.obstatus==4}">하</c:if>
+								</td>
+								<td>${vo.obsaleprice}원</td>
+								<td><fmt:formatDate value="${vo.obregdate}"	pattern="yyyy-MM-dd" /></td>
+								<td><c:choose>
+										<c:when test="${vo.obsalestatus==0}">
+											<a href="${cp}/seller/prodUpdateView?obnum=${vo.obnum}"> <input
+												type="button" value="수정" class="btn btn-primary"></a>
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="수정" class="btn btn-primary"
+												disabled="disabled">
+										</c:otherwise>
+									</c:choose></td>
+								<td><c:choose>
+										<c:when test="${vo.obsalestatus==0}">
+											<!-- <a href="${cp }/seller/oldbookDel?obnum=${vo.obnum}"></a> -->
+											<input type="button" value="삭제" class="btn btn-secondary"
+												onclick="del(${vo.obnum})">
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="삭제" class="btn btn-secondary"
+												disabled="disabled">
+										</c:otherwise>
+									</c:choose></td>
+							</tr>
+						</c:forEach>
+					</table>
+					<!-- 페이징처리 -->
+					<div>
+						<ul class="pagination justify-content-center">
+							<!-- 이전버튼 -->
+							<c:if test="${pu.startPageNum>3 }">
+								<li class="page-item"><a class="page-link"
+									href="${cp }/seller/prodLook?pageNum=${pu.startPageNum-1}&
+								keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">이전</a></li>
+							</c:if>
+							<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
+								<li class="page-item">
+									<a class="page-link" href="${cp }/seller/prodLook?pageNum=${i}&
+									keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}
+									&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">${i}</a>
+								</li>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${pu.totalPageCount>pu.endPageNum}">
+								<li class="page-item"><a class="page-link"
+									href="${cp }/seller/prodLook?pageNum=${pu.endPageNum+1}&
+								keyword=${map.keyword}&field=${map.field}&obsalestatus=${map.obsalestatus}&regdate=${map.regdate }&startDay=${map.startDay}&endDay=${map.endDay}">다음</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>

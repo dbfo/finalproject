@@ -11,6 +11,13 @@
 	font-weight: normal; 
 	font-style: normal; 
 }
+/*중고판매자 공통 아이콘이미지*/
+#tableicon{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
+
 /* ////////중고판매 현황판css///// */
 #sellerContentMain {
 	width: 1300px;
@@ -29,16 +36,15 @@
 
 /* ////////////////////////////중고 상품등록폼 관련 css ///////////////////////////*/
 #prodInputForm {
-	border: 1px solid red;
 	width: 1300px;
 	height: 2000px;
 	margin: auto;
+	background-color: #F2FAF4;
 }
 
 #cate {
 	width: 1300px;
 	height: 200px;
-	border: 1px solid black;
 }
 
 #cateck {
@@ -50,7 +56,6 @@
 #basic {
 	width: 1300px;
 	height: 500px;
-	border: 1px solid yellow;
 }
 
 .infotable {
@@ -59,7 +64,6 @@
 }
 
 #prodInputForm {
-	border: 1px solid red;
 	width: 1300px;
 	height: 2100px;
 	margin: auto;
@@ -68,7 +72,6 @@
 #cate {
 	width: 1300px;
 	height: 200px;
-	border: 1px solid black;
 }
 
 #cateck {
@@ -86,7 +89,6 @@
 #basic {
 	width: 1300px;
 	height: 300px;
-	border: 1px solid yellow;
 }
 
 #infotable1 tr td input {
@@ -97,7 +99,6 @@
 #price {
 	width: 1300px;
 	height: 300px;
-	border: 1px solid blue;
 }
 
 .infotd2 {
@@ -108,7 +109,6 @@
 #ship {
 	width: 1300px;
 	height: 300px;
-	border: 1px solid green;
 }
 
 #infotable3 tr td input {
@@ -135,7 +135,6 @@
 #bigbox {
 	width: 200px;
 	height: 300px;
-	border: 1px solid black;
 	float: left;
 }
 
@@ -144,14 +143,14 @@
 	height: 25px;
 	padding-left: 20px;
 }
-
-#insertbt {
-	margin: auto;
+#insertbt{
+	margin-left: 650px;
 }
-
-/*상품조회/수정관련css*/
+#updatebt{
+	margin-left: 650px;
+}
+/*=====================상품조회/수정관련css=====================*/
 #sellerProdLook {
-	border: 1px solid black;
 	width: 1300px;
 	height: 900px;
 	margin: auto;
@@ -159,8 +158,7 @@
 /*검색박스*/
 #selectBox {
 	width: 1300px;
-	height: 300px;
-	border: 1px solid red;
+	height: 250px;
 }
 
 #selectBox table {
@@ -187,9 +185,8 @@
 }
 /*테이블박스*/
 #showTable {
-	width: 1300px;
-	height: 500px;
-	border: 1px solid green;
+	width: 1250px;
+	height: 450px;
 }
 
 #showTable table {
@@ -203,4 +200,152 @@
 #list2bt {
 	margin-left: 10px;
 	margin-right: 10px;
+}
+/*=============판매관리메뉴 메인================*/
+#salesManagement {
+	width: 1300px;
+	height: 1400px;
+	margin: auto;
+}
+/*판매관리 상단메뉴css*/
+/*
+body {
+	color: #555;
+	background: #eeeeee;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+*/
+p {
+	margin: 0 0 20px;
+	line-height: 1.5;
+}
+
+.salesTopMenu {
+	width: 1300px;
+	height:1200px;
+	/*max-width: 800px;*/
+	padding: 50px;
+	margin: 0 auto;
+	background: #ffffff;
+}
+
+.salesTopMenu section {
+	display: none;
+	padding: 20px 0 0;
+	border-top: 1px solid #ddd;
+}
+
+/*라디오버튼 숨김*/
+.salesTopMenu input[name='tabs'] {
+	display: none;
+}
+
+.salesTopMenu label {
+	display: inline-block;
+	margin: 0 0 -1px;
+	padding: 15px 25px;
+	font-weight: 600;
+	text-align: center;
+	color: #bbb;
+	border: 1px solid transparent;
+}
+
+.salesTopMenu label:hover {
+	color: #2e9cdf;
+	cursor: pointer;
+}
+
+/*input 클릭시, label 스타일*/
+.salesTopMenu input:checked+label {
+	color: #555;
+	border: 1px solid #ddd;
+	border-top: 2px solid #2e9cdf;
+	border-bottom: 1px solid #ffffff;
+}
+
+#tab1:checked ~ #content1, 
+#tab2:checked ~ #content2, 
+#tab3:checked ~	#content3, 
+#tab4:checked ~ #content4 {
+	display: block;
+}
+/*메뉴1 입금대기중*/
+/*입금대기중 css*/
+#detail1 {
+	height: 1000px;
+}
+.toptr {
+	text-align: center;
+}
+
+#detail1 table .toptr {
+	height: 30px;
+	background-color: silver;
+}
+
+#searchBox1 {
+	width: 1200px;
+	height: 200px;
+}
+
+input[name='borderdate1'] {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+input[name='keyword1'] {
+	margin-left: 20px;
+	width: 400px;
+	display: inline;
+}
+
+#slaesListbt1 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+input[name='field1'] {
+	margin-right: 10px;
+	margin-left: 20px;
+}
+/*입금완료/배송요청중 css*/
+#detail2 {
+	height: 1000px;
+}
+
+.toptr {
+	text-align: center;
+}
+
+#detail2 table .toptr {
+	height: 30px;
+	background-color: silver;
+}
+
+#searchBox2 {
+	width: 1200px;
+	height: 200px;
+}
+
+.borderdate2 {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+#keyword_menu2{
+	margin-left: 20px;
+	width: 400px;
+	display: inline;
+}
+
+#slaesListbt2 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.field_menu2 {
+	margin-right: 10px;
+	margin-left: 20px;
 }

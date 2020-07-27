@@ -3,49 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<style>
-/*입금완료/배송요청중 css*/
-#detail2 {
-	border: 1px solid green;
-	height: 1400px;
-}
-
-.toptr {
-	text-align: center;
-}
-
-#detail2 table .toptr {
-	height: 30px;
-	background-color: silver;
-}
-
-#searchBox2 {
-	width: 1200px;
-	height: 200px;
-	border: 1px solid red;
-}
-
-.borderdate2 {
-	margin-left: 20px;
-	margin-right: 10px;
-}
-
-#keyword_menu2{
-	margin-left: 20px;
-	width: 400px;
-	display: inline;
-}
-
-#slaesListbt2 {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.field_menu2 {
-	margin-right: 10px;
-	margin-left: 20px;
-}
-</style>
 <script type="text/javascript" src="${cp }/resources/jh/js/jquery-3.2.1.min.js"></script>
 <form action="${cp }/seller/salesManagement2?tabType=2&keyword2=${map.keyword2}&startDay2=${map.startDay2}&
 							endDay2=${map.endDay2}&field2=${map.field2}&bpaydate2=${map.bpaydate2}">
@@ -86,10 +43,10 @@
 			</table>
 		</div>
 		<!-- 리스트 -->
-		<div>
-			<span>LIST</span>
-		</div>
-		<table class="table table-bordered">
+		<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">판매관리 리스트</div>
+			<div class="card-body">
+				<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr class="toptr">
 					<th scope="col" width="60" rowspan="2">NO</th>
@@ -163,10 +120,11 @@
 				</c:if>
 			</ul>
 		</div>
+				
+			</div>
+		</div>
 	</div>
 </form>
-
-
 <script>
 	//출고처리버튼
 	function sendInfo(bpaynum) {

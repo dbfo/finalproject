@@ -7,7 +7,7 @@
 /*배송중/구매확정전 css*/
 #detail4 {
 	border: 1px solid green;
-	height: 1400px;
+	height: 1000px;
 }
 
 .toptr {

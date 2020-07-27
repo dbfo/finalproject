@@ -6,8 +6,7 @@
 <style>
 /*배송중/구매확정전 css*/
 #detail3 {
-	border: 1px solid green;
-	height: 1400px;
+	height: 1000px;
 }
 
 .toptr {
@@ -22,7 +21,6 @@
 #searchBox3 {
 	width: 1200px;
 	height: 200px;
-	border: 1px solid red;
 }
 
 .borderdate3 {
@@ -85,10 +83,10 @@
 			</table>
 		</div>
 		<!-- 리스트 -->
-		<div>
-			<span>LIST</span>
-		</div>
-		<table class="table table-bordered">
+		<div class="card">
+			<div class="card-header"><img src="${cp }/resources/jh/jhimages/tableicon.png" id="tableicon">판매관리 리스트</div>
+			<div class="card-body">
+				<table class="table table-bordered">
 			<thead class="thead-dark">
 				<tr class="toptr">
 					<th scope="col" width="60" rowspan="2">NO</th>
@@ -158,6 +156,11 @@
 				</c:if>
 			</ul>
 		</div>
+		
+			</div>
+		</div>
+	
+		
 	</div>
 </form>
 <script>
