@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.MyPageDao;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Service
 public class MyPageService {
@@ -35,5 +36,12 @@ public class MyPageService {
 	public int countHistory(HashMap<String, Object>map) {
 		return dao.countHistory(map);
 	}
+	public int countQnaHistory(HashMap<String,Object>map) {
+		return dao.countQnaHistory(map);
+	}
+	public List<QnaHistoryVo> qnahistory(HashMap<String, Object>map){
+		return dao.qnahistory(map);
+	}
 	
+
 }

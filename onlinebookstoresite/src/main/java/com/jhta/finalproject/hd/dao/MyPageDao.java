@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Repository
 public class MyPageDao {
@@ -37,5 +38,13 @@ public class MyPageDao {
 	}
 	public int countHistory(HashMap<String, Object> map) {
 		return sqlsession.selectOne(NAMESPACE+".countHistory",map);
+	}
+	//문의내역 행수 
+	public int countQnaHistory(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".countQnaHistory",map);
+	}
+	//문의내역리스트
+	public List<QnaHistoryVo> qnahistory(HashMap<String, Object>map){
+		return sqlsession.selectList(NAMESPACE+".qnaHistory",map);
 	}
 }

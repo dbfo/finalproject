@@ -36,6 +36,7 @@ public class CartService {
 	public List<UsedCartListVo> usedlist(int mnum) {
 		return dao.usedlist(mnum);
 	}
+	//중고 장바구니 판매자구하기.
 	public String getSid(int snum) {
 		return dao.getSid(snum);
 	}

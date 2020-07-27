@@ -61,7 +61,7 @@ public class OrderManagerController {
 			return json.toString();
 		}
 	}
-	
+	//중고상품....
 	@RequestMapping(value="/order/usedmanage",method = RequestMethod.POST)
 	@ResponseBody
 	public String usedorderManage(int bpaynum,int bstatus,String apply,
@@ -101,5 +101,6 @@ public class OrderManagerController {
 			return json.toString();
 		}
 	}
+	
 	
 }

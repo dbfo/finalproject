@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MyPageService;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Controller
 public class MyPageController {
@@ -30,6 +31,15 @@ public class MyPageController {
 	public String cancelHistorypage() {
 		return ".cancelhistory";
 	}
+	@RequestMapping("/mypage/qnapage")
+	public String qnapage() {
+		return ".qnahistory";
+	}
+	@RequestMapping("/mypage/returnpage")
+	public String returnPage() {
+		return ".returnhistory";
+	}
+	//새상품 취소내역.
 	@RequestMapping(value="/mypage/cancelhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String cancelhistory(HttpSession session,@RequestParam(required=false)String startDay,String value,
@@ -97,7 +107,7 @@ public class MyPageController {
 		jarr.put(json);
 		return jarr.toString();
 	}
-	//중고제품 주문내역
+	//중고상품 취소내역
 		@RequestMapping(value="/mypage/usedcancelhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 		@ResponseBody
 		public String viewusedorderhistroy(HttpSession session,@RequestParam(required=false)String startDay,String value,
@@ -179,4 +189,57 @@ public class MyPageController {
 			jarr.put(json);
 			return jarr.toString();
 		}
+		//문의사항
+		@RequestMapping(value="/mypage/qnahistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String viewQnaList(HttpSession session,@RequestParam(required=false)String startDay,String value,
+				@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String,Object>datemap=new HashMap<String, Object>();
+			datemap.put("startDay", startDay);
+			datemap.put("endDay",endDay);
+			datemap.put("mnum",mnum);
+			datemap.put("value",value);
+			int totalcount=service.countQnaHistory(datemap);
+			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
+			datemap.put("startRow", pu.getStartRow());
+			datemap.put("endRow", pu.getEndRow());
+			List<QnaHistoryVo> list=service.qnahistory(datemap);
+			JSONArray jarr=new JSONArray();
+			for(QnaHistoryVo vo:list) {
+				JSONObject json=new JSONObject();
+				json.put("qnanum", vo.getQnanum());
+				json.put("qnadate", vo.getQnadate());
+				String status="";
+				int qnastatus=vo.getQnastatus();
+				if(qnastatus==0) {
+					status="처리중";
+				}else {
+					status="완료";
+				}				
+				json.put("qnastatus", qnastatus);
+				json.put("status", status);
+				json.put("qnatitle", vo.getQnatitle());
+				json.put("qnacontent", vo.getQnacontent());
+				jarr.put(json);
+			}
+			JSONObject json=new JSONObject();
+			json.put("value", value);
+			json.put("startDay", startDay);
+			json.put("endDay", endDay);
+			json.put("pageNum", pu.getPageNum());
+			json.put("totalPageCount", pu.getTotalPageCount());
+			json.put("startPageNum", pu.getStartPageNum());
+			if(pu.getEndPageNum()>=pu.getTotalPageCount()) {
+				pu.setEndPageNum(pu.getTotalPageCount());
+			}
+			json.put("endPageNum", pu.getEndPageNum());
+			
+			jarr.put(json);
+			return jarr.toString();
+		}
+		
+		
+		
 }

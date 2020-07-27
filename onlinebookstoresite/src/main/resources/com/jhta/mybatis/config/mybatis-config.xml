@@ -30,6 +30,7 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryDetailInfoVo" alias="orderdetailinfo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.refundBookVo" alias="BookVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryUsedBook" alias="historyUsedVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.QnaHistoryVo" alias="qnahistory"/>
   	
   	
   	<!-- /////////// -->

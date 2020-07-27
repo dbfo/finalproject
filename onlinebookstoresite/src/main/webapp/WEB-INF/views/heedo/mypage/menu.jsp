@@ -10,7 +10,7 @@
 	<tr>
 		<td>
 			<a class="menuAtag" href="${cp }/mypage/orderhistory">- 주문내역</a><br>
-			<a class="menuAtag" href="#">- 반품/환불 신청 및 조회</a><br>
+			<a class="menuAtag" href="${cp }/mypage/returnpage">- 반품/환불 신청 및 조회</a><br>
 			<a class="menuAtag" href="${cp }/mypage/cancelhistorypage">- 취소 주문내역</a><br>
 		</td>
 	</tr>
@@ -41,7 +41,7 @@
 		<th>고객센터</th>
 	</tr>
 	<tr>
-		<td><a class="menuAtag" href="#">-문의내역/문의하기</a></td>
+		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a></td>
 	</tr>
 </table>
 <style>

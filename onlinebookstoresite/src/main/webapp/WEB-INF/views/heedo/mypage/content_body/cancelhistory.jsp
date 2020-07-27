@@ -5,6 +5,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <%-- <script src="${cp }/resources/hd/datepicker/bootstrap-datepicker.ko.js"></script> --%>
 <div id="content_history">	
+	<h4><span id="colorfont">취소</span>내역</h4>
 	<div class="tabs">
 	  <div class="tab-2" id="new_tab-2" style="z-index:2">
 	    <label for="tab2-1" style="background-color:#212529;color:white;" id="tabnew">새상품</label>
@@ -484,12 +485,15 @@
   
 </script>
 <style>
+	#colorfont{
+		color:#f51167;
+	}
 	#content_history{
 	position: absolute;
     display: inline-block;
     border: 2px solid black;
     width: 927px;
-    height: 670px;
+    height: 720px;
     padding:10px
 	}
 	.calenderIcon{

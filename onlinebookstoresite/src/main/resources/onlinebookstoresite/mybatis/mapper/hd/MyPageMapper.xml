@@ -86,7 +86,50 @@
 	<select id="usedTitle" parameterType="int" resultType="hashmap">
 		select obname,obstatus from oldbooks where obnum=#{bnum}
 	</select>
-	
+	<!-- 문의내역 전체행수 구함. -->
+	<select id="countQnaHistory" parameterType="hashmap" resultType="int">
+		select NVL(count(*),0) from
+		(
+			select a.*,rownum rnum from 
+			(
+				select * from qna where mnum=#{mnum} and
+				<choose>
+				<when test="value=='process'">
+					qnastatus=0 and
+				</when>
+				<when test="value=='complete'">
+					qnastatus=1 and
+				</when>
+				</choose>
+				<![CDATA[TO_CHAR(qnadate,'yy/mm/dd') >= TO_CHAR(TO_DATE(#{startDay},'yy/mm/dd'),'yy/mm/dd') AND
+				TO_CHAR(qnadate,'yy/mm/dd') <= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+				order by qnadate desc
+				) a
+			)aa
+		<![CDATA[where rnum>=1 and rnum<=10]]>
+	</select>
+	<!-- 문의내역 리스트 -->
+	<select id="qnaHistory" parameterType="hashmap" resultType="qnahistory">
+		select aa.* from
+		(
+			select a.*,rownum rnum from 
+			(
+				select * from qna where mnum=#{mnum} and
+				<choose>
+				<when test="value=='process'">
+					qnastatus=0 and
+				</when>
+				<when test="value=='complete'">
+					qnastatus=1 and
+				</when>
+				</choose>
+				<![CDATA[TO_CHAR(qnadate,'yy/mm/dd') >= TO_CHAR(TO_DATE(#{startDay},'yy/mm/dd'),'yy/mm/dd') AND
+				TO_CHAR(qnadate,'yy/mm/dd') <= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+				order by qnadate desc
+				) a
+			)aa
+		<![CDATA[where rnum>=1 and rnum<=10]]>
+	</select>
 	
 	
 </mapper>

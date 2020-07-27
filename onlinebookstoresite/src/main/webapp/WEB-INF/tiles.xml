@@ -71,8 +71,17 @@
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/usedorderdetail.jsp"/>
 	</definition>
 	
-		<definition name=".cancelhistory" extends=".mypage">
+	<definition name=".cancelhistory" extends=".mypage">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/cancelhistory.jsp"/>
+	</definition>
+	
+	<definition name=".returnhistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/returnhistory.jsp"/>
+	</definition>
+	
+	
+	<definition name=".qnahistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/qna.jsp"/>
 	</definition>
 	
 	<!-- 장바구니. -->
