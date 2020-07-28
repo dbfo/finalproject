@@ -15,6 +15,14 @@
 	width: 1300px;
 	height: 330px;
 }
+input[name='obqstatus']{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+input[name='obqdate']{
+	margin-left: 10px;
+    margin-right: 10px;
+}
 .daptdstyle{
 	background-color: silver;
 }

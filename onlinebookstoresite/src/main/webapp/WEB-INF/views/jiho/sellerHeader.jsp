@@ -3,16 +3,26 @@
 <!DOCTYPE html>
 <style>
 #sellerhomeIcon{
-	margin-left: 400px;
+	margin-left: 500px;
+}
+.jhmaintop{
+	margin-top: 80px;
+	
 }
 
 </style>
 <div id="sellerTop">
-	<div style="width: 1100px;">
+	<div style="width: 1500px;">
 		<a href="${cp}/seller"><img	src="${cp}/resources/jh/jhimages/중고판매로고.png" id="sellerhomeIcon"></a>
-		<a href="${cp}/" style="margin-left: 50px;"><span style="color: black;">홈으로/</span></a>
-		<a href="${cp}/seller"><span style="color: black;">중고관리메인</span></a>
-		<a href="${cp }/logout"><span style="color: black;">로그아웃</span></a>
+		<a href="${cp}/" style="margin-left: 200px;">
+			<img src="${cp }/resources/jh/jhimages/홈으로_1.png" class="jhmaintop">
+		</a>
+		<a href="${cp}/seller">
+			<img src="${cp }/resources/jh/jhimages/중고관리메인_1.png" class="jhmaintop">
+		</a>
+		<a href="${cp }/logout">
+			<img src="${cp }/resources/jh/jhimages/로그아웃_1.png" class="jhmaintop">
+		</a>
 	</div>
 </div>
 <div>
