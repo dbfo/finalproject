@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhta.finalproject.hd.service.MyPageService;
 import com.jhta.finalproject.hd.service.OrderHistoryService;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Controller
@@ -27,11 +28,34 @@ public class MyPageController {
 	@Autowired
 	private OrderHistoryService orderservice;
 	
+	//메인페이지 상단 장바구니에 들어있는 상품갯수 구할때
+	@RequestMapping("/mypage/countcart")
+	@ResponseBody
+	public String countcart(HttpSession session) {
+		String smnum=(String)session.getAttribute("mnum");
+		int mnum=0;
+		JSONObject json=new JSONObject();
+		boolean result=false;
+		if(smnum!=null) {
+			mnum=Integer.parseInt(smnum);
+		}else {
+			json.put("result", result);
+			return json.toString();
+		}
+		int n=service.countcart(mnum);
+		
+		result=true;
+		json.put("count", n);
+		json.put("result", result);
+		return json.toString();
+	}
+	
+	
+	//마이페이지 메인갈때 사용..
 	@RequestMapping("/mypage/main")
 	public String conMyPage(HttpSession session,Model model) {
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=Integer.parseInt(smnum);
-		System.out.println("회원번호 mnum : "+mnum);
 		//최근주문리스트 
 		List<HistoryListVo>list=service.recentorder(mnum);
 		for(HistoryListVo vo:list) {
@@ -48,9 +72,7 @@ public class MyPageController {
 			}
 			vo.setStatusStr(statusStr);
 			int bpaynum=vo.getOrdernum();
-			System.out.println("컨트롤러 주문번호 : "+bpaynum);
-			int btype=vo.getBtype(); 
-			System.out.println("컨트롤러 타입 : "+btype);
+			int btype=vo.getBtype(); 		
 			if(btype==1) {
 				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
 				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));	
@@ -97,9 +119,7 @@ public class MyPageController {
 			}
 			vo.setStatusStr(statusStr);
 			int bpaynum=vo.getOrdernum();
-			System.out.println("컨트롤러 주문번호 : "+bpaynum);
 			int btype=vo.getBtype(); 
-			System.out.println("컨트롤러 타입 : "+btype);
 			if(btype==1) {
 				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
 				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));	
@@ -136,7 +156,19 @@ public class MyPageController {
 		}
 		model.addAttribute("cancellist",cancellist);
 		
-		
+		//최근문의내역.
+		List<QnaHistoryVo> qnalist=service.recentQna(mnum);
+		for(QnaHistoryVo vo:qnalist) {
+			String status="";
+			int qnastatus=vo.getQnastatus();
+			if(qnastatus==0) {
+				status="처리중";
+			}else {
+				status="완료";
+			}
+			vo.setStatusStr(status);
+		}
+		model.addAttribute("qnalist", qnalist);
 		
 		
 		
@@ -155,6 +187,31 @@ public class MyPageController {
 	public String returnPage() {
 		return ".returnhistory";
 	}
+	
+	@RequestMapping("/mypage/qnadetail")
+	public String qnadetail(int qnanum,HttpSession session,Model model) {
+		String smnum=(String)session.getAttribute("mnum");
+		int mnum=Integer.parseInt(smnum);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mnum", mnum);
+		map.put("qnanum", qnanum);
+		QnaHistoryVo vo=service.qnadetail(map);
+		int qnastatus=vo.getQnastatus();
+		String status="";
+		if(qnastatus==0) {
+			status="처리중";
+		}else {
+			status="완료";
+		}			
+		vo.setStatusStr(status);
+		if(vo.getQnastatus()==1) { //답변있을경우.
+			QnaAnswerVo avo=service.qnaAnswer(qnanum);
+			model.addAttribute("avo",avo);
+		}
+		model.addAttribute("qvo",vo);
+		return ".qnadetail";
+	}
+	
 	//새상품 취소내역.
 	@RequestMapping(value="/mypage/cancelhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -424,7 +481,7 @@ public class MyPageController {
 			jarr.put(json);
 			return jarr.toString();
 		}
-		//반품/취소내역
+		//반품내역
 		@RequestMapping(value="/mypage/usedReturnhistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 		@ResponseBody
 		public String viewUsedReturnhistroy(HttpSession session,@RequestParam(required=false)String startDay,String value,
@@ -467,9 +524,9 @@ public class MyPageController {
 				if(bstatus==6) {
 					status="취소";
 				}else if(bstatus==4) {
-					status="반품신청";
+					status="반품/교환신청";
 				}else if(bstatus==5) {
-					status="반품완료";
+					status="처리완료";
 				}
 				
 				json.put("bstatus", bstatus);

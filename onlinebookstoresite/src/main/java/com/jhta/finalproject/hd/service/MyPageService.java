@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.MyPageDao;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Service
@@ -45,6 +46,16 @@ public class MyPageService {
 	public int qnawrite(HashMap<String, Object>map) {
 		return dao.qnawrite(map);
 	}
+	public QnaHistoryVo qnadetail(HashMap<String, Object>map) {
+		return dao.qnadetail(map);
+	}
+	public QnaAnswerVo qnaAnswer(int qnanum) {
+		return dao.qnaAnswer(qnanum);
+	}
+	public int countcart(int mnum) {
+		return dao.countcart(mnum);
+	}
+	
 	
 	//마이페이지 최근리스트 관련 서비스
 	public List<HistoryListVo> recentorder(int mnum){
@@ -52,6 +63,9 @@ public class MyPageService {
 	}
 	public List<HistoryListVo> recentcancel(int mnum){
 		return dao.recentcancel(mnum);
+	}
+	public List<QnaHistoryVo> recentQna(int mnum){
+		return dao.recentqna(mnum);
 	}
 
 }

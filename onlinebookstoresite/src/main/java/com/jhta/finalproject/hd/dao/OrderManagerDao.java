@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.hd.vo.ConfirmOldBookVo;
 import com.jhta.finalproject.hd.vo.refundBookVo;
 
 @Repository
@@ -52,6 +53,9 @@ public class OrderManagerDao {
 	// 중고책 상태 판매완료로 변경
 	public int confirmold(HashMap<String, Object>map) {
 		return sqlsession.update(NAMESPACE+".confirmold", map);
+	}
+	public List<ConfirmOldBookVo>getoldbooks(int bpaynum){
+		return sqlsession.selectList(NAMESPACE+".getoldbooks", bpaynum);
 	}
 	// 중고책 상태 다시 판매중으로 변경
 	public int cancelmold(HashMap<String, Object>map) {

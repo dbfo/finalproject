@@ -31,6 +31,8 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.refundBookVo" alias="BookVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.HistoryUsedBook" alias="historyUsedVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.QnaHistoryVo" alias="qnahistory"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.QnaAnswerVo" alias="qnaAnswer"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.ConfirmOldBookVo" alias="confirmold"/>
   	
   	
   	<!-- /////////// -->

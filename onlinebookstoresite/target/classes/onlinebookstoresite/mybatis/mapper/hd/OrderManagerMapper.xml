@@ -68,6 +68,12 @@
 	<update id="confirmBpayment" parameterType="hashmap">
 		update bpayment set bstatus=3 where bpaynum=#{bpaynum}
 	</update>
+	<select id="getoldbooks" parameterType="int" resultType="confirmold">
+		select pb.bnum,paymentbook_num,obsaleprice from
+		(select bnum,paymentbook_num from paymentbook where bpaynum=#{bpaynum})pb,
+		(select obsaleprice,obnum from oldbooks )ob
+		where pb.bnum=ob.obnum
+	</select>
 	<!-- 수수료테이블에서 최근수수료 가져옴 -->
 	<select id="getfee" resultType="int">
 	select aa.fee from 
@@ -76,11 +82,10 @@
 		)aa
 	where aa.rnum=1	
 	</select>
-	<!--  -->
+
 	<insert id="insertComple" parameterType="hashmap">
-		insert into obcomplete values(SEQ_obcomplete_obcnum.nextval,#{bpaynum},
-					#{fprice},#{feeper},#{feepay},#{settlement},sysdate,0)
-	</insert>
+		insert into obcomplete values(SEQ_obcomplete_obcnum.nextval,#{fprice},#{feeper},#{feepay},#{settlement},sysdate,0,#{paymentbook_num})
 	
+	</insert>
 	
 </mapper>

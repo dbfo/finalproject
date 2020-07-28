@@ -24,11 +24,12 @@
 		</td>
 	</tr>
 	<tr>
-		<th scope="col">모임정보</th>
+		<th>나의계좌</th>
 	</tr>
 	<tr>
 		<td>
-			<a class="menuAtag" href="#">- 모임관리</a><br>
+			<a class="menuAtag" href="#">- 포인트내역</a><br>
+			<a class="menuAtag" href="#">- 예치금내역/신청</a>
 		</td>
 	</tr>
 	<tr>
@@ -44,7 +45,3 @@
 		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a></td>
 	</tr>
 </table>
-<style>
-	
-
-</style>

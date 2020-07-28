@@ -11,7 +11,7 @@
 	    <label for="tab2-1" style="background-color:#212529;color:white;" id="tabnew">새상품</label>
 	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
 	    <div id="newtab">
-			<div class="date_picker">
+			<div class="date_picker shadow">
 				<ul class="list-group list-group-horizontal" id="dateUl">
 					<li class="list-group-item selectdate newselect" onclick="changeDate(7,0)">최근 일주일</li>
 					<li class="list-group-item active selectdate newselect" onclick="changeDate(0,1)">1개월</li>
@@ -26,7 +26,7 @@
 				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 			</div>
 			
-			<div class="tableDiv" id="tablediv">
+			<div class="tableDiv shadow" id="tablediv">
 				<div style="text-align: right" id="selectboxdiv">
 				
 					<select class="form-control" id="statusSelect">
@@ -61,7 +61,7 @@
 		   	<label for="tab2-2"  style="background-color:#212529;color:white;" id="tabused">중고상품</label>
 		   	<input id="tab2-2" name="tabs-two" type="radio">
 		   	 <div id="newtab">
-			<div class="date_picker">
+			<div class="date_picker shadow">
 				<ul class="list-group list-group-horizontal" id="useddateUl">
 					<li class="list-group-item selectdate usedselect" onclick="usedchangeDate(7,0)">최근 일주일</li>
 					<li class="list-group-item active selectdate usedselect" onclick="usedchangeDate(0,1)">1개월</li>
@@ -76,7 +76,7 @@
 				<button type="button" class='btn btn-dark' id="usedresearchBtn">조회</button>
 			</div>
 			
-			<div class="tableDiv" id="usedtablediv">
+			<div class="tableDiv shadow" id="usedtablediv">
 				<div style="text-align: right" id="usedselectboxdiv">
 				
 					<select class="form-control" id="usedstatusSelect">
@@ -173,7 +173,6 @@
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
 							var yy=item.startDay;
 							var mm=item.endDay;
-							console.log('pageNum:'+item.pageNum)
 							if(i==item.pageNum){
 								paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
 									+"href='javascript:viewUsedOrderlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
@@ -256,7 +255,6 @@
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
 							var yy=item.startDay;
 							var mm=item.endDay;
-							console.log('pageNum:'+item.pageNum)
 							if(i==item.pageNum){
 								paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
 									+"href='javascript:viewNewOrderlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
@@ -514,7 +512,7 @@
 	#content_history{
 	position: absolute;
     display: inline-block;
-    border: 2px solid black;
+   	border-top:1px solid #dee2e6;
     width: 927px;
     height: 720px;
     padding:10px
@@ -534,9 +532,7 @@
 		margin-top: 15px;
 		padding:15px;
 		border-radius: 8px;
-		border:1px solid grey;
-		
-		box-shadow: 0px 0px 4px grey;
+		border:2px solid grey;
 	}
 	.selectdate{
 		text-align:center;
@@ -563,11 +559,10 @@
 	 border-radius: 8px;
 		margin-top: 20px;
 		font-size:14px;
-		border:1px solid grey;
-		width:903px;
+		border:2px solid grey;
+		width:907px;
 		height:435px;
 		padding:5px;
-		box-shadow: 0px 0px 4px grey;
 	}
 	#newPaging,#usedPaging{
 		text-align: center;

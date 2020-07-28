@@ -11,7 +11,7 @@
 	    <label for="tab2-1" style="background-color:#212529;color:white;" id="tabnew">새상품</label>
 	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
 	    <div id="newtab">
-			<div class="date_picker">
+			<div class="date_picker shadow">
 				<ul class="list-group list-group-horizontal" id="dateUl">
 					<li class="list-group-item selectdate newselect" onclick="changeDate(7,0)">최근 일주일</li>
 					<li class="list-group-item active selectdate newselect" onclick="changeDate(0,1)">1개월</li>
@@ -26,7 +26,7 @@
 				<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 			</div>
 			
-			<div class="tableDiv" id="tablediv">
+			<div class="tableDiv shadow" id="tablediv">
 				<table class="table" id="newTable">
 					<thead class="table-dark">
 						<th style="text-align:center;">주문번호</th>
@@ -49,7 +49,7 @@
 		   	<label for="tab2-2"  style="background-color:#212529;color:white;" id="tabused">중고상품</label>
 		   	<input id="tab2-2" name="tabs-two" type="radio">
 		   	 <div id="newtab">
-			<div class="date_picker">
+			<div class="date_picker shadow">
 				<ul class="list-group list-group-horizontal" id="useddateUl">
 					<li class="list-group-item selectdate usedselect" onclick="usedchangeDate(7,0)">최근 일주일</li>
 					<li class="list-group-item active selectdate usedselect" onclick="usedchangeDate(0,1)">1개월</li>
@@ -64,7 +64,7 @@
 				<button type="button" class='btn btn-dark' id="usedresearchBtn">조회</button>
 			</div>
 			
-			<div class="tableDiv" id="usedtablediv">
+			<div class="tableDiv shadow" id="usedtablediv">
 				<table class="table" id="usedTable">
 					<thead class="table-dark">
 						<th style="text-align:center;">주문번호</th>
@@ -107,7 +107,6 @@
 		$("#new_tab-2").css('z-index','1');
 	});
 	var viewUsedCancellist=function(startDay,endDay,pageNum,value){
-		console.log('중고주문리스트 시작.')
 		clearUsedlist();
 		if(pageNum==null){
 			pageNum=1;
@@ -148,7 +147,6 @@
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
 							var yy=item.startDay;
 							var mm=item.endDay;
-							console.log('pageNum:'+item.pageNum)
 							if(i==item.pageNum){
 								paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
 									+"href='javascript:viewUsedOrderlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
@@ -229,7 +227,6 @@
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
 							var yy=item.startDay;
 							var mm=item.endDay;
-							console.log('pageNum:'+item.pageNum)
 							if(i==item.pageNum){
 								paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
 									+"href='javascript:viewNewOrderlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
@@ -462,8 +459,6 @@
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#statusSelect").val()
-		console.log('startDay:'+date1);
-		console.log('endDay:'+date2);
 		clearNewlist();
 		viewNewCancellist(startDay,endDay,1,value);
 	});
@@ -471,8 +466,6 @@
 		var startDay=$("#useddate1").val();
 		var endDay=$("#useddate2").val();
 		var value=$("#usedstatusSelect").val()
-		console.log('startDay:'+date1);
-		console.log('endDay:'+date2);
 		clearUsedlist();
 		viewUsedOrderlist(startDay,endDay,1,value);
 	});
@@ -491,7 +484,7 @@
 	#content_history{
 	position: absolute;
     display: inline-block;
-    border: 2px solid black;
+    border-top:1px solid #dee2e6;
     width: 927px;
     height: 720px;
     padding:10px
@@ -506,9 +499,8 @@
 	.date_picker{
 		 border-radius: 8px;
 		margin-top: 15px;
-		border:1px solid grey;
+		border:2px solid grey;
 		padding:15px;
-		box-shadow: 0px 0px 4px grey;
 	}
 	.selectdate{
 		text-align:center;
@@ -535,17 +527,17 @@
 	 border-radius: 8px;
 		margin-top: 20px;
 		font-size:14px;
-		border:1px solid grey;
-		width:903px;
+		border:2px solid grey;
+		width:907px;
 		height:435px;
 		padding:5px;
-		box-shadow: 0px 0px 4px grey;
+		
 	}
 	#newPaging,#usedPaging{
 		text-align: center;
 		position:absolute;
-		top:620px;
-		left:370px;
+		top: 650px;
+    	left: 400px;
 	}
 	.pageli{
 		width:34px;

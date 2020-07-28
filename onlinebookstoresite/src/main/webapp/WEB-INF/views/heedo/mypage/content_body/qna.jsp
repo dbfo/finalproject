@@ -3,7 +3,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <div id="content_history">	
 		<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span id="colorfont">문의</span>내역</h4>
-		<div class="date_picker">
+		<div class="date_picker shadow">
 			<ul class="list-group list-group-horizontal" id="dateUl">
 				<li class="list-group-item selectdate qnaselect" onclick="changeDate(7,0)">최근 일주일</li>
 				<li class="list-group-item active selectdate qnaselect" onclick="changeDate(0,1)">1개월</li>
@@ -17,7 +17,7 @@
 			<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
 			<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 		</div>
-		<div class="tableDiv" id="tablediv">
+		<div class="tableDiv shadow" id="tablediv">
 			<div style="text-align: right" id="usedselectboxdiv">
 				
 					<select class="form-control" id="qnaSelect">
@@ -42,7 +42,7 @@
 							
 		</div>
 		<div id="btnDiv">
-			<button type="button" class="btn btn-default" id="writeQna" 
+			<button type="button" class="btn btn-dark" id="writeQna" 
 					data-toggle="modal" data-target="#writemodal">문의하기</button>
 		</div>
 </div>
@@ -376,7 +376,7 @@
 	#content_history{
 	position: absolute;
     display: inline-block;
-    border: 2px solid black;
+   border-top:1px solid #dee2e6;
     width: 927px;
     height: 670px;
     padding:10px
@@ -393,9 +393,7 @@
 		margin-top: 15px;
 		padding:15px;
 		border-radius: 8px;
-		border:1px solid grey;
-		
-		box-shadow: 0px 0px 4px grey;
+		border:2px solid grey;
 	}
 	#dateUl{
 		list-style-type: none;
@@ -422,11 +420,13 @@
 	 border-radius: 8px;
 		margin-top: 20px;
 		font-size:14px;
-		border:1px solid grey;
-		width:903px;
+		border:2px solid grey;
+		width:907px;
 		height:435px;
 		padding:5px;
-		box-shadow: 0px 0px 4px grey;
+	}
+	#btnDiv{
+		text-align: right;
 	}
 	#qnaPaging{
 		text-align: center;

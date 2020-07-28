@@ -38,7 +38,9 @@
 						</div>
 						<div class="up-item">
 							<div class="shopping-card">
-								<i class="flaticon-bag"></i><span>0<!-- 장바구니select행수 받기 --></span>
+								<i class="flaticon-bag"></i>
+								<span id="cartcount">
+								</span>
 							</div>
 							<a href="${cp }/pay/cart">장바구니</a>
 						</div>
@@ -85,3 +87,23 @@
 	</nav>
 </header>
 <!-- Header section end -->
+<script>
+	$(document).ready(function(){
+		$.ajax({
+			url:"/finalproject/mypage/countcart",
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				if(data.result){				
+					var count=data.count;
+					$("#cartcount").text(count);
+				}else{
+					$("#cartcount").text(0);
+				}
+				
+			}
+			
+		})
+		
+	})
+</script>

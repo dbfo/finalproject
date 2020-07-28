@@ -8,7 +8,7 @@
 	</div>
 	<br>
 	<div id="content_initial">		
-		<div class="content_core" id="listDiv">
+		<div class="content_core shadow" id="listDiv">
 			<h5><span class="colorFont">주문 상품</span> 정보</h5>
 			<table class="table table-borderd" id="listTable">
 				<thead>
@@ -38,23 +38,23 @@
 						<c:choose>
 							<c:when test="${ivo.bstatus==0 }">
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel">전체취소</button>
+								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel" data-fd="1">전체취소</button>
 							</td>		
 						</c:when>
 						<c:when test="${ivo.bstatus==1}">
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="cancel">주문취소</button>
+								<button type="button" class="btn btn-dark orderbtn orderbtn1" data-bstatus="${ivo.bstatus }" data-apply="cancel">주문취소</button>
 							</td>			
 						</c:when>
 						<c:when test="${ivo.bstatus==2}">				
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
+								<button type="button" class="btn btn-dark orderbtn orderbtn1" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
 							</td>				
 						</c:when>
 							<c:when test="${ivo.bstatus==3}">				
 							<td class="btnTd"  style="text-align: right;" data-bstatus="${ivo.bstatus }">
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
-								<button type="button" class="btn btn-dark orderbtn" data-bstatus="${ivo.bstatus }" data-apply="change">교환신청</button>
+								<button type="button" class="btn btn-dark orderbtn orderbtn1" data-bstatus="${ivo.bstatus }" data-apply="return">반품신청</button>
+								<button type="button" class="btn btn-dark orderbtn orderbtn1" data-bstatus="${ivo.bstatus }" data-apply="change">교환신청</button>
 							</td>				
 						</c:when>
 					</c:choose>
@@ -88,7 +88,7 @@
 			</table>
 		</div>
 		
-		<div class="content_core" id="orderinfoDiv">
+		<div class="content_core shadow" id="orderinfoDiv">
 			<h5><span class="colorFont">주문</span> 정보</h5>
 			<table class="table table-borderd">
 				<tr>
@@ -116,7 +116,7 @@
 			</table>
 		</div>
 		
-		<div class="content_core" id="payinfoDiv">
+		<div class="content_core shadow" id="payinfoDiv">
 			<h5><span class="colorFont">결제</span> 정보</h5>
 			<table class="table table-orderd">
 				<tr>
@@ -231,6 +231,26 @@
 </div>
 <!-- /// 확인 Modal 끝 ///-->
 
+<div id="selectAlertModal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	상품을 선택해주세요.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 	$(document).ready(function(){
 		defaultSetting();
@@ -275,7 +295,10 @@
 	});
 	//상품리스트쪽 버튼 클릭시.
 	$(".orderbtn").click(function(){
+		
+	
 		var apply=$(this).data('apply');
+		
 		$("#confirmbtn_modal").data('apply',apply)
 		var bstatus=$(this).data('bstatus');
 		if(bstatus==3&&apply=='change'){
@@ -287,14 +310,20 @@
 			$("#confirmModalLabel").text('반품신청');
 			$("#confirm_modal_body").text('선택하신 상품을 반품신청 하시겠습니까?')
 		}
+		var i=0;
 		$(".checkTd").each(function(){
 			if($(this).is(":checked")){
+				i++;
 				var bnum=$(this).data("bnum")
 				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("confirm_modal_body");
 			}
 			
 		});
-		
+		var fd=$(this).data('fd');
+		if(fd!='1'&&i==0){
+			$("#selectAlertModal").modal('show')
+			return;
+		}
 		$("#confirmModal").modal('show');
 	});
 	
@@ -338,7 +367,6 @@
 	#content_history_detail{
 		height:1200px;
 		width:920px;
-		border:2px solid black;
 	}
 	.colorFont{
 		color:#e83e8c;
@@ -349,7 +377,6 @@
 	.content_core{
 		padding:10px;
 		 border-radius: 8px;
-		 box-shadow: 0px 0px 4px grey;
 	}
 	#listDiv{
 		border:2px solid grey;
@@ -376,8 +403,7 @@
 		margin-top: 25px;
 	}
 	#buttondiv{
-		margin-top:30px;
-		border:1px solid hotpink;
+		margin-top:20px;
 		text-align: center;
 	}
 

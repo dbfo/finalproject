@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.hd.vo.HistoryListVo;
+import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
 @Repository
@@ -39,6 +40,16 @@ public class MyPageDao {
 	public int countHistory(HashMap<String, Object> map) {
 		return sqlsession.selectOne(NAMESPACE+".countHistory",map);
 	}
+	public QnaHistoryVo qnadetail(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".qnadetail",map);
+	}
+	public QnaAnswerVo qnaAnswer(int qnanum) {
+		return sqlsession.selectOne(NAMESPACE+".qnaAnswer", qnanum);
+	}
+	public int countcart(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".countcart",mnum);
+	}
+	
 	//문의내역 행수 
 	public int countQnaHistory(HashMap<String, Object>map) {
 		return sqlsession.selectOne(NAMESPACE+".countQnaHistory",map);
@@ -58,5 +69,9 @@ public class MyPageDao {
 	
 	public List<HistoryListVo> recentcancel(int mnum){
 		return sqlsession.selectList(NAMESPACE+".recentcancel", mnum);
+	}
+	
+	public List<QnaHistoryVo> recentqna(int mnum){
+		return sqlsession.selectList(NAMESPACE+".recentqna",mnum);
 	}
 }

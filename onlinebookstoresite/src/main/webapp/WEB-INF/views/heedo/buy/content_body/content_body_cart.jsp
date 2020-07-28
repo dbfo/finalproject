@@ -3,21 +3,21 @@
 <!-- /// 최상단 tab 영역 시작 /// -->
 <ul class="nav nav-tabs">
 	<li class="nav-item">
-		<a class="nav-link " data-toggle="tab" href="#newitem">새상품</a>
+		<a class="nav-link active" data-toggle="tab" href="#newitem">새상품</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link active" data-toggle="tab" href="#useditem">중고상품</a>
+		<a class="nav-link " data-toggle="tab" href="#useditem">중고상품</a>
 	</li>
 </ul>    
 <!-- /// 최상단 tab 영역 끝 /// -->
 <br>
 <!-- /// 내용 div 시작 /// -->
-<div class="tab-content container" style="border:1px solid black">
+<div class="tab-content container shadow" id="content_cart">
 	<!-- /// 새상품 div 시작 /// -->
-	<div id="newitem" class="tab-pane fade">
+	<div id="newitem" class="tab-pane active ">
 		<h4 style='display:inline'><span style='color:#f51167'>새상품</span> 장바구니</h4>
 		<div id="topButton" style="height:35px; float:right">
-			<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm' id='orderTopBtn'>주문하기</button>
+			<span>선택한 상품  </span><button type='button' class='btn btn-outline-dark btn-sm odbtn' id='orderTopBtn'>주문하기</button>
 			<button type='button' class='btn btn-outline-secondary btn-sm' id='deleteTopBtn'>삭제하기</button>
 		</div>
 		<table class="table">
@@ -43,12 +43,28 @@
 				</tr>
 			</tfoot>
 		</table>
+		<table class='table table-bordered' style='text-align:center;'>
+				<tr>
+					<th class='table-info' style='width:33.3%'>상품 총 금액</th>
+					<th class='table-info' style='width:33.3%'>배송비</th>
+					<th bgcolor='#80d4ff' style='width:33.3%'>최종 결제금액</th>
+				</tr>
+				<tr>
+					<td><span id='new_total_value'></span>원</td>
+					<td><span id='new_total_shipfee'></span>원</td>
+					<td bgcolor='#80d4ff'><span id='final_payment_newvalue' style='color:#f51167;'></span><span style='#f51167'>원</span></td>
+				<tr>
+		</table>
+		<div id="newbottomBtn">
+			<button type='button' class='btn btn-primary btn-lg' id='odbtn'>주문하기</button>
+			<a href='${cp}/'><button type='button' class='btn btn-light btn-lg'>쇼핑계속하기</button></a>
+		</div>
 	</div>
 	
 	
 	<!-- /// 새상품 div 끝 /// -->
 	<!-- /// 중고상품 div 시작 /// -->
-	<div id="useditem" class="tab-pane active">
+	<div id="useditem" class="tab-pane fade">
 		
 	</div>
 	<!-- /// 중고상품 div 끝 /// -->
@@ -79,10 +95,35 @@
   </div>
 </div>
 <!-- ///삭제 확인 Modal 끝 ///-->
+
+<!-- /// 경고알람 modal -->
+<div id="alertmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">경고</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	선택된 상품이 없습니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <script>
 	$(document).ready(function() {
 		viewCart();
 		viewusedcart();
+		
+		$("#order_container").css({
+			width:"1140",
+		})
 	})
 	//=====================중고 관린 스크립트 시작 ===========================//
 	var viewusedcart=function(){
@@ -94,7 +135,7 @@
 				
 				// 장바구니에 데이터 없을경우.
 				if(data.length==0){
-					var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
+					var c=$("<div class='container tableDiv'></div>").appendTo("#useditem");
 					var htitle="<h4 style='display:inline'><span style='color:#f51167'>중고 판매자별</span> 장바구니  : 없음 </h4>"
 					c.append(htitle);
 					var tableapp=
@@ -114,7 +155,7 @@
 								+"<td colspan='8' align='center'><strong><span>장바구니에 담긴 상품이 없습니다.</span></strong></td>"
 								+"</tr></table>";
 					 c.append(tableapp);
-					 var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
+					 var c=$("<div class='container tableDiv'></div>").appendTo("#useditem");
 						var htitle="<h5 style='display:inline'><span style='color:#f51167'>결제</span>정보</h5>"
 						c.append(htitle);
 						var chargeApp="<table class='table table-bordered' style='text-align:center;'>"
@@ -141,7 +182,7 @@
 				var sidlist=data[lastindex-1].sidlist
 				// 각 중고판매자 테이블부터 생성. 
 				for(var i=0;i<sidlist.length;i++){
-					var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
+					var c=$("<div class='container tableDiv'></div>").appendTo("#useditem");
 					var htitle="<h4 style='display:inline'><span style='color:#f51167'>중고판매자별</span> 장바구니  : "+ sidlist[i]+"</h4>"
 					c.append(htitle);
 					var topbutton="<div id='topButton' style='height:35px;display:inline-block;float:right'>"
@@ -231,7 +272,7 @@
 				var finalvalue=allvalue+allshipfee;
 				// 하단 결제정보 테이블 시작 //
 				
-				var c=$("<div class='container tableDiv' style='border:1px solid blue'></div>").appendTo("#useditem");
+				var c=$("<div class='container tableDiv'></div>").appendTo("#useditem");
 				var htitle="<h5 style='display:inline'><span style='color:#f51167'>결제</span>정보</h5>"
 				c.append(htitle);
 				var chargeApp="<table class='table table-bordered' style='text-align:center;'>"
@@ -328,7 +369,6 @@
 				}
 			}
 		});
-		console.log('fee:'+fee)
 		$("#"+sid+"_total_shipfee").text(fee);
 		renewchargetable();
 	}
@@ -440,7 +480,7 @@
 					var tableapp="<tr>"
 								+"<td colspan='8' align='center'><strong><span>장바구니에 담긴 상품이 없습니다.</span></strong></td>"
 					$("#newtbody").append(tableapp);
-					$("#total_value").text(total_value);
+					$("#total_value,#new_total_value,#new_total_shipfee,#final_payment_newvalue").text(total_value);
 					$("#total_point").text(total_point);
 				}else{
 					$(data).each(function(index,item){
@@ -461,9 +501,19 @@
 						$("#newtbody").append(tableapp);
 					});	
 					//리스트 불러온후 총액/포인트값  맨하단에 넣기.
-					$("#total_value").text(total_value);
+					$("#total_value,#new_total_value").text(total_value);
+					var shipfee=0;
 					$("#total_point").text(total_point);
+					if(total_value>=50000){
+						$("#new_total_shipfee").text(shipfee);
+					}else{
+						shipfee=2500;
+						$("#new_total_shipfee").text(shipfee);
+					}
 					
+					
+					var final_value=total_value+shipfee;
+					$("#final_payment_newvalue").text(final_value)
 					
 					//각행의 주문버튼 클릭시.
 					$(".orderbtn").click(function(){
@@ -497,7 +547,7 @@
 						});
 					});
 					//맨위 주문버튼 클릭시.
-					$("#orderTopBtn").click(function(){
+					$("#orderTopBtn,#odbtn").click(function(){
 						var form=$('<form></form>');
 						form.attr('action','${cp}/order/order');
 						form.attr('method','post');
@@ -512,6 +562,11 @@
 								form.append(cartNum);
 							}
 						});
+						if(i==0){
+							$("#alertmodal").modal('show')
+							return;
+						}
+						
 						form.submit();
 					});
 					
@@ -523,7 +578,9 @@
 	}
 	//각행 체크버튼 체크/비체크시.
 	$(document).on('change','.checkTd',function(){ 
+		var i=0;
 		if($(this).is(":checked")){
+			i++
 			var checkTd=$(this)
 			var tr=checkTd.parent().parent();
 			var td=tr.children();
@@ -533,8 +590,18 @@
 			var orgtotal_point=$("#total_point").text();
 			var total_value=Number(orgtotal_value)+Number(value);
 			var total_point=Number(orgtotal_point)+Number(point);
-			$("#total_value").text(total_value);
+			$("#total_value,#new_total_value").text(total_value);
 			$("#total_point").text(total_point);
+			if(total_value>=50000){
+				$("#new_total_shipfee").text(shipfee);
+			}else{
+				shipfee=2500;
+				$("#new_total_shipfee").text(shipfee);
+			}
+			
+			
+			var final_value=total_value+shipfee;
+			$("#final_payment_newvalue").text(final_value)
 		}else{
 			var checkTd=$(this)
 			var tr=checkTd.parent().parent();
@@ -545,9 +612,23 @@
 			var orgtotal_point=$("#total_point").text();
 			var total_value=Number(orgtotal_value)-Number(value);
 			var total_point=Number(orgtotal_point)-Number(point);
-			$("#total_value").text(total_value);
+			$("#total_value,#new_total_value").text(total_value);
 			$("#total_point").text(total_point);
+			if(total_value>=50000){
+				$("#new_total_shipfee").text(shipfee);
+			}else{
+				shipfee=2500;
+				$("#new_total_shipfee").text(shipfee);
+			}
+			
+			
+			var final_value=total_value+shipfee;
+			$("#final_payment_newvalue").text(final_value)
 		}	
+		if(i==0){
+			$("#new_total_shipfee").text(0);
+			$("#final_payment_newvalue").text(0)
+		}
 	});
 
 	//전체체크 버튼.

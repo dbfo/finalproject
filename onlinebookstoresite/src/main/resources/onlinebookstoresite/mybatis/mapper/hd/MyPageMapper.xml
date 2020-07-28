@@ -119,6 +119,17 @@
 			)aa
 		<![CDATA[where rnum>=1 and rnum<=10]]>
 	</select>
+	<select id="qnadetail" parameterType="hashmap" resultType="qnahistory">
+		select * from qna where mnum=#{mnum} and qnanum=#{qnanum}
+	</select>
+	
+	<select id="qnaAnswer" parameterType="int" resultType="qnaAnswer">
+		select * from qnaanswer where qnanum=#{qnanum}
+	</select>
+	<select id="countcart" parameterType="int" resultType="int">
+		select NVL(count(*),0) from cart where mnum=#{mnum}
+	</select>
+	
 	<!-- 문의내역 리스트 -->
 	<select id="qnaHistory" parameterType="hashmap" resultType="qnahistory">
 		select aa.* from
@@ -174,4 +185,15 @@
   		 <![CDATA[where rnum>=1 and rnum<=2]]>
 	</select>
 	
+	<select id="recentqna" parameterType="int" resultType="qnahistory">
+		select aa.* from
+			(
+			select a.*,rownum rnum from 
+			(
+				select * from qna where mnum=#{mnum}
+				order by qnadate desc
+				) a
+			)aa
+			<![CDATA[where rnum>=1 and rnum<=2]]>
+	</select>
 </mapper>

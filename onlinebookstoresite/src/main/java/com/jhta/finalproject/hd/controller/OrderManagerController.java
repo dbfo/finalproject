@@ -78,13 +78,10 @@ public class OrderManagerController {
 			map.put("bpaynum", bpaynum);
 			map.put("mnum", mnum);
 			map.put("apply",apply);
-			map.put("totalvalue", totalvalue);
 			map.put("totalprice", totalprice);
-			map.put("delfee", delfee);
+			map.put("totalvalue", totalvalue);
+			map.put("delfee",delfee);
 			if(apply.equals("confirm")) { //중고제품 구매확정누를때
-				int fee=service.getfee();
-				double feea=fee/100;
-				map.put("feea", feea);
 				service.confirmorder(map);
 				result=true;
 			}else if(apply.equals("cancel")){

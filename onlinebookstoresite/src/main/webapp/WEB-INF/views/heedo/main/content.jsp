@@ -173,12 +173,12 @@
 			</div>
 		</div>
 	</div>
-	<div id="content-mid-best">
+	<div id="content-mid-best" class="shadow">
 		<h3><span class="colorfont">베스트</span> 셀러</h3>
 		<div id="content-best-card"></div>
 	</div>
 	<br>
-	<div id="content-mid-new">
+	<div id="content-mid-new" class="shadow">
 		<h3><span class="colorfont">신</span>간</h3>
 		<div id="content-new-card"></div>
 	</div>

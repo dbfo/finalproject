@@ -229,12 +229,8 @@
 		});
 		var allHeight=parseInt($("#content_all").css("height"));
 		var detailHeight=parseInt($("#content_history_detail").css("height"));
-		console.log('all1:'+allHeight);
-		console.log('del1:'+detailHeight);
 		allHeight+=50*(tr-1);
 		detailHeight+=50*(tr-1);
-		console.log('all2:'+allHeight);
-		console.log('del2:'+detailHeight);
 		$("#content_all").css("height",allHeight);
 		$("#detailHeight").css("height",detailHeight)
 		/////////////////////////////////////////////
@@ -245,28 +241,9 @@
 		}
 		
 	}
-	//상품리스트 체크박스클릭시..
-	$("#allcheck").change(function(){
-		if($("#allcheck").is(":checked")){
-			$(".checkTd").each(function(){
-				if(!$(this).is(":checked")){
-					$(this).prop("checked",true)
-					$(this).change();
-				}
-			})
-		}else{
-			$(".checkTd").each(function(){
-				if($(this).is(":checked")){
-					$(this).prop("checked",false)
-					$(this).change();
-				}
-			});
-		}	
-	});
 	//주문리스트 버튼 클릭시.
 	$(".orderbtn").click(function(){
 		var apply=$(this).data('apply');
-		console.log('리스트버튼 apply : '+apply);
 		$("#confirmbtn_modal").data('apply',apply)
 		var bstatus=$(this).data('bstatus');
 		$("#confirmModal").modal('show');
@@ -293,7 +270,6 @@
 			type:"post",
 			dataType: "json",
 			success:function(data){
-				console.log(data.result);
 				if(data.result){	
 					$("#resultModal").modal('show');
 				}
@@ -317,7 +293,7 @@
 	#content_history_detail{
 		height:1200px;
 		width:920px;
-		border:2px solid black;
+		border-top:1px solid #dee2e6;
 	}
 	.colorFont{
 		color:#e83e8c;
@@ -356,7 +332,6 @@
 	}
 	#buttondiv{
 		margin-top:30px;
-		border:1px solid hotpink;
 		text-align: center;
 	}
 

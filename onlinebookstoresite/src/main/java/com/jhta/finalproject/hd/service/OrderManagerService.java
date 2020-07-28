@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.finalproject.hd.dao.OrderManagerDao;
+import com.jhta.finalproject.hd.vo.ConfirmOldBookVo;
 import com.jhta.finalproject.hd.vo.refundBookVo;
 
 @Service
@@ -55,26 +56,21 @@ public class OrderManagerService {
 	public int confirmorder(HashMap<String, Object>map) throws Exception{
 		dao.confirmold(map);
 		dao.confirmBpayment(map);
-		int fee=dao.getfee();
-		System.out.println("수수료 퍼센트 : "+fee);
-		int totalvalue=(int)map.get("totalvalue");
-		int totalprice=(int)map.get("totalprice");
-		double feea=fee/100;
-		double feeb=(double)map.get("feea");
-		double feepay=totalvalue*feeb;
-		
-		System.out.println("나누기:"+feeb);
-		System.out.println("수수료 떄간금액:"+feepay);
-		double settlement=totalprice-feepay;
-		double settlementB=totalvalue-feepay;
-		System.out.println("수수료 제외한 금액:"+settlement);
-		System.out.println("상품금액에서 수수료제외한금액 :"+settlementB);
+		int bpaynum=(int)map.get("bpaynum");
+		double fee=dao.getfee();
 		map.put("feeper", fee);
-		map.put("feepay", feepay);
-		map.put("settlement", settlement);
-		map.put("fprice", totalprice);
-		dao.insertComple(map);
-		
+		List<ConfirmOldBookVo>list=dao.getoldbooks(bpaynum);
+		for(ConfirmOldBookVo vo:list) {
+			int fprice=vo.getObsaleprice();
+			double feePer=fee/100;
+			int feepay=Integer.parseInt(String.valueOf(Math.round(fprice*feePer)));
+			int settlement=fprice-feepay;
+			map.put("fprice", fprice);
+			map.put("feepay", feepay);
+			map.put("settlement", settlement);
+			map.put("paymentbook_num", vo.getPaymentbook_num());
+			dao.insertComple(map);
+		}
 		return 1;
 	}
 	//중고상품 취소
