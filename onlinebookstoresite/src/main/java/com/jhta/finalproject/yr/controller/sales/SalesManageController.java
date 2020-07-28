@@ -56,12 +56,11 @@ public class SalesManageController {
 			String startYear, String startMonth, String endYear, String endMonth) {
 
 		
-		System.out.println(
-				 usedbookmenu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
-				 + " :sy "+startYear+ " :sm "+ startMonth + " :ey "+endYear+ " :em "+endMonth);
-		
-		
-		List<HashMap<String,String>> result = getDate( menu, usedbookmenu, startDate, endDate, week
+//		System.out.println(
+//				 "ggggggg " + menu + "," + usedbookmenu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
+//				 + " :sy "+startYear+ " :sm "+ startMonth + " :ey "+endYear+ " :em "+endMonth);
+
+		List<HashMap<String,String>> result = getDate(menu, usedbookmenu, startDate, endDate, week
 				 , startYear, startMonth ,endYear, endMonth); 
 		
 
@@ -100,8 +99,16 @@ public class SalesManageController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
 		
+		if(menu.equals("0")) {
+			
+			result = service.getThreeday();
+			
+			return result;
+		}
+	
 		map.put("endDate", endDate);
 		map.put("startDate", startDate);
+		
 		if(week != null && week != "") {
 			int iweek = Integer.parseInt(week);
 			iweek = (iweek-1) * 7;

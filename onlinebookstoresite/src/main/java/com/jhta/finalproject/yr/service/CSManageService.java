@@ -37,4 +37,9 @@ public class CSManageService {
 		return dao.getTotalCount(map);
 	}
 	
+	//오늘 cs 갯수
+	public int getTodayCSCount(){
+		return dao.getTodayCSCount();
+	}
+	
 }

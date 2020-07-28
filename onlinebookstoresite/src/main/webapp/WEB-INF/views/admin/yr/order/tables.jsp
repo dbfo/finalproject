@@ -15,14 +15,14 @@
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>주문일(결제일)</th>
-							<th>주문번호</th>
-							<th>주문자</th>
-							<th>책 제목</th>
-							<th>총 실제 결제 금액</th>
-							<th>결제수단</th>
-							<th>배송상태</th>
-							<th>cs주문상태</th>
+							<th class="table-active">주문일(결제일)</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문자</th>
+							<th class="table-active">책 제목</th>
+							<th class="table-active">총 실제 결제 금액</th>
+							<th class="table-active">결제수단</th>
+							<th class="table-active">배송상태</th>
+							<th class="table-active">cs주문상태</th>
 						</tr>
 					</thead>
 					<tbody>

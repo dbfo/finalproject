@@ -88,5 +88,5 @@
 	<insert id="insertDeposit" parameterType="depositVo">
 		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, #{bpaynum}, #{dtran}, sysdate, 0)
 	</insert>
-		
+
 </mapper>	

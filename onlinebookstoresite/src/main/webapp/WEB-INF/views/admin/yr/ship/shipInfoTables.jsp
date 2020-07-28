@@ -5,7 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class="container-fluid ">
-	<h2 class="mt-4">list</h2>
 	<div class="card mb-4">
 		<div class="card-header">
 			<i class="fas fa-table mr-1"></i>
@@ -16,17 +15,17 @@
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>주문번호</th>
-							<th>주문일(결제일)</th>
-							<th>주문자</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문일(결제일)</th>
+							<th class="table-active">주문자</th>
 							<c:if test="${path == 2}">
-								<th><input type="checkbox"></th>
+								<th class="table-active"><input type="checkbox"></th>
 							</c:if>
-							<th>책 제목</th>
-							<th>수량</th>
-							<th>판매가</th>
-							<th>배송료</th>
-							<th>총 실제 결제 금액</th>
+							<th class="table-active">책 제목</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가</th>
+							<th class="table-active">배송료</th>
+							<th class="table-active">총 실제 결제 금액</th>
 
 						</tr>
 					</thead>

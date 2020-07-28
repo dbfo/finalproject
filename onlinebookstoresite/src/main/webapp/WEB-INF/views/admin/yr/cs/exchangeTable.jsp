@@ -5,7 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="container-fluid">
-<h2 class="mt-4">list</h2>
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 검색결과[0]
@@ -17,13 +16,13 @@
 				<thead>
 					<tr>
 <!-- 						교환 -->
-						<th>주문일(신청일)</th>
-						<th>주문번호</th>
-						<th>주문자</th>
-						<th>책 제목</th>
-						<th>수량</th>
-						<th>결제예정금액</th>
-						<th>처리상태</th>
+						<th class="table-active">주문일(신청일)</th>
+						<th class="table-active">주문번호</th>
+						<th class="table-active">주문자</th>
+						<th class="table-active">책 제목</th>
+						<th class="table-active">수량</th>
+						<th class="table-active">결제예정금액</th>
+						<th class="table-active">처리상태</th>
 					</tr>
 				</thead>
 				<tbody>

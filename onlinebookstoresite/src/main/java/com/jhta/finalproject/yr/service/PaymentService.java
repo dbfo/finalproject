@@ -16,10 +16,6 @@ public class PaymentService {
 	@Autowired
 	public PaymentDao dao;
 	
-//	public List<PaymentVo> allList(HashMap<String, Object> map){
-//		return dao.allList(map);
-//	}
-	
 	//새책전체리스트보이도록
 	public List<PaymentAndBookListVo> paymentList(HashMap<String, Object> map){
 		return dao.paymentList(map);
@@ -36,5 +32,15 @@ public class PaymentService {
 	//중고책 전체 갯수
 	public int getusedBookTotalCount(HashMap<String, Object> map) {
 		return dao.getTotalCount(map);		
+	}
+	
+	// 오늘 결제갯수
+	public int getTodayPaymentCount() {
+		return dao.getTodayPaymentCount();		
+	}
+	
+	// 오늘 주문 갯수
+	public int getTodayOrderCount() {
+		return dao.getTodayPaymentCount();		
 	}
 }

@@ -23,6 +23,11 @@
 		</if>
 	</sql>
 	
+<!-- 	최근 3일 동안 결제된 금액 -->
+	<select id="getThreeday" resultType = "hashmap">
+		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-3) AND TO_DATE(sysdate) group by bpaydate order by bpaydate
+	</select>
+	
 	
 	<select id="getList" parameterType="hashmap" resultType="hashmap">
 		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment, paymentbook 
@@ -64,6 +69,9 @@
 		 group by to_char(feedate, 'IW') order by feedate
 	</select>
 	
-	
-	 
+<!-- 	 결제수단별 주문현황 -->
+	<select id="getThreeDayMethodpaymentInfo" resultType="MethodPaymentInfoVo">
+		select to_char(bpaydate,'yyyy-mm-dd') bpayment, sum(bfinalmoney) price, methodpayment, nvl(count(methodpayment),0) count from bpayment 
+		where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-3) AND TO_DATE(sysdate) group by bpaydate, methodpayment order by bpaydate, methodpayment
+	</select> 
 </mapper>	

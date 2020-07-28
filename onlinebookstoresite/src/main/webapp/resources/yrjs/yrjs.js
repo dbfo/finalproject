@@ -118,28 +118,28 @@
 		$("#searchSubmitBtn").click(function(){
 			if($("input[name=pkeyword]").val() != null && $("input[name=pkeyword]").val() != ""){
 				if($("select[name=pfield]").val() == "" || $("select[name=pfield]").val() == null ){
-					alert("1검색어를 선택해주세요..")
+					alert("검색어를 선택해주세요..")
 					return;
 				}
 			}
 			
 			if($("#startDate").val() != null && $("#startDate").val() != ""){
 				if($("select[name=tfield]").val() == "" || $("select[name=tfield]").val() == null ){
-					alert("2검색어를 선택해주세요..")
+					alert("검색어를 선택해주세요..")
 					return;
 				}
 			}
 			
 			if($("#endDate").val() != null && $("#endDate").val() != ""){
 				if($("select[name=tfield]").val() == "" || $("select[name=tfield]").val() == null ){
-					alert("3검색어를 선택해주세요..")
+					alert("검색어를 선택해주세요..")
 					return;
 				}
 			}
 
 			if($("input[name=bkeyword]").val() != null && $("input[name=bkeyword]").val() != ""){
 				if($("select[name=bfield]").val() == "" || $("select[name=bfield]").val() == null ){
-					alert("4검색어를 선택해주세요..")
+					alert("검색어를 선택해주세요..")
 					return;
 				}
 			}

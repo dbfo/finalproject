@@ -41,6 +41,14 @@ public class PaymentDao {
 	public int getusedBookTotalCount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".getusedBookTotalCount",map);		
 	}
+
+	// 오늘 결제갯수
+	public int getTodayPaymentCount() {
+		return session.selectOne(NAMESPACE+".getTodayPaymentCount");		
+	}
 	
-	
+	// 오늘 주문 갯수
+	public int getTodayOrderCount() {
+		return session.selectOne(NAMESPACE+".getTodayPaymentCount");		
+	}
 }

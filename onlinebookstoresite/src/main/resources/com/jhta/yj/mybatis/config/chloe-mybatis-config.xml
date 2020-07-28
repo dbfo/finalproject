@@ -37,6 +37,8 @@
 			alias="pointVo" /> 
 		<typeAlias type="com.jhta.finalproject.yr.vo.SettlementJoinVo"
 			alias="SettlementJoinVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.MethodPaymentInfoVo"
+			alias="MethodPaymentInfoVo" /> 
 	</typeAliases>
 	
 	<!-- 매퍼파일 -->

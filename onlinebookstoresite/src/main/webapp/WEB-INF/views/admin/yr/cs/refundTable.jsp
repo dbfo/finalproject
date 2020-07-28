@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container-fluid">
-<h2 class="mt-4">list</h2>
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 검색결과[0]
@@ -17,15 +16,15 @@
 					<tr>
 <!-- 						환불 -->
 						<c:if test="${path == 4 || path == 5 }">
-							<th><input type = "checkbox"></th>
+							<th class="table-active"><input type = "checkbox"></th>
 						</c:if>
-						<th>번호</th>
-						<th>신청날짜</th>
-						<th>회원번호</th>
-						<th>회원이름</th>
-						<th>계좌정보</th>
-						<th>환불 금액</th>
-						<th>처리상태</th>
+						<th class="table-active">번호</th>
+						<th class="table-active">신청날짜</th>
+						<th class="table-active">회원번호</th>
+						<th class="table-active">회원이름</th>
+						<th class="table-active">계좌정보</th>
+						<th class="table-active">환불 금액</th>
+						<th class="table-active">처리상태</th>
 					</tr>
 				</thead>
 				<tbody>

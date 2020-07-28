@@ -16,16 +16,16 @@
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>주문번호</th>
-							<th>주문일(결제일)</th>
-							<th>주문자</th>
-							<th><input type="checkbox"></th>
-							<th>운송장정보</th>
-							<th>책 제목</th>
-							<th>수량</th>
-							<th>판매가</th>
-							<th>배송료</th>
-							<th>총 실제 결제 금액</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문일(결제일)</th>
+							<th class="table-active">주문자</th>
+							<th class="table-active"><input type="checkbox"></th>
+							<th class="table-active">운송장정보</th>
+							<th class="table-active">책 제목</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가</th>
+							<th class="table-active">배송료</th>
+							<th class="table-active">총 실제 결제 금액</th>
 
 						</tr>
 					</thead>

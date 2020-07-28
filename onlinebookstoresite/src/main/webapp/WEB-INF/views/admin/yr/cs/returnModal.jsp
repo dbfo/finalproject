@@ -21,8 +21,8 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>주문번호</th>
-							<th>주문 일자</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문 일자</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,12 +44,12 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>책번호</th>
-							<th>책이름</th>
-							<th>수량</th>
-							<th>판매가격</th>
-							<th>총 적립 포인트</th>
-							<th>총 가격</th>
+							<th class="table-active">책번호</th>
+							<th class="table-active">책이름</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가격</th>
+							<th class="table-active">총 적립 포인트</th>
+							<th class="table-active">총 가격</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -81,11 +81,11 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>책번호</th>
-							<th>책이름</th>
-							<th>수량</th>
-							<th>판매가격</th>
-							<th>포인트 적립금</th>
+							<th class="table-active">책번호</th>
+							<th class="table-active">책이름</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가격</th>
+							<th class="table-active">포인트 적립금</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -127,9 +127,9 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>수령인</th>
-							<th>전화번호</th>
-							<th>주소</th>
+							<th class="table-active">수령인</th>
+							<th class="table-active">전화번호</th>
+							<th class="table-active">주소</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -149,9 +149,9 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>환불 예정액</th>
-					<th>회수 포인트</th>
-					<th>예치금 반환 예상액</th>
+					<th class="table-active">환불 예정액</th>
+					<th class="table-active">회수 포인트</th>
+					<th class="table-active">예치금 반환 예상액</th>
 				</tr>
 			</thead>
 			<tbody>

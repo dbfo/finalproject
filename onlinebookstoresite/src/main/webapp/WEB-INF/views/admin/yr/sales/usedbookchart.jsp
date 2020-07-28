@@ -9,18 +9,18 @@
 </style>
 
 <div class="container-fluid ">
-	<h1 class="mt-4">중고 책 수익금 매출 차트</h1>
+	<h2 class="mt-4">중고 책 수익금 매출 차트</h2>
 	
 	<div>
 		<ul class = "tab">
-			<li style = "font-size: 20px;padding-top: 15px;"><a href="${pageContext.request.contextPath }/sales?usedbookmenu=1">일별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=2">주별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=3">월별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href="${pageContext.request.contextPath }/sales?usedbookmenu=1">일별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=2">주별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=3">월별 매출</a></li>		
 		</ul>
 	</div>
 	
 		<input type="hidden" value = "${usedbookmenu}" id = "usedbookmenu">
-		<table class="table searchbox">
+		<table class="table searchbox" style="margin-top: 50px;">
 <!-- 			일별 검색 -->
 			<c:if test="${usedbookmenu == 1 }">
 				<tr>

@@ -11,20 +11,19 @@
 	
 </style>
 
-<h2 class="mt-4 mainTitle">Charts</h2>
-
 <div class="container-fluid" >
+	<h2 class="mt-4">매출 차트</h2>
 	
 	<div>
 		<ul class = "tab">
-			<li style = "font-size: 20px;padding-top: 15px;"><a href="${pageContext.request.contextPath }/sales?menu=1">일별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?menu=2">주별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?menu=3">월별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href="${pageContext.request.contextPath }/sales?menu=1">일별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?menu=2">주별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?menu=3">월별 매출</a></li>		
 		</ul>
 	</div>
 	
 		<input type="hidden" value = "${menu}" id = "menu">
-		<table class="table searchbox">
+		<table class="table searchbox" style="margin-top: 50px;">
 <!-- 			일별 검색 -->
 			<c:if test="${menu == 1 }">
 				<tr>

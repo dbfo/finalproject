@@ -199,4 +199,13 @@
 	    <include refid="CSStatus"/>
 	</select>
 	
+	<select id="getTodayPaymentCount" resultType="int">
+		select nvl(count(*), 0) from bpayment 
+		where TRUNC(BPAYDATE) BETWEEN TO_DATE(sysdate) AND TO_DATE(sysdate) 
+	</select>
+
+	<select id="getTodayOrderCount" resultType="int">
+		select nvl(count(*), 0) from bpayment 
+		where TRUNC(borderdate) BETWEEN TO_DATE(sysdate) AND TO_DATE(sysdate)
+	</select>
 </mapper>

@@ -108,7 +108,7 @@ public class CSMenuController {
 			
 			int totalRowCnt = dservice.getCount(map); // 전체글의 개수
 			
-			System.out.println("dtr : " + totalRowCnt);
+//			System.out.println("dtr : " + totalRowCnt);
 			
 			pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
 
@@ -167,8 +167,7 @@ public class CSMenuController {
 		String[] array_word; 
 
 		array_word = str.split(","); 
-				
-		
+
 		return array_word;
 	}
 	

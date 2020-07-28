@@ -56,5 +56,9 @@ public class CSManageDao {
 		return session.update(NAMESPACE+".updateStatus",map);
 	}
 	
+	//오늘 cs 갯수
+	public int getTodayCSCount(){
+		return session.selectOne(NAMESPACE+".getTodayCSCount");
+	}
 	
 }

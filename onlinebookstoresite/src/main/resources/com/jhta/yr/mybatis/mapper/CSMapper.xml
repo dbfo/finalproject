@@ -198,4 +198,9 @@
 		update bpayment set bstatus = 5 , bfinalmoney = bfinalmoney - #{returnPrice} where bpaynum = #{bpaynum}
 	</update>
 	
+	<select id="getTodayCSCount" resultType="int">
+		select nvl(count(*),0) count from refundhistory where  
+		TRUNC(aplctdate) BETWEEN TO_DATE(sysdate) AND TO_DATE(sysdate) 
+	</select>
+	
 </mapper>

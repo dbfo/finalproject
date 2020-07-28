@@ -7,11 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.yr.dao.SalesDao;
+import com.jhta.finalproject.yr.vo.MethodPaymentInfoVo;
 
 @Service
 public class SalesService {
 	@Autowired
 	private SalesDao dao;
+	
+	
+	
+	public List<HashMap<String, String>> getThreeday(){
+		return dao.getThreeday();
+
+	}
 	
 	public List<HashMap<String, String>> getList(HashMap<String,Object> map){
 		return dao.getList(map);
@@ -34,5 +42,10 @@ public class SalesService {
 	}
 	public List<HashMap<String, String>> usedbookweekList(HashMap<String,Object> map){
 		return dao.usedbookweekList(map);
+	}
+	
+//	결제수단별 주문현황	
+	public List<MethodPaymentInfoVo> getThreeDayMethodpaymentInfo(){
+		return dao.getThreeDayMethodpaymentInfo();
 	}
 }
