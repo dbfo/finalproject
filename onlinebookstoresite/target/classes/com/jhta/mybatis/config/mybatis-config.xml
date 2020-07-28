@@ -15,6 +15,7 @@
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerQnaListJoinVo" alias="qnalistjoin"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerObqanswerVo" alias="obqanswer"/>
 	<typeAlias type="com.jhta.finalproject.jh.vo.SellerReviewJoinVo" alias="obreviewjoin"/>
+	<typeAlias type="com.jhta.finalproject.jh.vo.MembersPointVo" alias="point"/>
  	<!-- /////// -->
  	
  	<!-- ////희도//// -->
@@ -45,12 +46,15 @@
 </typeAliases>
   <mappers>
   	<!-- ////지호///// -->
-    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/>
-    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/>
-    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerMainBoardMapper.xml"/>
-  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSalesManagementMapper.xml"/>
-  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSettlementMapper.xml"/>
-  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerBoardMapper.xml"/>
+  	<!-- 중고판매관련 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/OldbooksMapper.xml"/><!-- 중고책등록 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerProdLookMapper.xml"/><!-- 중고책수정/조회/삭제관련 -->
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerMainBoardMapper.xml"/><!-- 중고메인화면 -->
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSalesManagementMapper.xml"/><!-- 중고판매관련 -->
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerSettlementMapper.xml"/><!-- 중고정산조회관련 -->
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/SellerBoardMapper.xml"/><!-- 중고QnA/리뷰관련 -->
+  	<mapper resource="onlinebookstoresite/mybatis/mapper/jh/PointMapper.xml"/>
+  	<!-- 회원포인트 -->
   	
   	<!-- ////희도//// -->
   	<mapper resource="onlinebookstoresite/mybatis/mapper/hd/HomeMapper.xml"/><!-- 홈화면 -->

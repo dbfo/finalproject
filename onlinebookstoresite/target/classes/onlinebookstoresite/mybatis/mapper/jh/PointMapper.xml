@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.PointMapper.jh">
+	<!-- 검색조건 -->
+	<sql id="search">
+		<if test="pregdate ==1"><!-- 한달 -->
+			<![CDATA[ and pregdate >= TO_DATE(add_months(sysdate,-1)) ]]>
+		</if>
+		<if test="pregdate == 2"><!-- 3개월 -->
+			<![CDATA[ and pregdate >= TO_DATE(add_months(sysdate,-3)) ]]>
+		</if>
+	</sql>
+
+	<!-- 회원의 현재 총 포인트 -->
+	<select id="getTotPoint" resultType="int">
+		select nvl(SUM(tranpoint),0) totpoint from point where mnum=#{mnum};
+	</select>
+	
+	<!-- 회원 포인트 리스트 -->
+	<select id="getPointList" resultType="point" parameterType="hashmap">
+		select mnum,bpaynum,tranpoint,pregdate 
+		from(
+		    select a.*,rownum rnum 
+		    from (
+		        select * 
+		        from point 
+		        where mnum=#{mnum} and tranpoint NOT in(0) <include refid="search"/>
+		        order by pregdate desc)a)
+		<![CDATA[
+		where rnum>=#{startRow} and rnum<=#{endRow}
+		]]>
+	</select>
+	<!-- 포인트 총 갯수 -->
+	<select id="getRowPointCount" resultType="int" parameterType="int">
+		select nvl(count(*),0) count from point where mnum=#{mnum} and tranpoint NOT in(0) <include refid="search"/>
+	</select>
+</mapper>
