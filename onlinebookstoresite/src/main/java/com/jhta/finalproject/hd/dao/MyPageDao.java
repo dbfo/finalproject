@@ -50,4 +50,13 @@ public class MyPageDao {
 	public int qnawrite(HashMap<String, Object>map) {
 		return sqlsession.insert(NAMESPACE+".qnawrite", map);
 	}
+	
+	//마이페이지 최근리스트들
+	public List<HistoryListVo> recentorder(int mnum){
+		return sqlsession.selectList(NAMESPACE+".recentorder", mnum);
+	}
+	
+	public List<HistoryListVo> recentcancel(int mnum){
+		return sqlsession.selectList(NAMESPACE+".recentcancel", mnum);
+	}
 }

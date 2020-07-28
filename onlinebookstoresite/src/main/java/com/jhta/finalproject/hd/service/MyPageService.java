@@ -46,5 +46,12 @@ public class MyPageService {
 		return dao.qnawrite(map);
 	}
 	
+	//마이페이지 최근리스트 관련 서비스
+	public List<HistoryListVo> recentorder(int mnum){
+		return dao.recentorder(mnum);
+	}
+	public List<HistoryListVo> recentcancel(int mnum){
+		return dao.recentcancel(mnum);
+	}
 
 }

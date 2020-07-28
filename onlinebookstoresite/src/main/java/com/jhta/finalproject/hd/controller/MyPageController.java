@@ -9,12 +9,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MyPageService;
+import com.jhta.finalproject.hd.service.OrderHistoryService;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 
@@ -22,9 +24,119 @@ import com.jhta.finalproject.hd.vo.QnaHistoryVo;
 public class MyPageController {
 	@Autowired
 	private MyPageService service;
+	@Autowired
+	private OrderHistoryService orderservice;
 	
 	@RequestMapping("/mypage/main")
-	public String conMyPage() {
+	public String conMyPage(HttpSession session,Model model) {
+		String smnum=(String)session.getAttribute("mnum");
+		int mnum=Integer.parseInt(smnum);
+		System.out.println("회원번호 mnum : "+mnum);
+		//최근주문리스트 
+		List<HistoryListVo>list=service.recentorder(mnum);
+		for(HistoryListVo vo:list) {
+			String statusStr="";
+			int bstatus=vo.getBstatus();
+			if(bstatus==0) {
+				statusStr="주문";
+			}else if(bstatus==1) {
+				statusStr="결제완료";
+			}else if(bstatus==2) {
+				statusStr="배송중";
+			}else if(bstatus==3) {
+				statusStr="구매확정";
+			}
+			vo.setStatusStr(statusStr);
+			int bpaynum=vo.getOrdernum();
+			System.out.println("컨트롤러 주문번호 : "+bpaynum);
+			int btype=vo.getBtype(); 
+			System.out.println("컨트롤러 타입 : "+btype);
+			if(btype==1) {
+				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
+				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));	
+				int count=orderservice.countPaymentBook(bpaynum);
+				String btitle=orderservice.newBtitle(bnum);
+				String ordername=btitle;
+				if(count>1) {
+					ordername+=" 외 "+(count-1)+"종";
+				}
+				vo.setOrdername(ordername);			
+			}else {
+				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
+				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
+				int count=service.countPaymentBook(bpaynum);
+				HashMap<String,Object> usedmap=service.usedBtitle(bnum);
+				String btitle=(String)usedmap.get("OBNAME");
+				int status=Integer.parseInt(String.valueOf(usedmap.get("OBSTATUS")));
+				String statusString="";
+				if(status==1) {
+					statusString="[중고-최상]";
+				}else if(status==2) {
+					statusString="[중고-상]";
+				}else if(status==3) {
+					statusString="[중고-중]";
+				}else if(status==4) {
+					statusString="[중고-하]";
+				}
+				String ordername=statusString+" "+btitle;
+				if(count>1) {
+					ordername+=" 외 "+(count-1)+"종";
+				}
+				vo.setOrdername(ordername);
+			}
+		}
+		model.addAttribute("orderlist",list);
+		
+		//최근취소내역
+		List<HistoryListVo>cancellist=service.recentcancel(mnum);
+		for(HistoryListVo vo:cancellist) {
+			String statusStr="";
+			int bstatus=vo.getBstatus();
+			if(bstatus==6) {
+				statusStr="취소";
+			}
+			vo.setStatusStr(statusStr);
+			int bpaynum=vo.getOrdernum();
+			System.out.println("컨트롤러 주문번호 : "+bpaynum);
+			int btype=vo.getBtype(); 
+			System.out.println("컨트롤러 타입 : "+btype);
+			if(btype==1) {
+				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
+				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));	
+				int count=orderservice.countPaymentBook(bpaynum);
+				String btitle=orderservice.newBtitle(bnum);
+				String ordername=btitle;
+				if(count>1) {
+					ordername+=" 외 "+(count-1)+"종";
+				}
+				vo.setOrdername(ordername);			
+			}else {
+				HashMap<String,Object>map=orderservice.confirmtype(bpaynum);		
+				int bnum=Integer.parseInt(String.valueOf(map.get("BNUM")));
+				int count=service.countPaymentBook(bpaynum);
+				HashMap<String,Object> usedmap=service.usedBtitle(bnum);
+				String btitle=(String)usedmap.get("OBNAME");
+				int status=Integer.parseInt(String.valueOf(usedmap.get("OBSTATUS")));
+				String statusString="";
+				if(status==1) {
+					statusString="[중고-최상]";
+				}else if(status==2) {
+					statusString="[중고-상]";
+				}else if(status==3) {
+					statusString="[중고-중]";
+				}else if(status==4) {
+					statusString="[중고-하]";
+				}
+				String ordername=statusString+" "+btitle;
+				if(count>1) {
+					ordername+=" 외 "+(count-1)+"종";
+				}
+				vo.setOrdername(ordername);
+			}
+		}
+		model.addAttribute("cancellist",cancellist);
+		
+		
 		
 		
 		

@@ -147,5 +147,31 @@
 	</insert>
 	
 	<!-- 마이페이지 메인관련 sql문 -->
+	<select id="recentorder" parameterType="int" resultType="historyVo">
+		select aaa.* from (
+			select aa.*,rownum rnum from
+			(select bp.bpaynum ordernum,borderdate,bstatus,pb.btype from
+				<![CDATA[(select * from bpayment where mnum=#{mnum} and bstatus>=0 and bstatus<=3) bp,]]>
+				(select bpaynum,max(btype) btype  from 
+    		    paymentbook 
+       			 group by bpaynum )pb
+				where pb.bpaynum=bp.bpaynum
+				order by borderdate desc)aa
+   			 )aaa
+  		 <![CDATA[where rnum>=1 and rnum<=2]]>
+	</select>
+	<select id="recentcancel" parameterType="int" resultType="historyVo">
+		select aaa.* from (
+			select aa.*,rownum rnum from
+			(select bp.bpaynum ordernum,borderdate,bstatus,pb.btype from
+				<![CDATA[(select * from bpayment where mnum=#{mnum} and bstatus=6) bp,]]>
+				(select bpaynum,max(btype) btype  from 
+    		    paymentbook 
+       			 group by bpaynum )pb
+				where pb.bpaynum=bp.bpaynum
+				order by borderdate desc)aa
+   			 )aaa
+  		 <![CDATA[where rnum>=1 and rnum<=2]]>
+	</select>
 	
 </mapper>

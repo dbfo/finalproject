@@ -14,10 +14,13 @@ public class HistoryListVo {
 	private int btype;
 	private String ordername;
 	
+	//주문상태 ((( 마이페이지 최근 리스트에서만 사용함 )))
+	private String statusStr;
+	
 	public HistoryListVo() {}
 
 	public HistoryListVo(int ordernum, Date borderdate, int bfinalmoney, int delfee, int bstatus, int ordermoney,
-			String mname, String receiver, int btype, String ordername) {
+			String mname, String receiver, int btype, String ordername, String statusStr) {
 		super();
 		this.ordernum = ordernum;
 		this.borderdate = borderdate;
@@ -29,6 +32,7 @@ public class HistoryListVo {
 		this.receiver = receiver;
 		this.btype = btype;
 		this.ordername = ordername;
+		this.statusStr = statusStr;
 	}
 
 	public int getOrdernum() {
@@ -110,6 +114,15 @@ public class HistoryListVo {
 	public void setOrdername(String ordername) {
 		this.ordername = ordername;
 	}
+
+	public String getStatusStr() {
+		return statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+	
 	
 
 }

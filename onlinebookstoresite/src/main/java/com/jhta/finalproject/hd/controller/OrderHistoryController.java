@@ -25,6 +25,7 @@ import com.jhta.finalproject.hd.vo.VbankVo;
 public class OrderHistoryController {
 	@Autowired
 	private OrderHistoryService service;
+
 	
 	//주문내역페이지로 이동
 	@RequestMapping("/mypage/orderhistory")

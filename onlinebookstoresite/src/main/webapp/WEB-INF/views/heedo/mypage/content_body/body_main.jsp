@@ -1,29 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="content_history">
 	
 	<div class="maintable" id="recentorderTable">
-	<h5>최근주문내역(새상품)</h5>
+	<h5>최근주문내역</h5>
 		<table class="table table-borderd" id="ordertable">
 			<thead class="table-dark">
 				<th>주문번호</th>
 				<th>주문내역</th>
 				<th>주문일자</th>
-				<th>주문상태</th>
+				<th>상태</th>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<c:forEach var="ovo" items="${orderlist }">
+					<tr>
+						<td>${ovo.ordernum }</td>
+						<td>${ovo.ordername }</td>
+						<td>${ovo.borderdate }</td>
+						<td>${ovo.statusStr }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -38,18 +35,14 @@
 				<th>상태</th>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<c:forEach var="cvo" items="${cancellist }">
+					<tr>
+						<td>${cvo.ordernum }</td>
+						<td>${cvo.ordername }</td>
+						<td>${cvo.borderdate }</td>
+						<td>${cvo.statusStr }</td>
+					</tr>
+				</c:forEach>
 			
 			</tbody>
 		</table>
