@@ -7,6 +7,22 @@
 	width:100px;
 	height:auto;
 }
+#content_cart{
+		border:2px solid grey;
+		padding:10px;
+		border-radius: 8px;
+}
+.order_core_container{
+		border:2px solid grey;
+		padding:10px;
+		border-radius: 8px;
+		
+	
+}
+.tableDiv{
+	margin-bottom: 20px;
+	padding:0px;
+}
 .imgTd{
 	padding:0px;
 }

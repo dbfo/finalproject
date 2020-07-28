@@ -41,17 +41,14 @@
 		<div id="header">
 			<tiles:insertAttribute name="header" />
 		</div>
-		<div class="container">
+		<div id="content_all" class="container">
 			<div id="content_header">
 				<tiles:insertAttribute name="content_header" />
-			</div>
-			<div id="content_body_top">
-				<tiles:insertAttribute name="content_body_top"/>
 			</div>
 			<div id="menu">
 				<tiles:insertAttribute name="menu" />
 			</div>
-			<div class="container" id="content_body">
+			<div id="content_body">
 				<tiles:insertAttribute name="content_body" />
 			</div>
 		</div>

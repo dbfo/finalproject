@@ -9,8 +9,9 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="${cp }/mypage/orderhistory">- 주문내역</a><br>
-			<a href="#">- 반품/환불/취소</a><br>
+			<a class="menuAtag" href="${cp }/mypage/orderhistory">- 주문내역</a><br>
+			<a class="menuAtag" href="${cp }/mypage/returnpage">- 반품/환불 신청 및 조회</a><br>
+			<a class="menuAtag" href="${cp }/mypage/cancelhistorypage">- 취소 주문내역</a><br>
 		</td>
 	</tr>
 	<tr>
@@ -18,22 +19,29 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="#">- 회원정보</a><br>
-			<a href="#">- 회원탈퇴</a>
+			<a class="menuAtag" href="#">- 회원정보</a><br>
+			<a class="menuAtag" href="#">- 회원탈퇴</a>
 		</td>
 	</tr>
 	<tr>
-		<th scope="col">모임정보</th>
+		<th>나의계좌</th>
 	</tr>
 	<tr>
 		<td>
-			<a href="#">- 모임관리</a><br>
+			<a class="menuAtag" href="#">- 포인트내역</a><br>
+			<a class="menuAtag" href="#">- 예치금내역/신청</a>
 		</td>
 	</tr>
 	<tr>
 		<th>중고관리</th>
 	</tr>
 	<tr>
-		<td><a href="${cp }/seller">-중고판매자매니저</a></td>
+		<td><a class="menuAtag" href="${cp }/seller">-중고판매자매니저</a></td>
+	</tr>
+	<tr>
+		<th>고객센터</th>
+	</tr>
+	<tr>
+		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a></td>
 	</tr>
 </table>

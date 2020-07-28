@@ -27,16 +27,13 @@ public class MemberController {
 		@ResponseBody
 		public String loginCheck(HttpSession session,String id,String pwd) {
 			HashMap<String, Object> map=new HashMap<String, Object>();
-			System.out.println("id : "+id);
 			map.put("id", id);
 			map.put("pwd",pwd);
 			String result="success";
 			LoginCheckVo vo=service.membercheck(map);
 			if(vo==null) {
-				System.out.println("fail!!");
 				result="fail";
 			}else if(vo.getSnum()!=0){  //snum이 있으면 세션에 저장함.
-				System.out.println("로그인시 snum : "+vo.getSnum());
 				session.setAttribute("mnum", vo.getMnum());
 				session.setAttribute("mid", vo.getMid());
 				session.setAttribute("snum", vo.getSnum());

@@ -129,7 +129,7 @@
 		$("#content-new-card").empty();
 	}
 </script>
-<div class="container">
+<div class="container" id="main_container">
 	<div id="carosel_wrap">
 		<div class="center-block">
 			<div id="imgslide" class="carousel slide" data-ride="carousel">
@@ -146,15 +146,15 @@
 					<div class="carousel-item active" id="slideForm">
 						<!--가로-->
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test1.svg" alt="First slide">
+							src="${cp }/resources/hd/img/slide/slide1.png" alt="First slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test2.svg" alt="Second slide">
+							src="${cp }/resources/hd/img/slide/slide2.png" alt="Second slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="${cp }/resources/hd/img/slide/test3.svg" alt="Third slide">
+							src="${cp }/resources/hd/img/slide/slide3.png" alt="Third slide">
 					</div>
 					<!-- / 슬라이드 쇼 끝 -->
 					<!-- 왼쪽 오른쪽 화살표 버튼 -->
@@ -173,13 +173,13 @@
 			</div>
 		</div>
 	</div>
-	<div id="content-mid-best">
-		<h3>베스트셀러</h3>
+	<div id="content-mid-best" class="shadow">
+		<h3><span class="colorfont">베스트</span> 셀러</h3>
 		<div id="content-best-card"></div>
 	</div>
 	<br>
-	<div id="content-mid-new">
-		<h3>신간</h3>
+	<div id="content-mid-new" class="shadow">
+		<h3><span class="colorfont">신</span>간</h3>
 		<div id="content-new-card"></div>
 	</div>
 	<br> <br>

@@ -137,7 +137,6 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
-			System.out.println("mnum : "+mnum);
 			OrderCompleteResultVo vo=service.complete_info(bpaynum);
 			if(mnum!=0) {
 				vo.setName(service.getName(mnum));
@@ -191,10 +190,10 @@ public class OrderController {
 						statusString="[중고-하]";
 					}
 					vo1.setStatusString(statusString);
+					
 				}
 				model.addAttribute("list", list);
 				model.addAttribute("totalprice", totalprice);
-				
 			}		
 			if(method.equals("vbank")) {
 				VbankVo bankvo=service.vbank_info(bpaynum);
@@ -224,7 +223,6 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
-			System.out.println("mnum : "+mnum);
 			int orderprice=pay_price+usepoint;
 			Map<String, Object>map=new HashMap<String, Object>();
 			map.put("mnum",mnum);

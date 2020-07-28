@@ -78,13 +78,37 @@
 		<put-attribute name="header" value="/WEB-INF/views/heedo/main/header.jsp"/>
 		<put-attribute name="content_header" value="/WEB-INF/views/heedo/mypage/content_header/mypage_main.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/heedo/mypage/menu.jsp"/>
-		<put-attribute name="content_body_top" value="/WEB-INF/views/heedo/mypage/content_body_top.jsp"/>
-		<put-attribute name="content_body" value=""/>
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/body_main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/heedo/main/footer.jsp"/>
 	</definition>
 	
 	<definition name=".orderhistory" extends=".mypage">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderhistory.jsp"/>
+	</definition>
+	
+	<definition name=".orderdetail" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/orderdetail.jsp"/>
+	</definition>
+	
+	<definition name=".usedorderdetail" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/usedorderdetail.jsp"/>
+	</definition>
+	
+	<definition name=".cancelhistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/cancelhistory.jsp"/>
+	</definition>
+	
+	<definition name=".returnhistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/returnhistory.jsp"/>
+	</definition>
+	
+	
+	<definition name=".qnahistory" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/qna.jsp"/>
+	</definition>
+	
+	<definition name=".qnadetail" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/qnadetail.jsp"/>
 	</definition>
 	
 	<!-- 장바구니. -->
@@ -99,9 +123,11 @@
 		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_order.jsp"/>
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_order.jsp"/>
 	</definition>
+	
 	<definition name=".usedorder" extends=".order">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_usedorder.jsp"/>
 	</definition>
+	
 	<definition name=".complete" extends=".cart">
 		<put-attribute name="content_header" value="/WEB-INF/views/heedo/buy/content_header/content_header_complete.jsp"/>
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/buy/content_body/content_body_ordercomplete.jsp"/>

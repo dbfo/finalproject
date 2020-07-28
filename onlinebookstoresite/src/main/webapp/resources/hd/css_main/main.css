@@ -7,7 +7,14 @@
 #content-mid-best,#content-mid-new{
 	width:1110px;
 	height:456px;
-	border:1px solid black;
+	border-radius: 8px;
+	border:2px solid grey;
+	padding-left:10px;
+	padding-right:10px;
+}
+#content-mid-best{
+	margin-top:25px;
+	
 }
 #content-card{
 	display:table-cell;
@@ -24,6 +31,13 @@
 	width: 30px;
 	height: 100%;
 	text-align: center;
+}
+#bestprev,#newprev{
+	margin-right:10px;
+	
+}
+#bestnext,#newnext{
+	margin-left:10px;
 }
 #content-new-card .card,#content-best-card .card{
 	width:12rem;
@@ -45,6 +59,12 @@
 #content-mid-new h3, #content-mid-best h3{
 	text-align: center;
 }
-
-
+.colorfont{
+	color: #f51167;
+	font-weight: 600;
+}
+#main_container{
+	width:1140px;
+	height:1540px;
+}
 

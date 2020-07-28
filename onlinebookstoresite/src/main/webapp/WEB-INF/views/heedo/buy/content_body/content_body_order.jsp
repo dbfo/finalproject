@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container" style="border:1px solid black">
+<div class="container order_core_container shadow">
 <!--/////////// 주문상품 리스트 테이블 시작 ///////////////-->
 <h4><span style='color:#f51167'>상품</span>확인</h4>
 <table class="table" id="productTable">
@@ -59,7 +59,7 @@
 				<th class="table-secondary">사용포인트</th>
 				<td rowspan="2" class="table-danger">
 					<strong>최종 결제금액</strong><br>
-					<span class="final_payment_price"></span>원<br>
+					<span class="final_payment_price" id="final_price1"></span>원<br>
 					<strong>적립예정포인트</strong><br>
 					<span id="totalpoint">${totalpoint }</span>
 				</td>
@@ -83,7 +83,7 @@
 </div>
 	<br>
 <!--/////////// 배송정보 테이블 시작 ///////////////--> 
-<div class="container" style="border:1px solid black;">
+<div class="container order_core_container shadow">
 	<h4><span style='color:#f51167'>배송</span>정보</h4>
 	<table class="table table-bordered">
 		<tr>
@@ -148,7 +148,7 @@
 <!--/////////// 배송정보 테이블 끝 ///////////////--> 	
 <!--/////////// 결제정보 테이블 시작 ///////////////--> 	
 <br>
-<div class="container" style="border:1px solid black;">
+<div class="container order_core_container shadow">
 		<h4><span style='color:#f51167'>결제</span>정보</h4>
 		<table class="table table-borderd">
 			<tr>
@@ -220,9 +220,14 @@
 		usablepoint();
 		shipCharge();
 		finalprice();
+		
+		$("#order_container").css({
+			width:"1140",
+			height:"1250"
+		})
 	
 	});
-
+	
 	//상세주소 입력시.
 	$("#addr4").on('keyup',function(){
 		var addr4=$("#addr4").val();
@@ -319,6 +324,10 @@
 	});
 	//사용할 포인트 취소버튼 눌렀을때
 	$("#point_cancel").click(function(){
+		var use_point_value=Number($("#use_point").text());
+		var final_payment_price_v=Number($("#final_price1").text());	
+		var final_payment_price=final_payment_price_v+use_point_value;
+		$(".final_payment_price").text(final_payment_price)
 		$("#use_point").text("0");
 		$("#usePbtn").removeClass("disabled");
 		$(this).addClass("disabled");
@@ -330,6 +339,10 @@
 		var usablepoint=$("#modal_usablepoint").val();
 		var usepoint=Number($("#modal_usepoint").val());
 		if(usepoint==""||!(usepoint>0&&usepoint<=usablepoint)){
+			return;
+		}
+		if(usepoint>Number($("#final_price1").text())){
+			
 			return;
 		}
 		var remainpoint=Number(usablepoint)-usepoint;
@@ -451,15 +464,10 @@
 			bnumArray.push(bnum);
 			bcountArray.push(bcount);
 			point.push(pointvalue);
-			console.log('장바구니번호 !! : '+$(this).data('cartnum'))
 			if($(this).data('cartnum')!=0){ //장바구니번호 있을경우 배열에다가다 담음.
 				cartNumArray.push($(this).data('cartnum'));
 			}
 		})
-		console.log(bnumArray);
-		console.log(cartNumArray);
-		console.log(point);
-		console.log(bcountArray);
 		
 		//사용포인트 , 총적립포인트  
 		var usepoint=$("#use_point").text(); //사용포인트
@@ -491,7 +499,6 @@
 		
 		//결제수단에 따라 분류.
 		var paymentOption=$("input[name='payment_option']:checked").val();
-		console.log('paymentOption : '+paymentOption)
 		if(paymentOption==0){ // 신용카드 선택
 			IMP.request_pay({
 			    pg : 'inicis', // version 1.1.0부터 지원.
@@ -507,7 +514,6 @@
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
-			    	console.log('payment_success')
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	$.ajax({
 			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
@@ -533,7 +539,6 @@
 				    		//기타 필요한 데이터가 있으면 추가 전달
 			    		}
 			    	}).done(function(data) {
-			    		console.log('done');
 			    		var bpaynum_value=data.bpaynum;
 			    		var method_value=data.method;
 			    		var separate_value=data.separate;
@@ -558,7 +563,6 @@
 			    			alert(msg);*/
 			    	});
 			    } else {
-			    	console.log('payment_fail')
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 
@@ -581,9 +585,6 @@
 			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
 			    if ( rsp.success ) {
-			    	console.log(rsp.vbank_num)
-			   		console.log(rsp.vbank_name)
-			   		console.log(rsp.vbank_holder);
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	jQuery.ajax({
 			    		url: "/finalproject/order/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
@@ -634,7 +635,7 @@
 			    }
 			});
 		}
-	});
+	})
 	
 	///////////// 결제 API 끝 ////////////////////////////////////////////////////////
 </script>
