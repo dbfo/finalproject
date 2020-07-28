@@ -89,10 +89,85 @@
 		select * from smallcategory where bcatenum=#{bcatenum} order by scatenum asc
 	</select>
 
+	<select id="bookdetail" parameterType="hashmap" resultType="oldall">
+	
+				select ob.*,i.* from oldbooks ob,img i 
+                 where ob.obnum =#{obnum} and ob.obnum = i.bnum(+)
+	</select>
+
 		<!-- cart에 인서트 할거임 -->
 	
 	<select id="oldcartinsert" parameterType="oldcart" resultType="int">
-		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},1,#{obnum})
+		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},2,#{obnum})
 	</select>
+	
+	
+	<!-- ////////////중고 QnA////////////// -->
+
+		
+	<!-- QnA 등록  -->
+	
+	<select id="obqnainsert" parameterType="obqnainsert">
+		insert into obqna values(SEQ_OBQNA_OBQNUM.nextval,
+		#{obqtitle},#{obqcontent},0,sysdate,#{obnum},#{mnum})
+	</select>
+
+	<select id="obqnadelete" parameterType="int">
+		delete from obqna where obqnum=#{obqnum}
+	</select>
+
+		<!-- 중고판매자 QnA리스트 가져오기 -->
+	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="hashmap">
+		select OBNAME,OBQTITLE,OBQCONTENT,MID,OBQSTATUS,OBQDATE,OBNUM,OBQNUM,MNUM
+		from(
+  			select qna.*,ROWNUM rnum
+    		from(
+	        select o.obname OBNAME, oq.obqtitle OBQTITLE, oq.obqcontent OBQCONTENT, m.mid MID, oq.obqstatus OBQSTATUS,
+			oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
+			from oldbooks o,obqna oq, members m
+			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+       		order by oq.obqdate desc)qna)a
+        <![CDATA[
+		where rnum>=#{startRow} and rnum<=#{endRow}
+		]]>
+	</select>
+	<!-- 중고판매자 QnA총 글갯수 가져오기 -->
+	<select id="getSellerQnaCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) count
+		from oldbooks o,obqna oq, members m
+		where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+	</select>
+
+
+		<!-- 판매자리뷰 목록/////// -->
+	<select id="reviewlist" parameterType="hashmap" resultType="obreviewc">
+	select * from
+	(
+		select aa.*,rownum rnum from
+		(
+			select sr.*,m.mname from sellerreview sr,members m 
+			where sr.obnum=#{obnum} and sr.mnum = m.mnum
+			order by sr.obnum desc
+		)aa
+	)
+
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	
+	<!-- 책리뷰카운터 -->
+	<select id="breviewcount" resultType="int" parameterType="hashmap">
+	select NVL(count(*),0) cnt from(
+		select * from (
+			select aa.*,rownum rnum from
+			(
+			select br.*,m.mname from bookreview br,members m 
+			where br.bnum=#{bnum} and br.mnum = m.mnum
+			order by br.bnum desc
+			)aa
+		)
+	)
+	</select>
+	
 
 </mapper>

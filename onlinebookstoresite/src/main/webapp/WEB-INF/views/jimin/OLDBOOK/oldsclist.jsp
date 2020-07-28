@@ -39,9 +39,6 @@
 			<br>
 		</div>
 	</div>
-	<c:if test="">
-	
-	</c:if>
 	<!--////////////// 책 목록출력시 /////////////////-->
 	<c:forEach  var="vo" items="${oldsclist }">
 	
@@ -182,8 +179,8 @@
 
 	});
 	$("#cartBtn").click(function(){
-		var bnum=$("#bnum").val();
-		$.post("${cp }/cart/oldinsert?bnum="+bnum+"&bcount=1", function(data){
+		var obnum=$("#obnum").val();
+		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="success"){
 				alert("장바구니에 담았음");

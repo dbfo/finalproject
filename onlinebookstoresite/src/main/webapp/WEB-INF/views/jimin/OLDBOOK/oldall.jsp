@@ -47,19 +47,19 @@
 	<div id="listwrap">
 	<div id="image">
 			<c:if test="${empty vo.imgsavefilename}">
-				<a href="bdetail?bnum=${vo.obnum }"> <img
+				<a href="obdetail?obnum=${vo.obnum }"> <img
 				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
 				</a>			
 			</c:if>
 			
-				<a href="bdetail?bnum=${vo.obnum }"> <img
+				<a href="obdetail?obnum=${vo.obnum }&snum=${vo.snum}"> <img
 				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
 				</a>
 
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.obnum }"> 
+							<a  style="font-size:20px; color:green;" href="obdetail?obnum=${vo.obnum}&snum=${vo.snum}"> 
 								<strong>
 									${vo.obname }
 								</strong>
@@ -129,7 +129,7 @@
 			<br>
 			<br>
 			<button class="btn btn-success" id="cartBtn">장바구니</button>
-			<input type="hidden" id="obnum" value="${obnum} ">
+			<input type="hidden" id="obnum" value="${vo.obnum}">
 	
 		</div>
 		</div>
@@ -190,8 +190,8 @@
 	});
 	
 	$("#cartBtn").click(function(){
-		var bnum=$("#obnum").val();
-		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&obcount=1", function(data){
+		var obnum=$("#obnum").val();
+		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="success"){
 				alert("장바구니에 담았음");

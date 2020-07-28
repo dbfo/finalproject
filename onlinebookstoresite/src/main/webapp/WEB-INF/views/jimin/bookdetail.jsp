@@ -428,7 +428,7 @@
 	$("#cartBtn").click(function(){
 		var bnum=$("#bnum").val();
 		var buycount=$("#bcnt2").val();
-		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount="+ buycount, function(data){
+		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount="+buycount, function(data){
 			console.log("callback");
 			if(data=="success"){
 				alert("장바구니에 담았습니다.");

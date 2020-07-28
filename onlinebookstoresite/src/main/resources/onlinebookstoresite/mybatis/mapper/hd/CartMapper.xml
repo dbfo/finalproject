@@ -10,7 +10,7 @@
 		select cart.*,img.imgsavefilename,obs.snum, oborgprice, obsaleprice, obstatus, obnum,obname,obdelfee
 		from (select * from cart where btype=2 and mnum=#{mnum})cart,
 		(select * from oldbooks)obs,
-		(select * from img where btype=2)img
+		(select * from img where btype=2 and thumbnail=1)img
 		where cart.bnum=obs.obnum and cart.bnum=img.bnum
 	</select>
 	

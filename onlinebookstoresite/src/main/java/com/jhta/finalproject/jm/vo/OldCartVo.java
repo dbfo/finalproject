@@ -9,13 +9,14 @@ public class OldCartVo {
 	private int obsaleprice; //판매가격 
 	private int obstatus; // 품질 상태
 	private int snum; //판매자번호 
+	private int mnum; //회원번호
 	private String obname; // 책제목
 	private int obdelfee;  //배송비.
 	
 	public OldCartVo() {}
 
 	public OldCartVo(int cartnum, int bcount, int obnum, String imgsavefilename, int oborgprice, int obsaleprice,
-			int obstatus, int snum, String obname, int obdelfee) {
+			int obstatus, int snum, int mnum, String obname, int obdelfee) {
 		super();
 		this.cartnum = cartnum;
 		this.bcount = bcount;
@@ -25,6 +26,7 @@ public class OldCartVo {
 		this.obsaleprice = obsaleprice;
 		this.obstatus = obstatus;
 		this.snum = snum;
+		this.mnum = mnum;
 		this.obname = obname;
 		this.obdelfee = obdelfee;
 	}
@@ -93,6 +95,14 @@ public class OldCartVo {
 		this.snum = snum;
 	}
 
+	public int getMnum() {
+		return mnum;
+	}
+
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
+	}
+
 	public String getObname() {
 		return obname;
 	}
@@ -108,8 +118,6 @@ public class OldCartVo {
 	public void setObdelfee(int obdelfee) {
 		this.obdelfee = obdelfee;
 	}
-	
 
 	
-
 }

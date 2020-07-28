@@ -41,6 +41,11 @@
 		<typeAlias type="com.jhta.finalproject.jm.vo.CartVo" alias="cart"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.OldAllListVo" alias="oldall"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.OldCartVo" alias="oldcart"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldBreviewVo" alias="obreviewc"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.SellerQnaListJoinVo" alias="qnalistjoin"/>	
+		<typeAlias type="com.jhta.finalproject.jm.vo.ObQnaInsertVo" alias="obqnainsert"/>
+		
+		
 	<!-- /////////////// -->
 </typeAliases>
   <mappers>

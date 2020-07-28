@@ -23,15 +23,15 @@ public class jmOldCartController {
 	@PostMapping("/cart/oldinsert")
 	@ResponseBody
 	public String oldinsertCart(HttpSession session, int obnum, int bcount) {
-		String ssnum=(String)session.getAttribute("snum");
+		String smnum=(String)session.getAttribute("mnum");
 
-		OldCartVo vo=new OldCartVo();
+		OldCartVo vo=new OldCartVo(); 
 		
 		vo.setObnum(obnum);
 		vo.setBcount(bcount);
-		int snum=Integer.parseInt(ssnum);
-		
-		vo.setSnum(snum);
+		int mnum=Integer.parseInt(smnum);
+	
+		vo.setMnum(mnum);
 		int n=oldservice.oldcartinsert(vo);
 		if(n>0) {
 			return "success";

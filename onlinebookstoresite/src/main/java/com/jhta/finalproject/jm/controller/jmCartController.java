@@ -34,20 +34,4 @@ public class jmCartController {
 		}
 	}
 
-//	@PostMapping("/cart/obinsert")
-//	@ResponseBody
-//	public String obinsertCart(HttpSession session, int obnum, int obcount) {
-//		String smnum=(String)session.getAttribute("mnum");
-//		CartVo vo=new CartVo();
-//		vo.setBnum(obnum);
-//		vo.setBcount(obcount);
-//		int mnum=Integer.parseInt(smnum);
-//		vo.setMnum(mnum);
-//		int n=cart_service.cartinsert(vo);
-//		if(n>0) {
-//			return "success";
-//		}else {
-//			return "fail";
-//		}
-//	}
 }
