@@ -37,7 +37,7 @@ public class MembersPointController {
 		map.put("endRow", pu.getEndRow());
 		map.put("pregdate",pregdate);
 		List<MembersPointVo> list=service.getPointList(map);
-//		System.out.println("시작:"+startDay);
+//		System.out.println("시작일자:"+startDay);
 		model.addAttribute("list", list);
 		model.addAttribute("pu", pu);
 		return ".point";
