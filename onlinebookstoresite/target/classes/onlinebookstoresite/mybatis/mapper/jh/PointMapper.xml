@@ -11,6 +11,11 @@
 		<if test="pregdate == 2"><!-- 3개월 -->
 			<![CDATA[ and pregdate >= TO_DATE(add_months(sysdate,-3)) ]]>
 		</if>
+		<if test='startDay != null'><!-- 날짜검색 -->
+			<![CDATA[
+				and pregdate >= to_date(#{startDay},'yyyy-mm-dd') and pregdate <= to_date(#{endDay},'yyyy_mm_dd')+0.99999
+			]]>
+		</if>
 	</sql>
 
 	<!-- 회원의 현재 총 포인트 -->
