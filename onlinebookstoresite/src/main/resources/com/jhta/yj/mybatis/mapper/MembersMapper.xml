@@ -11,6 +11,16 @@
 			sysdate, 0, 1, #{birth}, #{sex})
 	</insert>
 	
+	<!-- id 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*) from members where mid = #{mid}
+	</select>
+	
+	<!-- email 중복체크 -->
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from members where email = #{email}
+	</select>
+	
 	<sql id="search">
 		<if test="infoField != null and infoField != '' ">
 			and ${infoField} like '%'||#{infoKeyword}||'%'

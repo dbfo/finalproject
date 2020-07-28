@@ -13,9 +13,17 @@ import com.jhta.finalproject.yj.vo.MembersVO;
 public class MembersService {
 	@Autowired
 	private MembersDao dao;
-	
+
 	public int join(MembersVO vo) {
 		return dao.join(vo);
+	}
+
+	public int idCheck(String mid) {
+		return dao.idCheck(mid);
+	}
+	
+	public int emailCheck(String email) {
+		return dao.emailCheck(email);
 	}
 
 	public int memCount(HashMap<String, Object> map) {

@@ -15,13 +15,17 @@ public class MembersDao {
 	private SqlSessionTemplate session;
 	private final String NAMESPACE = "com.jhta.yj.mybatis.mapper.MembersMapper";
 
-	public void setSession(SqlSessionTemplate session) {
-		this.session = session;
-	}
-	
 	// 회원가입
 	public int join(MembersVO vo) {
 		return session.insert(NAMESPACE + ".join", vo);
+	}
+
+	public int idCheck(String mid) {
+		return session.selectOne(NAMESPACE + ".idCheck", mid);
+	}
+	
+	public int emailCheck(String email) {
+		return session.selectOne(NAMESPACE + ".emailCheck", email);
 	}
 
 	public int memCount(HashMap<String, Object> map) {
