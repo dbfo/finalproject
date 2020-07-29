@@ -200,6 +200,13 @@
 
 
 	<!-- ///////////////////////지호/////////////////////////////// -->
+	<!-- 중고판매자 등록 안했을 경우 인증관련 -->
+	<definition name=".seller.certified" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmail.jsp"/>
+	</definition>
+	<definition name=".seller.emailInjeung" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmailCk.jsp"/>
+	</definition>
 	<!-- 중고판매자 tiles설정-->
 	<definition name=".seller" template="/WEB-INF/views/jiho/sellerLayout.jsp">
 		<put-attribute name="sellerHeader" value="/WEB-INF/views/jiho/sellerHeader.jsp"/>
@@ -235,6 +242,10 @@
 	<!-- 중고상품 게시판(QnA/리뷰) 관련 -->
 	<definition name=".seller.qna" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
+	</definition>
+	<!-- 회원 포인트 조회 관련 -->
+	<definition name=".point" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/jiho/point/members_point.jsp"/>
 	</definition>
 	
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
