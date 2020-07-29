@@ -156,8 +156,8 @@
 							<tr>
 								<td>${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}</td>
 								<td>${vo.obname}</td>
-								<td>${vo.obwriter}</td>
 								<td>${vo.obpublisher}</td>
+								<td>${vo.obwriter}</td>
 								<td><c:if test="${vo.obsalestatus==0}">판매중</c:if> 
 									<c:if test="${vo.obsalestatus==1}">입금대기중</c:if> 
 									<c:if test="${vo.obsalestatus==2}">결제완료</c:if>
