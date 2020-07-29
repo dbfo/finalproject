@@ -8,14 +8,10 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources directory -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-
 	<beans:bean
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
@@ -39,14 +35,23 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 
+
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="2" />
+		<beans:property name="order" value="2"/>
 	</beans:bean>
 
 	<context:component-scan
-		base-package="com.jhta.finalproject.*.controller" />
+		base-package="com.jhta.finalproject.hd.controller" />
+	<context:component-scan
+		base-package="com.jhta.finalproject.jh.controller" />
+	<context:component-scan
+		base-package="com.jhta.finalproject.jm.controller" />
+	<context:component-scan
+		base-package="com.jhta.finalproject.yj.controller" />
+	<context:component-scan
+		base-package="com.jhta.finalproject.yr.controller" />
 
-</beans:beans>
+ </beans:beans>

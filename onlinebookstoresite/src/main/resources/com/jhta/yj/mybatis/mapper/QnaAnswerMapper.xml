@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jhta.yj.mybatis.mapper.QnaAnswerMapper">
-	<insert id="qnaAnswerInsert" parameterType="qnaAnswer">
+	<insert id="qnaAnswerInsert" parameterType="adminqnaAnswer">
 		insert into qnaanswer values('admin', #{qnanum}, #{acontent}, sysdate)
 	</insert>
 	
-	<select id="answerInfo" resultType="qnaAnswer" parameterType="int">
+	<select id="answerInfo" resultType="adminqnaAnswer" parameterType="int">
 		select maid, a.qnanum qnanum, a.qnacontent acontent, qnaregdate adate, 
 		m.mnum mnum, mid, qnatitle, q.qnacontent qcontent, qnastatus, qnadate qdate 
 		from qnaanswer a, qna q, members m 
@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- 답변 수정 -->
-	<update id="answerUpdate" parameterType="qnaAnswer">
+	<update id="answerUpdate" parameterType="adminqnaAnswer">
 		update qnaanswer set qnacontent = #{acontent} where qnanum = #{qnanum}
 	</update>
 	

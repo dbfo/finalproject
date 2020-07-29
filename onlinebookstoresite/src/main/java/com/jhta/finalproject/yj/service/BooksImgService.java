@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jhta.finalproject.yj.dao.BooksDao;
+import com.jhta.finalproject.yj.dao.BooksDao2;
 import com.jhta.finalproject.yj.dao.ImgDao;
 import com.jhta.finalproject.yj.vo.BigCategoryVO;
 import com.jhta.finalproject.yj.vo.BooksVO;
@@ -16,7 +16,7 @@ import com.jhta.finalproject.yj.vo.SmallCategoryVO;
 @Service
 public class BooksImgService {
 	@Autowired
-	private BooksDao bdao;
+	private BooksDao2 bdao;
 	@Autowired
 	private ImgDao idao;
 

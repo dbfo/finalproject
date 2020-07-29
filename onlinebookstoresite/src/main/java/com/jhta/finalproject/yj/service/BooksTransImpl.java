@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jhta.finalproject.yj.dao.BooksDao;
+import com.jhta.finalproject.yj.dao.BooksDao2;
 import com.jhta.finalproject.yj.dao.ImgDao;
 import com.jhta.finalproject.yj.vo.BooksVO;
 import com.jhta.finalproject.yj.vo.ImgVO;
@@ -14,11 +14,11 @@ import com.jhta.finalproject.yj.vo.ImgVO;
 @Service
 public class BooksTransImpl implements BooksTransService {
 	@Autowired
-	private BooksDao bdao;
+	private BooksDao2 bdao;
 	@Autowired
 	private ImgDao idao;
 
-	public void setBdao(BooksDao bdao) {
+	public void setBdao(BooksDao2 bdao) {
 		this.bdao = bdao;
 	}
 
