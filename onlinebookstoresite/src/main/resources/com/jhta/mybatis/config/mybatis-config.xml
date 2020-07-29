@@ -39,8 +39,6 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.ConfirmOldBookVo" alias="confirmold"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.DepositHistoryVo" alias="depositHistory"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.AccountVo" alias="AccountVo"/>
-  	
-  	
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->
@@ -57,44 +55,29 @@
 		<typeAlias type="com.jhta.finalproject.jm.vo.OldCartVo" alias="oldcart"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.OldBreviewVo" alias="obreviewc"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.ObQnaInsertVo" alias="obqnainsert"/>
-		
-		
 	<!-- /////////////// -->
 	
 	<!-- 연주 -->
 		<!-- books -->
-		<typeAlias type="com.jhta.finalproject.yj.vo.BooksVO"
-			alias="books" />
-		<typeAlias type="com.jhta.finalproject.yj.vo.ImgVO"
-			alias="bookimg" />
-		<typeAlias type="com.jhta.finalproject.yj.vo.BigCategoryVO"
-			alias="bctg" />
-		<typeAlias
-			type="com.jhta.finalproject.yj.vo.SmallCategoryVO" alias="smctg" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.BooksVO" alias="books" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.ImgVO" alias="bookimg" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.BigCategoryVO" alias="bctg" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.SmallCategoryVO" alias="smctg" />
 
 		<!-- members -->
-		<typeAlias type="com.jhta.finalproject.yj.vo.MembersVO"
-			alias="members" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.MembersVO" alias="members" />
 
 		<!-- qna -->
-		<typeAlias type="com.jhta.finalproject.yj.vo.QnaVO"
-			alias="qna" />
-		<typeAlias type="com.jhta.finalproject.yj.vo.QnaAnswerVO"
-			alias="adminqnaAnswer" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.QnaVO" alias="qna" />
+		<typeAlias type="com.jhta.finalproject.yj.vo.QnaAnswerVO" alias="adminqnaAnswer" />
 		
 		<!-- 유래 -->
-		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo"
-			alias="payment" />
-		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo"
-			alias="booksVo" /> 
-		<typeAlias type="com.jhta.finalproject.yr.vo.DepositVo"
-			alias="depositVo" /> 
-		<typeAlias type="com.jhta.finalproject.yr.vo.PointVo"
-			alias="pointVo" /> 
-		<typeAlias type="com.jhta.finalproject.yr.vo.SettlementJoinVo"
-			alias="SettlementJoinVo" /> 
-		<typeAlias type="com.jhta.finalproject.yr.vo.MethodPaymentInfoVo"
-			alias="MethodPaymentInfoVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentVo" alias="payment" />
+		<typeAlias type="com.jhta.finalproject.yr.vo.PaymentBooksVo" alias="booksVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.DepositVo" alias="depositVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.PointVo" alias="pointVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.SettlementJoinVo" alias="SettlementJoinVo" /> 
+		<typeAlias type="com.jhta.finalproject.yr.vo.MethodPaymentInfoVo" alias="MethodPaymentInfoVo" /> 
 	
 </typeAliases>
   <mappers>
@@ -135,6 +118,5 @@
 	<mapper resource="com/jhta/yr/mybatis/mapper/DepositMapper.xml" />
 	<mapper resource="com/jhta/yr/mybatis/mapper/UsedBookSellerMapper.xml" />
 	<mapper resource="com/jhta/yr/mybatis/mapper/SalesMapper.xml" />
-	
   </mappers>
 </configuration>
