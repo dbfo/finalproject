@@ -59,6 +59,7 @@ public class ListController {
 		mv.addObject("pu", pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword", keyword);
+		mv.addObject("bnum",bnum);
 		
 		return mv;
 	}
@@ -67,7 +68,7 @@ public class ListController {
 	@GetMapping(value = "/list2")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView bestlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword) {
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -88,6 +89,7 @@ public class ListController {
 		mv.addObject("pu", pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword", keyword);
+		mv.addObject("bnum",bnum);
 		
 		return mv;
 	}
@@ -96,7 +98,8 @@ public class ListController {
 	@RequestMapping(value = "/sbooklist")
 	public ModelAndView sbooklist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
 			String keyword ,@RequestParam(value = "bcate2", defaultValue = "0")int bcate2,
-			@RequestParam(value = "scate2", defaultValue = "0")int scate2) {
+			@RequestParam(value = "scate2", defaultValue = "0")int scate2,
+			@RequestParam(value = "bnum", defaultValue = "0")int bnum) {
 		System.out.println("scate:" + scate2);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -132,6 +135,7 @@ public class ListController {
 		mv.addObject("scatenum", scate2);
 		mv.addObject("keyword", keyword);
 		mv.addObject("bcatenum", bcate2);
+		mv.addObject("bnum",bnum);
 		System.out.println("==========================================================");
 		return mv;
 	}
@@ -140,7 +144,7 @@ public class ListController {
 	@GetMapping(value = "/newlist")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView newlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword) {
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -209,7 +213,7 @@ public class ListController {
 	@GetMapping(value = "/cnovel")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView cnovellist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -239,7 +243,7 @@ public class ListController {
 	@GetMapping(value = "/cpoetry")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView cpoetrylist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -269,7 +273,7 @@ public class ListController {
 	@GetMapping(value = "/chuman")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView chumanlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -299,7 +303,7 @@ public class ListController {
 	@GetMapping(value = "/ceconomy")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView ceconomylist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -329,7 +333,7 @@ public class ListController {
 	@GetMapping(value = "/cselfdev")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView cselfdevlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -359,7 +363,7 @@ public class ListController {
 	@GetMapping(value = "/chistory")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView chistorylist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -389,7 +393,7 @@ public class ListController {
 	@GetMapping(value = "/cjob")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView cjoblist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -419,7 +423,7 @@ public class ListController {
 	@GetMapping(value = "/ctravel")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView ctravellist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -450,7 +454,7 @@ public class ListController {
 	@GetMapping(value = "/cit")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView citlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -481,7 +485,7 @@ public class ListController {
 	@GetMapping(value = "/ccartoon")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView ccartoonlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
@@ -512,7 +516,7 @@ public class ListController {
 	@GetMapping(value = "/cguitar")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
 	public ModelAndView cguitarlist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
+			String keyword,@RequestParam(value = "bnum", defaultValue = "0")int bnum){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기

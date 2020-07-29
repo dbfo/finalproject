@@ -21,10 +21,16 @@ public class jmCartController {
 	@ResponseBody
 	public String insertCart(HttpSession session, int bnum, int bcount) {
 		String smnum=(String)session.getAttribute("mnum");
+		if(smnum == null) {
+			smnum = "0";
+		}
 		CartVo vo=new CartVo();
 		vo.setBnum(bnum);
 		vo.setBcount(bcount);
 		int mnum=Integer.parseInt(smnum);
+		if (mnum == 0) {
+			return "fail";
+		}
 		vo.setMnum(mnum);
 		int n=cart_service.cartinsert(vo);
 		if(n>0) {

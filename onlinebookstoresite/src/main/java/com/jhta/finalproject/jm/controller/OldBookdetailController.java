@@ -44,7 +44,13 @@ public class OldBookdetailController {
 			@RequestParam(value = "snum", defaultValue = "0")int snum,HttpSession session)  {
 		
 		String smnum=(String)session.getAttribute("mnum");
-		int mnum=Integer.parseInt(smnum);
+		if(smnum == null) {
+			smnum = "0";
+			int mnum=Integer.parseInt(smnum);
+		}else {
+			int mnum=Integer.parseInt(smnum);
+		}
+		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("field",field);

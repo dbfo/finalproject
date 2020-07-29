@@ -433,7 +433,8 @@
 			if(data=="success"){
 				alert("장바구니에 담았습니다.");
 			}else{
-				alert("장바구니 담기 실패입니다.");
+				alert("로그인을 해주세요.");
+				location.href = "${cp }/login";
 			}
 		});
 	});

@@ -98,7 +98,6 @@
 				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 				    <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true" style="color: black;border: 1px solid #7d7d7d;"><strong>상세정보</strong></a>
 				    <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="#nav-qna" role="tab" aria-controls="nav-qna" aria-selected="false" style="color: black;border: 1px solid #7d7d7d;"><strong>QnA</strong></a>
-				    <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false" style="color: black;border: 1px solid #7d7d7d;"><strong>리뷰</strong></a>
 				  </div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
@@ -169,121 +168,6 @@
 					</div>
 					</div>
 				  </div>
-				  <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-							
-					<div class="tabWrite">	
-					<!-- <form name="form" method="post" action="/ypbooks/book/pop_review_proc.jsp" target="ifrmProc"> -->
-					<form id="insertform" method="GET" action="${cp }/enrllReview">
-					
-						<input type="hidden" name="obnum" value="${obnum}">
-<!-- 						<input type="hidden" name="mnum" value="4"> -->
-						
-						<div style=" width: 1110px;background-color:#f9f9f9 ;padding: 12px 20px 19px 20px; overflow: hidden; border: 2px solid #f9f9f9">
-							<span style="font-size: 20px;"><strong>독자서평 쓰기</strong></span>
-							 <span style="font-size: 12px;">로그인을 하시면 독자서평을 쓰실 수 있습니다.</span> 
-							<dl>
-								<input type="hidden" name="review_name" id="review_name" value="지쳤거나 좋아하는 게 없거나">
-								<br>
-								<div>
-								<strong>도서평점</strong>&nbsp&nbsp&nbsp
-									<input type="radio" value="1" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★</span>
-									&nbsp
-									<input type="radio" value="2" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★</span>
-									&nbsp
-									<input type="radio" value="3" name="bscore" class="writeRadio" checked="checked"><span style="color: red;">&nbsp ★★★</span>
-									&nbsp
-									<input type="radio" value="4" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★★★</span>
-									&nbsp
-									<input type="radio" value="5" name="bscore" class="writeRadio"><span style="color: red;">&nbsp ★★★★★</span>
-									&nbsp
-								</div>
-								<br>
-								<strong>내용</strong>
-								<br><br>
-								<span>
-									<textarea name="reviewcontent" style="width:900px;height:100px;"></textarea>
-									<input type="submit" style="display:inline-block  ;float:right ;margin-bottom: 18px; " class="btn btn-success" id="enrollBtn" value="등록하기"> 
-								</span>
-							</dl>
-						</div>
-					</form>
-
-<!-- 					<table style="width:1110px;" class="writeList1"> -->
-<%-- 						<c:forEach var ="rvo" items="${reviewvo }"> --%>
-<!-- 						<tbody style="width:1110px;border: 1px solid #7d7d7d;"> -->
-<!-- 						<tr> -->
-<%-- 							<td style=" width:13%;" id="mid" >${rvo.mname }</td> --%>
-<!-- 							<td style="width:19%;" id="mscore">		 -->
-							
-<%-- 							<c:set var="score" value="${rvo.bscore }" /> --%>
-
-<%-- 								<c:if test="${score eq 5 }"> --%>
-<!-- 									<span style="color: red;">★★★★★</span> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${score eq 4 }"> --%>
-<!-- 									<span style="color: red;">★★★★</span> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${score eq 3 }"> --%>
-<!-- 									<span style="color: red;">★★★</span> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${score eq 2 }"> --%>
-<!-- 									<span style="color: red;">★★</span> -->
-<%-- 								</c:if> --%>
-<%-- 								<c:if test="${score eq 1 }"> --%>
-<!-- 									<span style="color: red;">★</span> -->
-<%-- 								</c:if> --%>
-<%-- <%-- 								<span>${rvo.bscore }</span> --%> --%>
-<!-- 							</td> -->
-<%-- 							<td class="tdCen" id="mdate"><fmt:formatDate value="${rvo.breviewregdate }"></fmt:formatDate></td> --%>
-<!-- 						</tr> -->
-<!-- 						<tr class="writeCon02"> -->
-<!-- 							<td colspan="4" id="mwrite"> -->
-<%-- 								<span>${rvo.reviewcontent }</span> --%>
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						</tbody> -->
-<%-- 						</c:forEach> --%>
-<!-- 					</table> -->
-					<br>
-						<div>
-<%-- 						   <c:choose> --%>
-<%-- 				               <c:when test="${pu.startPageNum>1 }"> --%>
-<!-- 				                  <button style="width: 50px; border-radius: 5px / 5px;"> -->
-<%-- 				                  	<a style="color: black;" href="bdetail?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}&bnum=${bnum}"> --%>
-<!-- 				                  	<strong style="color: black;">이전글</strong> -->
-<!-- 				                  	</a> -->
-<!-- 				                  </button> -->
-<%-- 				               </c:when> --%>
-<%-- 				               <c:otherwise> --%>
-<!-- 				                  <button disabled="disabled"> -->
-<!-- 				                  	<a href="#">이전글</a> -->
-<!-- 				                  </button> -->
-<%-- 				               </c:otherwise> --%>
-<%-- 				            </c:choose> --%>
-<%-- 								<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${i==pu.pageNum }"> --%>
-<!-- 										<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;"> -->
-<%-- 									 	<a href="obdetail?pageNum=${i }&field=${field}&keyword=${keyword}&obnum=${obnum}"> --%>
-<%-- 									 	<span style="color:red">${i }</span> --%>
-<%-- 									 	<strong style="color:red">${i }</strong> --%>
-<!-- 									 	</a> -->
-<!-- 									 	</button> -->
-<%-- 								 	</c:when> --%>
-<%-- 								 	<c:otherwise> --%>
-<!-- 								 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;"> -->
-<%-- 									 	<a href="obdetail?pageNum=${i }&field=${field}&keyword=${keyword}&obnum=${obnum}"> --%>
-<%-- 									 	<span style="color: black">${i }</span> --%>
-<%-- 									 	<strong style="color:black">${i }</strong> --%>
-<!-- 									 	</a> -->
-<!-- 									 	</button> -->
-<%-- 								 	</c:otherwise> --%>
-<%-- 							 	</c:choose> --%>
-<%-- 								</c:forEach> --%>
-							</div>
-					</div>
-				  </div>
-				</div>
 	</div>
 </div>
 <br>
@@ -315,7 +199,8 @@
 			if(data=="success"){
 				alert("장바구니에 담았습니다.");
 			}else{
-				alert("장바구니 담기 실패입니다.");
+				alert("로그인을 해주세요.");
+				location.href = "${cp }/login";
 			}
 		});
 	});

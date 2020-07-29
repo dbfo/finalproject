@@ -12,7 +12,7 @@
 			select aa.*,rownum rnum from
 			(
 				select ob.*,i.imgsavefilename from oldbooks ob,img i  
-                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2 
+                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2 and obsalestatus = 0
 				 order by ob.obnum asc
 			)aa
 		)
@@ -29,7 +29,7 @@
 			select aa.*,rownum rnum from
 			(
 				select ob.*,i.imgsavefilename from oldbooks ob,img i  
-                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2
+                 where ob.obnum = i.bnum(+) and i.thumbnail=1 and i.btype=2  and obsalestatus = 0
 				 order by ob.obnum asc
 			)aa
 		)
@@ -44,7 +44,7 @@
 			(
 				select ob.*,i.imgsavefilename from oldbooks ob,img i
                  where ob.scatenum = #{scatenum} and ob.obname like '%'||#{keyword}||'%'
-                 	and ob.obnum = i.bnum(+) and i.thumbnail=1 
+                 	and ob.obnum = i.bnum(+) and i.thumbnail=1 and obsalestatus = 0
 				 order by ob.obnum asc
 			)aa
 		)
@@ -60,7 +60,7 @@
 					(
 						select ob.*,i.imgsavefilename from oldbooks ob,img i
 		                 where ob.scatenum =#{scatenum} and ob.obname like '%'||#{keyword}||'%' 
-							and ob.obnum = i.bnum(+) and i.thumbnail=1 
+							and ob.obnum = i.bnum(+) and i.thumbnail=1 and obsalestatus = 0
 						 order by ob.obnum asc
 				)aa
 			)

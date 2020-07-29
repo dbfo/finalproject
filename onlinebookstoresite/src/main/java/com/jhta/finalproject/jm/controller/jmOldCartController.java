@@ -24,13 +24,19 @@ public class jmOldCartController {
 	@ResponseBody
 	public String oldinsertCart(HttpSession session, int obnum, int bcount) {
 		String smnum=(String)session.getAttribute("mnum");
-
+		System.out.println("smnum에 뭐들어있냐" + smnum);
+		if(smnum == null) {
+			smnum = "0";
+		}
 		OldCartVo vo=new OldCartVo(); 
 		
 		vo.setObnum(obnum);
 		vo.setBcount(bcount);
 		int mnum=Integer.parseInt(smnum);
-	
+		System.out.println("mnum에 뭐들어있냐" + mnum);
+		if (mnum == 0) {
+			return "fail";
+		}
 		vo.setMnum(mnum);
 		int n=oldservice.oldcartinsert(vo);
 		if(n>0) {
