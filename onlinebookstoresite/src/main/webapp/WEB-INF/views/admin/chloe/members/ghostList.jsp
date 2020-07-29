@@ -79,6 +79,7 @@
 					<th>생년월일</th>
 					<th>만&nbsp;나이</th>
 					<th>가입일</th>
+					<th>상세</th>
 				</tr>
 			</thead>
 			<tfoot>
@@ -90,6 +91,7 @@
 					<th>생년월일</th>
 					<th>만&nbsp;나이</th>
 					<th>가입일</th>
+					<th>상세</th>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -104,6 +106,7 @@
 						<td>${vo.age}</td>
 						<fmt:formatDate value="${vo.regdate}" pattern="yy/MM/dd" var="regdate" />
 						<td>${regdate}</td>
+						<td><a class="btn-outline-success" href="${pageContext.request.contextPath}/ghostInfo?mnum=${vo.mnum}">상세</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

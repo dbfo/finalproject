@@ -47,7 +47,6 @@ public class QnaListController {
 			qnacontent = qnacontent.replace("\n", "<br>");
 		}
 		vo.setQnacontent(qnacontent);
-		System.out.println();
 		model.addAttribute("vo", vo);
 		return ".unAnswerDetail";
 	}

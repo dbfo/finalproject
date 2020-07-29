@@ -78,8 +78,7 @@ public class SalesManageController {
 					}
 				}
 			}
-			
-			
+
 			json.put("code", "success");
 			json.put("label",slabel);
 			json.put("data",data);
@@ -99,11 +98,11 @@ public class SalesManageController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
 		
-		if(menu.equals("0")) {
-			
-			result = service.getThreeday();
-			
-			return result;
+		if(menu != null && menu != "") {
+			if(menu.equals("0")) {
+				result = service.getThreeday();
+				return result;
+			}			
 		}
 	
 		map.put("endDate", endDate);
@@ -130,9 +129,9 @@ public class SalesManageController {
 		if(menu != null && menu != "") {
 			map.put("field","bpaydate");
 			
-			for (String key : map.keySet()) {
-				System.out.println(key + " : " + map.get(key));
-			}
+//			for (String key : map.keySet()) {
+//				System.out.println(key + " : " + map.get(key));
+//			}
 			
 			
 			if(menu.equals("1") ) {
@@ -145,6 +144,7 @@ public class SalesManageController {
 		}
 		
 		if(usedbookmenu != null && usedbookmenu != "") {
+			
 			map.put("field","feedate");
 
 			if(usedbookmenu.equals("1") ) {

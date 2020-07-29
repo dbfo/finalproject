@@ -27,7 +27,6 @@ public class HomeController {
 	private PaymentService pservice;	
 	@Autowired
 	private SalesService sservice;
-	
 	@Autowired
 	private QnaService qnaservice;
 	
@@ -58,11 +57,10 @@ public class HomeController {
 		Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("current: " + df.format(cal.getTime()));
+//        System.out.println("current: " + df.format(cal.getTime()));
         result.add(df.format(cal.getTime()));
         
         for (int i = 1; i <= 2 ; i++) {
-        	System.out.println(i);
         	cal.add(Calendar.DATE, -1);
         	result.add(df.format(cal.getTime()));
 		}

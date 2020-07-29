@@ -146,10 +146,10 @@
 										</c:choose>							
 									</c:if>
 								</c:forEach>
-									<c:if test = "${length-1 == j }">
-										<td>0</td>										
-										<td>0</td>																				
-									</c:if>
+								<c:if test = "${mivo == null }">
+									<td>0</td>										
+									<td>0</td>																				
+								</c:if>
 							</c:forEach>
 						</tr>
 						<tr >
