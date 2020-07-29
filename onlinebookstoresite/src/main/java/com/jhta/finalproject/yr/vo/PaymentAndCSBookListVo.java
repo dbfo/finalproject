@@ -14,6 +14,7 @@ public class PaymentAndCSBookListVo {
 	private int ordermoney; // 주문금액
 	private int usedpoint; // 포인트 사용량
 	private int methodpayment; // 지불방법(0:카드,1:무통장)
+	private int delfee;// 수령인
 	private String receiver;// 수령인
 	private int mnum; // 회원 번호
 	private String mname;// 회원이름(주문자이름)
@@ -25,8 +26,8 @@ public class PaymentAndCSBookListVo {
 	}
 	
 	public PaymentAndCSBookListVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate,
-			Date bpaydate, int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int mnum,
-			String mname, List<CSAndPaymentBookVo> cSAndPaymentBook) {
+			Date bpaydate, int bstatus, int ordermoney, int usedpoint, int methodpayment, int delfee, String receiver,
+			int mnum, String mname, List<CSAndPaymentBookVo> cSAndPaymentBook) {
 		super();
 		this.bpaynum = bpaynum;
 		this.baddr = baddr;
@@ -38,11 +39,14 @@ public class PaymentAndCSBookListVo {
 		this.ordermoney = ordermoney;
 		this.usedpoint = usedpoint;
 		this.methodpayment = methodpayment;
+		this.delfee = delfee;
 		this.receiver = receiver;
 		this.mnum = mnum;
 		this.mname = mname;
 		CSAndPaymentBook = cSAndPaymentBook;
 	}
+
+
 
 	public Date getBorderdate() {
 		return borderdate;
@@ -139,6 +143,14 @@ public class PaymentAndCSBookListVo {
 	public void setMethodpayment(int mothodpayment) {
 		this.methodpayment = mothodpayment;
 	}
+	
+	public int getDelfee() {
+		return delfee;
+	}
+
+	public void setDelfee(int delfee) {
+		this.delfee = delfee;
+	}
 
 	public String getReceiver() {
 		return receiver;
@@ -168,11 +180,11 @@ public class PaymentAndCSBookListVo {
 	public String toString() {
 		return "PaymentAndCSBookListVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone
 				+ ", bfinalmoney=" + bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate
-				+ ", bstatus=" + bstatus + ", ordermoney=" + ordermoney + ", usedpoint=" + usedpoint + ", methodpayment="
-				+ methodpayment + ", receiver=" + receiver + ", mnum=" + mnum + ", mname=" + mname
-				+ ", CSAndPaymentBook=" + CSAndPaymentBook + "]";
+				+ ", bstatus=" + bstatus + ", ordermoney=" + ordermoney + ", usedpoint=" + usedpoint
+				+ ", methodpayment=" + methodpayment + ", delfee=" + delfee + ", receiver=" + receiver + ", mnum="
+				+ mnum + ", mname=" + mname + ", CSAndPaymentBook=" + CSAndPaymentBook + "]";
 	}
-	
+
 	
 
 }

@@ -65,7 +65,7 @@
 								</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="5" align="right">배송금액 </td>
+							<td colspan="5" align="right">${vo.delfee }</td>
 							<td colspan="1" align="right">${vo.ordermoney}</td>
 						</tr>
 					</c:forEach>
@@ -106,25 +106,13 @@
 								</tr>
 							</c:if>
 						</c:forEach>
-									
-<%-- 						<c:forEach items="${vo.CSAndPaymentBook}" var="book"> --%>
-<%-- 							<c:if test="${book.type != 1 }"> --%>
-<%-- 								<div id = "newOrderBnum">${book.bnum}</div> --%>
-<%-- 							</c:if> --%>
-<%-- 							<c:if test="${book.type == 1 }"> --%>
-<%-- 								<c:if test="${book.bcount-book.count > 0 }">  --%>
-<%-- 									<c:out value="${book.bcount-book.count }"></c:out> --%>
-<%-- 									${book.bnum  } --%>
-<%-- 								</c:if> --%>
-<%-- 							</c:if> --%>
-<%-- 						</c:forEach> --%>
 						
-					</c:forEach>
 					<tr>
-						<td colspan="5" align="right">배송비</td>
+						<td colspan="5" align="right">${vo.delfee }</td>
 						<td colspan="1" align="right" id = "cancelPrice">${cancelPrice }</span></td>
 						<td colspan="1" align="right"><span style = "color : red">${cancelPrice }</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			

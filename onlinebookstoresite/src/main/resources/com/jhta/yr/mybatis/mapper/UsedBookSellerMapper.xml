@@ -12,6 +12,7 @@
 		<result property="settlement" column="settlement"/>
 		<result property="bocomstatus" column="bocomstatus"/>
 		<result property="seller" column="seller"/>
+		<result property="paymentbook_num" column="paymentbook_num"/>
 		<result property="buyer" column="buyer"/>
 		<result property="sellername" column="sellername"/>
 		<result property="buyername" column="buyername"/>
@@ -25,10 +26,10 @@
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(pfield)">	
 			<choose>
 				<when test="pfield == 'sellername'">
-					and sellername like '%'||#{pkeyword}||'%'
+					and members.mname like '%'||#{pkeyword}||'%'
 				</when>
 				<when test="pfield == 'mname'">
-					and members.mname like '%'||#{pkeyword}||'%'
+					and buyername like '%'||#{pkeyword}||'%'
 				</when>
 			</choose>
 		</if>
@@ -41,31 +42,51 @@
 	</sql>
 
 	<select id="getList" resultMap="uosellerinfovo" parameterType="hashmap">
-		select aa.*, members.mname buyername
-		from
-		(
-			select borderdate, bpaydate, bpayment.bpaynum, obname, fprice, settlement, bocomstatus , obseller.mnum seller, bpayment.mnum buyer, sname.mname sellername
-			from bpayment, paymentbook, obseller, members, oldbooks, obcomplete,
-			(select mname from obseller, members where obseller.mnum = members.mnum) sname
-			where bpayment.bpaynum = paymentbook.bpaynum
-			and paymentbook.bnum = oldbooks.obnum
-			and oldbooks.snum = obseller.snum
-			and obseller.mnum = members.mnum
-			and obcomplete.bpaynum = bpayment.bpaynum
-			and members.mname = sname.mname
-            order by obcomplete.bocomstatus, borderdate
-		) aa
-		, members
-		where aa.buyer= members.mnum
-		<include refid="search"/>													
+		select * from(
+			select aa.*, members.mname sellername, rownum rnm  from
+			(
+					select obcomplete.*, bpayment.mnum buyer, bpayment.*, oldbooks.obname, obseller.mnum seller, members.mname buyername from 
+					paymentbook, obcomplete, bpayment, members, oldbooks, obseller
+					where paymentbook.paymentbook_num = obcomplete.paymentbook_num
+					and bpayment.bpaynum = paymentbook.bpaynum
+					and bpayment.mnum = members.mnum
+					and paymentbook.bnum = oldbooks.obnum
+					and oldbooks.snum = obseller.snum
+					order by obcomplete.bocomstatus, borderdate
+					)aa, members
+				where 
+				aa.seller = members.mnum
+				<include refid="search"/>	 
+			)
+		<![CDATA[where rnm >= #{startRow} and rnm <= #{endRow}]]>
 	</select>
-
+	
+	<select id="getCount" resultType="int" parameterType="hashmap">
+		select count(*) from(
+			select aa.*, members.mname sellername, rownum rnm  from
+				(
+				select obcomplete.*, bpayment.mnum buyernum, bpayment.*, oldbooks.obname, obseller.mnum sellernum, members.mname buyername from 
+				paymentbook, obcomplete, bpayment, members, oldbooks, obseller
+				where paymentbook.paymentbook_num = obcomplete.paymentbook_num
+				and bpayment.bpaynum = paymentbook.bpaynum
+				and bpayment.mnum = members.mnum
+				and paymentbook.bnum = oldbooks.obnum
+				and oldbooks.snum = obseller.snum
+				order by obcomplete.bocomstatus, borderdate
+				)aa, members
+			where 
+			aa.sellernum = members.mnum 
+			<include refid="search"/>	
+		)
+		
+	</select>
+	
 	<update id="updateObcomplete" parameterType="int"> 
-		update obcomplete set bocomstatus = 1 where bpaynum = #{bpaynum}
+		update obcomplete set bocomstatus = 1, feedate = sysdate where paymentbook_num = #{paymentbook_num}
 	</update>
 	
 	<insert id="insertDeposit" parameterType="depositVo">
 		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, #{bpaynum}, #{dtran}, sysdate, 0)
 	</insert>
-		
+
 </mapper>	

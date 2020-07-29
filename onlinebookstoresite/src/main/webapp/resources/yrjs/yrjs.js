@@ -1,17 +1,22 @@
 /**
  * 
  */
-	$(function(){
-		var startDate = $('#startDate').val();
-		if(startDate == '' || startDate == null){
-			var date = new Date();
-			var yyyy = date.getFullYear();
-			var mm = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + (date.getMonth()+1);
-			var dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
 	
-			$('#startDate').val(yyyy+'-'+mm+'-'+dd);
-			$('#endDate').val(yyyy+'-'+mm+'-'+dd);
-		}
+	var count = 0;
+
+	$(function(){
+		
+		var startDate = $('#startDate').val();
+		
+//		if(startDate == '' || startDate == null){
+//			var date = new Date();
+//			var yyyy = date.getFullYear();
+//			var mm = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + (date.getMonth()+1);
+//			var dd = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+//	
+//			$('#startDate').val(yyyy+'-'+mm+'-'+dd);
+//			$('#endDate').val(yyyy+'-'+mm+'-'+dd);
+//		}
 		
 		//[오늘, 내일, 7일, 1개월, 6개월]버튼 클릭하면 색 바뀜
 		$('.dbtn').on('click', function() {
@@ -58,13 +63,19 @@
 		
 		})
 		
+
 		
 		//input date 값 검사
 		$('input[type=date]').on('change',getDate)
 		
-		$('#searchform').submit(getDate)
 		
 		function getDate(){
+			console.log("count" + count);
+
+			if(count == 0){
+				count++;
+				return true;
+			}
 			var startD = $('#startDate').val();
 			var endD = $('#endDate').val();
 			var startresult = startD.replace(/-/g,'');
@@ -96,6 +107,49 @@
 			}
 		})
 		
+		
+		//주소 | 빼고 나오게 하기
+		$('.addr').each(function(idx,item){
+			var addr = $(this).text();
+			addr =  addr.replace(/\|/g, ' ');
+			$(this).text(addr);			
+		})
+		
+		$("#searchSubmitBtn").click(function(){
+			if($("input[name=pkeyword]").val() != null && $("input[name=pkeyword]").val() != ""){
+				if($("select[name=pfield]").val() == "" || $("select[name=pfield]").val() == null ){
+					alert("검색어를 선택해주세요..")
+					return;
+				}
+			}
+			
+			if($("#startDate").val() != null && $("#startDate").val() != ""){
+				if($("select[name=tfield]").val() == "" || $("select[name=tfield]").val() == null ){
+					alert("검색어를 선택해주세요..")
+					return;
+				}
+			}
+			
+			if($("#endDate").val() != null && $("#endDate").val() != ""){
+				if($("select[name=tfield]").val() == "" || $("select[name=tfield]").val() == null ){
+					alert("검색어를 선택해주세요..")
+					return;
+				}
+			}
+
+			if($("input[name=bkeyword]").val() != null && $("input[name=bkeyword]").val() != ""){
+				if($("select[name=bfield]").val() == "" || $("select[name=bfield]").val() == null ){
+					alert("검색어를 선택해주세요..")
+					return;
+				}
+			}
+			
+			if(!getDate()){
+				return;
+			}
+			
+			$("#searchform").submit();
+		})		
 	})
 	
 

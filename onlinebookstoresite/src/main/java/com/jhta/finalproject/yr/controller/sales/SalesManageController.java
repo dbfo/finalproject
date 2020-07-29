@@ -21,14 +21,13 @@ public class SalesManageController {
 	private SalesService service;
 	
 	@RequestMapping("/sales")
-	public String goSales(Model model,String menu, String startDate, String endDate, String week,
+	public String goSales(Model model,String menu,String usedbookmenu, String startDate, String endDate, String week,
 			String startYear, String startMonth, String endYear, String endMonth) {
 		
 //		System.out.println(
 //				 menu + " : "+ startDate + " : "+ endDate+ " : "+ week
 //				 + " : "+startYear+ " : "+ startMonth + " : "+endYear+ " : "+endMonth);
 		
-		model.addAttribute("menu", menu);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("week", endDate);
@@ -37,25 +36,31 @@ public class SalesManageController {
 		model.addAttribute("endYear", endYear);
 		model.addAttribute("endMonth", endMonth);
 		
-		return ".sales";
+		
+		if(menu != null && menu != "") {
+			
+			model.addAttribute("menu", menu);
+			return ".sales";
+		}else {
+			model.addAttribute("usedbookmenu", usedbookmenu);
+			return ".usedbooksales";
+			
+		}
+		
 	}
 	
 	
 	@RequestMapping("/sales/getInfo")
 	@ResponseBody
-	public String getInfo(String menu, String startDate, String endDate, String week,
+	public String getInfo(String menu, String usedbookmenu, String startDate, String endDate, String week,
 			String startYear, String startMonth, String endYear, String endMonth) {
 
-		HashMap<String, Object> map	 = new HashMap<String, Object>();
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
 		
 //		System.out.println(
-//				 menu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
+//				 "ggggggg " + menu + "," + usedbookmenu + " :sd "+ startDate + " :ed "+ endDate+ " :w "+ week
 //				 + " :sy "+startYear+ " :sm "+ startMonth + " :ey "+endYear+ " :em "+endMonth);
-		
-		
-		List<HashMap<String,String>> result = getDate( menu, startDate, endDate, week
+
+		List<HashMap<String,String>> result = getDate(menu, usedbookmenu, startDate, endDate, week
 				 , startYear, startMonth ,endYear, endMonth); 
 		
 
@@ -66,7 +71,7 @@ public class SalesManageController {
 		if(result != null) {
 			for (HashMap<String, String> hashMap : result) {
 				for (String key	: hashMap.keySet()) {
-					if(key.equals("BPAYDATE")){
+					if(key.equals("BPAYDATE") || key.equals("FEEDATE")){
 						slabel.add(hashMap.get(key));					
 					}else {
 						data.add(hashMap.get(key));					
@@ -89,28 +94,27 @@ public class SalesManageController {
 		return arry.toString();
 	}
 	
-	public List<HashMap<String,String>> getDate(String menu, String startDate, String endDate, String week,
+	public List<HashMap<String,String>> getDate(String menu, String usedbookmenu, String startDate, String endDate, String week,
 			String startYear, String startMonth, String endYear, String endMonth) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
 		
-		if(menu.equals("1")) {
-			map.put("menu", menu);
-			map.put("startDate", startDate);
-			map.put("endDate", endDate);
+		if(menu.equals("0")) {
 			
-			result = service.getList(map);
-		}else if(menu.equals("2")) {
-
-			if(week != null && week != "") {
-				int iweek = Integer.parseInt(week);
-				iweek = (iweek-1) * 7;
-				map.put("week", iweek);
-				result = service.weekList(map);
-			}
+			result = service.getThreeday();
 			
-		}else if(menu.equals("3")) {
-
+			return result;
+		}
+	
+		map.put("endDate", endDate);
+		map.put("startDate", startDate);
+		
+		if(week != null && week != "") {
+			int iweek = Integer.parseInt(week);
+			iweek = (iweek-1) * 7;
+			map.put("week", iweek);
+		}
+		if(startYear != null && startYear != "") {
 			String startYearAndMonth= startYear + "-" +  startMonth;
 			int iendMonth = Integer.parseInt(endMonth)+1;
 			int iendYear = Integer.parseInt(endYear);
@@ -121,10 +125,38 @@ public class SalesManageController {
 			String endYearAndMonth= iendYear + "-" +  iendMonth;
 			map.put("startYearAndMonth",startYearAndMonth);
 			map.put("endYearAndMonth",endYearAndMonth);
-			
-			result = service.mothList(map);
 		}
-	
+		
+		if(menu != null && menu != "") {
+			map.put("field","bpaydate");
+			
+			for (String key : map.keySet()) {
+				System.out.println(key + " : " + map.get(key));
+			}
+			
+			
+			if(menu.equals("1") ) {
+				result = service.getList(map);				
+			}else if(menu.equals("2")) {
+				result = service.weekList(map);
+			}else if(menu.equals("3")) {
+				result = service.mothList(map);
+			}
+		}
+		
+		if(usedbookmenu != null && usedbookmenu != "") {
+			map.put("field","feedate");
+
+			if(usedbookmenu.equals("1") ) {
+				result = service.usedbookgetList(map);				
+			}else if(usedbookmenu.equals("2")) {
+				result = service.usedbookweekList(map);				
+			}else if(usedbookmenu.equals("3")) {
+				result = service.usedbookmothList(map);				
+			}
+			
+		}
 		return result;
 	}
+	
 }

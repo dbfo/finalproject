@@ -9,20 +9,20 @@
 </style>
 
 <div class="container-fluid ">
-	<h1 class="mt-4">Charts</h1>
+	<h2 class="mt-4">중고 책 수익금 매출 차트</h2>
 	
 	<div>
 		<ul class = "tab">
-			<li style = "font-size: 20px;padding-top: 15px;"><a href="${pageContext.request.contextPath }/sales?menu=1">일별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?menu=2">주별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 15px;"><a href = "${pageContext.request.contextPath }/sales?menu=3">월별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href="${pageContext.request.contextPath }/sales?usedbookmenu=1">일별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=2">주별 매출</a></li>		
+			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?usedbookmenu=3">월별 매출</a></li>		
 		</ul>
 	</div>
 	
-		<input type="hidden" value = "${menu}" id = "menu">
-		<table class="table searchbox">
+		<input type="hidden" value = "${usedbookmenu}" id = "usedbookmenu">
+		<table class="table searchbox" style="margin-top: 50px;">
 <!-- 			일별 검색 -->
-			<c:if test="${menu == 1 }">
+			<c:if test="${usedbookmenu == 1 }">
 				<tr>
 					<th class="table-active">기간</th>
 					<td colspan="3">
@@ -43,7 +43,7 @@
 				</tr>
 			</c:if>
 <!-- 			주별 검색 -->
-			<c:if test="${menu == 2 }">
+			<c:if test="${usedbookmenu == 2 }">
 			<tr>
 				<th class="table-active">기간</th>
 				<td>
@@ -55,7 +55,7 @@
 				</td>
 			</tr>
 			</c:if>
-			<c:if test="${menu == 3 }">
+			<c:if test="${usedbookmenu == 3 }">
 				<th class="table-active mm">기간</th>
 				<td>
 				<div class="row">
@@ -138,7 +138,7 @@
 <script type="text/javascript">
 
 	$(function(){
-		var menu = $("#menu").val();
+		var menu = $("#usedbookmenu").val();
 		var startDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		var week = $("#week").val();
@@ -156,7 +156,7 @@
 	})
 	
 	$('#searchBtn').click(function(){
-		var menu= $("#menu").val();
+		var menu= $("#usedbookmenu").val();
 		var startDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		var week = $("#week").val();
@@ -177,7 +177,7 @@
 		$.ajax({
 			url: "${pageContext.request.contextPath}/sales/getInfo",
 			dataType : "json",
-			data : {menu:menu, startDate : startDate , endDate : endDate,  week:week , startYear:startYear, 
+			data : {usedbookmenu:menu, startDate : startDate , endDate : endDate,  week:week , startYear:startYear, 
 				startMonth:startMonth, endYear:endYear, endMonth:endMonth},
 			success : function(data){
 				if(data[0].code == "success"){

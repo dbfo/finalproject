@@ -28,6 +28,13 @@ public class CSManageDao {
 	public List<PaymentAndCSBookListVo> paymentList(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".paymentList",map);
 	}
+	public List<PaymentAndCSBookListVo> getOnePayment(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".getOnePayment",map);
+	}
+	
+	public int getTotalCount(HashMap<String, Object> map){
+		return session.selectOne(NAMESPACE+".getTotalCount",map);
+	}
 	
 	public int cancelPaymentInsert(PaymentVo vo) {
 		return session.insert(NAMESPACE + ".cancelPaymentInsert",vo);
@@ -48,4 +55,10 @@ public class CSManageDao {
 	public int updateStatus(HashMap<String, Object> map) {
 		return session.update(NAMESPACE+".updateStatus",map);
 	}
+	
+	//오늘 cs 갯수
+	public int getTodayCSCount(){
+		return session.selectOne(NAMESPACE+".getTodayCSCount");
+	}
+	
 }

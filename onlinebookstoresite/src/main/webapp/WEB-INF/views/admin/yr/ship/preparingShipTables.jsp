@@ -12,19 +12,20 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
+				<table class="table table-bordered" width="100%"
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>주문번호</th>
-							<th>주문일(결제일)</th>
-							<th>주문자</th>
-							<th><input type="checkbox"></th>
-							<th>운송장정보</th>
-							<th>책 제목</th>
-							<th>수량</th>
-							<th>판매가</th>
-							<th>총 실제 결제 금액</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문일(결제일)</th>
+							<th class="table-active">주문자</th>
+							<th class="table-active"><input type="checkbox"></th>
+							<th class="table-active">운송장정보</th>
+							<th class="table-active">책 제목</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가</th>
+							<th class="table-active">배송료</th>
+							<th class="table-active">총 실제 결제 금액</th>
 
 						</tr>
 					</thead>
@@ -67,6 +68,7 @@
 										<p>${book.bprice}</p>
 									</c:forEach></td>
 
+								<td rowspan="2">${vo.delfee}</td>
 								<td rowspan="2">${vo.bfinalmoney}</td>
 							</tr>
 							<tr>
@@ -78,19 +80,44 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="pagination justify-content-center">
+			<!-- 페이징 -->
+			<div id="listPaging">
+				<c:choose>
+					<c:when test="${pu.startPageNum > 1 }">
+						<button onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'" 
+							type="button" class="btn btn-outline-success">이전</button>
+					</c:when>
+				</c:choose>
+	
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${i == pu.pageNum }">
+								<button type="button" class="btn btn-success"
+									onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'">${i }</button>
+							</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-success" 
+								onclick ="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'">${i }</button>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+				<c:choose>
+						<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+							<button
+								onclick="location.href='${pageContext.request.contextPath }/ship/menu?PageName=${PageName }&type=${type }&pageNum=${pu.startPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}'"
+								type="button" class="btn btn-outline-success">다음</button>
+						</c:when>
+					</c:choose>
+			</div>
+			<br>
+			<!-- ////////////////// -->
+		</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-	
-	
-	$(function(){
-		$('.addr').each(function(idx,item){
-			var addr = $(this).text();
-			addr =  addr.replace(/\|/g, ' ');
-			$(this).text(addr);			
-		})
-	})
 	
 	
 // 	 입력 확인
@@ -101,6 +128,9 @@
 		var courier = $('#courier').eq(index).val();
 		var chb = $('#chb').eq(index).prop('checked');
 		var bpaynum = $('.bpaynum').eq(index).text();
+		var bpaynumArr = new Array();
+		
+		bpaynumArr.push(bpaynum);
 		
 		if(tnum == '' || tnum == null  ){
 			alert('송장번호를 입력해주세요..')
@@ -125,7 +155,7 @@
 		$.ajax({
 			url :'${pageContext.request.contextPath}/ship/changeToShipping',
 			dataType : "json",
-			data : {"bpaynum" : bpaynum},
+			data : {"bpaynum" : bpaynumArr, "bstatus" : 2},
 			success : function(data){
 				console.log(data.code);
 				if(data.code == "success"){

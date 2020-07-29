@@ -10,6 +10,7 @@ import java.util.List;
 public class UsedOldBookSellerInfoVo {
 	private Date borderdate; //주문일자
 	private Date bpaydate; //결제일자
+	private int paymentbook_num; //주문번호
 	private int bpaynum; //주문번호
 	private int fprice; //판매금액
 	private int settlement; // 정산금액
@@ -26,11 +27,14 @@ public class UsedOldBookSellerInfoVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UsedOldBookSellerInfoVo(Date borderdate, Date bpaydate, int bpaynum, int fprice, int settlement,
-			int bocomstatus, int seller, int buyer, String sellername, String buyername, List<String> obname) {
+
+	public UsedOldBookSellerInfoVo(Date borderdate, Date bpaydate, int paymentbook_num, int bpaynum, int fprice,
+			int settlement, int bocomstatus, int seller, int buyer, String sellername, String buyername,
+			List<String> obname) {
 		super();
 		this.borderdate = borderdate;
 		this.bpaydate = bpaydate;
+		this.paymentbook_num = paymentbook_num;
 		this.bpaynum = bpaynum;
 		this.fprice = fprice;
 		this.settlement = settlement;
@@ -151,16 +155,16 @@ public class UsedOldBookSellerInfoVo {
 	public void setObname(List<String> obname) {
 		this.obname = obname;
 	}
+	
+	
 
-	@Override
-	public String toString() {
-		return "UsedOldBookSellerInfoVo [borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bpaynum=" + bpaynum
-				+ ", fprice=" + fprice + ", settlement=" + settlement + ", bocomstatus=" + bocomstatus + ", seller="
-				+ seller + ", buyer=" + buyer + ", sellername=" + sellername + ", buyername=" + buyername + ", obname="
-				+ obname + "]";
+	public int getPaymentbook_num() {
+		return paymentbook_num;
 	}
-	
-	
-	
+
+
+	public void setPaymentbook_num(int paymentbook_num) {
+		this.paymentbook_num = paymentbook_num;
+	}
 	
 }

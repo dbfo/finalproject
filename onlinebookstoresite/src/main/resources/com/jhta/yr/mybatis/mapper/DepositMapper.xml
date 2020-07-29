@@ -39,10 +39,34 @@
 	</sql>
 
 	<select id="settlementList" resultType="SettlementJoinVo" parameterType="hashmap" >
-		select * from settlement, account, members where settlement.anum = account.anum and account.mnum = members.mnum
-		<include refid="sestatusKinds"/>
+	
+<!-- 		select * from settlement, account, members where settlement.anum = account.anum and account.mnum = members.mnum -->
+<!-- 		<include refid="sestatusKinds"/> -->
+<!-- 		<include refid="search"/> -->
+<!-- 		 order by sestatus, appdate -->
+		select * from		
+		(
+			select aa.*, rownum rnum from 
+			(
+                select settlement.SENUM, SESTATUS,REQMONEY,APPDATE,COMDATE , account.*, members.mname
+                from settlement, account, members
+                where settlement.anum = account.anum and account.mnum = members.mnum 
+                <include refid="sestatusKinds"/>
+				<include refid="search"/>
+				order by settlement.SESTATUS , appdate 
+			)aa
+		)
+		<![CDATA[where rnum >= #{startRow} and rnum<= #{endRow}]]>
+	
+	</select>
+	
+<!-- 	갯수세기 -->
+	<select id="getCount" resultType="int" parameterType="hashmap">
+		select nvl(count(*),0) count
+        from settlement, account, members
+        where settlement.anum = account.anum and account.mnum = members.mnum 
+	    <include refid="sestatusKinds"/>
 		<include refid="search"/>
-		 order by sestatus, appdate
 	</select>
 	
 	<update id = "updateSestatus" parameterType="int">

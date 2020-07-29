@@ -4,35 +4,34 @@
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container-fluid">
-<h2 class="mt-4">list</h2>
 <div class="card mb-4">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i> 검색결과[0]
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%"
+			<table class="table table-bordered" width="100%"
 				cellspacing="0">
 				<thead>
 					<tr>
 <!-- 						환불 -->
-						<c:if test="${path == 4 || path == 6 }">
-							<th><input type = "checkbox"></th>
+						<c:if test="${path == 4 || path == 5 }">
+							<th class="table-active"><input type = "checkbox"></th>
 						</c:if>
-						<th>번호</th>
-						<th>신청날짜</th>
-						<th>회원번호</th>
-						<th>회원이름</th>
-						<th>계좌정보</th>
-						<th>환불 금액</th>
-						<th>처리상태</th>
+						<th class="table-active">번호</th>
+						<th class="table-active">신청날짜</th>
+						<th class="table-active">회원번호</th>
+						<th class="table-active">회원이름</th>
+						<th class="table-active">계좌정보</th>
+						<th class="table-active">환불 금액</th>
+						<th class="table-active">처리상태</th>
 					</tr>
 				</thead>
 				<tbody>
 
 					<c:forEach var="vo" items="${list}">
 						<tr>
-							<c:if test="${path == 4 || path == 6 }">
+							<c:if test="${path == 4 || path == 5 }">
 								<td><input type = "checkbox" id = "sechb" <c:if test = "${vo.sestatus == 1 }">disabled</c:if>></td>
 							</c:if>
 							<td id = "senum">${vo.senum }</td>
@@ -54,14 +53,46 @@
 						</tr>
 					</c:forEach>
 						<tr>
-							<td colspan="8">
-								<c:if test="${path == 4 || path == 6 }">
+							<c:if test="${path == 4 || path == 5 }">
+								<td colspan="8">
 									<input id = "refundBtn" onclick = "abcbtn(${path})" class = "btn btn-success" type = "button" value = "처리하기">
-								</c:if>
-							</td>
+								</td>
+							</c:if>
 						</tr>
 				</tbody>
 			</table>
+		</div>
+		<div class="pagination justify-content-center">
+			<!-- 페이징 -->
+			<div id="listPaging">
+				<c:choose>
+					<c:when test="${pu.startPageNum > 1 }">
+						<button onclick="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'" 
+							type="button" class="btn btn-outline-success">이전</button>
+					</c:when>
+				</c:choose>
+	
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<c:choose>
+						<c:when test="${i == pu.pageNum }">
+								<button type="button" class="btn btn-success"
+									onclick="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
+							</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-success" 
+								onclick ="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+				<c:choose>
+						<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+							<button
+								onclick="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'"
+								type="button" class="btn btn-outline-success">다음</button>
+						</c:when>
+					</c:choose>
+			</div>
 		</div>
 	</div>
 </div>

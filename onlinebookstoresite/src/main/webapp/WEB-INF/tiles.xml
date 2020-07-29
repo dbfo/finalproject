@@ -104,20 +104,20 @@
 	<definition name=".admin.beforeDeposit"
 		extends=".admin.ship">
 		<put-attribute name="shiptables"
-			value="/WEB-INF/views/admin/yr/ship/beforeDepositTables.jsp" />
+			value="/WEB-INF/views/admin/yr/ship/UsedBookAndNewBookTab.jsp" />
 	</definition>
 
 	<!-- 배송 준비중 -->
 	<definition name=".admin.preparingShip"
 		extends=".admin.ship">
 		<put-attribute name="shiptables"
-			value="/WEB-INF/views/admin/yr/ship/preparingShipTables.jsp" />
+			value="/WEB-INF/views/admin/yr/ship/UsedBookAndNewBookTab.jsp" />
 	</definition>
 
 	<!-- 배송 중, 배송완료 -->
 	<definition name=".admin.shipInfo" extends=".admin.ship">
 		<put-attribute name="shiptables"
-			value="/WEB-INF/views/admin/yr/ship/shipInfoTables.jsp" />
+			value="/WEB-INF/views/admin/yr/ship/UsedBookAndNewBookTab.jsp" />
 	</definition>
 
 
@@ -140,7 +140,7 @@
 	<!-- 취소 -->
 	<definition name=".admin.cancel" extends=".admin.cs">
 		<put-attribute name="cstables"
-			value="/WEB-INF/views/admin/yr/cs/csCancelTables.jsp" />
+			value="/WEB-INF/views/admin/yr/cs/allCancelListTable.jsp" />
 	</definition>
 	<!-- 반품 -->
 	<definition name=".admin.return" extends=".admin.cs">
@@ -182,4 +182,9 @@
 			value="/WEB-INF/views/admin/yr/sales/chart.jsp" />
 	</definition>
 
+	<!-- 중고책 매출관리 -->
+	<definition name=".usedbooksales" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/yr/sales/usedbookchart.jsp" />
+	</definition>
 </tiles-definitions>

@@ -27,9 +27,13 @@
 	    where bpayment.bpaynum = paymentbook.bpaynum
 	    and bpayment.bpaynum = #{bpaynum}
 	</select>
-		
-	<update id="updatePrepareToShipping" parameterType="int">
-		update bpayment set bstatus = 2 where bpaynum = #{bpaynum} 
+	
+<!-- 	bstatus상태 바꾸기(배송준비중 , 배송 완료)	 -->
+	<update id="updateBstatus" parameterType="hashmap">
+		update bpayment set bstatus = #{bstatus} where
+		<foreach collection="bpaynum" item = "bpaynum" separator="or">
+	 	  bpaynum = #{bpaynum} 
+		</foreach>	
 	</update>
 	
 	<select id="getBookPoint" parameterType="int" resultType="int">

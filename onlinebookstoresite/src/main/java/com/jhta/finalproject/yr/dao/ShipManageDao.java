@@ -27,9 +27,9 @@ public class ShipManageDao {
 		return session.update(NAMESPACE+".updateBeforeToPreparing",list);
 	}
 	
-	//준비중 -> 배송중으로 상태 업데이트
-	public int updatePrepareToShipping(int bpaynum) {
-		return session.update(NAMESPACE+".updatePrepareToShipping",bpaynum);
+	//bstatus상태 바꾸기
+	public int updateBstatus(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".updateBstatus",map);
 	}
 	
 	//입금중 누를때 포인트 증가시키기(얼마나 증가시킬지 포인트 가져옴)

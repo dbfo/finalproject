@@ -17,4 +17,9 @@ public class DepositService {
 	public List<SettlementJoinVo> getSettlementList(HashMap<String, Object> map){
 		return dao.getSettlementList(map);
 	}
+	
+	//갯수세기
+	public int getCount(HashMap<String, Object> map){
+		return dao.getCount(map);
+	}
 }

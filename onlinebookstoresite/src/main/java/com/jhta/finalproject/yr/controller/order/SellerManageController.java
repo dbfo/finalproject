@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.finalproject.yj.vo.PageUtil;
 import com.jhta.finalproject.yr.service.SellerDepositService;
 import com.jhta.finalproject.yr.vo.UsedOldBookSellerInfoVo;
 
@@ -20,7 +21,7 @@ public class SellerManageController {
 	private SellerDepositService service;
 	
 	@RequestMapping("/admin/seller")
-	public String goSellerManage(Model model, String pfield, String pkeyword, 
+	public String goSellerManage(Model model,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,String pfield, String pkeyword, 
 			String tfield, String startDate, String endDate) { 
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -30,8 +31,16 @@ public class SellerManageController {
 		map.put("startDate", startDate);	
 		map.put("endDate", endDate);	
 		
+		int totalRowCnt = service.getCount(map); // 전체글의 개수
+				
+		PageUtil pu = new PageUtil(pageNum, totalRowCnt, 5, 5);
+
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
 		List<UsedOldBookSellerInfoVo> list = service.getList(map);
 		
+		model.addAttribute("pu", pu);
 		model.addAttribute("list", list);
 		model.addAttribute("pfield", pfield);	
 		model.addAttribute("pkeyword", pkeyword);	
@@ -46,13 +55,14 @@ public class SellerManageController {
 	
 	@RequestMapping("/admin/depositToSeller")
 	@ResponseBody
-	public String DepositToSeller(@RequestParam(value = "bpaynum[]") List<Integer> bpaynum,
+	public String DepositToSeller(@RequestParam(value = "paymentBookNum[]") List<Integer> paymentBookNum,
+			@RequestParam(value = "bpaynum[]") List<Integer> bpaynum,
 			@RequestParam(value = "sellernum[]") List<Integer> sellernum,
 			@RequestParam(value = "price[]") List<Integer> price) {
 		
 		int n = 0;
 		try {
-			n = service.updateSellerDepositStatus(bpaynum, sellernum, price);
+			n = service.updateSellerDepositStatus(paymentBookNum, bpaynum,sellernum, price);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

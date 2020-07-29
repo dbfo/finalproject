@@ -11,18 +11,18 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
+				<table class="table table-bordered" width="100%"
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>주문일(결제일)</th>
-							<th>주문번호</th>
-							<th>주문자</th>
-							<th>책 제목</th>
-							<th>총 실제 결제 금액</th>
-							<th>결제수단</th>
-							<th>배송상태</th>
-							<th>cs주문상태</th>
+							<th class="table-active">주문일(결제일)</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문자</th>
+							<th class="table-active">책 제목</th>
+							<th class="table-active">총 실제 결제 금액</th>
+							<th class="table-active">결제수단</th>
+							<th class="table-active">배송상태</th>
+							<th class="table-active">cs주문상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -96,6 +96,42 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<div class="pagination justify-content-center">
+				<!-- 페이징 -->
+				<div id="listPaging">
+					<c:choose>
+						<c:when test="${pu.startPageNum > 1 }">
+							<button onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${pu.startPageNum - 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'" 
+								type="button" class="btn btn-outline-success">이전</button>
+						</c:when>
+					</c:choose>
+		
+					<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+						<c:choose>
+							<c:when test="${i == pu.pageNum }">
+									<button type="button" class="btn btn-success"
+										onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'">${i }</button>
+								</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-outline-success" 
+									onclick ="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'">${i }</button>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+		
+					<c:choose>
+							<c:when test="${pu.totalPageCnt > pu.endPageNum }">
+								<button
+									onclick="location.href='${pageContext.request.contextPath }/totalOrder?pageNum=${pu.endPageNum + 1}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&bstatus=${bstatus}&type=${type}&payType=${payType}&mType=${mType}'"
+									type="button" class="btn btn-outline-success">다음</button>
+							</c:when>
+						</c:choose>
+				</div>
+				<br>
+				<!-- ////////////////// -->
+			</div>
+				
 			</div>
 		</div>
 	</div>
