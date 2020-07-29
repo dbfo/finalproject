@@ -64,7 +64,7 @@
 									</form>
 									<a href="#!" class="forgot-password-link">비밀번호를 잊어버리셨습니까?</a>
 									<p class="login-card-footer-text">
-										아이디를 가지고 있지 않습니까? <a href="#!" class="text-reset">회원가입은
+										아이디를 가지고 있지 않습니까? <a href="${cp }/join" class="text-reset">회원가입은
 											여기에서!</a>
 									</p>
 									<nav class="login-card-footer-nav">

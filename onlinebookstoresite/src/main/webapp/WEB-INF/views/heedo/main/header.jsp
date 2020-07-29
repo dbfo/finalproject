@@ -29,7 +29,7 @@
 						<div class="up-item">
 							<i class="flaticon-profile"></i>
 							<c:if test="${ empty sessionScope.mid }">
-								<a href="${cp }/login">로그인</a> / <a href="#">회원가입</a>
+								<a href="${cp }/login">로그인</a> / <a href="${cp }/join">회원가입</a>
 							</c:if>
 							<c:if test="${not empty sessionScope.mid }">
 								<a href="${cp }/logout">로그아웃</a>

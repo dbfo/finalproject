@@ -57,7 +57,7 @@
 			value="/WEB-INF/views/admin/chloe/members/ghostInfo.jsp" />
 	</definition>
 
-	<definition name=".join" extends=".adminmain">
+	<definition name=".join" extends=".main">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/members/join.jsp" />
 	</definition>
