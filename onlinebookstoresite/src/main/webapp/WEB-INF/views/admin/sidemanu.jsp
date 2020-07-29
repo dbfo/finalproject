@@ -82,7 +82,6 @@
 					<nav class="sb-sidenav-menu-nested nav">
 						<a class="nav-link" href="${pageContext.request.contextPath }/membersList">회원리스트</a>
 						<a class="nav-link" href="${pageContext.request.contextPath }/ghostList">탈퇴회원리스트</a>
-						<a class="nav-link" href="${pageContext.request.contextPath }/join">회원가입test</a>
 					</nav>
 				</div>
 

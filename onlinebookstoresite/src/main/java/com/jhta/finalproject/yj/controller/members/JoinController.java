@@ -85,11 +85,9 @@ public class JoinController {
 			System.out.println(e.getMessage());
 		}
 		if (n > 0) {
-			return "/admin/success";
-			// 이 부분 admin으로 가면 안됨 *수정 필수*
+			return ".main";
 		} else {
-			// 이 부분 admin으로 가면 안됨 *수정 필수*
-			return "/admin/fail";
+			return ".main";
 		}
 	}
 }
