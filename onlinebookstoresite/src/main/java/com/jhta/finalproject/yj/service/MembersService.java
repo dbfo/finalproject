@@ -21,7 +21,7 @@ public class MembersService {
 	public int idCheck(String mid) {
 		return dao.idCheck(mid);
 	}
-	
+
 	public int emailCheck(String email) {
 		return dao.emailCheck(email);
 	}
@@ -40,6 +40,14 @@ public class MembersService {
 
 	public List<MembersVO> ghostList(HashMap<String, Object> map) {
 		return dao.ghostList(map);
+	}
+
+	public MembersVO memInfo(int mnum) {
+		return dao.memInfo(mnum);
+	}
+
+	public MembersVO ghostInfo(int mnum) {
+		return dao.ghostInfo(mnum);
 	}
 
 	// 엑셀

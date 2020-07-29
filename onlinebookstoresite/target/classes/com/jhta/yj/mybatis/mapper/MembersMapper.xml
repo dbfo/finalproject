@@ -51,12 +51,18 @@
 	<select id="memList" resultType="members" parameterType="hashmap">
 		select * from 
 		(select aa.*, rownum rnum from 
-		(select mname, mid, email, phone, regdate, birth, 
+		(select mnum, mname, mid, email, phone, regdate, birth, 
 		FLOOR((months_between(sysdate, birth))/12) age
 		from members where mstatus = 1 
 		<include refid="search" /> 
 		order by mnum desc) aa)
 		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
+	</select>
+	
+	<select id="memInfo" resultType="members" parameterType="int">
+		select mnum, mname, mid, email, phone, addr, 
+		regdate, grade, mstatus, birth, FLOOR((months_between(sysdate, birth))/12) age, sex 
+		from members where mstatus = 1 and mnum = #{mnum}
 	</select>
 
 	<!-- 전체 탈퇴회원수 -->
@@ -70,12 +76,18 @@
 	<select id="ghostList" resultType="members">
 		select * from 
 		(select aa.*, rownum rnum from 
-		(select mname, mid, email, phone, regdate, birth, 
+		(select mnum, mname, mid, email, phone, regdate, birth, 
 		FLOOR((months_between(sysdate, birth))/12) age
 		from members where mstatus = 0 
 		<include refid="search" /> 
 		order by mnum desc) aa)
 		<![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
+	</select>
+	
+	<select id="ghostInfo" resultType="members" parameterType="int">
+		select mnum, mname, mid, email, phone, addr, 
+		regdate, grade, mstatus, birth, FLOOR((months_between(sysdate, birth))/12) age, sex 
+		from members where mstatus = 0 and mnum = #{mnum}
 	</select>
 	
 	<!-- 엑셀 리스트 -->

@@ -23,7 +23,7 @@ public class MembersDao {
 	public int idCheck(String mid) {
 		return session.selectOne(NAMESPACE + ".idCheck", mid);
 	}
-	
+
 	public int emailCheck(String email) {
 		return session.selectOne(NAMESPACE + ".emailCheck", email);
 	}
@@ -42,6 +42,14 @@ public class MembersDao {
 
 	public List<MembersVO> ghostList(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".ghostList", map);
+	}
+
+	public MembersVO memInfo(int mnum) {
+		return session.selectOne(NAMESPACE + ".memInfo", mnum);
+	}
+
+	public MembersVO ghostInfo(int mnum) {
+		return session.selectOne(NAMESPACE + ".ghostInfo", mnum);
 	}
 
 	// 엑셀 리스트

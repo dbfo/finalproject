@@ -47,6 +47,16 @@
 			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
 
+	<definition name=".memInfo" extends=".adminmain">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/members/memInfo.jsp" />
+	</definition>
+	
+	<definition name=".ghostInfo" extends=".adminmain">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/members/ghostInfo.jsp" />
+	</definition>
+
 	<definition name=".join" extends=".adminmain">
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/chloe/members/join.jsp" />
