@@ -47,6 +47,11 @@
 			value="/WEB-INF/views/admin/chloe/members/ghostList.jsp" />
 	</definition>
 
+	<definition name=".join" extends=".main">
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/chloe/members/join.jsp" />
+	</definition>
+
 	<!-- qna -->
 	<definition name=".unAnswerList" extends=".main">
 		<put-attribute name="content"
@@ -152,7 +157,7 @@
 		<put-attribute name="cstables"
 			value="/WEB-INF/views/admin/yr/cs/refundTabTable.jsp" />
 	</definition>
-	
+
 	<definition name=".cs.*" extends=".main">
 		<put-attribute name="content" value=".admin.{1}" />
 	</definition>

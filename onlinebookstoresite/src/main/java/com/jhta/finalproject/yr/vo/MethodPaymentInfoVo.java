@@ -16,9 +16,7 @@ public class MethodPaymentInfoVo {
 				+ ", count=" + count + "]";
 	}
 
-	public MethodPaymentInfoVo() {
-		// TODO Auto-generated constructor stub
-	}
+	public MethodPaymentInfoVo() {}
 	
 	public MethodPaymentInfoVo(String bpayment, int price, int methodpayment, int count) {
 		super();

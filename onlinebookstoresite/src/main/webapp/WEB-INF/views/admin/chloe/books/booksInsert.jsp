@@ -93,7 +93,7 @@
 				var big = $(this).val();
 				//alert("big:" + big);
 				$.ajax({
-					url : "/finalproject/booksctg",
+					url : "${pageContext.request.contextPath}/booksctg",
 					data : {
 						bcatenum : big
 					},
