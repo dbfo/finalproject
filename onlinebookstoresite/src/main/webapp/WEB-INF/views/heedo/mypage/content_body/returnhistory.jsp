@@ -192,7 +192,7 @@
 					var date=new Date(Date.parse(item.borderdate));
 					var tableapp="<tr>"
 							    +"<td style='text-align:center;'>"+item.ordernum+"</td>"
-							    +"<td><a class='movedetail'>"+item.ordername+"</td>"
+							    +"<td>"+item.ordername+"</td>"
 							    +"<td>"+item.ordermoney+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"
@@ -556,8 +556,8 @@
 	#newPaging,#usedPaging{
 		text-align: center;
 		position:absolute;
-		top:650px;
-		left:370px;
+		top: 650px;
+  		left: 400px;
 	}
 	.pageli{
 		width:34px;

@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.hd.vo.AccountVo;
+import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
 import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
@@ -48,6 +50,23 @@ public class MyPageDao {
 	}
 	public int countcart(int mnum) {
 		return sqlsession.selectOne(NAMESPACE+".countcart",mnum);
+	}
+	
+	public int countDeposithistory(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".countDeposithistory", map);
+	}
+	public List<DepositHistoryVo> deposithistory(HashMap<String, Object>map){
+		return sqlsession.selectList(NAMESPACE+".deposithistory",map);
+	}
+	
+	public int confirmacount(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".confirmacount",mnum);
+	}
+	public int insertAccount(HashMap<String, Object>map) {
+		return sqlsession.insert(NAMESPACE+".insertAccount",map);
+	}
+	public AccountVo selectAccount(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".selectAccount", mnum);
 	}
 	
 	//문의내역 행수 

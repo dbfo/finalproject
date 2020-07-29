@@ -157,6 +157,78 @@
 		insert into qna values(SEQ_qna_qnanum.nextval,#{mnum},#{qnatitle},#{qnacontent},0,sysdate)
 	</insert>
 	
+	
+	<select id="countDeposithistory" parameterType="hashmap" resultType="int">
+		select NVL(count(*),0) from (
+				select * from deposit where mnum=#{mnum} and
+				<choose>
+					<when test="value=='all'">
+						dereason in(0,1,2,3) 
+					</when>
+					<when test="value=='sellmoney'">
+						dereason=0
+					</when>
+					<when test="value=='ordercancel'">
+						dereason=1
+					</when>
+					<when test="value=='return'">
+						dereason=2
+					</when>
+					<otherwise>
+						dereason=3
+					</otherwise>
+				</choose>
+				<![CDATA[
+					AND TO_CHAR(trandate,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+					AND TO_CHAR(trandate,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+				order by trandate desc
+				)a
+			
+		
+	</select>
+	<select id="deposithistory" parameterType="hashmap" resultType="depositHistory">
+		select aa.* from (
+			select a.*,rownum rnum from (
+				select * from deposit where mnum=#{mnum} and
+				<choose>
+					<when test="value=='all'">
+						dereason in(0,1,2,3) 
+					</when>
+					<when test="value=='sellmoney'">
+						dereason=0
+					</when>
+					<when test="value=='ordercancel'">
+						dereason=1
+					</when>
+					<when test="value=='return'">
+						dereason=2
+					</when>
+					<otherwise>
+						dereason=3
+					</otherwise>
+				</choose>
+				<![CDATA[
+					AND TO_CHAR(trandate,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+					AND TO_CHAR(trandate,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]>
+				order by trandate desc
+				)a
+			)aa
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	
+	<!-- 계좌번호 있는지여부 확인. -->
+	<select id="confirmacount" parameterType="int" resultType="int">
+		select NVL(count(*),0) from account where mnum=#{mnum}
+	</select>
+	<!-- 계좌등록 -->
+	<insert id="insertAccount" parameterType="hashmap">
+		insert into account values(SEQ_account_anum.nextval,#{mnum},#{bank},#{banknum})
+	</insert>
+	<!-- 계좌번호 select -->
+	<select id="selectAccount" parameterType="int" resultType="AccountVo">
+		select * from account where mnum=#{mnum}
+	</select>
+	
 	<!-- 마이페이지 메인관련 sql문 -->
 	<select id="recentorder" parameterType="int" resultType="historyVo">
 		select aaa.* from (

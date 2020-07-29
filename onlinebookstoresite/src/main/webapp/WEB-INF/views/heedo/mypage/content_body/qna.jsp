@@ -431,8 +431,8 @@
 	#qnaPaging{
 		text-align: center;
 		position:absolute;
-		top:620px;
-		left:370px;
+		top: 650px;
+    	left: 400px;
 	}
 	.pageli{
 		width:34px;

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MyPageService;
 import com.jhta.finalproject.hd.service.OrderHistoryService;
+import com.jhta.finalproject.hd.vo.AccountVo;
+import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
 import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
@@ -571,6 +573,116 @@ public class MyPageController {
 			return json.toString();
 		}
 		
-		
-		
+		//예치금내역페이지.
+		@RequestMapping(value="/mypage/depositpage")
+		public String depositpage() {
+			return ".depositpage";
+		}
+		@RequestMapping(value="/mypage/deposithistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String deposithistory(HttpSession session,@RequestParam(required=false)String startDay,String value,
+				@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String,Object>datemap=new HashMap<String, Object>();
+			datemap.put("startDay", startDay);
+			datemap.put("endDay",endDay);
+			datemap.put("mnum",mnum);
+			datemap.put("value",value);
+			System.out.println("value:"+value);
+			//value-> all : 전체  , sellmoney -> 판매대금 (0) 주문취소(1) 반품/환불처리(2) 계좌인출(3)
+			int totalcount=service.countDeposithistory(datemap);
+			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
+			datemap.put("startRow", pu.getStartRow());
+			datemap.put("endRow", pu.getEndRow());
+			List<DepositHistoryVo> list=service.deposithistory(datemap);
+			JSONArray jarr=new JSONArray();
+			int total_deposit=0;
+			for(DepositHistoryVo vo:list) {
+				total_deposit+=vo.getDtran();
+				JSONObject json=new JSONObject();
+				json.put("dnum", vo.getDnum());
+				json.put("mnum", vo.getMnum());
+				json.put("dtran", vo.getDtran());
+				json.put("trandate", vo.getTrandate());
+				int status=vo.getDereason();
+				String statusStr="";
+				if(status==0) {
+					statusStr="판매대금";
+				}else if(status==1) {
+					statusStr="주문취소";
+				}else if(status==2) {
+					statusStr="반품/환불";
+				}else if(status==3) {
+					statusStr="계좌인출";
+				}
+				json.put("status", statusStr);
+				jarr.put(json);
+			}
+			JSONObject json=new JSONObject();
+			json.put("total_deposit", total_deposit);
+			json.put("value", value);
+			json.put("startDay", startDay);
+			json.put("endDay", endDay);
+			json.put("pageNum", pu.getPageNum());
+			json.put("totalPageCount", pu.getTotalPageCount());
+			json.put("startPageNum", pu.getStartPageNum());
+			if(pu.getEndPageNum()>=pu.getTotalPageCount()) {
+				pu.setEndPageNum(pu.getTotalPageCount());
+			}
+			json.put("endPageNum", pu.getEndPageNum());
+			jarr.put(json);
+			return jarr.toString();
+		}
+		@RequestMapping(value="/mypage/confirmaccount",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String confirmaccount(HttpSession session) {
+			JSONObject json=new JSONObject();
+			int mnum=0;
+			String smnum=(String)session.getAttribute("mnum");
+			if(smnum!=null) {
+				mnum=Integer.parseInt(smnum);
+			}
+			String result="";
+			if(mnum==0) {
+				result="loginerr";
+				json.put("result", result);
+				return json.toString();
+			}
+			int n=service.confirmacount(mnum);
+			if(n>0) {
+				result="confirm";
+				AccountVo vo=service.selectAccount(mnum);
+				json.put("bank", vo.getBank());
+				json.put("banknum", vo.getAccount());
+				
+			}else {
+				result="accounterr";
+			}
+			json.put("result", result);
+			return json.toString();
+			
+		}
+		@RequestMapping(value="/mypage/insertAccount",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String insertAccount(HttpSession session,String bank,int banknum) {
+			JSONObject json=new JSONObject();
+			String smnum=(String)session.getAttribute("mnum");
+			boolean result=false;
+			if(smnum==null) {
+				json.put("result", result);
+				return json.toString();
+			}
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>datamap=new HashMap<String, Object>();
+			datamap.put("mnum", mnum);
+			datamap.put("bank", bank);
+			datamap.put("banknum", banknum);
+			int n=service.insertAccount(datamap);
+			if(n>0) {
+				result=true;
+			}
+			json.put("result", result);
+			return json.toString();
+		}
 }

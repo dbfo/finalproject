@@ -8,16 +8,14 @@
 	height:auto;
 }
 #content_cart{
-		border:2px solid grey;
-		padding:10px;
-		border-radius: 8px;
+	border:2px solid grey;
+	padding:10px;
+	border-radius: 8px;
 }
 .order_core_container{
-		border:2px solid grey;
-		padding:10px;
-		border-radius: 8px;
-		
-	
+	border:2px solid grey;
+	padding:10px;
+	border-radius: 8px;	
 }
 #newbottomBtn{
 	text-align: center;

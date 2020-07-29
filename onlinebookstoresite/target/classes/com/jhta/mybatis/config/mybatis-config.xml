@@ -33,6 +33,8 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.QnaHistoryVo" alias="qnahistory"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.QnaAnswerVo" alias="qnaAnswer"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.ConfirmOldBookVo" alias="confirmold"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.DepositHistoryVo" alias="depositHistory"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.AccountVo" alias="AccountVo"/>
   	
   	
   	<!-- /////////// -->

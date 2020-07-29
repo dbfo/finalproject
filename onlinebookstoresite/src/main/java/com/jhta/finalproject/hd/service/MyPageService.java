@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.MyPageDao;
+import com.jhta.finalproject.hd.vo.AccountVo;
+import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
 import com.jhta.finalproject.hd.vo.QnaAnswerVo;
 import com.jhta.finalproject.hd.vo.QnaHistoryVo;
@@ -54,6 +56,21 @@ public class MyPageService {
 	}
 	public int countcart(int mnum) {
 		return dao.countcart(mnum);
+	}
+	public int countDeposithistory(HashMap<String, Object>map) {
+		return dao.countDeposithistory(map);
+	}
+	public List<DepositHistoryVo> deposithistory(HashMap<String, Object>map){
+		return dao.deposithistory(map);
+	}
+	public int confirmacount(int mnum) {
+		return dao.confirmacount(mnum);
+	}
+	public int insertAccount(HashMap<String, Object>map) {
+		return dao.insertAccount(map);
+	}
+	public AccountVo selectAccount(int mnum) {
+		return dao.selectAccount(mnum);
 	}
 	
 	
