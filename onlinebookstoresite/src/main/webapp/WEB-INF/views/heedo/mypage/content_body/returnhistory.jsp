@@ -271,7 +271,7 @@
 					var date=new Date(Date.parse(item.borderdate));
 					var tableapp="<tr>"
 							    +"<td style='text-align:center;'><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordernum+"</a></td>"
-							    +"<td><a class='movedetail' href='${cp}/orderhistory/detailview?bpaynum="+item.ordernum+"'>"+item.ordername+"</a></td>"
+							    +"<td>"+item.ordername+"</td>"
 							    +"<td>"+item.ordermoney+"</td>"
 							    +"<td>"+item.borderdate+"</td>"
 							    +"<td>"+item.status+"</td>"

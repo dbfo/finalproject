@@ -25,7 +25,7 @@
 							<td style="width:7%">${bvo.bcount }</td>
 							<td style="width:15%">${bvo.bprice }원</td>
 							<td style="width:15%">${bvo.point }</td>
-							<td><input class='checkTd' type='checkbox' data-bnum="${bvo.bnum }"></td>
+							<td><input class='checkTd' type='checkbox' data-bnum="${bvo.bnum }" checked="checked"></td>
 						</tr>
 					</c:forEach>
 					
@@ -315,7 +315,7 @@
 			if($(this).is(":checked")){
 				i++;
 				var bnum=$(this).data("bnum")
-				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("confirm_modal_body");
+				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("body");
 			}
 			
 		});

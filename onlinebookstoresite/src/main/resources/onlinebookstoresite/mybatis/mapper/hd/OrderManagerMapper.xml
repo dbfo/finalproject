@@ -37,7 +37,7 @@
 	</select>	
 	
 	<select id="getbcount" parameterType="hashmap" resultType="int">
-		select bcount from paymentbook where btype=1 and bnum=#{bnum}
+		select bcount from paymentbook where btype=1 and bnum=#{bnum} and bpaynum=#{bpaynum}
 	</select>
 	
 	<!-- 반품신청 -->
