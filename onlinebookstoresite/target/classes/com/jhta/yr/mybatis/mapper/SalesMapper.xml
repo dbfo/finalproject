@@ -5,6 +5,7 @@
 <mapper namespace="com.jhta.yr.mybatis.mapper.SalesMapper">
 	
 	
+<!-- 	test -->
 	<sql id="daySearch">			
 		<if test="startDate == null or startDate == '' ">
 			TRUNC(${field}) BETWEEN TO_DATE(sysdate-3) AND TO_DATE(sysdate) 
