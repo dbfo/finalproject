@@ -26,7 +26,7 @@ public class MembersPointDao {
 	}
 	
 	//회원 포인트 총 갯수 가져오기
-	public int getRowPointCount(int mnum) {
-		return sqlSession.selectOne(NAMESPACE+".getRowPointCount", mnum);
+	public int getRowPointCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".getRowPointCount", map);
 	}
 }

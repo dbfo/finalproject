@@ -106,6 +106,7 @@ public class SellerBoardConteoller {
 		model.addAttribute("obqnum", obqnum);
 		return "redirect:/seller/qnadetail";
 	}
+	//===========================================================
 	
 	//====================리뷰========================
 	//중고판매자 리뷰페이지
@@ -119,7 +120,7 @@ public class SellerBoardConteoller {
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		List<SellerReviewJoinVo> list=service.getObreviewList(map);//리뷰리스트
-		//판매자 평점
+		//판매자 총 평점
 		Double reviewAvg=service.getReviewAvg((Integer)session.getAttribute("snum"));
 		
 		model.addAttribute("list", list);

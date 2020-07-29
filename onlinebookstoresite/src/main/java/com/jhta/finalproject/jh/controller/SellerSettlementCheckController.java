@@ -19,7 +19,7 @@ public class SellerSettlementCheckController {
 	@Autowired
 	private SellerSettlmentService service;
 	
-	
+	//중고판매자 정산조회 메소드
 	@RequestMapping("/seller/settlementCheck")
 	public String settlementCheckList(
 			Model model,HttpSession session,
