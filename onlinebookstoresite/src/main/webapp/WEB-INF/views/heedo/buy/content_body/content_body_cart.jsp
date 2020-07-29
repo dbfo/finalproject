@@ -578,9 +578,8 @@
 	}
 	//각행 체크버튼 체크/비체크시.
 	$(document).on('change','.checkTd',function(){ 
-		var i=0;
-		if($(this).is(":checked")){
-			i++
+		var shipfee=0;
+		if($(this).is(":checked")){		
 			var checkTd=$(this)
 			var tr=checkTd.parent().parent();
 			var td=tr.children();
@@ -592,14 +591,14 @@
 			var total_point=Number(orgtotal_point)+Number(point);
 			$("#total_value,#new_total_value").text(total_value);
 			$("#total_point").text(total_point);
+			
 			if(total_value>=50000){
+				shipfee=0;
 				$("#new_total_shipfee").text(shipfee);
 			}else{
 				shipfee=2500;
 				$("#new_total_shipfee").text(shipfee);
 			}
-			
-			
 			var final_value=total_value+shipfee;
 			$("#final_payment_newvalue").text(final_value)
 		}else{
@@ -615,22 +614,29 @@
 			$("#total_value,#new_total_value").text(total_value);
 			$("#total_point").text(total_point);
 			if(total_value>=50000){
+				shipfee=0;
 				$("#new_total_shipfee").text(shipfee);
 			}else{
 				shipfee=2500;
 				$("#new_total_shipfee").text(shipfee);
 			}
-			
-			
 			var final_value=total_value+shipfee;
 			$("#final_payment_newvalue").text(final_value)
 		}	
+		checkValue();
+	});
+	var checkValue=function(){
+		var i=0;
+		$('.checkTd').each(function(){
+			if($(this).is(":checked")){
+				i++;
+			}
+		});
 		if(i==0){
 			$("#new_total_shipfee").text(0);
-			$("#final_payment_newvalue").text(0)
+			$("#final_payment_newvalue").text(0);
 		}
-	});
-
+	}
 	//전체체크 버튼.
 	$("#allcheck").change(function(){
 			if($("#allcheck").is(":checked")){

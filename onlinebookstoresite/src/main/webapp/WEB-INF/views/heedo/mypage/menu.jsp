@@ -29,7 +29,7 @@
 	<tr>
 		<td>
 			<a class="menuAtag" href="#">- 포인트내역</a><br>
-			<a class="menuAtag" href="#">- 예치금내역/신청</a>
+			<a class="menuAtag" href="${cp }/mypage/depositpage">- 예치금내역/신청</a>
 		</td>
 	</tr>
 	<tr>

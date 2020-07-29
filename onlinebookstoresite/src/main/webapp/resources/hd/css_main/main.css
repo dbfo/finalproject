@@ -52,6 +52,11 @@
 	  maxwidth:10rem;
 	  height:100%;
 }
+#content-new-card,#content-best-card{
+	left: 22px;
+    position: relative;
+	
+}
 #bestprev img, #bestnext img, #newprev img,#newnext img{
 	width:100%;
 	height:auto;

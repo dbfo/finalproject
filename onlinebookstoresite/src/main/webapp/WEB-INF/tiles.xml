@@ -198,15 +198,8 @@
 			value="/WEB-INF/views/admin/yr/sales/usedbookchart.jsp" />
 	</definition>
 
+
 	<!-- ///////////////////////지호/////////////////////////////// -->
-	<!-- 중고판매자 등록 안했을 경우 인증관련 -->
-	<definition name=".seller.certified" extends=".main">
-		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmail.jsp"/>
-	</definition>
-	<definition name=".seller.emailInjeung" extends=".main">
-		<put-attribute name="content" value="/WEB-INF/views/jiho/sellerEmail/sellerEmailCk.jsp"/>
-	</definition>
-	
 	<!-- 중고판매자 tiles설정-->
 	<definition name=".seller" template="/WEB-INF/views/jiho/sellerLayout.jsp">
 		<put-attribute name="sellerHeader" value="/WEB-INF/views/jiho/sellerHeader.jsp"/>
@@ -239,25 +232,10 @@
 	<definition name=".seller.settlementCheck" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/settlementCheck/sellerSettlementCheck.jsp"/>
 	</definition>
-	<!-- 중고상품 게시판(QnA) 관련 -->
+	<!-- 중고상품 게시판(QnA/리뷰) 관련 -->
 	<definition name=".seller.qna" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
 	</definition>
-	<definition name=".seller.qnadetail" extends=".seller">
-		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaDetail.jsp"/>
-	</definition>
-	<definition name=".seller.qnaupdate" extends=".seller">
-		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaUpdate.jsp"/>
-	</definition>
-	<!-- 중고상품 게시판(리뷰) 관련 -->
-	<definition name=".seller.review" extends=".seller">
-		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerReview.jsp"/>
-	</definition>
-	<!-- 회원 포인트 관련 -->
-	<definition name=".point" extends=".mypage">
-		<put-attribute name="content_body" value="/WEB-INF/views/jiho/point/members_point.jsp"/>
-	</definition>
-	
 	
 	<!-- ////////////////////////////////////////////////////////////////////////// -->
 	
@@ -305,6 +283,10 @@
 	
 	<definition name=".qnadetail" extends=".mypage">
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/qnadetail.jsp"/>
+	</definition>
+	
+	<definition name=".depositpage" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/deposithistory.jsp"/>
 	</definition>
 	
 	<!-- 장바구니. -->
@@ -391,5 +373,5 @@
 	<definition name=".*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}.jsp"/>				
 	</definition>
-	
+	<!-- ////////////////////////////////////////////////////////////////////////////// -->
 </tiles-definitions>
