@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.jh.service.MembersPointService;
 import com.jhta.finalproject.jh.vo.MembersPointVo;
@@ -19,8 +21,9 @@ import com.jhta.page.util.PageUtil;
 public class MembersPointController {
 	@Autowired
 	private MembersPointService service;
-	
-	@RequestMapping("/members/point")
+	//포인트내역
+	@RequestMapping(value="/members/point",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+	@ResponseBody
 	public String membersPoint(HttpSession session,Model model,
 			@RequestParam(value="pregdate",defaultValue = "0")int pregdate,
 			@RequestParam(value="pageNum",defaultValue = "1")int pageNum) {
