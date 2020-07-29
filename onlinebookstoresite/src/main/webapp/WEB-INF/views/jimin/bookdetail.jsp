@@ -66,16 +66,27 @@
 				</div>
 			</div>
 			<div id="detailbtn">
-				<button class="btn btn-success btn-lg btn-block"><a href="#">구매하기</a></button>
+				<button class="btn btn-success btn-lg btn-block" id="buynow"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
 				<br>
 				<br>
-				<button class="btn btn-success btn-lg btn-block"><a href="#">장바구니</a></button>
+				<button class="btn btn-success btn-lg btn-block" id="cartBtn">장바구니</button>
+				<input type="hidden" id="bnum" value="${bookvo.bnum} ">
 				<br>
 				<br>
-				<span style="text-align: center;"><strong>재고수량:</strong><strong style="color: red;">${bcnt }</strong></span>
+				<span style="text-align: center;"><strong>재고수량:</strong></span>
+<%-- 				<span style="color: red;" id="bcnt1" value="${bcnt }">${bcnt }</span> --%>
+				<input type="text" readonly="readonly" style="width:100px; border-style: none; color: red;" id="bcnt1" value="${bcnt }">
+				
 				<br>
 				<br>
-				<input type="text" style="width: 200px;" id="bcnt">
+<!-- 				<input type="text" style="width: 200px;" id="bcnt"> -->
+				<form>
+<!-- 					<input style="width: 30px; height:30px;text-align: center;" type="button" value="-" onClick="javascript:this.form.amount.value--;"> -->
+<!-- 					<input style="width: 30px;height:30px;text-align: center;" type="button" value="+" onClick="javascript:this.form.amount.value++;"> -->
+					<input style="width: 100px;height:30px;text-align: center;" type="text" name="amount" id="bcnt2" value="1">
+					<input style="width: 30px; height:30px;text-align: center;" type="button" value="-" onClick="return cntm()">
+					<input style="width: 30px;height:30px;text-align: center;" type="button" value="+" onClick="return cntplus()">
+				</form>
 			</div>
 		</div>
 		
@@ -165,7 +176,7 @@
 					<form id="insertform" method="GET" action="${cp }/enrllReview">
 					
 						<input type="hidden" name="bnum" value="${bnum}">
-						<input type="hidden" name="mnum" value="4">
+<!-- 						<input type="hidden" name="mnum" value="4"> -->
 						
 						<div style=" width: 1110px;background-color:#f9f9f9 ;padding: 12px 20px 19px 20px; overflow: hidden; border: 2px solid #f9f9f9">
 							<span style="font-size: 20px;"><strong>독자서평 쓰기</strong></span>
@@ -317,4 +328,115 @@
 // 			alert(data);
 // 		});
 // 	});
+
+//    $("#bcnt2").on("change", function() {
+
+//        var buycnt =parseInt( $(this).val());
+//        var remaincnt=$("#bcnt1").val();
+//        console.log(remaincnt );
+//        console.log(buycnt );
+//        if(buycnt>remaincnt){
+    	   
+//           alert("재고수량 보다 작은 수량만 구매 가능합니다!");
+//           $("#bcnt2").val('1');
+//           $("#bcnt2").focus();
+          
+//        }else if(buycnt==null && buycnt==""){          
+//           alert("수량을 반드시 입력해주세요!");
+//           $("#bcnt2").val('1');
+//           $("#bcnt2").focus();
+          
+//        }else if(buycnt.keyCode<48 || buycnt.keyCode>57){
+//           alert("숫자만 입력해주세요!");
+//           $("#bcnt2").val('1');
+//           $("#bcnt2").focus();
+//        }
+//    });
+   var buycnt =$("#bcnt2").val();
+   function cntplus(){
+	   
+       var remaincnt=$("#bcnt1").val();
+       console.log(remaincnt );
+       buycnt++;
+       console.log(buycnt );
+	   $("#bcnt2").val(buycnt);
+       if(buycnt>remaincnt){
+    	   
+           alert("재고수량 보다 작은 수량만 구매 가능합니다!");
+           $("#bcnt2").val(remaincnt);
+           $("#bcnt2").focus();
+           
+        }else if(buycnt==null && buycnt==""){          
+           alert("수량을 반드시 입력해주세요!");
+           $("#bcnt2").val('1');
+           $("#bcnt2").focus();
+           
+        }else if(buycnt.keyCode<48 || buycnt.keyCode>57){
+           alert("숫자만 입력해주세요!");
+           $("#bcnt2").val('1');
+           $("#bcnt2").focus();
+        }
+      return true;
+   };
+   function cntm(){
+	   
+       var remaincnt=$("#bcnt1").val();
+       console.log(remaincnt );
+       buycnt--;
+       console.log(buycnt );
+	   $("#bcnt2").val(buycnt);
+       if(buycnt>remaincnt){
+    	   
+           alert("재고수량 보다 작은 수량만 구매 가능합니다!");
+           $("#bcnt2").val(remaincnt);
+           $("#bcnt2").focus();
+           
+        }else if(buycnt==null && buycnt==""){          
+           alert("수량을 반드시 입력해주세요!");
+           $("#bcnt2").val('1');
+           $("#bcnt2").focus();
+        }else if(buycnt<1){
+            alert("수량을 1개 이상 입력해주세요!");
+            $("#bcnt2").val('1');
+            $("#bcnt2").focus();
+        	 
+        }else if(buycnt.keyCode<48 || buycnt.keyCode>57){
+           alert("숫자만 입력해주세요!");
+           $("#bcnt2").val('1');
+           $("#bcnt2").focus();
+        }
+      return true;
+   };
+   
+//    $(document).on('click','#gocart',function(){
+// 		var form=$('<form></form>');
+// 		form.attr('action','${cp}/order/usedorder');
+// 		form.attr('method','post');
+// 		form.appendTo('body');
+// 		var sid=$(this).data('sid');
+// 		$("."+sid+"_checkTd").each(function(){
+// 			if($(this).is(':checked')){
+// 				var cartNumValue=$(this).data('cartnum');
+// 				var cartNum=$("<input type='hidden' value="
+// 						+cartNumValue+" name='cartNum'>");
+// 				form.append(cartNum);
+// 			}
+// 		});
+// 		form.submit();
+// 	})
+   
+	$("#cartBtn").click(function(){
+		var bnum=$("#bnum").val();
+		var buycount=$("#bcnt2").val();
+		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount="+buycount, function(data){
+			console.log("callback");
+			if(data=="success"){
+				alert("장바구니에 담았습니다.");
+			}else{
+				alert("로그인을 해주세요.");
+				location.href = "${cp }/login";
+			}
+		});
+	});
+
 </script>

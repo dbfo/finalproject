@@ -98,7 +98,7 @@ public class BooksService {
 	public List<BooksVo> sbooklist(int num) {
 		return dao.sbooklist(num);
 	}
-	public List<BooksVo> sbooklist1(HashMap<String,Object> map) {
+	public List<AllListVo> sbooklist1(HashMap<String,Object> map) {
 		return dao.sbooklist1(map);
 	}
 	public List<AllListVo> newlist(HashMap<String, Object> map){

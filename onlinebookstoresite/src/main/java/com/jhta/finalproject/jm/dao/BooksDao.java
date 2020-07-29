@@ -96,7 +96,7 @@ public class BooksDao {
 	public List<BooksVo> sbooklist(int num) {
 		return sqlSession.selectList(NAMESPACE + ".sbooklist",num);
 	}
-	public List<BooksVo> sbooklist1(HashMap<String,Object> map) {
+	public List<AllListVo> sbooklist1(HashMap<String,Object> map) {
 		return sqlSession.selectList(NAMESPACE + ".sbooklist1",map);
 	}
 	

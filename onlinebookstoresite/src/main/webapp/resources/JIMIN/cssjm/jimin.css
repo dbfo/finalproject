@@ -17,7 +17,8 @@
 #search{
 	width:280px;
 	position: relative;
-	margin-right: 1px;
+	float:right;
+	margin-right: 415px;
 	display: inline-block;
 	
 }
@@ -31,6 +32,7 @@
 	height:200px;
 	display: inline-block;
 	margin-left:1px;
+	
 }
 #image{
 	width:150px;
@@ -60,6 +62,9 @@
 	width: 400px;
 }
 .review_score{
+	width: 400px;
+}
+.status{
 	width: 400px;
 }
 
@@ -124,6 +129,7 @@ a:visited {text-decoration: none; color: white;}
 	float: right;
 	margin-right: 65px;
 	margin-top: 50px;
+	text-align: center;
 }
 #detailcontent{
 	width:900px;

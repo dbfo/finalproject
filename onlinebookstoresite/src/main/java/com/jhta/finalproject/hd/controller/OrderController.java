@@ -132,6 +132,9 @@ public class OrderController {
 	//주문/결제 완료페이지로 이동함.
 		@RequestMapping(value="/order/resultorder",method=RequestMethod.POST)
 		public String orderCompletePage(int bpaynum,String method,String separate,HttpSession session,Model model) {
+			
+			System.out.println("gggggggggggggggggggggggggggggggggggggggggggggggggg");
+			
 			int mnum=0;
 			String smnum=(String)session.getAttribute("mnum");
 			if(smnum!=null) {

@@ -52,6 +52,13 @@
 		<typeAlias type="com.jhta.finalproject.jm.vo.ImgVo" alias="jmimg"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.ListimgVo" alias="listimg"/>
 		<typeAlias type="com.jhta.finalproject.jm.vo.AllListVo" alias="alllist"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.CartVo" alias="cart"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldAllListVo" alias="oldall"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldCartVo" alias="oldcart"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.OldBreviewVo" alias="obreviewc"/>
+		<typeAlias type="com.jhta.finalproject.jm.vo.ObQnaInsertVo" alias="obqnainsert"/>
+		
+		
 	<!-- /////////////// -->
 	
 	<!-- 연주 -->
@@ -113,6 +120,7 @@
     
     <!-- ////지민//// -->
     <mapper resource="onlinebookstoresite/mybatis/mapper/jm/BooksMapper.xml"/>
+    <mapper resource="onlinebookstoresite/mybatis/mapper/jm/OldBooksMapper.xml"/>
 
 	<!-- 연주 -->
 	<mapper resource="com/jhta/yj/mybatis/mapper/BooksMapper.xml" />
