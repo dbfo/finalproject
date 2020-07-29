@@ -31,7 +31,7 @@
 		    from (
 		        select * 
 		        from point 
-		        where mnum=#{mnum} and tranpoint NOT in(0) <include refid="search"/>
+		        where mnum=#{mnum} and tranpoint NOT in(0)
 		        order by pregdate desc)a)
 		<![CDATA[
 		where rnum>=#{startRow} and rnum<=#{endRow}
@@ -39,6 +39,6 @@
 	</select>
 	<!-- 포인트 총 갯수 -->
 	<select id="getRowPointCount" resultType="int" parameterType="int">
-		select nvl(count(*),0) count from point where mnum=#{mnum} and tranpoint NOT in(0) <include refid="search"/>
+		select nvl(count(*),0) count from point where mnum=#{mnum} and tranpoint NOT in(0)
 	</select>
 </mapper>

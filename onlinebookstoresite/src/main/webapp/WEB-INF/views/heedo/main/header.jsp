@@ -81,7 +81,7 @@
 						<li><a href="#">모임관리</a></li>
 						<li><a href="${cp }/seller">문의게시판</a></li>
 					</ul></li>
-					
+				<li><a href="${cp }/adminmain">관리자 페이지</a></li>
 			</ul>
 		</div>
 	</nav>

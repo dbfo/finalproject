@@ -15,7 +15,7 @@ public class SellerFeepayJoinVo {
 	private Date bpaydate;
 	private int bstatus;
 	private int ordermoney;
-	private int mothodpayment;
+	private int methodpayment;
 	private String receiver;
 	private int mnum;
 	private int delfee;
@@ -30,7 +30,7 @@ public class SellerFeepayJoinVo {
 	public SellerFeepayJoinVo() {}
 	
 	public SellerFeepayJoinVo(int bpaynum, int snum, int btype, int bcount, String baddr, String bphone,
-			int bfinalmoney, Date borderdate, Date bpaydate, int bstatus, int ordermoney, int mothodpayment,
+			int bfinalmoney, Date borderdate, Date bpaydate, int bstatus, int ordermoney, int methodpayment,
 			String receiver, int mnum, int delfee, String mname, int obcnum, int feepay, int settlement, Date feedate,
 			int bocomstatus, List<SellerOldbooksVo> sellerOldbooksVo) {
 		super();
@@ -45,7 +45,7 @@ public class SellerFeepayJoinVo {
 		this.bpaydate = bpaydate;
 		this.bstatus = bstatus;
 		this.ordermoney = ordermoney;
-		this.mothodpayment = mothodpayment;
+		this.methodpayment = methodpayment;
 		this.receiver = receiver;
 		this.mnum = mnum;
 		this.delfee = delfee;
@@ -146,12 +146,12 @@ public class SellerFeepayJoinVo {
 		this.ordermoney = ordermoney;
 	}
 
-	public int getMothodpayment() {
-		return mothodpayment;
+	public int getMethodpayment() {
+		return methodpayment;
 	}
 
-	public void setMothodpayment(int mothodpayment) {
-		this.mothodpayment = mothodpayment;
+	public void setMethodpayment(int methodpayment) {
+		this.methodpayment = methodpayment;
 	}
 
 	public String getReceiver() {
@@ -233,4 +233,6 @@ public class SellerFeepayJoinVo {
 	public void setSellerOldbooksVo(List<SellerOldbooksVo> sellerOldbooksVo) {
 		this.sellerOldbooksVo = sellerOldbooksVo;
 	}
+	
+	
 }
