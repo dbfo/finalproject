@@ -25,7 +25,7 @@
 							<td style="width:7%">${bvo.bcount }</td>
 							<td style="width:15%">${bvo.bprice }원</td>
 							<td style="width:15%">${bvo.point }</td>
-							<td><input class='checkTd' type='checkbox' data-bnum="${bvo.bnum }"></td>
+							<td><input class='checkTd' type='checkbox' data-bnum="${bvo.bnum }" checked="checked"></td>
 						</tr>
 					</c:forEach>
 					
@@ -295,8 +295,7 @@
 	});
 	//상품리스트쪽 버튼 클릭시.
 	$(".orderbtn").click(function(){
-		
-	
+
 		var apply=$(this).data('apply');
 		
 		$("#confirmbtn_modal").data('apply',apply)
@@ -315,7 +314,7 @@
 			if($(this).is(":checked")){
 				i++;
 				var bnum=$(this).data("bnum")
-				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("confirm_modal_body");
+				$("<input type='hidden' class='bnumgroup' value="+bnum+">").appendTo("body");
 			}
 			
 		});
@@ -335,8 +334,10 @@
 		var apply=$(this).data('apply');
 		var bnum=[];
 		$(".bnumgroup").each(function(){
+			console.log($(this).val());
 			bnum.push($(this).val())
 		});
+		console.log(bnum);
 		$.ajax({
 			url:"/finalproject/order/manage",
 			data:{bstatus:bstatus,bpaynum:bpaynum,apply:apply,bnum:bnum},
@@ -346,6 +347,11 @@
 			success:function(data){
 				if(data.result){	
 					$("#resultModal").modal('show');
+					var form=$("<form></form>")
+					form.attr('method','post');
+					form.attr('action','${cp}/mypage/orderhistory');
+					form.appendTo('body');
+					form.submit();
 				}
 			}
 		})

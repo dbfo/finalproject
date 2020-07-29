@@ -44,8 +44,11 @@ public class OrderManagerService {
 		dao.orderCancel(map);
 		String [] bnum=(String[])map.get("bnum");
 		for(int i=0;i<bnum.length;i++) {
+			System.out.println("서비스안 apply:"+map.get("apply"));
 			map.put("bnum", bnum[i]);
+			System.out.println("서비스안 bnum:"+bnum[i]);
 			int bcount=dao.getbcount(map);
+			System.out.println("서비스안 bcount :"+bcount);
 			map.put("bcount", bcount);
 			dao.inputrefund(map);
 		}

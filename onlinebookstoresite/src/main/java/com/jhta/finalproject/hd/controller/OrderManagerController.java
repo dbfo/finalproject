@@ -30,6 +30,7 @@ public class OrderManagerController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
+		System.out.println("bnum:"+bnum);
 		try {
 			JSONObject json=new JSONObject();
 			boolean result=false;
