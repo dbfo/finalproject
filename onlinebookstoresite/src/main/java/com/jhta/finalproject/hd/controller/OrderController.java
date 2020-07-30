@@ -42,7 +42,7 @@ public class OrderController {
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("datalist", data);
 		List<UsedOrderListVo> list=service.usedorderlist(map);
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/jh/jhobupload";
 		int totalprice=0;
 		HashMap<String, Object> shipmap=new HashMap<String, Object>();
 		for(UsedOrderListVo vo:list) {
@@ -157,7 +157,7 @@ public class OrderController {
 			String roadaddr="("+addr1+") "+addr2+" "+addr5+" "+addr4;
 			vo.setJibunaddr(jibunaddr);
 			vo.setRoadaddr(roadaddr);
-			String path=session.getAttribute("cp")+"/resources/hd/image";
+			String path=session.getAttribute("cp")+"/resources/imgUpload";
 			if(separate.equals("new")) {
 				List<OrderCompleteListVo>list=service.getPaymentBook(bpaynum);
 				int totalpoint=0;
@@ -215,7 +215,7 @@ public class OrderController {
 		//주문완료 메소드
 		@RequestMapping(value="/order/complete",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 		@ResponseBody
-		public String orderComplete_card(@RequestParam(value="cartNum")String[]cartNum, 
+		public String orderComplete_card(@RequestParam(value="cartNum",required=false)String[]cartNum, 
 				@RequestParam(value="bnum")String[]bnum,
 				  @RequestParam(value="bcount")String[]bcount, @RequestParam(value="point")String[]point,
 				  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
@@ -227,11 +227,14 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
+			System.out.println("컨트롤러 실행!!!");
 			int orderprice=pay_price+usepoint;
 			Map<String, Object>map=new HashMap<String, Object>();
 			map.put("mnum",mnum);
-			if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
-				map.put("cartNum",cartNum);
+			if(cartNum!=null) {
+				if(cartNum[0]!="0") { //장바구니있는경우는 장바구니에서도 삭제해줘야하기때문에.
+					map.put("cartNum",cartNum);
+				}
 			}
 			map.put("separate",separate);
 			//가상계좌일때만 추가되는 map 값들
@@ -344,7 +347,7 @@ public class OrderController {
 		//https://fblens.com/entry/JAVA-Array%EB%A5%BC-List%EB%A1%9C-List%EB%A5%BC-Array%EB%A1%9C
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("datalist", data);
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/imgUpload";
 		List<OrderListResultVo> list=service.inputorderlist(map);
 		int totalprice=0;
 		int totalpoint=0;

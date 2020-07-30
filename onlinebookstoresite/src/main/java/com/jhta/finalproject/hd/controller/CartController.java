@@ -32,7 +32,7 @@ public class CartController {
 	@ResponseBody
 	public String usedlist(HttpSession session,Model model) {
 		String smnum=(String)session.getAttribute("mnum");
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/jh/jhobupload";
 		int mnum=0;
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
@@ -107,7 +107,7 @@ public class CartController {
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/imgUpload";
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mnum", mnum);
 		List<CartListVo> list=service.cartlist(map);
