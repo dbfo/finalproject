@@ -47,14 +47,8 @@
 	
 	<div id="listwrap">
 	<div id="image">
-			<c:if test="${empty vo.imgsavefilename}">
 				<a href="bdetail?bnum=${vo.bnum }"> <img
-				src="${cp }/resources/JIMIN/images/광규2.png" id="thumbnail">
-				</a>			
-			</c:if>
-			
-				<a href="bdetail?bnum=${vo.bnum }"> <img
-				src="${cp }/resources/JIMIN/images/${vo.imgsavefilename}" id="thumbnail">
+				src="${cp }/resources/imgUpload/${vo.imgsavefilename}" id="thumbnail">
 				</a>
 
 	</div>
