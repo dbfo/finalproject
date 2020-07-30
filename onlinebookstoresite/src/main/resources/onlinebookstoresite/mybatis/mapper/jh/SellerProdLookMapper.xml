@@ -114,5 +114,12 @@
 	<select id="delImgInfo" parameterType="int" resultType="img">
 		select * from img where bnum=#{bnum}
 	</select>
-
+	<!-- 중고책 해당하는 답변삭제 -->
+	<delete id="obqanswerdel" parameterType="int">
+		delete from obqanswer where obqnum=(select obqnum from obqna where obnum=#{obnum})
+	</delete>
+	<!-- 중고책 문의사항 삭제 -->
+	<delete id="obqnadel" parameterType="int">
+		delete from obqna where obnum=#{obnum}
+	</delete>
 </mapper>

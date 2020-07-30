@@ -66,7 +66,7 @@
 	
 	<!-- 중고판매자 디테일:상품 썸네일 이미지 가져오기 -->
 	<select id="getQnaDetailImg" resultType="img" parameterType="int">
-		select * from img where bnum=#{bnum} and thumbnail=1
+		select * from img where bnum=#{bnum} and thumbnail=1 and btype=2
 	</select>
 	<!-- 문의사항 답변하기 -->
 	<insert id="insertObqanswer" parameterType="hashmap">

@@ -77,8 +77,10 @@ public class SellerProdLookService implements SellerProdUpdate{
 	//상품삭제하는 메소드
 	@Override
 	public int oldbookDel(int obnum) {
-		dao.oldbookDel(obnum);
-		dao.oldbookImgDel(obnum);
+		dao.obqanswerdel(obnum); //중고책 답변 삭제
+		dao.obqnadel(obnum);  //중고책 문의 삭제
+		dao.oldbookDel(obnum);  //중고책 상품삭제
+		dao.oldbookImgDel(obnum);  //중고책 이미지 삭제
 		return 1;
 	}
 	

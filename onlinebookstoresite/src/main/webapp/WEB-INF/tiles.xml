@@ -243,6 +243,16 @@
 	<definition name=".seller.qna" extends=".seller">
 		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQna.jsp"/>
 	</definition>
+	<definition name=".seller.qnadetail" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaDetail.jsp"/>
+	</definition>
+	<definition name=".seller.qnaupdate" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerQnaUpdate.jsp"/>
+	</definition>
+	<!-- 중고상품 게시판(리뷰) 관련 -->
+	<definition name=".seller.review" extends=".seller">
+		<put-attribute name="sellerContent" value="/WEB-INF/views/jiho/sellerBoard/sellerReview.jsp"/>
+	</definition>
 	<!-- 회원 포인트 조회 관련 -->
 	<definition name=".point" extends=".mypage">
 		<put-attribute name="content_body" value="/WEB-INF/views/jiho/point/members_point.jsp"/>
@@ -397,6 +407,6 @@
 	<definition name=".*.*" extends=".main">		
 		<put-attribute name="content" value="/WEB-INF/views/jimin/{1}/{2}.jsp"/>				
 	</definition>
-	<!-- ////////////////////////////////////////////////////////////////////////////// -->
+	
 </tiles-definitions>
 

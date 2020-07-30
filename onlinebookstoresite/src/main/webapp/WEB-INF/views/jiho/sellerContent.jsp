@@ -38,7 +38,7 @@
 					<td><a href="${cp }/seller/settlementCheck">${getObcompleteCount2}개</a></td>
 				</tr>
 				<tr>
-					<th><a href="${cp }/seller/qnalist"><span style="color: black;">묻고답하기(Q&A)</span></a></th>
+					<th><a href="${cp }/seller/qnalist"><span style="color: black;">미답변 Q&A</span></a></th>
 					<td><a href="${cp }/seller/qnalist">${getMainQnaCount }개</a></td>
 				</tr>
 				<tr>

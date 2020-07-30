@@ -74,6 +74,16 @@ public class SellerProdLookDao {
 		List<SellerImgVo> list=sqlSession.selectList(NAMESPACE+".delImgInfo", obnum);
 		return list;
 	}
+	//중고상품 문의글 삭제
+	public int obqanswerdel(int obnum) {
+		return sqlSession.delete(NAMESPACE+".obqanswerdel", obnum);
+	}
+	//중고상품 문의글 답변 삭제
+	public int obqnadel(int obnum) {
+		return sqlSession.delete(NAMESPACE+".obqnadel", obnum);
+	}
+	
+	//-----------------------------페이징----------------------------------
 	//글갯수 구하기
 	public int oldbookPageCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE+".oldbookPageCount", map);
