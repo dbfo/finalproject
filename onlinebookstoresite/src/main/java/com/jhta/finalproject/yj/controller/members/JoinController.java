@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +29,23 @@ public class JoinController {
 	}
 
 	// 아이디 중복체크
-	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinIdCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public int idCheck(@RequestParam("mid") String mid) {
-		return service.idCheck(mid);
+	public String idCheck(@RequestParam("mid") String mid) {
+		int result = service.idCheck(mid);
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		return json.toString();
 	}
 
 	// 이메일 중복체크
-	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinEmailCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public int emailCheck(@RequestParam("email") String email) {
-		return service.emailCheck(email);
+	public String emailCheck(@RequestParam("email") String email) {
+		int result = service.emailCheck(email);
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		return json.toString();
 	}
 
 	@PostMapping("/join")
@@ -51,7 +58,7 @@ public class JoinController {
 
 			String email1 = req.getParameter("email1");
 			String email2 = req.getParameter("email2");
-			String email = email1 + "@" + email2;
+			String email = email1 + email2;
 
 			String phone1 = req.getParameter("phone1");
 			String phone2 = req.getParameter("phone2");
@@ -87,7 +94,7 @@ public class JoinController {
 		if (n > 0) {
 			return ".main";
 		} else {
-			return ".main";
+			return ".join";
 		}
 	}
 }

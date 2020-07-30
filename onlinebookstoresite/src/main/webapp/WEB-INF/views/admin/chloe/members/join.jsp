@@ -6,106 +6,289 @@
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-<div class="container-fluid">
-	<form action="${pageContext.request.contextPath }/join" method="post">
-		<table>
-			<tr>
-				<td><label for="mname">이름</label></td>
-				<td>
-					<input type="text" name="mname" id="mname"> 
+<style type="text/css">
+#joinheader {
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#joinwrapper {
+	position: relative;
+	height: 100%;
+}
+
+#joincontent {
+	width: 800px;
+	margin-left: 30%;
+}
+
+.joinlabel {
+	margin: 19px 0 8px;
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.box {
+	display: block;
+	width: 100%;
+	height: 51px;
+	border: solid 1px #dadada;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+}
+
+.int {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 29px;
+	border: none;
+	background: #fff;
+	font-size: 15px;
+}
+
+.box.int_pass {
+	padding-right: 40px;
+}
+
+.box.int_pass_check {
+	padding-right: 40px;
+}
+
+.pswdImg {
+	width: 18px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	margin-top: -10px;
+}
+
+#email_wrap, #phone_wrap, #addr_wrap1, #addr_wrap2, #addr_wrap3,
+	#bir_wrap {
+	display: table;
+	width: 100%;
+}
+
+#email_1 {
+	display: table-cell;
+	width: 90px;
+}
+
+#email_2 {
+	display: table-cell;
+	width: 100px;
+}
+
+#email_3 {
+	display: table-cell;
+	width: 50px;
+}
+
+#phone_1, #phone_2, #phone_3 {
+	display: table-cell;
+	width: 50px;
+}
+
+#addrBtn {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	margin-top: -15px;
+}
+
+#addr_1, #addr_2, #addr_3, #addr_4, #addr_5 {
+	display: table-cell;
+	width: 50px;
+}
+
+#birthday-y-ko, #birthday-m-ko, #birthday-d-ko {
+	display: table-cell;
+	width: 147px;
+}
+
+.btn_area {
+	margin: 30px 0 91px;
+}
+
+#sbm {
+	width: 100%;
+	padding: 21px 0 17px;
+	border: 0;
+	cursor: pointer;
+	color: #fff;
+	background-color: #4C8625;
+	font-size: 20px;
+	font-weight: 400;
+	/* 	font-family: Dotum, '돋움', Helvetica, sans-serif; */
+}
+</style>
+
+<div id="joinheader">
+	<div id="joinwrapper">
+		<div id="joincontent">
+			<img src="${pageContext.request.contextPath }/resources/jh/jhimages/회원가입로고_1.png" width="500px" height="225px">		
+			<form action="${pageContext.request.contextPath }/join" method="post">
+				<div>
+						<label class="joinlabel" for="mname">이름</label>
+					<span class="box int_id">
+						<input type="text" id="mname" name="mname" class="int">
+					</span>
 					<span id="nameCheck"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="mid">아이디</label></td>
-				<td>
-					<input type="text" name="mid" id="mid"> 
+				</div>
+				
+				<div>
+						<label class="joinlabel" for="mid">아이디</label>
+					<span class="box int_id">
+						<input type="text" id="mid" name="mid" class="int" maxlength="15">
+					</span>
 					<span id="idCheck"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="mpwd">비밀번호</label></td>
-				<td>
-					<input type="password" name="mpwd" id="mpwd"> 
+				</div>
+				
+				<div>
+						<label class="joinlabel" for="mpwd">비밀번호</label>
+					<span class="box int_pass">
+						<input type="password" id="mpwd" name="mpwd" class="int">
+						<img src="${pageContext.request.contextPath }/resources/img/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
+					</span>
 					<span id="pwdCheck1"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="mpwd2">비밀번호확인</label></td>
-				<td>
-					<input type="password" id="mpwd2"> 
+				</div>
+				
+				<div>
+						<label class="joinlabel" for="mpwd2">비밀번호 확인</label>
+					<span class="box int_pass_check">
+						<input type="password" id="mpwd2" class="int">
+						<img src="${pageContext.request.contextPath }/resources/img/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
+					</span>
 					<span id="pwdCheck2"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="email">이메일</label></td>
-				<td>
-					<input type="text" name="email1" id="email1"> @ 
-					<input type="text" name="email2" id="email2"> 
-					<select id="emailSelect">
-						<option value="">직접입력</option>
-						<option value="naver.com">naver.com</option>
-						<option value="hanmail.net">hanmail.net</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="google.com">google.com</option>
-						<option value="yahoo.co.kr">yahoo.co.kr</option>
-						<option value="korea.com">korea.com</option>
-						<option value="paran.com">paran.com</option>
-					</select> 
-					<span id="emailCheck"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><label>휴대폰번호</label></td>
-				<td>
-					<input type="text" name="phone1" id="phone1" size="4" maxlength="3"> - 
-					<input type="text" name="phone2" id="phone2" size="6" maxlength="4"> - 
-					<input type="text" name="phone3" id="phone3" size="6" maxlength="4"> 
-					<span id="phoneCheck"></span>
-				</td>
-			</tr>
-
-			<tr>
-				<td class="bgtd"><label>주소</label></td>
-				<td>
-					<input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="addr" onclick="sample4_execDaumPostcode()" size="10px" readonly="readonly"> 
-					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"> 
-					<br>
-					<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr" onclick="sample4_execDaumPostcode()" size="40px" readonly="readonly"> 
-					<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr" size="40px"> 
-					<span id="guide" style="color: #999; display: none"></span> 
-					<br> 
-					<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr" size="40px"> 
-					<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr" onclick="sample4_execDaumPostcode()" size="40px" readonly="readonly">
-				</td>
-			</tr>
-
-			<tr>
-				<td><label for="birthday-y-ko">생년월일</label></td>
-				<td>
-					<div class="form-wrap ui-check-date" data-term="100">
-						<select id="birthday-y-ko" title="연도 선택" data-default-option="연도 선택" data-unit="y" name="yyyy"></select> 
-						<select id="birthday-m-ko" title="달 선택" data-default-option="달 선택" data-unit="m" name="mm"></select> 
-						<select id="birthday-d-ko" title="일 선택" data-default-option="일 선택" data-unit="d" name="dd"></select>
+				</div>
+				
+				<div>
+						<label class="joinlabel" for="email1">이메일</label>
+					<div id="email_wrap">
+						<div id="email_1">
+							<span class="box">
+								<input type="text" name="email1" id="email1" class="int" placeholder="gobook1234"> 
+							</span>
+						</div>
+						<div id="email_2">
+							<span class="box"> 
+								<input type="text" name="email2" id="email2" class="int" placeholder="@gobook.com"> 
+							</span>
+						</div>
+						<div id="email_3">
+							<span class="box"> 
+								<select id="emailSelect" class="int">
+									<option value="">직접입력</option>
+									<option value="@naver.com">@naver.com</option>
+									<option value="@hanmail.net">@hanmail.net</option>
+									<option value="@gmail.com">@gmail.com</option>
+									<option value="@google.com">@google.com</option>
+									<option value="@yahoo.co.kr">@yahoo.co.kr</option>
+									<option value="@korea.com">@korea.com</option>
+									<option value="@paran.com">@paran.com</option>
+							</select>
+							</span>
+						</div>
 					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<td><label>성별</label></td>
-				<td>
-					<input type="radio" name="sex" value="F"> 여자 
-					<input type="radio" name="sex" value="M"> 남자
-				</td>
-			</tr>
-
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="가입" id="sbm">
-				</td>
-			</tr>
-		</table>
-	</form>
+					<span id="emailCheck"></span>
+				</div>
+				
+				<div>
+						<label class="joinlabel">휴대폰번호</label>
+					<div id="phone_wrap">
+						<div id="phone_1">
+							<span class="box">
+								<input type="text" name="phone1" id="phone1" size="4" maxlength="3" class="int" placeholder="010">
+							</span>
+						</div>
+						<div id="phone_2">
+							<span class="box">
+								<input type="text" name="phone2" id="phone2" size="6" maxlength="4" class="int" placeholder="1234">
+							</span>
+						</div>
+						<div id="phone_3">
+							<span class="box">
+								<input type="text" name="phone3" id="phone3" size="6" maxlength="4" class="int" placeholder="5678">
+							</span>
+						</div>
+					</div>
+					<span id="phoneCheck"></span>
+				</div>
+				
+				<div>
+						<label class="joinlabel">주소</label>
+					<div id="addr_wrap1">
+						<div id="addr_1">
+							<span class="box int_addr">
+								<input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="addr int" onclick="sample4_execDaumPostcode()" size="10px" readonly="readonly">
+								<input type="button" id="addrBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"> 
+							</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div id="addr_wrap2">
+						<div id="addr_2">
+							<span class="box">
+								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="addr int" onclick="sample4_execDaumPostcode()" size="40px" readonly="readonly"> 
+							</span>
+						</div>
+						<div id="addr_3">
+							<span class="box">
+								<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3" class="addr int" size="40px"> 
+							</span>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div id="addr_wrap3">
+						<div id="addr_4">
+							<span class="box">
+								<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr4" class="addr int" size="40px">  
+							</span>
+						</div>
+						<div id="addr_5">
+							<span class="box">
+								<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr5" class="addr int" onclick="sample4_execDaumPostcode()" size="40px" readonly="readonly">
+							</span>
+						</div>
+					</div>
+					<span id="guide" style="color: #999; display: none"></span>
+				</div>
+				
+				<div>
+						<label class="joinlabel" for="birthday-y-ko">생년월일</label>
+					<div id="bir_wrap">
+						<div class="form-wrap ui-check-date" data-term="100">
+							<span class="box int_id">
+								<select id="birthday-y-ko" title="연도 선택" data-default-option="연도 선택" data-unit="y" name="yyyy" class="int"></select> 
+								<select id="birthday-m-ko" title="달 선택" data-default-option="달 선택" data-unit="m" name="mm" class="int"></select> 
+								<select id="birthday-d-ko" title="일 선택" data-default-option="일 선택" data-unit="d" name="dd" class="int"></select>
+							</span>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+						<label class="joinlabel">성별</label>
+					<span class="box int_sex">
+						<input type="radio" name="sex" value="F"> 여자 
+						<input type="radio" name="sex" value="M"> 남자
+					</span>
+				</div>
+				
+				<div class="btn_area">
+					<button type="submit" id="sbm"><span>가입하기</span></button>
+				 </div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -114,12 +297,12 @@
 	// 이름 정규식
 	var namej = /^[가-힣]{2,6}$/;
 	//아이디 정규식
-	var idj = /^[a-z0-9]{5,10}$/;
+	var idj = /^[a-z0-9]{5,14}$/;
 	// 비밀번호 정규식
 	var pwdj = /^[A-Za-z0-9]{4,10}$/;
 	// 이메일 검사 정규식
 	var emailj1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/i;
-	var emailj2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var emailj2 = /^@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	// 휴대폰번호 정규식
 	var phonej1 = /^01[0|1|6|7|8|9]$/;
 	var phonej2 = /^[0-9]{3,4}$/;
@@ -138,12 +321,14 @@
 	// 아이디 중복체크 및 유효성 검사
 	$("input[name='mid']").blur(function() {
 		var mid = $("input[name='mid']").val();
+		console.log("mid:"+mid);
 		$.ajax({
-			url : "${pageContext.request.contextPath}/idCheck?mid=" + mid,
+			url : "${pageContext.request.contextPath}/joinIdCheck?mid=" + mid,
 			type : "get",
+			dataType : "json",
 			success : function(data) {
 				// 1 - 중복 / 0 - 사용가능
-				if (data == 1) {
+				if (data.result == 1) {
 					$("#idCheck").text("이미 사용 중인 아이디입니다.");
 					$("#idCheck").css("color", "red");
 					$("#sbm").attr("disabled", true);
@@ -155,8 +340,8 @@
 					$("#idCheck").text("5자 이상으로 입력해 주세요");
 					$("#idCheck").css("color", "red");
 					$("#sbm").attr("disabled", true);
-				} else if (mid.length > 10) {
-					$("#idCheck").text("10자 이하로 입력해 주세요");
+				} else if (mid.length > 14) {
+					$("#idCheck").text("14자 이하로 입력해 주세요");
 					$("#idCheck").css("color", "red");
 					$("#sbm").attr("disabled", true);
 				} else if (!(idj.test(mid))) {
@@ -192,14 +377,15 @@
 	function emailAjax() {
 		var email1 = $("#email1").val();
 		var email2 = $("#email2").val();
-		var email = email1 + "@" + email2;
+		var email = email1 + email2;
 
 		$.ajax({
-			url : "${pageContext.request.contextPath}/emailCheck?email=" + email,
+			url : "${pageContext.request.contextPath}/joinEmailCheck?email=" + email,
 			type : "get",
+			dataType : "json",
 			success : function(data) {
 				// 1 - 중복 / 0 - 사용가능
-				if (data == 1) {
+				if (data.result == 1) {
 					$("#emailCheck").text("이미 사용 중인 이메일입니다.");
 					$("#emailCheck").css("color", "red");
 					$("#sbm").attr("disabled", true);
@@ -241,6 +427,8 @@
 			$("#pwdCheck2").text("");
 		}
 	});
+	
+	//휴대폰번호
 	$("#phone1").blur(function() {
 		if (phonej1.test($(this).val())) {
 			$("#phoneCheck").text("");
@@ -269,6 +457,11 @@
 	// submit 버튼 눌렀을 때 한 번 더 유효성 체크
 	var invalArr = new Array(4).fill(false);
 	$("form").submit(function() {
+		
+		var email1 = $("#email1").val();
+		var email2 = $("#email2").val();
+		var email = email1 + email2;
+		
 		// 이름
 		if (namej.test($("#mname").val())) {
 			invalArr[0] = true;
@@ -314,9 +507,10 @@
 		//성별
 
 		if (All) { // 유효성 모두 통과하면
+			alert("고북 회원가입을 축하합니다! 로그인 후 이용해 주세요 :)");
 			return true;
 		} else {
-			alert("제대로 입력했는지 다시 한 번 확인해 주세요");
+			alert("제대로 입력이 되었는지 다시 한 번 확인해 주세요.");
 			return false;
 		}
 	});
