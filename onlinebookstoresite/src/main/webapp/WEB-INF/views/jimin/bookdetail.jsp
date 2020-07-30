@@ -66,7 +66,7 @@
 				</div>
 			</div>
 			<div id="detailbtn">
-				<button class="btn btn-success btn-lg btn-block" id="buynow"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
+				<button class="btn btn-success btn-lg btn-block" id="buynow"><a href="${cp }/order/directorder?bnum=${bookvo.bnum}&bcount=1">구매하기</a></button>
 				<br>
 				<br>
 				<button class="btn btn-success btn-lg btn-block" id="cartBtn">장바구니</button>
