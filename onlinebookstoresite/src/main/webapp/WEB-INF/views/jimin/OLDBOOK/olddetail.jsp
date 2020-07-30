@@ -132,7 +132,7 @@
 											<td>${vo.obqtitle }</td>
 											<td>${vo.obqcontent }</td>
 											<td><fmt:formatDate value="${vo.obqdate }"></fmt:formatDate></td>
-											<td><button id="qnadel" style="background-color: orange">삭제</button></td>
+											<td><button style="background: green;color: white;" name="qnadel" onclick="goDel(${vo.obqnum},${vo.mnum})">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</table>				
@@ -144,7 +144,7 @@
 					
 						<input type="hidden" id="obnum" name="obnum" value="${obnum}">
 						<input type="hidden" id="snum" name="snum" value="${snum}">
-						<input type="hidden" id="mnum" name="mnum" value="${mnum }">
+						<input type="hidden" id="mnum" name="mnum" value="${mnum}">
 						
 						
 						
@@ -207,26 +207,45 @@
 			}
 		});
 	});
-	$("#qnadel").click(function(){
-		var obqnum=$("#obqnum").val();
+// 	$("#qnadel").click(function(){
+// 		var obqnum=$("#obqnum").val();
+// 		var obnum=$("#obnum").val();
+// 		var snum=$("#snum").val();
+// 		var mnum=$("#mnum").val();
+// 		var qnamnum=$("#qnamnum").val();
+// 		console.log("obqnum="+obqnum);
+// 		console.log("obnum="+obnum);
+// 		console.log("snum="+snum);
+// 		console.log("mnum="+mnum);
+// 		console.log("qnamnum="+qnamnum);
+		
+// 		if(mnum == qnamnum){
+// 			$.get("${cp }/delqna?obqnum="+obqnum+"&obnum="+obnum+ "&snum=" +snum,function(data){
+// 				console.log("callback");
+// 				window.location.reload();
+// 			});
+// 		}else{
+// 			alert("본인이 작성한 글이 아닙니다.");
+// 		}
+// 	});
+	function goDel(obqnum,qnamnum){
 		var obnum=$("#obnum").val();
 		var snum=$("#snum").val();
 		var mnum=$("#mnum").val();
-		var qnamnum=$("#qnamnum").val();
-		console.log("obqnum="+obqnum);
 		console.log("obnum="+obnum);
 		console.log("snum="+snum);
 		console.log("mnum="+mnum);
-		console.log("qnamnum="+qnamnum);
+		console.log("obqnum=" + obqnum);
+		console.log("qnamnum=" + qnamnum);
 		
 		if(mnum == qnamnum){
-			$.get("${cp }/delqna?obqnum="+obqnum+"&obnum="+obnum+ "&snum=" +snum,function(data){
+			$.get("${cp }/delqna?obqnum="+obqnum+"&obnum="+obnum+"&snum="+snum,function(data){
 				console.log("callback");
 				window.location.reload();
 			});
 		}else{
 			alert("본인이 작성한 글이 아닙니다.");
 		}
-	});
+	}
 
 </script>
