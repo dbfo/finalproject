@@ -76,6 +76,7 @@
 					" ${oldbookvo.obdetail } "
 					</strong>
 				</div>
+				
 			</div>
 			<div id="detailbtn">
 				<button class="btn btn-success btn-lg btn-block" id="buynow"><a href="${cp }/order/directUsedOrder?obnum=${oldbookvo.obnum}&bcount=1">구매하기</a></button>
