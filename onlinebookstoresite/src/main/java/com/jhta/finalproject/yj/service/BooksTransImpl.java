@@ -26,6 +26,7 @@ public class BooksTransImpl implements BooksTransService {
 		this.idao = idao;
 	}
 
+	// 등록
 	@Transactional
 	@Override
 	public int insert(BooksVO bvo, ImgVO ivo) {
@@ -45,6 +46,7 @@ public class BooksTransImpl implements BooksTransService {
 		return 1;
 	}
 
+	// 수정
 	@Transactional
 	@Override
 	public int update(ImgVO ivo1, ImgVO ivo2) {
@@ -58,4 +60,19 @@ public class BooksTransImpl implements BooksTransService {
 		return 1;
 	}
 
+	// 삭제
+	@Transactional
+	@Override
+	public int delete(int bnum) {
+		int n1 = bdao.bookReviewDelect(bnum);
+		if (n1 <= 0) {
+			idao.imgDelete(bnum);
+			bdao.booksDelete(bnum);
+		} else {
+			bdao.bookReviewDelect(bnum);
+			idao.imgDelete(bnum);
+			bdao.booksDelete(bnum);
+		}
+		return 1;
+	}
 }

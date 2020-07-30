@@ -29,6 +29,11 @@ public class BooksDao2 {
 		return sqlsession.delete(NAMESPACE + ".booksDelete", bnum);
 	}
 
+	// 리뷰 달린 글 삭제할 때
+	public int bookReviewDelect(int bnum) {
+		return sqlsession.delete(NAMESPACE + ".bookReviewDelect", bnum);
+	}
+
 	public List<BigCategoryVO> getBigctg() {
 		return sqlsession.selectList(NAMESPACE + ".bctg");
 	}
@@ -56,7 +61,7 @@ public class BooksDao2 {
 	public int booksUpdate(BooksVO vo) {
 		return sqlsession.update(NAMESPACE + ".booksUpdate", vo);
 	}
-	
+
 	// 엑셀 리스트
 	public List<BooksVO> excelList() {
 		return sqlsession.selectList(NAMESPACE + ".excelList");

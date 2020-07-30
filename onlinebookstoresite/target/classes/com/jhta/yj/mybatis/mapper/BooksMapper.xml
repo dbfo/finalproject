@@ -22,9 +22,14 @@
 	<delete id="booksDelete" parameterType="int">
 		delete from books where bnum = #{bnum}
 	</delete>
-
+	
 	<delete id="imgDelete" parameterType="int">
 		delete from img where bnum = #{bnum}
+	</delete>
+	
+	<!-- 리뷰가 달린 책을 삭제할 경우 -->
+	<delete id="bookReviewDelect" parameterType="int">
+		delete from bookreview where bnum = #{bnum} 
 	</delete>
 
 	<update id="booksUpdate" parameterType="books">

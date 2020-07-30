@@ -14,4 +14,6 @@ public interface BooksTransService {
 	int insertList(BooksVO bvo, List<ImgVO> list);
 
 	int update(ImgVO ivo1, ImgVO ivo2);
+
+	int delete(int bnum);
 }
