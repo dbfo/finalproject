@@ -81,9 +81,9 @@
 								▶ 상품명 : ${oldbook.obname } | 수량 : 1개 | 판매가 : ${oldbook.obsaleprice }원 <br>
 								</c:forEach></th>
 							<th scope="col" style="text-align: center; margin: auto;">${vo.mname }</th>
-							<th scope="col" style="text-align: right;">${vo.ordermoney }원</th>
+							<th scope="col" style="text-align: right;">${vo.bfinalmoney }원</th>
 							<th scope="col" rowspan="2"
-								style="text-align: right; margin: auto;">${vo.bfinalmoney }원</th>
+								style="text-align: right; margin: auto;">${vo.ordermoney }원</th>
 							<th scope="col" rowspan="2" style="text-align: center;"><fmt:formatDate
 									value="${vo.borderdate }" pattern="yyyy-MM-dd" /></th>
 						</tr>
