@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class = "container-fluid">
+	<h2 class="mt-4 pageTitle" >주문 리스트</h2>
 	<!-- 상단 탭메뉴 -->
 	<div class="salesTopMenu">
-	
+		
 		<input id="tab1" type="radio" name="tabs"  <c:if test="${type == '1'}"> checked </c:if>><label for="tab1">책</label>
 		<input id="tab2" type="radio" name="tabs" <c:if test="${type == '2'}"> checked </c:if>><label for="tab2">중고 책</label>
 			

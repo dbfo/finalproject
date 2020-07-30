@@ -8,7 +8,7 @@
 
 	<!-- Modal Header -->
 	<div class="modal-header">
-		<h4 class="modal-title">교환 처리 상세정보</h4>
+		<h4 class="modal-title pageTitle">교환 처리 상세정보</h4>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>
 

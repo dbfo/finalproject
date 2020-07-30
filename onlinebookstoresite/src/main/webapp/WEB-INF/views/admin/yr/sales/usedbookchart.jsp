@@ -9,7 +9,7 @@
 </style>
 
 <div class="container-fluid ">
-	<h2 class="mt-4">중고 책 수익금 매출 차트</h2>
+	<h2 class="mt-4 pageTitle">중고 책 수익금 매출 차트</h2>
 	
 	<div>
 		<ul class = "tab">

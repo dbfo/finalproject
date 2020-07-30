@@ -6,7 +6,7 @@
 <div class="container-fluid">
 <div class="card mb-4">
 	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 검색결과[0]
+		<i class="fas fa-table mr-1"></i>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">

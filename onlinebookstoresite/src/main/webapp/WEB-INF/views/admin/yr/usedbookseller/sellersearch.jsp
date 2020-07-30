@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class = "container-fluid">
 <form action="${pageContext.request.contextPath }/admin/seller" method="post" id="searchform">
-	<h2>판매자 정산 관리</h2>
+	<h2 class="pageTitle">판매자 정산 관리</h2>
 	<table class="table searchbox">
 		<tr>
 			<th class="table-active">검색어</th>
@@ -54,7 +54,7 @@
 		</tr>
 		<tr>
 			<td align="center" colspan="4"><input
-				class="btn btn-outline-success float-right yrbtn" type="reset"
+				class="btn btn-outline-success float-right yrbtn" id = "resetBtn" type="reset"
 				value="초기화"> <input class="btn btn-success float-right yrbtn"
 				id = "searchSubmitBtn" type = "button" value="검색"></td>
 		</tr>

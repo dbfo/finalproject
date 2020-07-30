@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class = "container-fluid">
+	<h2 class="mt-4 pageTitle" >주문 리스트</h2>
+
 	<!-- 상단 탭메뉴 -->
 	<div class="salesTopMenu">
 	

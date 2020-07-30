@@ -29,6 +29,7 @@ public class PaymentVo {
 	private int usedpoint; // 포인트 사용량
 	private int methodpayment; // 지불방법(0:카드,1:무통장)
 	private String receiver;// 수령인
+	private int delfee;// 배송료
 	private int mnum; // 회원 번호
 
 	public PaymentVo() {
@@ -36,7 +37,8 @@ public class PaymentVo {
 	}
 	
 	public PaymentVo(int bpaynum, String baddr, String bphone, int bfinalmoney, Date borderdate, Date bpaydate,
-			int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int mnum) {
+			int bstatus, int ordermoney, int usedpoint, int methodpayment, String receiver, int delfee, int mnum) {
+		super();
 		this.bpaynum = bpaynum;
 		this.baddr = baddr;
 		this.bphone = bphone;
@@ -48,20 +50,9 @@ public class PaymentVo {
 		this.usedpoint = usedpoint;
 		this.methodpayment = methodpayment;
 		this.receiver = receiver;
+		this.delfee = delfee;
 		this.mnum = mnum;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "PaymentVo [bpaynum=" + bpaynum + ", baddr=" + baddr + ", bphone=" + bphone + ", bfinalmoney="
-				+ bfinalmoney + ", borderdate=" + borderdate + ", bpaydate=" + bpaydate + ", bstatus=" + bstatus
-				+ ", btype=" +", ordermoney=" + ordermoney + ", usedpoint=" + usedpoint
-				+ ", methodpayment=" + methodpayment + ", receiver=" + receiver + ", mnum=" + mnum +"]";
-	}
-
-
 
 	public Date getBorderdate() {
 		return borderdate;
@@ -159,4 +150,22 @@ public class PaymentVo {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
+
+	public int getOrdermoney() {
+		return ordermoney;
+	}
+
+	public void setOrdermoney(int ordermoney) {
+		this.ordermoney = ordermoney;
+	}
+
+	public int getDelfee() {
+		return delfee;
+	}
+
+	public void setDelfee(int delfee) {
+		this.delfee = delfee;
+	}
+	
+	
 }

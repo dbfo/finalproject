@@ -149,7 +149,19 @@
 			}
 			
 			$("#searchform").submit();
-		})		
+		})
+		
+		$("#resetBtn").click(function(){
+			$("select[name=pfield]").val('');
+			$("select[name=tfield]").val('');
+			$("select[name=pkeyword]").val('');
+			$("select[name=bfield]").val('');
+			$("select[name=bkeyword]").val('');
+			$('#form1 input[name=bstatus]').removeAttr('checked');
+			$('#form1 input[name=type]').removeAttr('checked');
+			$('#form1 input[name=payType]').removeAttr('checked');
+			$('#form1 input[name=mType]').removeAttr('checked');
+		})
 	})
 	
 

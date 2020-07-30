@@ -106,7 +106,7 @@
 		</tr>
 		<tr>
 			<td align="center" colspan="4"><input
-				class="btn btn-outline-success float-right yrbtn" type="reset"
+				class="btn btn-outline-success float-right yrbtn" id = "resetBtn" type="reset"
 				value="초기화"> <input class="btn btn-success float-right yrbtn"
 				id = "searchSubmitBtn" type = "button" value="검색"></td>
 		</tr>

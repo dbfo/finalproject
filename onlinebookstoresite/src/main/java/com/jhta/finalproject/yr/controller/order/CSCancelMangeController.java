@@ -88,8 +88,14 @@ public class CSCancelMangeController {
 		
 		for (PaymentAndCSBookListVo vo : list) {
 			
+			//배송료 계산
+			int delfee = 2500;
+			if(vo.getOrdermoney()-icancelPrice > 50000) {
+				delfee = 0;
+			}
+			
 			cancelPayment = new PaymentVo(0,vo.getBaddr(),vo.getBphone(),0,vo.getBorderdate(),
-					null,0,vo.getOrdermoney()-icancelPrice,0,vo.getMethodpayment(),vo.getReceiver(),vo.getMnum());
+					null,0,vo.getOrdermoney()-icancelPrice, 0,vo.getMethodpayment(),vo.getReceiver(), delfee, vo.getMnum());
 			
 			//책리스트 가져오기
 			List<CSAndPaymentBookVo> bookList = vo.getCSAndPaymentBook();

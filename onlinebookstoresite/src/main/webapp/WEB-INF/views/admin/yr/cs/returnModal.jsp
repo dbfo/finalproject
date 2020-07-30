@@ -9,7 +9,7 @@
 
 	<!-- Modal Header -->
 	<div class="modal-header">
-		<h4 class="modal-title">반품 처리 상세정보</h4>
+		<h4 class="modal-title pageTitle">반품 처리 상세정보</h4>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>
 
@@ -81,6 +81,7 @@
 				<table class="table">
 					<thead>
 						<tr>
+							<th class="table-active"><input type = "checkbox" ></th>
 							<th class="table-active">책번호</th>
 							<th class="table-active">책이름</th>
 							<th class="table-active">수량</th>

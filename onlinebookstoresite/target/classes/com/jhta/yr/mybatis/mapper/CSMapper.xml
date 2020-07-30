@@ -156,7 +156,7 @@
 <!-- 취소 -->
 	<insert id="cancelPaymentInsert" parameterType="payment">
 		insert into bpayment values (SEQ_BPAYMENT_BPAYNUM.nextval,#{baddr},#{bphone},#{bfinalmoney},
-			sysdate, null,0,#{ordermoney},0,#{methodpayment},#{receiver},#{mnum})
+			sysdate, null,0,#{ordermoney},0,#{methodpayment},#{receiver},#{delfee},#{mnum})
 	</insert>
 
 	<insert id="paymentbooksInsert" parameterType="booksVo">

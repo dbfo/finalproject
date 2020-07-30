@@ -26,16 +26,16 @@ public class TotalOrderManegeController {
 			String tfield, String startDate, String endDate ,String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
 		
 		
-		System.out.println(	"pfield : "+ pfield
-		+" pkeyword : "+ pkeyword
-		+" tfield : "+ tfield
-		+" startDate :"+ startDate
-		+" endDate : "+ endDate
-		+" bfield : "+ bfield
-		+" bkeyword : "+ bkeyword
-		+" bstatus : " + bstatus
-		+ " mType :"+ mType
-		);
+//		System.out.println(	"pfield : "+ pfield
+//		+" pkeyword : "+ pkeyword
+//		+" tfield : "+ tfield
+//		+" startDate :"+ startDate
+//		+" endDate : "+ endDate
+//		+" bfield : "+ bfield
+//		+" bkeyword : "+ bkeyword
+//		+" bstatus : " + bstatus
+//		+ " mType :"+ mType
+//		);
 		
 //		주문번호, 주문자명		
 		HashMap<String, Object> map = new HashMap<String, Object>();

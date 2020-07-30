@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container-fluid ">
-	<h2 class="mt-4">list</h2>
 	<div class="card mb-4">
 		<div class="card-header">
 			<i class="fas fa-table mr-1"></i> 

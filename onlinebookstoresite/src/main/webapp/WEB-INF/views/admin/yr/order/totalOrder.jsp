@@ -3,7 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h2 class="mt-4 mainTitle">전체주문관리</h2>
+<h2 class="mt-4 mainTitle pageTitle">전체주문관리</h2>
 <div class="container-fluid ">
 	<form action="${pageContext.request.contextPath }/totalOrder" method = "post" id="searchform">
 		<table class="table searchbox">
@@ -102,7 +102,7 @@
 			</tr>
 			<tr>
 				<td align="center" colspan="4">
-					<input  class="btn btn-outline-success float-right yrbtn" type = "reset" value = "초기화">
+					<input  class="btn btn-outline-success float-right yrbtn" id = "resetBtn" type = "reset" value = "초기화">
 					<input class="btn btn-success float-right yrbtn" id = "searchSubmitBtn" type = "button" value = "검색" >
 				</td>		
 			</tr>

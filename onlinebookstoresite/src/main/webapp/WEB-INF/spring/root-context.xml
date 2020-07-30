@@ -26,7 +26,7 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
-			value="jdbc:oracle:thin:@192.168.0.3:1521:xe" />
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="username" value="gobook" />
 		<property name="password" value="gobook1234" />
 	</bean>

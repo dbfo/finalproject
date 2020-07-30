@@ -27,6 +27,7 @@ public class RefundServiceImpl implements RefundService{
 		
 		for (int i = 0; i < mnum.size(); i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			
 			map.put("dtran", priceArr.get(i)*-1);
 			map.put("mnum", mnum.get(i));
 			

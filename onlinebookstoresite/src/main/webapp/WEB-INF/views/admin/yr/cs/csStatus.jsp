@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container-fluid ">
-	<h2>취소/교환/반품/환불</h2>
+	<h2 class="pageTitle">취소/교환/반품/환불</h2>
 	
 	<ul class="tab">	
 		<li>

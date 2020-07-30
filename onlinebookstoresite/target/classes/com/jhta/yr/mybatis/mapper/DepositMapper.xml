@@ -56,8 +56,9 @@
 				order by settlement.SESTATUS , appdate 
 			)aa
 		)
-		<![CDATA[where rnum >= #{startRow} and rnum<= #{endRow}]]>
-	
+		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startRow)">
+            <![CDATA[where rum >= #{startRow} and rum <= #{endRow}]]>
+        </if>
 	</select>
 	
 <!-- 	갯수세기 -->
@@ -69,10 +70,12 @@
 		<include refid="search"/>
 	</select>
 	
+<!-- 	예치금 돈으로 환산 후 처리 결과 INSERT -->
 	<update id = "updateSestatus" parameterType="int">
 		update settlement set sestatus = 1,  comdate = sysdate where senum = #{senum}
 	</update>
 	
+<!-- 	예치금 돈으로 반환 -->
 	<insert id="decreaseDeposit" parameterType="hashmap">
 		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, null, #{dtran}, sysdate, 3)
 	</insert>

@@ -12,7 +12,7 @@
 </style>
 
 <div class="container-fluid" >
-	<h2 class="mt-4">매출 차트</h2>
+	<h2 class="mt-4 pageTitle">매출 차트</h2>
 	
 	<div>
 		<ul class = "tab">
