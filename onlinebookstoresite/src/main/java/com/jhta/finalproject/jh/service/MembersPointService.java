@@ -25,6 +25,6 @@ public class MembersPointService {
 	
 	//회원 포인트 총 갯수 가져오기
 	public int getRowPointCount(HashMap<String, Object> map) {
-		return dao.getRowPointCount(map);
+		return dao.getRowPointCount(map); 
 	}
 }

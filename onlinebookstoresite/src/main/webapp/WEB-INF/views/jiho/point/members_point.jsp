@@ -82,14 +82,11 @@
 				type:'post',
 				data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
 				success:function(data){
-					/*
 					if(data.length==1){ //값이없을때..
 						var tableapp="<tr><td colspan='5'>포인트내역이 없습니다.</td></tr>";
 						$("#qnaTable > tbody").append(tableapp);
-						
 						return;
-					}*/
-					
+					}
 					$(data).each(function(index,item){
 						if(index==data.length-1){
 							var yy=item.startDay;
@@ -131,7 +128,7 @@
 						}
 						var tableapp="<tr>"
 								    +"<td style='text-align: center'>1</td>"
-								    +"<td style='text-align: center'>포인트적립</td>"
+								    +"<td style='text-align: center'>"+item.value+"</td>"
 								    +"<td style='text-align: right'></td>"
 								    +"<td style='text-align: right'>1000</td>"
 								    +"<td style='text-align: center'>"+item.pregdate+"</td>"

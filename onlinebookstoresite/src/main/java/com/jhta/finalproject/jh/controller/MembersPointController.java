@@ -57,6 +57,11 @@ public class MembersPointController {
 			json.put("mnum", vo.getMnum());
 			json.put("bpaynum", vo.getBpaynum());
 			json.put("tranpoint", vo.getTranpoint());
+			if(vo.getTranpoint()>0) {
+				json.put("value", "포인트 적립");
+			}else if(vo.getTranpoint()<0) {
+				json.put("value", "포인트 사용");
+			}
 			json.put("pregdate", vo.getPregdate());
 			jarr.put(json);
 		}
