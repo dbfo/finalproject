@@ -48,7 +48,7 @@
 	<div id="image">
 			
 				<a href="obdetail?obnum=${vo.obnum }&snum=${vo.snum}"> <img
-				src="${cp }/resources/imgUpload/${vo.imgsavefilename}" id="thumbnail">
+				src="${cp}/resources/jh/jhobupload/${vo.imgsavefilename}" id="thumbnail">
 				</a>
 
 	</div>

@@ -56,11 +56,11 @@ public class MembersPointController {
 			json.put("mnum", vo.getMnum());
 			json.put("bpaynum", vo.getBpaynum());
 			if(vo.getTranpoint()>0) {
-				json.put("pointContent", "포인트 적립");
+				json.put("pointContent", "포인트(+)");
 				json.put("leftTranpoint", "");
 				json.put("rightTranpoint", vo.getTranpoint()+"원");
 			}else if(vo.getTranpoint()<0) {
-				json.put("pointContent", "포인트 사용");
+				json.put("pointContent", "포인트(-)");
 				json.put("leftTranpoint", vo.getTranpoint()+"원");
 				json.put("rightTranpoint", "");
 			}
