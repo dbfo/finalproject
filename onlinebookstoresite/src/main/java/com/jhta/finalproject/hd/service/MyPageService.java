@@ -72,6 +72,9 @@ public class MyPageService {
 	public AccountVo selectAccount(int mnum) {
 		return dao.selectAccount(mnum);
 	}
+	public int applydeposit(HashMap<String, Object>map) {
+		return dao.applydeposit(map);
+	}
 	
 	
 	//마이페이지 최근리스트 관련 서비스

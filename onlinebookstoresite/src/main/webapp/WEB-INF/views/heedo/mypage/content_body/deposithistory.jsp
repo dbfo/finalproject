@@ -231,6 +231,25 @@
 
   </div>
 </div>
+<div id="errmodal4" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">에러</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="errmodal_body">
+        	신청액은 숫자만 입력가능합니다!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <div id="successmodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
@@ -242,6 +261,26 @@
       </div>
       <div class="modal-body" id="errmodal_body">
         	계좌등록성공!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="successmodal1" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ccccff">
+       <h4 class="modal-title" style="color:white">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="errmodal_body">
+        	인출신청 완료!
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
@@ -387,15 +426,25 @@
 		$("#applymodal").modal('hide');
 		var can_deposit=$("#can_deposit").val()
 		var apply_deposit=$("#apply_deposit").val();
+		if(!$.isNumeric(apply_deposit)){
+			$("#errmodal4").modal('show');
+			return
+		}
 		if(apply_deposit>can_deposit){
 			$("#errmodal3").modal('show');
 			return;
 		}
 		$.ajax({
-			url:"",
-			dataType: "",
+			url:"/finalproject/mypage/applydeposit",
+			dataType: "json",
+			data:{deposit:apply_deposit},
 			type:"post",
 			success:function(data){
+				if(data.result){
+					$("#successmodal1").modal('show')
+				}else{
+					$("#errmodal2").modal('show')
+				}
 				
 			}
 		})
@@ -434,7 +483,7 @@
 						var paginationapp="<ul class='pagination pageul'>";
 						if(item.startPageNum>=6){
 							paginationapp+="<li class='page-item '>"
-									+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.startpageNum-1)+"."+item.value+")'><<"
+									+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.startpageNum-1)+",\""+item.value+"\")'><<"
 									+"</a></li>";
 						}else{
 							paginationapp+="<li class='page-item disabled'><a class='page-link pageli' href='#'><<</a></li>";
@@ -445,17 +494,17 @@
 							var mm=item.endDay;
 							if(i==item.pageNum){
 								paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
-									+"href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
+									+"href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+i+",\""+item.value+"\")'>"+i+"</a></li>"
 							}else{
 								paginationapp+="<li class='page-item'><a class='page-link pageli'"
-									+"href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
+									+"href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+i+",\""+item.value+"\")'>"+i+"</a></li>"
 							}
 							
 							
 						}
 						if(item.endPageNum<item.totalPageCount){
 							paginationapp+="<li class='page-item'>"
-								+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+"."+item.value+")'>>></a></li>";
+								+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+",\""+item.value+"\")'>>></a></li>";
 						}else{
 							paginationapp+="<li class='page-item disabled'>"
 									+"<a class='page-link pageli' href='#'>>></a></li>";

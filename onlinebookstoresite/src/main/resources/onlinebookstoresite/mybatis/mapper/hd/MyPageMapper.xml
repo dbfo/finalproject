@@ -229,6 +229,10 @@
 		select * from account where mnum=#{mnum}
 	</select>
 	
+	<insert id="applydeposit" parameterType="hashmap">
+		insert into settlement values(SEQ_settlement_senum.nextval,#{anum},#{reqmoney},0,sysdate,null)
+	</insert>
+	
 	<!-- 마이페이지 메인관련 sql문 -->
 	<select id="recentorder" parameterType="int" resultType="historyVo">
 		select aaa.* from (

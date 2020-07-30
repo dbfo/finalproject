@@ -68,6 +68,9 @@ public class MyPageDao {
 	public AccountVo selectAccount(int mnum) {
 		return sqlsession.selectOne(NAMESPACE+".selectAccount", mnum);
 	}
+	public int applydeposit(HashMap<String, Object>map) {
+		return sqlsession.insert(NAMESPACE+".applydeposit", map);
+	}
 	
 	//문의내역 행수 
 	public int countQnaHistory(HashMap<String, Object>map) {

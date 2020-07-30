@@ -685,4 +685,23 @@ public class MyPageController {
 			json.put("result", result);
 			return json.toString();
 		}
+		@RequestMapping(value="/mypage/applydeposit",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String applydeposit(HttpSession session,int deposit) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			AccountVo vo=service.selectAccount(mnum);
+			int anum=vo.getAnum();
+			HashMap<String, Object>datamap=new HashMap<String, Object>();
+			datamap.put("anum", anum);
+			datamap.put("reqmoney", deposit);
+			int n=service.applydeposit(datamap);
+			boolean result=false;
+			if(n>0) {
+				result=true;
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();
+		}
 }

@@ -182,6 +182,7 @@ public class OrderController {
 					vo1.setTotalvalue(vo1.getObsaleprice()*vo1.getBcount());
 					totalprice+=vo1.getObsaleprice()*vo1.getBcount();
 					int status=vo1.getObstatus();
+					
 					String statusString="";
 					if(status==1) {
 						statusString="[중고-최상]";
