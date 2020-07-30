@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="infomation">
-	
+	<img src="${cp }/resources/jh/jhimages/마이페이지내정보상단.png">
 </div>
 <table class="table table-striped" id="menubar">
 	<tr>
@@ -28,7 +28,7 @@
 	</tr>
 	<tr>
 		<td>
-			<a class="menuAtag" href="#">- 포인트내역</a><br>
+			<a class="menuAtag" href="${cp }/members/pointList">- 포인트내역</a><br>
 			<a class="menuAtag" href="${cp }/mypage/depositpage">- 예치금내역/신청</a>
 		</td>
 	</tr>

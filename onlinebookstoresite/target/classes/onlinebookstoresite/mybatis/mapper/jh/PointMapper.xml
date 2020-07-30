@@ -19,8 +19,8 @@
 		        from point 
 		        where mnum=#{mnum} and tranpoint NOT in(0) and
 		        <![CDATA[
-		        TO_CHAR(pregdate,'yyyy-mm-dd') >= TO_CHAR(TO_DATE(#{startDay},'yyyy-mm-dd'),'yyyy-mm-dd') AND
-				TO_CHAR(pregdate,'yyyy-mm-dd') <= TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'),'YYYY-MM-DD')
+		        TO_CHAR(pregdate,'yyyy/mm/dd') >= TO_CHAR(TO_DATE(#{startDay},'yyyy/mm/dd'),'yyyy/mm/dd') AND
+				TO_CHAR(pregdate,'yyyy/mm/dd') <= TO_CHAR(TO_DATE(#{endDay},'YYYY/MM/DD'),'YYYY/MM/DD')
 				]]>
 		        order by pregdate desc)a)
 		<![CDATA[
@@ -29,17 +29,10 @@
 	</select>
 	<!-- 포인트 총 갯수 -->
 	<select id="getRowPointCount" resultType="int" parameterType="hashmap">
-		<!-- 
 		select nvl(count(*),0) count from point where mnum=#{mnum} and tranpoint NOT in(0) and 
 		<![CDATA[
 		        TO_CHAR(pregdate,'yyyy-mm-dd') >= TO_CHAR(TO_DATE(#{startDay},'yyyy-mm-dd'),'yyyy-mm-dd') AND
-				TO_CHAR(pregdate,'yyyy-mm-dd') <= TO_CHAR(TO_DATE(#{endDay},'yyyy-mm-dd'),'yyyy-mm-dd')
-		]]> 
-		-->
-		select nvl(count(*),0) count from point where mnum=#{mnum} and tranpoint NOT in(0) and 
-		<![CDATA[
-		        TO_CHAR(pregdate,'yyyy/mm/dd') >= TO_CHAR(TO_DATE(#{startDay},'yyyy-mm-dd'),'yyyy-mm-dd') AND
-				TO_CHAR(pregdate,'yyyy/mm/dd') <= TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'),'YYYY-MM-DD')
+				TO_CHAR(pregdate,'yyyy-mm-dd') <= TO_CHAR(TO_DATE(#{endDay},'YYYY-MM-DD'),'YYYY-MM-DD')
 		]]>
 	</select>
 </mapper>

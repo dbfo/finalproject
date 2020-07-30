@@ -10,10 +10,10 @@
 	<form action="${cp }/members/point">
 		<div class="date_picker shadow">
 			<ul class="list-group list-group-horizontal" id="dateUl">
-				<li class="list-group-item selectdate qnaselect" onclick="changeDate(7,0)">최근 일주일</li>
-				<li class="list-group-item active selectdate qnaselect" onclick="changeDate(0,1)">1개월</li>
-				<li class="list-group-item selectdate qnaselect" onclick="changeDate(0,3)">3개월</li>
-				<li class="list-group-item selectdate qnaselect" onclick="changeDate(0,6)">6개월</li>
+				<li class="list-group-item selectdate pointselect" onclick="changeDate(7,0)">최근 일주일</li>
+				<li class="list-group-item active selectdate pointselect" onclick="changeDate(0,1)">1개월</li>
+				<li class="list-group-item selectdate pointselect" onclick="changeDate(0,3)">3개월</li>
+				<li class="list-group-item selectdate pointselect" onclick="changeDate(0,6)">6개월</li>
 			</ul>
 			<input type="text" id="date1" class="form-control" readonly="readonly">
 			<i class="far fa-calendar-alt fa-2x calenderIcon" id="startday"></i>
@@ -23,10 +23,10 @@
 			<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 		</div>
 		<div class="tableDiv shadow" id="tablediv">
-			<table class="table" id="qnaTable">
+			<table class="table" id="pointTable">
 				<thead class="thead-dark">
 					<tr style="text-align: center">
-						<th width="80">NO</th>
+						<th width="80">주문번호</th>
 						<th width="200">내용</th>
 						<th width="120">사용금액</th>
 						<th width="120">적립금액</th>
@@ -37,23 +37,9 @@
 					
 				</tbody>
 			</table>
-			<div>
-				<ul class="pagination justify-content-center">
-					<c:if test="${pu.startPageNum>3 }">
-						<li class="page-item">
-							<a class="page-link" href="">이전</a></li>
-					</c:if>
-					<c:forEach var="i" end="${pu.endPageNum}" begin="${pu.startPageNum }">
-						<li class="page-item">
-							<a class="page-link" href="">${i}</a></li>
-					</c:forEach>
-					<c:if test="${pu.totalPageCount>pu.endPageNum}">
-						<li class="page-item">
-							<a class="page-link" href="">다음</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
+		</div>
+		<div class="pagingDiv" id="pointPaging">
+							
 		</div>
 	</form>
 </div>
@@ -62,12 +48,11 @@
 			defaultDate();
 			var startDay=$("#date1").val();
 			var endDay=$("#date2").val();
-			var value=$("#qnaSelect").val();
-			viewQnalist(startDay,endDay,1,value);	
+			viewPointlist(startDay,endDay,1);	
 		});
 		
-		var viewQnalist=function(startDay,endDay,pageNum,value){
-			clearQnalist();
+		var viewPointlist=function(startDay,endDay,pageNum){
+			clearPointlist();
 			if(pageNum==null){
 				pageNum=1;
 			}
@@ -75,27 +60,27 @@
 				+"<li class='page-item disabled'><a class='page-link' href='#'><<</a></li>"
 				+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
 				+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
-				$("#qnaPaging").append(paginationapp);
+				$("#pointPaging").append(paginationapp);
 			$.ajax({
 				url:'/finalproject/members/point',
 				dataType:'json',
 				type:'post',
-				data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
+				data:{startDay:startDay,endDay:endDay,pageNum:pageNum},
 				success:function(data){
 					if(data.length==1){ //값이없을때..
 						var tableapp="<tr><td colspan='5'>포인트내역이 없습니다.</td></tr>";
-						$("#qnaTable > tbody").append(tableapp);
+						$("#pointTable > tbody").append(tableapp);
 						return;
 					}
 					$(data).each(function(index,item){
 						if(index==data.length-1){
 							var yy=item.startDay;
 							var mm=item.endDay;
-							$("#qnaPaging").empty();
+							$("#pointPaging").empty();
 							var paginationapp="<ul class='pagination pageul'>";
-							if(item.startPageNum>=3){
+							if(item.startPageNum>=4){
 								paginationapp+="<li class='page-item '>"
-										+"<a class='page-link pageli' href='javascript:viewQnalist(\""+yy+"\",\""+mm+"\","+(item.startpageNum-1)+"."+item.value+")'><<"
+										+"<a class='page-link pageli' href='javascript:viewPointlist(\""+yy+"\",\""+mm+"\","+(item.pageNum-1)+")'><<"
 										+"</a></li>";
 							}else{
 								paginationapp+="<li class='page-item disabled'><a class='page-link pageli' href='#'><<</a></li>";
@@ -106,34 +91,33 @@
 								var mm=item.endDay;
 								if(i==item.pageNum){
 									paginationapp+="<li class='page-item disabled' ><a class='page-link pageli'"
-										+"href='javascript:viewQnalist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
+										+"href='javascript:viewPointlist(\""+yy+"\",\""+mm+"\","+i+")'>"+i+"</a></li>"
 								}else{
 									paginationapp+="<li class='page-item'><a class='page-link pageli'"
-										+"href='javascript:viewQnalist(\""+yy+"\",\""+mm+"\","+i+"."+item.value+")'>"+i+"</a></li>"
+										+"href='javascript:viewPointlist(\""+yy+"\",\""+mm+"\","+i+")'>"+i+"</a></li>"
 								}
-								
-								
 							}
 							if(item.endPageNum<item.totalPageCount){
 								paginationapp+="<li class='page-item'>"
-									+"<a class='page-link pageli' href='javascript:viewQnalist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+"."+item.value+")'>>></a></li>";
+									+"<a class='page-link pageli' href='javascript:viewPointlist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+")'>>></a></li>";
 							}else{
 								paginationapp+="<li class='page-item disabled'>"
 										+"<a class='page-link pageli' href='#'>>></a></li>";
 							}
 							
-							$("#qnaPaging").append(paginationapp);
+							$("#pointPaging").append(paginationapp);
 							return;
 							
 						}
 						var tableapp="<tr>"
-								    +"<td style='text-align: center'>1</td>"
-								    +"<td style='text-align: center'>"+item.value+"</td>"
-								    +"<td style='text-align: right'></td>"
-								    +"<td style='text-align: right'>1000</td>"
+							//pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)
+								    +"<td style='text-align: center'>"+item.no+"</td>"
+								    +"<td style='text-align: center'>"+item.pointContent+"</td>"
+								    +"<td style='text-align: right'>"+item.leftTranpoint+"</td>"
+								    +"<td style='text-align: right'>"+item.rightTranpoint+"</td>"
 								    +"<td style='text-align: center'>"+item.pregdate+"</td>"
 								  +"</tr>"; 
-						$("#qnaTable > tbody").append(tableapp);
+						$("#pointTable > tbody").append(tableapp);
 					})
 					
 					
@@ -142,15 +126,15 @@
 			})
 			
 		}
-		var clearQnalist=function(){
-			$("#qnaTable > tbody").empty();
-			$("#qnaPaging").empty();
+		var clearPointlist=function(){
+			$("#pointTable > tbody").empty();
+			$("#pointPaging").empty();
 		}
 		
 		
 		//ul 선택 이펙트
-		$(".qnaselect").click(function(){
-			$(".qnaselect").each(function(){
+		$(".pointselect").click(function(){
+			$(".pointselect").each(function(){
 				$(this).removeClass('active')
 			});
 			$(this).addClass('active');
@@ -246,23 +230,20 @@
 		$("#dateUl li").on('click',function(){
 			var startDay=$("#date1").val();
 			var endDay=$("#date2").val();
-			var value=$("#qnaSelect").val()
-			clearQnalist();
-			viewQnalist(startDay,endDay,1,value);
+			clearPointlist();
+			viewPointlist(startDay,endDay,1);
 		});
-		$("#qnaSelect").change(function(){
-			var value=$(this).val();
-			clearQnalist();
+		$("#pointSelect").change(function(){
+			clearPointlist();
 			var startDay=$("#date1").val();
 			var endDay=$("#date2").val();
-			viewQnalist(startDay,endDay,1,value);
+			viewPointlist(startDay,endDay,1);
 		});
 		$("#researchBtn").on('click',function(){
 			var startDay=$("#date1").val();
 			var endDay=$("#date2").val();
-			var value=$("#qnaSelect").val()
-			clearQnalist();
-			viewQnalist(startDay,endDay,1,value);
+			clearPointlist();
+			viewPointlist(startDay,endDay,1);
 		});
 </script>
 <style>
@@ -343,7 +324,7 @@
 			text-align: right;
 		}
 		
-		#qnaPaging {
+		#pointPaging {
 			text-align: center;
 			position: absolute;
 			top: 620px;
@@ -359,7 +340,7 @@
 			border-color: #f51167;
 		}
 		
-		#qnaSelect {
+		#pointSelect {
 			outline: gray;
 			height: 25px;
 			width: 130px;

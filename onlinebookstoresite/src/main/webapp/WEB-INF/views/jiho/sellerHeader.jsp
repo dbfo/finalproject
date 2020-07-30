@@ -47,7 +47,6 @@
 							<li><a href="${cp }/seller/review">구매리뷰관리</a></li>
 						</ul>
 					</li>
-					<li><a href="${cp }/members/pointList">포인트테스트</a></li> 
 				</ul>
 			</div>
 		</nav>
