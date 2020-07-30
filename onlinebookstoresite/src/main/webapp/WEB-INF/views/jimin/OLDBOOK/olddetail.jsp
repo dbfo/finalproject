@@ -10,7 +10,7 @@
 		<div id="detailupper">
 			<div id="detailinfo">
 				<img id="detailbook_img"
-				src="${cp }/resources/JIMIN/images/${img1.imgsavefilename}" id="thumbnail">
+				src="${cp }/resources/imgUpload/${img1.imgsavefilename}" id="thumbnail">
 				
 				<div id="detailbookNameTitle">
 				<strong style="font-size: x-large;">${oldbookvo.obname }</strong>
@@ -75,6 +75,8 @@
 					<strong style="font-size:17px;color: #2E2E2E;text-align: center;">
 					" ${oldbookvo.obdetail } "
 					</strong>
+					<br>
+					<br>
 				</div>
 				
 			</div>
@@ -107,7 +109,7 @@
 					<br>
 					<h3 style="text-align: center;">상세정보
 					<br><br>
-					<img src="${cp }/resources/JIMIN/images/${img2.imgsavefilename}" id="detailimg"/>
+					<img src="${cp }/resources/imgUpload/${img2.imgsavefilename}" id="detailimg"/>
 					</h3>
 				  </div>
 				  <div class="tab-pane fade" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">

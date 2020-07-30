@@ -10,7 +10,7 @@
 		<div id="detailupper">
 			<div id="detailinfo">
 				<img id="detailbook_img"
-				src="${cp }/resources/JIMIN/images/${img1.imgsavefilename}" id="thumbnail">
+				src="${cp }/resources/imgUpload/${img1.imgsavefilename}" id="thumbnail">
 				
 				<div id="detailbookNameTitle">
 				<strong style="font-size: x-large;">${bookvo.btitle }</strong>
@@ -57,12 +57,14 @@
 				</div>
 				<br>
 
-				<div id="detailcontent">
+				<div class="container" id="detailcontent" style="width:850px;height: auto;">
 				<br>
 				<br>
-					<strong style="font-size:17px;color: #2E2E2E;text-align: center;">
+
+					<strong style="font-size:17px;color: #2E2E2E;text-align: center;height: auto;">
 					" ${bookvo.bcontent } "
 					</strong>
+					<br><br>
 				</div>
 			</div>
 			<div id="detailbtn">
@@ -92,7 +94,7 @@
 		
 		<div id="detaillower">
 		
-				<nav>
+				<nav style="height: auto;">
 				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 				    <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true" style="color: black;border: 1px solid #7d7d7d;"><strong>상세정보</strong></a>
 				    <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="#nav-qna" role="tab" aria-controls="nav-qna" aria-selected="false" style="color: black;border: 1px solid #7d7d7d;"><strong>교환 및 환불 정보</strong></a>
@@ -105,7 +107,7 @@
 					<br>
 					<h3 style="text-align: center;">상세정보
 					<br><br>
-					<img src="${cp }/resources/JIMIN/images/${img2.imgsavefilename}" id="detailimg"/>
+					<img src="${cp }/resources/imgUpload/${img2.imgsavefilename}" id="detailimg"/>
 					</h3>
 				  </div>
 				  <div class="tab-pane fade" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">
@@ -385,9 +387,9 @@
        buycnt--;
        console.log(buycnt );
 	   $("#bcnt2").val(buycnt);
-       if(buycnt>remaincnt){
+       if(buycnt<0){
     	   
-           alert("재고수량 보다 작은 수량만 구매 가능합니다!");
+           alert("1개이상부터 구매 가능합니다!");
            $("#bcnt2").val(remaincnt);
            $("#bcnt2").focus();
            
