@@ -32,7 +32,7 @@
 		 				<td class="replycontent qnaloc">내용</td><td coslpan="3">${avo.qnacontent }</td>
 		 			</tr>
 		 			<tr id="subinfo">
-		 				<td class="qnaloc">작성일</td><td colspan="3">${avo.qnadate }</td>
+		 				<td class="qnaloc">작성일</td><td colspan="3">${avo.qnaregdate }</td>
 		 			</tr>
 	 			</c:when>
  				<c:otherwise>
