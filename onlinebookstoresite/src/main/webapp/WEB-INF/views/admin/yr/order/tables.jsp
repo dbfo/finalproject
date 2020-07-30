@@ -6,7 +6,7 @@
 	<h2 class="mt-4 pageTitle" >주문 리스트</h2>
 	<div class="card mb-4">
 		<div class="card-header">
-			<i class="fas fa-table mr-1"></i> 검색결과[0]
+			<i class="fas fa-table mr-1"></i>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -18,6 +18,7 @@
 							<th class="table-active">주문번호</th>
 							<th class="table-active">주문자</th>
 							<th class="table-active">책 제목</th>
+							<th class="table-active">배송료</th>
 							<th class="table-active">총 실제 결제 금액</th>
 							<th class="table-active">결제수단</th>
 							<th class="table-active">배송상태</th>
@@ -47,7 +48,8 @@
 										<p>${book.btitle}</p>									
 									</c:forEach>
 								</td>
-								<td>${vo.bfinalmoney}</td>
+								<td>${vo.delfee}원</td>
+								<td>${vo.bfinalmoney}원</td>
 <!-- 								결제수단 -->
 								<c:choose>
 									<c:when test="${vo.methodpayment == 0 }">

@@ -109,8 +109,8 @@
 						
 					<tr>
 						<td colspan="5" align="right">${vo.delfee }</td>
-						<td colspan="1" align="right" id = "cancelPrice">${cancelPrice }</span></td>
-						<td colspan="1" align="right"><span style = "color : red">${cancelPrice }</td>
+						<td colspan="1" align="right" >${cancelPrice }</span></td>
+						<td colspan="1" align="right" id = "cancelPrice"><span style = "color : red">${cancelPrice+vo.delfee }</td>
 					</tr>
 					</c:forEach>
 				</tbody>

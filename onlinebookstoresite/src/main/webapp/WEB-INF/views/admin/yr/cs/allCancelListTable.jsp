@@ -83,11 +83,11 @@
 					<c:choose>
 						<c:when test="${i == pu.pageNum }">
 								<button type="button" class="btn btn-success"
-									onclick="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
+									onclick="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
 							</c:when>
 						<c:otherwise>
 							<button type="button" class="btn btn-outline-success" 
-								onclick ="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${pu.startPageNum}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
+								onclick ="location.href='${pageContext.request.contextPath }/cs/menu?PageName=${PageName }&pageNum=${i}&pfield=${pfield}&pkeyword=${pkeyword}&tfield=${tfield}&startDate=${startDate}&endDate=${endDate}&bfield=${bfield}&bkeyword=${bkeyword}&mType=${mType}&status=${status }'">${i }</button>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

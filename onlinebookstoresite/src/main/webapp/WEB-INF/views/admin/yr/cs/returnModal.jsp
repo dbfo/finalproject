@@ -98,7 +98,7 @@
 							<c:forEach items="${vo.CSAndPaymentBook}" var="book">
 								<c:if test="${book.type == 2 }">
 									<tr>
-										<c:set var="returnPrice" value = "${returnPrice + book.bprice }"/>
+										<c:set var="returnPrice" value = "${returnPrice + (book.bprice*book.count) }"/>
 										<td>
 											<input type="checkbox" <c:if test = "${book.status == 2 }"><c:set var = "statusCount" value = "${statusCount + 1}"/>disabled</c:if>>
 											<input type="hidden" name = "paymentbook_num"value="${book.paymentbook_num}">										

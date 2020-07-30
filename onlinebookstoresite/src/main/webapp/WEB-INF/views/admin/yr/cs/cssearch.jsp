@@ -89,10 +89,10 @@
 		<tr>
 			<th class="table-active">처리상태</th>
 			<td>
-				<input type="checkbox" name="status" value="-1" id="ototal" <c:if test="${status == '-1'}">checked</c:if> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="1" id="oapply" <c:if test="${status == '1'}">checked</c:if>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing" <c:if test="${status == '2'}">checked</c:if>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>									
-				<input type="checkbox" name="status" value="3"id="ocomplete" <c:if test="${status == '3'}">checked</c:if>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
+				<input type="checkbox" name="status" value="-1" id="ototal" <c:forEach var="status" items="${status}"><c:if test="${status == '-1'}">checked</c:if></c:forEach> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="1" id="oapply" <c:forEach var="status" items="${status}"><c:if test="${status == '1'}">checked</c:if></c:forEach>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
+				<input type="checkbox" name="status" value="2"id="processing" <c:forEach var="status" items="${status}"><c:if test="${status == '2'}">checked</c:if></c:forEach>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>									
+				<input type="checkbox" name="status" value="3"id="ocomplete" <c:forEach var="status" items="${status}"><c:if test="${status == '3'}">checked</c:if></c:forEach>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
 			</td>
 		</tr>
 		</c:if>

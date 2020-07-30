@@ -8,7 +8,7 @@
 	<h2 class="mt-4 pageTitle" >주문 리스트</h2>
 	<div class="card mb-4">
 	<div class="card-header">
-		<i class="fas fa-table mr-1"></i> 검색결과[0]
+		<i class="fas fa-table mr-1"></i>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">

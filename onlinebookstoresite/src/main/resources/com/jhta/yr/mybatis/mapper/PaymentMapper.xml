@@ -181,7 +181,10 @@
 						    <include refid="shipStatus"/>
 						    <include refid="CSStatus"/> 
                     ) a
-                )   <![CDATA[where rum >= #{startRow} and rum <= #{endRow}]]>
+                )  
+                <if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startRow)">
+            		<![CDATA[where rum >= #{startRow} and rum <= #{endRow}]]>
+        		</if>
             )AND members.mnum = bpayment.mnum
             and paymentbook.bpaynum = bpayment.bpaynum
             and paymentbook.bnum= oldbooks.obnum

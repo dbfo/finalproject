@@ -38,23 +38,34 @@ public class CSCancelMangeController {
 		int point = 0;
 		int deposit = 0;
 		
+		for (PaymentAndCSBookListVo paymentAndCSBookListVo : list) {
+			System.out.println(paymentAndCSBookListVo);			
+		}
+		
 		for (PaymentAndCSBookListVo vo : list) {
 			
 			//책리스트 가져오기
 			List<CSAndPaymentBookVo> bookList = vo.getCSAndPaymentBook();
 			
 			for (CSAndPaymentBookVo blist : bookList) {				
-				if(blist.getBtype() == 1) {
+				if(blist.getType() == 1) { //취소한 책일 경우
+//					System.out.println("책이름  " + blist.getBtitle());
+//					System.out.println("bcount : "+blist.getBcount()); 
 					if(blist.getBcount() - blist.getCount() > 0) { //주문한 책 갯수 - 취소한 책 갯수 
 						point += blist.getPoint()/blist.getBcount() * (blist.getBcount() - blist.getCount());
 						deposit += blist.getBprice();
+//						System.out.println("deposit 1 : " + deposit);
 					}else{
 						point += blist.getPoint(); //포인트 총 구하기
-						deposit += blist.getBprice(); //줘야할 예치금
+						deposit += blist.getBprice() * blist.getCount(); //줘야할 예치금
+//						System.out.println("count : " + blist.getCount());
+//						System.out.println("deposit 2 : " + deposit);
 					}					
 				}
 			}
 		}
+		
+//		System.out.println("deposit : " + deposit);
 		
 		model.addAttribute("List",list);
 		model.addAttribute("cancelPoint",point);
@@ -122,21 +133,14 @@ public class CSCancelMangeController {
 			if(!paymentbookList.isEmpty() && cancelPayment != null) {
 				//새로운 주문 insert
 				int n = cservice.makeCancelPayment(cancelPayment, paymentbookList);
-//				if(n < 1) {
-//					System.out.println("insert 실패ㅜㅜㅜ");
-//				}else {
-//					System.out.println("성공");
-//				}
 			}
 			
 			//refundhistory랑 원래 주문 상태 update
 			int n = cservice.updateStatus(Integer.parseInt(bpaynum), paymentbookNumList, dvo , pointVo);
 			
 			if(n > 0) {
-//				System.out.println("변경완료");
 				json.put("code", "success");			
 			}else {
-//				System.out.println("변경실패");
 				json.put("code", "error");						
 			}
 		}catch(Exception e) {
