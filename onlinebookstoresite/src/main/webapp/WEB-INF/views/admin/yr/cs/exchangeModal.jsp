@@ -20,8 +20,8 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>주문번호</th>
-							<th>주문 일자</th>
+							<th class="table-active">주문번호</th>
+							<th class="table-active">주문 일자</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,11 +43,11 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>책번호</th>
-							<th>책이름</th>
-							<th>수량</th>
-							<th>판매가격</th>
-							<th>총 가격</th>
+							<th class="table-active">책번호</th>
+							<th class="table-active">책이름</th>
+							<th class="table-active">수량</th>
+							<th class="table-active">판매가격</th>
+							<th class="table-active">총 가격</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -73,9 +73,9 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>수령인</th>
-							<th>전화번호</th>
-							<th>주소</th>
+							<th class="table-active">수령인</th>
+							<th class="table-active">전화번호</th>
+							<th class="table-active">주소</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,10 +95,10 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>책번호</th>
-					<th>책이름</th>
-					<th>수량</th>
-					<th>판매가격</th>
+					<th class="table-active">책번호</th>
+					<th class="table-active">책이름</th>
+					<th class="table-active">수량</th>
+					<th class="table-active">판매가격</th>
 				</tr>
 			</thead>
 			<tbody>

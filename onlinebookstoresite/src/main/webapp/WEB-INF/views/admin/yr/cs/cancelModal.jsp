@@ -20,9 +20,9 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>주문번호</th>
-						<th>주문자 이름</th>
-						<th>주문 일자</th>
+						<th class="table-active">주문번호</th>
+						<th class="table-active">주문자 이름</th>
+						<th class="table-active">주문 일자</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,12 +44,12 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>책번호</th>
-						<th>책이름</th>
-						<th>수량</th>
-						<th>판매가격</th>
-						<th>배송비</th>
-						<th>총 가격</th>
+						<th class="table-active">책번호</th>
+						<th class="table-active">책이름</th>
+						<th class="table-active">수량</th>
+						<th class="table-active">판매가격</th>
+						<th class="table-active">배송비</th>
+						<th class="table-active">총 가격</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -82,13 +82,13 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>책번호</th>
-						<th>책이름</th>
-						<th>수량</th>
-						<th>판매가격</th>
-						<th>배송비</th>
-						<th>취소 가격</th>
-						<th>총 취소 예상 가격</th>
+						<th class="table-active">책번호</th>
+						<th class="table-active">책이름</th>
+						<th class="table-active">수량</th>
+						<th class="table-active">판매가격</th>
+						<th class="table-active">배송비</th>
+						<th class="table-active">취소 가격</th>
+						<th class="table-active">총 취소 예상 가격</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -123,7 +123,7 @@
 			</h5>
 			<table class="table table-bordered">
 					<tr>
-						<th>회수 포인트</th>
+						<th class="table-active">회수 포인트</th>
 						<td id = "cancelPoint">${cancelPoint }</td>
 					</tr>
 			</table>

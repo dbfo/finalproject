@@ -25,6 +25,18 @@ public class TotalOrderManegeController {
 	public String ordersearch(Model model, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String pfield, String  pkeyword,
 			String tfield, String startDate, String endDate ,String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
 		
+		
+		System.out.println(	"pfield : "+ pfield
+		+" pkeyword : "+ pkeyword
+		+" tfield : "+ tfield
+		+" startDate :"+ startDate
+		+" endDate : "+ endDate
+		+" bfield : "+ bfield
+		+" bkeyword : "+ bkeyword
+		+" bstatus : " + bstatus
+		+ " mType :"+ mType
+		);
+		
 //		주문번호, 주문자명		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pfield",pfield);
@@ -42,7 +54,7 @@ public class TotalOrderManegeController {
 		map.put("bkeyword",bkeyword);
 
 //		주문상태
-		String[] bstatusArray = {};
+		String[] bstatusArray = null;
 		if(bstatus != null && bstatus != "") {
 			bstatusArray = stringToArray(bstatus);
 			map.put("bstatus",bstatusArray);			
@@ -50,7 +62,7 @@ public class TotalOrderManegeController {
 		
 //		cs주문상태
 //		refundhistory --- 0 : 없음, 1 :취소, 2: 반품, 3: 교환
-		String[] typeArray = {};
+		String[] typeArray = null;
 		if(type != null && type != "") {
 			typeArray = stringToArray(type);
 			map.put("type",typeArray);			
@@ -98,10 +110,6 @@ public class TotalOrderManegeController {
 		String[] array_word; 
 
 		array_word = str.split(","); 
-				
-//		for(int i=0;i<array_word.length;i++) { //출력
-//		    System.out.println("배열로  : " + array_word[i]);
-//		}
 		
 		return array_word;
 	}
