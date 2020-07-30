@@ -77,7 +77,7 @@ public class ListController {
 
 		ModelAndView mv = new ModelAndView(".list2");
 		int totalRowCount = service.count1(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -114,7 +114,7 @@ public class ListController {
 		
 		System.out.println("전체"+totalRowCount);
 
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		// 검색조건 Map에 담기
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -153,7 +153,7 @@ public class ListController {
 
 		ModelAndView mv = new ModelAndView(".newlist");
 		int totalRowCount = service.count1(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -223,7 +223,7 @@ public class ListController {
 		map.put("keyword", keyword);
 
 		int totalRowCount = service.novelcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -253,7 +253,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.poetrycount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -283,7 +283,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.humancount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -313,7 +313,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.economycount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -343,7 +343,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.selfdevcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -373,7 +373,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.historycount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -403,7 +403,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.jobcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -433,7 +433,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.travelcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -464,7 +464,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.itcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -495,7 +495,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.cartooncount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -526,7 +526,7 @@ public class ListController {
 		map.put("keyword", keyword);
 		
 		int totalRowCount = service.guitarcount(map);// 전체글의 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
+		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());

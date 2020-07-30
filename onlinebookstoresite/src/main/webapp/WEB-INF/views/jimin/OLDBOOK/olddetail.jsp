@@ -136,7 +136,30 @@
 										</tr>
 									</c:forEach>
 								</table>
-								페이지
+								
+									<div>
+											<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+											<c:choose>
+												<c:when test="${i==pu.pageNum }">
+													<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
+												 	<a href="obdetail?pageNum=${i }&field=${field}&keyword=${keyword}&bnum=${bnum}">
+									<%-- 			 	<span style="color:red">${i }</span> --%>
+												 	<strong style="color:red">${i }</strong>
+												 	</a>
+												 	</button>
+											 	</c:when>
+											 	<c:otherwise>
+											 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
+												 	<a href="bdetail?pageNum=${i }&field=${field}&keyword=${keyword}&bnum=${bnum}">
+									<%-- 			 	<span style="color: black">${i }</span> --%>
+												 	<strong style="color:black">${i }</strong>
+												 	</a>
+												 	</button>
+											 	</c:otherwise>
+										 	</c:choose>
+											</c:forEach>
+									</div>
+								
 								<div>
 								</div>
 					<div class="tabqnaWrite">	

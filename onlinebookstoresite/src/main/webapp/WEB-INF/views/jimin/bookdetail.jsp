@@ -250,20 +250,20 @@
 					</table>
 					<br>
 						<div>
-						   <c:choose>
-				               <c:when test="${pu.startPageNum>1 }">
-				                  <button style="width: 50px; border-radius: 5px / 5px;">
-				                  	<a style="color: black;" href="bdetail?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}&bnum=${bnum}">
-				                  	<strong style="color: black;">이전글</strong>
-				                  	</a>
-				                  </button>
-				               </c:when>
-				               <c:otherwise>
-				                  <button disabled="disabled">
-				                  	<a href="#">이전글</a>
-				                  </button>
-				               </c:otherwise>
-				            </c:choose>
+<%-- 						   <c:choose> --%>
+<%-- 				               <c:when test="${pu.startPageNum>1 }"> --%>
+<!-- 				                  <button style="width: 50px; border-radius: 5px / 5px;"> -->
+<%-- 				                  	<a style="color: black;" href="bdetail?pageNum=${pu.startPageNum-1 }&field=${field}&keyword=${keyword}&bnum=${bnum}"> --%>
+<!-- 				                  	<strong style="color: black;">이전글</strong> -->
+<!-- 				                  	</a> -->
+<!-- 				                  </button> -->
+<%-- 				               </c:when> --%>
+<%-- 				               <c:otherwise> --%>
+<!-- 				                  <button disabled="disabled"> -->
+<!-- 				                  	<a href="#">이전글</a> -->
+<!-- 				                  </button> -->
+<%-- 				               </c:otherwise> --%>
+<%-- 				            </c:choose> --%>
 								<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 								<c:choose>
 									<c:when test="${i==pu.pageNum }">
