@@ -46,6 +46,8 @@ public class OrderManagerService {
 		for(int i=0;i<bnum.length;i++) {
 			map.put("bnum", bnum[i]);
 			int bcount=dao.getbcount(map);
+			int paymentbook_num=dao.getpaymentbooknum(map);
+			map.put("paymentbooknum",paymentbook_num);
 			map.put("bcount", bcount);
 			dao.inputrefund(map);
 		}

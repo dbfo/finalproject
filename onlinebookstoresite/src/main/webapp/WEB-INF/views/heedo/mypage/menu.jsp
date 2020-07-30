@@ -10,7 +10,7 @@
 	<tr>
 		<td>
 			<a class="menuAtag" href="${cp }/mypage/orderhistory">- 주문내역</a><br>
-			<a class="menuAtag" href="${cp }/mypage/returnpage">- 반품/환불 신청 및 조회</a><br>
+			<a class="menuAtag" href="${cp }/mypage/returnpage">- 반품/교환 신청,완료 내역</a><br>
 			<a class="menuAtag" href="${cp }/mypage/cancelhistorypage">- 취소 주문내역</a><br>
 		</td>
 	</tr>

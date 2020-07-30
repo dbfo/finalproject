@@ -40,6 +40,10 @@
 		select bcount from paymentbook where btype=1 and bnum=#{bnum} and bpaynum=#{bpaynum}
 	</select>
 	
+	<select id="getpaymentbooknum" parameterType="hashmap" resultType="int">
+		select paymentbook_num from paymentbook where bpaynum=#{bpaynum} and bnum=#{bnum};
+	</select>
+	
 	<!-- 반품신청 -->
 	<insert id="inputrefund" parameterType="hashmap">
 		insert into refundhistory values(1,sysdate,null,
@@ -54,7 +58,7 @@
 				3
 			</otherwise>
 		</choose>
-		,#{bnum},#{bcount})
+		,#{paymentbooknum},#{bcount})
 	</insert>
 	<!-- 중고상품 취소 클릭시 다시 상태 0번으로 변경 -->
 	<update id="cancelmold" parameterType="hashmap">

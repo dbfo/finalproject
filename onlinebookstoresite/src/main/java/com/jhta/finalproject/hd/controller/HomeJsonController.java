@@ -24,6 +24,11 @@ public class HomeJsonController {
 	@Autowired
 	private HomeService service;
 	
+	/*
+	 해당책상세페이지 갈때
+	 /bdetail 로 bnum만 던져주면됨
+	 */
+	
 	//홈화면   베스트셀러
 	@RequestMapping(value="/home/bestlist",produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -39,8 +44,25 @@ public class HomeJsonController {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
-			
+			String title=vo.getBtitle();
+			String viewtitle="";
+			if(title.length()>=9) {
+				viewtitle=title.substring(0, 9);
+				viewtitle+="..";
+			}else {
+				viewtitle=title;
+			}
+			json.put("viewtitle", viewtitle);
 			json.put("bwriter", vo.getBwriter());
+			String writer=vo.getBwriter();
+			String viewWriter="";
+			if(writer.length()>=10) {
+				viewWriter=title.substring(0, 10);
+				viewWriter+="..";
+			}else {
+				viewWriter=writer;
+			}
+			json.put("viewWriter", viewWriter);
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();
@@ -65,7 +87,25 @@ public class HomeJsonController {
 			JSONObject json=new JSONObject();
 			json.put("bnum", vo.getBnum());
 			json.put("btitle", vo.getBtitle());
+			String title=vo.getBtitle();
+			String viewtitle="";
+			if(title.length()>=8) {
+				viewtitle=title.substring(0, 8);
+				viewtitle+="..";
+			}else {
+				viewtitle=title;
+			}
+			json.put("viewtitle", viewtitle);
 			json.put("bwriter", vo.getBwriter());
+			String writer=vo.getBwriter();
+			String viewWriter="";
+			if(writer.length()>=10) {
+				viewWriter=title.substring(0, 10);
+				viewWriter+="..";
+			}else {
+				viewWriter=writer;
+			}
+			json.put("viewWriter", viewWriter);
 			json.put("bpublisher", vo.getBpublisher());
 			json.put("bprice", vo.getBprice());
 			String imgpath=path+"\\"+vo.getImgsavefilename();

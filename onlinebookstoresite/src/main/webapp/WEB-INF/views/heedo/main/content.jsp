@@ -29,10 +29,10 @@
 								$("<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
 									" alt='Card image cap'></div>"
 									+ "<div class='card-body'><h5 class='card-title'>"
-									+ item.btitle
+									+ item.viewtitle
 									+ "</h5>"
 									+ "<p class='card-text'>"
-									+ item.bwriter
+									+ item.viewWriter
 									+ "<br><strong>"
 									+ item.bprice
 									+ "</strong></p></div></div>").appendTo("#content-best-card");
@@ -87,10 +87,10 @@
 													"<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
 								" alt='Card image cap'></div>"
 															+ "<div class='card-body'><h5 class='card-title'>"
-															+ item.btitle
+															+ item.viewtitle
 															+ "</h5>"
 															+ "<p class='card-text'>"
-															+ item.bwriter
+															+ item.viewWriter
 															+ "<br><strong>"
 															+ item.bprice
 															+ "</stromg></p></div></div>")

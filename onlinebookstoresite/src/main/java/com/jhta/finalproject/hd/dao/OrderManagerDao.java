@@ -42,7 +42,9 @@ public class OrderManagerDao {
 	public int getbcount(HashMap<String, Object>map) {
 		return sqlsession.selectOne(NAMESPACE+".getbcount", map);
 	}
-	
+	public int getpaymentbooknum(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".getpaymentbooknum",map);
+	}
 	// refund 테이블에 반품/교환/취소 책들 insert 함
 	public int inputrefund(HashMap<String,Object>map) {
 		return sqlsession.insert(NAMESPACE+".inputrefund", map);
