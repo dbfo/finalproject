@@ -45,4 +45,16 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<filter>
+		<filter-name>PermisionFilter</filter-name>
+		<filter-class>com.jhta.finalproject.hd.filter.PermisionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PermisionFilter</filter-name>
+		<url-pattern>/pay/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>PermisionFilter</filter-name>
+		<url-pattern>/mypage/*</url-pattern>
+	</filter-mapping>
 </web-app>
