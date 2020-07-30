@@ -26,10 +26,12 @@ public class OrderManagerController {
 	@ResponseBody
 	public String orderManage(int bpaynum,int bstatus,String apply,@RequestParam(value="bnum")String[]bnum,HttpSession session) {
 		int mnum=0;
+		System.out.println("11111111");
 		String smnum=(String)session.getAttribute("mnum");
 		if(smnum!=null) {
 			mnum=Integer.parseInt(smnum);
 		}
+		System.out.println("mnum:"+mnum);
 		try {
 			JSONObject json=new JSONObject();
 			boolean result=false;
@@ -40,11 +42,13 @@ public class OrderManagerController {
 			map.put("apply",apply);
 			map.put("bnum", bnum);
 			if(bstatus==0) { //주문전체취소할때
+				System.out.println("00000");
 				int n=service.orderCancel(map);
 				if(n>0) {
 					result=true;
 				}
 			}else {
+				System.out.println("1212");
 				List<refundBookVo>list=service.getpaymentbook(map);
 				map.put("list",list);
 				int n=service.orderapply(map);	

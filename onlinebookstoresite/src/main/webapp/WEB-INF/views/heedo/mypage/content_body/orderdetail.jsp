@@ -78,7 +78,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="3">주문 총 금액 : ${tatalprice+ivo.delfee }원</td>
+									<td colspan="3">주문 총 금액 : ${totalprice+ivo.delfee }원</td>
 									
 								</tr>
 							</table>

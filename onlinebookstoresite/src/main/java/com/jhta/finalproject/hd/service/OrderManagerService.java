@@ -20,6 +20,7 @@ public class OrderManagerService {
 	//주문상태인거 주문취소.
 	@Transactional
 	public int orderCancel(HashMap<String,Object>map) {
+		System.out.println("222222");
 		dao.orderCancel(map);
 		List<refundBookVo>list=dao.getpaymentbook(map);
 		for(refundBookVo vo:list) {
@@ -42,13 +43,16 @@ public class OrderManagerService {
 	@Transactional
 	public int orderapply(HashMap<String, Object>map) throws Exception{
 		dao.orderCancel(map);
+		System.out.println("apapapap");
 		String [] bnum=(String[])map.get("bnum");
 		for(int i=0;i<bnum.length;i++) {
 			map.put("bnum", bnum[i]);
 			int bcount=dao.getbcount(map);
 			int paymentbook_num=dao.getpaymentbooknum(map);
+			System.out.println("paymentbook_num:"+paymentbook_num);
 			map.put("paymentbooknum",paymentbook_num);
 			map.put("bcount", bcount);
+			System.out.println("bcout:"+bcount);
 			dao.inputrefund(map);
 		}
 		return 1;
