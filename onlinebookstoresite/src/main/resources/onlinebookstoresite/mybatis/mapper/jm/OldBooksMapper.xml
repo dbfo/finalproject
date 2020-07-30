@@ -127,9 +127,7 @@
 			from oldbooks o,obqna oq, members m
 			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
        		order by oq.obqdate desc)qna)a
-        <![CDATA[
-		where rnum>=#{startRow} and rnum<=#{endRow}
-		]]>
+     
 	</select>
 	<!-- 중고판매자 QnA총 글갯수 가져오기 -->
 	<select id="getSellerQnaCount" resultType="int" parameterType="hashmap">

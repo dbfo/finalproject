@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 import com.jhta.finalproject.jm.vo.AllListVo;
 import com.jhta.finalproject.jm.vo.BooksVo;
 import com.jhta.finalproject.jm.vo.BreviewVo;
@@ -14,7 +15,7 @@ import com.jhta.finalproject.jm.vo.ImgVo;
 import com.jhta.finalproject.jm.vo.ObQnaInsertVo;
 import com.jhta.finalproject.jm.vo.OldAllListVo;
 import com.jhta.finalproject.jm.vo.ReviewinsertVo;
-import com.jhta.finalproject.jm.vo.SellerQnaListJoinVo;
+
 
 @Repository
 public class OldBookdetailDao {

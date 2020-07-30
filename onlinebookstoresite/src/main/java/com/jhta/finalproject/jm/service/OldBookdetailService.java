@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 import com.jhta.finalproject.jm.dao.BookdetailDao;
 import com.jhta.finalproject.jm.dao.OldBookdetailDao;
 import com.jhta.finalproject.jm.vo.AllListVo;
@@ -15,7 +16,7 @@ import com.jhta.finalproject.jm.vo.ImgVo;
 import com.jhta.finalproject.jm.vo.ObQnaInsertVo;
 import com.jhta.finalproject.jm.vo.OldAllListVo;
 import com.jhta.finalproject.jm.vo.ReviewinsertVo;
-import com.jhta.finalproject.jm.vo.SellerQnaListJoinVo;
+
 
 @Service
 public class OldBookdetailService {

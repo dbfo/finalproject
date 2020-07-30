@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jhta.finalproject.jh.vo.SellerQnaListJoinVo;
 import com.jhta.finalproject.jm.service.BookdetailService;
 import com.jhta.finalproject.jm.service.BooksService;
 import com.jhta.finalproject.jm.service.OldBookdetailService;
@@ -29,7 +30,7 @@ import com.jhta.finalproject.jm.vo.ImgVo;
 import com.jhta.finalproject.jm.vo.ObQnaInsertVo;
 import com.jhta.finalproject.jm.vo.OldAllListVo;
 import com.jhta.finalproject.jm.vo.ReviewinsertVo;
-import com.jhta.finalproject.jm.vo.SellerQnaListJoinVo;
+
 import com.jhta.page.util.PageUtil;
 
 @Controller
@@ -59,20 +60,14 @@ public class OldBookdetailController {
 		
 		
 		ModelAndView mv = new ModelAndView(".obdetail");
-		int totalRowCount = service.breviewcount(obnum);// 리뷰 갯수
-		int totalRowCount2 = service.obqnacount(snum);//qna리뷰 갯수
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
-		PageUtil puqna=new PageUtil(pageNum, totalRowCount2, 10, 10);
-		map.put("startRow", puqna.getStartRow());
-		map.put("endRow", puqna.getEndRow());
+
 		map.put("obnum",obnum);
 		map.put("snum", snum);
 		
 		List<OldAllListVo> oldbookvo=service.bookdetail(obnum);
-		List<BreviewVo> reviewvo=service.reviewlist(map);
 		List<SellerQnaListJoinVo> qnavo=service.obqna(snum);
 		
-		
+	
 	//	ImgVo imglist=service.imginfo(bnum);
 
 		//썸네일,상세이미지 구분하기
@@ -91,10 +86,8 @@ public class OldBookdetailController {
 		//중고라서 재고가 하나임
 //		mv.addObject("bcnt", 1); 
 		mv.addObject("bcnt",bcnt1);
-		
+	
 
-		mv.addObject("puqna",puqna);
-		mv.addObject("reviewvo",reviewvo);
 		mv.addObject("oldbookvo",oldbookvo.get(0));
 		mv.addObject("qnavo",qnavo);
 		mv.addObject("obnum",obnum);
