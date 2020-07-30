@@ -62,17 +62,10 @@ public class OldBookdetailController {
 		ModelAndView mv = new ModelAndView(".obdetail");
 
 		map.put("obnum",obnum);
-		map.put("snum", snum);
-		
-		List<OldAllListVo> oldbookvo=service.bookdetail(obnum);
-		List<SellerQnaListJoinVo> qnavo=service.obqna(snum);
-		
-	
-	//	ImgVo imglist=service.imginfo(bnum);
 
-		//썸네일,상세이미지 구분하기
-//		mv.addObject("oldbookvo",oldbookvo.get(0));
-		
+		List<OldAllListVo> oldbookvo=service.bookdetail(obnum);
+		List<SellerQnaListJoinVo> qnavo=service.obqna(obnum);
+
 		for(OldAllListVo vo:oldbookvo) {
 			if(vo.getThumbnail()==1) {
 				mv.addObject("img1",vo);

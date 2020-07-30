@@ -125,7 +125,7 @@
 	        select o.obname OBNAME, oq.obqtitle OBQTITLE, oq.obqcontent OBQCONTENT, m.mid MID, oq.obqstatus OBQSTATUS,
 			oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
 			from oldbooks o,obqna oq, members m
-			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.snum=#{snum}
+			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.obnum=#{obnum}
        		order by oq.obqdate desc)qna)a
      
 	</select>

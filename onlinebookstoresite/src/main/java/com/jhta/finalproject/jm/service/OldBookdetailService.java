@@ -46,8 +46,8 @@ public class OldBookdetailService {
 		return dao.obqnadelete(obqnum);
 	}
 	
-	public List<SellerQnaListJoinVo> obqna (int snum){
-		return dao.obqna(snum);
+	public List<SellerQnaListJoinVo> obqna (int obnum){
+		return dao.obqna(obnum);
 	}
 	public int obqnacount(int snum) {
 		return dao.obqnacount(snum);

@@ -46,8 +46,8 @@ public class OldBookdetailDao {
 		return sqlSession.delete(NAMESPACE + ".obqnadelete",obqnum);
 	}
 	
-	public List<SellerQnaListJoinVo> obqna(int snum){
-		return sqlSession.selectList(NAMESPACE + ".getSellerQnaList",snum);
+	public List<SellerQnaListJoinVo> obqna(int obnum){
+		return sqlSession.selectList(NAMESPACE + ".getSellerQnaList",obnum);
 	}
 	public int obqnacount(int snum) {
 		return sqlSession.selectOne(NAMESPACE + ".getSellerQnaCount",snum);
