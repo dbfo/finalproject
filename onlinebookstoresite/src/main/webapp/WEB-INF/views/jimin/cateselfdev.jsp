@@ -87,8 +87,8 @@
 			<button class="btn btn-success"><a href="${cp }/order/directorder?bnum=${vo.bnum}&bcount=1">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success" id="cartBtn">장바구니</button>
-			<input type="hidden" id="bnum" value="${vo.bnum} ">
+			<button class="btn btn-success" name="cartBtn" onclick="goCart(${vo.bnum})">장바구니</button>
+<%-- 			<input type="hidden" name="bnum" value="${vo.bnum}"> --%>
 	
 		</div>
 	</div>
@@ -137,8 +137,8 @@
 
 
 	});
-	$("#cartBtn").click(function(){
-		var bnum=$("#bnum").val();
+	function goCart(bnum){
+		console.log(bnum);
 		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="success"){
@@ -148,7 +148,7 @@
 				location.href = "${cp }/login";
 			}
 		});
-	});
+	}
 	
 	
 	function nullable(){

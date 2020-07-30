@@ -119,8 +119,8 @@
 			<button class="btn btn-success"><a href="${cp }/order/directUsedOrder?obnum=${vo.obnum}&bcount=1">구매하기</a></button>
 			<br>
 			<br>
-			<button class="btn btn-success" id="cartBtn">장바구니</button>
-			<input type="hidden" id="obnum" value="${obnum} ">
+			<button class="btn btn-success" name="cartBtn" onclick="goCart(${vo.obnum})">장바구니</button>
+<%-- 			<input type="hidden" name="bnum" value="${vo.bnum}"> --%>
 	
 		</div>
 		</div>
@@ -171,17 +171,31 @@
 
 
 	});
-	$("#cartBtn").click(function(){
-		var obnum=$("#obnum").val();
+// 	$("#cartBtn").click(function(){
+// 		var obnum=$("#obnum").val();
+// 		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
+// 			console.log("callback");
+// 			if(data=="success"){
+// 				alert("장바구니에 담았음");
+// 			}else{
+// 				alert("장바구니 담기 실패ㅜㅜ");
+// 			}
+// 		});
+// 	});
+	
+	function goCart(obnum){
+		console.log(obnum);
 		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="success"){
 				alert("장바구니에 담았음");
 			}else{
-				alert("장바구니 담기 실패ㅜㅜ");
+				alert("로그인을 해주세요.");
+				location.href = "${cp }/login";
 			}
 		});
-	});
+	}
+
 	
 	
 	function nullable(){
