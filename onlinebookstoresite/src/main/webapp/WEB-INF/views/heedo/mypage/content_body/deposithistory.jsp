@@ -432,12 +432,14 @@
 	$("#applydepositBtn").click(function(){
 		$("#applymodal").modal('hide');
 		var can_deposit=$("#can_deposit").val()
+		console.log("can:"+can_deposit);
 		var apply_deposit=$("#apply_deposit").val();
+		console.log("apply:"+apply_deposit);
 		if(!$.isNumeric(apply_deposit)){
 			$("#errmodal4").modal('show');
 			return
 		}
-		if(apply_deposit>can_deposit){
+		if(Number(apply_deposit)>=Number(can_deposit)){
 			$("#errmodal3").modal('show');
 			return;
 		}
