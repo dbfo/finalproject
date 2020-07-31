@@ -140,7 +140,6 @@ public class NonmemberController {
 		HistoryDetailInfoVo ivo=ohservice.orderinfo(bpaynum);
 	
 		String addr=ivo.getBaddr();
-		System.out.println("addr : "+addr);
 		String [] addrGroup=addr.split("\\|");
 		String addr1=addrGroup[0]; //우편번호
 		String addr2=addrGroup[1]; // 도로명주소

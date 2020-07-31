@@ -75,6 +75,9 @@ public class MyPageDao {
 		return sqlsession.insert(NAMESPACE+".applydeposit_depositTable", map);
 	}
 	
+	public int getdeposit_num() {
+		return sqlsession.selectOne(NAMESPACE+".getdeposit_num");
+	}
 	//문의내역 행수 
 	public int countQnaHistory(HashMap<String, Object>map) {
 		return sqlsession.selectOne(NAMESPACE+".countQnaHistory",map);

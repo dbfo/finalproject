@@ -177,11 +177,15 @@
 		
 	});
 	$("#search_order").click(function(){
-		console.log('11111')
 		var ordernum=$("#ordernum").val();
 		var phone=$("#phone").val();
 		if(ordernum=='' ||phone==''){
 			$("#errmodal_body").text("주문번호와 전화번호를 입력해주세요.");
+			$("#errmodal").modal('show')
+			return;
+		}
+		if(!$.isNumeric(ordernum)){
+			$("#errmodal_body").text("주문번호는 숫자만 입력가능합니다.");
 			$("#errmodal").modal('show')
 			return;
 		}

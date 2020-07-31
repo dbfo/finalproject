@@ -75,11 +75,14 @@ public class MyPageService {
 	}
 	@Transactional
 	public int applydeposit(HashMap<String, Object>map) throws Exception{
-			dao.applydeposit(map);
 			int reqmoney=(int)map.get("reqmoney");
 			int applymoney=(-1)*reqmoney;
 			map.put("applymoney", applymoney);
 			dao.applydeposit_depositTable(map);
+			int dnum=dao.getdeposit_num();
+			map.put("dnum", dnum);
+			dao.applydeposit(map);
+			
 			return 1;
 	}
 	

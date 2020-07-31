@@ -236,8 +236,11 @@
 	</select>
 	
 	<insert id="applydeposit" parameterType="hashmap">
-		insert into settlement values(SEQ_settlement_senum.nextval,#{anum},#{reqmoney},0,sysdate,null)
+		insert into settlement values(SEQ_settlement_senum.nextval,#{anum},#{reqmoney},0,sysdate,null,#{dnum})
 	</insert>
+	<select id="getdeposit_num" resultType="int">
+		select SEQ_deposit_dnum.currval from dual
+	</select>
 	
 	<insert id="applydeposit_depositTable" parameterType="hashmap">
 		insert into deposit values(SEQ_deposit_dnum.nextval,#{mnum},null,#{applymoney},sysdate,4)
