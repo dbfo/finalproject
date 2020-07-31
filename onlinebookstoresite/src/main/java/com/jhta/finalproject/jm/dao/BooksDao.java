@@ -76,6 +76,8 @@ public class BooksDao {
 	public List<BigcateVo> list2(){
 		return sqlSession.selectList(NAMESPACE + ".bcatelist");
 	}
+	
+	
 	public BooksVo detail(int num) {
 		return sqlSession.selectOne(NAMESPACE + ".detail",num);
 	}
@@ -85,6 +87,16 @@ public class BooksDao {
 	public int imginfo(int bnum) {
 		return sqlSession.selectOne(NAMESPACE + ".imginfo",bnum);
 	}
+	
+	
+	public String getsCatename(int scatenum) {
+		return sqlSession.selectOne(NAMESPACE + ".getsCatename",scatenum);
+	}
+	public String getbCatename(int bcatenum) {
+		return sqlSession.selectOne(NAMESPACE + ".getbCatename",bcatenum);
+	}
+	
+	
 	
 	public List<AllListVo> allbooklist(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".allbooklist",map);

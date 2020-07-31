@@ -22,6 +22,17 @@ public class OldBooksDao {
 	public List<OldAllListVo> oldalllist(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".oldalllist",map);
 	}
+	
+	
+	public String getosCatename(int scatenum) {
+		return sqlSession.selectOne(NAMESPACE + ".getosCatename",scatenum);
+	}
+	public String getobCatename(int bcatenum) {
+		return sqlSession.selectOne(NAMESPACE + ".getobCatename",bcatenum);
+	}
+	
+	
+	
 	public int addHit(int num) {
 		return sqlSession.update(NAMESPACE + ".hit",num);
 	}

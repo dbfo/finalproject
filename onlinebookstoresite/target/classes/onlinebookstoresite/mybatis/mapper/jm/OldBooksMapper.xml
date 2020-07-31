@@ -69,6 +69,16 @@
 	</select>
 	
 	
+	<!-- 중고   -->
+	
+	<select id="getosCatename" parameterType="int" resultType="String">
+		select scataname from smallcategory where scatenum =#{scatenum}
+	</select>
+	<select id="getobCatename" parameterType="int" resultType="String">
+		select bcataname from bigcategory where bcatenum =#{bcatenum}
+	</select>
+	
+	
 		<!-- 조회수 증가하기 -->
 	<update id="hit" parameterType="int">
 		update oldbooks set obhit=obhit+1 where obnum=#{obnum}

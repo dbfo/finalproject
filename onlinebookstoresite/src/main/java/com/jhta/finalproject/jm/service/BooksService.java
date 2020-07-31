@@ -88,6 +88,17 @@ public class BooksService {
 	public int imginfo(int bnum) {
 		return dao.imginfo(bnum);
 	}
+	
+	
+	public String getsCatename(int scatenum) {
+		return dao.getsCatename(scatenum);
+	}
+	public String getbCatename(int bcatenum) {
+		return dao.getbCatename(bcatenum);
+	}
+	
+	
+	
 	public List<AllListVo> allbooklist(HashMap<String, Object> map){
 		return dao.allbooklist(map);
 	}

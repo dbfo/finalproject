@@ -63,11 +63,20 @@
 	<select id="bcatelist" resultType="bigcate">
 		select * from bigcategory order by bcatenum asc
 	</select>
-	
+<!-- 	검색창 	-->
+
 	<select id="scatelist" parameterType="int" resultType="smallcate">
 		select * from smallcategory where bcatenum=#{bcatenum} order by scatenum asc
 	</select>
 	
+	<select id="getsCatename" parameterType="int" resultType="String">
+		select scataname from smallcategory where scatenum =#{scatenum}
+	</select>
+	<select id="getbCatename" parameterType="int" resultType="String">
+		select bcataname from bigcategory where bcatenum =#{bcatenum}
+	</select>
+	
+<!-- /////////////// -->
 	
 	<select id="bbooklist" parameterType="int" resultType="book">
 		

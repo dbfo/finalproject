@@ -76,6 +76,10 @@ public class OldListController {
 		System.out.println("scate2가 뭐냐?" + scate2);
 		System.out.println("bcate2가 뭐임?" + bcate2);
 		
+		String scatename=service.getosCatename(scate2);
+		String bcatename=service.getobCatename(bcate2);
+		System.out.println("scatename가 뭐냐?" + scatename);
+		System.out.println("bcatename가 뭐임?" + bcatename);
 		System.out.println(pu.getStartRow()+"/"+pu.getEndRow()+"/"+scate2);
 		
 		List<OldAllListVo> oldsclist=service.oldsclist(map);
@@ -88,6 +92,8 @@ public class OldListController {
 		mv.addObject("scatenum", scate2);
 		mv.addObject("keyword", keyword);
 		mv.addObject("bcatenum", bcate2);
+		mv.addObject("bcatename",bcatename);
+		mv.addObject("scatename",scatename);
 		System.out.println("==========================================================");
 		return mv;
 	}

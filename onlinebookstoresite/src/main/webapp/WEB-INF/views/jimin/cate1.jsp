@@ -23,12 +23,10 @@
 					>
 					<select id="scate2" name="scate2">
 						<option>[---소 분류---]</option>
-					</select>
-
+					</select><a></a>
 <!-- 				</div> -->
 				<div id="search">
 						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
-<!-- 						<button>검색</button> -->
 				<input id="#searchclick" type="submit" value="검색~">
 				</div>
 					</form>
@@ -143,8 +141,6 @@
 				
 			}
 		});
-
-
 	});
 	
 	function goCart(bnum){
@@ -159,20 +155,6 @@
 			}
 		});
 	}
-	/* 
-	$("button[name='cartBtn']").click(function(){
-		var bnum=$("input[name='bnum']").val();
-		console.log(bnum);
-		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
-			console.log("callback");
-			if(data=="success"){
-				alert("장바구니에 담았음");
-			}else{
-				alert("로그인을 해주세요.");
-				location.href = "${cp }/login";
-			}
-		});
-	}); */
 
 	function nullable(){
 		 var bc3= "[--- 대 분류 ---]" ;
@@ -184,6 +166,9 @@
 		 else{
 			 return true;
 		 }
+	}
+	function cateval(){
+		
 	}
 	
 </script>

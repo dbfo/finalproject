@@ -15,14 +15,16 @@
 					<form method="post" action="oldsclist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
-						<option>[---대 분류---]</option>
+<!-- 						<option>[---대 분류---]</option> -->
+						<option value="${bcatenum}" selected="selected">${bcatename}</option>
 					<c:forEach var="vo" items="${bclist }">	
 						<option value="${vo.bcatenum }">${vo.bcataname }</option>
 					</c:forEach>
 					</select>
 					>
 					<select id="scate2" name="scate2">
-						<option>[---소 분류---]</option>
+<!-- 						<option>[---소 분류---]</option> -->
+						<option value="${scatenum}" selected="selected">${scatename}</option>
 					</select>
 
 <!-- 				</div> -->

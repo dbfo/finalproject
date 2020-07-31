@@ -122,7 +122,10 @@ public class ListController {
 		
 		System.out.println("scate2가 뭐냐?" + scate2);
 		System.out.println("bcate2가 뭐임?" + bcate2);
-		
+		String scatename=service.getsCatename(scate2);
+		String bcatename=service.getbCatename(bcate2);
+		System.out.println("scatename가 뭐냐?" + scatename);
+		System.out.println("bcatename가 뭐임?" + bcatename);
 		System.out.println(pu.getStartRow()+"/"+pu.getEndRow()+"/"+scate2);
 		
 		List<AllListVo> sbooklist1=service.sbooklist1(map);
@@ -136,6 +139,8 @@ public class ListController {
 		mv.addObject("keyword", keyword);
 		mv.addObject("bcatenum", bcate2);
 		mv.addObject("bnum",bnum);
+		mv.addObject("bcatename",bcatename);
+		mv.addObject("scatename",scatename);
 		System.out.println("==========================================================");
 		return mv;
 	}

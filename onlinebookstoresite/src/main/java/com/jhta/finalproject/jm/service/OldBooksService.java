@@ -30,4 +30,12 @@ public class OldBooksService {
 		return dao.oldsccount(map);
 	}
 	
+	
+	public String getosCatename(int scatenum) {
+		return dao.getosCatename(scatenum);
+	}
+	public String getobCatename(int bcatenum) {
+		return dao.getobCatename(bcatenum);
+	}
+	
 }
