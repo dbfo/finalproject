@@ -91,7 +91,7 @@ public class OrderController {
 	//================== 중고상품 주문 컨트롤러 끝 ===========================//
 	@RequestMapping(value="/order/directUsedOrder")
 	public String directUsedOrder(int obnum,int bcount,Model model,HttpSession session) {
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/jh/jhobupload";
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=0; //비회원 회원번호 0번으로 가정함.
 		if(smnum!=null) {
@@ -370,7 +370,7 @@ public class OrderController {
 	// 바로 주문하기 눌렀을때  (( 책번호랑 몇개주문했는지 bcount 받아야함 )):
 	@RequestMapping(value="/order/directorder")
 	public String directOrder(HttpSession session,int bnum,int bcount,Model model) {
-		String path=session.getAttribute("cp")+"/resources/hd/image";
+		String path=session.getAttribute("cp")+"/resources/imgUpload";
 		String smnum=(String)session.getAttribute("mnum");
 		int mnum=0; //비회원 회원번호 0번으로 가정함.
 		if(smnum!=null) {

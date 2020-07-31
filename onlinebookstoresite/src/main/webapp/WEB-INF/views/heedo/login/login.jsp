@@ -76,18 +76,18 @@
 									<p class="login-card-description">주문조회</p>
 									<form action="#!">
 										<div class="form-group">
-											<label for="email" class="sr-only">주문번호</label> <input
+											<label for="ordernum" class="sr-only">주문번호</label> <input
 												type="text" name="ordernum" id="ordernum" class="form-control"
 												placeholder="주문번호를 입력하세요">
 										</div>
 										<div class="form-group mb-4">
-											<label for="password" class="sr-only">이메일</label> <input
-												type="email" name="email" id="email"
-												class="form-control" placeholder="이메일을 입력하세요">
+											<label for="phone" class="sr-only">전화번호</label> <input
+												type="text" name="phone" id="phone"
+												class="form-control" placeholder="전화번호를 입력하세요(-포함)">
 										</div>
-										<input name="login" id="confirm"
+										<input name="login" id="search_order"
 											class="btn btn-block login-btn mb-4" type="button"
-											value="확인">
+											value="조회">
 									</form>
 									<a href="#!" class="forgot-password-link">주문번호를 잊어버리셨습니까?</a>
 									<p class="login-card-footer-text">
@@ -106,6 +106,47 @@
 	</main>
 	
 </body>
+<div id="errmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">에러</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="errmodal_body">
+        	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="alertmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ccccff">
+       <h4 class="modal-title" style="color:white">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="alertmodal_body">
+        	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <script src="${cp }/resources/hd/js/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="${cp }/resources/hd/js/bootstrap.min.js"></script>
@@ -114,7 +155,8 @@
 		var id=$("#id").val();
 		var pwd=$("#pwd").val();
 		if(id=='' ||pwd==''){
-			alert("아이디와 비밀번호를 적어주세요.")
+			$("#errmodal_body").text("아이디와 비밀번호를 적어주세요.");
+			$("#errmodal").modal('show')
 		}else{
 			$.ajax({
 				url:"/finalproject/loginCheck",
@@ -123,7 +165,8 @@
 				dataType:"json",
 				success:function(data){
 					if(data.result=="fail"){
-						alert("로그인 실패!")
+						$("#errmodal_body").text("로그인에러 발생!");
+						$("#errmodal").modal('show')
 					}else{
 						window.location.href="/finalproject/";
 					}
@@ -133,6 +176,39 @@
 		}
 		
 	});
+	$("#search_order").click(function(){
+		console.log('11111')
+		var ordernum=$("#ordernum").val();
+		var phone=$("#phone").val();
+		if(ordernum=='' ||phone==''){
+			$("#errmodal_body").text("주문번호와 전화번호를 입력해주세요.");
+			$("#errmodal").modal('show')
+			return;
+		}
+		$.ajax({
+			url:"/finalproject/nomem/inquiryorder",
+			data:{bpaynum:ordernum,phone:phone},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="nothing"){
+					$("#alertmodal_body").text("존재하지 않는 주문입니다. 주문번호와 전화번호를 확인해주세요.")
+					$("#alertmodal").modal('show')
+				}else if(data.result=="applycancel"){
+					$("#alertmodal_body").text("반품/교환신청된 주문입니다")
+					$("#alertmodal").modal('show')
+				}else if(data.result=="confirmcancel"){
+					$("#alertmodal_body").text("반품/교환완료된 주문입니다")
+					$("#alertmodal").modal('show')	
+				}else if(data.result=="cancelorder"){
+					$("#alertmodal_body").text("취소처리된 주문입니다.")
+					$("#alertmodal").modal('show')		
+				}else if(data.result=="success"){
+					
+				}
+			}
+		});
+	})
 	
 </script>
 </html>

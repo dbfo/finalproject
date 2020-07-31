@@ -221,11 +221,24 @@
 		shipAddr();
 		usablepoint();
 		finalprice();
-		$("#order_container").css({
-			width:"1140",
-			height:"1250"
-		})
+		defaultSetting();
 	});
+	var defaultSetting=function(){
+		var tr=0;
+		$("#productTable > tbody tr").each(function(){
+			tr+=1;
+		});
+		
+		var allHeight=1320;
+		
+		if(tr>=2){
+			allHeight+=158*(tr-1);
+		}
+		$("#order_container").css("height",allHeight);
+		$("#order_container").css("width",1140);
+	
+		/////////////////////////////////////////////
+	}
 	//상세주소 입력시.
 	$("#addr4").on('keyup',function(){
 		var addr4=$("#addr4").val();
