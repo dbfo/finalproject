@@ -204,7 +204,21 @@
 					$("#alertmodal_body").text("취소처리된 주문입니다.")
 					$("#alertmodal").modal('show')		
 				}else if(data.result=="success"){
-					
+					var bpaynum1=data.bpaynum;
+					var btype1=data.btype;
+					var action="";
+					if(btype1==1){
+						action="${cp}/orderhistory/detailview1";
+					}else{
+						action="${cp}/orderhistory/useddetailview1";
+					}
+					var form=$('<form></form>');
+					form.attr("action",action);
+		    		form.attr('method','post');
+		    		form.appendTo('body');
+					var bpaynum2="<input type='hidden' name='bpaynum' value="+bpaynum1+">"
+					form.append(bpaynum2);
+					form.submit();
 				}
 			}
 		});
