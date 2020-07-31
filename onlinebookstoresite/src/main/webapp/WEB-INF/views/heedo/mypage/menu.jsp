@@ -11,6 +11,7 @@
 		내 등급 : <%=session.getAttribute("grade") %>
 	</span>
 </div>
+
 <table class="table table-striped" id="menubar">
 	<tr>
 		<th scope="col">주문내역</th>
