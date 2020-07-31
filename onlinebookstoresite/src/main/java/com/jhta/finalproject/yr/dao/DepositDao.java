@@ -23,9 +23,17 @@ public class DepositDao {
 	public int updateSestatus(int senum) {
 		return session.update(NAMESPACE+".updateSestatus", senum);
 	}
-	public int decreaseDeposit(HashMap<String, Object> map) {
-		return session.insert(NAMESPACE+".decreaseDeposit", map);
-	}	
+	
+	//seatatus의 dnum에 상태 업데이트하기
+	public int updateDeposit(int dnum) {
+		return session.update(NAMESPACE+".updateDeposit", dnum);
+	}
+	
+	//dnum가져오기
+	public int getDnum(int senum) {
+		return session.selectOne(NAMESPACE+".getDnum", senum);
+	}
+
 	
 	//갯수세기
 	public int getCount(HashMap<String, Object> map){

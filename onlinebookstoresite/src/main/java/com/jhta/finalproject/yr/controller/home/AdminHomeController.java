@@ -41,9 +41,9 @@ public class AdminHomeController {
 		List<MethodPaymentInfoVo> mivo = sservice.getThreeDayMethodpaymentInfo();
 		List<String> days = getThreeDate();
 
-		for (MethodPaymentInfoVo methodPaymentInfoVo : mivo) {
-			System.out.println(methodPaymentInfoVo);
-		}
+//		for (MethodPaymentInfoVo methodPaymentInfoVo : mivo) {
+//			System.out.println(methodPaymentInfoVo);
+//		}
 		
 		
 		//3일 결제수단별 건수, 금액 결과 리스트에 담기
@@ -102,11 +102,11 @@ public class AdminHomeController {
 			}
 		}
 		
-		for (HashMap<String, Object> hashMap : threedayResult) {
-			for (String key : hashMap.keySet()) {
-				System.out.println(key + " : " + hashMap.get(key));
-			}
-		}
+//		for (HashMap<String, Object> hashMap : threedayResult) {
+//			for (String key : hashMap.keySet()) {
+//				System.out.println(key + " : " + hashMap.get(key));
+//			}
+//		}
 
 		model.addAttribute("cscount", cscount);
 		model.addAttribute("ordercount", ordercount);

@@ -75,9 +75,16 @@
 		update settlement set sestatus = 1,  comdate = sysdate where senum = #{senum}
 	</update>
 	
-<!-- 	예치금 돈으로 반환 -->
-	<insert id="decreaseDeposit" parameterType="hashmap">
-		insert into deposit values (SEQ_DEPOSIT_DNUM.nextval, #{mnum}, null, #{dtran}, sysdate, 3)
-	</insert>
+<!-- 	dnum가지고 오기	 -->
+	<select id="getDnum" parameterType="int">
+		select dnum from settlement where senum = #{senum}
+	</select>
+	
+<!-- 	deposit상태 업테이트 하기 -->
+	<update id = "updateDeposit" parameterType="int">
+		update deposit set dereason = 3 where dnum = #{dnum} 
+	</update>
+	
+
 
 </mapper>

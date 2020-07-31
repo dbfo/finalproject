@@ -44,8 +44,8 @@
 								</c:choose>
 								</td>	
 								<td rowspan="2">${vo.mname }</td>
-								<td rowspan="2"><input type="checkbox" id = "chb" <c:if test = "${vo.paymentbook[0].btype == 2 }">disabled</c:if>></td>
-								<td rowspan="1"><select id="courier" name="courier">
+								<td rowspan="2"><input type="checkbox" class = "chb" <c:if test = "${vo.paymentbook[0].btype == 2 }">disabled</c:if>></td>
+								<td rowspan="1"><select class="courier" name="courier">
 										<option value=''>--택배사 선택--</option>
 										<option value='cj'>CJ대한통운</option>
 										<option value='post'>우체국</option>
@@ -124,8 +124,8 @@
 		var index = $('input[name=saveBtn]').index(this);
 		
 		var tnum = $('input[name=transportNumber]').eq(index).val();
-		var courier = $('#courier').eq(index).val();
-		var chb = $('#chb').eq(index).prop('checked');
+		var courier = $('.courier').eq(index).val();
+		var chb = $('.chb').eq(index).prop('checked');
 		var bpaynum = $('.bpaynum').eq(index).text();
 		var bpaynumArr = new Array();
 		

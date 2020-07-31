@@ -107,13 +107,13 @@
 										<td>${book.btitle}</td>
 										<td>${book.count}</td>
 										<td>${book.bprice}</td>
-										<td><c:out value = "${ book.point/book.bcount}"/></td>
+										<td><c:out value = "${book.point/book.bcount}"/></td>
 									</tr>
 								</c:if>
 							</c:forEach>
 									<tr>
 										<td colspan="6" align="right">
-											<button type="button" class="btn btn-success btn-md" <c:if test = "${length == statusCount}">disabled</c:if>
+											<button type="button" class="btn btn-success btn-md" <c:if test = "${count == statusCount}">disabled</c:if>
 												onclick = "clickPickupBtn(${length})" id="pickupBtn">
 												수거 완료
 											</button>
@@ -169,8 +169,8 @@
 				</tr>
 				<tr>
 					<td colspan="3" align="right" >
-							<button type="button" class="btn btn-success btn-md"
-								id="giveBtn" onclick = "clickGiveBtn(${List[0].bpaynum },${returnPrice},${Point })">예치금 전달</button>
+						<button type="button" class="btn btn-success btn-md"
+							id="giveBtn" onclick = "clickGiveBtn(${List[0].bpaynum },${returnPrice},${Point })">예치금 전달</button>
 					</td>
 				</tr>
 
@@ -190,11 +190,14 @@
 		var tdArr = new Array();
 		var idxArr = new Array();
 		var checkbox = $("input[type=checkbox]:checked");
-	
+		
+		alert("길이 : " + checkbox.length);
+			
 		if(checkbox.length == 0){
 			alert("수거한 상품을 체크를 해주세요..")
 			return 
 		}
+		
 		checkbox.each(function(i){
 			// checkbox.parent() : checkbox의 부모는 <td>이다.
 			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
@@ -229,7 +232,7 @@
 	
 	
 	function ajpickUpfunction(length,paymentbookNum,idxArr){
-
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/returnPickup",
 			dataType : "json",
@@ -245,7 +248,7 @@
 						 $("#pickupBtn").prop("disabled","disabled")
 					 }
 				}else{
-					alert("처리 실패 하셨습니다.")					
+					alert("처리 실패 하셨습니다.");					
 				}
 			}
 		})		

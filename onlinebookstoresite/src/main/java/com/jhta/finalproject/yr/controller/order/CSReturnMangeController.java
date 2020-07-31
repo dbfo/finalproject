@@ -34,6 +34,8 @@ public class CSReturnMangeController {
 		
 		List<PaymentAndCSBookListVo> list = service.paymentList(map);
 		int point = 0;
+		int count = 0; // 반품처리할 책
+		
 		for (PaymentAndCSBookListVo vo : list) {
 			
 			List<CSAndPaymentBookVo> csbook = vo.getCSAndPaymentBook();
@@ -45,12 +47,14 @@ public class CSReturnMangeController {
 					}else{
 						point += csvo.getPoint();
 					}
+					count++ ;
 				}
 			}
 		}
 		
-		System.out.println(point);
+//		System.out.println(point);
 		
+		model.addAttribute("count", count);
 		model.addAttribute("List", list);
 		model.addAttribute("Point", point);
 		
@@ -68,17 +72,16 @@ public class CSReturnMangeController {
 		map.put("status",2);
 		map.put("paymentbook_num", paymentbookNum);
 		
-		int n = service.updateStatus(map);
+//		int n = service.updateStatus(map);
 		
-		System.out.println(n);
 		
 		JSONObject json = new JSONObject();
 		
-		if(n>0) {
+//		if(n>0) {
 			json.put("code", "success");
-		}else {
-			json.put("code", "error");
-		}
+//		}else {
+//			json.put("code", "error");
+//		}
 		
 		return json.toString();
 	}

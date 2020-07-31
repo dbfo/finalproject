@@ -19,7 +19,7 @@
 				</div>
 				<div
 					class="card-footer active d-flex align-items-center justify-content-between">
-					<a class="small stretched-link" href="#">> 주문으로 바로가기</a>
+					<a class="small stretched-link" href="${pageContext.request.contextPath}/totalOrder">> 주문으로 바로가기</a>
 					<div class="small text-white">
 						<i class="fas fa-angle-right"></i>
 					</div>
@@ -34,7 +34,7 @@
 				</div>
 				<div
 					class="card-footer active d-flex align-items-center justify-content-between">
-					<a class="small stretched-link" href="#">> 결제바로가기</a>
+					<a class="small stretched-link" href="${pageContext.request.contextPath}/ship/menu?PageName=0&type=1">> 결제바로가기</a>
 					<div class="small text-white">
 						<i class="fas fa-angle-right"></i>
 					</div>
@@ -49,7 +49,7 @@
 				</div>
 				<div
 					class="card-footer active d-flex align-items-center justify-content-between">
-					<a class="small stretched-link" href="#">> CS관리 바로가기</a>
+					<a class="small stretched-link" href="${pageContext.request.contextPath}/cs/menu?PageName=1">> CS관리 바로가기</a>
 					<div class="small text-white">
 						<i class="fas fa-angle-right"></i>
 					</div>
@@ -64,7 +64,7 @@
 				</div>
 				<div
 					class="card-footer active d-flex align-items-center justify-content-between">
-					<a class="small stretched-link" href="#">> QnA관리 바로가기</a>
+					<a class="small stretched-link" href="${pageContext.request.contextPath }/unAnswerList">> QnA관리 바로가기</a>
 					<div class="small text-white">
 						<i class="fas fa-angle-right"></i>
 					</div>

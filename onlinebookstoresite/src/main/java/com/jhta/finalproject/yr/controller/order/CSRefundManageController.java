@@ -25,11 +25,10 @@ public class CSRefundManageController {
 			@RequestParam(value="mnum[]") List<Integer> mnum,
 			@RequestParam(value="priceArr[]") List<Integer> priceArr) {
 			
-		//settlement 상태 바꾸기(상태, 정산 완료날짜)
-		//예치금 요청 금액 만큼 빼기
+		//settlement, Deposit 상태 바꾸기(상태, 정산 완료날짜)
 		int n = 0;
 		try {
-			n = rfservcie.updateSestausAndDecreaseDeposit(senum, mnum, priceArr);			
+			n = rfservcie.updateSestausAndUpdateDeposit(senum, mnum, priceArr);			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
