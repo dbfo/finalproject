@@ -127,56 +127,28 @@
 					</thead>
 					<tbody>
 						<tr>
-							<c:set var = "length" value = "${fn:length(mivo)}"/>
 							<th class="table-active">무통장</th>
-							<c:forEach var="days" items="${days }">
-								<c:set var = "j" value = "0"/>
-								<c:forEach var="mivo" items="${mivo }">
-									<c:set var = "j" value = "${j+1}"/>
-									<c:if test="${mivo.methodpayment == 0}">
-										<c:choose>
-											<c:when test="${days == mivo.bpayment }">
-												<td>${mivo.count}</td>																				
-												<td>${mivo.price}</td>																				
-											</c:when>
-											<c:when test = "${length-1 == j }">
-												<td>0</td>										
-												<td>0</td>																				
-											</c:when>
-										</c:choose>							
-									</c:if>
+							<c:forEach  var="threedayResult" items="${threedayResult }">
+								<c:forEach  var="map" items="${threedayResult}">
+									<c:if test="${map.value.methodpayment == 0 }">
+										<td>${map.value.count }</td>
+										<td>${map.value.price }</td>
+									</c:if>								
 								</c:forEach>
-								<c:if test = "${mivo == null }">
-									<td>0</td>										
-									<td>0</td>																				
-								</c:if>
 							</c:forEach>
 						</tr>
-						<tr >
+						<tr>
 							<th class="table-active">카드</th>
-							<c:forEach var="days" items="${days}">
-								<c:set var="i" value="0"/>
-								<c:set var = "i" value = "${i+1}"/>
-								<c:forEach var="mivo" items="${mivo }">
-									<c:if test="${mivo.methodpayment == 1}">
-										<c:choose>
-											<c:when test="${days == mivo.bpayment }">
-												<td>${mivo.count}</td>																				
-												<td>${mivo.price}</td>																				
-											</c:when>
-											<c:when test = "${length-1 == i }">
-												<td>0</td>										
-												<td>0</td>										
-											</c:when >
-										</c:choose>							
-									</c:if>
+							<c:forEach  var="threedayResult" items="${threedayResult }">
+								<c:forEach  var="map" items="${threedayResult}">
+									<c:if test="${map.value.methodpayment == 1 }">
+										<td>${map.value.count }</td>
+										<td>${map.value.price }</td>
+									</c:if>								
 								</c:forEach>
-								<c:if test = "${length-1 == i}">
-									<td>0</td>										
-									<td>0</td>																				
-								</c:if>
 							</c:forEach>
 						</tr>
+						
 					</tbody>
 				</table>
 			</div>
