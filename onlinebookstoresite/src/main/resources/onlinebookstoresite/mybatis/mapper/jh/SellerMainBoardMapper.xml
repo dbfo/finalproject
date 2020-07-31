@@ -25,14 +25,14 @@
 		select NVL(count(distinct(pay)),0) count from (
 		   select bp.bpaynum pay from 
 		   bpayment b,oldbooks o,paymentbook bp,members m 
-		   where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum 
+		   where o.snum=#{snum} and b.bstatus=#{bstatus} and b.bpaynum=bp.bpaynum and bp.btype=2
 		   and bp.bnum=o.obnum and m.mnum=b.mnum and borderdate >= TO_DATE(add_months(sysdate,-1)))
 	</select>
 	<!-- 최근 한달 정산조회 -->
 	<select id="getObcompleteCount" resultType="int" parameterType="hashmap">
 		select count(DISTINCT(b.bpaynum)) count 
 		from bpayment b, paymentbook bp, oldbooks o, members m, obcomplete ob 
-		where b.bpaynum=bp.bpaynum and bp.bnum=o.obnum and b.mnum=m.mnum and snum=#{snum} and b.bstatus=3 and bp.paymentbook_num=ob.paymentbook_num
+		where b.bpaynum=bp.bpaynum and bp.bnum=o.obnum and b.mnum=m.mnum and snum=#{snum} and b.bstatus=3 and bp.btype=2 and bp.paymentbook_num=ob.paymentbook_num
 		and ob.bocomstatus=#{bocomstatus} and feedate >= TO_DATE(add_months(sysdate,-1))
 	</select>
 	<!-- 최근한달 미답변 Qna -->

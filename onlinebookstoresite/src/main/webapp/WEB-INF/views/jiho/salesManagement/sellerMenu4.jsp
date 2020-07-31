@@ -119,8 +119,8 @@
 							<td scope="col" rowspan="2" width="120" style="text-align: center">
 								<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
 							</td>
-							<td scope="col" style="text-align: right;">${vo.ordermoney}원</td>
-							<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney}원</td>
+							<td scope="col" style="text-align: right;">${vo.bfinalmoney}원</td>
+							<td scope="col" rowspan="2" style="text-align: right;">${vo.ordermoney}원</td>
 							<td scope="col" rowspan="2" width="120" style="text-align: right;">${vo.feepay }원</td>
 							<td scope="col" rowspan="2" width="120" style="text-align: right;">${vo.settlement }원</td>
 						</tr>

@@ -114,8 +114,8 @@
 							▶상품명 : ${book.obname } | 수량 : 1개 | 상품금액 : ${book.obsaleprice }원<br>
 						</c:forEach>
 					</td>
-					<td scope="col" style="text-align: right;" >${vo.ordermoney }원</td>
-					<td scope="col" rowspan="2" style="text-align: right;">${vo.bfinalmoney } 원</td>
+					<td scope="col" style="text-align: right;" >${vo.bfinalmoney }원</td>
+					<td scope="col" rowspan="2" style="text-align: right;">${vo.ordermoney } 원</td>
 					<td scope="col" rowspan="2" style="text-align: center">
 						<fmt:formatDate value="${vo.bpaydate }" pattern="yyyy-MM-dd"/>
 					</td> 
