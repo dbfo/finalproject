@@ -17,6 +17,10 @@ public class MembersPointService {
 	public int getTotPoint(int mnum) {
 		return dao.getTotPoint(mnum);
 	}
+	//현재 회원 등급 가져오기
+	public String getGrade(int mnum) {
+		return dao.getGrade(mnum);
+	}
 	
 	//회원포인트리스트 가져오기
 	public List<MembersPointVo> getPointList(HashMap<String, Object> map){

@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MemberService;
 import com.jhta.finalproject.hd.vo.LoginCheckVo;
+import com.jhta.finalproject.jh.service.MembersPointService;
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private MembersPointService pointService;
+	
 	//로그인화면으로 이동..
 		@RequestMapping("/login")
 		public String moveloginPage() {
@@ -37,9 +41,13 @@ public class MemberController {
 				session.setAttribute("mnum", vo.getMnum());
 				session.setAttribute("mid", vo.getMid());
 				session.setAttribute("snum", vo.getSnum());
+				session.setAttribute("point", pointService.getTotPoint(Integer.parseInt(vo.getMnum())));//포인트 세션에 저장
+				session.setAttribute("grade", pointService.getGrade(Integer.parseInt(vo.getMnum())));//등급 세션에 저장
 			}else {
 				session.setAttribute("mnum", vo.getMnum());
 				session.setAttribute("mid", vo.getMid());
+				session.setAttribute("point", pointService.getTotPoint(Integer.parseInt(vo.getMnum())));//포인트 세션에 저장
+				session.setAttribute("grade", pointService.getGrade(Integer.parseInt(vo.getMnum())));//등급 세션에 저장
 			}
 			JSONObject json=new JSONObject();
 			json.put("result", result);

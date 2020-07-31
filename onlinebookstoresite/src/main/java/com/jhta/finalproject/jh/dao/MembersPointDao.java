@@ -20,6 +20,11 @@ public class MembersPointDao {
 		return sqlSession.selectOne(NAMESPACE+".getTotPoint", mnum);
 	}
 	
+	//현재 회원 등급 가져오기
+	public String getGrade(int mnum) {
+		return sqlSession.selectOne(NAMESPACE+".getGrade", mnum);
+	}
+	
 	//회원포인트리스트 가져오기
 	public List<MembersPointVo> getPointList(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE+".getPointList", map);
