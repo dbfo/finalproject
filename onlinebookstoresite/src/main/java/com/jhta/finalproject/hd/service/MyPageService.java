@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.finalproject.hd.dao.MyPageDao;
 import com.jhta.finalproject.hd.vo.AccountVo;
@@ -72,8 +73,14 @@ public class MyPageService {
 	public AccountVo selectAccount(int mnum) {
 		return dao.selectAccount(mnum);
 	}
-	public int applydeposit(HashMap<String, Object>map) {
-		return dao.applydeposit(map);
+	@Transactional
+	public int applydeposit(HashMap<String, Object>map) throws Exception{
+			dao.applydeposit(map);
+			int reqmoney=(int)map.get("reqmoney");
+			int applymoney=(-1)*reqmoney;
+			map.put("applymoney", applymoney);
+			dao.applydeposit_depositTable(map);
+			return 1;
 	}
 	
 	

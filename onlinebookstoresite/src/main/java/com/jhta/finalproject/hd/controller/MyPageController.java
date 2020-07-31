@@ -592,9 +592,12 @@ public class MyPageController {
 			System.out.println("value:"+value);
 			//value-> all : 전체  , sellmoney -> 판매대금 (0) 주문취소(1) 반품/환불처리(2) 계좌인출(3)
 			int totalcount=service.countDeposithistory(datemap);
+			System.out.println("totalcount:"+totalcount);
 			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 			datemap.put("startRow", pu.getStartRow());
 			datemap.put("endRow", pu.getEndRow());
+			System.out.println("시작열 : "+pu.getStartRow());
+			System.out.println("끝열 : "+pu.getEndRow());
 			List<DepositHistoryVo> list=service.deposithistory(datemap);
 			JSONArray jarr=new JSONArray();
 			int total_deposit=0;
@@ -614,7 +617,9 @@ public class MyPageController {
 				}else if(status==2) {
 					statusStr="반품/환불";
 				}else if(status==3) {
-					statusStr="계좌인출";
+					statusStr="인출완료";
+				}else if(status==4) {
+					statusStr="인출신청";
 				}
 				json.put("status", statusStr);
 				jarr.put(json);
@@ -693,15 +698,24 @@ public class MyPageController {
 			AccountVo vo=service.selectAccount(mnum);
 			int anum=vo.getAnum();
 			HashMap<String, Object>datamap=new HashMap<String, Object>();
+			datamap.put("mnum", mnum);
 			datamap.put("anum", anum);
 			datamap.put("reqmoney", deposit);
-			int n=service.applydeposit(datamap);
-			boolean result=false;
-			if(n>0) {
-				result=true;
+			int n=0;
+			try {
+				n=service.applydeposit(datamap);
+				boolean result=false;
+				if(n>0) {
+					result=true;
+				}
+				JSONObject json=new JSONObject();
+				json.put("result", result);
+				return json.toString();
+			}catch(Exception e) {
+				JSONObject json=new JSONObject();
+				json.put("result", false);
+				return json.toString();
 			}
-			JSONObject json=new JSONObject();
-			json.put("result", result);
-			return json.toString();
+			
 		}
 }

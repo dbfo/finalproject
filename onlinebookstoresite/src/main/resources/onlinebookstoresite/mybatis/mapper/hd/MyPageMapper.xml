@@ -163,7 +163,7 @@
 				select * from deposit where mnum=#{mnum} and
 				<choose>
 					<when test="value=='all'">
-						dereason in(0,1,2,3) 
+						dereason in(0,1,2,3,4) 
 					</when>
 					<when test="value=='sellmoney'">
 						dereason=0
@@ -173,6 +173,9 @@
 					</when>
 					<when test="value=='return'">
 						dereason=2
+					</when>
+					<when test="value=='apply'">
+						dereason=4
 					</when>
 					<otherwise>
 						dereason=3
@@ -192,7 +195,7 @@
 				select * from deposit where mnum=#{mnum} and
 				<choose>
 					<when test="value=='all'">
-						dereason in(0,1,2,3) 
+						dereason in(0,1,2,3,4) 
 					</when>
 					<when test="value=='sellmoney'">
 						dereason=0
@@ -202,6 +205,9 @@
 					</when>
 					<when test="value=='return'">
 						dereason=2
+					</when>
+					<when test="value=='apply'">
+						dereason=4
 					</when>
 					<otherwise>
 						dereason=3
@@ -231,6 +237,10 @@
 	
 	<insert id="applydeposit" parameterType="hashmap">
 		insert into settlement values(SEQ_settlement_senum.nextval,#{anum},#{reqmoney},0,sysdate,null)
+	</insert>
+	
+	<insert id="applydeposit_depositTable" parameterType="hashmap">
+		insert into deposit values(SEQ_deposit_dnum.nextval,#{mnum},null,#{applymoney},sysdate,4)
 	</insert>
 	
 	<!-- 마이페이지 메인관련 sql문 -->

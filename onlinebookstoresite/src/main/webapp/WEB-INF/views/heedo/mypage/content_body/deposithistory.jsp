@@ -25,7 +25,8 @@
 						<option value="sellmoney">판매대금</option>
 						<option value="ordercancel">주문취소</option>
 						<option value="return">반품/환불처리</option>
-						<option value="withdraw">계좌인출</option>
+						<option value="withdraw">인출완료</option>
+						<option value="apply">인출신청</option>
 					</select>
 				</div>
 			<table class="table" id="depositTable">
@@ -361,6 +362,12 @@
 		var value=$("#depositSelect").val();
 		viewDepositlist(startDay,endDay,1,value);	
 	});
+	 $('#successmodal1').on('hidden.bs.modal', function (e) {
+		var startDay=$("#date1").val();
+		var endDay=$("#date2").val();
+		var value=$("#depositSelect").val();
+		viewDepositlist(startDay,endDay,1,value);
+	});
 	$("#withdrawApply").click(function(){
 		var total_deposit=$(this).data('total_deposit');
 		console.log('total :'+total_deposit)
@@ -490,6 +497,9 @@
 						}
 										
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
+							console.log("i:"+i);
+							console.log("startPn:"+item.startPageNum)
+							console.log("endPn:"+item.endPageNum)
 							var yy=item.startDay;
 							var mm=item.endDay;
 							if(i==item.pageNum){
@@ -714,7 +724,7 @@
 		font-size:14px;
 		border:2px solid grey;
 		width:907px;
-		height:435px;
+		height: 455px;
 		padding:5px;
 	}
 	#btnDiv{
