@@ -35,9 +35,11 @@
 						</div>
 					</div>
 					
-					<div id="imgDiv">
-						<img style="max-width: 1300px" src="${pageContext.request.contextPath}/resources/imgUpload/${imgVO2.imgsavefilename}" />
-					</div>
+					<c:if test="${!empty imgVO2 }">
+						<div id="imgDiv">
+							<img style="max-width: 1300px" src="${pageContext.request.contextPath}/resources/imgUpload/${imgVO2.imgsavefilename}" />
+						</div>
+					</c:if>
 					<div class="row">
 						<div class="col-md-12">
 							<div id="introTextDiv" style="font-size: 30px; font-weight: 600;">[소개글]</div>
