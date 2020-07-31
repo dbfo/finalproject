@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="getImgInfo" resultType="bookimg" parameterType="int">
-		select * from img where bnum = #{bnum}
+		select * from img where bnum = #{bnum} and btype = 1 
 	</select>
 	
 	<!-- 검색을 위한 sql -->
