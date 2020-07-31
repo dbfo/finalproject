@@ -56,7 +56,7 @@
 							<a  style="font-size:20px; color:green;" href="obdetail?obnum=${vo.obnum}&snum=${vo.snum}">
 								<input type="hidden" name="" value="${vo.obname }">  
 								
-								<c:set var="TextValue" value="${vo.btitle }"/>
+								<c:set var="TextValue" value="${vo.obname }"/>
 								<c:set var="TextLength" value="${fn:length(TextValue) }"/>
 								<c:if test="${TextLength >= 17}">
 									<strong name="btitle">
@@ -202,11 +202,14 @@
 		console.log(obnum);
 		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
 			console.log("callback");
-			if(data=="success"){
-				alert("장바구니에 담았음");
-			}else{
-				alert("로그인을 해주세요.");
-				location.href = "${cp }/login";
+			if(data=="already"){
+				alert("이미 장바구니에 담긴 상품입니다.");
+				location.href = "${cp }/pay/cart";
+			}else if(data=="success"){
+				alert("장바구니에 담았습니다.");
+			}else if(data=="fail"){
+			alert("로그인을 해주세요.");
+			location.href = "${cp }/login";
 			}
 		});
 	}

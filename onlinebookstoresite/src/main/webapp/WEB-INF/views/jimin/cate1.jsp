@@ -11,8 +11,7 @@
 
 		<div class="col-xl-12">
 			<div id="topcate">
-<!-- 					<div id="bcate"> -->
-<!--                  <form action="list" style="width: 550px; padding: 0px; margin: 0px; margin-left: 43px;"> -->
+
 					<form method="post" action="sbooklist" id="catesearch" name="catesearch2" onsubmit="return nullable()">
 					<br>
 					<select id="bcate2" name="bcate2" >
@@ -25,7 +24,7 @@
 					<select id="scate2" name="scate2">
 						<option>[---소 분류---]</option>
 					</select><a></a>
-<!-- 				</div> -->
+
 				<div id="search">
 						<input id="searchv" type="text" name="keyword" value="${keyword }" placeholder="예) 책 제목">
 				<input id="#searchclick" type="submit" value="검색~">
@@ -46,14 +45,14 @@
 	<div id="listwrap">
 	<div id="image">
 
-				<a href="bdetail?bnum=${vo.bnum }"> <img
+				<a href="bdetail?bnum=${vo.bnum}"> <img
 				src="${cp }/resources/imgUpload/${vo.imgsavefilename}" id="thumbnail">
 				</a>
 
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum }">
+							<a  style="font-size:20px; color:green;" href="bdetail?bnum=${vo.bnum}">
 								<input type="hidden" name="" value="${vo.btitle}">  
 								
 								<c:set var="TextValue" value="${vo.btitle }"/>
@@ -76,7 +75,7 @@
 							
 							|<fmt:formatDate value="${vo.bpublishdate }" pattern="yyyy-MM-dd" var="regdate"/>
 								<span>${regdate }</span>
-<%-- 							<span class="publication"> ${vo.bpublishdate } </span> --%>
+
 						</div>
 
 						<div class="price">
@@ -98,24 +97,17 @@
 			<br>
 			<br>
 			<button class="btn btn-success" name="cartBtn" onclick="goCart(${vo.bnum})">장바구니</button>
-<%-- 			<input type="hidden" name="bnum" value="${vo.bnum}"> --%>
 	
 		</div>
 		</div>
 	</c:forEach>
 
 	<div>
-<%-- 		<c:if test="${pu.startPageNum != 1 }"> --%>
-<%-- 			<a href="/spring10/board/list1?pageNum=${pu.startPageNum - 1 }&field=${pu.rowBlockCount}">&lt;</a> --%>
-<%-- 		</c:if> --%>
-		
-		
 		<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 			<c:when test="${i==pu.pageNum }">
 				<button style="border-style: none;border-style: ridge; width: 30px; border-radius: 5px / 5px;">
 			 	<a href="list1?pageNum=${i }&field=${field}&keyword=${keyword}">
-<%-- 			 	<span style="color:red">${i }</span> --%>
 			 	<strong style="color:red">${i }</strong>
 			 	</a>
 			 	</button>
@@ -123,17 +115,13 @@
 		 	<c:otherwise>
 		 		<button style="border-style: none;width: 30px;border-radius: 5px / 5px;">
 			 	<a href="list1?pageNum=${i }&field=${field}&keyword=${keyword}">
-<%-- 			 	<span style="color: black">${i }</span> --%>
 			 	<strong style="color:black">${i }</strong>
 			 	</a>
 			 	</button>
 		 	</c:otherwise>
 	 	</c:choose>
 		</c:forEach>
-		
-<%-- 		<c:if test="${(pu.endPageNum/10) != 0}"> --%>
-<%-- 			<a href="/spring10/board/list1?pageNum=${pu.endPageNum+1 }&rowBlockCount=${pu.totalPageCount}">&gt;</a> --%>
-<%-- 		</c:if> --%>
+
 	</div>
 </div>
 
@@ -160,11 +148,14 @@
 		console.log(bnum);
 		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount=1", function(data){
 			console.log("callback");
-			if(data=="success"){
-				alert("장바구니에 담았음");
-			}else{
-				alert("로그인을 해주세요.");
-				location.href = "${cp }/login";
+			if(data=="already"){
+				alert("이미 장바구니에 담긴 상품입니다.");
+				location.href = "${cp }/pay/cart";
+			}else if(data=="success"){
+				alert("장바구니에 담았습니다.");
+			}else if(data=="fail"){
+			alert("로그인을 해주세요.");
+			location.href = "${cp }/login";
 			}
 		});
 	}
@@ -180,8 +171,6 @@
 			 return true;
 		 }
 	}
-	function cateval(){
-		
-	}
+
 	
 </script>

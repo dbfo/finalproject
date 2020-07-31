@@ -1,5 +1,7 @@
 package com.jhta.finalproject.jm.controller;
 
+import java.util.HashMap;
+
 import javax.naming.PartialResultException;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +22,7 @@ public class jmOldCartController {
 	@Autowired private jmOldCartService oldservice;
 	
 	
-	@PostMapping("/cart/oldinsert")
+	@RequestMapping("/cart/oldinsert")
 	@ResponseBody
 	public String oldinsertCart(HttpSession session, int obnum, int bcount) {
 		String smnum=(String)session.getAttribute("mnum");
@@ -38,6 +40,17 @@ public class jmOldCartController {
 			return "fail";
 		}
 		vo.setMnum(mnum);
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("obnum", obnum);
+		map.put("btype", 2); //1이 새책 ,2가 헌책
+		map.put("mnum", mnum);
+		int nvl = oldservice.oldcartselect(map);
+		System.out.println("NVL 값??" + nvl);
+		if(nvl == 1) {
+			return "already";
+		}
+		
 		int n=oldservice.oldcartinsert(vo);
 		if(n>0) {
 			return "success";

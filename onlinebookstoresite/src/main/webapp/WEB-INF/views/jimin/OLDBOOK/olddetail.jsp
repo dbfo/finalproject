@@ -197,13 +197,16 @@
 		var obnum=$("#obnum").val();
 //  		var buycount=$("#obcnt1").val();
  		var buycount=1;
-		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount="+buycount, function(data){
+		$.get("${cp }/cart/oldinsert?obnum="+obnum+"&bcount="+buycount, function(data){
 			console.log("callback");
-			if(data=="success"){
+			if(data=="already"){
+				alert("이미 장바구니에 담긴 상품입니다.");
+				location.href = "${cp }/pay/cart";
+			}else if(data=="success"){
 				alert("장바구니에 담았습니다.");
-			}else{
-				alert("로그인을 해주세요.");
-				location.href = "${cp }/login";
+			}else if(data=="fail"){
+			alert("로그인을 해주세요.");
+			location.href = "${cp }/login";
 			}
 		});
 	});

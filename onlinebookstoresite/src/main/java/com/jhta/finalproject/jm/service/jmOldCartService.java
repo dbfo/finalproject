@@ -1,5 +1,7 @@
 package com.jhta.finalproject.jm.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,8 @@ public class jmOldCartService {
 	
 	public int oldcartinsert(OldCartVo vo) {
 		return dao.oldcartinsert(vo);
+	}
+	public int oldcartselect(HashMap<String, Object> map) {
+		return dao.oldcartselect(map);
 	}
 }

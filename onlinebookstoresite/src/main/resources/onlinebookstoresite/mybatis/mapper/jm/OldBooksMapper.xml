@@ -111,6 +111,11 @@
 		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},2,#{obnum})
 	</select>
 	
+		
+	<select id="oldcartselect" parameterType="hashmap" resultType="int">
+		select NVL(COUNT(*),0) FROM CART WHERE OBNUM=#{obnum} and MNUM=#{mnum} and BTYPE=#{btype}; 
+	</select>
+
 	
 	<!-- ////////////중고 QnA////////////// -->
 

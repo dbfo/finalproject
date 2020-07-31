@@ -13,16 +13,16 @@
 				src="${cp }/resources/imgUpload/${img1.imgsavefilename}" id="thumbnail">
 				
 				<div id="detailbookNameTitle">
-				<strong style="font-size: x-large;">${bookvo.btitle }</strong>
+				<strong style="font-size: x-large;">${bookvo.btitle}</strong>
 				</div>
 				<br>
 				<br>
 				<div id="detailwriter">
-						<span style="font-size: 15px; color: #7d7d7d;">저 자 : </span><strong>${bookvo.bwriter }</strong>
+						<span style="font-size: 15px; color: #7d7d7d;">저 자 : </span><strong>${bookvo.bwriter}</strong>
 						ㅣ				
-						<span style="font-size: 15px; color: #7d7d7d;">출판사 : </span><strong>${bookvo.bpublisher }</strong>
+						<span style="font-size: 15px; color: #7d7d7d;">출판사 : </span><strong>${bookvo.bpublisher}</strong>
 						ㅣ					
-						<span style="font-size: 15px; color: #7d7d7d;">등록일 : </span><strong><fmt:formatDate value="${bookvo.bregdate }" pattern="yyyy-MM-dd"/></strong>
+						<span style="font-size: 15px; color: #7d7d7d;">등록일 : </span><strong><fmt:formatDate value="${bookvo.bregdate}" pattern="yyyy-MM-dd"/></strong>
 				</div>
 				<br>
 				<br>
@@ -31,28 +31,28 @@
 						<span style="font-size: 22px;font-weight: bold ;float: left;margin-left: 118px;" >
 						<img src="http://image.kyobobook.co.kr/ink/images/common/ico_commt_01.gif">&nbsp
 						</span>
-						<c:set var="avg" value="${avg }" />
+						<c:set var="avg" value="${avg}" />
 						<c:if test="${avg == null }">
 						<span style="font-size: 22px;font-weight: bold ; color: black;float: left;">0.0</span>
 						</c:if>
 						<c:if test="${avg > 0.0 }">
-						<span style="font-size: 22px;font-weight: bold ; color: black;float: left;">${avg }</span>
+						<span style="font-size: 22px;font-weight: bold ; color: black;float: left;">${avg}</span>
 						</c:if>
 						<br>
 						<br>
 						<span style="font-size:17px;color: #7d7d7d; float:left; margin-left: 1px;">판매가</span>
 						<span style="font-size: 22px;font-weight: bold ; color: red;float: left;margin-left: 100px;" >
-						${bookvo.bprice } </span>
+						${bookvo.bprice} </span>
 						<span style="font-size: 18px;font-weight: bold ; color: red;float: left;margin-left: 10px;">원</span>
 						<br>
 						<br>
 						<span style="font-size:17px;color: #7d7d7d; float:left; margin-left: 1px;">적립금</span>
-						<span style="font-size: 20px;float: left;margin-left: 100px;" >${bookvo.bpoint } </span>
+						<span style="font-size: 20px;float: left;margin-left: 100px;" >${bookvo.bpoint} </span>
 						<span style="font-size: 17px;float: left;margin-left: 20px;">point</span>
 						<br>
 						<br>
 						<span style="font-size:17px;color: #7d7d7d; float:left; margin-left: 1px;">배송비</span>
-						<span style="font-size: 20px;float: left;margin-left: 100px;" >${bookvo.bshipinfo } </span>
+						<span style="font-size: 20px;float: left;margin-left: 100px;" >${bookvo.bshipinfo} </span>
 						<span style="font-size: 17px;float: left;margin-left: 20px;">원</span>
 				</div>
 				<br>
@@ -62,7 +62,7 @@
 				<br>
 
 					<strong style="font-size:17px;color: #2E2E2E;text-align: center;height: auto;">
-					" ${bookvo.bcontent } "
+					" ${bookvo.bcontent} "
 					</strong>
 					<br><br>
 				</div>
@@ -72,7 +72,7 @@
 				<br>
 				<br>
 				<button class="btn btn-success btn-lg btn-block" id="cartBtn">장바구니</button>
-				<input type="hidden" id="bnum" value="${bookvo.bnum} ">
+				<input type="hidden" id="bnum" value="${bookvo.bnum}">
 				<br>
 				<br>
 				<span style="text-align: center;"><strong>재고수량:</strong></span>
@@ -429,14 +429,17 @@
    
 	$("#cartBtn").click(function(){
 		var bnum=$("#bnum").val();
-		var buycount=$("#bcnt2").val();
-		$.post("${cp }/cart/insert?bnum="+bnum+"&bcount="+buycount, function(data){
+		var bcount=$("#bcnt2").val();
+		$.get("${cp }/cart/insert?bnum="+bnum+"&bcount="+bcount, function(data){
 			console.log("callback");
-			if(data=="success"){
+			if(data=="already"){
+				alert("이미 장바구니에 담긴 상품입니다.");
+				location.href = "${cp }/pay/cart";
+			}else if(data=="success"){
 				alert("장바구니에 담았습니다.");
-			}else{
-				alert("로그인을 해주세요.");
-				location.href = "${cp }/login";
+			}else if(data=="fail"){
+			alert("로그인을 해주세요.");
+			location.href = "${cp }/login";
 			}
 		});
 	});
