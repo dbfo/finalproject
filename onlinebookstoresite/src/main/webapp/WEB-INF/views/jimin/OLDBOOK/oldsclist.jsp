@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Page Content -->
 <div class="container" id="main">
 
@@ -52,10 +53,22 @@
 	</div>
 		<div id="detail">
 						<div class="title">
-							<a  style="font-size:20px; color:green;" href="#"> 
-								<strong>
-									${vo.obname }
-								</strong>
+							<a  style="font-size:20px; color:green;" href="obdetail?obnum=${vo.obnum}&snum=${vo.snum}">
+								<input type="hidden" name="" value="${vo.obname }">  
+								
+								<c:set var="TextValue" value="${vo.btitle }"/>
+								<c:set var="TextLength" value="${fn:length(TextValue) }"/>
+								<c:if test="${TextLength >= 17}">
+									<strong name="btitle">
+										${fn:substring(TextValue,0,17)}...
+									</strong>
+								</c:if>
+								
+								<c:if test="${TextLength < 17}">
+									<strong name="btitle">
+										${vo.obname }
+									</strong>
+								</c:if>																	
 							</a>
 						</div>
 						<div class="pub_info">
