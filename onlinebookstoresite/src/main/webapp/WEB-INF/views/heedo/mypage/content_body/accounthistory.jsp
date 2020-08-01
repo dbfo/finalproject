@@ -161,35 +161,50 @@
 				var account=data.account;
 				var bank=data.bank;
 				var anum=Number(data.anum);
-				console.log('anum:'+anum);
+				console.log('anum1:'+anum);
 				$("#account_num").text(account);
 				$("#bank_name").text(bank);
-				$("#changeAccountBtn").data('anum',anum);
+				$("#accountDiv").data('anum',anum);
 			}
 		})
 	}
 	
 	
 	$("#accountConfirmBtn").click(function(){
+		$("#changeModal").modal('hide');
 		var banknum=$("#banknum").val();
 		var bank=$("#bankSelect").val();
+		var anum=Number($("#accountDiv").data('anum'));
+		console.log('anum:'+anum);
 		if(banknum==""||banknum==null){
-			$("#erromodal1_body").text('계좌번호를 입력해주세요.')
-			$("#errmodal1").modal('show');
+			$("#erromodal_body").text('계좌번호를 입력해주세요.')
+			$("#errmodal").modal('show');
 			return;
 		}
 		if(!$.isNumeric(banknum)){
-			$("#erromodal1_body").text('계좌번호는 숫자만 입력가능합니다..')
-			$("#errmodal1").modal('show');
+			$("#erromodal_body").text('계좌번호는 숫자만 입력가능합니다..')
+			$("#errmodal").modal('show');
 			return;
 		}
+		banknum=Number(banknum);
 		$.ajax({
-			url:"/mypage/updateAccount",
-			data:{bank:bank,banknum:banknum},
+			url:"/finalproject/mypage/updateAccount",
+			data:{bank:bank,banknum:banknum,anum:anum},
 			dataType:"json",
 			type:"post",
 			success:function(data){
-				
+				if(data.result){
+					myaccount();
+					var startDay=$("#date1").val();
+					var endDay=$("#date2").val();
+					var value=$("#accountSelect").val();
+					viewAccountlist(startDay,endDay,1,value);		
+				}else{
+					$("#erromodal_body").text('계좌번호 변경에러!')
+					$("#errmodal").modal('show');
+					
+				}
+					
 			}
 		})
 	});
@@ -478,7 +493,7 @@
 	#accountPaging{
 		text-align: center;
 		position:absolute;
-		top: 650px;
+		top: 690px;
     	left: 400px;
 	}
 	.pageli{

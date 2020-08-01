@@ -409,8 +409,6 @@
 		$("#insertAccount").modal('hide');
 		var banknum=$("#banknum").val();
 		var bank=$("#bankSelect").val();
-		console.log('bank:'+bank);
-		console.log('banknum:'+banknum);
 		if(banknum==""||banknum==null){
 			$("#erromodal1_body").text('계좌번호를 입력해주세요.')
 			$("#errmodal1").modal('show');

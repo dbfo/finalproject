@@ -279,6 +279,10 @@
 	<select id="selectAccount" parameterType="int" resultType="AccountVo">
 		select * from account where mnum=#{mnum}
 	</select>
+	<!-- 계좌 변경 -->
+	<update id="updateAccount" parameterType="hashmap">
+		update account set bank=#{bank},account=#{banknum} where anum=#{anum}
+	</update>
 	
 	<insert id="applydeposit" parameterType="hashmap">
 		insert into settlement values(SEQ_settlement_senum.nextval,#{anum},#{reqmoney},0,sysdate,null,#{dnum})

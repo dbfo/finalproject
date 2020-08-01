@@ -106,5 +106,7 @@ public class MyPageService {
 	public List<AccountHistoryVo> accounthistory(HashMap<String, Object>map){
 		return dao.accounthistory(map);
 	}
-
+	public int updateAccount(HashMap<String, Object>map) {
+		return dao.updateAccount(map);
+	}
 }

@@ -111,4 +111,7 @@ public class MyPageDao {
 	public List<AccountHistoryVo> accounthistory(HashMap<String, Object>map){
 		return sqlsession.selectList(NAMESPACE+".accounthistory",map);
 	}
+	public int updateAccount(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".updateAccount", map);
+	}
 }

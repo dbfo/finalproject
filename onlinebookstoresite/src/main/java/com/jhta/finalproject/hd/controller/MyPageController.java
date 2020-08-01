@@ -804,6 +804,30 @@ public class MyPageController {
 			return jarr.toString();
 		}
 		
+		@RequestMapping(value="/mypage/updateAccount",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String updateAccount(HttpSession session,String bank,int banknum,int anum) {
+			JSONObject json=new JSONObject();
+			String smnum=(String)session.getAttribute("mnum");
+			boolean result=false;
+			if(smnum==null) {
+				json.put("result", result);
+				return json.toString();
+			}
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>datamap=new HashMap<String, Object>();
+			datamap.put("mnum", mnum);
+			datamap.put("bank", bank);
+			datamap.put("anum", anum);
+			datamap.put("banknum", banknum);
+			int n=service.updateAccount(datamap);
+			if(n>0) {
+				result=true;
+			}
+			json.put("result", result);
+			return json.toString();
+		}
+		
 		
 		
 }
