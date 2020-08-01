@@ -103,7 +103,7 @@
 					<th scope="col">배송비</th>
 				</tr>
 			</thead>
-			<c:forEach var="vo" items="${list }" varStatus="status">
+			<c:forEach var="vo" items="${list2 }" varStatus="status">
 				<tr>
 					<td scope="col" width="60" rowspan="2" style="text-align: center">
 						${pu.totalRowCount - ((pu.pageNum-1) * 5 + status.index)}

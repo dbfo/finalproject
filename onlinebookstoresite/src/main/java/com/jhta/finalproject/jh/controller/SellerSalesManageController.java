@@ -88,8 +88,8 @@ bpayment bstatus
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		List<SellerSalesJoinVo> list=service.getSalesList(map);
-		model.addAttribute("list", list);
+		List<SellerSalesJoinVo> list2=service.getSalesList(map);
+		model.addAttribute("list2", list2);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
 		model.addAttribute("map", map);
@@ -129,8 +129,8 @@ bpayment bstatus
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		List<SellerSalesJoinVo> list=service.getSalesList(map);
-		model.addAttribute("list", list);
+		List<SellerSalesJoinVo> list3=service.getSalesList(map);
+		model.addAttribute("list3", list3);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
 		model.addAttribute("map", map);
@@ -161,8 +161,8 @@ bpayment bstatus
 		PageUtil pu=new PageUtil(pageNum, totRowCount, 5, 3);
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-		List<SellerFeepayJoinVo> list=service.getfeeList(map);
-		model.addAttribute("list", list);
+		List<SellerFeepayJoinVo> list4=service.getfeeList(map);
+		model.addAttribute("list4", list4);
 		model.addAttribute("tabType", tabType);
 		model.addAttribute("pu", pu);
 		model.addAttribute("map", map);
