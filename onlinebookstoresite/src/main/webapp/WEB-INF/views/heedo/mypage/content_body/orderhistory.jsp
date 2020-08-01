@@ -221,9 +221,9 @@
 		}
 	
 		var paginationapp="<ul class='pagination pageul'>"
-			+"<li class='page-item'><a class='page-link' href='#'><<</a></li>"
+			+"<li class='page-item disabled'><a class='page-link' href='#'><<</a></li>"
 			+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
-			+"<li class='page-item'><a class='page-link' href='#'>>></a></li>"
+			+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
 			$("#newPaging").append(paginationapp);
 		$.ajax({
 			url:'/finalproject/orderhistroy/newview',

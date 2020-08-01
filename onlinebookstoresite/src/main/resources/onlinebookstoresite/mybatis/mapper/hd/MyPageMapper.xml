@@ -222,6 +222,51 @@
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	
+	<select id="countAccount" parameterType="hashmap" resultType="int">
+	select NVL(count(*),0) from (
+		select * from settlement where anum=#{anum} 
+			<![CDATA[
+			AND TO_CHAR(appdate,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+			AND TO_CHAR(appdate,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]> AND
+			<choose>
+				<when test="value=='all'">
+					sestatus in(0,1)
+				</when>
+				<when test="value=='apply'">
+					sestatus=0
+				</when>
+				<otherwise>
+					sestatus=1
+				</otherwise>
+			</choose>
+			order by appdate desc)
+	</select>
+	<select id="accounthistory" parameterType="hashmap" resultType="acchistoryVo">
+	select * from (
+		select aa.*,rownum rnum from (
+			select * from settlement where anum=#{anum} 
+				<![CDATA[
+				AND TO_CHAR(appdate,'YY/MM/DD') >= TO_CHAR(TO_DATE(#{startDay},'YY/MM/DD'),'YY/MM/DD') 
+				AND TO_CHAR(appdate,'YY/MM/DD')<= TO_CHAR(TO_DATE(#{endDay},'YY/MM/DD'),'YY/MM/DD')]]> AND
+				<choose>
+					<when test="value=='all'">
+						sestatus in(0,1)
+					</when>
+					<when test="value=='apply'">
+						sestatus=0
+					</when>
+					<otherwise>
+						sestatus=1
+					</otherwise>
+				</choose>
+			order by appdate desc)aa
+		)
+	<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}	]]>
+	</select>
+	
+	<select id="getanum" parameterType="int" resultType="int">
+		
+	</select>	
 	<!-- 계좌번호 있는지여부 확인. -->
 	<select id="confirmacount" parameterType="int" resultType="int">
 		select NVL(count(*),0) from account where mnum=#{mnum}

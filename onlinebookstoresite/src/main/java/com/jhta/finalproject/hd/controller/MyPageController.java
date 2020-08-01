@@ -1,5 +1,6 @@
 package com.jhta.finalproject.hd.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MyPageService;
 import com.jhta.finalproject.hd.service.OrderHistoryService;
+import com.jhta.finalproject.hd.vo.AccountHistoryVo;
 import com.jhta.finalproject.hd.vo.AccountVo;
 import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
@@ -722,4 +724,86 @@ public class MyPageController {
 			}
 			
 		}
+		// 계좌인출내역페이지 계좌정보출력 
+		@RequestMapping(value="/mypage/myaccount",method=RequestMethod.POST,produces="application/json;charset=utf-8")
+		@ResponseBody
+		public String myaccount(HttpSession session) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			AccountVo vo=service.selectAccount(mnum);
+			JSONObject json=new JSONObject();
+			json.put("anum", vo.getAnum());
+			json.put("bank", vo.getBank());
+			json.put("account",vo.getAccount());
+			return json.toString();
+		}
+		
+		// 계좌인출내역페이지 리스트출력
+		@RequestMapping(value="/mypage/accounthistory",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String accounthistory(HttpSession session,@RequestParam(required=false)String startDay,String value,
+				@RequestParam(required = false)String endDay,@RequestParam(defaultValue = "1")int pageNum) {
+			String smnum=(String)session.getAttribute("mnum");
+			
+			int mnum=Integer.parseInt(smnum);
+			AccountVo vo1=service.selectAccount(mnum);
+			int anum=vo1.getAnum();
+			HashMap<String,Object>datamap=new HashMap<String, Object>();
+			datamap.put("startDay", startDay);
+			datamap.put("endDay",endDay);
+			datamap.put("mnum",mnum);
+			datamap.put("value",value); 
+			datamap.put("anum",anum);
+			//apply -> 0 처리중  confirm-> 1 처리완료
+			System.out.println("value:"+value);
+			int totalcount=service.countAccount(datamap);
+			System.out.println("totalcount:"+totalcount);
+			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
+			datamap.put("startRow", pu.getStartRow());
+			datamap.put("endRow", pu.getEndRow());
+			System.out.println("시작열 : "+pu.getStartRow());
+			System.out.println("끝열 : "+pu.getEndRow());
+			List<AccountHistoryVo> list=service.accounthistory(datamap);
+			JSONArray jarr=new JSONArray();
+			for(AccountHistoryVo vo:list) {
+				JSONObject json=new JSONObject();
+				int status=vo.getSestatus();
+				String statusStr="";
+				int senum=vo.getSenum();
+				int reqmoney=vo.getReqmoney();
+				Date appdate=vo.getAppdate();
+				Date comdate=vo.getComdate();
+				json.put("comdate", comdate);
+				if(comdate==null) {
+					json.put("comdate", "");
+				}
+				json.put("senum", senum);
+				json.put("reqmoney", reqmoney);
+				json.put("appdate", appdate);
+				
+				if(status==0) {
+					statusStr="처리신청";
+				}else if(status==1) {
+					statusStr="처리완료";
+				}
+				json.put("status", statusStr);
+				jarr.put(json);
+			}
+			JSONObject json=new JSONObject();
+			json.put("value", value);
+			json.put("startDay", startDay);
+			json.put("endDay", endDay);
+			json.put("pageNum", pu.getPageNum());
+			json.put("totalPageCount", pu.getTotalPageCount());
+			json.put("startPageNum", pu.getStartPageNum());
+			if(pu.getEndPageNum()>=pu.getTotalPageCount()) {
+				pu.setEndPageNum(pu.getTotalPageCount());
+			}
+			json.put("endPageNum", pu.getEndPageNum());
+			jarr.put(json);
+			return jarr.toString();
+		}
+		
+		
+		
 }

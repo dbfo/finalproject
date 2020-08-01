@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.finalproject.hd.dao.MyPageDao;
+import com.jhta.finalproject.hd.vo.AccountHistoryVo;
 import com.jhta.finalproject.hd.vo.AccountVo;
 import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
@@ -96,6 +97,14 @@ public class MyPageService {
 	}
 	public List<QnaHistoryVo> recentQna(int mnum){
 		return dao.recentqna(mnum);
+	}
+	
+	public int countAccount(HashMap<String, Object>map) {
+		return dao.countAccount(map);
+	}
+	
+	public List<AccountHistoryVo> accounthistory(HashMap<String, Object>map){
+		return dao.accounthistory(map);
 	}
 
 }

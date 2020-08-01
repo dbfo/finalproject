@@ -38,7 +38,7 @@
 	<tr>
 		<td>
 			<a class="menuAtag" href="${cp }/members/pointList">- 포인트내역</a><br>
-			<a class="menuAtag" href="${cp }/mypage/depositpage">- 예치금내역/신청</a>
+			<a class="menuAtag" href="${cp }/mypage/depositpage">- 예치금내역/신청</a><br>
 			<a class="menuAtag" href="${cp }/mypage/accountpage">- 계좌내역</a>
 		</td>
 	</tr>

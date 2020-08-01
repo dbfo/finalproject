@@ -163,8 +163,8 @@
        <h4 class="modal-title" style="color:white">에러</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
-      <div class="modal-body" id="errmodal_body">
-        	계좌번호를 작성해주세요!
+      <div class="modal-body" id="errmodal1_body">
+        	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
@@ -412,6 +412,12 @@
 		console.log('bank:'+bank);
 		console.log('banknum:'+banknum);
 		if(banknum==""||banknum==null){
+			$("#erromodal1_body").text('계좌번호를 입력해주세요.')
+			$("#errmodal1").modal('show');
+			return;
+		}
+		if(!$.isNumeric(banknum)){
+			$("#erromodal1_body").text('계좌번호는 숫자만 입력가능합니다..')
 			$("#errmodal1").modal('show');
 			return;
 		}

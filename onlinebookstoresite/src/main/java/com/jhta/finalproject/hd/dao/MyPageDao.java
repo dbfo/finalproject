@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.finalproject.hd.vo.AccountHistoryVo;
 import com.jhta.finalproject.hd.vo.AccountVo;
 import com.jhta.finalproject.hd.vo.DepositHistoryVo;
 import com.jhta.finalproject.hd.vo.HistoryListVo;
@@ -101,5 +102,13 @@ public class MyPageDao {
 	
 	public List<QnaHistoryVo> recentqna(int mnum){
 		return sqlsession.selectList(NAMESPACE+".recentqna",mnum);
+	}
+	
+	public int countAccount(HashMap<String, Object>map) {
+		return sqlsession.selectOne(NAMESPACE+".countAccount",map);
+	}
+	
+	public List<AccountHistoryVo> accounthistory(HashMap<String, Object>map){
+		return sqlsession.selectList(NAMESPACE+".accounthistory",map);
 	}
 }

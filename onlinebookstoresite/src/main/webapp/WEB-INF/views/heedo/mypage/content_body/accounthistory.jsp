@@ -3,10 +3,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <div id="content_history">	
 		<i class="fab fa-first-order-alt"></i><h4 style="display:inline"><span id="colorfont">계좌 인출</span> 내역</h4>
-		<div id="accountDiv">
-			<span>계좌번호</span> <span id="account_num"> </span> 은행 <span id="bank_name"> </span>
-			<button type="button">변경</button>
-		</div>
+		
 		<div class="date_picker shadow">
 			<ul class="list-group list-group-horizontal" id="dateUl">
 				<li class="list-group-item selectdate accountselect" onclick="changeDate(7,0)">최근 일주일</li>
@@ -21,6 +18,21 @@
 			<i class="far fa-calendar-alt fa-2x calenderIcon" id="endday"></i>
 			<button type="button" class='btn btn-dark' id="researchBtn">조회</button>
 		</div>
+		<div id="accountDiv" class="shadow">
+		<table class="table" id="accounInfo" frame="void">
+			<tr>
+				<td>
+					<span id="bank_name"></span>
+				</td>
+				<td>	
+					<span id="account_num"></span>
+				</td>
+				<td>
+					<button type="button" class="btn btn-dark" id="changeAccountBtn" data-toggle="modal" data-target="#changeModal">변경</button>
+				</td>
+			</tr>
+		</table>
+		</div>
 		<div class="tableDiv shadow" id="tablediv">
 			<div style="text-align: right" id="usedselectboxdiv">
 				
@@ -32,10 +44,11 @@
 				</div>
 			<table class="table" id="accountTable">
 				<thead class="table-dark">
-					<th style="width:25%;">처리번호</th>
-					<th style="width:25%;">거래금액</th>
-					<th style="width:25%;">거래날짜</th>
-					<th style="width:25%;">사유</th>
+					<th style="width:20%;">처리번호</th>
+					<th style="width:20%;">인출금액</th>
+					<th style="width:20%;">신청날짜</th>
+					<th style="width:20%;">처리날짜</th>
+					<th style="width:20%;">상태</th>
 				</thead>
 				<tbody>
 					
@@ -48,90 +61,6 @@
 </div>
 
 <!-- ==== 모달창 ======== -->
-<div id="writemodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #b3d9ff ">
-       <h4 class="modal-title" >문의사항 작성</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        	제목<br>
-        	<input type="text" id="qnatitle" placeholder="제목을 작성하세요."><br>
-        	문의내용
-        	<textarea rows="5" cols="50" id="qnacontent"></textarea>
-      </div>
-      <div class="modal-footer">
-      	<button type="button" class="btn btn-dark" id="modal_confirmBtn" data-dismiss="modal" >문의하기</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="alertmodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">경고</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        	제목,내용을 전부 작성해주셔야합니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="confirmmodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
-       <h4 class="modal-title">알림</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        	인출신청완료!!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="falsemodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">알림</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        	인출할 수 있는 예치금 잔액이 없습니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <div id="errmodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
@@ -142,7 +71,7 @@
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
       <div class="modal-body" id="errmodal_body">
-        	로그인에러 발생!!
+        	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
@@ -152,103 +81,8 @@
   </div>
 </div>
 
-<div id="errmodal1" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">에러</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body">
-        	계좌번호를 작성해주세요!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
 
-  </div>
-</div>
-
-<div id="accounterrmodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">에러</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body" >
-        	계좌번호가 존재하지 않습니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark"  id="acmodalbtn">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="errmodal2" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">에러</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body">
-        	에러발생!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-<div id="errmodal3" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">에러</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body">
-        	신청하신 금액이 가능한 금액보다 많습니다!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-<div id="errmodal4" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ff66a3">
-       <h4 class="modal-title" style="color:white">에러</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body">
-        	신청액은 숫자만 입력가능합니다!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 <div id="successmodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
@@ -259,7 +93,7 @@
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
       <div class="modal-body" id="errmodal_body">
-        	계좌등록성공!
+        	계좌변경성공!
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
@@ -269,27 +103,7 @@
   </div>
 </div>
 
-<div id="successmodal1" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
-       <h4 class="modal-title" style="color:white">알림</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body" id="errmodal_body">
-        	인출신청 완료!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="insertAccount" class="modal fade" role="dialog"> 
+<div id="changeModal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -300,7 +114,7 @@
       </div>
       <div class="modal-body">
         	은행<br>
-        	<select id="bankSelect">
+        	<select id="bankSelect" class="modal_input">
         		<option value="우리은행">우리은행</option>
         		<option value="케이뱅크">케이뱅크</option>
         		<option value="기업은행">기업은행</option>
@@ -314,10 +128,10 @@
         		<option value="카카오뱅크">카카오뱅크</option>		
         	</select><br>
         	계좌번호<br>
-        	<input type="number" id="banknum" placeholder="(-제외)계좌번호를 입력해주세요">
+        	<input type="number" id="banknum" placeholder="(-제외)계좌번호를 입력해주세요" class="modal_input">
       </div>
       <div class="modal-footer">
-       	<button type="button" class="btn btn-light" id="accountConfirmBtn">등록</button>
+       	<button type="button" class="btn btn-light" id="accountConfirmBtn">변경</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
@@ -325,124 +139,80 @@
   </div>
 </div>
 
-<div id="applymodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
-       <h4 class="modal-title" style="color:white">출금신청</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-      	은행<br><input type="text" id="bankConfirm" readonly="readonly"><br>
-      	계좌번호<br><input type="text" id="banknumConfrim" readonly="readonly"><br>
-      	출금신청가능액<br>
-      	<input type="text" id="can_deposit" readonly="readonly"><br>
-      	신청액<br>
-      	<input type="number" id="apply_deposit"><br>
-      </div>
-      <div class="modal-footer">
-       	<button type="button" class="btn btn-dark" id="applydepositBtn">신청</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 
 <script>
 	$(document).ready(function(){
 		defaultDate();
+		myaccount();
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#accountSelect").val();
-		viewAccountlist(startDay,endDay,1,value);	
-	});
-	 $('#successmodal1').on('hidden.bs.modal', function (e) {
-		var startDay=$("#date1").val();
-		var endDay=$("#date2").val();
-		var value=$("#accountSelect").val();
-		viewAccountlist(startDay,endDay,1,value);
+		viewAccountlist(startDay,endDay,1,value);		
 	});
 	
-	$("#acmodalbtn").click(function(){
-		$("#accounterrmodal").modal('hide');
-		$("#insertAccount").modal('show');
-	})
+	
+	var myaccount=function(){
+		$.ajax({
+			url:"/finalproject/mypage/myaccount",
+			dataType: "json",
+			method:"post",
+			success:function(data){
+				var account=data.account;
+				var bank=data.bank;
+				var anum=Number(data.anum);
+				console.log('anum:'+anum);
+				$("#account_num").text(account);
+				$("#bank_name").text(bank);
+				$("#changeAccountBtn").data('anum',anum);
+			}
+		})
+	}
+	
+	
 	$("#accountConfirmBtn").click(function(){
-		$("#insertAccount").modal('hide');
 		var banknum=$("#banknum").val();
 		var bank=$("#bankSelect").val();
-		console.log('bank:'+bank);
-		console.log('banknum:'+banknum);
 		if(banknum==""||banknum==null){
+			$("#erromodal1_body").text('계좌번호를 입력해주세요.')
+			$("#errmodal1").modal('show');
+			return;
+		}
+		if(!$.isNumeric(banknum)){
+			$("#erromodal1_body").text('계좌번호는 숫자만 입력가능합니다..')
 			$("#errmodal1").modal('show');
 			return;
 		}
 		$.ajax({
-			url:"/finalproject/mypage/insertAccount",
-			type:"post",
-			dataType:"json",
+			url:"/mypage/updateAccount",
 			data:{bank:bank,banknum:banknum},
-			success:function(data){
-				if(data.result){
-					$("#successmodal").modal('show');
-				}else{
-					$("#errmodal2").modal('show');
-				}
-			}
-		})
-	});
-	$("#applydepositBtn").click(function(){
-		$("#applymodal").modal('hide');
-		var can_deposit=$("#can_deposit").val()
-		console.log("can:"+can_deposit);
-		var apply_deposit=$("#apply_deposit").val();
-		console.log("apply:"+apply_deposit);
-		if(!$.isNumeric(apply_deposit)){
-			$("#errmodal4").modal('show');
-			return
-		}
-		if(Number(apply_deposit)>=Number(can_deposit)){
-			$("#errmodal3").modal('show');
-			return;
-		}
-		$.ajax({
-			url:"/finalproject/mypage/applydeposit",
-			dataType: "json",
-			data:{deposit:apply_deposit},
+			dataType:"json",
 			type:"post",
 			success:function(data){
-				if(data.result){
-					$("#successmodal1").modal('show')
-				}else{
-					$("#errmodal2").modal('show')
-				}
 				
 			}
 		})
 	});
 	
 	var viewAccountlist=function(startDay,endDay,pageNum,value){
+		
 		clearAccountlist();
 		if(pageNum==null){
 			pageNum=1;
 		}
 		var paginationapp="<ul class='pagination pageul'>"
-			+"<li class='page-item disabled'><a class='page-link' href='#'><<</a></li>"
-			+"<li class='page-item disabled'><a class='page-link' href='#'>1</a></li>"
-			+"<li class='page-item disabled'><a class='page-link' href='#'>>></a></li>"
+			+"<li class='page-item disabled pageli'><a class='page-link' href='#'><<</a></li>"
+			+"<li class='page-item disabled pageli'><a class='page-link' href='#'>1</a></li>"
+			+"<li class='page-item disabled pageli'><a class='page-link' href='#'>>></a></li>"
 			$("#accountPaging").append(paginationapp);
 		$.ajax({
-			url:'/finalproject/mypage/deposithistory',
+			url:'/finalproject/mypage/accounthistory',
 			dataType:'json',
 			type:'post',
 			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
 			success:function(data){
 				if(data.length==1){ //값이없을때..
-					var tableapp="<tr><td colspan='4'>예치금내역이 없습니다.</td></tr>";
+					var tableapp="<tr><td colspan='4'>인출내역이 없습니다.</td></tr>";
 					$("#accountTable > tbody").append(tableapp);
 					return;
 				}
@@ -455,7 +225,7 @@
 						var paginationapp="<ul class='pagination pageul'>";
 						if(item.startPageNum>=6){
 							paginationapp+="<li class='page-item '>"
-									+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.startpageNum-1)+",\""+item.value+"\")'><<"
+									+"<a class='page-link pageli' href='javascript:viewAccountlist(\""+yy+"\",\""+mm+"\","+(item.startpageNum-1)+",\""+item.value+"\")'><<"
 									+"</a></li>";
 						}else{
 							paginationapp+="<li class='page-item disabled'><a class='page-link pageli' href='#'><<</a></li>";
@@ -472,31 +242,32 @@
 									+"href='javascript:viewAccountlist(\""+yy+"\",\""+mm+"\","+i+",\""+item.value+"\")'>"+i+"</a></li>"
 							}else{
 								paginationapp+="<li class='page-item'><a class='page-link pageli'"
-									+"href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+i+",\""+item.value+"\")'>"+i+"</a></li>"
+									+"href='javascript:viewAccountlist(\""+yy+"\",\""+mm+"\","+i+",\""+item.value+"\")'>"+i+"</a></li>"
 							}
 							
 							
 						}
 						if(item.endPageNum<item.totalPageCount){
 							paginationapp+="<li class='page-item'>"
-								+"<a class='page-link pageli' href='javascript:viewDepositlist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+",\""+item.value+"\")'>>></a></li>";
+								+"<a class='page-link pageli' href='javascript:viewAccountlist(\""+yy+"\",\""+mm+"\","+(item.endPageNum+1)+",\""+item.value+"\")'>>></a></li>";
 						}else{
 							paginationapp+="<li class='page-item disabled'>"
 									+"<a class='page-link pageli' href='#'>>></a></li>";
 						}
 						
-						$("#depositPaging").append(paginationapp);
+						$("#accountPaging").append(paginationapp);
 						
 						return;
 						
 					}
 					var tableapp="<tr>"
-							    +"<td>"+item.dnum+"</td>"
-							    +"<td>"+item.dtran+"</td>"
-							    +"<td>"+item.trandate+"</td>"
+							    +"<td>"+item.senum+"</td>"
+							    +"<td>"+item.reqmoney+"</td>"
+							    +"<td>"+item.appdate+"</td>"
+							    +"<td>"+item.comdate+"</td>"
 							    +"<td>"+item.status+"</td>"
 							  +"</tr>"; 
-					$("#depositTable > tbody").append(tableapp);
+					$("#accountTable > tbody").append(tableapp);
 				})
 				
 				
@@ -505,7 +276,7 @@
 		})
 		
 	}
-	var clearDepositlist=function(){
+	var clearAccountlist=function(){
 		$("#accountTable > tbody").empty();
 		$("#accountPaging").empty();
 	}
@@ -610,22 +381,22 @@
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#accountSelect").val()
-		clearDepositlist();
-		viewDepositlist(startDay,endDay,1,value);
+		clearAccountlist();
+		viewAccountlist(startDay,endDay,1,value);
 	});
 	$("#accountSelect").change(function(){
 		var value=$(this).val();
-		clearDepositlist();
+		clearAccountlist();
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
-		viewDepositlist(startDay,endDay,1,value);
+		viewAccountlist(startDay,endDay,1,value);
 	});
 	$("#researchBtn").on('click',function(){
 		var startDay=$("#date1").val();
 		var endDay=$("#date2").val();
 		var value=$("#accountSelect").val()
-		clearDepositlist();
-		viewDepositlist(startDay,endDay,1,value);
+		clearAccountlist();
+		viewAccountlist(startDay,endDay,1,value);
 	});
 </script>
 <style>
@@ -634,11 +405,7 @@
 	}
 	#bankSelect{
 		font-size:12px;
-		width:100px;
 		height:30px;
-	}
-	#banknum{
-		width:250px;
 	}
 	#content_history{
 	position: absolute;
@@ -656,12 +423,25 @@
 		display:inline-flex;
 	}
 	.date_picker,#accountDiv{
-		 
+		text-align:center;
 		margin-top: 15px;
 		padding:15px;
 		border-radius: 8px;
 		border:2px solid grey;
 	}
+	#accountDiv{
+		padding: 0px;
+   		 height: 50px;
+    }
+    #accountInfo > tr >td{
+    	padding: 10px;
+    }
+    #changeAccountBtn{
+    	height:30px;
+    }
+    .modal_input{
+    	width:300px;
+    }
 	#dateUl{
 		list-style-type: none;
 	}
@@ -698,8 +478,8 @@
 	#accountPaging{
 		text-align: center;
 		position:absolute;
-		top:620px;
-		left:370px;
+		top: 650px;
+    	left: 400px;
 	}
 	.pageli{
 		width:34px;
