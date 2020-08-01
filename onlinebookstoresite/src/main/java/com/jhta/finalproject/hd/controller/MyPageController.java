@@ -51,6 +51,10 @@ public class MyPageController {
 		json.put("result", result);
 		return json.toString();
 	}
+	@RequestMapping("/mypage/accountpage")
+	public String accountPage() {
+		return ".accountPage";
+	}
 	
 	
 	//마이페이지 메인갈때 사용..
