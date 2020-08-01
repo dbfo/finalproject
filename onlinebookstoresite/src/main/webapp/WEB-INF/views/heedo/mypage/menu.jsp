@@ -39,7 +39,7 @@
 		<td>
 			<a class="menuAtag" href="${cp }/members/pointList">- 포인트내역</a><br>
 			<a class="menuAtag" href="${cp }/mypage/depositpage">- 예치금내역/신청</a><br>
-			<a class="menuAtag" href="${cp }/mypage/accountpage">- 계좌내역</a>
+			<a class="menuAtag" href="javascript:accountpage()">- 계좌내역</a>
 		</td>
 	</tr>
 	<tr>
@@ -55,3 +55,69 @@
 		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a></td>
 	</tr>
 </table>
+<div id="err_modal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">에러</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="err_modal_body">
+        	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="alertmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ccccff">
+       <h4 class="modal-title">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	등록된 계좌가 없습니다. 계좌를 등록해주세요.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+	var accountpage=function(){
+		console.log('111')
+		$.ajax({
+			url:"/finalproject/mypage/confirmaccount",
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="loginerr"){
+					$("#err_modal_body").text('로그인 에러 발생!');
+					$("#err_modal").modal('show');
+					return
+				}else if(data.result=="accounterr"){ //계좌없을떄 
+					$("#alertmodal").modal('show');
+					return;
+				}else if(data.result=="confirm"){
+					window.location.href="${cp}/mypage/accountpage"
+				}else{
+					$("#err_modal_body").text('에러 발생!');
+					$("#err_modal").modal('show');
+
+				}
+			}
+		})
+		
+	}
+
+</script>
