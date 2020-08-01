@@ -83,11 +83,67 @@
        <h4 class="modal-title">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
-      <div class="modal-body">
-        	등록된 계좌가 없습니다. 계좌를 등록해주세요.
+      <div class="modal-body" id="alertmodal_body">
+        	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="alertmodal1" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ccccff">
+       <h4 class="modal-title">알림</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="alertmodal1_body">
+        	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="insertAccount" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ccccff">
+       <h4 class="modal-title" style="color:white">계좌번호 입력</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        	은행<br>
+        	<select id="bankSelect" class="modal_input">
+        		<option value="우리은행">우리은행</option>
+        		<option value="케이뱅크">케이뱅크</option>
+        		<option value="기업은행">기업은행</option>
+        		<option value="신한은행">신한은행</option>
+        		<option value="국민은행">국민은행</option>
+        		<option value="국민은행">국민은행</option>
+        		<option value="하나은행">하나은행</option>
+        		<option value="농협은행">농협은행</option>
+        		<option value="대구은행">대구은행</option>
+        		<option value="씨티은행">씨티은행</option>		
+        		<option value="카카오뱅크">카카오뱅크</option>		
+        	</select><br>
+        	계좌번호<br>
+        	<input type="number" id="banknum" placeholder="(-제외)계좌번호를 입력해주세요" class="modal_input">
+      </div>
+      <div class="modal-footer">
+       	<button type="button" class="btn btn-light" id="accountConfirmBtn">변경</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
 
@@ -106,6 +162,7 @@
 					$("#err_modal").modal('show');
 					return
 				}else if(data.result=="accounterr"){ //계좌없을떄 
+					$("#alertmodal_body").text('등록된 계좌가 존재하지 않습니다. 계좌를 등록해주세요.')
 					$("#alertmodal").modal('show');
 					return;
 				}else if(data.result=="confirm"){
@@ -119,5 +176,44 @@
 		})
 		
 	}
+	 $('#alertmodal').on('hidden.bs.modal', function (e) {
+			$("#insertAccount").modal('show');
+		});
+	
+	$("#accountConfirmBtn").click(function(){
+		$("#insertAccount").modal('hide');
+		var banknum=$("#banknum").val();
+		var bank=$("#bankSelect").val();
+		if(banknum==""||banknum==null){
+			$("#erromodal1_body").text('계좌번호를 입력해주세요.')
+			$("#errmodal1").modal('show');
+			return;
+		}
+		if(!$.isNumeric(banknum)){
+			$("#erromodal1_body").text('계좌번호는 숫자만 입력가능합니다..')
+			$("#errmodal1").modal('show');
+			return;
+		}
+		$.ajax({
+			url:"/finalproject/mypage/insertAccount",
+			type:"post",
+			dataType:"json",
+			data:{bank:bank,banknum:banknum},
+			success:function(data){
+				if(data.result){
+					$("#alertmodal_body1").text('계좌등록완료!')
+					$("#alertmodal1").modal('show');
+				}else{
+					$("#err_modal_body1").text('에러 발생!');
+					$("#err_modal1").modal('show');
+				}
+			}
+		})
+	});
 
 </script>
+<style>
+	.modal_input{
+    	width:300px;
+    }
+</style>
