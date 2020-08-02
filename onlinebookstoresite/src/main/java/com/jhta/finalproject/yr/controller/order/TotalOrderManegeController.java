@@ -25,18 +25,6 @@ public class TotalOrderManegeController {
 	public String ordersearch(Model model, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String pfield, String  pkeyword,
 			String tfield, String startDate, String endDate ,String  bfield, String bkeyword, String bstatus, String type, String payType,String mType ) {
 		
-		
-//		System.out.println(	"pfield : "+ pfield
-//		+" pkeyword : "+ pkeyword
-//		+" tfield : "+ tfield
-//		+" startDate :"+ startDate
-//		+" endDate : "+ endDate
-//		+" bfield : "+ bfield
-//		+" bkeyword : "+ bkeyword
-//		+" bstatus : " + bstatus
-//		+ " mType :"+ mType
-//		);
-		
 //		주문번호, 주문자명		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pfield",pfield);
@@ -83,6 +71,7 @@ public class TotalOrderManegeController {
 		map.put("endRow", pu.getEndRow());
 		
 		
+		//리스트 가져오기
 		List<PaymentAndBookListVo> list = service.paymentList(map);
 		
 		

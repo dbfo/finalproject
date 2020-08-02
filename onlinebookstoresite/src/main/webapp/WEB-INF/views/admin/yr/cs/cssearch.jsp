@@ -18,8 +18,10 @@
 						
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="pkeyword" value = "${pkeyword }" <c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
-					</div>
+							<input class="form-control" type="text" name="pkeyword"
+								value="${pkeyword }"
+								<c:if test="${path == 4 || path == 5 || path == 6}">disabled</c:if>>
+						</div>
 				</div>
 			</td>
 		</tr>
@@ -80,22 +82,13 @@
 						</select>
 					</div>
 					<div class="col-xs-3">
-						<input class="form-control" type="text" name="bkeyword" value = "${bkeyword }" <c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
-					</div>
+							<input class="form-control" type="text" name="bkeyword"
+								value="${bkeyword }"
+								<c:if test="${path == 4|| path == 5 || path == 6}">disabled</c:if>>
+						</div>
 				</div>
 			</td>
 		</tr>
-		<c:if test="${path < 4 }">
-		<tr>
-			<th class="table-active">처리상태</th>
-			<td>
-				<input type="checkbox" name="status" value="-1" id="ototal" <c:forEach var="status" items="${status}"><c:if test="${status == '-1'}">checked</c:if></c:forEach> ><label for="ototal"> &nbsp;전체&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="1" id="oapply" <c:forEach var="status" items="${status}"><c:if test="${status == '1'}">checked</c:if></c:forEach>><label for="oapply"> &nbsp;신청&nbsp;&nbsp;</label> 
-				<input type="checkbox" name="status" value="2"id="processing" <c:forEach var="status" items="${status}"><c:if test="${status == '2'}">checked</c:if></c:forEach>><label for="processing"> &nbsp;처리중 &nbsp;&nbsp;</label>									
-				<input type="checkbox" name="status" value="3"id="ocomplete" <c:forEach var="status" items="${status}"><c:if test="${status == '3'}">checked</c:if></c:forEach>><label for="ocomplete"> &nbsp;완료&nbsp;&nbsp;</label>					
-			</td>
-		</tr>
-		</c:if>
 		<tr>
 			<th class="table-active">회원 / 비회원</th>
 			<td>

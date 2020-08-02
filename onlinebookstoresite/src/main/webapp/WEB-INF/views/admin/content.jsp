@@ -183,9 +183,7 @@ function ajChartdraw(){
 }
 
 function lineDraw(label,data){
-	
 	var ctx = document.getElementById("myAreaChart");
-
 	var mychart = new Chart (ctx, {
 		  type: 'line',
  		  data: {

@@ -20,15 +20,11 @@ public class SMChangeShipStatusController {
 	@Autowired
 	private ShipManageService service;
 	
+	//배송 상태 바꾸기
 	@RequestMapping(value="/ship/changeToShipping")
 	@ResponseBody
 	public String changeToShipping(@RequestParam(value="bpaynum[]") List<Integer> bpaynum, int bstatus) {
 		
-		for (Integer integer : bpaynum) {
-			
-			System.out.println(integer);
-		}
-			
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("bpaynum", bpaynum);
 		map.put("bstatus", bstatus);

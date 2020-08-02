@@ -24,24 +24,13 @@ public class ShipMenuController {
 	private ShipManageService service;
 	
 	@RequestMapping("/ship/menu")
-	public String goMenu(Model model ,String PageName,String type, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String pfield, String pkeyword, 
-			String tfield, String startDate, String endDate, String bfield, String bkeyword, String mType) {
+	public String goMenu(Model model ,String PageName,String type, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, 
+			String pfield, String pkeyword, String tfield, String startDate, String endDate, String bfield, String bkeyword, String mType) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 //		배송 상태 갯수 가져오기
 		List<HashMap<String, Object>> countlist = service.getShipCount();
-		
-//		System.out.println(	"2pfield : "+ pfield
-//		+" 2pkeyword : "+ pkeyword
-//		+" 2tfield : "+ tfield
-//		+" 2startDate :"+ startDate
-//		+" 2endDate : "+ endDate
-//		+" 2bfield : "+ bfield
-//		+" 2bkeyword : "+ bkeyword
-//		+ " 2mType :"+ mType
-//		);
-		
 		
 		
 //		검색하기
@@ -57,7 +46,6 @@ public class ShipMenuController {
 		
 		
 //		입금전 리스트 가져오기
-		
 		map.put("shipStatus", PageName);			
 
 		List<PaymentAndBookListVo> list = new ArrayList<PaymentAndBookListVo>();
@@ -90,8 +78,7 @@ public class ShipMenuController {
 		model.addAttribute("countList", countlist);
 		model.addAttribute("list", list);
 		model.addAttribute("PageName", PageName);
-		model.addAttribute("pu", pu);
-		
+		model.addAttribute("pu", pu);	
 		model.addAttribute("list", list);
 		model.addAttribute("pfield",pfield);
 		model.addAttribute("pkeyword",pkeyword);

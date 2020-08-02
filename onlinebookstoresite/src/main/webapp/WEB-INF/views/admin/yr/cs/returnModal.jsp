@@ -100,7 +100,8 @@
 									<tr>
 										<c:set var="returnPrice" value = "${returnPrice + (book.bprice*book.count) }"/>
 										<td>
-											<input type="checkbox" <c:if test = "${book.status == 2 }"><c:set var = "statusCount" value = "${statusCount + 1}"/>disabled</c:if>>
+											<input type="checkbox" <c:if test = "${book.status == 2 }"><c:set var = "statusCount" 
+											value = "${statusCount + 1}"/>disabled</c:if>>
 											<input type="hidden" name = "paymentbook_num"value="${book.paymentbook_num}">										
 										</td>
 										<td>${book.paymentbook_num} ${book.bnum}</td>
@@ -218,12 +219,6 @@
 	} 
  
 	function clickGiveBtn(bpaynum, returnPrice, point){
-		
-// 		console.log("길이 : " + $("#pickupBtn").length);
-// 		console.log("bpaynum : " + bpaynum);
-// 		console.log("paymentbookNum : " + $(".paymentbookNum").text());
-// 		alert("point : " + point);
-		
 		if($("#pickupBtn").prop("disabled")){
 			ajGivefunction(bpaynum,returnPrice, point);
 		}else{

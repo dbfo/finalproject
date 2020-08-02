@@ -18,7 +18,7 @@
 //			$('#endDate').val(yyyy+'-'+mm+'-'+dd);
 //		}
 		
-		//[오늘, 내일, 7일, 1개월, 6개월]버튼 클릭하면 색 바뀜
+		//[오늘, 내일, 7일, 1개월, 6개월]버튼 클릭하면 색 바뀜, 해당 날짜로 값 입력
 		$('.dbtn').on('click', function() {
 			var clickbtn = $(this);
 
@@ -31,30 +31,31 @@
 			
 			var v = $(this).val() ;
 			
-			var date = new Date();
-			var mv = 1;
-			var dv = 0;
+			var startDate = new Date();
+			var endDate = new Date();
 			
 			if(v == '어제'){
 				console.log("gg"+v);
-				dv = -1;
+				startDate.setDate(startDate.getDate()-1);
 			}else if(v == '7일'){
-				dv = -7;
+				startDate.setDate(startDate.getDate()-7);
 			}else if(v == '1개월'){
-				mv -= 1; 
+				startDate.setMonth(startDate.getMonth()-1);
 			}else if(v == '6개월'){
-				mv -= 6;
+				startDate.setMonth(startDate.getMonth()-6);
 			}
 			
-			var yyyy = date.getFullYear();
-			var mm = date.getMonth()+mv > 9 ? date.getMonth()+mv : '0' + (date.getMonth()+mv);
-			var dd = date.getDate()+dv > 9 ? date.getDate()+dv : '0' + (date.getDate()+dv);
 			
-			var yyyy2 = date.getFullYear();
-			var mm2 = date.getMonth()+1 > 9 ? date.getMonth()+1 : '0' + (date.getMonth()+1);
-			var dd2 = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
 			
-		
+			var yyyy = startDate.getFullYear();
+			var mm = startDate.getMonth()+1 > 9 ? startDate.getMonth()+1 : '0' + (startDate.getMonth()+1);
+			var dd = startDate.getDate() > 9 ? startDate.getDate() : '0' + startDate.getDate();
+			
+			var yyyy2 = endDate.getFullYear();
+			var mm2 = endDate.getMonth()+1 > 9 ? endDate.getMonth()+1 : '0' + (endDate.getMonth()+1);
+			var dd2 = endDate.getDate() > 9 ? endDate.getDate() : '0' + endDate.getDate();
+			
+			
 			$('#startDate').val(yyyy+"-"+mm+"-"+dd);			
 			$('#endDate').val(yyyy2+"-"+mm2+"-"+dd2);
 			

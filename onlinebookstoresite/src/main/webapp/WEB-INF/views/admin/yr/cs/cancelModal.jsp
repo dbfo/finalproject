@@ -152,7 +152,8 @@
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/cancelapproval",
 			dataType : "json",
-			data : {mnum : $("#mnum").val(), bpaynum : $('#bpaynum').text(), cancelPrice : $('#cancelPrice').text(), cancelPoint :  $('#cancelPoint').text()},
+			data : {mnum : $("#mnum").val(), bpaynum : $('#bpaynum').text(), cancelPrice : $('#cancelPrice').text(),
+				cancelPoint :  $('#cancelPoint').text()},
 			success : function(data){
 				if(data.code == "success"){
 					alert("처리 성공 하셨습니다.");

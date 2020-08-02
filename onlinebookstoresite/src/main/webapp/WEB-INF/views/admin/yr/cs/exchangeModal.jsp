@@ -118,12 +118,14 @@
 						<c:choose>
 							<c:when test="${book.status == 1}">
 								<td colspan="5" align="right">
-									<button type="button" class="btn btn-success btn-md" id="okBtn" onclick = "changeStatusClick(2,${book.paymentbook_num})">교환 처리</button>
+									<button type="button" class="btn btn-success btn-md" id="okBtn" 
+									onclick = "changeStatusClick(2,${book.paymentbook_num})">교환 처리</button>
 								</td>
 							</c:when>
 							<c:when test="${book.status == 2}">			
 								<td colspan="5" align="right">
-									<button type="button" class="btn btn-success btn-md" id="pickUpBtn" onclick = "changeStatusClick(3,${book.paymentbook_num})">수거 완료</button>
+									<button type="button" class="btn btn-success btn-md" id="pickUpBtn" 
+									onclick = "changeStatusClick(3,${book.paymentbook_num})">수거 완료</button>
 								</td>
 							</c:when>
 						</c:choose>

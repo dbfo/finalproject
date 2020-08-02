@@ -15,10 +15,13 @@
 	<h2 class="mt-4 pageTitle">매출 차트</h2>
 	
 	<div>
-		<ul class = "tab">
-			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href="${pageContext.request.contextPath }/sales?menu=1">일별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?menu=2">주별 매출</a></li>		
-			<li style = "font-size: 20px;padding-top: 35px; margin-right: 10px;"><a href = "${pageContext.request.contextPath }/sales?menu=3">월별 매출</a></li>		
+		<ul class="tab">
+			<li style="font-size: 20px; padding-top: 35px; margin-right: 10px;"><a
+				href="${pageContext.request.contextPath }/sales?menu=1">일별 매출</a></li>
+			<li style="font-size: 20px; padding-top: 35px; margin-right: 10px;"><a
+				href="${pageContext.request.contextPath }/sales?menu=2">주별 매출</a></li>
+			<li style="font-size: 20px; padding-top: 35px; margin-right: 10px;"><a
+				href="${pageContext.request.contextPath }/sales?menu=3">월별 매출</a></li>
 		</ul>
 	</div>
 	
@@ -149,11 +152,7 @@
 		var startMonth = $("#startMonth").val();
 		var endYear = $("#endYear").val();
 		var endMonth = $("#endMonth").val();
-		
-		
-// 		console.log(" sd : " +startDate + " ed : " + endDate + " w : " + week + " sy : " +  startYear + " sm : " + startMonth 
-// 				+ " ey : " + endYear + " em : " + endMonth);
-		
+			
 		ajdraw(menu,startDate, endDate, week, startYear, startMonth, endYear, endMonth);
 		
 	})

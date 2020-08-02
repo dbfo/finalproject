@@ -88,11 +88,15 @@
 			</tr>
 			<tr>
 				<th class="table-active">입금 / 결제 상태</th>
-				<td>
-					<input type="radio" name="payType" value="-1" id = "ptotal"  <c:if test="${payType == '-1'}">checked</c:if>><label for="ptotal"> &nbsp;전체 &nbsp;&nbsp;</label>
-					<input type="radio" name="payType" value="0" id = "pbefore"<c:if test="${payType == '0'}">checked</c:if> ><label for="pbefore"> &nbsp;입금 전 &nbsp;&nbsp;</label>
-					<input type="radio" name="payType" value="1" id = "pafter"<c:if test="${payType == '1'}">checked</c:if>><label for ="pafter"> &nbsp;입금 완료 &nbsp;&nbsp;</label>
-				</td>
+				<td><input type="radio" name="payType" value="-1" id="ptotal"
+					<c:if test="${payType == '-1'}">checked</c:if>><label
+					for="ptotal"> &nbsp;전체 &nbsp;&nbsp;</label> <input type="radio"
+					name="payType" value="0" id="pbefore"
+					<c:if test="${payType == '0'}">checked</c:if>><label
+					for="pbefore"> &nbsp;입금 전 &nbsp;&nbsp;</label> <input type="radio"
+					name="payType" value="1" id="pafter"
+					<c:if test="${payType == '1'}">checked</c:if>><label
+					for="pafter"> &nbsp;입금 완료 &nbsp;&nbsp;</label></td>
 				<th class="table-active">회원 / 비회원</th>
 				<td>
 					<input type="radio" name="mType" value="-1" id = "mtotal" <c:if test="${mType == '-1'}">checked</c:if>><label for="mtotal"> &nbsp;전체 &nbsp;&nbsp;</label>

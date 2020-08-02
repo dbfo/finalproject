@@ -33,18 +33,17 @@ public class AdminHomeController {
 
 	@RequestMapping("/adminmain")
 	public String goHome(Model model) {
-
+		
+		//오늘 들어온 CS주문 갯수 
 		int cscount = csservice.getTodayCSCount();
+		//오늘 들어온  주문 갯수 
 		int ordercount = pservice.getTodayOrderCount();
+		//오늘 들어온  결제 갯수 
 		int paymentcount = pservice.getTodayPaymentCount();
+		//오늘 들어온  미답변 갯수 
 		int qnacount = qnaservice.unAnswerCount();
 		List<MethodPaymentInfoVo> mivo = sservice.getThreeDayMethodpaymentInfo();
 		List<String> days = getThreeDate();
-
-//		for (MethodPaymentInfoVo methodPaymentInfoVo : mivo) {
-//			System.out.println(methodPaymentInfoVo);
-//		}
-		
 		
 		//3일 결제수단별 건수, 금액 결과 리스트에 담기
 		List<HashMap<String, Object>> threedayResult = new ArrayList<HashMap<String, Object>>();
@@ -87,13 +86,6 @@ public class AdminHomeController {
 			
 			threedayResult.add(map);
 		}
-		
-//		for (HashMap<String, Object> hashMap : threedayResult) {
-//			System.out.println("gggg11111");
-//			for (String key : hashMap.keySet()) {
-//				System.out.println(key + " : " + hashMap.get(key));
-//			}
-//		}
 
 		model.addAttribute("cscount", cscount);
 		model.addAttribute("ordercount", ordercount);
@@ -104,7 +96,8 @@ public class AdminHomeController {
 
 		return ".adminmain";
 	}
-
+	
+	//최근 3일 날짜
 	public List<String> getThreeDate() {
 
 		List<String> result = new ArrayList<String>();

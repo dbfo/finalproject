@@ -42,7 +42,7 @@
 		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment, paymentbook 
         where bpayment.bpaynum = paymentbook.bpaynum and btype = 1 and bstatus in (3,5)
 		and <include refid="daySearch"/>
-		group by bpaydate order by bpaydate
+		group by to_char(bpaydate,'yyyy-mm-dd') order by bpaydate
 	</select>
 	
 	
@@ -66,7 +66,7 @@
 	<select id="usedbookgetList" parameterType="hashmap" resultType="hashmap">
 		select  to_char(feedate,'yyyy-mm-dd') feedate, sum(feepay) from obcomplete
 		where <include refid="daySearch"/>
-		group by feedate order by feedate
+		group by to_char(feedate,'yyyy-mm-dd') order by feedate
 	</select>
 	
 <!-- 	중고책 월별 리스트 가져오기 -->

@@ -57,7 +57,7 @@
 			)aa
 		)
 		<if test="@com.jhta.finalproject.yr.mybatischeck.MybatisCheck@notEmpty(startRow)">
-            <![CDATA[where rum >= #{startRow} and rum <= #{endRow}]]>
+            <![CDATA[where rnum >= #{startRow} and rnum <= #{endRow}]]>
         </if>
 	</select>
 	
@@ -70,13 +70,13 @@
 		<include refid="search"/>
 	</select>
 	
-<!-- 	예치금 돈으로 환산 후 처리 결과 INSERT -->
+<!-- 	예치금 돈으로 환산 후 처리 결과  업데이트-->
 	<update id = "updateSestatus" parameterType="int">
 		update settlement set sestatus = 1,  comdate = sysdate where senum = #{senum}
 	</update>
 	
 <!-- 	dnum가지고 오기	 -->
-	<select id="getDnum" parameterType="int">
+	<select id="getDnum" parameterType="int" resultType="int">
 		select dnum from settlement where senum = #{senum}
 	</select>
 	

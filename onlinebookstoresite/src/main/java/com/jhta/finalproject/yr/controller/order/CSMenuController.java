@@ -30,6 +30,7 @@ public class CSMenuController {
 			String pfield, String  pkeyword,String tfield, String startDate, String endDate ,String  bfield, String bkeyword,
 			String status,String mType ) {
 		
+		
 		//상단 cs 갯수 상황판
 		List<HashMap<String, Object>> CSCount = service.getCSCount();
 		
@@ -37,17 +38,6 @@ public class CSMenuController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		String CSStatus = PageName; 
-		
-//		System.out.println(	"2pfield : "+ pfield
-//		+" 2pkeyword : "+ pkeyword
-//		+" 2tfield : "+ tfield
-//		+" 2startDate :"+ startDate
-//		+" 2endDate : "+ endDate
-//		+" 2bfield : "+ bfield
-//		+" 2bkeyword : "+ bkeyword
-//		+"status : " + status
-//		+ " 2mType :"+ mType
-//		);
 		
 		map.put("CSStatus", CSStatus);
 		
