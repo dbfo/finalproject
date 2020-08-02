@@ -4,8 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.yr.mybatis.mapper.SalesMapper">
 	
-	
-<!-- 	test -->
 	<sql id="daySearch">			
 		<if test="startDate == null or startDate == '' ">
 			TRUNC(${field}) BETWEEN TO_DATE(sysdate-3) AND TO_DATE(sysdate) 
@@ -36,8 +34,7 @@
 <!-- 	최근 3일 동안 결제된 금액 -->
 	<select id="getThreeday" resultType = "hashmap">
 		select  to_char(bpaydate,'yyyy-mm-dd') bpaydate, sum(bfinalmoney) from bpayment 
-		where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-2) AND TO_DATE(sysdate) group by bpaydate order by bpaydate
-	</select>
+		where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-2) AND TO_DATE(sysdate) group by to_char(bpaydate,'yyyy-mm-dd') order by bpaydate	</select>
 	
 	
 <!-- 	일별 리스트 가져오기 -->
@@ -89,6 +86,6 @@
 <!-- 	 결제수단별 주문현황 -->
 	<select id="getThreeDayMethodpaymentInfo" resultType="MethodPaymentInfoVo">
 		select to_char(bpaydate,'yyyy-mm-dd') bpayment, sum(bfinalmoney) price, methodpayment, nvl(count(methodpayment),0) count from bpayment 
-		where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-2) AND TO_DATE(sysdate) group by bpaydate, methodpayment order by bpaydate, methodpayment
+		where TRUNC(bpaydate) BETWEEN TO_DATE(sysdate-2) AND TO_DATE(sysdate) group by to_char(bpaydate,'yyyy-mm-dd'), methodpayment	
 	</select> 
 </mapper>	

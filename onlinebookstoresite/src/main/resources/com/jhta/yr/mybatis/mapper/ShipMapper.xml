@@ -9,7 +9,7 @@
 	</select>
 	
 	<update id="updateBeforeToPreparing" parameterType="list">
-		update bpayment set bstatus = 1 where
+		update bpayment set bstatus = 1 , bpaydate = sysdate where
 		<foreach collection="list" item = "bpaynum" separator="or">
 	 	  bpaynum = #{bpaynum} 
 		</foreach>	

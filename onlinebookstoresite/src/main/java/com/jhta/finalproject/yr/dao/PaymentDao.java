@@ -49,6 +49,6 @@ public class PaymentDao {
 	
 	// 오늘 주문 갯수
 	public int getTodayOrderCount() {
-		return session.selectOne(NAMESPACE+".getTodayPaymentCount");		
+		return session.selectOne(NAMESPACE+".getTodayOrderCount");		
 	}
 }

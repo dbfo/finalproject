@@ -205,11 +205,13 @@
 	    <include refid="CSStatus"/>
 	</select>
 	
+<!-- 오늘 결제한 주문갯수 -->
 	<select id="getTodayPaymentCount" resultType="int">
 		select nvl(count(*), 0) from bpayment 
 		where TRUNC(BPAYDATE) BETWEEN TO_DATE(sysdate) AND TO_DATE(sysdate) 
 	</select>
 
+<!-- 오늘 주문한 주문갯수 -->
 	<select id="getTodayOrderCount" resultType="int">
 		select nvl(count(*), 0) from bpayment 
 		where TRUNC(borderdate) BETWEEN TO_DATE(sysdate) AND TO_DATE(sysdate)

@@ -52,7 +52,7 @@ public class CSReturnMangeController {
 			}
 		}
 		
-//		System.out.println(point);
+//		System.out.println("returncount : " + count);
 		
 		model.addAttribute("count", count);
 		model.addAttribute("List", list);
@@ -72,16 +72,15 @@ public class CSReturnMangeController {
 		map.put("status",2);
 		map.put("paymentbook_num", paymentbookNum);
 		
-//		int n = service.updateStatus(map);
-		
+		int n = service.updateStatus(map);
 		
 		JSONObject json = new JSONObject();
 		
-//		if(n>0) {
+		if(n>0) {
 			json.put("code", "success");
-//		}else {
-//			json.put("code", "error");
-//		}
+		}else {
+			json.put("code", "error");
+		}
 		
 		return json.toString();
 	}
@@ -109,7 +108,7 @@ public class CSReturnMangeController {
 		try {
 			int n1 = rservice.updateStatus("3", paymentbookNum,pointVo, depositVo, map);
 			
-			System.out.println("결과 : " + n1);
+//			System.out.println("결과 : " + n1);
 			
 			
 			if(n1 > 0) {

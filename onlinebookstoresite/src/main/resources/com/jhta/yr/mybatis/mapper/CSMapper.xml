@@ -176,10 +176,13 @@
 <!-- 교환, 반품 상태 업데이트 -->
 	<update id="updateStatus" parameterType="hashmap">
 		update refundhistory set status = #{status} 
+		<if test="status == 3">
+		 , recomdate = sysdate		 
+		</if>	
 		where 
 		<foreach collection="paymentbook_num" item = "paymentbook_num" separator="or">
-		paymentbook_num = #{paymentbook_num}
-		</foreach>	
+		 paymentbook_num = #{paymentbook_num}
+		</foreach>
 	</update>
 
 <!-- 회원번호 가져오기 -->

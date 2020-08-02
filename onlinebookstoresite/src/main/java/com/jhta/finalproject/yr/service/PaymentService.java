@@ -41,6 +41,6 @@ public class PaymentService {
 	
 	// 오늘 주문 갯수
 	public int getTodayOrderCount() {
-		return dao.getTodayPaymentCount();		
+		return dao.getTodayOrderCount();		
 	}
 }

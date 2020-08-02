@@ -103,7 +103,7 @@
 											<input type="checkbox" <c:if test = "${book.status == 2 }"><c:set var = "statusCount" value = "${statusCount + 1}"/>disabled</c:if>>
 											<input type="hidden" name = "paymentbook_num"value="${book.paymentbook_num}">										
 										</td>
-										<td>${book.bnum}</td>
+										<td>${book.paymentbook_num} ${book.bnum}</td>
 										<td>${book.btitle}</td>
 										<td>${book.count}</td>
 										<td>${book.bprice}</td>
@@ -114,7 +114,7 @@
 									<tr>
 										<td colspan="6" align="right">
 											<button type="button" class="btn btn-success btn-md" <c:if test = "${count == statusCount}">disabled</c:if>
-												onclick = "clickPickupBtn(${length})" id="pickupBtn">
+												onclick = "clickPickupBtn(${length},${count })" id="pickupBtn">
 												수거 완료
 											</button>
 										</td>
@@ -186,12 +186,12 @@
 
 <script type="text/javascript">
  
-	function clickPickupBtn(length){
+	function clickPickupBtn(length, count){
 		var tdArr = new Array();
 		var idxArr = new Array();
 		var checkbox = $("input[type=checkbox]:checked");
 		
-		alert("길이 : " + checkbox.length);
+// 		alert("길이 : " + checkbox.length);
 			
 		if(checkbox.length == 0){
 			alert("수거한 상품을 체크를 해주세요..")
@@ -203,17 +203,18 @@
 			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
 			var tr = checkbox.parent().parent().eq(i);
 			var td = tr.children();
+			var idx = tr.index();
 		
 			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-			var no = $("input[name=paymentbook_num]").eq(i).val();
-			
+			var no = $("input[name=paymentbook_num]").eq(idx).val();
+	
 			if(no != "책번호"){
 				tdArr.push(no);					
 				idxArr.push(i);
 			}
 			
 		})
- 		ajpickUpfunction(length,tdArr,idxArr);
+ 		ajpickUpfunction(length,tdArr,idxArr, count);
 	} 
  
 	function clickGiveBtn(bpaynum, returnPrice, point){
@@ -231,7 +232,7 @@
 	}
 	
 	
-	function ajpickUpfunction(length,paymentbookNum,idxArr){
+	function ajpickUpfunction(length,paymentbookNum,idxArr,count){
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/cs/returnPickup",
@@ -244,7 +245,7 @@
 					 $("input[type=checkbox]:checked").each(function(i){
 						 $(this).prop("disabled","disabled")
 					 })
-					 if($("input[type=checkbox]:disabled").length == length){
+					 if($("input[type=checkbox]:disabled").length == count){
 						 $("#pickupBtn").prop("disabled","disabled")
 					 }
 				}else{

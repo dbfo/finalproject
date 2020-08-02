@@ -49,60 +49,47 @@ public class AdminHomeController {
 		//3일 결제수단별 건수, 금액 결과 리스트에 담기
 		List<HashMap<String, Object>> threedayResult = new ArrayList<HashMap<String, Object>>();
 
-		int i = 0;
-		for (String day : days) {
+		
+		//카드
+		for (int j = 0; j < days.size(); j++) {
+			
+			String day = days.get(j);
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("m"+day, new MethodPaymentInfoVo(null, 0, 0, 0));
+			
 			for (MethodPaymentInfoVo methodPaymentInfoVo : mivo) {
 				if(methodPaymentInfoVo.getMethodpayment() == 0) {
 					if (methodPaymentInfoVo.getBpayment().equals(day)) {
-						HashMap<String, Object> map = new HashMap<String, Object>();
 						map.put("m"+day, methodPaymentInfoVo);
-						threedayResult.add(map);
-					}
-					if (i == days.size() - 1) {
-						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("m"+day, new MethodPaymentInfoVo(null, 0, 0, 0));
-						threedayResult.add(map);
-					}					
-					i++;
+					}				
 				}
 			}
+			
+			threedayResult.add(map);
 		}
-		if(i == 0) {
-			for (String day : days) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("c"+day, new MethodPaymentInfoVo(null, 0, 0, 0));
-				threedayResult.add(map);				
-			}
-		}
-		
-		i = 0;
-		for (String day : days) {
+
+		//무통장
+		for (int j = 0; j < days.size(); j++) {
+			
+			String day = days.get(j);
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("c"+day, new MethodPaymentInfoVo(null, 0, 1, 0));
+			
 			for (MethodPaymentInfoVo methodPaymentInfoVo : mivo) {
 				if(methodPaymentInfoVo.getMethodpayment() == 1) {
 					if (methodPaymentInfoVo.getBpayment().equals(day)) {
-						HashMap<String, Object> map = new HashMap<String, Object>();
 						map.put("c"+day, methodPaymentInfoVo);
-						threedayResult.add(map);
-					}
-					if (i == days.size() - 1) {
-						HashMap<String, Object> map = new HashMap<String, Object>();
-						map.put("c"+day, new MethodPaymentInfoVo(null, 0, 1, 0));
-						threedayResult.add(map);
-					}					
-					i++;
+					}				
 				}
 			}
-		}
-
-		if(i == 0) {
-			for (String day : days) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("c"+day, new MethodPaymentInfoVo(null, 0, 1, 0));
-				threedayResult.add(map);				
-			}
+			
+			threedayResult.add(map);
 		}
 		
 //		for (HashMap<String, Object> hashMap : threedayResult) {
+//			System.out.println("gggg11111");
 //			for (String key : hashMap.keySet()) {
 //				System.out.println(key + " : " + hashMap.get(key));
 //			}

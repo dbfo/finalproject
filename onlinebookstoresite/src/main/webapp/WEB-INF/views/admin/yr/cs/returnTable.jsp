@@ -52,24 +52,27 @@
 								<c:set var="b1count" value="0"/>
 								<c:set var="b2count" value="0"/>
 								<c:set var="b3count" value="0"/>
-								<c:set var="length" value="${fn:length(vo.CSAndPaymentBook) }"/>
+								<c:set var="length" value="0"/>
 								<c:forEach items="${vo.CSAndPaymentBook}" var="book">
-									<c:if test = "${book.status == 1 }">
-										<c:set var="b1count" value = "${b1count+1 }"/>
-									</c:if>
-									<c:if test = "${book.status == 2 }">
-										<c:set var="b2count" value = "${b2count+1 }"/>
-									</c:if>
-									<c:if test = "${book.status == 3 }">
-										<c:set var="b3count" value = "${b3count+1 }"/>
+									<c:if test="${book.type == 2 }">
+										<c:set var="length" value="${length + 1 }"/>
+										<c:if test = "${book.status == 1 }">
+											<c:set var="b1count" value = "${b1count+1 }"/>
+										</c:if>
+										<c:if test = "${book.status == 2 }">
+											<c:set var="b2count" value = "${b2count+1 }"/>
+										</c:if>
+										<c:if test = "${book.status == 3 }">
+											<c:set var="b3count" value = "${b3count+1 }"/>
+										</c:if>
 									</c:if>
 								</c:forEach>
 								<c:choose>
-									<c:when test="${b1count == length-1 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
+									<c:when test="${b1count == length }"> <input class= "btn btn-success" id = "openModal2" type="button"  
 									value = "신청 처리"  onclick = "openModal(${vo.bpaynum})"></c:when>
 									<c:when test="${b2count >= 1 }"> <input class= "btn btn-success" id = "openModal2" type="button"  
 									value = "처리 중"  onclick = "openModal(${vo.bpaynum})"></c:when>
-									<c:when test="${b3count == length-1 }"><input class= "btn btn-secondary" type="button" 
+									<c:when test="${b3count == length }"><input class= "btn btn-secondary" type="button" 
 									value = "처리 완료" disabled="disabled"></c:when>							
 								</c:choose>
 							</td>

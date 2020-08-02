@@ -34,7 +34,7 @@
 				</div>
 				<div
 					class="card-footer active d-flex align-items-center justify-content-between">
-					<a class="small stretched-link" href="${pageContext.request.contextPath}/ship/menu?PageName=0&type=1">> 결제바로가기</a>
+					<a class="small stretched-link" href="${pageContext.request.contextPath}/ship/menu?PageName=1&type=1">> 결제바로가기</a>
 					<div class="small text-white">
 						<i class="fas fa-angle-right"></i>
 					</div>
@@ -112,9 +112,9 @@
 							<th class="table-active" rowspan="3" >구분</th>
 						</tr>
 						<tr>
-							<th class="table-active" colspan="2" id = "day1">날짜1</th>
-							<th class="table-active" colspan="2" id = "day2">날짜2</th>
-							<th class="table-active" colspan="2" id = "day3">날짜3</th>
+							<th class="table-active" colspan="2" id = "day1">${days[0] }</th>
+							<th class="table-active" colspan="2" id = "day2">${days[1] }</th>
+							<th class="table-active" colspan="2" id = "day3">${days[2] }</th>
 						</tr>
 						<tr>
 							<th class="table-active" >건수</th>
@@ -130,7 +130,7 @@
 							<th class="table-active">무통장</th>
 							<c:forEach  var="threedayResult" items="${threedayResult }">
 								<c:forEach  var="map" items="${threedayResult}">
-									<c:if test="${map.value.methodpayment == 0 }">
+									<c:if test="${map.value.methodpayment == 1 }">
 										<td>${map.value.count }</td>
 										<td>${map.value.price }</td>
 									</c:if>								
@@ -141,7 +141,7 @@
 							<th class="table-active">카드</th>
 							<c:forEach  var="threedayResult" items="${threedayResult }">
 								<c:forEach  var="map" items="${threedayResult}">
-									<c:if test="${map.value.methodpayment == 1 }">
+									<c:if test="${map.value.methodpayment == 0 }">
 										<td>${map.value.count }</td>
 										<td>${map.value.price }</td>
 									</c:if>								
@@ -163,18 +163,7 @@
 $(function(){
 	
 	ajChartdraw();
-	
-	var date = new Date();
-	
-	for (var dv = 0; dv < 3; dv++) {
-		
-		var yyyy = date.getFullYear();
-		var mm = (date.getMonth()+1) > 9 ? (date.getMonth()+1) : '0' + (date.getMonth()+1);
-		var dd = date.getDate()-dv > 9 ? date.getDate()-dv : '0' + (date.getDate()-dv);
-	
-		$("#day"+(dv+1)).text(yyyy+"-"+mm+"-"+dd);
-	}
-		
+
 })
 
 function ajChartdraw(){

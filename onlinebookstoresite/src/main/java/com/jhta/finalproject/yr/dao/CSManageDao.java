@@ -52,6 +52,7 @@ public class CSManageDao {
 		return session.update(NAMESPACE+".updateRefundStatus",bpaynum);
 	}
 	
+	//cs처리상태 업데이트
 	public int updateStatus(HashMap<String, Object> map) {
 		return session.update(NAMESPACE+".updateStatus",map);
 	}
