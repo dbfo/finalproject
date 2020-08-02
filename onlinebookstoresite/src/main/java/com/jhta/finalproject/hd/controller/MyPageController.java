@@ -755,14 +755,10 @@ public class MyPageController {
 			datamap.put("value",value); 
 			datamap.put("anum",anum);
 			//apply -> 0 처리중  confirm-> 1 처리완료
-			System.out.println("value:"+value);
 			int totalcount=service.countAccount(datamap);
-			System.out.println("totalcount:"+totalcount);
 			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 			datamap.put("startRow", pu.getStartRow());
 			datamap.put("endRow", pu.getEndRow());
-			System.out.println("시작열 : "+pu.getStartRow());
-			System.out.println("끝열 : "+pu.getEndRow());
 			List<AccountHistoryVo> list=service.accounthistory(datamap);
 			JSONArray jarr=new JSONArray();
 			for(AccountHistoryVo vo:list) {
@@ -803,7 +799,7 @@ public class MyPageController {
 			jarr.put(json);
 			return jarr.toString();
 		}
-		
+		//등록된 계좌 바꾸는 ajax 컨트롤러
 		@RequestMapping(value="/mypage/updateAccount",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 		@ResponseBody
 		public String updateAccount(HttpSession session,String bank,int banknum,int anum) {

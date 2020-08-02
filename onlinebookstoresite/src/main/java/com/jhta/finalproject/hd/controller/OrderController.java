@@ -132,9 +132,6 @@ public class OrderController {
 	//주문/결제 완료페이지로 이동함.
 		@RequestMapping(value="/order/resultorder",method=RequestMethod.POST)
 		public String orderCompletePage(int bpaynum,String method,String separate,HttpSession session,Model model) {
-			
-			System.out.println("gggggggggggggggggggggggggggggggggggggggggggggggggg");
-			
 			int mnum=0;
 			String smnum=(String)session.getAttribute("mnum");
 			if(smnum!=null) {
@@ -174,6 +171,7 @@ public class OrderController {
 				model.addAttribute("totalpoint",totalpoint); //총 적립예정포인트
 				model.addAttribute("totalprice", totalprice);
 			}else {
+				 path=session.getAttribute("cp")+"/resources/jh/jhobupload";
 				List<OrderCompleteUsedListVo>list=service.getUsedPaymentBook(bpaynum);
 				int totalprice=0;
 				for(OrderCompleteUsedListVo vo1:list) {
@@ -227,7 +225,6 @@ public class OrderController {
 			if(smnum!=null) {
 				mnum=Integer.parseInt(smnum);
 			}
-			System.out.println("컨트롤러 실행!!!");
 			int orderprice=pay_price+usepoint;
 			Map<String, Object>map=new HashMap<String, Object>();
 			map.put("mnum",mnum);

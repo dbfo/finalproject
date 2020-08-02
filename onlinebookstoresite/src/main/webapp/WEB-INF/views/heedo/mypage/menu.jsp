@@ -28,8 +28,8 @@
 	</tr>
 	<tr>
 		<td>
-			<a class="menuAtag" href="#">- 회원정보</a><br>
-			<a class="menuAtag" href="#">- 회원탈퇴</a>
+			<a class="menuAtag" href="javascript:memberpage('info')">- 회원정보</a><br>
+			<a class="menuAtag" href="javascript:memberpage('leave')">- 회원탈퇴</a>
 		</td>
 	</tr>
 	<tr>
@@ -52,7 +52,9 @@
 		<th>고객센터</th>
 	</tr>
 	<tr>
-		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a></td>
+		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a>
+			<button type="button" data-toggle="modal" data-target="#loginmodal">테스트모달</button>
+		</td>
 	</tr>
 </table>
 <div id="err_modal" class="modal fade" role="dialog"> 
@@ -103,7 +105,7 @@
        <h4 class="modal-title">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
-      <div class="modal-body" id="alertmodal1_body">
+      <div class="modal-body" id="alertmodal_body1">
         	
       </div>
       <div class="modal-footer">
@@ -142,7 +144,36 @@
         	<input type="number" id="banknum" placeholder="(-제외)계좌번호를 입력해주세요" class="modal_input">
       </div>
       <div class="modal-footer">
-       	<button type="button" class="btn btn-light" id="accountConfirmBtn">변경</button>
+       	<button type="button" class="btn btn-light" id="accountConfirmBtn">등록</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="loginmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #212529">
+       <h4 class="modal-title" id="loginmodal_h4">본인확인</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="loginmodal_body">
+        	<img src="${cp }/resources/hd/img/logo2.jpg" id="loginmodal_img"><br>
+        	<div class="loginmodal_div">
+        		<span class="modalloc"><strong>아이디</strong></span>
+        		<input type="text" id="modalid" class="loginmodal_input" readonly="readonly" value="${mid }"><br>
+        	</div>
+        	<div class="loginmodal_div">
+        		<span class="modalloc"><strong>비밀번호</strong></span>
+        		<input type="password" id="modalpwd" class="loginmodal_input">
+        	</div>
+      </div>
+      <div class="modal-footer">
+      	  	<button type="button" class="btn btn-dark" id="loginconfirmBtn">확인</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
@@ -150,8 +181,49 @@
   </div>
 </div>
 <script>
+	var memberpage=function(value){
+		$("#loginmodal_body").data('value',value);
+		console.log('value : '+value);
+		$("#loginmodal").modal('show');
+	}
+	$("#loginconfirmBtn").click(function(){
+		$("#loginmodal").modal('hide');
+		var id=$("#modalid").val();
+		var pwd=$("#modalpwd").val();
+		var value=$("#loginmodal_body").data('value');
+		if(pwd==''){
+			$("#err_modal_body").text("비밀번호를 입력해주세요.");
+			$("#err_modal").modal('show')
+			return;
+		}
+		$.ajax({
+			url:"/finalproject/loginCheck",
+			dataType: "json",
+			data:{id:id,pwd:pwd},
+			type:"post",
+			success:function(data){
+				if(data.result=="fail"){
+					$("#err_modal_body").text('비밀번호를 확인해주세요.')
+					$("#err_modal").modal('show');
+					return;
+				}
+				if(value=="info"){
+					window.location.href="${cp}/member/memberinfopage";
+				}else{
+					window.location.href="${cp}/member/memberleavepage";
+				}
+				
+				
+				
+			}
+		});
+		
+		
+	});
+
+
+	// 계좌내역 이동함수.
 	var accountpage=function(){
-		console.log('111')
 		$.ajax({
 			url:"/finalproject/mypage/confirmaccount",
 			dataType:"json",
@@ -165,7 +237,7 @@
 					$("#alertmodal_body").text('등록된 계좌가 존재하지 않습니다. 계좌를 등록해주세요.')
 					$("#alertmodal").modal('show');
 					return;
-				}else if(data.result=="confirm"){
+				}else if(data.result=="confirm"){ //계좌있을때 
 					window.location.href="${cp}/mypage/accountpage"
 				}else{
 					$("#err_modal_body").text('에러 발생!');
@@ -176,10 +248,12 @@
 		})
 		
 	}
+	//계좌없을때 알람창 종료시. 계좌등록모달 띄움
 	 $('#alertmodal').on('hidden.bs.modal', function (e) {
 			$("#insertAccount").modal('show');
 		});
 	
+	//계좌등록모달 등록버튼클릭시 
 	$("#accountConfirmBtn").click(function(){
 		$("#insertAccount").modal('hide');
 		var banknum=$("#banknum").val();
@@ -211,9 +285,33 @@
 		})
 	});
 
+	
+	
 </script>
 <style>
 	.modal_input{
+		border-radius: 4px; 
     	width:300px;
+    }
+    #loginmodal_h4{
+		color:white;    
+    }
+    #loginmodal_img{
+		width:300px    
+    }
+    #loginmodal{
+    	text-align: center;
+    }
+    .loginmodal_input{
+    	border-radius: 4px; 
+    }
+    
+    
+    .modalloc{
+    	display:inline-block;
+    	width:150px;
+    }
+    .loginmodal_div{
+    	margin-bottom: 10px
     }
 </style>

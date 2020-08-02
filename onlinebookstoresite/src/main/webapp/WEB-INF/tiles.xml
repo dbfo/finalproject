@@ -314,6 +314,15 @@
 		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/accounthistory.jsp"/>
 	</definition>
 	
+	<definition name=".memberleave" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/memberleave.jsp"/>
+	</definition>
+	
+	<definition name=".memberinfo" extends=".mypage">
+		<put-attribute name="content_body" value="/WEB-INF/views/heedo/mypage/content_body/memberinfo.jsp"/>
+	</definition>
+	
+	
 	<!-- 장바구니. -->
 	<definition name=".cart" template="/WEB-INF/views/heedo/layout/buylayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/heedo/main/header.jsp"/>

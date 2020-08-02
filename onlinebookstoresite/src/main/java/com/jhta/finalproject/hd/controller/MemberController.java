@@ -37,6 +37,8 @@ public class MemberController {
 			LoginCheckVo vo=service.membercheck(map);
 			if(vo==null) {
 				result="fail";
+			}else if(vo.getMstatus()==0) {
+				result="leave";
 			}else if(vo.getSnum()!=0){  //snum이 있으면 세션에 저장함.
 				session.setAttribute("mnum", vo.getMnum());
 				session.setAttribute("mid", vo.getMid());
@@ -58,5 +60,14 @@ public class MemberController {
 		public String logout(HttpSession session) {
 			session.invalidate();
 			return "redirect:/";
+		}
+		
+		@RequestMapping("/member/memberinfopage")
+		public String infopage() {
+			return ".memberinfo";
+		}
+		@RequestMapping("/member/memberleavepage")
+		public String leavepage() {
+			return ".memberleave";
 		}
 }
