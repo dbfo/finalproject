@@ -74,11 +74,10 @@
 				<li><a href="${cp }/mypage/main">마이페이지</a>
 					<ul class="sub-menu">
 						<li><a href="${cp }/mypage/orderhistory">주문내역</a></li>
-						<li><a href="#">반품/취소/환불</a></li>
-						<li><a href="#">나의계좌</a></li>
-						<li><a href="#">나의정보</a></li>
+						<li><a href="#">반품/교환내역</a></li>
+						<li><a href="#">예치금내역</a></li>
+						<li><a href="#">계좌내역</a></li>
 						<li><a href="${cp }/seller">중고판매관리</a></li>
-						<li><a href="#">모임관리</a></li>
 						<li><a href="${cp }/mypage/qnapage">문의게시판</a></li>
 					</ul></li>
 				<li><a href="${cp }/adminmain">관리자 페이지</a></li>

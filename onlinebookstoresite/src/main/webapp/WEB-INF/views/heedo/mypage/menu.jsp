@@ -53,7 +53,6 @@
 	</tr>
 	<tr>
 		<td><a class="menuAtag" href="${cp }/mypage/qnapage">-문의내역/문의하기</a>
-			<button type="button" data-toggle="modal" data-target="#loginmodal">테스트모달</button>
 		</td>
 	</tr>
 </table>

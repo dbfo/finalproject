@@ -9,5 +9,28 @@
 		(select * from members where mid=#{id} and mpwd=#{pwd}) members,(select * from obseller )obs
 		where members.mnum=obs.mnum(+)
 	</select>
+	
+	<!-- 탈퇴시 조건체크하는 mybatis sql문 시작. -->
+	<select id="ordercheck" parameterType="int" resultType="int">
+		select NVL(count(*),0) from bpayment where mnum=#{mnum} and bstatus in(0,1)
+	</select>
+	<select id="depositapplycheck" parameterType="int" resultType="int">
+		select NVL(count(*),0) from deposit where mnum=#{mnum} and dereason=4
+	</select>
+	<select id="depositcheck" parameterType="int" resultType="int">
+		select dtran from deposit where mnum=#{mnum}
+	</select>
+	<select id="obsellercheck" parameterType="int" resultType="int">
+		select NVL(MAX(snum),0) snum from obseller where mnum=#{mnum}
+	</select>
+	<select id="obcheck" parameterType="int" resultType="int">
+		select NVL(count(*),0) from oldbooks where snum=#{snum} and obsalestatus in(0,1)
+	</select>
+	<!-- 탈퇴시 조건체크하는 mybatis sql문 끝. -->
+	
+	<!-- 탈퇴처리 sql문 -->
+	<update id="leavemember" parameterType="int">
+		update members set mstatus=0 where mnum=#{mnum}
+	</update>
 </mapper>
 

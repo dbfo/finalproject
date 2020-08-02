@@ -350,13 +350,21 @@
 			}
 		})
 	});
+	/*
 	$("#confirmBtn").click(function(){
 		var form=$("<form></form>")
 		form.attr('method','post');
 		form.attr('action','${cp}/mypage/orderhistory');
 		form.appendTo('body');
 		form.submit();
-	});
+	});*/
+	$("#resultmodal").on('hidden.bs.modal', function () {
+		var form=$("<form></form>")
+		form.attr('method','post');
+		form.attr('action','${cp}/mypage/orderhistory');
+		form.appendTo('body');
+		form.submit();
+	})
 	
 	
 </script>

@@ -1,6 +1,7 @@
 package com.jhta.finalproject.hd.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MemberService;
@@ -61,13 +63,81 @@ public class MemberController {
 			session.invalidate();
 			return "redirect:/";
 		}
-		
+		//회원정보페이지로 이동
 		@RequestMapping("/member/memberinfopage")
 		public String infopage() {
 			return ".memberinfo";
 		}
+		//회원탈퇴페이지로 이동
 		@RequestMapping("/member/memberleavepage")
 		public String leavepage() {
 			return ".memberleave";
+		}
+		//탈퇴시 체크
+		@RequestMapping(value="/member/leavecheck",method = RequestMethod.POST)
+		@ResponseBody
+		public String leaveCheck(HttpSession session) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			JSONObject json=new JSONObject();
+			String result="";
+			int n=service.ordercheck(mnum);
+			if(n>0) { // 주문,결제 상태 주문내역존재 
+				result="orderfail";
+				json.put("result", result);
+				return json.toString();
+			}
+			int n1=service.depositapplycheck(mnum);
+			if(n1>0) { // 인출신청중인 예치금존재
+				result="depositapplyfail";
+				json.put("result", result);
+				return json.toString();
+			}
+			List<Integer>list=service.depositcheck(mnum);
+			int totaldeposit=0;
+			if(list!=null) {
+				for(int val:list) {
+					totaldeposit+=val;
+				}
+			}
+			if(totaldeposit>0) {
+				result="depositfail";
+				json.put("result", result);
+				return json.toString();
+			}else if(totaldeposit<0) {
+				result="err";
+				json.put("result", result);
+				return json.toString();
+			}
+			int snum=service.obsellercheck(mnum);
+			int n2=0;
+			if(snum>0) {
+				n2=service.obcheck(snum);
+			}
+			if(n2>0) {
+				result="obfail";
+				json.put("result", result);
+				return json.toString();
+			}
+			result="success";
+			json.put("result", result);
+			return json.toString();
+		}
+		//탈퇴처리.
+		@RequestMapping(value="/member/leavemember",method = RequestMethod.POST)
+		@ResponseBody
+		public String leavemember(HttpSession session) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			int n=service.leavemember(mnum);
+			String result="";
+			if(n>0) {
+				result="success";
+			}else {
+				result="fail";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();
 		}
 }

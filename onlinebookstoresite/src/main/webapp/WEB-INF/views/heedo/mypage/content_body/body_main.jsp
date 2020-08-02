@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <div id="content_history">
 	
 	<div class="maintable shadow" id="recentorderTable">
-	<h5>최근주문내역</h5>
+	<i class="fab fa-first-order-alt"></i><h5 style="display:inline"><span class="colorFont">최근주문</span>내역</h5>
 		<table class="table table-borderd" id="ordertable">
 			<thead class="table-dark">
 				<th style="width:10%">주문번호</th>
@@ -21,12 +23,17 @@
 						<td>${ovo.statusStr }</td>
 					</tr>
 				</c:forEach>
+				<c:if test="${fn:length(orderlist)==0}">
+					<tr>
+						<td colspan="4" style="text-align: center;">주문내역이 없습니다.</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 	</div>
 	
 	<div class="maintable shadow" id="recentCancelTable">
-	<h5>최근취소내역</h5>
+	<i class="fab fa-first-order-alt"></i><h5 style="display:inline"><span class="colorFont">최근취소</span>내역</h5>
 		<table class="table table-borderd">
 			<thead class="table-dark">
 				<th style="width:10%">주문번호</th>
@@ -43,14 +50,18 @@
 						<td>${cvo.statusStr }</td>
 					</tr>
 				</c:forEach>
-			
+				<c:if test="${fn:length(cancellist)==0}">
+					<tr>
+						<td colspan="4" style="text-align: center;">취소내역이 없습니다.</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 		
 	</div>
 	
 	<div class="maintable shadow" id="recentQnaTable">
-	<h5>최근문의내역</h5>
+	<i class="fab fa-first-order-alt"></i><h5 style="display:inline"><span class="colorFont">최근문의</span>내역</h5>
 		<table class="table table-borderd">
 			<thead class="table-dark">
 				<th style="width:10%">문의번호</th>
@@ -67,6 +78,11 @@
 						<td>${qvo.statusStr }</td>
 					</tr>
 				</c:forEach>
+				<c:if test="${fn:length(qnalist)==0}">
+					<tr>
+						<td colspan="4" style="text-align: center;">문의내역이 없습니다.</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 		
@@ -89,5 +105,8 @@
 		border-radius: 8px;
 		margin-bottom: 30px;
 		padding:10px;
+	}
+	.colorFont{
+		color:#e83e8c;
 	}
 </style>
