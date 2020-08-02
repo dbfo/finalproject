@@ -32,5 +32,27 @@
 	<update id="leavemember" parameterType="int">
 		update members set mstatus=0 where mnum=#{mnum}
 	</update>
+	
+	<!-- 회원정보조회 -->
+	<select id="memberinfo" parameterType="int" resultType="memberinfo">
+		select * from members where mnum=#{mnum}
+	</select>
+	
+	<!-- 정보수정 -->
+	<update id="changepwd" parameterType="hashmap">
+		update members set mpwd=#{mpwd} where mnum=#{mnum}
+	</update>
+	
+	<update id="changephone" parameterType="hashmap">
+		update members set phone=#{phone} where mnum=#{mnum}
+	</update>
+	
+	<update id="chageemail" parameterType="hashmap">
+		update members set email=#{email} where mnum=#{mnum}
+	</update>
+	
+	<update id="chageaddr" parameterType="hashmap">
+		update members set addr=#{addr} where mnum=#{mnum}
+	</update>
 </mapper>
 

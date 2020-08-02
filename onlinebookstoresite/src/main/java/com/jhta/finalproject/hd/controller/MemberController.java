@@ -1,5 +1,6 @@
 package com.jhta.finalproject.hd.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.finalproject.hd.service.MemberService;
 import com.jhta.finalproject.hd.vo.LoginCheckVo;
+import com.jhta.finalproject.hd.vo.MemberinfoVo;
 import com.jhta.finalproject.jh.service.MembersPointService;
 @Controller
 public class MemberController {
@@ -65,7 +68,16 @@ public class MemberController {
 		}
 		//회원정보페이지로 이동
 		@RequestMapping("/member/memberinfopage")
-		public String infopage() {
+		public String infopage(HttpSession session,Model model) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			MemberinfoVo vo=service.memberinfo(mnum);
+			String mname=vo.getMname();
+			String mid=vo.getMid();
+			Date regdate=vo.getRegdate();
+			model.addAttribute("mname",mname);
+			model.addAttribute("mid",mid);
+			model.addAttribute("regdate",regdate);
 			return ".memberinfo";
 		}
 		//회원탈퇴페이지로 이동

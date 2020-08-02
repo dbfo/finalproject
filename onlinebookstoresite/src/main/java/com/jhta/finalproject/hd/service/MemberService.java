@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.finalproject.hd.dao.MemberDao;
 import com.jhta.finalproject.hd.vo.LoginCheckVo;
+import com.jhta.finalproject.hd.vo.MemberinfoVo;
 
 @Service
 public class MemberService {
@@ -35,7 +36,12 @@ public class MemberService {
 	public int obcheck(int snum) {
 		return dao.obcheck(snum);
 	}
+	//탈퇴처리 
 	public int leavemember(int mnum) {
 		return dao.leavemember(mnum);
+	}
+	//회원정보조회
+	public MemberinfoVo memberinfo(int mnum) {
+		return dao.memberinfo(mnum);
 	}
 }

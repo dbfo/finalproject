@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.finalproject.hd.vo.LoginCheckVo;
+import com.jhta.finalproject.hd.vo.MemberinfoVo;
 
 @Repository
 public class MemberDao {
@@ -39,5 +40,9 @@ public class MemberDao {
 	//탈퇴처리 dao
 	public int leavemember(int mnum) {
 		return sqlsession.update(NAMESPACE+".leavemember",mnum);
+	}
+	//회원정보
+	public MemberinfoVo memberinfo(int mnum) {
+		return sqlsession.selectOne(NAMESPACE+".memberinfo", mnum);
 	}
 }

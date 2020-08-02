@@ -40,6 +40,7 @@
   	<typeAlias type="com.jhta.finalproject.hd.vo.DepositHistoryVo" alias="depositHistory"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.AccountVo" alias="AccountVo"/>
   	<typeAlias type="com.jhta.finalproject.hd.vo.AccountHistoryVo" alias="acchistoryVo"/>
+  	<typeAlias type="com.jhta.finalproject.hd.vo.MemberinfoVo" alias="memberinfo"/>
   	<!-- /////////// -->
   	
 	<!-- ////지민///// -->
