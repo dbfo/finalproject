@@ -49,31 +49,6 @@
 		</div>
 </div>
 
-<!-- ==== 모달창 ======== -->
-<div id="writemodal" class="modal fade" role="dialog"> 
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #b3d9ff ">
-       <h4 class="modal-title" >문의사항 작성</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        	제목<br>
-        	<input type="text" id="qnatitle" placeholder="제목을 작성하세요."><br>
-        	문의내용
-        	<textarea rows="5" cols="50" id="qnacontent"></textarea>
-      </div>
-      <div class="modal-footer">
-      	<button type="button" class="btn btn-dark" id="modal_confirmBtn" data-dismiss="modal" >문의하기</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <div id="alertmodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
@@ -99,7 +74,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
+      <div class="modal-header" style="background-color: #212529">
        <h4 class="modal-title">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
@@ -256,7 +231,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
+      <div class="modal-header" style="background-color: #212529">
        <h4 class="modal-title" style="color:white">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
@@ -276,7 +251,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
+      <div class="modal-header" style="background-color: #212529">
        <h4 class="modal-title" style="color:white">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
@@ -332,7 +307,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
+      <div class="modal-header" style="background-color: #212529">
        <h4 class="modal-title" style="color:white">출금신청</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>

@@ -21,16 +21,19 @@
 										+ "<img src='${cp }/resources/hd/image/prevButton.png' id='bestprevimg'>"
 										+ "</div>").appendTo("#content-best-card");
 						$(data).each(function(index, item) {
-								$("<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
+								$("<div class='card'><div id='imgwrap'>"
+									+"<img class='card-img-top' src="+item.imgsrc+
 									" alt='Card image cap'></div>"
 									+ "<div class='card-body'><h5 class='card-title'>"
-									+ item.viewtitle
+									+item.viewtitle
 									+ "</h5>"
 									+ "<p class='card-text'>"
 									+ item.viewWriter
 									+ "<br><strong>"
 									+ item.bprice
-									+ "</strong></p></div></div>").appendTo("#content-best-card");
+									+ "</strong></p></div></div>")
+									.appendTo(
+											"#content-best-card");
 						});
 						var a = $("<div id='bestnext'>"
 								+ "<img src='${cp }/resources/hd/image/nextButton.png' id='bestnextimg'>"
@@ -88,7 +91,7 @@
 															+ item.viewWriter
 															+ "<br><strong>"
 															+ item.bprice
-															+ "</stromg></p></div></div>")
+															+ "</strong></p></div></div>")
 													.appendTo(
 															"#content-new-card");
 

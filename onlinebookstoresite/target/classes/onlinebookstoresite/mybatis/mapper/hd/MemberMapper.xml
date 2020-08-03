@@ -47,11 +47,11 @@
 		update members set phone=#{phone} where mnum=#{mnum}
 	</update>
 	
-	<update id="chageemail" parameterType="hashmap">
+	<update id="changeEmail" parameterType="hashmap">
 		update members set email=#{email} where mnum=#{mnum}
 	</update>
 	
-	<update id="chageaddr" parameterType="hashmap">
+	<update id="changeaddr" parameterType="hashmap">
 		update members set addr=#{addr} where mnum=#{mnum}
 	</update>
 </mapper>

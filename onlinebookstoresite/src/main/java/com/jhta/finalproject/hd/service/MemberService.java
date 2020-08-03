@@ -44,4 +44,14 @@ public class MemberService {
 	public MemberinfoVo memberinfo(int mnum) {
 		return dao.memberinfo(mnum);
 	}
+	
+	public int updatephone(HashMap<String, Object>map) {
+		return dao.updatephone(map);
+	}
+	public int updatepwd(HashMap<String, Object>map) {
+		return dao.updatepwd(map);
+	}
+	public int updateEmail(HashMap<String, Object>map) {
+		return dao.updateEmail(map);
+	}
 }

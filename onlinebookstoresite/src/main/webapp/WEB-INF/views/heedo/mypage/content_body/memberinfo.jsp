@@ -19,7 +19,7 @@
 				<td class="tableloc">아이디</td><td>${requestScope.mid }</td><td class="tableloc">비밀번호</td>
 				<td>
 					<input type="password" id="mypwd" readonly="readonly">
-					<button type="button" class="btn btn-dark changeBtn" data-toggle="modal" data-target="#pwdmodal">변경</button>
+					<button type="button" class="btn btn-dark changeBtn" data-toggle="modal" data-target="#pwdchangemodal">변경</button>
 				</td>
 			</tr>
 			<tr>
@@ -33,7 +33,7 @@
 				</td>
 				<td>
 					<span id="email"></span>
-					<button type="button" class="btn btn-dark changeBtn" data-toggle="modal" data-target="#emailmodal">변경</button>
+					<button type="button" class="btn btn-dark changeBtn" data-toggle="modal" data-target="#emailchangemodal">변경</button>
 				</td>
 			</tr>
 			<tr>
@@ -70,7 +70,7 @@
         	</div>
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>변경할전화번호</strong></span>
-        		<input type="text" id="modalphone1" class="modalphone">
+        		<input type="text" id="modalphone1" class="modalphone" value="010">
         		<input type="text" id="modalphone2" class="modalphone">
         		<input type="text" id="modalphone3" class="modalphone">
         	</div>
@@ -84,7 +84,7 @@
   </div>
 </div>
 
-<div id="emailmodal" class="modal fade" role="dialog"> 
+<div id="emailchangemodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -103,7 +103,7 @@
         	</div>
       </div>
       <div class="modal-footer">
-      	  	<button type="button" class="btn btn-dark" id="emailconfirmBtn">변경</button>
+      	  	<button type="button" class="btn btn-dark" id="emailchangeBtn">변경</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
@@ -111,7 +111,7 @@
   </div>
 </div>
 
-<div id="pwdmodal" class="modal fade" role="dialog"> 
+<div id="pwdchangemodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -130,7 +130,7 @@
         	</div>
       </div>
       <div class="modal-footer">
-      	  	<button type="button" class="btn btn-dark" id="pwdconfirmBtn">변경</button>
+      	  	<button type="button" class="btn btn-dark" id="pwdchangeBtn">변경</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
@@ -158,16 +158,16 @@
   </div>
 </div>
 
-<div id="alertinfomodal" class="modal fade" role="dialog"> 
+<div id="alertchangemodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
-       <h4 class="modal-title">알림</h4>
+      <div class="modal-header" style="background-color: #212529">
+       <h4 class="modal-title" style="color:white">알림</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
-      <div class="modal-body" id="alertinfomodal_body">
+      <div class="modal-body" id="alertchangemodal_body">
         	
       </div>
       <div class="modal-footer">
@@ -177,22 +177,153 @@
 
   </div>
 </div>
+
+<div id="successchangemodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #212529">
+       <h4 class="modal-title" id="loginmodal_h4">회원정보</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body modalbody">
+        	<strong>변경완료</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="errchangemodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ff66a3">
+       <h4 class="modal-title" style="color:white">에러</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body" id="errmodal_body">
+        	에러발생으로 변경실패
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(document).ready(function(){
 		memberinfo();
 	});
 	
+	//이메일변경
+	$("#emailchangeBtn").click(function(){
+		$("#emailchangemodal").modal('hide')
+		var changeemail=$("#input_email").val();
+		
+		if(changeemail==""){
+			$("#alertchangemodal_body").text('변경할 이메일을 적어주세요.')
+			$("#alertchangemodal").modal('show')
+			return
+		}
+		
+		$.ajax({
+			url:"${cp}/member/updateEmail",
+			data:{email:changeemail},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="success"){
+					$("#successchangemodal").modal('show');
+					memberinfo();
+				}else if(data.result=="fail"){
+					$("#errchangemodal").modal('show');
+				}
+			}
+		})
+	});
+	
+	
+	//비밀번호변경
+	$("#pwdchangeBtn").click(function(){
+		$("#pwdchangemodal").modal('hide')
+		var changepwd=$("#input_pwd").val();
+		
+		if(changepwd==""){
+			$("#alertchangemodal_body").text('변경할 비밀번호를 적어주세요.')
+			$("#alertchangemodal").modal('show')
+			return
+		}
+		
+		$.ajax({
+			url:"${cp}/member/updatepwd",
+			data:{pwd:changepwd},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="success"){
+					$("#successchangemodal").modal('show');
+					memberinfo();
+				}else if(data.result=="fail"){
+					$("#errchangemodal").modal('show');
+				}
+			}
+		})
+	});
+	
+	
+	
+	
+	//전화번호변경
+	$("#phoneconfirmBtn").click(function(){
+		$("#phonemodal").modal('hide')
+		var phone1=$("#modalphone1").val();
+		var phone2=$("#modalphone2").val();
+		var phone3=$("#modalphone3").val();
+		
+		if(phone1==""||phone3==""||phone2==""){
+			$("#alertchangemodal_body").text('변경할 전화번호를 적어주세요.')
+			$("#alertchangemodal").modal('show')
+			return
+		}
+		
+		var changephone=phone1+"-"+phone2+"-"+phone3;
+		
+		$.ajax({
+			url:"${cp}/member/updatephone",
+			data:{phone:changephone},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="success"){
+					$("#successchangemodal").modal('show');
+					memberinfo();
+				}else if(data.result=="fail"){
+					$("#errchangemodal").modal('show');
+				}
+			}
+		})
+	});
+	
 	var memberinfo=function(){
 		$.ajax({
-			url:"/finalproject/member/memberinfo",
+			url:"${cp}/member/memberinfo",
 			dataType:"json",
 			type:"post",
 			success:function(data){
 				$("#mypwd").val(data.mpwd)
 				$("#modal_pwd").val(data.mpwd);
 				$("#email").text(data.email);
-				$("#modal_email").text(data.email);
+				$("#modal_email").val(data.email);
 				$("#phone").text(data.phone);
 				$("#modal_phone").val(data.phone);
 				$("#addr1").val(data.addr1);
@@ -335,6 +466,6 @@
 		text-align: center;
 	}
 	.modalphone{
-		width: 55px;
+		width: 64px;
 	}
 </style>

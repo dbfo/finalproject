@@ -152,7 +152,7 @@ public class MemberController {
 			json.put("result", result);
 			return json.toString();
 		}
-		
+		//회원정보페이지 이동.
 		@RequestMapping(value="/member/memberinfo",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
 		@ResponseBody
 		public String memberinfo(HttpSession session) {
@@ -176,6 +176,67 @@ public class MemberController {
 			json.put("addr3", addr3);
 			json.put("addr4", addr4);
 			json.put("addr5", addr5);
+			return json.toString();
+		}
+		
+		//전화번호수정.
+		@RequestMapping(value="/member/updatephone",produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String updatePhone(HttpSession session,String phone) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>map=new HashMap<String, Object>();
+			map.put("mnum", mnum);
+			map.put("phone",phone);
+			int n=service.updatephone(map);
+			String result="";
+			if(n>0) {
+				result="success";
+			}else {
+				result="fail";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();
+		}
+		
+		@RequestMapping(value="/member/updatepwd",produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String updatePwd(HttpSession session,String pwd) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>map=new HashMap<String, Object>();
+			map.put("mnum", mnum);
+			map.put("mpwd",pwd);
+			int n=service.updatepwd(map);
+			String result="";
+			if(n>0) {
+				result="success";
+			}else {
+				result="fail";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();
+		}
+		
+		@RequestMapping(value="/member/updateEmail",produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String updateEmail(HttpSession session,String email) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>map=new HashMap<String, Object>();
+			map.put("mnum", mnum);
+			map.put("email",email);
+			int n=service.updateEmail(map);
+			String result="";
+			if(n>0) {
+				result="success";
+			}else {
+				result="fail";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
 			return json.toString();
 		}
 }

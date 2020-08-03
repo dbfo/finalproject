@@ -45,4 +45,15 @@ public class MemberDao {
 	public MemberinfoVo memberinfo(int mnum) {
 		return sqlsession.selectOne(NAMESPACE+".memberinfo", mnum);
 	}
+	
+	public int updatephone(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".changephone", map);
+	}
+	public int updatepwd(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".changepwd", map);
+	}
+	public int updateEmail(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".changeEmail", map);
+	}
+	
 }

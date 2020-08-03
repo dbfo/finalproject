@@ -165,7 +165,7 @@
 				dataType:"json",
 				success:function(data){
 					if(data.result=="fail"){
-						$("#errmodal_body").text("존재하지 않는 회원입니다. 아이디와 비밀번호를 확인해주세요.");
+						$("#errmodal_body").text("입력하신 정보와 일치하는 회원이 없습니다. 아이디와 비밀번호를 확인해주세요.");
 						$("#errmodal").modal('show')
 					}else if(data.result=="leave"){
 						$("#errmodal_body").text("탈퇴한 회원입니다.");
