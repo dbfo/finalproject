@@ -28,7 +28,7 @@
 					<span id="account_num"></span>
 				</td>
 				<td>
-					<button type="button" class="btn btn-dark" id="changeAccountBtn" data-toggle="modal" data-target="#changeModal">변경</button>
+					<button type="button" class="btn btn-dark" id="changeAccountBtn" data-toggle="modal" data-target="#changeAccountModal">변경</button>
 				</td>
 			</tr>
 		</table>
@@ -61,7 +61,7 @@
 </div>
 
 <!-- ==== 모달창 ======== -->
-<div id="errmodal" class="modal fade" role="dialog"> 
+<div id="accounterrmodal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -70,7 +70,7 @@
        <h4 class="modal-title" style="color:white">에러</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
-      <div class="modal-body" id="errmodal_body">
+      <div class="modal-body" id="accerromodal_body">
         	
       </div>
       <div class="modal-footer">
@@ -103,7 +103,7 @@
   </div>
 </div>
 
-<div id="changeModal" class="modal fade" role="dialog"> 
+<div id="changeAccountModal" class="modal fade" role="dialog"> 
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -114,7 +114,7 @@
       </div>
       <div class="modal-body">
         	은행<br>
-        	<select id="bankSelect" class="modal_input">
+        	<select id="bankSelect_change" class="modal_input">
         		<option value="우리은행">우리은행</option>
         		<option value="케이뱅크">케이뱅크</option>
         		<option value="기업은행">기업은행</option>
@@ -128,10 +128,10 @@
         		<option value="카카오뱅크">카카오뱅크</option>		
         	</select><br>
         	계좌번호<br>
-        	<input type="number" id="banknum" placeholder="(-제외)계좌번호를 입력해주세요" class="modal_input">
+        	<input type="number" id="banknum_change" placeholder="(-제외)계좌번호를 입력해주세요" class="modal_input">
       </div>
       <div class="modal-footer">
-       	<button type="button" class="btn btn-light" id="accountConfirmBtn">변경</button>
+       	<button type="button" class="btn btn-dark" id="accountConfirmBtn2">변경</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
       </div>
     </div>
@@ -161,7 +161,6 @@
 				var account=data.account;
 				var bank=data.bank;
 				var anum=Number(data.anum);
-				console.log('anum1:'+anum);
 				$("#account_num").text(account);
 				$("#bank_name").text(bank);
 				$("#accountDiv").data('anum',anum);
@@ -170,29 +169,33 @@
 	}
 	
 	
-	$("#accountConfirmBtn").click(function(){
-		$("#changeModal").modal('hide');
-		var banknum=$("#banknum").val();
-		var bank=$("#bankSelect").val();
+	$("#accountConfirmBtn2").click(function(){
+		console.log('1111')
+		$("#changeAccountModal").modal('hide');
+		var banknum=$("#banknum_change").val();
+		var bank=$("#bankSelect_change").val();
 		var anum=Number($("#accountDiv").data('anum'));
-		console.log('anum:'+anum);
 		if(banknum==""||banknum==null){
-			$("#erromodal_body").text('계좌번호를 입력해주세요.')
-			$("#errmodal").modal('show');
+			console.log('2222')
+			$("#accerromodal_body").text('계좌번호를 입력해주세요.')
+			$("#accounterrmodal").modal('show');
 			return;
 		}
 		if(!$.isNumeric(banknum)){
-			$("#erromodal_body").text('계좌번호는 숫자만 입력가능합니다..')
-			$("#errmodal").modal('show');
+			console.log('333')
+			$("#accerromodal_body").text('계좌번호는 숫자만 입력가능합니다..')
+			$("#accounterrmodal").modal('show');
 			return;
 		}
 		banknum=Number(banknum);
+		console.log('4444')
 		$.ajax({
 			url:"/finalproject/mypage/updateAccount",
 			data:{bank:bank,banknum:banknum,anum:anum},
 			dataType:"json",
 			type:"post",
 			success:function(data){
+				console.log('5555')
 				if(data.result){
 					myaccount();
 					var startDay=$("#date1").val();
@@ -200,8 +203,8 @@
 					var value=$("#accountSelect").val();
 					viewAccountlist(startDay,endDay,1,value);		
 				}else{
-					$("#erromodal_body").text('계좌번호 변경에러!')
-					$("#errmodal").modal('show');
+					$("#accerromodal_body").text('계좌번호 변경에러!')
+					$("#accounterrmodal").modal('show');
 					
 				}
 					
@@ -247,9 +250,6 @@
 						}
 										
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
-							console.log("i:"+i);
-							console.log("startPn:"+item.startPageNum)
-							console.log("endPn:"+item.endPageNum)
 							var yy=item.startDay;
 							var mm=item.endDay;
 							if(i==item.pageNum){

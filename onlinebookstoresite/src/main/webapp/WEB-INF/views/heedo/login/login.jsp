@@ -193,7 +193,7 @@
 			return;
 		}
 		$.ajax({
-			url:"/finalproject/nomem/inquiryorder",
+			url:"${cp}/nomem/inquiryorder",
 			data:{bpaynum:ordernum,phone:phone},
 			dataType:"json",
 			type:"post",

@@ -11,20 +11,15 @@
 	var bestpageNum = 1;
 	var newpageNum = 1;
 	var viewBest = function() {
-
-		$
-				.ajax({
-					url : "/finalproject/home/bestlist",
-					dataType : "json",
-					data : {
-						pageNum : bestpageNum
-					},
-					success : function(data) {
+		$.ajax({
+				url : "${cp}/home/bestlist",
+				dataType : "json",
+				data : {pageNum : bestpageNum},
+				success : function(data) {
 						var b = $(
 								"<div id='bestprev'>"
 										+ "<img src='${cp }/resources/hd/image/prevButton.png' id='bestprevimg'>"
-										+ "</div>").appendTo(
-								"#content-best-card");
+										+ "</div>").appendTo("#content-best-card");
 						$(data).each(function(index, item) {
 								$("<div class='card'><div id='imgwrap'><img class='card-img-top' src="+item.imgsrc+
 									" alt='Card image cap'></div>"
@@ -69,7 +64,7 @@
 	var viewnew = function() {
 		$
 				.ajax({
-					url : "/finalproject/home/newlist",
+					url : "{cp}/home/newlist",
 					dataType : "json",
 					data : {
 						pageNum : newpageNum
