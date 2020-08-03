@@ -68,16 +68,13 @@
 		
 	</select>
 	
-	
 	<!-- 중고   -->
-	
 	<select id="getosCatename" parameterType="int" resultType="String">
 		select scataname from smallcategory where scatenum =#{scatenum}
 	</select>
 	<select id="getobCatename" parameterType="int" resultType="String">
 		select bcataname from bigcategory where bcatenum =#{bcatenum}
 	</select>
-	
 	
 		<!-- 조회수 증가하기 -->
 	<update id="hit" parameterType="int">
@@ -100,13 +97,11 @@
 	</select>
 
 	<select id="bookdetail" parameterType="hashmap" resultType="oldall">
-	
 				select ob.*,i.* from oldbooks ob,img i 
                  where ob.obnum =#{obnum} and ob.obnum = i.bnum(+)
 	</select>
-
-		<!-- cart에 인서트 할거임 -->
 	
+		<!-- cart에 인서트 할거임 -->
 	<select id="oldcartinsert" parameterType="oldcart" resultType="int">
 		insert into cart values(SEQ_CART_CARTNUM.nextval,#{mnum},#{bcount},2,#{obnum})
 	</select>
@@ -115,11 +110,8 @@
 	<select id="oldcartselect" parameterType="hashmap" resultType="int">
 		select NVL(COUNT(*),0) from cart where bnum=#{obnum} and mnum=#{mnum} and btype=#{btype}
 	</select>
-
 	
-	<!-- ////////////중고 QnA////////////// -->
-
-		
+	<!-- ////////////중고 QnA////////////// -->		
 	<!-- QnA 등록  -->
 	
 	<select id="obqnainsert" parameterType="obqnainsert">

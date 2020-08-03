@@ -35,27 +35,20 @@ public class ListController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 검색조건 Map에 담기
-		map.put("field", field); //아무것도 안들어감1
-		map.put("keyword", keyword); //아무것도 안들어감2
-//		System.out.println("★★★★★★★★★★★★★★field는???"+field);
-//		System.out.println("★★★★★★★★★★★★★★keyword는???" + keyword);
+		map.put("field", field); //null
+		map.put("keyword", keyword); //null
 
 		ModelAndView mv = new ModelAndView(".list1");
 		int totalRowCount = service.count1(map);// 전체글의 갯수
 		PageUtil pu = new PageUtil(pageNum, totalRowCount, 10, 10);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		
 
-//		List<BooksVo> list = service.list(map);
 		List<AllListVo> list=service.allbooklist(map);
 		List<BigcateVo> list2=service.list2();
 
-		
-		mv.addObject("list", list);
-	
+		mv.addObject("list", list);	
 		mv.addObject("list2", list2);
-
 		mv.addObject("pu", pu);
 		mv.addObject("field", field);
 		mv.addObject("keyword", keyword);
@@ -120,12 +113,12 @@ public class ListController {
 		map.put("endRow", pu.getEndRow());
 
 		
-		System.out.println("scate2가 뭐냐?" + scate2);
-		System.out.println("bcate2가 뭐임?" + bcate2);
+		System.out.println("scate2?" + scate2);
+		System.out.println("bcate2?" + bcate2);
 		String scatename=service.getsCatename(scate2);
 		String bcatename=service.getbCatename(bcate2);
-		System.out.println("scatename가 뭐냐?" + scatename);
-		System.out.println("bcatename가 뭐임?" + bcatename);
+		System.out.println("scatename?" + scatename);
+		System.out.println("bcatename?" + bcatename);
 		System.out.println(pu.getStartRow()+"/"+pu.getEndRow()+"/"+scate2);
 		
 		List<AllListVo> sbooklist1=service.sbooklist1(map);
@@ -141,7 +134,6 @@ public class ListController {
 		mv.addObject("bnum",bnum);
 		mv.addObject("bcatename",bcatename);
 		mv.addObject("scatename",scatename);
-		System.out.println("==========================================================");
 		return mv;
 	}
 	
