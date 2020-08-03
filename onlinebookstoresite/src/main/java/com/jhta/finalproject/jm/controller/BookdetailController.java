@@ -75,24 +75,15 @@ public class BookdetailController {
 			mv.addObject("avg",avg);					
 		}
 		System.out.println("AVG에 뭐들어있냐?"+avg);
-
-		///////////////////
-		
 		int bcnt=0;
-		
 		for(AllListVo vo:bookvo) {
 			bcnt=vo.getBcount();
 			mv.addObject("bcnt",bcnt);
-		}
-		
+		}	
 		System.out.println("bcnt는???"+bcnt);
 		mv.addObject("pu",pu);
 		mv.addObject("reviewvo",reviewvo);
 		mv.addObject("bnum",bnum);
-	//	mv.addObject("img1",img1);
-	//	mv.addObject("img2",img2);
-		
-		
 		return mv;
 	}
 	

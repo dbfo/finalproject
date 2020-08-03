@@ -617,26 +617,7 @@
 	<select id="imginfo" parameterType="int" resultType="jmimg">
 		select * from img where bnum=#{bnum}
 	</select>
-	
-<!-- 	<select id="bookimglist" parameterType="hashmap" resultType="listimg"> -->
-	
-<!-- 		select * from img i,books b where i.bnum=#{bnum} and i.thumbnail=1 -->
 
-<!-- 		select * from ( -->
-<!-- 			select aa.*,rownum rnum from -->
-<!-- 			( -->
-<!-- 				select b.*,i.imgsavefilename from books b,img i  -->
-<!--                  where b.bnum = i.bnum and i.thumbnail=1   -->
-<!--                  <if test="field!=null and field!=''"> -->
-<!-- 					and ${field} like '%'||#{keyword}||'%'  -->
-<!-- 				 </if> -->
-<!-- 				 order by b.bnum asc -->
-<!-- 			)aa -->
-<!-- 		) -->
-<!-- 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]> -->
-
-<!-- 	</select> -->
-	
 	<select id="allbooklist" parameterType="hashmap" resultType="alllist">
 	
 		select * from (

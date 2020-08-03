@@ -165,47 +165,7 @@ public class ListController {
 		
 		return mv;
 	}
-	
-	
-	
-	
-	/*
-	//소설분류 리스트
-	@GetMapping(value = "/cnovel")
-	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
-	public ModelAndView cnovellist(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, String field,
-			String keyword){
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		// 검색조건 Map에 담기
-
-		map.put("field", field);
-		map.put("keyword", keyword);
-
-		int totalRowCount = service.novelcount(map);// 전체글의 갯수
-
-		PageUtil pu = new PageUtil(pageNum, totalRowCount, 5, 10);
-		ModelAndView mv = new ModelAndView(".cnovel");
-
-		map.put("startRow", pu.getStartRow());
-		map.put("endRow", pu.getEndRow());
-		
-		
-		List<BooksVo> catenovel = service.catenovel(map);
-		List<BigcateVo> list2=service.list2();
-		
-		
-		mv.addObject("catenovel", catenovel);
-		mv.addObject("list2", list2);
-		mv.addObject("pu", pu);
-		mv.addObject("field",field);
-		mv.addObject("keyword", keyword);
-		
-		return mv;
-	}
-	*/
-	
-	
 	//소설분류 리스트
 	@GetMapping(value = "/cnovel")
 	// 파라미터가 pageNum으로 넘어오지않으면 기본값(defaultValue)를 1로 줘라~
