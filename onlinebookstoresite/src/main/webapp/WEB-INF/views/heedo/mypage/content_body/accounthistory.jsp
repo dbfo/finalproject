@@ -173,8 +173,11 @@
 		console.log('1111')
 		$("#changeAccountModal").modal('hide');
 		var banknum=$("#banknum_change").val();
+		console.log('banknum:'+banknum);
 		var bank=$("#bankSelect_change").val();
+		console.log('bank:'+bank)
 		var anum=Number($("#accountDiv").data('anum'));
+		console.log('anum:'+anum);
 		if(banknum==""||banknum==null){
 			console.log('2222')
 			$("#accerromodal_body").text('계좌번호를 입력해주세요.')
@@ -190,7 +193,7 @@
 		banknum=Number(banknum);
 		console.log('4444')
 		$.ajax({
-			url:"/finalproject/mypage/updateAccount",
+			url:"${cp}/mypage/updateAccount",
 			data:{bank:bank,banknum:banknum,anum:anum},
 			dataType:"json",
 			type:"post",
@@ -224,7 +227,7 @@
 			+"<li class='page-item disabled pageli'><a class='page-link' href='#'>>></a></li>"
 			$("#accountPaging").append(paginationapp);
 		$.ajax({
-			url:'/finalproject/mypage/accounthistory',
+			url:'${cp}/mypage/accounthistory',
 			dataType:'json',
 			type:'post',
 			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},

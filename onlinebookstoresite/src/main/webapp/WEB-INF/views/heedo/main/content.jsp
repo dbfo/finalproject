@@ -64,7 +64,7 @@
 	var viewnew = function() {
 		$
 				.ajax({
-					url : "{cp}/home/newlist",
+					url : "${cp}/home/newlist",
 					dataType : "json",
 					data : {
 						pageNum : newpageNum
