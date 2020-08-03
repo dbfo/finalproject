@@ -199,7 +199,7 @@
 	});
 	
 	function goCart(obnum){
-		console.log(obnum);
+		
 		$.post("${cp }/cart/oldinsert?obnum="+obnum+"&bcount=1", function(data){
 			console.log("callback");
 			if(data=="already"){

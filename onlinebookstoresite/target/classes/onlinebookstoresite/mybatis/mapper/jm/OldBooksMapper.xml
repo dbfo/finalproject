@@ -113,7 +113,7 @@
 	
 		
 	<select id="oldcartselect" parameterType="hashmap" resultType="int">
-		select NVL(COUNT(*),0) FROM CART WHERE OBNUM=#{obnum} and MNUM=#{mnum} and BTYPE=#{btype}; 
+		select NVL(COUNT(*),0) from cart where bnum=#{obnum} and mnum=#{mnum} and btype=#{btype}
 	</select>
 
 	
@@ -133,12 +133,12 @@
 
 		<!-- 중고판매자 QnA리스트 가져오기 -->
 	<select id="getSellerQnaList" resultType="qnalistjoin" parameterType="hashmap">
-		select OBNAME,OBQTITLE,OBQCONTENT,MID,OBQSTATUS,OBQDATE,OBNUM,OBQNUM,MNUM
+		select obname,obqtitle,obqcontent,mid,obqstatus,OBQDATE,obnum,obqnum,mnum
 		from(
   			select qna.*,ROWNUM rnum
     		from(
-	        select o.obname OBNAME, oq.obqtitle OBQTITLE, oq.obqcontent OBQCONTENT, m.mid MID, oq.obqstatus OBQSTATUS,
-			oq.obqdate OBQDATE,o.obnum OBNUM,oq.obqnum OBQNUM,m.mnum MNUM
+	        select o.obname obname, oq.obqtitle obqtitle, oq.obqcontent obqcontent, m.mid mid, oq.obqstatus obqstatus,
+			oq.obqdate obqdate,o.obnum obnum,oq.obqnum obqnum,m.mnum mnum
 			from oldbooks o,obqna oq, members m
 			where o.obnum=oq.obnum and oq.mnum=m.mnum and o.obnum=#{obnum}
        		order by oq.obqdate desc)qna)a
