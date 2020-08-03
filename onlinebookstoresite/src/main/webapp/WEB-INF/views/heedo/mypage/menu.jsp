@@ -120,7 +120,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
+      <div class="modal-header" style="background-color: #212529">
        <h4 class="modal-title" style="color:white">계좌번호 입력</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
@@ -182,7 +182,6 @@
 <script>
 	var memberpage=function(value){
 		$("#loginmodal_body").data('value',value);
-		console.log('value : '+value);
 		$("#loginmodal").modal('show');
 	}
 	$("#loginconfirmBtn").click(function(){

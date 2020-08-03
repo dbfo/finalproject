@@ -105,7 +105,6 @@
 			type:"post",
 			success:function(data){
 				var result=data.result;
-				console.log('result:'+result)
 				if(result=="orderfail"){
 					$("#leaveErr_body").text('주문/결제 상태의 주문내역이 존재합니다. 주문내역을 확인해주세요.')
 					$("#leaveErrModal").modal('show');

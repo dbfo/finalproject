@@ -595,15 +595,11 @@ public class MyPageController {
 			datemap.put("endDay",endDay);
 			datemap.put("mnum",mnum);
 			datemap.put("value",value);
-			System.out.println("value:"+value);
 			//value-> all : 전체  , sellmoney -> 판매대금 (0) 주문취소(1) 반품/환불처리(2) 계좌인출(3)
 			int totalcount=service.countDeposithistory(datemap);
-			System.out.println("totalcount:"+totalcount);
 			PageUtil pu=new PageUtil(pageNum, totalcount, 8, 5);
 			datemap.put("startRow", pu.getStartRow());
 			datemap.put("endRow", pu.getEndRow());
-			System.out.println("시작열 : "+pu.getStartRow());
-			System.out.println("끝열 : "+pu.getEndRow());
 			List<DepositHistoryVo> list=service.deposithistory(datemap);
 			JSONArray jarr=new JSONArray();
 			int total_deposit=0;
@@ -671,8 +667,7 @@ public class MyPageController {
 				result="accounterr";
 			}
 			json.put("result", result);
-			return json.toString();
-			
+			return json.toString();	
 		}
 		@RequestMapping(value="/mypage/insertAccount",method=RequestMethod.POST,produces = "application/json;charset=utf-8")
 		@ResponseBody

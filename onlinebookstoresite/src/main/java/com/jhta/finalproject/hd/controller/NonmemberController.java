@@ -32,38 +32,29 @@ public class NonmemberController {
 		map.put("bpaynum", bpaynum);
 		map.put("phone", phone);
 		int n=service.confirmbpayment(map);
-		System.out.println("n: "+n);
 		String result="";
 		JSONObject json=new JSONObject();
 		if(n==0) {
-			System.out.println("00000");
 			result="nothing";
 			json.put("result", result);
 			return json.toString();
 		}
-		System.out.println("elsesssss");
 		HashMap<String, Object>resultmap=service.nomenOrder(map);
 		int bstatus=((BigDecimal)resultmap.get("BSTATUS")).intValue();
 		int btype=((BigDecimal)resultmap.get("BTYPE")).intValue();
-		System.out.println("컨트롤러안 bstatus:"+bstatus);
-		System.out.println("컨트롤러안 btype:"+btype);
 		if(bstatus==4) {
-			System.out.println("4444");
 			result="applycancel";
 			json.put("result", result);
 			return json.toString();
 		}else if(bstatus==5) {
-			System.out.println("5555");
 			result="confirmcancel";
 			json.put("result", result);
 			return json.toString();
 		}else if(bstatus==6) {
-			System.out.println("666");
 			result="cancelorder";
 			json.put("result", result);
 			return json.toString();
 		}else {
-			System.out.println("success");
 			result="success";
 		}
 		json.put("btype", btype);

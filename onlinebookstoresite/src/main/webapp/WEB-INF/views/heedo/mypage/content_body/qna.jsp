@@ -53,8 +53,8 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #b3d9ff ">
-       <h4 class="modal-title" >문의사항 작성</h4>
+      <div class="modal-header" style="background-color: #212529 ">
+       <h4 class="modal-title" style="color:white">문의사항 작성</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
       <div class="modal-body">
@@ -372,6 +372,9 @@
 <style>
 	#colorfont{
 		color:#f51167;
+	}
+	#qnatitle{
+		width:473px;
 	}
 	#content_history{
 	position: absolute;

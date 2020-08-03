@@ -370,13 +370,12 @@
 	});
 	$("#withdrawApply").click(function(){
 		var total_deposit=$(this).data('total_deposit');
-		console.log('total :'+total_deposit)
 		if(total_deposit<=0){
 			$("#falsemodal").modal('show')
 			return;
 		}
 		$.ajax({
-			url:"/finalproject/mypage/confirmaccount",
+			url:"${cp}/mypage/confirmaccount",
 			dataType:"json",
 			type:"post",
 			success:function(data){
@@ -420,7 +419,7 @@
 			return;
 		}
 		$.ajax({
-			url:"/finalproject/mypage/insertAccount",
+			url:"${cp}/mypage/insertAccount",
 			type:"post",
 			dataType:"json",
 			data:{bank:bank,banknum:banknum},
@@ -436,9 +435,7 @@
 	$("#applydepositBtn").click(function(){
 		$("#applymodal").modal('hide');
 		var can_deposit=$("#can_deposit").val()
-		console.log("can:"+can_deposit);
 		var apply_deposit=$("#apply_deposit").val();
-		console.log("apply:"+apply_deposit);
 		if(!$.isNumeric(apply_deposit)){
 			$("#errmodal4").modal('show');
 			return
@@ -448,7 +445,7 @@
 			return;
 		}
 		$.ajax({
-			url:"/finalproject/mypage/applydeposit",
+			url:"${cp}/mypage/applydeposit",
 			dataType: "json",
 			data:{deposit:apply_deposit},
 			type:"post",
@@ -475,7 +472,7 @@
 			$("#depositPaging").append(paginationapp);
 			$("#withdrawApply").data('total_deposit',0);
 		$.ajax({
-			url:'/finalproject/mypage/deposithistory',
+			url:'${cp}/mypage/deposithistory',
 			dataType:'json',
 			type:'post',
 			data:{startDay:startDay,endDay:endDay,pageNum:pageNum,value:value},
@@ -489,7 +486,6 @@
 				$(data).each(function(index,item){
 					if(index==data.length-1){
 						$("#withdrawApply").data('total_deposit',item.total_deposit);
-						console.log(item.total_deposit);
 						var yy=item.startDay;
 						var mm=item.endDay;
 						$("#depositPaging").empty();
@@ -503,9 +499,6 @@
 						}
 										
 						for(let i=item.startPageNum;i<=item.endPageNum;i++){
-							console.log("i:"+i);
-							console.log("startPn:"+item.startPageNum)
-							console.log("endPn:"+item.endPageNum)
 							var yy=item.startDay;
 							var mm=item.endDay;
 							if(i==item.pageNum){

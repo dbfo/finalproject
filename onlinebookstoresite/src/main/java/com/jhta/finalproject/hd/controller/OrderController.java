@@ -219,7 +219,8 @@ public class OrderController {
 				  int usepoint,int totalpoint,int shipCharge,String shipaddr,int pay_price,int pay_price_noshipfee,
 				  String receiver,String callnum,String method,String imp_uid,@RequestParam(required = false)String vbank_due
 				  ,String separate,@RequestParam(required = false)String vbank_name,
-				  @RequestParam(required = false,defaultValue = "0")long vbank_num,@RequestParam(required = false)String vbank_holder,HttpSession session) {
+				  @RequestParam(required = false,defaultValue = "0")long vbank_num,
+				  @RequestParam(required = false)String vbank_holder,HttpSession session) {
 			int mnum=0;
 			String smnum=(String)session.getAttribute("mnum");
 			if(smnum!=null) {
@@ -341,7 +342,6 @@ public class OrderController {
 	@RequestMapping(value="/order/order",method = RequestMethod.POST)
 	public String order(@RequestParam(value="cartNum")int[]cartNum,Model model,HttpSession session) {
 		ArrayList<Integer> data=new ArrayList<Integer>(Arrays.stream(cartNum).boxed().collect(Collectors.toList()));
-		//https://fblens.com/entry/JAVA-Array%EB%A5%BC-List%EB%A1%9C-List%EB%A5%BC-Array%EB%A1%9C
 		Map<String, Object>map=new HashMap<String, Object>();
 		map.put("datalist", data);
 		String path=session.getAttribute("cp")+"/resources/imgUpload";

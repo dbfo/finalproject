@@ -108,8 +108,8 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ccccff">
-       <h4 class="modal-title" style="color:white">계좌번호 입력</h4>
+      <div class="modal-header" style="background-color: #212529">
+       <h4 class="modal-title" style="color:white">계좌번호 변경</h4>
         <button type="button" class="close" data-dismiss="modal">x</button>
       </div>
       <div class="modal-body">
@@ -170,35 +170,29 @@
 	
 	
 	$("#accountConfirmBtn2").click(function(){
-		console.log('1111')
 		$("#changeAccountModal").modal('hide');
 		var banknum=$("#banknum_change").val();
-		console.log('banknum:'+banknum);
 		var bank=$("#bankSelect_change").val();
-		console.log('bank:'+bank)
 		var anum=Number($("#accountDiv").data('anum'));
-		console.log('anum:'+anum);
 		if(banknum==""||banknum==null){
-			console.log('2222')
 			$("#accerromodal_body").text('계좌번호를 입력해주세요.')
 			$("#accounterrmodal").modal('show');
 			return;
 		}
 		if(!$.isNumeric(banknum)){
-			console.log('333')
+	
 			$("#accerromodal_body").text('계좌번호는 숫자만 입력가능합니다..')
 			$("#accounterrmodal").modal('show');
 			return;
 		}
 		banknum=Number(banknum);
-		console.log('4444')
+		
 		$.ajax({
 			url:"${cp}/mypage/updateAccount",
 			data:{bank:bank,banknum:banknum,anum:anum},
 			dataType:"json",
 			type:"post",
 			success:function(data){
-				console.log('5555')
 				if(data.result){
 					myaccount();
 					var startDay=$("#date1").val();
