@@ -154,8 +154,8 @@
 		<h4><span style='color:#f51167'>결제</span>정보</h4>
 		<table class="table table-borderd">
 			<tr>
-				<td rowspan="2">결제수단</td>
-				<td rowspan="2">
+				<td rowspan="2" style="width:10%">결제수단</td>
+				<td rowspan="2" style="width:40%">
 					<div class="form-check-inline">
 						<label class="form-check-label">
 							<input type="radio" class="form-check-input" name="payment_option" checked="checked" value="0">신용카드
@@ -167,12 +167,12 @@
 						</label>
 					</div>
 				</td>
-				<td>
-					최종결제금액
+				<td style="width:50%;text-align: center;background-color:#f5c6cb ">
+					<strong>최종결제금액</strong>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="background-color:#f5c6cb;text-align:center;">
 					<span class="final_payment_price" id="final_price"></span>원
 				</td>
 			</tr>
