@@ -66,7 +66,7 @@
       <div class="modal-body modalbody" id="phonemodal_body">
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>전화번호</strong></span>
-        		<input type="text" id="modalphone" class="loginmodal_input" readonly="readonly"><br>
+        		<input type="text" id="modal_phone" class="loginmodal_input" readonly="readonly"><br>
         	</div>
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>변경할전화번호</strong></span>
@@ -95,11 +95,11 @@
       <div class="modal-body modalbody" id="emailmodal_body">
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>이메일</strong></span>
-        		<input type="text" id="modalemail" class="emailmodal_input" readonly="readonly"><br>
+        		<input type="text" id="modal_email" class="emailmodal_input" readonly="readonly"><br>
         	</div>
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>변경할이메일</strong></span>
-        		<input type="email" id="inputemail" class="emailmodal_input"><br>
+        		<input type="email" id="input_email" class="emailmodal_input"><br>
         	</div>
       </div>
       <div class="modal-footer">
@@ -122,11 +122,11 @@
       <div class="modal-body modalbody" id="pwdmodal_body">
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>비밀번호</strong></span>
-        		<input type="password" id="modalpwd" class="pwdmodal_input" readonly="readonly"><br>
+        		<input type="password" id="modal_pwd" class="pwdmodal_input" readonly="readonly"><br>
         	</div>
         	<div class="phonemodal_div">
         		<span class="modalloc"><strong>변경할비밀번호</strong></span>
-        		<input type="password" id="inputpwd" class="pwdmodal_input"><br>
+        		<input type="password" id="input_pwd" class="pwdmodal_input"><br>
         	</div>
       </div>
       <div class="modal-footer">
@@ -180,16 +180,26 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(document).ready(function(){
-		
+		memberinfo();
 	});
 	
 	var memberinfo=function(){
 		$.ajax({
-			url:"/finalproject/member/getinfo",
+			url:"/finalproject/member/memberinfo",
 			dataType:"json",
 			type:"post",
-			success:function(){
-				
+			success:function(data){
+				$("#mypwd").val(data.mpwd)
+				$("#modal_pwd").val(data.mpwd);
+				$("#email").text(data.email);
+				$("#modal_email").text(data.email);
+				$("#phone").text(data.phone);
+				$("#modal_phone").val(data.phone);
+				$("#addr1").val(data.addr1);
+				$("#addr2").val(data.addr2);
+				$("#addr3").val(data.addr3);
+				$("#addr4").val(data.addr4);
+				$("#addr5").val(data.addr5);
 			}
 		})
 	}

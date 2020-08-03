@@ -152,4 +152,30 @@ public class MemberController {
 			json.put("result", result);
 			return json.toString();
 		}
+		
+		@RequestMapping(value="/member/memberinfo",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+		@ResponseBody
+		public String memberinfo(HttpSession session) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			MemberinfoVo vo=service.memberinfo(mnum);
+			JSONObject json=new JSONObject();
+			json.put("mid", vo.getMid());
+			json.put("mpwd", vo.getMpwd());
+			json.put("email", vo.getEmail());
+			json.put("phone", vo.getPhone());
+			String addr=vo.getAddr();
+			String [] addrGroup=addr.split("\\|");
+			String addr1=addrGroup[0]; //우편번호
+			String addr2=addrGroup[1]; // 도로명주소
+			String addr3=addrGroup[2]; // 지번주소
+			String addr4=addrGroup[3]; // 상세주소
+			String addr5=addrGroup[4]; // 참고주소
+			json.put("addr1", addr1);
+			json.put("addr2", addr2);
+			json.put("addr3", addr3);
+			json.put("addr4", addr4);
+			json.put("addr5", addr5);
+			return json.toString();
+		}
 }
