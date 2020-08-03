@@ -55,5 +55,8 @@ public class MemberDao {
 	public int updateEmail(HashMap<String, Object>map) {
 		return sqlsession.update(NAMESPACE+".changeEmail", map);
 	}
+	public int updateaddr(HashMap<String, Object>map) {
+		return sqlsession.update(NAMESPACE+".changeaddr", map);
+	}
 	
 }

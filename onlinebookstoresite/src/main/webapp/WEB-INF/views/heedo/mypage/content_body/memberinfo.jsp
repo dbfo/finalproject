@@ -217,6 +217,29 @@
   </div>
 </div>
 
+<div id="addrinputmodal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #212529">
+       <h4 class="modal-title" id="loginmodal_h4">회원정보</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body modalbody" id="addrinputmodal_body">
+        	<div class="addrLoc">우편번호</div> <input type="text" id="modaladdr1" class="textbox1" readonly="readonly"><br>
+				<div class="addrLoc">지번 주소</div><input type="text" id="modaladdr3" class="road_land_textbox" readonly="readonly"><br>
+				<div class="addrLoc">도로명 주소</div><input type="text" id="modaladdr2" class="road_land_textbox" readonly="readonly"><br>
+				<input type="text" id="modaladdr4" placeholder="상세주소">
+				&nbsp<input type="text" id="modaladdr5" placeholder="참고주소">
+      </div>
+      <div class="modal-footer">
+      	  	<button type="button" class="btn btn-dark" id="addrinputBtn">확인</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -224,6 +247,54 @@
 	$(document).ready(function(){
 		memberinfo();
 	});
+	var count = 0; // 모달이 열릴 때 마다 count 해서  z-index값을 높여줌
+
+	$(document).on('show.bs.modal', '.modal', function () {
+
+	    var zIndex = 1040 + (10 * count);
+
+	    $(this).css('z-index', zIndex);
+
+	    setTimeout(function() {
+
+	        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+
+	    }, 0);
+
+	    count = count + 1
+
+	});
+	
+	$("#addrinputBtn").click(function(){
+		var addr1=$("#modaladdr1").val();
+		var addr2=$("#modaladdr2").val();
+		var addr3=$("#modaladdr3").val();
+		var addr4=$("#modaladdr4").val();
+		var addr5=$("#modaladdr5").val();
+		if(addr1==""||addr2==""||addr3==""||addr4==""||addr5==""){
+			$("#alertchangemodal_body").text('주소입력칸은 빈칸이 될 수 없습니다. 전부 작성해주세요.');
+			$("#alertchangemodal").modal('show')
+			return	
+		}
+		$("#addrinputmodal").modal('hide');
+		var addr=addr1+"|"+addr2+"|"+addr3+"|"+addr4+"|"+addr5
+		$.ajax({
+			url:"${cp}/member/updateaddr",
+			data:{addr:addr},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				if(data.result=="success"){
+					$("#successchangemodal").modal('show');
+					memberinfo();
+				}else if(data.result=="fail"){
+					$("#errchangemodal").modal('show');
+				}
+			}
+		})
+		
+	});
+	
 	
 	//이메일변경
 	$("#emailchangeBtn").click(function(){
@@ -344,6 +415,7 @@
 	function searchShipAddr() {
         new daum.Postcode({
             oncomplete: function(data) {
+            	console.log('111')
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
@@ -366,15 +438,15 @@
                 }
 				var postnum=data.zonecode;
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $("#addr1").val(postnum);
-                $("#addr2").val(roadAddr);
-                $("#addr3").val(data.jibunAddress);
+                $("#modaladdr1").val(postnum);
+                $("#modaladdr2").val(roadAddr);
+                $("#modaladdr3").val(data.jibunAddress);
                 
                 var toproadAddr="("+postnum+")"+" "+roadAddr;
                 var topjibunAddr="("+postnum+")"+" "+data.jibunAddress
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
-                   $("#addr5").val(extraRoadAddr);
+                   $("#modaladdr5").val(extraRoadAddr);
                     toproadAddr+=" "+extraRoadAddr+" ";
                     topjibunAddr+=" "+extraRoadAddr+" ";
                 } else {
@@ -395,8 +467,8 @@
                     //guideTextBox.innerHTML = '';
                    // guideTextBox.style.display = 'none';
                 }
-                $("#alertinfomodal_body").text("주소 변경완료.")
-                $("#alertinfomodal").modal('show');
+                $("#addrinputmodal").modal('show');
+                $("#alertchangemodal_body").text("주소 변경완료.")
                 
             }
         }).open();
@@ -411,7 +483,7 @@
 	.colorFont{
 		color:#e83e8c;
 	}
-
+    
 	#content_memberinfo{
 		padding:10px;
 		height:740px;
@@ -424,7 +496,7 @@
 		height:20px;
 		display:inline-block;
 	}
-	#addr4, #addr5{
+	#addr4, #addr5,#modaladdr4, #modaladdr5{
 		font-size:13px;
 		height:20px;
 	}

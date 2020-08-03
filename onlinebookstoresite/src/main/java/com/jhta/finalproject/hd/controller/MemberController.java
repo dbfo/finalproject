@@ -239,4 +239,24 @@ public class MemberController {
 			json.put("result", result);
 			return json.toString();
 		}
+		
+		@RequestMapping(value="/member/updateaddr",produces = "application/json;charset=utf-8")
+		@ResponseBody
+		public String updateaddr(HttpSession session,String addr) {
+			String smnum=(String)session.getAttribute("mnum");
+			int mnum=Integer.parseInt(smnum);
+			HashMap<String, Object>map=new HashMap<String, Object>();
+			map.put("mnum", mnum);
+			map.put("addr",addr);
+			int n=service.updateaddr(map);
+			String result="";
+			if(n>0) {
+				result="success";
+			}else {
+				result="fail";
+			}
+			JSONObject json=new JSONObject();
+			json.put("result", result);
+			return json.toString();
+		}
 }

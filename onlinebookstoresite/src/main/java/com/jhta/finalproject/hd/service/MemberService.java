@@ -54,4 +54,7 @@ public class MemberService {
 	public int updateEmail(HashMap<String, Object>map) {
 		return dao.updateEmail(map);
 	}
+	public int updateaddr(HashMap<String, Object>map) {
+		return dao.updateaddr(map);
+	}
 }
